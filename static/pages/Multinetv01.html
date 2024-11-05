@@ -124,6 +124,10 @@
         <div class="column">
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Dataset coverage</h2>
+            <p>
+              All 3 SoTA models - HuggingFace's JAT (generalist model, OS implementation of GATO), GPT-4o (VLM), and OpenVLA (VLA) were evaluated across the 20 diverse datasets from the Open-X-Embodiment collection listed below, evaluating their
+              performance on various manipulation tasks. JAT was also evaluated on 33 other OpenX Embodiment datasets, and GPT-4o was evaluated on 2 more OpenX Embodiment datasets. You can find the results of these evaluations in the <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf">paper</a>
+            </p>
             <style>
           .table-container {
               max-width: 100%;
@@ -174,14 +178,14 @@
           }
       </style>
       <div class="table-container">
-          <div class="caption">Dataset Coverage and Action Space Characteristics for OpenVLA Evaluation</div>
+          <div class="caption">Dataset Coverage and Action Space Characteristics of the 20 OpenX datasets that JAT, GPT-4o, and OpenVLA were evaluated on.</div>
           
           <table>
               <thead>
                   <tr>
                       <th>Dataset Name</th>
                       <th>Registered Dataset Name</th>
-                      <th>In Pretraining</th>
+                      <th>In Pretraining for OpenVLA</th>
                       <th>Action Space Type</th>
                   </tr>
               </thead>
