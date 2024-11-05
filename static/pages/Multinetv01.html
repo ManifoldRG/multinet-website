@@ -79,7 +79,7 @@
                           <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank"
                           class="external-link button is-normal is-rounded is-dark">
                           <span class="icon">
-                            <i class="fab fa-code"></i>
+                            <i class="fas fa-code"></i>
                           </span>
                           <span>GenESIS framework</span>
                         </a>
@@ -118,7 +118,206 @@
     </div>
   </section>
 
-
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Dataset coverage</h2>
+            <style>
+          .table-container {
+              max-width: 100%;
+              margin: 20px auto;
+              overflow-x: auto;
+              font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+          }
+          
+          table {
+              border-collapse: collapse;
+              width: 100%;
+              margin-bottom: 10px;
+          }
+          
+          th, td {
+              padding: 12px;
+              text-align: left;
+              border-bottom: 1px solid #ddd;
+          }
+          
+          th {
+              background-color: #f5f5f5;
+              font-weight: bold;
+          }
+          
+          tr:hover {
+              background-color: #f9f9f9;
+          }
+          
+          .caption {
+              font-size: 1.2em;
+              font-weight: bold;
+              margin-bottom: 15px;
+              text-align: center;
+          }
+          
+          .table-notes {
+              font-size: 0.9em;
+              color: #666;
+              text-align: center;
+              margin-top: 10px;
+              font-style: italic;
+          }
+          
+          .checkmark {
+              color: green;
+              font-weight: bold;
+          }
+      </style>
+      <div class="table-container">
+          <div class="caption">Dataset Coverage and Action Space Characteristics for OpenVLA Evaluation</div>
+          
+          <table>
+              <thead>
+                  <tr>
+                      <th>Dataset Name</th>
+                      <th>Registered Dataset Name</th>
+                      <th>In Pretraining</th>
+                      <th>Action Space Type</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>Jaco Play</td>
+                      <td>jaco_play</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>4D (1 grip, 3 pos)</td>
+                  </tr>
+                  <tr>
+                      <td>Berkeley Cable Routing</td>
+                      <td>berkeley_cable_routing</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>7D (3 ang, 3 pos, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>NYU Door Opening</td>
+                      <td>nyu_door_opening_surprising_effectiveness</td>
+                      <td></td>
+                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>VIOLA</td>
+                      <td>viola</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>Berkeley Autolab UR5</td>
+                      <td>berkeley_autolab_ur5</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>TOTO</td>
+                      <td>toto</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>7D (3 ang, 3 pos, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>Columbia PushT</td>
+                      <td>columbia_cairlab_pusht_real</td>
+                      <td></td>
+                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>NYU ROT</td>
+                      <td>nyu_rot_dataset_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                  </tr>
+                  <tr>
+                      <td>Stanford HYDRA</td>
+                      <td>stanford_hydra_dataset_converted_externally_to_rlds</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                  </tr>
+                  <tr>
+                      <td>UCSD Kitchen</td>
+                      <td>ucsd_kitchen_dataset_converted_externally_to_rlds</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>UCSD Pick Place</td>
+                      <td>ucsd_pick_and_place_dataset_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>4D (3 vel, 1 grip torque)</td>
+                  </tr>
+                  <tr>
+                      <td>USC Cloth Sim</td>
+                      <td>usc_cloth_sim_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>4D (3 pos, 1 grip)</td>
+                  </tr>
+                  <tr>
+                      <td>Tokyo PR2 Fridge</td>
+                      <td>utokyo_pr2_opening_fridge_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>Tokyo PR2 Tabletop</td>
+                      <td>utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>UTokyo xArm Pick-Place</td>
+                      <td>utokyo_xarm_pick_and_place_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                  </tr>
+                  <tr>
+                      <td>Stanford MaskVIT</td>
+                      <td>stanford_mask_vit_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>5D (3 pos, 1 ang, 1 grip)</td>
+                  </tr>
+                  <tr>
+                      <td>ETH Agent Affordances</td>
+                      <td>eth_agent_affordances</td>
+                      <td></td>
+                      <td>6D (3 vel, 3 ang vel)</td>
+                  </tr>
+                  <tr>
+                      <td>Imperial Sawyer</td>
+                      <td>imperialcollege_sawyer_wrist_cam</td>
+                      <td></td>
+                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>ConqHose</td>
+                      <td>conq_hose_manipulation</td>
+                      <td></td>
+                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                  </tr>
+                  <tr>
+                      <td>Plex RoboSuite</td>
+                      <td>plex_robosuite</td>
+                      <td></td>
+                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                  </tr>
+              </tbody>
+          </table>
+          
+          <div class="table-notes">
+              pos: position, grip: gripper, term: terminate, vel: velocity, ang: angular
+          </div>
+      </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </body>
 </html>
