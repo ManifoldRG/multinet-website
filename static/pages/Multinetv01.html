@@ -342,7 +342,7 @@
     </div>
   </section>
 
-  <section class="section"></section>
+  <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column">
@@ -362,25 +362,25 @@
               <img src="../images/AMSE in MM.png" alt="AMSE across datasets with the action space unit in millimeters" width="100%">
               <p class="caption">AMSE across datasets with the action space unit in millimeters</p>
             </div>
-            <div class="content has-text-centered"></div>
+            <div class="content has-text-centered">
               <img src="../images/Namse GPT.png" alt="Normalized AMSE For GPT-4o" width="100%">
               <p class="caption">Normalized AMSE For GPT-4o</p>
             </div>
-            <div class="content has-text-centered"></div>
+            <div class="content has-text-centered">
               <img src="../images/Namse Jat.png" alt="Normalized AMSE For JAT" width="100%">
               <p class="caption">Normalized AMSE For JAT</p>
             </div>
-            <div class="content has-text-centered"></div>
+            <div class="content has-text-centered">
               <img src="../images/Namse OpenVLA.png" alt="Normalized AMSE For OpenVLA" width="100%">
               <p class="caption">Normalized AMSE For OpenVLA</p>
             </div>
             <p>
-              We observe that while JAT consistently shows higher AMSE (indicating worse performance) across most datasets, OpenVLA and GPT demonstratemore comparable performance levels, with AMSE typically below 0.5 for most datasets.
+              We observe that while JAT consistently shows higher AMSE (indicating worse performance) across most datasets, OpenVLA and GPT demonstrate more comparable performance levels, with AMSE typically below 0.5 for most datasets.
               For OpenVLA, we observe generally consistent performance across most datasets with AMSE in the 0.1-0.5 range, with best performance of all 3 models for tasks that fall within its training distribution, with notable exceptions in complex manipulation tasks. GPT shows comparable or slightly better performance on many
               datasets, particularly excelling in precise manipulation tasks. Both models maintain relatively stable performance across
               similar task types, though with different error profiles. 
               The normalized analyses reveals that while absolute performance varies significantly, there are consistent patterns in
-              what tasks are relatively more challenging for each model architecture. The success of GPT-4o’s prompt engineering
+              what tasks are relatively more challenging for each model architecture. The success of GPT-4o's prompt engineering
               approach, in particular, suggests that providing structured context about action spaces and environmental constraints
               may be a key factor in achieving consistent performance across diverse tasks. This observation could inform future
               development of VLA models, suggesting that incorporating more explicit task and action space information could
