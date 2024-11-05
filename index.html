@@ -258,9 +258,6 @@
         <div class="column">
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Motivation</h2>
-            <p>
-              Introducing MultiNet: a comprehensive benchmark we are building to evaluate Vision-Language and Multimodal Action models on their generalist capabilities. With Multinet, we aim to provide:
-            </p>
             <ul>
               <li>Deepmind's <a href="https://deepmind.google/discover/blog/a-generalist-agent/">GATO</a> showed the first glimpse of what a generalist model could look like, and the capabilities it could unlock.
                 <ul>
@@ -279,6 +276,108 @@
   </section>
 
   
+
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+    }
+    
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+    
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+    
+    caption {
+      font-style: italic;
+      margin-top: 8px;
+    }
+  </style>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-justified">
+          <h2 class="title is-3 has-text-centered">Dataset coverage</h2>
+          <p>
+            Multinet brings a diverse set of datasets which can be used to train models that will have high vision-language 
+            association knowledge, language understanding and generation abilities, and prowess in reward-based action
+            trajectories in a variety of environments and tasks. Additionally, it can be used to evaluate SOTA VLMs and
+            VLAs to showcase where they are lacking and what work needs to be done to build the next generation of truly
+            generalist models.
+          </p>
+            
+            <table>
+              <thead>
+                <tr>
+                  <th>Dataset</th>
+                  <th>Task/Data type</th>
+                  <th>Modality</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>OBELICS</td>
+                  <td>Interleaved Image-Text</td>
+                  <td>Vision-Language</td>
+                </tr>
+                <tr>
+                  <td>COYO-700M</td>
+                  <td>Image-Text pairs</td>
+                  <td>Vision-Language</td>
+                </tr>
+                <tr>
+                  <td>MS COCO</td>
+                  <td>Object detection, segmentation, key-point detection, captioning</td>
+                  <td>Vision-Language</td>
+                </tr>
+                <tr>
+                  <td>Conceptual Captions</td>
+                  <td>Image Captioning</td>
+                  <td>Vision-Language</td>
+                </tr>
+                <tr>
+                  <td>A-OKVQA</td>
+                  <td>Visual Question Answering</td>
+                  <td>Vision-Language</td>
+                </tr>
+                <tr>
+                  <td>VQA-v2</td>
+                  <td>Visual Question Answering</td>
+                  <td>Vision-Language</td>
+                </tr>
+                <tr>
+                  <td>Datacomp-1B</td>
+                  <td>Image-Text pairs</td>
+                  <td>Vision-Language</td>
+                </tr>
+                <tr>
+                  <td>Fineweb-edu</td>
+                  <td>High quality text corpus</td>
+                  <td>Language</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <p>Categorization of vision-Language and Language datasets that can be used for training, fine-tuning, and some of them eval</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <footer class="footer">
   <div class="container">
