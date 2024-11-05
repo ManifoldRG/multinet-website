@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MultinetX-v0.1</title>
+  <title>Multinetv0.1</title>
   
   <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
@@ -35,13 +35,13 @@
                     <span class="author-block">
                       <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank">Pranav Guruprasad</a><sup>*12</sup>,</span>
                       <span class="author-block">
-                        <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Harsh Sikka</a><sup>*123</sup>,</span>
+                        <a href="https://www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>*123</sup>,</span>
                         <span class="author-block">
-                          <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Jaewoo Song</a><sup>*1</sup>,</span>
+                          <a href="https://songstudio.info/" target="_blank">Jaewoo Song</a><sup>*1</sup>,</span>
                           <span class="author-block">
-                            <a href="FOURTH AUTHOR PERSONAL LINK" target="_blank">Yangyue Wang</a><sup>1</sup>,</span>
+                            <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>1</sup>,</span>
                             <span class="author-block">
-                              <a href="FIFTH AUTHOR PERSONAL LINK" target="_blank">Paul Pu Liang</a><sup>4</sup>,</span>
+                              <a href="https://pliang279.github.io/" target="_blank">Paul Pu Liang</a><sup>4</sup>,</span>
                         </span>
                         </div>
       
@@ -178,7 +178,7 @@
           }
       </style>
       <div class="table-container">
-          <div class="caption">Dataset Coverage and Action Space Characteristics of the 20 OpenX datasets that JAT, GPT-4o, and OpenVLA were evaluated on.</div>
+          <div class="caption">Dataset Coverage and Action Space Characteristics</div>
           
           <table>
               <thead>
@@ -317,6 +317,25 @@
               pos: position, grip: gripper, term: terminate, vel: velocity, ang: angular
           </div>
       </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section"></section>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Benchmark</h2>
+            <p>
+                We benchmark a SoTA VLM (GPT-4o), a SoTA VLA (OpenVLA), and a SoTA generalist model (JAT) across 20 diverse datasets from the Open-X-Embodiment collection. 
+                In order to evaluate each of these models on offline Robotics trajectories, we utilize Mean Squared Error (MSE) as a metric to compare the predicted action of the model and the ground truth action from the dataset on a per-timestep basis.
+                The MSEs per timestep are averaged over all the timesteps in the eval split of the dataset to give an Averaged Mean Squared Error (AMSE) for the whole dataset. This metric is used to compare the performance of the different models given a dataset.
+                In order to account for the difference in the scales of the action spaces (and therefore, the MSEs) across datasets, we normalize the per-timestep MSEs using the minimum and maximum MSE values observed in the evaluation (timestep MSE - min MSE) / (max MSE - min MSE). This is then averaged over the entire dataset to give a Normalized Average Mean Squared Error (NAMSE) for each dataset.
+                The NAMSE is a metric that allows comparison of a given model's performance across different datasets.
+            </p>
           </div>
         </div>
       </div>
