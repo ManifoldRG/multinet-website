@@ -405,7 +405,7 @@
                   This framework allows one to adapt a wide range of models to multiple types of tasks or datasets for scaling effectively while reducing the amount of engineering effort required. 
                   In MultiNet v0.1, GenESIS is used to evaluate GPT-4-o on the OpenX datasets. Since the GPT-4o is a VLM for general-purpose tasks, this involved setting up a well-researched instruction prompt, pre-processing of the input data in each dataset into a form that GPT-4 can consume, the management of chat history list for correct API calls, and conversion of the generated text outputs from the model to a format comparable with the ground truth action.
                 </li>
-                <li> We open-source the code to download any dataset within Multinet, and convert all control datasets in Multinet to a unified format - Tensorflow Datasets. 
+                <li> We also open-source the code to easily download any dataset within Multinet - typically from a variety of different sources, and convert all control datasets in Multinet to a unified format - Tensorflow Datasets. 
                   Lots of rich, diverse, highly valuable datasets in RL and Robotics are of different formats, from various different sources, in badly maintained states, with insufficient documentation. We open-source simple code that allows one to translate the downloaded control dataset shards into tensorflow dataset shards.
                   Once translated to TFDS, the datasets can easily be utilized for training, fine-tuning, and evaluation.
                 </li>
@@ -422,7 +422,70 @@
     </div>
   </section>
 
+  <section class="section"></section>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Acknowledgements</h2>
+            <p>
+              We thank xyz for their helpful feedback on this work
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">FAQ</h2>
+
+            <div class="box">
+              <div class="content">
+                <p class="has-text-weight-semibold">Q: What is the username and password for the virtual machines?</p>
+                <p>
+                  The username and password for the virtual machines are as follows:<br>
+                  - Ubuntu: <code>user</code> / <code>password</code><br>
+                  - Windows: <code>TBD</code>
+                </p>
+              </div>
+            </div>
+
+            <div class="box">
+              <div class="content">
+                <p class="has-text-weight-semibold">Q: How to setup the account and credentials for Google and Google Drive?</p>
+                <p>See <a href="#">Account Guideline</a>.</p>
+              </div>
+            </div>
+
+            <div class="box">
+              <div class="content">
+                <p class="has-text-weight-semibold">Q: How can I configure a proxy for the VM if I'm behind a GFW?</p>
+                <p>See <a href="#">Proxy Guideline</a>.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{park2021nerfies,
+    author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
+    title     = {Nerfies: Deformable Neural Radiance Fields},
+    journal   = {ICCV},
+    year      = {2021},
+  }</code></pre>
+    </div>
+  </section>
 
 </body>
 </html>
