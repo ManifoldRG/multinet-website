@@ -330,12 +330,33 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Benchmark</h2>
             <p>
-                We benchmark a SoTA VLM (GPT-4o), a SoTA VLA (OpenVLA), and a SoTA generalist model (JAT) across 20 diverse datasets from the Open-X-Embodiment collection. 
-                In order to evaluate each of these models on offline Robotics trajectories, we utilize Mean Squared Error (MSE) as a metric to compare the predicted action of the model and the ground truth action from the dataset on a per-timestep basis.
+                We benchmark a SoTA VLM (GPT-4o), a SoTA VLA (OpenVLA), and a SoTA generalist model (JAT) a zero-shot setting across 20 diverse datasets from the Open-X-Embodiment collection. 
+                In order to evaluate each of these models on offline Robotics trajectories, we utilize Mean Squared Error (MSE) as a metric to compare the predicted action of the model and the ground truth action from the dataset on a per-timestep basis. This metric seemed most appropriate given the offline nature of the dataset, and no access to physical robots or the simulated environments corresponding to the datasets.
                 The MSEs per timestep are averaged over all the timesteps in the eval split of the dataset to give an Averaged Mean Squared Error (AMSE) for the whole dataset. This metric is used to compare the performance of the different models given a dataset.
-                In order to account for the difference in the scales of the action spaces (and therefore, the MSEs) across datasets, we normalize the per-timestep MSEs using the minimum and maximum MSE values observed in the evaluation (timestep MSE - min MSE) / (max MSE - min MSE). This is then averaged over the entire dataset to give a Normalized Average Mean Squared Error (NAMSE) for each dataset.
-                The NAMSE is a metric that allows comparison of a given model's performance across different datasets.
+                In order to account for the difference in the scales of the action spaces (and therefore, the MSEs) across datasets, we normalize the per-timestep MSEs using the minimum and maximum MSE values observed in the evaluation (timestep MSE - min MSE) / (max MSE - min MSE). These are then averaged over the entire dataset to give a Normalized Average Mean Squared Error (NAMSE) for each dataset.
+                The NAMSE is a metric that allows comparison of a given model's performance across different datasets. We will be actively updating this benchmark as we profile SoTA VLMs and VLAs on more OpenX-Embodiment datasets, other RL and Robotics datasets, and in few-shot and fine-tuned settings.
             </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section"></section>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Analysis</h2>
+            <p>
+                We conduct thorough quantitative analyses to observe the performance of the SoTA models across different OpenX Embodiment datasets. We investigate the performance difference between models by comparing their AMSE scores across datasets. 
+                We also do a model-specific analysis to understand performance patterns of models that may be attributable to several architectural and training differences between
+                them, which in turn helps guide future research in this direction. While absolute performance metrics like AMSE provide insight into task-specific capabilities, looking into the NAMSE scores allows us to understand how each model performs across different tasks relative to its own
+                capabilities. NAMSE proves to be particularly valuable for understanding inherent task difficulty and model behavior patterns independent of action space scale. Here is an overview of our analysis:
+            </p>
+            <div class="content has-text-centered">
+                <img src="static/images/AMSE All.png" alt="AMSE across all datasets" width="100%">
+            </div>
           </div>
         </div>
       </div>
