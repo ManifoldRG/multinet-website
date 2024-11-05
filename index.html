@@ -184,8 +184,7 @@
 
   <style>
     .news-section {
-      background-color: #f5f5f5;
-      padding: 20px;
+      padding: 20px 0;
       max-height: 400px;
       overflow-y: auto;
     }
@@ -200,6 +199,9 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
     }
   
     .news-item {
@@ -249,6 +251,33 @@
       </div>
     </div>
   </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Motivation</h2>
+            <p>
+              Introducing MultiNet: a comprehensive benchmark we are building to evaluate Vision-Language and Multimodal Action models on their generalist capabilities. With Multinet, we aim to provide:
+            </p>
+            <ul>
+              <li>Deepmind's <a href="https://deepmind.google/discover/blog/a-generalist-agent/">GATO</a> showed the first glimpse of what a generalist model could look like, and the capabilities it could unlock.
+                <ul>
+                  <li>Dataset composition - Gato is trained on a large number of datasets comprising agent experience in both simulated and real world environments, as well as a variety of natural language and image datasets. However, most of GATO's datasets are internal and closed-source, and the model was never released - both OS or API (1)</li>
+                </ul> 
+              <li>Emerging class of Vision-Language-Action models (<a href="https://openvla.github.io/">OpenVLA</a>, <a href="https://octo-models.github.io/">Octo</a>) display interesting capabilities of taking vision-language-grounded action. However, they are trained for a niche set of robotics tasks, very nascent, and might not be great at challenging vision-language understanding/generation tasks</li>
+              <li>In order to truly build something generalist that can work on a myriad of tasks, in a variety of environments, a model/system needs to be trained on a combination of multiple modalities. Should have the ability to understand vision-language input, and generate meaningful outputs. Should have the ability to generate actions for different tasks in a variety of environments where the observation and action spaces can either be continuous or discrete. This will be vision-language-action in the truest sense - good at each of these modalities, as well as at tasks that involve combinations of these modalities - this is what typically occurs in the real world. </li>
+            </ul>
+            <p>
+              There doesn't exist a large, truly open-source, generalist dataset that can be used for pre-training, fine-tuning, and eval. This is the main reason the Multinet effort started.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   
 
   <footer class="footer">
@@ -268,6 +297,8 @@
     </div>
   </div>
 </footer>
+
+
 
 <!-- Statcounter tracking code -->
   
