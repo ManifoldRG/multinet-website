@@ -371,7 +371,7 @@
               </tbody>
             </table>
             
-            <p style="text-align: center; font-weight: bold;">Categorization of Vision-Language and Language datasets that can be used for training, fine-tuning, and some of them for evaluation.</p>
+            <p style="text-align: center; font-weight: bold;">Categorization of Vision-Language and Language datasets that can be used for training, fine-tuning, and some of them for evaluation</p>
 
             
             <table>
@@ -436,7 +436,7 @@
               </tbody>
             </table>
 
-            <p style="text-align: center; font-weight: bold;">Categorization of Vision-Language and Language datasets that are purely for evaluation.</p>
+            <p style="text-align: center; font-weight: bold;">Categorization of Vision-Language and Language datasets that are purely for evaluation</p>
 
             <table>
               <thead>
@@ -483,7 +483,7 @@
                   <td>Game-based control</td>
                 </tr>
                 <tr>
-                  <td>Open X-Embodiment</td>
+                  <td>Open X Embodiment</td>
                   <td>Real-world Robotics tasks</td>
                   <td>Manipulation-based control and Locomotion-based control</td>
                 </tr>
@@ -495,13 +495,67 @@
               </tbody>
             </table>
             
-            <p style="text-align: center; font-weight: bold;">Categorization of control datasets.</p>
+            <p style="text-align: center; font-weight: bold;">Categorization of control datasets</p>
             
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Benchmark</h2>
+            <p>
+              Existing benchmarks evaluate specific capabilities and modalities. There does not exist a truly generalist benchmark
+              which is a one-stop shop for a holistic evaluation of a given model - evaluating action capabilities of SOTA VLMs, and
+              Multimodal understanding and generation capabilities of SOTA VLAs. A benchmark like this would require effort
+              researching, evaluating, and consolidating a wide variety of high quality, relevant, and diverse set of datasets, tasks, and
+              metrics. This is what Multinet aims to bring to the field of AI. In this work, we extensively researched the metrics that
+              can be used to evaluate the capabilities of these SOTA models on a variety of tasks across vision-language, language,
+              and control tasks.
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Evaluation Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>CIDEr</td>
+                  <td>Image Captioning, Image-based Text retrieval</td>
+                </tr>
+                <tr>
+                  <td>VQA Accuracy</td>
+                  <td>Visual Question Answering</td>
+                </tr>
+                <tr>
+                  <td>Recall@K</td>
+                  <td>Image understanding, Text-based image retrieval</td>
+                </tr>
+                <tr>
+                  <td>Accuracy</td>
+                  <td>VQA, Commonsense reasoning, Text understanding</td>
+                </tr>
+                <tr>
+                  <td>Mean Squared Error</td>
+                  <td>RL, Robotics</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <p style="text-align: center; font-weight: bold;">Metrics in Multinet benchmark and the categories of tasks they each evaluate</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
 
   <footer class="footer">
@@ -515,7 +569,7 @@
             You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
             Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
-
+          
         </div>
       </div>
     </div>
