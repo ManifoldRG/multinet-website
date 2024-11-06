@@ -165,6 +165,113 @@
     </div>
   </section>
 
+  <style>
+    .video-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    .responsive-video {
+      width: 100%;
+      max-width: 720px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+    }
+
+    .news-section {
+      padding: 20px 0;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .news-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .news-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    .news-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .news-icon {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .news-content {
+      flex-grow: 1;
+    }
+
+    .news-content a {
+      color: blue;
+      text-decoration: none;
+    }
+
+    .news-content a:hover {
+      text-decoration: underline;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    caption {
+      font-style: italic;
+      margin-top: 8px;
+    }
+  </style>
+
+
+  <div class="video-container"></div>
+    <video 
+        class="responsive-video"
+        controls 
+        autoplay 
+        loop 
+        muted 
+        preload="auto"
+    >
+        <source src="static/videos/Multinet Data Video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
   <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -185,64 +292,13 @@
               In our <a href="static/pages/Multinetv01.html">initial release</a>, we present the results of evaluating GPT-4o (SOTA VLM), OpenVLA (SOTA VLA), and HuggingFace's JAT (SOTA generalist model) on 20 OpenX datasets. We aim to quickly iterate and expand our evaluation results to more datasets within Multinet.
             </p>
             <p>
-              <strong><em>We are always excited about quick and longer term collaborators getting involved! So, if you are interested in contributing please reach out to us via <a href="https://discord.gg/Rk4gAq5aYr">Discord</a></em></strong>
+              <strong><em>Interested in contributing/collaborating on this effort? Join the conversation on <a href="https://discord.gg/Rk4gAq5aYr">Discord</a></em></strong>
             </p>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-  <style>
-    .news-section {
-      padding: 20px 0;
-      max-height: 400px;
-      overflow-y: auto;
-    }
-  
-    .news-title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-  
-    .news-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      background-color: #f5f5f5;
-      padding: 20px;
-      border-radius: 5px;
-    }
-  
-    .news-item {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-  
-    .news-icon {
-      font-size: 24px;
-      margin-right: 10px;
-    }
-  
-    .news-content {
-      flex-grow: 1;
-    }
-  
-    .news-content a {
-      color: blue;
-      text-decoration: none;
-    }
-  
-    .news-content a:hover {
-      text-decoration: underline;
-    }
-  </style>
-
   <section class="news-section">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -253,7 +309,7 @@
               <div class="news-item">
                 <div class="news-icon">🎉</div>
                 <div class="news-content">
-                  <p><strong>Multinet v0.1!</strong> How generalist are today's VLMs and VLAs? Read more on our <a href="static/pages/Multinetv01.html">Release page</a></p>
+                  <p><strong>Multinet v0.1!</strong> How well do modern state-of-the-art VLMs and VLAs do on challenging, real-world robotics tasks? Read more on our <a href="static/pages/Multinetv01.html">Release page</a></p>
                 </div>
               </div>
             </div>
@@ -285,36 +341,6 @@
       </div>
     </div>
   </section>
-
-  
-
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-    }
-    
-    th, td {
-      padding: 12px 16px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-    
-    th {
-      background-color: #f2f2f2;
-      font-weight: bold;
-    }
-    
-    tr:hover {
-      background-color: #f5f5f5;
-    }
-    
-    caption {
-      font-style: italic;
-      margin-top: 8px;
-    }
-  </style>
 
 <section class="section">
   <div class="container is-max-desktop">
