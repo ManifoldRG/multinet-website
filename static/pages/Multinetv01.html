@@ -341,6 +341,17 @@
         <div class="column">
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Benchmark</h2>
+            <section class="section"></section>
+              <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                  <div class="column">
+                    <div class="content has-text-centered">
+                      <img src="../images/trajectory mse visual.png" alt="Multinet v0.1 Release Visual" width="100%">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
             <p>
                 We benchmark a SoTA VLM (GPT-4o), a SoTA VLA (OpenVLA), and a SoTA generalist model (JAT) in zero-shot settings across 20 diverse datasets from the Open-X-Embodiment collection. 
                 In order to evaluate each of these models on offline Robotics trajectories, we utilize Mean Squared Error (MSE) as a metric to compare the predicted action of the model and the ground truth action from the dataset on a per-timestep basis. This metric seemed most appropriate given the offline nature of the dataset, and no access to physical robots or the simulated environments corresponding to the datasets.
