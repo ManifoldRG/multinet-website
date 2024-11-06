@@ -345,7 +345,17 @@
                 <div class="columns is-centered">
                   <div class="column">
                     <div class="content has-text-centered">
-                      <img src="../images/trajectory mse visual.png" alt="Multinet v0.1 Release Visual" width="80%">
+                      <img src="../images/trajectory mse visual.png" alt="Trajectory similarity" width="60%">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="container is-max-desktop"></div>
+                <div class="columns is-centered">
+                  <div class="column">
+                    <div class="content has-text-centered">
+                      <img src="../images/action completion visual.png" alt="Action completion" width="60%">
                     </div>
                   </div>
                 </div>
@@ -355,7 +365,8 @@
                 In order to evaluate each of these models on offline Robotics trajectories, we utilize Mean Squared Error (MSE) as a metric to compare the predicted action of the model and the ground truth action from the dataset on a per-timestep basis. This metric seemed most appropriate given the offline nature of the dataset, and no access to physical robots or the simulated environments corresponding to the datasets.
                 The MSEs per timestep are averaged over all the timesteps in the eval split of the dataset to give an Averaged Mean Squared Error (AMSE) for the whole dataset. This metric is used to compare the performance of the different models given a dataset.
                 In order to account for the difference in the scales of the action spaces (and therefore, the MSEs) across datasets, we normalize the per-timestep MSEs using the minimum and maximum MSE values observed in the evaluation (timestep MSE - min MSE) / (max MSE - min MSE). These are then averaged over the entire dataset to give a Normalized Average Mean Squared Error (NAMSE) for each dataset.
-                The NAMSE is a metric that allows comparison of a given model's performance across different datasets. We will be actively updating this benchmark as we profile SoTA VLMs and VLAs on more OpenX-Embodiment datasets, other RL and Robotics datasets, and in few-shot and fine-tuned settings.
+                The NAMSE is a metric that allows comparison of a given model's performance across different datasets. We also assess successful completion of an episode in a given task, by comparing final predicted actions with ground truthfinal actions. While this serves as an approximate measure of task completion, it provides valuable insights into the models’ ability to reach target states across trajectories.
+                We will be actively updating this benchmark as we profile SoTA VLMs and VLAs on more OpenX-Embodiment datasets, other RL and Robotics datasets, and in few-shot and fine-tuned settings.
             </p>
           </div>
         </div>
