@@ -25,7 +25,7 @@
 
 
   <title>Academic Project Page</title>
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"> <!-- TODO: Change this to Multinet favicon-->
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
 
@@ -71,7 +71,14 @@
           <a class="navbar-item" href="https://github.com/eihli/mugato">
             μGato
           </a>
+          <a class="navbar-item" href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules">
+            GenESIS Framework
+          </a>
+          <a class="navbar-item" href="https://multinet.ai/static/pages/Multinetv01.html">
+            Multinet v0.1
+          </a>
         </div>
+        
       </div>
     </div>
 
@@ -176,6 +183,9 @@
             </ul>
             <p>
               In our <a href="static/pages/Multinetv01.html">initial release</a>, we present the results of evaluating GPT-4o (SOTA VLM), OpenVLA (SOTA VLA), and HuggingFace's JAT (SOTA generalist model) on 20 OpenX datasets. We aim to quickly iterate and expand our evaluation results to more datasets within Multinet.
+            </p>
+            <p>
+              <strong><em>We are always looking excited about quick and longer term collaborators getting involved! So, if you are interested in contributing please reach out to us via <a href="https://discord.gg/Rk4gAq5aYr">Discord</a></em></strong>
             </p>
           </div>
         </div>
@@ -319,6 +329,46 @@
             VLAs to showcase where they are lacking and what work needs to be done to build the next generation of truly
             generalist models.
           </p>
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+            <!-- Title -->
+            <text x="200" y="30" text-anchor="middle" font-size="16" font-family="Arial">Distribution of datasets across modalities in Multinet</text>
+            
+            <!-- Pie Chart -->
+            <g transform="translate(200, 150)">
+                <!-- Control segment (58%) - 208.8 degrees -->
+                <path d="M 0 0 L 80 0 A 80 80 0 1 1 -62.8 -49.6 Z" 
+                      fill="#FFEB99" />
+                
+                <!-- Vision-Language segment (29%) - 104.4 degrees -->
+                <path d="M 0 0 L -62.8 -49.6 A 80 80 0 0 1 38.8 -70 Z" 
+                      fill="#6666FF" />
+                
+                <!-- Language segment (13%) - 46.8 degrees -->
+                <path d="M 0 0 L 38.8 -70 A 80 80 0 0 1 80 0 Z" 
+                      fill="#66B2FF" />
+            </g>
+            
+            <!-- Legend -->
+            <g transform="translate(320, 120)">
+                <!-- Vision-Language -->
+                <rect x="0" y="0" width="15" height="15" fill="#6666FF"/>
+                <text x="20" y="12" font-size="12" font-family="Arial">Vision-Language (29%)</text>
+                
+                <!-- Language -->
+                <rect x="0" y="25" width="15" height="15" fill="#66B2FF"/>
+                <text x="20" y="37" font-size="12" font-family="Arial">Language (13%)</text>
+                
+                <!-- Control -->
+                <rect x="0" y="50" width="15" height="15" fill="#FFEB99"/>
+                <text x="20" y="62" font-size="12" font-family="Arial">Control (58%)</text>
+            </g>
+            
+            <!-- Caption -->
+            <text x="200" y="270" text-anchor="middle" font-size="12" font-family="Arial" font-style="italic">
+                Control represents the largest portion (58%) due to the extensive OpenX-Embodiment collection, followed by Vision-Language (29%) and Language (13%) datasets.
+            </text>
+        </svg>
             
             <table>
               <thead>
