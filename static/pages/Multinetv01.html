@@ -148,7 +148,7 @@
             <h2 class="title is-3 has-text-centered">Dataset coverage</h2>
             <p>
               All 3 SoTA models - HuggingFace's JAT (generalist model, OS implementation of GATO), GPT-4o (VLM), and OpenVLA (VLA) were evaluated across the 20 diverse datasets from the Open-X-Embodiment collection listed below, evaluating their
-              performance on various manipulation tasks. JAT was also evaluated on 33 other OpenX Embodiment datasets, and GPT-4o was evaluated on 2 more OpenX Embodiment datasets. You can find the results of these evaluations in the <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf">paper</a>
+              performance on various manipulation tasks. JAT was also evaluated on 33 other OpenX Embodiment datasets, and GPT-4o was evaluated on 2 more OpenX Embodiment datasets. You can find the results of these evaluations in the <a href="../pdfs/Benchmarking Vision Language Action Models.pdf">paper</a>
             </p>
             <style>
           .table-container {
@@ -445,24 +445,27 @@
       <div class="columns is-centered">
         <div class="column">
           <div class="content has-text-justified">
-            <h2 class="title is-3 has-text-centered">Key Technical Contributions</h2>
+            <h2 class="title is-3 has-text-centered">Supporting Technical Contributions</h2>
             <p>
                Apart from open-sourcing our evaluation framework and profiling code, 2 technical contributions that we believe are novel to this work are:
-               <ol></ol>
-                <li>The <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules">GenESIS (Generalizable Extendable Stratified Inference System) framework</a> - A general framework for mapping VLMs to other modality classes, with particular emphasis on action spaces. 
-                  This framework allows one to adapt a wide range of models to multiple types of tasks or datasets for scaling effectively while reducing the amount of engineering effort required. 
-                  In MultiNet v0.1, GenESIS is used to evaluate GPT-4-o on the OpenX datasets. Since the GPT-4o is a VLM for general-purpose tasks, this involved setting up a well-researched instruction prompt, pre-processing of the input data in each dataset into a form that GPT-4 can consume, the management of chat history list for correct API calls, and conversion of the generated text outputs from the model to a format comparable with the ground truth action.
-                </li>
-                <li> We also open-source the code to easily download any dataset within Multinet - typically from a variety of different sources, and convert all control datasets in Multinet to a unified format - Tensorflow Datasets. 
-                  Lots of rich, diverse, highly valuable datasets in RL and Robotics are of different formats, from various different sources, in badly maintained states, with insufficient documentation. We open-source simple code that allows one to translate the downloaded control dataset shards into tensorflow dataset shards.
-                  Once translated to TFDS, the datasets can easily be utilized for training, fine-tuning, and evaluation.
-                </li>
-               </ol>
             </p>
-            <div class="content has-text-centered">
+            <p>
+              The <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules">GenESIS (Generalizable Extendable Stratified Inference System) framework</a> - A general framework for mapping VLMs to other modality classes, with particular emphasis on action spaces. 
+              This framework allows one to adapt a wide range of models to multiple types of tasks or datasets for scaling effectively while reducing the amount of engineering effort required. 
+              In MultiNet v0.1, GenESIS is used to evaluate GPT-4-o on the OpenX datasets. Since the GPT-4o is a VLM for general-purpose tasks, this involved setting up a well-researched instruction prompt, pre-processing of the input data in each dataset into a form that GPT-4 can consume, the management of chat history list for correct API calls, and conversion of the generated text outputs from the model to a format comparable with the ground truth action.
+            </p>
+              
+              <div class="content has-text-centered">
                 <img src="../images/Framework Figure.png" alt="GenESIS Framework" width="100%">
                 <p class="caption">GenESIS Framework - used to adapt GPT-4o to the OpenX datasets</p>
             </div>
+
+            <p> We also open-source the code to easily download any dataset within Multinet - typically from a variety of different sources.
+                Lots of rich, diverse, highly valuable datasets in RL and Robotics are of different formats, from various different sources, in badly maintained states, with insufficient documentation. 
+                We open-source simple code that allows one to translate the downloaded control dataset shards into tensorflow dataset shards.
+                Once translated to TFDS, the datasets can easily be utilized for training, fine-tuning, and evaluation.
+            </p>
+            
             
           </div>
         </div>

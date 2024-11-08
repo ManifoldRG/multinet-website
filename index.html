@@ -291,17 +291,18 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Introduction</h2>
             <p>
-              Introducing MultiNet: a comprehensive benchmark we are building to evaluate Vision-Language and Multimodal Action models on their generalist capabilities. With Multinet, we aim to provide:
+              Introducing <strong>MultiNet</strong>: a comprehensive benchmark we are building to develop and evaluate Vision-Language Models (VLMs) and Multimodal Action Models. Key contributions of Multinet include:
             </p>
             <ul>
-              <li>The largest collection of open-source datasets for evaluating Vision-Language and Multimodal Action models</li>
-              <li>Open-source software infrastructure for downloading, managing, and utilizing the datasets mentioned above</li>
-              <li>Open-source code to translate RL and Robotics datasets of various formats from various sources into a unified Tensorflow Datasets format</li>
+              <li>The largest open-source generalist dataset, consolidating diverse modalities and tasks suitable for pre-training, fine-tuning, and evaluation of VLMs and Multimodal Action Models</li>
+              <li>Detailed analysis of the constituent datasets’ validity and utility for generalist objectives</li>
+              <li>Open-source software infrastructure for downloading, managing, and utilizing the benchmark data</li>
+              <li>Open-source software toolkit for translating control (RL and Robotics) datasets of various formats from various sources into a unified TensorFlow Datasets format, making them immediately usable for training, fine-tuning, and evaluation</li>
               <li>A general framework for mapping VLMs to other modality classes, with particular emphasis on action spaces</li>
-              <li>Open-source frameworks to evaluate SoTA VLMs and VLAs on datasets within Multinet</li>
+              <li>Open-source evaluation frameworks to profile SoTA VLMs and VLAs on datasets within Multinet</li>
             </ul>
             <p>
-              In our <a href="static/pages/Multinetv01.html">initial release</a>, we present the results of evaluating GPT-4o (SOTA VLM), OpenVLA (SOTA VLA), and HuggingFace's JAT (SOTA generalist model) on 20 OpenX datasets. We aim to quickly iterate and expand our evaluation results to more datasets within Multinet.
+              In our <a href="static/pages/Multinetv01.html">initial release</a>, we present the results of evaluating GPT-4o (SoTA VLM), OpenVLA (SoTA VLA), and HuggingFace's JAT (novel generalist model) on 20 diverse and challenging OpenX Embodiment datasets. We aim to quickly iterate and expand our evaluation results to more datasets within Multinet.
             </p>
             <p>
               <div style="text-align: center;"><strong><em>Interested in contributing/collaborating on this effort? Join the conversation on <a href="https://discord.gg/Rk4gAq5aYr">Discord</a></em></strong></div>
@@ -337,16 +338,20 @@
         <div class="column">
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Motivation</h2>
-            <ul>
-              <li>Deepmind's <a href="https://deepmind.google/discover/blog/a-generalist-agent/">GATO</a> showed the first glimpse of what a generalist model could look like, and the capabilities it could unlock.
-                <ul>
-                  <li>Dataset composition - Gato is trained on a large number of datasets comprising agent experience in both simulated and real world environments, as well as a variety of natural language and image datasets. However, most of GATO's datasets are internal and closed-source, and the model was never released - both OS or API</li>
-                </ul> 
-              <li>The emerging class of Vision-Language-Action models (<a href="https://openvla.github.io/">OpenVLA</a>, <a href="https://octo-models.github.io/">Octo</a>) display interesting capabilities of taking vision-language-grounded action. However, they are trained for a niche set of robotics tasks, very nascent, and might not be great at challenging vision-language understanding/generation tasks</li>
-              <li>In order to truly build something generalist that can work on a myriad of tasks, in a variety of environments, a model/system needs to be trained on a combination of multiple modalities. It should have the ability to understand vision-language input, and generate meaningful outputs. It should have the ability to generate actions for different tasks in a variety of environments where the observation and action spaces can either be continuous or discrete. This will be vision-language-action in the truest sense - good at each of these modalities, as well as at tasks that involve combinations of these modalities - this is what typically occurs in the real world. </li>
-            </ul>
             <p>
-              There doesn't exist a large, truly open-source, generalist dataset that can be used for pre-training, fine-tuning, and eval. This is the main reason the Multinet effort started.
+              Deepmind's <a href="https://deepmind.google/discover/blog/a-generalist-agent/">GATO</a> represented a significant milestone as the first truly multi-modal, multi-task, multi-embodiment
+              agent. Operating with a single neural network and fixed weights, Gato demonstrated capabilities spanning Atari gameplay, image captioning, conversational interaction, and real-world robotic manipulation.
+              However,both the model and the majority of its training datasets remain closed-source, limiting its impact on the broader research community.
+            </p>
+            <p>
+              The emerging class of Vision-Language-Action models such as <a href="https://openvla.github.io/">OpenVLA</a>, and <a href="https://octo-models.github.io/">Octo</a> display impressive capabilities of taking vision-language-grounded action in control tasks. However, they are trained for a niche set of robotics tasks, very nascent, and might not be great at challenging vision-language understanding/generation tasks
+            </p>  
+            <p>
+              Building genuinely generalist models requires training on diverse datasets that span multiple modalities and task types.
+              Such models must excel not only at individual modalities (vision, language, or control/action) but also at tasks that require
+              seamless integration across modalities - a requirement that better reflects real-world scenarios. Currently, there exists
+              no large-scale, open-source dataset specifically designed for training and evaluating such generalist models. This gap
+              motivated the development of Multinet.
             </p>
           </div>
         </div>
@@ -361,11 +366,10 @@
         <div class="content has-text-justified">
           <h2 class="title is-3 has-text-centered">Dataset Coverage and Analysis</h2>
           <p>
-            Multinet brings a diverse set of datasets which can be used to train models that will have high vision-language 
-            association knowledge, language understanding and generation abilities, and prowess in reward-based action
-            trajectories in a variety of environments and tasks. Additionally, it can be used to evaluate SOTA VLMs and
-            VLAs to showcase where they are lacking and what work needs to be done to build the next generation of truly
-            generalist models.
+            Multinet offers a rich collection of diverse datasets to develop comprehensive multimodal capabilities across multiple domains. 
+            It can be utilized to train models that will cultivate sophisticated vision-language association knowledge, high quality language understanding and generation abilities, and prowess in reward-based action
+            trajectories in a myriad of environments and tasks. This consolidation effort not only provides pre-training scale data for a generalist objective, but also serves as a valuable benchmark for evaluating the capabilities of 
+            current SoTA VLMs and VLAs, illuminating paths toward more versatile and genuinely generalist AI systems.
           </p>
 
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" style="width: 100%; max-width: 800px; height: auto; margin: 20px auto; display: block;">
@@ -602,13 +606,12 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Benchmark</h2>
             <p>
-              Existing benchmarks evaluate specific capabilities and modalities. There does not exist a truly generalist benchmark
-              which is a one-stop shop for a holistic evaluation of a given model - evaluating action capabilities of SOTA VLMs, and
-              Multimodal understanding and generation capabilities of SOTA VLAs. A benchmark like this would require effort
-              researching, evaluating, and consolidating a wide variety of high quality, relevant, and diverse set of datasets, tasks, and
-              metrics. This is what Multinet aims to bring to the field of AI. In this work, we extensively researched the metrics that
-              can be used to evaluate the capabilities of these SOTA models on a variety of tasks across vision-language, language,
-              and control tasks.
+              While existing benchmarks excel at evaluating specific capabilities and modalities, there remains a notable gap in
+              holistic evaluation frameworks that can assess both the action capabilities of Vision-Language Models (VLMs) and the
+              multimodal understanding of Vision-Language-Action Models (VLAs). Multinet addresses this gap by providing a
+              comprehensive benchmark that spans vision-language, language, RL, and Robotics tasks. Our work consolidates diverse,
+              high-quality datasets and establishes standardized evaluation metrics to enable systematic comparison of state-of-the-art
+              models. For a detailed list of datasets and metrics included in Multinet, please refer to our <a href="static/pdfs/MultiNet Dataset Spec Paper.pdf">dataset specification paper</a>
             </p>
             <table>
               <thead>
@@ -655,14 +658,21 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Importance of Multinet</h2>
             <p>
-              Multinet is the first step in paving the path towards a new class of foundation models that are truly generalist. Multinet aims to showcase the
-              gap in the cutting-edge of the field, for models that work across multiple modalities, tasks, and environments.
-              In our <a href="static/pages/Multinetv01.html">first release</a> we show the initial version of this - today's SOTA VLMs and VLAs are not
-              each impressive and reliable on Vision-Language, Language, RL, and Robotics tasks.
-              With datasets such as the ones included in Multinet, and benchmarks to evaluate performance, better VLAs 
-              can be built, that are truly Vision-Language-Action models in the sense that they are SOTA in each of these
-              modalities, and not just Vision-Language-grounded Actions. Multinet includes pre-training scale data across
-              these modalities, and will only grow in size in the future versions.
+              Multinet represents a significant step toward advancing generalist AI systems. Multinet establishes a comprehensive benchmark for evaluating truly
+              generalist models that can operate across multiple modalities, tasks, and environments. Our <a href="static/pages/Multinetv01.html">initial findings</a> demonstrate
+              a significant capability gap in current state-of-the-art models: Today's VLMs, VLAs, and generalist models
+              struggle to maintain consistent performance across a diverse set of real-world robotics tasks that they have not
+              been exposed to before.
+            </p>
+            <p>
+              Current Vision-Language-Action models typically excel at vision-language-grounded actions but may underperform in pure vision-language or language tasks. 
+              Multinet provides pre-training scale data across all these modalities, enabling the development of models that achieve state-of-the-art performance across all
+              constituent tasks, not just their primary domain. 
+            </p>
+            <p>
+              A significant contribution of this work is our open-source toolkit for standardizing
+              robotics and reinforcement learning data. Many existing datasets suffer from outdated formats, poor maintenance, and
+              accessibility issues. Multinet's toolkit provides stable access methods, conversion to a unified format, and ease of use for training, fine-tuning, and evaluation.
             </p>
           </div>
         </div>
@@ -677,20 +687,22 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">What's Next?</h2>
             <p>
-              <p>This is just the beginning of a new class of foundation models, training data, evaluation methods, and
-              benchmarks. We hope to make Multinet a much bigger and useful project with our future versions.</p>
+              <p>The release of Multinet marks an important first step toward a new paradigm of foundation models, but significant
+                opportunities remain for expansion and improvement.</p>
               <ul>
-                <li>In future versions we will be profiling the performance of SOTA VLAs on pure Vision-Language and Language
-                tasks to assess whether their fine-tuning or co-training on control tasks reduces their capabilities in tasks
-                related to each of the individual modalities.</li>
-                <li>We also plan to go beyond the OpenX Embodiment dataset, and evaluate the models on other control tasks in Multinet to
-                understand the performance of VLAs and generalist models on data that is completely out-of-distribution.</li>
-                <li>Currently, our profiling efforts as seen in our <a href="static/pages/Multinetv01.html">first release</a> are completely zero-shot, but we plan to also assess the capabilities of these
-                models when they are evaluated few-shot, and fine-tuned.</li>
-                <li>We are especially interested in fine-tuning and transferring VLAs to environments that are very different but
+                <li>While current VLAs show promising results on control tasks, we plan to systematically evaluate their performance on pure vision-language and language tasks to assess whether fine-tuning or co-fine-tuning on control tasks compromises their capabilities in individual modalities.</li>
+                <li>We also aim to broaden our evaluation scope beyond the OpenX-Embodiment dataset. By incorporating the diverse
+                  control tasks described in this paper, we can better understand how VLAs and generalist models perform on completely
+                  out-of-distribution data. </li>
+                <li>Currently, our profiling efforts as seen in our <a href="static/pages/Multinetv01.html">first release</a> focus on zero-shot performance, future work will explore few-shot learning and
+                  fine-tuning scenarios.</li>
+                <li>We are especially interested in fine-tuning and transferring VLAs to o novel domains.
+                  We are exploring how these models might be adapted to software environments, potentially enabling more capable
+                  digital agents by leveraging insights from embodied learning that are very different but
                 analogous to embodied environments - such as software environments, in order to build digital agents.</li>
-                <li>Currently, Multinet is an offline benchmark, but in the future we will be exploring methods to make it an
-                online benchmark which may include simulation environments for 2D and 3D control tasks.</li>
+                <li>Finally, we envision transforming Multinet from its current offline form into an online benchmark. This evolution may
+                  include the development of simulation environments for both 2D and 3D control tasks, enabling more dynamic and
+                  interactive evaluation of model capabilities.</li>
               </ul>
             </p>
           </div>
