@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP82HPYSRH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+  
+      gtag('config', 'G-PP82HPYSRH');
+    </script>
+  
+    <meta charset="utf-8">
+    <!-- Meta tags for social media banners -->
+    <meta name="description" content="Multinet: A Generalist Benchmark for Vision-Language & Action models">
+    <meta property="og:title" content="Multinet"/>
+    <meta property="og:description" content="A Generalist Benchmark for Vision-Language & Action models"/>
+    <meta property="og:url" content="https://multinet.ai"/>
+    <meta property="og:image" content="static/images/Multinetlogo.png" />
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+  
+    <meta name="twitter:title" content="Multinet">
+    <meta name="twitter:description" content="A Generalist Benchmark for Vision-Language & Action models">
+    <meta name="twitter:image" content="static/images/Multinetlogo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="keywords" content="vision-language models, action models, robotics, machine learning, artificial intelligence, benchmarking">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <title>Multinet</title>
+    <link rel="icon" type="image/x-icon" href="../images/Multinetlogo.png"> 
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  
+    <link rel="stylesheet" href="../css/bulma.min.css">
+    <link rel="stylesheet" href="../css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="../css/bulma-slider.min.css">
+    <link rel="stylesheet" href="../css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script defer src="../js/fontawesome.all.min.js"></script>
+    <script src="../js/bulma-carousel.min.js"></script>
+    <script src="../js/bulma-slider.min.js"></script>
+    <script src="../js/index.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+                <a class="navbar-item" href="https://manifoldrg.com">
+                    <span class="icon">
+                        <i class="fas fa-home"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title">MultiNet: A Generalist Benchmark for Vision-Language & Action models</h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">This is a collaborative effort between <a href="https://www.manifoldrg.com/">Manifold Research</a> and <a href="https://metarch.ai/">Metarch.ai</a></span>
+                            <span class="author-block">This work is sponsored by <a href="https://metarch.ai/">Metarch.ai.</a></span>
+                            <br>
+                            <span class="author-block">Interested in using Action Models in Production? Reach out <a href="https://docs.google.com/forms/d/e/1FAIpQLSenIAtRXhpPzzTVH5luQmKE8UBXh4Y0mzZx-km8YZSMVmXn6A/viewform"> here</a></span>
+                        </div>
+
+                        <!-- Publication Links -->
+                        <div class="publication-links">
+                            <span class="link-block">
+                                <a href="Multinetv01.html" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-robot"></i>
+                                    </span>
+                                    <span>Multinetv0.1</span>
+                                </a>
+                            </span>
+
+                            <span class="link-block">
+                                <a href="../pdfs/Benchmarking Vision Language Action Models.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </span>
+                                    <span>Paper</span>
+                                </a>
+                            </span>
+
+                            <span class="link-block">
+                                <a href="../pdfs/MultiNet_Dataset_Spec_Paper.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </span>
+                                    <span>Dataset Spec</span>
+                                </a>
+                            </span>
+
+                            <span class="link-block">
+                                <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>Code</span>
+                                </a>
+                            </span>
+
+                            <span class="link-block">
+                                <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-code"></i>
+                                    </span>
+                                    <span>GenESIS framework</span>
+                                </a>
+                            </span>
+
+                            <span class="link-block">
+                                <a href="https://github.com/eihli/mugato" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-file-code"></i>
+                                    </span>
+                                    <span>μGato</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column">
+                    <div class="content has-text-justified">
+                        <h2 class="title is-3 has-text-centered">Introducing Multinet</h2>
+                        <p>
+                            </p>
+                            <p>We present Multinet, a comprehensive benchmark designed to evaluate truly generalist models across vision, language, and action domains.</p>
+                            <p>Multinet consolidates diverse, high-quality datasets including OBELICS, COYO-700M, and OpenX-Embodiment, establishing standardized evaluation protocols for assessing both the action capabilities of Vision-Language Models (VLMs) and the multimodal understanding of Vision-Language-Action Models (VLAs).</p>
+                            <p>Our benchmark includes carefully curated training data spanning vision-language association (800M+ image-text pairs), language understanding (1.3T tokens), and control tasks (35+ TB of robotics and RL data). We provide evaluation protocols across multiple dimensions, including image captioning, visual question answering, commonsense reasoning, and robotic control.</p>
+                            <p>Additionally, we open-source a toolkit that standardizes the challenging process of obtaining and utilizing reinforcement learning and robotics data from various sources.</p>
+                            <p>Through systematic evaluation of state-of-the-art models, we aim to demonstrate significant gaps in current approaches: VLMs struggle with control tasks while VLAs show limited capabilities in pure vision-language understanding.</p>
+                            <p>These findings will highlight the need for more genuinely generalist models. Multinet serves as both a comprehensive evaluation framework and a foundation for developing the next generation of truly generalist AI systems.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Sections -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column">
+                    <div class="content has-text-justified">
+                        <h2 class="title is-3 has-text-centered">Motivation</h2>
+                        <p>
+                            Deepmind's <a href="https://deepmind.google/discover/blog/a-generalist-agent/">GATO</a> represented a significant milestone as the first truly multi-modal, multi-task, multi-embodiment
+                            agent. Operating with a single neural network and fixed weights, Gato demonstrated capabilities spanning Atari gameplay, image captioning, conversational interaction, and real-world robotic manipulation.
+                            However,both the model and the majority of its training datasets remain closed-source, limiting its impact on the broader research community.
+                        </p>
+                        <p>
+                            The emerging class of Vision-Language-Action models such as <a href="https://openvla.github.io/">OpenVLA</a>, and <a href="https://octo-models.github.io/">Octo</a> display impressive capabilities of taking vision-language-grounded action in control tasks. However, they are trained for a niche set of robotics tasks, their performance on vision-language understanding/generation tasks is not well understood.
+                        </p>  
+                        <p>
+                            Building next generation "generalist" models requires training on diverse datasets that span multiple modalities and task types.
+                            Such models must excel not only at individual modalities (vision, language, or control/action) but also at tasks that require
+                            seamless integration across modalities - a requirement that better reflects real-world scenarios. Currently, there exists
+                            no large-scale, open-source dataset specifically designed for training and evaluating such generalist models. This gap
+                            motivated the development of Multinet.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column">
+                    <div class="content has-text-justified">
+                        <h2 class="title is-3 has-text-centered">Dataset Coverage and Analysis</h2>
+                        <p>
+                            Multinet offers a rich collection of diverse datasets to develop comprehensive multimodal capabilities across multiple domains. 
+                            It can be utilized to train models that will cultivate sophisticated vision-language association knowledge, high quality language understanding and generation abilities, and prowess in reward-based action
+                            trajectories in a myriad of environments and tasks. This consolidation effort not only provides pre-training scale data for a generalist objective, but also serves as a valuable benchmark for evaluating the capabilities of 
+                            current SoTA VLMs and VLAs, illuminating paths toward more versatile and capable generalist AI systems.
+                        </p>
+
+                        <!-- SVG Chart -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" style="width: 100%; max-width: 800px; height: auto; margin: 20px auto; display: block;">
+                            <!-- Title -->
+                            <text x="400" y="30" text-anchor="middle" font-size="20" font-family="Google Sans">Distribution of datasets across modalities in Multinet</text>
+                            
+                            <!-- Pie Chart -->
+                            <g transform="translate(250, 200)">
+                                <!-- Control segment (58%) -->
+                                <path d="M 0 0 L 100 0 A 100 100 0 1 1 -78.5 -62 Z" 
+                                      fill="#FFEB99" />
+                                
+                                <!-- Vision-Language segment (29%) -->
+                                <path d="M 0 0 L -78.5 -62 A 100 100 0 0 1 48.5 -87.5 Z" 
+                                      fill="#6666FF" />
+                                
+                                <!-- Language segment (13%) -->
+                                <path d="M 0 0 L 48.5 -87.5 A 100 100 0 0 1 100 0 Z" 
+                                      fill="#66B2FF" />
+                            </g>
+                            
+                            <!-- Legend -->
+                            <g transform="translate(500, 150)">
+                                <!-- Vision-Language -->
+                                <rect x="0" y="0" width="20" height="20" fill="#6666FF"/>
+                                <text x="30" y="15" font-size="16" font-family="Google Sans">Vision-Language (29%)</text>
+                                
+                                <!-- Language -->
+                                <rect x="0" y="35" width="20" height="20" fill="#66B2FF"/>
+                                <text x="30" y="50" font-size="16" font-family="Google Sans">Language (13%)</text>
+                                
+                                <!-- Control -->
+                                <rect x="0" y="70" width="20" height="20" fill="#FFEB99"/>
+                                <text x="30" y="85" font-size="16" font-family="Google Sans">Control (58%)</text>
+                            </g>
+                            
+                            <!-- Caption -->
+                            <text x="400" y="350" text-anchor="middle" font-size="14" font-family="Google Sans" font-style="italic">
+                                <tspan x="400" dy="0">Control represents the largest portion (58%) due to the extensive OpenX-Embodiment collection,</tspan>
+                                <tspan x="400" dy="20">followed by Vision-Language (29%) and Language (13%) datasets.</tspan>
+                            </text>
+                        </svg>
+
+                        <!-- Tables -->
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Dataset</th>
+                                    <th style="text-align: center;">Task/Data type</th>
+                                    <th style="text-align: center;">Modality</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;">OBELICS</td>
+                                    <td style="text-align: center;">Interleaved Image-Text</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">COYO-700M</td>
+                                    <td style="text-align: center;">Image-Text pairs</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">MS COCO</td>
+                                    <td style="text-align: center;">Object detection, segmentation, key-point detection, captioning</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Conceptual Captions</td>
+                                    <td style="text-align: center;">Image Captioning</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">A-OKVQA</td>
+                                    <td style="text-align: center;">Visual Question Answering</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">VQA-v2</td>
+                                    <td style="text-align: center;">Visual Question Answering</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Datacomp-1B</td>
+                                    <td style="text-align: center;">Image-Text pairs</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Fineweb-edu</td>
+                                    <td style="text-align: center;">High quality text corpus</td>
+                                    <td style="text-align: center;">Language</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p style="text-align: center; font-weight: bold; margin-bottom: 3rem; margin-top: 1rem;">Categorization of Vision-Language and Language datasets that can be used for training, fine-tuning, and some of them for evaluation</p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Dataset</th>
+                                    <th style="text-align: center;">Task/Data type</th>
+                                    <th style="text-align: center;">Modality</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;">Flickr30k</td>
+                                    <td style="text-align: center;">Image Captioning</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">TextVQA</td>
+                                    <td style="text-align: center;">Visual Question Answering</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">VizWiz</td>
+                                    <td style="text-align: center;">Visual Question Answering</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">WinoGAViL</td>
+                                    <td style="text-align: center;">Vision-based Commonsense Reasoning</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">ImageNet-R</td>
+                                    <td style="text-align: center;">Image-Text Pairs</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">ObjectNet</td>
+                                    <td style="text-align: center;">Image-Text Pairs</td>
+                                    <td style="text-align: center;">Vision-Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Hellaswag</td>
+                                    <td style="text-align: center;">Commonsense Reasoning</td>
+                                    <td style="text-align: center;">Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">ARC</td>
+                                    <td style="text-align: center;">Complex Reasoning and Knowledge Application</td>
+                                    <td style="text-align: center;">Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">CommonsenseQA</td>
+                                    <td style="text-align: center;">Commonsense Reasoning</td>
+                                    <td style="text-align: center;">Language</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">MMLU</td>
+                                    <td style="text-align: center;">Knowledge-intensive Question Answering</td>
+                                    <td style="text-align: center;">Language</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p style="text-align: center; font-weight: bold; margin-bottom: 3rem; margin-top: 1rem;">Categorization of Vision-Language and Language datasets that are purely for evaluation</p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Dataset</th>
+                                    <th style="text-align: center;">Task/Data type</th>
+                                    <th style="text-align: center;">Control Category</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;">DM Lab</td>
+                                    <td style="text-align: center;">Teach RL Agents 3D vision</td>
+                                    <td style="text-align: center;">Navigation-based control</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">DM Control Suite</td>
+                                    <td style="text-align: center;">Physics-based simulation environments</td>
+                                    <td style="text-align: center;">Locomotion-based control</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">ALE Atari</td>
+                                    <td style="text-align: center;">Atari games</td>
+                                    <td style="text-align: center;">Game-based control</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Baby AI</td>
+                                    <td style="text-align: center;">Language-grounded navigation</td>
+                                    <td style="text-align: center;">Navigation-based control</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">MuJoCo</td>
+                                    <td style="text-align: center;">Multi-joint dynamics</td>
+                                    <td style="text-align: center;">Locomotion-based control</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Meta-World</td>
+                                    <td style="text-align: center;">Meta-RL and Multi-task learning</td>
+                                    <td style="text-align: center;">Manipulation-based control</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">V-D4RL</td>
+                                    <td style="text-align: center;">Pixel-based analogues of DM Control Suite</td>
+                                    <td style="text-align: center;">Locomotion-based control</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Procgen</td>
+                                    <td style="text-align: center;">Procedurally generated Atari-like environments</td>
+                                    <td style="text-align: center;">Game-based control</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Open X Embodiment</td>
+                                    <td style="text-align: center;">Real-world Robotics tasks</td>
+                                    <td style="text-align: center;">Manipulation-based control and Locomotion-based control</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">LocoMuJoCo</td>
+                                    <td style="text-align: center;">Imitation learning for locomotion</td>
+                                    <td style="text-align: center;">Locomotion-based control</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p style="text-align: center; font-weight: bold; margin-top: 1rem;">Categorization of control datasets</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column">
+                    <div class="content has-text-justified">
+                        <h2 class="title is-3 has-text-centered">Benchmark</h2>
+                        <p>
+                            While existing benchmarks excel at evaluating specific capabilities and modalities, there remains a notable gap in
+                            holistic evaluation frameworks that can assess both the action capabilities of Vision-Language Models (VLMs) and the
+                            multimodal understanding of Vision-Language-Action Models (VLAs). Multinet addresses this gap by providing a
+                            comprehensive benchmark that spans vision-language, language, RL, and Robotics tasks. Our work consolidates diverse,
+                            high-quality datasets and establishes standardized evaluation metrics to enable systematic comparison of state-of-the-art
+                            models. For a detailed list of datasets and metrics included in Multinet, please refer to our <a href="static/pdfs/MultiNet_Dataset_Spec_Paper.pdf">dataset specification paper</a>
+                        </p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Metric</th>
+                                    <th style="text-align: center;">Evaluation Category</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;">CIDEr</td>
+                                    <td style="text-align: center;">Image Captioning, Image-based Text retrieval</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">VQA Accuracy</td>
+                                    <td style="text-align: center;">Visual Question Answering</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Recall@K</td>
+                                    <td style="text-align: center;">Image understanding, Text-based image retrieval</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Accuracy</td>
+                                    <td style="text-align: center;">VQA, Commonsense reasoning, Text understanding</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Mean Squared Error</td>
+                                    <td style="text-align: center;">RL, Robotics</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p style="text-align: center; font-weight: bold;">Metrics in Multinet benchmark and the categories of tasks they each evaluate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column">
+                    <div class="content has-text-justified">
+                        <h2 class="title is-3 has-text-centered">Importance of Multinet</h2>
+                        <p>
+                            Multinet represents a significant step toward advancing generalist AI systems. Multinet establishes a comprehensive benchmark for evaluating truly
+                            generalist models that can operate across multiple modalities, tasks, and environments. Our <a href="static/pages/Multinetv01.html">initial findings</a> demonstrate
+                            a significant capability gap in current state-of-the-art models: Today's VLMs, VLAs, and generalist models
+                            struggle to maintain consistent performance across a diverse set of real-world robotics tasks that they have not
+                            been exposed to before.
+                        </p>
+                        <p>
+                            Current Vision-Language-Action models typically excel at vision-language-grounded actions but may underperform in pure vision-language or language tasks. 
+                            Multinet provides pre-training scale data across all these modalities, enabling the development of models that achieve state-of-the-art performance across all
+                            constituent tasks, not just their primary domain. 
+                        </p>
+                        <p>
+                            A significant contribution of this work is our open-source toolkit for standardizing
+                            robotics and reinforcement learning data. Many existing datasets suffer from outdated formats, poor maintenance, and
+                            accessibility issues. Multinet's toolkit provides stable access methods, conversion to a unified format, and ease of use for training, fine-tuning, and evaluation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column">
+                    <div class="content has-text-justified">
+                        <h2 class="title is-3 has-text-centered">What's Next?</h2>
+                        <p>The release of Multinet marks an important first step toward a new paradigm of foundation models, but significant
+                            opportunities remain for expansion and improvement.</p>
+                        <ul>
+                            <li>While current VLAs show promising results on control tasks, we plan to systematically evaluate their performance on pure vision-language and language tasks to assess whether fine-tuning or co-fine-tuning on control tasks compromises their capabilities in individual modalities.</li>
+                            <li>We also aim to broaden our evaluation scope beyond the OpenX-Embodiment dataset. By incorporating the diverse
+                                control tasks described above, we can better understand how VLAs and generalist models perform on completely
+                                out-of-distribution data. </li>
+                            <li>Currently, our profiling efforts as seen in our <a href="static/pages/Multinetv01.html">first release</a> focus on zero-shot performance, future work will explore few-shot learning and
+                                fine-tuning scenarios.</li>
+                            <li>We are especially interested in fine-tuning and transferring VLAs to novel domains.
+                                We are exploring how these models might be adapted to software environments, potentially enabling more capable
+                                digital agents by leveraging insights from embodied learning.</li>
+                            <li>Finally, we envision transforming Multinet from its current offline form into an online benchmark. This evolution may
+                                include the development of simulation environments for both 2D and 3D control tasks, enabling more dynamic and
+                                interactive evaluation of model capabilities.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- BibTeX Section -->
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <h2 class="title">BibTeX</h2>
+          <pre><code>@misc{guruprasad2024benchmarking,
+        author    = {Guruprasad, Pranav and Sikka, Harshvardhan and Song, Jaewoo and Wang, Yangyue and Liang, Paul},
+        title     = {Benchmarking Vision, Language, & Action Models on Robotic Learning Tasks},
+        DOI       = {10.20944/preprints202411.0494.v1},
+        year      = {2024},
+      }</code></pre>
+        </div>
+      </section>
+    
+    
+    
+    
+    
+      <footer class="footer" style="background-color: #363636;">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content" style="color: #fff;">
+              <div class="buttons is-centered mb-4">
+                <a href="static/pdfs/MultiNet Dataset Spec Paper.pdf" class="button is-small is-dark" target="_blank">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+                <a href="https://github.com/ManifoldRG/MultiNet" class="button is-small is-dark" target="_blank">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </div>
+    
+              <p>For questions or issues, please <a href="https://github.com/ManifoldRG/MultiNet/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
+    
+              <p>
+                This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+              </p>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
