@@ -51,22 +51,44 @@
     <!-- Navigation -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
         <div class="navbar-menu">
-            <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-                <a class="navbar-item" href="https://manifoldrg.com">
-                    <span class="icon">
-                        <i class="fas fa-home"></i>
-                    </span>
+          <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+            <a class="navbar-item" href="https://manifoldrg.com">
+            <span class="icon">
+                <i class="fas fa-home"></i>
+            </span>
+            </a>
+      
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Related Projects
+              </a>
+              <div class="navbar-dropdown">
+                <a class="navbar-item" href="https://github.com/eihli/mugato">
+                  μGato
                 </a>
+                <a class="navbar-item" href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules">
+                  GenESIS Framework
+                </a>
+                <a class="navbar-item" href="https://multinet.ai/static/pages/Multinetv01.html">
+                  Multinet v0.1
+                </a>
+                <a class="navbar-item" href="Multinetv02.html">
+                  Multinet v0.2
+                </a>
+              </div>
+              
             </div>
+          </div>
+      
         </div>
-    </nav>
+      </nav>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -79,62 +101,78 @@
                             <span class="author-block">This is a collaborative effort between <a href="https://www.manifoldrg.com/">Manifold Research</a> and <a href="https://metarch.ai/">Metarch.ai</a></span>
                             <span class="author-block">This work is sponsored by <a href="https://metarch.ai/">Metarch.ai.</a></span>
                             <br>
-                            <span class="author-block">Interested in using Action Models in Production? Reach out <a href="https://docs.google.com/forms/d/e/1FAIpQLSenIAtRXhpPzzTVH5luQmKE8UBXh4Y0mzZx-km8YZSMVmXn6A/viewform"> here</a></span>
+                            <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:contact@metarch.ai"> here</a></strong></span>
                         </div>
 
                         <!-- Publication Links -->
                         <div class="publication-links">
+                            <!-- Multinet v0.2 page -->
                             <span class="link-block">
-                                <a href="Multinetv01.html" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                                    <span class="icon">
-                                        <i class="fas fa-robot"></i>
-                                    </span>
-                                    <span>Multinetv0.1</span>
-                                </a>
+                              <a href="static/pages/Multinetv02.html" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                <span class="icon">
+                                  <i class="fas fa-gamepad"></i> <!-- Icon representing video game playing -->
+                                </span>
+                                <span>Multinetv0.2</span>
+                              </a>
                             </span>
-
+              
+                            <!-- Multinet v0.1 page -->
                             <span class="link-block">
-                                <a href="../pdfs/Benchmarking Vision Language Action Models.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                                    <span class="icon">
-                                        <i class="fas fa-file-pdf"></i>
-                                    </span>
-                                    <span>Paper</span>
-                                </a>
+                              <a href="static/pages/Multinetv01.html" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                <span class="icon">
+                                  <i class="fas fa-robot"></i>
+                                </span>
+                                <span>Multinetv0.1</span>
+                              </a>
                             </span>
-
+              
+                            <!-- Supplementary PDF link -->
                             <span class="link-block">
-                                <a href="../pdfs/MultiNet_Dataset_Spec_Paper.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                                    <span class="icon">
-                                        <i class="fas fa-file-pdf"></i>
-                                    </span>
-                                    <span>Dataset Spec</span>
-                                </a>
+                              <a href="static/pdfs/MultiNet_Dataset_Spec_Paper.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                <span class="icon">
+                                  <i class="fas fa-file-pdf"></i>
+                                </span>
+                                <span>Dataset Spec</span>
+                              </a>
                             </span>
-
+              
+                            <!-- Github link -->
                             <span class="link-block">
-                                <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                                    <span class="icon">
-                                        <i class="fab fa-github"></i>
-                                    </span>
-                                    <span>Code</span>
-                                </a>
+                              <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                <span class="icon">
+                                  <i class="fab fa-github"></i>
+                                </span>
+                                <span>Code</span>
+                              </a>
                             </span>
-
+              
+                            <!-- Link to VLM-Action framework -->
                             <span class="link-block">
-                                <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                                    <span class="icon">
-                                        <i class="fas fa-code"></i>
-                                    </span>
-                                    <span>GenESIS framework</span>
-                                </a>
+                              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                <span class="icon">
+                                  <i class="fas fa-atom"></i>
+                                </span>
+                                <span>GenESIS framework</span>
+                              </a>
                             </span>
-
+              
+                            <!-- Link to Technical Blog -->
                             <span class="link-block">
-                                <a href="https://github.com/eihli/mugato" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                                    <span class="icon">
-                                        <i class="fas fa-file-code"></i>
-                                    </span>
-                                    <span>μGato</span>
+                              <a href="static/pages/Technical Blog.html" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                <span class="icon">
+                                  <i class="fas fa-file-alt"></i>
+                                </span>
+                                <span>Technical Blog</span>
+                              </a>
+                            </span>
+              
+                            <!-- Link to VLM-Action framework -->
+                            <span class="link-block">
+                              <a href="https://github.com/eihli/mugato" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                <span class="icon">
+                                  <i class="fas fa-file-code"></i>
+                                </span>
+                                <span>μGato</span>
                                 </a>
                             </span>
                         </div>
@@ -151,13 +189,18 @@
                     <div class="content has-text-justified">
                         <h2 class="title is-3 has-text-centered">Introducing Multinet</h2>
                         <p>
-                            </p>
-                            <p>We present Multinet, a comprehensive benchmark designed to evaluate truly generalist models across vision, language, and action domains.</p>
-                            <p>Multinet consolidates diverse, high-quality datasets including OBELICS, COYO-700M, and OpenX-Embodiment, establishing standardized evaluation protocols for assessing both the action capabilities of Vision-Language Models (VLMs) and the multimodal understanding of Vision-Language-Action Models (VLAs).</p>
-                            <p>Our benchmark includes carefully curated training data spanning vision-language association (800M+ image-text pairs), language understanding (1.3T tokens), and control tasks (35+ TB of robotics and RL data). We provide evaluation protocols across multiple dimensions, including image captioning, visual question answering, commonsense reasoning, and robotic control.</p>
-                            <p>Additionally, we open-source a toolkit that standardizes the challenging process of obtaining and utilizing reinforcement learning and robotics data from various sources.</p>
-                            <p>Through systematic evaluation of state-of-the-art models, we aim to demonstrate significant gaps in current approaches: VLMs struggle with control tasks while VLAs show limited capabilities in pure vision-language understanding.</p>
-                            <p>These findings will highlight the need for more genuinely generalist models. Multinet serves as both a comprehensive evaluation framework and a foundation for developing the next generation of truly generalist AI systems.
+                            Introducing MultiNet: a comprehensive benchmark we are building to evaluate and advance the development of the emerging category of Multimodal Action Models. Key contributions of Multinet include:
+                        </p>
+                        <ul>
+                            <li>The largest open-source generalist dataset, consolidating diverse modalities and tasks suitable for pre-training, fine-tuning, and evaluation of Multimodal Action Models</li>
+                            <li>Detailed analysis of the constituent datasets’ validity and utility for generalist objectives</li>
+                            <li>Open-source software infrastructure for downloading, managing, and utilizing the benchmark data</li>
+                            <li>Open-source software toolkit for translating control (RL and Robotics) datasets of various formats from various sources into a unified TensorFlow Datasets format, making them immediately usable for training, fine-tuning, and evaluation</li>
+                            <li>A general framework for mapping VLMs to other modality classes, with particular emphasis on action spaces</li>
+                            <li>Open-source evaluation frameworks to profile SoTA VLMs and VLAs on datasets within Multinet</li>
+                        </ul>
+                        <p>
+                            <a href="Multinetv01.html">In our initial release</a>, we presented the results of evaluating GPT-4o (SoTA VLM), OpenVLA (SoTA VLA), and HuggingFace's JAT (novel generalist model) on 20 diverse and challenging OpenX Embodiment datasets. <a href="Multinetv02.html">In our latest release</a>, we have expanded our evaluation to analyze the performance of a new set of SoTA models - Pi0, Pi0 with FAST, OpenVLA, GPT 4o, and GPT 4.1 -  on simulated, procedurally generated 2D game-playing environments.
                         </p>
                     </div>
                 </div>
@@ -476,7 +519,7 @@
                                     <td style="text-align: center;">VQA, Commonsense reasoning, Text understanding</td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center;">Mean Squared Error</td>
+                                    <td style="text-align: center;">Mean Squared Error, Brier Mean Absolute Error, Precision, Recall, F1 Score</td>
                                     <td style="text-align: center;">RL, Robotics</td>
                                 </tr>
                             </tbody>
@@ -497,10 +540,10 @@
                         <h2 class="title is-3 has-text-centered">Importance of Multinet</h2>
                         <p>
                             Multinet represents a significant step toward advancing generalist AI systems. Multinet establishes a comprehensive benchmark for evaluating truly
-                            generalist models that can operate across multiple modalities, tasks, and environments. Our <a href="static/pages/Multinetv01.html">initial findings</a> demonstrate
+                            generalist models that can operate across multiple modalities, tasks, and environments. Our <a href="static/pages/Multinetv01.html">initial findings</a> demonstrated
                             a significant capability gap in current state-of-the-art models: Today's VLMs, VLAs, and generalist models
                             struggle to maintain consistent performance across a diverse set of real-world robotics tasks that they have not
-                            been exposed to before.
+                            been exposed to before. Our latest release <a href="static/pages/Multinetv02.html">Multinetv0.2</a> shows that even SoTA VLAs and VLMs struggle to generalize to a different class of control tasks - procedurally generated 2D game-playing environments.
                         </p>
                         <p>
                             Current Vision-Language-Action models typically excel at vision-language-grounded actions but may underperform in pure vision-language or language tasks. 
@@ -527,11 +570,11 @@
                         <p>The release of Multinet marks an important first step toward a new paradigm of foundation models, but significant
                             opportunities remain for expansion and improvement.</p>
                         <ul>
-                            <li>While current VLAs show promising results on control tasks, we plan to systematically evaluate their performance on pure vision-language and language tasks to assess whether fine-tuning or co-fine-tuning on control tasks compromises their capabilities in individual modalities.</li>
-                            <li>We also aim to broaden our evaluation scope beyond the OpenX-Embodiment dataset. By incorporating the diverse
+                            <li>While current VLAs show promising but inconsistent results on robotics control tasks, and very poor performance on simulated, procedurally generated 2D game-playing environments, we plan to systematically evaluate their performance on pure vision-language and language tasks to assess whether fine-tuning or co-fine-tuning on control tasks compromises their capabilities in individual modalities.</li>
+                            <li>We also aim to broaden our evaluation scope beyond the OpenX-Embodiment and Procgen datasets. By incorporating the diverse
                                 control tasks described above, we can better understand how VLAs and generalist models perform on completely
                                 out-of-distribution data. </li>
-                            <li>Currently, our profiling efforts as seen in our <a href="static/pages/Multinetv01.html">first release</a> focus on zero-shot performance, future work will explore few-shot learning and
+                            <li>Currently, our profiling efforts as seen in our <a href="static/pages/Multinetv01.html">first release</a> and <a href="static/pages/Multinetv02.html">latest release</a> focus on zero-shot performance, future work will explore few-shot learning and
                                 fine-tuning scenarios.</li>
                             <li>We are especially interested in fine-tuning and transferring VLAs to novel domains.
                                 We are exploring how these models might be adapted to software environments, potentially enabling more capable
@@ -569,7 +612,7 @@
           <div class="column is-8">
             <div class="content" style="color: #fff;">
               <div class="buttons is-centered mb-4">
-                <a href="static/pdfs/MultiNet Dataset Spec Paper.pdf" class="button is-small is-dark" target="_blank">
+                <a href="static/pdfs/MultiNet_Dataset_Spec_Paper.pdf" class="button is-small is-dark" target="_blank">
                   <span class="icon">
                     <i class="fas fa-file-pdf"></i>
                   </span>
