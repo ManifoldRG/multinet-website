@@ -13,7 +13,7 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Multinetv0.2</title>
+  <title>Multinetv0.1</title>
   
   <link rel="icon" type="image/x-icon" href="../images/Multinetlogo.png">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
@@ -261,6 +261,90 @@
     }
     .tab-pane.is-active {
       display: block; /* Show only the active tab pane */
+  <!-- Add Chart.js before our custom script -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/v0_2_table.js"></script>
+
+  <style>
+    .metrics-container {
+      display: flex;
+      gap: 2rem;
+      margin: 2rem 0;
+      align-items: flex-start;
+      min-height: 1600px;
+    }
+
+    .metrics-sidebar {
+      width: 200px;
+      position: sticky;
+      top: 2rem;
+      height: fit-content;
+      z-index: 2;
+    }
+
+    .metric-button {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      text-align: left;
+      background: #f5f5f5;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .metric-button.active {
+      background: #363636;
+      color: white;
+    }
+
+    .metrics-charts {
+      flex: 1;
+      min-width: 0;
+      position: relative;
+      min-height: 1600px;
+    }
+
+    .metric-chart {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      width: 100%;
+      height: 1600px;
+      transition: opacity 0.4s;
+    }
+
+    .metric-chart.active {
+      opacity: 1;
+      pointer-events: auto;
+      position: relative;
+    }
+
+    @media (max-width: 900px) {
+      .metrics-container {
+        flex-direction: column;
+        min-height: auto;
+      }
+      .metrics-sidebar {
+        width: 100%;
+        position: static;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .metric-button {
+        width: auto;
+        flex: 1 1 40%;
+        margin: 0.25rem 0;
+      }
+      .metrics-charts {
+        min-height: 1200px;
+      }
+      .metric-chart {
+        height: 1200px;
+      }
     }
   </style>
 </head>
@@ -345,11 +429,40 @@
       <div class="columns is-centered">
         <div class="column">
           <div class="content has-text-centered">
-            <img src="../images/Multinet v0.1 release visual 3.0.png" alt="Multinet v0.1 Release Visual" width="85%">
+            <img src="../images/v0_2_visual.png" alt="Multinet v0.2 Release Visual" width="85%">
           </div>
         </div>
       </div>
     </div>
+
+  <div class="container is-max-desktop">
+      <div class="columns is-centered">
+          <div class="column">
+          <div class="content has-text-centered">
+            <div class="metrics-container">
+              <div class="metrics-sidebar">
+                <button class="metric-button active" data-metric="brier-mae">Brier MAE</button>
+                <button class="metric-button" data-metric="normalized_amae">Normalized AMAE</button>
+                <button class="metric-button" data-metric="normalized_quantile_filtered_amae">Normalized Quantile Filtered AMAE</button>
+                <button class="metric-button" data-metric="micro-precision">Micro Precision</button>
+                <button class="metric-button" data-metric="micro-recall">Micro Recall</button>
+                <button class="metric-button" data-metric="micro-f1">Micro F1</button>
+                <button class="metric-button" data-metric="macro-precision">Macro Precision</button>
+                <button class="metric-button" data-metric="macro-recall">Macro Recall</button>
+                <button class="metric-button" data-metric="macro-f1">Macro F1</button>
+              </div>
+              
+              <div class="metrics-charts">
+                <!-- Charts will be dynamically inserted here -->
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+
+
+
 
   <section class="section"></section>
     <div class="container is-max-desktop">
@@ -441,137 +554,96 @@
               <thead>
                   <tr>
                       <th>Dataset Name</th>
-                      <th>Registered Dataset Name</th>
-                      <th>In Pretraining for OpenVLA</th>
+                      <th>Environment Description</th>
                       <th>Action Space Type</th>
                   </tr>
               </thead>
               <tbody>
                   <tr>
-                      <td>Jaco Play</td>
-                      <td>jaco_play</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>4D (1 grip, 3 pos)</td>
+                      <td>Bigfish</td>
+                      <td>Eat smaller fish to grow while avoiding larger fish</td>
+                      <td>8 directions + no-op</td>
                   </tr>
                   <tr>
-                      <td>Berkeley Cable Routing</td>
-                      <td>berkeley_cable_routing</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>7D (3 ang, 3 pos, 1 term)</td>
+                      <td>Bossfight</td>
+                      <td>Dodge projectiles and damage the boss when shields are down</td>
+                      <td>8 directions + no-op + fire bullet</td>
                   </tr>
                   <tr>
-                      <td>NYU Door Opening</td>
-                      <td>nyu_door_opening_surprising_effectiveness</td>
-                      <td></td>
-                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                      <td>Caveflyer</td>
+                      <td>Navigate caves, destroy targets, and avoid obstacles to reach exit</td>
+                      <td>8 directions + no-op + fire bullet</td>
                   </tr>
                   <tr>
-                      <td>VIOLA</td>
-                      <td>viola</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                      <td>Chaser</td>
+                      <td>Collect orbs and stars to make enemies vulnerable for consumption</td>
+                      <td>8 directions + no-op</td>
                   </tr>
                   <tr>
-                      <td>Berkeley Autolab UR5</td>
-                      <td>berkeley_autolab_ur5</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                      <td>Climber</td>
+                      <td>Climb platforms and collect stars while avoiding flying monsters</td>
+                      <td>8 directions + no-op</td>
                   </tr>
                   <tr>
-                      <td>TOTO</td>
-                      <td>toto</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>7D (3 ang, 3 pos, 1 term)</td>
+                      <td>Coinrun</td>
+                      <td>Reach the coin while avoiding saws, enemies, and chasms</td>
+                      <td>8 directions + no-op</td>
                   </tr>
                   <tr>
-                      <td>Columbia PushT</td>
-                      <td>columbia_cairlab_pusht_real</td>
-                      <td></td>
-                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                      <td>Dodgeball</td>
+                      <td>Hit enemies with balls and reach the unlocked platform</td>
+                      <td>8 directions + no-op + fire ball</td>
                   </tr>
                   <tr>
-                      <td>NYU ROT</td>
-                      <td>nyu_rot_dataset_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                      <td>Fruitbot</td>
+                      <td>Collect fruit, avoid non-fruit, and use keys to unlock gates</td>
+                      <td>8 directions + no-op + fire key</td>
                   </tr>
                   <tr>
-                      <td>Stanford HYDRA</td>
-                      <td>stanford_hydra_dataset_converted_externally_to_rlds</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                      <td>Heist</td>
+                      <td>Collect colored keys to unlock doors and steal the gem</td>
+                      <td>8 directions + no-op</td>
                   </tr>
                   <tr>
-                      <td>UCSD Kitchen</td>
-                      <td>ucsd_kitchen_dataset_converted_externally_to_rlds</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                      <td>Jumper</td>
+                      <td>Use double jump to navigate platforms and find the carrot</td>
+                      <td>8 directions + no-op</td>
                   </tr>
                   <tr>
-                      <td>UCSD Pick Place</td>
-                      <td>ucsd_pick_and_place_dataset_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>4D (3 vel, 1 grip torque)</td>
+                      <td>Leaper</td>
+                      <td>Cross lanes by avoiding cars and hopping on logs</td>
+                      <td>8 directions + no-op</td>
                   </tr>
                   <tr>
-                      <td>USC Cloth Sim</td>
-                      <td>usc_cloth_sim_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>4D (3 pos, 1 grip)</td>
+                      <td>Maze</td>
+                      <td>Navigate the maze to find and collect the cheese</td>
+                      <td>8 directions + no-op</td>
                   </tr>
                   <tr>
-                      <td>Tokyo PR2 Fridge</td>
-                      <td>utokyo_pr2_opening_fridge_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                      <td>Miner</td>
+                      <td>Dig through dirt, collect diamonds, and avoid falling objects</td>
+                      <td>8 directions + no-op</td>
                   </tr>
                   <tr>
-                      <td>Tokyo PR2 Tabletop</td>
-                      <td>utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                      <td>Ninja</td>
+                      <td>Jump across ledges and use throwing stars to clear bombs</td>
+                      <td>8 directions + no-op + 4 throwing star directions</td>
                   </tr>
                   <tr>
-                      <td>UTokyo xArm Pick-Place</td>
-                      <td>utokyo_xarm_pick_and_place_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                      <td>Plunder</td>
+                      <td>Fire cannonballs at enemy ships while avoiding friendly ships</td>
+                      <td>8 directions + no-op + fire cannonball</td>
                   </tr>
                   <tr>
-                      <td>Stanford MaskVIT</td>
-                      <td>stanford_mask_vit_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>5D (3 pos, 1 ang, 1 grip)</td>
-                  </tr>
-                  <tr>
-                      <td>ETH Agent Affordances</td>
-                      <td>eth_agent_affordances</td>
-                      <td></td>
-                      <td>6D (3 vel, 3 ang vel)</td>
-                  </tr>
-                  <tr>
-                      <td>Imperial Sawyer</td>
-                      <td>imperialcollege_sawyer_wrist_cam</td>
-                      <td></td>
-                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
-                  </tr>
-                  <tr>
-                      <td>ConqHose</td>
-                      <td>conq_hose_manipulation</td>
-                      <td></td>
-                      <td>7D (3 pos, 3 ang, 1 grip)</td>
-                  </tr>
-                  <tr>
-                      <td>Plex RoboSuite</td>
-                      <td>plex_robosuite</td>
-                      <td></td>
-                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                      <td>Starpilot</td>
+                      <td>Dodge projectiles and defeat enemies while navigating obstacles</td>
+                      <td>8 directions + no-op + 2 fire bullet directions</td>
                   </tr>
               </tbody>
           </table>
           
           <div class="table-notes">
-              pos: position, grip: gripper, term: terminate, vel: velocity, ang: angular
+              Action space dimensions include: movement actions (8 directions + no-op) and special actions (varies by environment)
           </div>
       </div>
           </div>
@@ -1006,5 +1078,4 @@
 
 </body>
 </html>
-
 
