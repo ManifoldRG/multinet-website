@@ -98,8 +98,8 @@ function renderCharts(data) {
   
       const ctx = chartDiv.querySelector('canvas').getContext('2d');
       const useModels = ['brier-mae', 'normalized_amae', 'normalized_quantile_filtered_amae'].includes(metric) 
-        ? models.slice(0, 4)  // Use first 4 models (excluding pi0_base)
-        : models;  // Use all models for other metrics
+        ? models.slice(0, 4)
+        : models;
   
       const colors = [
         'rgba(54, 162, 235, 0.7)',
@@ -136,6 +136,7 @@ function renderCharts(data) {
             data: chartData,
             options: {
               responsive: true,
+              maintainAspectRatio: false,
               plugins: {
                 legend: { 
                   position: 'top',
@@ -145,16 +146,7 @@ function renderCharts(data) {
                   }
                 },
                 title: { 
-                  display: true, 
-                  text: metricDisplay[metric],
-                  font: {
-                    size: 16,
-                    weight: 'bold'
-                  },
-                  padding: {
-                    top: 10,
-                    bottom: 20
-                  }
+                  display: false
                 }
               },
               scales: {
@@ -187,7 +179,6 @@ function renderCharts(data) {
                       weight: 'bold'
                     }
                   },
-                  // For MAE metrics, set a fixed range to better show differences
                   ...(['brier-mae', 'normalized_amae', 'normalized_quantile_filtered_amae'].includes(metric) ? {
                     min: 0,
                     max: 2,
@@ -225,7 +216,7 @@ function renderCharts(data) {
         console.error(`Error creating chart for ${metric}:`, error);
       }
     });
-  }
+}
 
 function showChart(metric) {
   document.querySelectorAll('.metric-chart').forEach(div => {
@@ -271,3 +262,12 @@ if (document.readyState === 'loading') {
 } else {
   initializeCharts();
 }
+
+// Add window resize handler to maintain chart heights
+window.addEventListener('resize', () => {
+  Object.values(charts).forEach(chart => {
+    if (chart) {
+      chart.resize();
+    }
+  });
+});
