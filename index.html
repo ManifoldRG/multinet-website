@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP82HPYSRH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PP82HPYSRH');
+  </script>
+
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
@@ -24,8 +34,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <title>Academic Project Page</title>
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <title>Multinet</title>
+  <link rel="icon" type="image/x-icon" href="static/images/Multinetlogo.png"> 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
 
@@ -43,74 +53,132 @@
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
+
 </head>
 <body>
+  
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://manifoldrg.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Related Projects
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://github.com/eihli/mugato">
+            μGato
+          </a>
+          <a class="navbar-item" href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules">
+            GenESIS Framework
+          </a>
+          <a class="navbar-item" href="https://multinet.ai/static/pages/Multinetv01.html">
+            Multinet v0.1
+          </a>
+          <a class="navbar-item" href="https://multinet.ai/static/pages/Multinetv02.html">
+            Multinet v0.2
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
 
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Academic Project Page</h1>
+            <h1 class="title is-1 publication-title">MultiNet: A Generalist Benchmark for Vision-Language & Action models</h1>
             <div class="is-size-5 publication-authors">
-              <!-- Paper authors -->
-              <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">First Author</a><sup>*</sup>,</span>
-                <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Second Author</a><sup>*</sup>,</span>
-                  <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a>
-                  </span>
-                  </div>
+              <span class="author-block">This is a collaborative effort between <a href="https://www.manifoldrg.com/">Manifold Research</a> and <a href="https://metarch.ai/">Metarch.ai</a></span>
+              <span class="author-block">This work is sponsored by <a href="https://metarch.ai/">Metarch.ai.</a></span>
+              <br>
+              <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:contact@metarch.ai"> here</a></strong></span>
+            </div>
 
-                  <div class="is-size-5 publication-authors">
-                    <span class="author-block">Institution Name<br>Conferance name and year</span>
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                  </div>
-
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- Arxiv PDF link -->
-                      <span class="link-block">
-                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
-                    </span>
-
-                    <!-- Supplementary PDF link -->
-                    <span class="link-block">
-                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Supplementary</span>
-                    </a>
-                  </span>
-
-                  <!-- Github link -->
-                  <span class="link-block">
-                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-
-                <!-- ArXiv abstract Link -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
+            <div class="publication-links">
+              <!-- Multinet v0.2 page -->
+              <span class="link-block">
+                <a href="static/pages/Multinetv02.html" target="_blank" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                    <i class="ai ai-arxiv"></i>
+                    <i class="fas fa-gamepad"></i> <!-- Icon representing video game playing -->
                   </span>
-                  <span>arXiv</span>
+                  <span>Multinetv0.2</span>
+                </a>
+              </span>
+
+              <!-- Multinet v0.1 page -->
+              <span class="link-block">
+                <a href="static/pages/Multinetv01.html" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-robot"></i>
+                  </span>
+                  <span>Multinetv0.1</span>
+                </a>
+              </span>
+
+              <!-- Supplementary PDF link -->
+              <span class="link-block">
+                <a href="static/pdfs/MultiNet_Dataset_Spec_Paper.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Dataset Spec</span>
+                </a>
+              </span>
+
+              <!-- Github link -->
+              <span class="link-block">
+                <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+              <!-- Link to VLM-Action framework -->
+              <span class="link-block">
+                <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-atom"></i>
+                  </span>
+                  <span>GenESIS framework</span>
+                </a>
+              </span>
+
+              <!-- Link to Technical Blog -->
+              <span class="link-block">
+                <a href="static/pages/Technical Blog.html" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-alt"></i>
+                  </span>
+                  <span>Technical Blog</span>
+                </a>
+              </span>
+
+              <!-- Link to VLM-Action framework -->
+              <span class="link-block">
+                <a href="https://github.com/eihli/mugato" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-code"></i>
+                  </span>
+                  <span>μGato</span>
                 </a>
               </span>
             </div>
@@ -118,188 +186,553 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-<!-- Teaser video-->
-<section class="hero teaser">
+<section class="section">
   <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video poster="" id="tree" autoplay controls muted loop height="100%">
-        <!-- Your video here -->
-        <source src="static/videos/banner_video.mp4"
-        type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
-      </h2>
-    </div>
+      <div class="columns is-centered">
+          <div class="column">
+              <div class="content has-text-justified">
+                  <h2 class="title is-3 has-text-centered">Introducing Multinet</h2>
+                  <p>
+                      </p>
+                      <p>We present <a href="static/pages/Multinet.html">Multinet</a>, a comprehensive benchmark for evaluating generalist models across vision, language, and action. It consolidates diverse datasets and standardizes protocols to assess multimodal understanding and action generation capabilities of SoTA VLMs and VLAs. Multinet provides extensive training data (800M+ image-text pairs, 1.3T language tokens, 35TB+ control data), varied evaluation tasks (e.g., captioning, VQA, robotics, game-playing, commonsense reasoning, simulated locomotion and manipulation, etc.), and an open-source toolkit to standardize the process of obtaining and utilizing robotics/RL data, aiming to highlight current model limitations and drive development of truly generalist AI.</p>
+                  </p>
+              </div>
+          </div>
+      </div>
   </div>
 </section>
-<!-- End teaser video -->
 
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
-
-
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="MY ALT TEXT"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-<!-- End image carousel -->
-
-
-
-
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
+  <!-- Flip Cards Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <h2 class="title is-3 has-text-centered">Dive deeper into our research</h2>
           
-          <div class="publication-video">
-            <!-- Youtube embed code here -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <div class="columns is-multiline is-centered">
+            <!-- Card 1 -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="static/pages/Multinet.html" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">Multinet</h3>
+                      <p>A comprehensive benchmark for evaluating Multimodal Action Models</p>
+                      <img src="static/images/Multinetlogo.png" alt="Multinet Icon">
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div> <!-- Content wrapper -->
+                          <h3 class="title is-4">Multinet</h3>
+                          <p class="description-intro">Key contributions include:</p>
+                          <ul>
+                            <li>Comprehensive dataset for evaluating multimodal models</li>
+                            <li>Tools for standardizing robotics and RL data</li>
+                            <li>Framework for mapping language models to actions</li>
+                            <li>Evaluation suite for vision-language agents</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="static/pages/Multinetv01.html" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">Multinet v0.1</h3>
+                      <p>Benchmarking Vision, Language, and Action models on Robotics tasks</p>
+                      <img src="static/images/roboticon.jpg" alt="Multinet Robotics Icon">
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div> <!-- Content wrapper -->
+                          <h3 class="title is-4">Multinet v0.1</h3>
+                          <p class="description-intro">Key contributions include:</p>
+                          <ul>
+                            <li>Profiling results for VLM, VLA, and generalist models</li>
+                            <li>Analysis of model generalization to robotics tasks</li>
+                            <li>Evaluation metrics for OpenX Dataset</li>
+                            <li>Framework for mapping VLMs to actions</li>
+                            <li>Open-source benchmark infrastructure</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="static/pages/Multinetv02.html" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">Multinet v0.2</h3>
+                      <p>Benchmarking Vision, Language, & Action Models in Procedurally
+                        Generated, Open Ended Action Environments</p>
+                      <img src="static/images/procgenicon.png" alt="Procgen Icon">
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div> <!-- Content wrapper -->
+                          <h3 class="title is-4">Multinet v0.2</h3>
+                          <p class="description-intro">Key contributions include:</p>
+                          <ul>
+                            <li>Benchmarking SOTA models in procedurally generated environments.</li>
+                            <li>Impact of architecture, data, & processing on model generalization.</li>
+                            <li>Insights on action space & image complexity for generalist AI.</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">GenESIS</h3>
+                      <p>Generalizable Extendable Stratified Inference System - A framework for mapping language models to actions</p>
+                      <img src="static/images/genesisicon.png" alt="GenESIS Icon">
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div> <!-- Content wrapper -->
+                          <h3 class="title is-4">GenESIS</h3>
+                          <p class="description-intro">GenESIS structures prompts for action generation using:</p>
+                          <ul>
+                            <li>System-level goals and constraints.</li>
+                            <li>Task and environment context/rules.</li>
+                            <li>Integration of visual input</li>
+                            <li>Clear action space definitions.</li>
+                            <li>Precise output formatting instructions.</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Card 5: New Card -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="static/pages/Technicalblog.html" target="_blank" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">Technical Blog</h3>
+                      <p>Technical blog posts about our research and engineering achievements along the way</p>
+                      <img src="static/images/reporticon.png" alt="Technical report icon">
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div> <!-- Content wrapper -->
+                          <h3 class="title is-4">Technical Blog</h3>
+                          <p class="description-intro">Explore our technical blog for key discoveries and engineering achievements from our cutting-edge work in Vision-Language-Action models, action data, and benchmarking.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- End youtube video -->
+  </section>
 
+  <style>
+    /* Flip card styles */
+    .section .title.is-3.has-text-centered {
+      color: #363636; 
+      margin-bottom: 3rem; 
+      font-weight: 600; 
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+    }
 
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4"
-            type="video/mp4">
-          </video>
+    .flip-card-anchor {
+      display: block;
+      width: 280px; /* Card width */
+      height: 280px; /* Card height */
+      margin: 0 auto 25px auto; /* Center horizontally, add bottom margin */
+      text-decoration: none;
+      color: inherit;
+    }
+    .flip-card-anchor:hover {
+      text-decoration: none;
+    }
+
+    .flip-card {
+      background-color: transparent;
+      width: 100%; /* Takes width from anchor */
+      height: 100%; /* Takes height from anchor */
+      perspective: 1000px;
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15); 
+      border-radius: 15px; 
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 15px; 
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px; /* Adjusted padding for smaller card size */
+    }
+
+    .flip-card-front {
+      background-color: #ffffff; 
+      color: #4a4a4a; 
+      border: 1px solid #e0e0e0; 
+    }
+
+    .flip-card-front .title.is-4 {
+      color: #005A9C; 
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .flip-card-front p {
+      font-size: 0.85rem; /* Slightly smaller for better fit */
+      color: #555555; 
+      line-height: 1.4;
+    }
+
+    .flip-card-front img {
+      max-width: 65px; /* Adjusted for smaller card */
+      max-height: 65px; /* Adjusted for smaller card */
+      margin-top: 10px; /* Adjusted margin */
+      margin-bottom: 5px;
+    }
+
+    .flip-card-back {
+      background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%); 
+      color: white;
+      transform: rotateY(180deg);
+      overflow: hidden; 
+    }
+    
+    .flip-card-back .scrollable-content {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      padding-right: 10px; 
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; /* Content starts from top */
+      align-items: center;
+    }
+    
+    .flip-card-back .scrollable-content > div { 
+        width: 100%;
+    }
+
+    .flip-card-back .title.is-4 {
+      color: #ffffff; 
+      margin-bottom: 10px; /* Adjusted margin */
+      font-weight: 600;
+      text-align: center; 
+      font-size: 1.25rem; /* Adjusted for smaller card */
+    }
+
+    .flip-card-back p.description-intro,
+    .flip-card-back p.single-description {
+      font-size: 0.85rem; /* Adjusted for smaller card */
+      color: #e0e0e0; 
+      line-height: 1.4; /* Adjusted line height */
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+    
+    .flip-card-back p.single-description {
+        text-align: center; 
+        margin-bottom: 10px; 
+    }
+    
+    .flip-card-back p.description-intro {
+        text-align: left; 
+        font-weight: 500; 
+    }
+
+    .flip-card-back ul {
+      font-size: 0.8rem; /* Adjusted for smaller card */
+      color: #e0e0e0;
+      line-height: 1.5; /* Adjusted line height */
+      list-style-type: disc; 
+      padding-left: 20px; 
+      margin-top: 0;
+      margin-bottom: 10px; /* Adjusted margin */
+      text-align: left;
+    }
+
+    .flip-card-back ul li {
+      margin-bottom: 4px; /* Adjusted margin */
+    }
+
+    /* Customize scrollbar for webkit browsers */
+    .scrollable-content::-webkit-scrollbar {
+      width: 6px; 
+    }
+
+    .scrollable-content::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1); 
+      border-radius: 3px;
+    }
+
+    .scrollable-content::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.5); 
+      border-radius: 3px;
+    }
+
+    .scrollable-content::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.8); 
+    }
+
+    /* Card-specific styles */
+
+    /* Card 1 (Multinet - Blue Theme) */
+    .columns > .column:nth-child(1) .flip-card-front .title.is-4 {
+      color: #005A9C; 
+    }
+    .columns > .column:nth-child(1) .flip-card-back {
+      background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%);
+    }
+
+    /* Card 2 (Multinet v0.1 - Green Theme) */
+    .columns > .column:nth-child(2) .flip-card-front .title.is-4 {
+      color: #1E8449; 
+    }
+    .columns > .column:nth-child(2) .flip-card-back {
+      background: linear-gradient(135deg, #27AE60 0%, #1E8449 100%); 
+    }
+
+    /* Card 3 (Multinet v0.2 - Orange Theme) */
+    .columns > .column:nth-child(3) .flip-card-front .title.is-4 {
+      color: #D35400; 
+    }
+    .columns > .column:nth-child(3) .flip-card-back {
+      background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); 
+    }
+
+    /* Card 4 (GenESIS - Purple Theme, was GoEX) */
+    .columns > .column:nth-child(4) .flip-card-front .title.is-4 {
+      color: #8E44AD; 
+    }
+    .columns > .column:nth-child(4) .flip-card-back {
+      background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); 
+    }
+
+    /* Card 5 (Technical Blog - Red Theme, was Open X-Embodiment) */
+    .columns > .column:nth-child(5) .flip-card-front .title.is-4 {
+      color: #C0392B; 
+    }
+    .columns > .column:nth-child(5) .flip-card-back {
+      background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); 
+    }
+  </style>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <p class="is-size-5">
+            <strong><em>Interested in contributing/collaborating on this effort? Join the conversation on <a href="https://discord.gg/Rk4gAq5aYr" target="_blank">Discord</a>.</em></strong>
+          </p>
         </div>
-        <div class="item item-video2">
-          <video poster="" id="video2" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4"
-            type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video3">
-          <video poster="" id="video3" autoplay controls muted loop height="100%">\
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4"
-            type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End video carousel -->
-
-
-
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
       </div>
     </div>
   </section>
-<!--End paper poster -->
 
-
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>BibTex Code Here</code></pre>
-    </div>
-</section>
-<!--End BibTex citation -->
-
-
-  <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-
+  <section class="news-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">News</h2>
+            <div class="news-container">
+              <div class="news-item">
+                <div class="news-icon">🏆</div>
+                <div class="news-content">
+                  <p><strong>Multinet v0.2 released!</strong> How well do state-of-the-art VLAs and VLMs perform in procedurally generated Out-of-Distribution (OOD) environments? Read more on our <a href="Multinetv0.2.html">v0.2 Release Page</a>.</p>
+                </div>
+              </div>
+              <div class="news-item">
+                <div class="news-icon">🎉</div>
+                <div class="news-content">
+                  <p><strong>Multinet v0.1 released!</strong> How well do state-of-the-art VLMs and VLAs perform on real-world robotics tasks? Read more on our <a href="static/pages/Multinetv01.html">release Page</a>.</p>
+                </div>
+              </div>
+              <div class="news-item">
+                <div class="news-icon">🚀</div>
+                <div class="news-content">
+                  <p><strong>Introducing Multinet!</strong> A new generalist benchmark to evaluate Vision-Language & Action models. <a href="static/pages/Multinet.html">Learn more here</a>.</p>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</footer>
+  </section>
+
+  <style>
+    .video-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    .responsive-video {
+      width: 100%;
+      max-width: 720px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+    }
+
+    .news-section {
+      padding: 20px 0;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .news-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .news-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    .news-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .news-icon {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .news-content {
+      flex-grow: 1;
+    }
+
+    .news-content a {
+      color: blue;
+      text-decoration: none;
+    }
+
+    .news-content a:hover {
+      text-decoration: underline;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    caption {
+      font-style: italic;
+      margin-top: 8px;
+    }
+  </style>
+
+
+  <div class="video-container"></div>
+    <video 
+        class="responsive-video"
+        controls 
+        autoplay 
+        loop 
+        muted 
+        preload="auto"
+    >
+        <source src="static/videos/Multinet Data Video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+  <!-- BibTeX Section -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@misc{guruprasad2024benchmarking,
+    author    = {Guruprasad, Pranav and Sikka, Harshvardhan and Song, Jaewoo and Wang, Yangyue and Liang, Paul},
+    title     = {Benchmarking Vision, Language, & Action Models on Robotic Learning Tasks},
+    DOI       = {10.20944/preprints202411.0494.v1},
+    year      = {2024},
+  }</code></pre>
+    </div>
+  </section>
+
 
 <!-- Statcounter tracking code -->
   

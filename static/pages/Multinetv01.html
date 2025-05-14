@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP82HPYSRH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PP82HPYSRH');
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multinetv0.1</title>
+  
+  <link rel="icon" type="image/x-icon" href="../images/Multinetlogo.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../css/bulma.min.css">
+  <link rel="stylesheet" href="../css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="../css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="../css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="../js/fontawesome.all.min.js"></script>
+  <script src="../js/bulma-carousel.min.js"></script>
+  <script src="../js/bulma-slider.min.js"></script>
+  <script src="../js/index.js"></script>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Benchmarking Vision, Language, & Action Models On
+                Robotic Learning Tasks</h1>
+                <div class="is-size-5 publication-authors">
+                    <!-- Paper authors -->
+                    <span class="author-block">
+                      <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank">Pranav Guruprasad</a><sup>*12</sup>,</span>
+                      <span class="author-block">
+                        <a href="https://www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>*123</sup>,</span>
+                        <span class="author-block">
+                          <a href="https://songstudio.info/" target="_blank">Jaewoo Song</a><sup>*1</sup>,</span>
+                          <span class="author-block">
+                            <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>1</sup>,</span>
+                            <span class="author-block">
+                              <a href="https://pliang279.github.io/" target="_blank">Paul Pu Liang</a><sup>4</sup>,</span>
+                        </span>
+                        </div>
+      
+                        <div class="is-size-5 publication-authors">
+                          <span class="author-block"><a href="https://www.manifoldrg.com/">Manifold Research</a><sup>1</sup>, <a href="https://metarch.ai/">Metarch.ai</a><sup>2</sup>, Georgia Institute of Technology<sup>3</sup>, MIT<sup>4</sup><br>This work is sponsored by <a href="https://metarch.ai/">Metarch.ai.</a> </span>
+                          <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                 <!-- Link to paper -->
+                              <span class="link-block">
+                                <a href="../pdfs/Benchmarking Vision Language Action Models.pdf" target="_blank"
+                                class="external-link button is-normal is-rounded is-dark">
+                                <span class="icon">
+                                  <i class="fas fa-file-pdf"></i>
+                                </span>
+                                <span>Paper</span>
+                              </a>
+                            </span>
+        
+                          <!-- Github link -->
+                          <span class="link-block">
+                            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank"
+                            class="external-link button is-normal is-rounded is-dark">
+                            <span class="icon">
+                              <i class="fab fa-github"></i>
+                            </span>
+                            <span>Code</span>
+                          </a>
+                        </span>
+        
+                        <!-- Link to VLM-Action framework -->
+                        <span class="link-block">
+                          <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank"
+                          class="external-link button is-normal is-rounded is-dark">
+                          <span class="icon">
+                            <i class="fas fa-code"></i>
+                          </span>
+                          <span>GenESIS framework</span>
+                        </a>
+                      </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-centered">
+            <img src="../images/Multinet v0.1 release visual 3.0.png" alt="Multinet v0.1 Release Visual" width="85%">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <section class="section"></section>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Abstract</h2>
+            <p>
+                Vision-language-action (VLA) models represent a promising direction for developing general-purpose
+                robotic systems, demonstrating the ability to combine visual understanding, language comprehension,
+                and action generation. However, systematic evaluation of these models across diverse robotic tasks
+                remains limited. In this work, we present a comprehensive evaluation framework and benchmark suite
+                for assessing VLA models. We profile three state-of-the-art VLM and VLAs —GPT-4o, OpenVLA,
+                and JAT—across 20 diverse datasets from the Open-X-Embodiment collection, evaluating their
+                performance on various manipulation tasks. Our analysis reveals several key insights: (1) current
+                VLA models show significant variation in performance across different tasks and robot platforms, with
+                GPT-4o demonstrating the most consistent performance through sophisticated prompt engineering,
+                (2) all models struggle with complex manipulation tasks requiring multi-step planning, and (3) model
+                performance is notably sensitive to action space characteristics and environmental factors. We release
+                our evaluation framework and findings to facilitate systematic assessment of future VLA models and
+                identify critical areas for improvement in the development of general-purpose robotic systems.
+            
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Dataset coverage</h2>
+            <p>
+              All 3 models - HuggingFace's JAT (novel generalist model, OS implementation of GATO), GPT-4o (SoTA VLM), and OpenVLA (SoTA VLA) were evaluated across the 20 diverse datasets from the Open-X-Embodiment collection listed below, thus evaluating their
+              performance on various manipulation tasks. JAT was also evaluated on 33 more OpenX Embodiment datasets, and GPT-4o was evaluated on 2 more OpenX Embodiment datasets. You can find the results of these evaluations in the <a href="../pdfs/Benchmarking Vision Language Action Models.pdf">paper</a>
+            </p>
+            <style>
+          .table-container {
+              max-width: 100%;
+              margin: 20px auto;
+              overflow-x: auto;
+              font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+          }
+          
+          table {
+              border-collapse: collapse;
+              width: 100%;
+              margin-bottom: 10px;
+          }
+          
+          th, td {
+              padding: 12px;
+              text-align: left;
+              border-bottom: 1px solid #ddd;
+          }
+          
+          th {
+              background-color: #f5f5f5;
+              font-weight: bold;
+          }
+          
+          tr:hover {
+              background-color: #f9f9f9;
+          }
+          
+          .caption {
+              font-size: 1.2em;
+              font-weight: bold;
+              margin-bottom: 15px;
+              text-align: center;
+          }
+          
+          .table-notes {
+              font-size: 0.9em;
+              color: #666;
+              text-align: center;
+              margin-top: 10px;
+              font-style: italic;
+          }
+          
+          .checkmark {
+              color: green;
+              font-weight: bold;
+          }
+      </style>
+      <div class="table-container">
+          <div class="caption">Dataset Coverage and Action Space Characteristics</div>
+          
+          <table>
+              <thead>
+                  <tr>
+                      <th>Dataset Name</th>
+                      <th>Registered Dataset Name</th>
+                      <th>In Pretraining for OpenVLA</th>
+                      <th>Action Space Type</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>Jaco Play</td>
+                      <td>jaco_play</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>4D (1 grip, 3 pos)</td>
+                  </tr>
+                  <tr>
+                      <td>Berkeley Cable Routing</td>
+                      <td>berkeley_cable_routing</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>7D (3 ang, 3 pos, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>NYU Door Opening</td>
+                      <td>nyu_door_opening_surprising_effectiveness</td>
+                      <td></td>
+                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>VIOLA</td>
+                      <td>viola</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>Berkeley Autolab UR5</td>
+                      <td>berkeley_autolab_ur5</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>TOTO</td>
+                      <td>toto</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>7D (3 ang, 3 pos, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>Columbia PushT</td>
+                      <td>columbia_cairlab_pusht_real</td>
+                      <td></td>
+                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>NYU ROT</td>
+                      <td>nyu_rot_dataset_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                  </tr>
+                  <tr>
+                      <td>Stanford HYDRA</td>
+                      <td>stanford_hydra_dataset_converted_externally_to_rlds</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                  </tr>
+                  <tr>
+                      <td>UCSD Kitchen</td>
+                      <td>ucsd_kitchen_dataset_converted_externally_to_rlds</td>
+                      <td><span class="checkmark">✓</span></td>
+                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>UCSD Pick Place</td>
+                      <td>ucsd_pick_and_place_dataset_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>4D (3 vel, 1 grip torque)</td>
+                  </tr>
+                  <tr>
+                      <td>USC Cloth Sim</td>
+                      <td>usc_cloth_sim_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>4D (3 pos, 1 grip)</td>
+                  </tr>
+                  <tr>
+                      <td>Tokyo PR2 Fridge</td>
+                      <td>utokyo_pr2_opening_fridge_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>Tokyo PR2 Tabletop</td>
+                      <td>utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>UTokyo xArm Pick-Place</td>
+                      <td>utokyo_xarm_pick_and_place_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                  </tr>
+                  <tr>
+                      <td>Stanford MaskVIT</td>
+                      <td>stanford_mask_vit_converted_externally_to_rlds</td>
+                      <td></td>
+                      <td>5D (3 pos, 1 ang, 1 grip)</td>
+                  </tr>
+                  <tr>
+                      <td>ETH Agent Affordances</td>
+                      <td>eth_agent_affordances</td>
+                      <td></td>
+                      <td>6D (3 vel, 3 ang vel)</td>
+                  </tr>
+                  <tr>
+                      <td>Imperial Sawyer</td>
+                      <td>imperialcollege_sawyer_wrist_cam</td>
+                      <td></td>
+                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                  </tr>
+                  <tr>
+                      <td>ConqHose</td>
+                      <td>conq_hose_manipulation</td>
+                      <td></td>
+                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                  </tr>
+                  <tr>
+                      <td>Plex RoboSuite</td>
+                      <td>plex_robosuite</td>
+                      <td></td>
+                      <td>7D (3 pos, 3 ang, 1 grip)</td>
+                  </tr>
+              </tbody>
+          </table>
+          
+          <div class="table-notes">
+              pos: position, grip: gripper, term: terminate, vel: velocity, ang: angular
+          </div>
+      </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section"></section>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Benchmark</h2>
+            <p>
+                We benchmark a SoTA VLM (GPT-4o), a SoTA VLA (OpenVLA), and a novel generalist model (JAT) in zero-shot settings across 20 diverse datasets from the Open-X-Embodiment collection. 
+                In order to evaluate each of these models on offline Robotics trajectories, we utilize Mean Squared Error (MSE) as a metric to compare the predicted action of the model and the ground truth action from the dataset on a per-timestep basis. This metric seemed most appropriate given the offline nature of the dataset, and no access to physical robots or the simulated environments corresponding to the datasets.
+                The MSEs per timestep are averaged over all the timesteps in the eval split of the dataset to give an Averaged Mean Squared Error (AMSE) for the whole dataset. This metric is used to compare the performance of the different models given a dataset.
+            </p>
+            <p>   
+                In order to account for the difference in the scales of the action spaces (and therefore, the MSEs) across datasets, we normalize the per-timestep MSEs using the minimum and maximum MSE values observed in the evaluation (timestep MSE - min MSE) / (max MSE - min MSE). These are then averaged over the entire dataset to give a Normalized Average Mean Squared Error (NAMSE) for each dataset.
+                The NAMSE is a metric that allows comparison of a given model's performance across different datasets. 
+            </p>
+            <p>     
+                We also assess successful completion of an episode in a given task, by comparing final predicted actions with ground truth final actions. While this serves as an approximate measure of task completion, it provides valuable insights into the models’ ability to reach target states across trajectories.
+                We will be actively updating this benchmark as we profile SoTA VLMs and VLAs on more OpenX-Embodiment datasets, other RL and Robotics datasets, and in few-shot and fine-tuned settings.
+           </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <img src="../images/trajectory mse visual.png" alt="Trajectory similarity" width="63%">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop"></div>
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <img src="../images/action completion visual.png" alt="Action completion" width="50%">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Analysis</h2>
+            <p>
+                We conduct thorough quantitative analyses to observe the performance of the different models across different OpenX Embodiment datasets. We investigate the performance difference between models by comparing their AMSE scores across datasets. 
+                We also do a model-specific analysis to understand performance patterns of models that may be attributable to several architectural and training differences between
+                them, which in turn helps guide future research in this direction. While absolute performance metrics like AMSE provide insight into task-specific capabilities, looking into the NAMSE scores allows us to understand how each model performs across different tasks relative to its own
+                capabilities. NAMSE proves to be particularly valuable for understanding inherent task difficulty and model behavior patterns independent of action space scale. Here is an overview of our analysis:
+            </p>
+            <div class="content has-text-centered">
+                <img src="../images/AMSE All.png" alt="AMSE across all datasets" width="100%">
+                <p class="caption">AMSE across all datasets</p>
+            </div>
+            <div class="content has-text-centered">
+              <img src="../images/AMSE in MM.png" alt="AMSE across datasets with the action space unit in millimeters" width="100%">
+              <p class="caption">AMSE across datasets with the action space unit in millimeters</p>
+            </div>
+            <div class="content has-text-centered">
+              <img src="../images/Namse GPT.png" alt="Normalized AMSE For GPT-4o" width="100%">
+              <p class="caption">Normalized AMSE For GPT-4o</p>
+            </div>
+            <div class="content has-text-centered">
+              <img src="../images/Namse Jat.png" alt="Normalized AMSE For JAT" width="100%">
+              <p class="caption">Normalized AMSE For JAT</p>
+            </div>
+            <div class="content has-text-centered">
+              <img src="../images/Namse OpenVLA.png" alt="Normalized AMSE For OpenVLA" width="100%">
+              <p class="caption">Normalized AMSE For OpenVLA</p>
+            </div>
+            <p>
+              We observe that while JAT consistently shows higher AMSE (indicating worse performance) across most datasets, OpenVLA and GPT demonstrate more comparable performance levels, with AMSE typically below 0.5 for most datasets.
+              For OpenVLA, we observe generally consistent performance across most datasets with AMSE in the 0.1-0.5 range, with best performance of all 3 models for tasks that fall within its training distribution, with notable exceptions in complex manipulation tasks. GPT shows comparable or slightly better performance on many
+              datasets, particularly excelling in precise manipulation tasks. Both models maintain relatively stable performance across
+              similar task types, though with different error profiles. 
+              The normalized analyses reveals that while absolute performance varies significantly, there are consistent patterns in
+              what tasks are relatively more challenging for each model architecture. The success of GPT-4o's prompt engineering
+              approach, in particular, suggests that providing structured context about action spaces and environmental constraints
+              may be a key factor in achieving consistent performance across diverse tasks. This observation could inform future
+              development of VLA models, suggesting that incorporating more explicit task and action space information could
+              improve robustness and generalization capabilities.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section"></section>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Supporting Technical Contributions</h2>
+            <p>
+               Apart from open-sourcing our evaluation framework and profiling code, 2 technical contributions that we believe are novel to this work are:
+            </p>
+            <p>
+              The <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules">GenESIS (Generalizable Extendable Stratified Inference System) framework</a> - A general framework for mapping VLMs to other modality classes, with particular emphasis on action spaces. 
+              This framework allows one to adapt a wide range of models to multiple types of tasks or datasets for scaling effectively while reducing the amount of engineering effort required. 
+              In MultiNet v0.1, GenESIS is used to evaluate GPT-4-o on the OpenX datasets. Since the GPT-4o is a VLM for general-purpose tasks, this involved setting up a well-researched instruction prompt, pre-processing of the input data in each dataset into a form that GPT-4 can consume, the management of chat history list for correct API calls, and conversion of the generated text outputs from the model to a format comparable with the ground truth action.
+            </p>
+              
+              <div class="content has-text-centered">
+                <img src="../images/Framework Figure.png" alt="GenESIS Framework" width="100%">
+                <p class="caption">GenESIS Framework - used to adapt GPT-4o to the OpenX datasets</p>
+            </div>
+
+            <p> We also open-source the code to easily download any dataset within Multinet - typically from a variety of different sources.
+                Lots of rich, diverse, highly valuable datasets in RL and Robotics are of different formats, from various different sources, in badly maintained states, with insufficient documentation. 
+                We open-source simple code that allows one to translate the downloaded control dataset shards into tensorflow dataset shards.
+                Once translated to TFDS, the datasets can easily be utilized for training, fine-tuning, and evaluation.
+            </p>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section"></section>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Acknowledgements</h2>
+            <p>
+              We thank <a href="https://agarwl.github.io/">Rishabh Agarwal</a>, <a href="https://snats.xyz/index.html">Santiago Pedroza</a>, <a href="https://kickitlikeshika.github.io/">Ahmed Khaled</a>,  <a href="https://people.eecs.berkeley.edu/~jianlanluo/">Jianlan Luo</a>, <a href="https://www.stoneztao.com/">Stone Tao</a>, <a href="https://sites.google.com/view/jaehyungkim">Jaehyung Kim</a>, <a href="https://www.alexirpan.com/">Alex Irpan</a>, <a href="https://jeffcui.com/">Jeff Cui</a>,
+              <a href="https://yuchencui.cc/publications.html">Yuchen Cui</a>, <a href="https://arthurliu-website.web.app/">I-Chun Liu</a>, <a href="https://russellmendonca.github.io/">Russell Mendonca</a>, <a href="https://zhuyifengzju.github.io/">Yifeng Zhu</a>, <a href="https://frt03.github.io/">Hiroki Furuta</a>, <a href="https://mahis.life/">Nur Muhammad Shafiullah</a>,
+              <a href="https://siddhanthaldar.github.io/">Siddhant Haldar</a>, <a href="https://www.lilichen.me/">Lili Chen</a>, <a href="https://ehsanik.github.io/">Kiana Ehsani</a>, <a href="https://ben-eysenbach.github.io/">Benjamin Eysenbach</a>, <a href="https://robodhruv.github.io/">Dhruv Shah</a>, <a href="https://rosehendrix.com/">Rose Hendrix</a>,
+              <a href="https://shahrutav.github.io/">Rutav Shah</a>, <a href="https://scholar.google.com/citations?user=t97UbkoAAAAJ&hl=en">Giulio Schiavi</a>, <a href="https://homerwalke.com/">Homer Walke</a>, <a href="https://people.eecs.berkeley.edu/~ilija/">Ilija Radosavovic</a>, <a href="https://shivindass.github.io/">Shivin Dass</a> for their contributions and helpful feedback in various capacities on this work.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@misc{guruprasad2024benchmarkingvisionlanguage,
+        title={Benchmarking Vision, Language, & Action Models on Robotic Learning Tasks}, 
+        author={Pranav Guruprasad and Harshvardhan Sikka and Jaewoo Song and Yangyue Wang and Paul Pu Liang},
+        year={2024},
+        eprint={2411.05821},
+        archivePrefix={arXiv},
+        primaryClass={cs.RO},
+        url={https://arxiv.org/abs/2411.05821},
+  }</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer" style="background-color: #363636;">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content" style="color: #fff;">
+            <div class="buttons is-centered mb-4">
+              <a href="../pdfs/Benchmarking Vision Language Action Models.pdf" class="button is-small is-dark" target="_blank">
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+              <a href="https://github.com/ManifoldRG/MultiNet" class="button is-small is-dark" target="_blank">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </div>
+  
+            <p>For questions or issues, please <a href="https://github.com/ManifoldRG/MultiNet/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
