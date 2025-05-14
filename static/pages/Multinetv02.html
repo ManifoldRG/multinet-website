@@ -261,6 +261,8 @@
     }
     .tab-pane.is-active {
       display: block; /* Show only the active tab pane */
+    }
+  </style>
   <!-- Add Chart.js before our custom script -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@4.1.0/dist/chartjs-chart-matrix.umd.min.js"></script>
@@ -647,50 +649,34 @@
         <div class="column">
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Results and Analysis</h2>
-            <div class="container is-max-desktop">
-              <div class="columns is-centered">
-                  <div class="column">
-                  <div class="content has-text-centered">
-                    <div class="metrics-container">
-                      <div class="metrics-sidebar">
-                        <button class="metric-button active" data-metric="brier-mae">Brier MAE</button>
-                        <button class="metric-button" data-metric="normalized_amae">Normalized AMAE</button>
-                        <button class="metric-button" data-metric="normalized_quantile_filtered_amae">Normalized Quantile Filtered AMAE</button>
-                        <button class="metric-button" data-metric="micro-precision">Micro Precision</button>
-                        <button class="metric-button" data-metric="micro-recall">Micro Recall</button>
-                        <button class="metric-button" data-metric="micro-f1">Micro F1</button>
-                        <button class="metric-button" data-metric="macro-precision">Macro Precision</button>
-                        <button class="metric-button" data-metric="macro-recall">Macro Recall</button>
-                        <button class="metric-button" data-metric="macro-f1">Macro F1</button>
-                      </div>
-                      
-                      <div class="metrics-charts">
-                        <!-- Charts will be dynamically inserted here -->
+            <p>
+              <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column">
+                    <div class="content has-text-centered">
+                      <div class="metrics-container">
+                        <div class="metrics-sidebar">
+                          <button class="metric-button active" data-metric="brier-mae">Brier MAE</button>
+                          <button class="metric-button" data-metric="normalized_amae">Normalized AMAE</button>
+                          <button class="metric-button" data-metric="normalized_quantile_filtered_amae">Normalized Quantile Filtered AMAE</button>
+                          <button class="metric-button" data-metric="micro-precision">Micro Precision</button>
+                          <button class="metric-button" data-metric="micro-recall">Micro Recall</button>
+                          <button class="metric-button" data-metric="micro-f1">Micro F1</button>
+                          <button class="metric-button" data-metric="macro-precision">Macro Precision</button>
+                          <button class="metric-button" data-metric="macro-recall">Macro Recall</button>
+                          <button class="metric-button" data-metric="macro-f1">Macro F1</button>
+                        </div>
+                        
+                        <div class="metrics-charts">
+                          <!-- Charts will be dynamically inserted here -->
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  </div>
-              </div>
-              </div>
-            <p>
-                Our analysis highlighted significant limitations arising from architectural constraints, training
-                paradigms, and input-output biases inherent to the models. The
-                stark domain discrepancy between training data—primarily
-                continuous-action robotics datasets, and general web-scale
-                vision language data—and discrete-action game environments
-                emerged as a critical barrier to effective zero-shot generalization.
-                We identified notable differences in model behaviors linked
-                directly to their architectures, training strategies, and input/output processing techniques. OpenVLA’s robust action-space
-                clamping technique consistently provided superior generalization, minimizing invalid outputs and exhibiting relative
-                resilience to out-of-distribution scenarios. Conversely, autoregressive models like GPT-4x displayed substantial difficulties
-                in generalizing, especially under complex image conditions,
-                and frequently defaulted to overly simplistic or biased action choices. Additionally, Pi0 models showed intermediate
-                performance influenced heavily by their diffusion-based (Pi0
-                Base) or autoregressive (Pi0 FAST) decoding methods, with
-                Pi0 FAST notably sensitive to image complexity and unable
-                to restrict majority of its predictions to a desired output range.
-                For a more thorough look at the results and our analysis, please refer to the <a href="https://arxiv.org/pdf/2505.05540" target="_blank">paper</a>.
+                    </div>
+                </div>
+                </div>
             </p>
+            
             <p>
               <!-- Interactive Confusion Matrix Block -->
               <div id="confusion-matrix-section" class="box" style="margin-top:2rem;">
@@ -716,6 +702,27 @@
                 </div>
               </div>
             </p>
+
+            <p>
+                Our analysis highlighted significant limitations arising from architectural constraints, training
+                paradigms, and input-output biases inherent to the models. The
+                stark domain discrepancy between training data—primarily
+                continuous-action robotics datasets, and general web-scale
+                vision language data—and discrete-action game environments
+                emerged as a critical barrier to effective zero-shot generalization.
+                We identified notable differences in model behaviors linked
+                directly to their architectures, training strategies, and input/output processing techniques. OpenVLA's robust action-space
+                clamping technique consistently provided superior generalization, minimizing invalid outputs and exhibiting relative
+                resilience to out-of-distribution scenarios. Conversely, autoregressive models like GPT-4x displayed substantial difficulties
+                in generalizing, especially under complex image conditions,
+                and frequently defaulted to overly simplistic or biased action choices. Additionally, Pi0 models showed intermediate
+                performance influenced heavily by their diffusion-based (Pi0
+                Base) or autoregressive (Pi0 FAST) decoding methods, with
+                Pi0 FAST notably sensitive to image complexity and unable
+                to restrict majority of its predictions to a desired output range.
+                For a more thorough look at the results and our analysis, please refer to the <a href="https://arxiv.org/pdf/2505.05540" target="_blank">paper</a>.
+            </p>
+
           </div>
         </div>
       </div>
