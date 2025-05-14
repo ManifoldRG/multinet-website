@@ -432,34 +432,6 @@
       </div>
     </div>
 
-  <div class="container is-max-desktop">
-      <div class="columns is-centered">
-          <div class="column">
-          <div class="content has-text-centered">
-            <div class="metrics-container">
-              <div class="metrics-sidebar">
-                <button class="metric-button active" data-metric="brier-mae">Brier MAE</button>
-                <button class="metric-button" data-metric="normalized_amae">Normalized AMAE</button>
-                <button class="metric-button" data-metric="normalized_quantile_filtered_amae">Normalized Quantile Filtered AMAE</button>
-                <button class="metric-button" data-metric="micro-precision">Micro Precision</button>
-                <button class="metric-button" data-metric="micro-recall">Micro Recall</button>
-                <button class="metric-button" data-metric="micro-f1">Micro F1</button>
-                <button class="metric-button" data-metric="macro-precision">Macro Precision</button>
-                <button class="metric-button" data-metric="macro-recall">Macro Recall</button>
-                <button class="metric-button" data-metric="macro-f1">Macro F1</button>
-              </div>
-              
-              <div class="metrics-charts">
-                <!-- Charts will be dynamically inserted here -->
-              </div>
-            </div>
-          </div>
-          </div>
-      </div>
-      </div>
-
-
-
 
   <section class="section"></section>
     <div class="container is-max-desktop">
@@ -655,6 +627,31 @@
         <div class="column">
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Results and Analysis</h2>
+            <div class="container is-max-desktop">
+              <div class="columns is-centered">
+                  <div class="column">
+                  <div class="content has-text-centered">
+                    <div class="metrics-container">
+                      <div class="metrics-sidebar">
+                        <button class="metric-button active" data-metric="brier-mae">Brier MAE</button>
+                        <button class="metric-button" data-metric="normalized_amae">Normalized AMAE</button>
+                        <button class="metric-button" data-metric="normalized_quantile_filtered_amae">Normalized Quantile Filtered AMAE</button>
+                        <button class="metric-button" data-metric="micro-precision">Micro Precision</button>
+                        <button class="metric-button" data-metric="micro-recall">Micro Recall</button>
+                        <button class="metric-button" data-metric="micro-f1">Micro F1</button>
+                        <button class="metric-button" data-metric="macro-precision">Macro Precision</button>
+                        <button class="metric-button" data-metric="macro-recall">Macro Recall</button>
+                        <button class="metric-button" data-metric="macro-f1">Macro F1</button>
+                      </div>
+                      
+                      <div class="metrics-charts">
+                        <!-- Charts will be dynamically inserted here -->
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+              </div>
+              </div>
             <p>
                 Our analysis highlighted significant limitations arising from architectural constraints, training
                 paradigms, and input-output biases inherent to the models. The
