@@ -79,78 +79,84 @@ function createDatasetSidebar() {
 
 function getMatrixData(model, dataset) {
   console.log('Getting matrix data for:', { model, dataset });
-  const entry = confusionMatrixData[model][dataset];
-  console.log('Raw entry data:', entry);
-  if (!entry) {
+  if (!confusionMatrixData || !confusionMatrixData[model] || !confusionMatrixData[model][dataset]) {
     console.warn('No data found for:', { model, dataset });
     return null;
   }
-  
-  // Get action space size from prediction keys
-  const actionCount = Math.max(
-    ...Object.keys(entry.prediction).map(Number),
-    ...Object.keys(entry.ground_truth).map(Number)
-  ) + 1;
-  console.log('Action space size:', actionCount);
-  
-  const gt = entry.ground_truth;
-  const pred = entry.prediction;
-  
-  // First create the raw confusion matrix
-  const raw = Array(actionCount).fill().map(() => Array(actionCount).fill(0));
-  
-  // Calculate the total number of samples
-  const totalSamples = Object.values(gt).reduce((sum, count) => sum + count, 0);
-  console.log('Total samples:', totalSamples);
-  
-  // For each ground truth action
-  Object.entries(gt).forEach(([gtAction, gtCount]) => {
-    // Calculate the proportion of this ground truth action
-    const gtProportion = gtCount / totalSamples;
-    console.log(`Ground truth action ${gtAction}:`, { gtCount, gtProportion });
-    
-    // For each prediction action
-    Object.entries(pred).forEach(([predAction, predCount]) => {
-      // Calculate the proportion of this prediction
-      const predProportion = predCount / totalSamples;
-      console.log(`  Prediction ${predAction}:`, { predCount, predProportion });
+  const datasetPercentageData = confusionMatrixData[model][dataset];
+  console.log('Raw percentage data from JSON:', datasetPercentageData);
+
+  const trueActionLabelsStr = Object.keys(datasetPercentageData).sort((a, b) => Number(a) - Number(b));
+  if (trueActionLabelsStr.length === 0) {
+      console.warn('No action labels found in data for:', { model, dataset });
+      return null;
+  }
+  const actionCount = trueActionLabelsStr.length;
+  const labels = trueActionLabelsStr.map(Number); // Numeric labels for display and consistency
+
+  console.log('Action labels (numeric):', labels);
+  console.log('Action count:', actionCount);
+
+  const matrix = []; // This will be the matrix of percentages
+
+  for (let i = 0; i < actionCount; i++) {
+    const trueActionStr = trueActionLabelsStr[i]; // Current ground truth action (string)
+    const rowPercentages = [];
+    const predictionsForTrueAction = datasetPercentageData[trueActionStr];
+
+    if (!predictionsForTrueAction) {
+        console.warn(`Missing prediction data for true_action ${trueActionStr} in ${model}/${dataset}`);
+        // Fill row with zeros as a fallback
+        for (let j = 0; j < actionCount; j++) {
+            rowPercentages.push(0);
+        }
+        matrix.push(rowPercentages);
+        continue;
+    }
+
+    for (let j = 0; j < actionCount; j++) {
+      const predActionStr = trueActionLabelsStr[j]; // Current predicted action (string)
+      const percentage = predictionsForTrueAction[predActionStr];
       
-      // Calculate the joint count based on both proportions
-      const jointCount = Math.round(gtProportion * predProportion * totalSamples);
-      raw[gtAction][predAction] = jointCount;
-    });
-  });
-  
-  console.log('Raw confusion matrix:', raw);
-  
-  // Create normalized matrix
-  const matrix = raw.map(row => {
-    const rowSum = row.reduce((sum, count) => sum + count, 0);
-    // Handle zero-sum rows to avoid division by zero
-    const divisor = rowSum === 0 ? 1 : rowSum;
-    return row.map(count => count / divisor);
-  });
-  
-  console.log('Normalized matrix:', matrix);
-  
+      if (typeof percentage === 'number') {
+        rowPercentages.push(percentage);
+      } else {
+        // If a specific prediction percentage is missing for a given true_action/pred_action pair, default to 0
+        rowPercentages.push(0); 
+        // console.warn(`Missing percentage for ${model}/${dataset}, true: ${trueActionStr}, pred: ${predActionStr}. Defaulting to 0.`);
+      }
+    }
+    matrix.push(rowPercentages);
+  }
+
+  console.log('Constructed percentage matrix:', matrix);
+
   return {
-    matrix: matrix,
-    raw: raw,
-    labels: Array.from({length: actionCount}, (_, i) => i)
+    matrix: matrix, // This is already the percentage matrix
+    labels: labels
   };
 }
 
 function renderConfusionMatrix() {
   const container = document.getElementById('confusion-matrix-canvas-container');
-  container.innerHTML = '<canvas id="confusion-matrix-canvas"></canvas>';
-  const ctx = document.getElementById('confusion-matrix-canvas').getContext('2d');
+  container.innerHTML = '<canvas id="confusion-matrix-canvas"></canvas>'; // Clear previous content, including error messages
+  const ctx = document.getElementById('confusion-matrix-canvas').getContext('2d'); // This canvas is not used anymore for the table
   const data = getMatrixData(currentModel, currentDataset);
-  if (!data) {
-    container.innerHTML = '<div class="notification is-danger">No data available for this model/dataset.</div>';
+
+  if (!data || !data.matrix || !data.labels) {
+    container.innerHTML = '<div class="notification is-warning">No data available to display for this selection.</div>';
+    console.warn("Render failed: No data returned from getMatrixData for", currentModel, currentDataset)
+    if (matrixChart) { // If a chart.js instance exists, destroy it
+        matrixChart.destroy();
+        matrixChart = null;
+    }
     return;
   }
-  const {matrix, raw, labels} = data;
-  // Destroy previous chart
+
+  // const {matrix, raw, labels} = data; // Old, raw is no longer available
+  const {matrix, labels} = data; // New
+
+  // Destroy previous Chart.js instance if it exists (though we are moving to a table)
   if (matrixChart) {
     matrixChart.destroy();
     matrixChart = null;
@@ -220,11 +226,14 @@ function renderConfusionMatrix() {
       const td = document.createElement('td');
       td.style.padding = '4px';
       td.style.border = '1px solid #ddd';
-      td.style.backgroundColor = value > 0 ? 
-        `rgba(${255 * value},${200 + 55 * (1 - value)},${255 * (1 - value)},0.85)` : 
-        'rgba(240,240,240,0.7)';
-      td.textContent = value > 0 ? `${(value * 100).toFixed(1)}%` : '';
-      td.title = `Raw count: ${raw[i][j]}`;
+      // Apply the pastel color scheme for all values.
+      // When value is 0, this becomes rgba(255, 248, 178, 0.85) (pastel yellow).
+      td.style.backgroundColor = 
+        `rgba(255, ${Math.round(248 - 248 * value)}, ${Math.round(178 - 178 * value)}, 0.85)`;
+      
+      // Display 0.0% for zero values, otherwise format the percentage
+      td.textContent = `${(value * 100).toFixed(1)}%`; 
+      // td.title = `Raw count: ${raw[i][j]}`; // Removed as raw counts are no longer available
       tr.appendChild(td);
     });
     tbody.appendChild(tr);

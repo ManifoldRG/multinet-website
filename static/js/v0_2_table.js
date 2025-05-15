@@ -121,8 +121,8 @@ function renderCharts(data) {
             borderColor: colors[i % colors.length].replace('0.7', '1'),
             borderWidth: 1,
             borderRadius: 4,
-            barPercentage: 0.4,
-            categoryPercentage: 0.5
+            barPercentage: 0.8,
+            categoryPercentage: 0.6
           };
         })
       };
@@ -170,8 +170,7 @@ function renderCharts(data) {
                     display: false
                   },
                   offset: true,
-                  categoryPercentage: 0.5,
-                  barPercentage: 0.4,
+                  categoryPercentage: 0.9,
                   afterFit: function(scaleInstance) {
                     scaleInstance.paddingRight = 20;
                     scaleInstance.paddingLeft = 20;

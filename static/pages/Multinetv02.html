@@ -690,12 +690,13 @@
                     </div>
                   </div>
                   <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
-                    <div class="confusion-matrix-datasets" style="display:flex;flex-direction:column;height:500px;overflow-y:auto;min-width:120px;gap:0.25rem;padding-top:20px;">
+                    <div class="confusion-matrix-datasets" style="display:flex;flex-direction:column;height:500px;overflow-y:auto;min-width:120px;gap:0.25rem;padding-top:20px;padding-right: 20px;box-sizing: border-box;">
                       <!-- Dataset buttons will be injected here -->
                     </div>
-                    <div style="flex:1;position:relative;padding:20px 0 0 50px;display:flex;justify-content:center;">
+                    <div style="flex:1;position:relative;padding:20px 0 0 50px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;">
+                      <div id="confusion-matrix-dynamic-title" style="font-size: 1.1em; font-weight: bold; margin-bottom: 15px; text-align: center; color: #363636;"></div>
                       <div id="confusion-matrix-canvas-container" style="width:100%;height:500px;position:relative;">
-                        <canvas id="confusion-matrix-canvas"></canvas>
+                        <!-- Canvas was here, but JS replaces content with a table -->
                       </div>
                     </div>
                   </div>
