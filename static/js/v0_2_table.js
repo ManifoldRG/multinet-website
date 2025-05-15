@@ -11,8 +11,8 @@ const metrics = [
   'micro-recall',
   'micro-f1',
   'brier-mae',
-  'normalized_amae',
-  'normalized_quantile_filtered_amae'
+  'normalized_mae',
+  'normalized_quantile_filtered_mae'
 ];
 
 // Map metric to display name
@@ -24,23 +24,23 @@ const metricDisplay = {
   'micro-recall': 'Micro Recall',
   'micro-f1': 'Micro F1',
   'brier-mae': 'Brier MAE',
-  'normalized_amae': 'Normalized AMAE',
-  'normalized_quantile_filtered_amae': 'Normalized Quantile Filtered AMAE'
+  'normalized_mae': 'Normalized MAE',
+  'normalized_quantile_filtered_mae': 'Normalized Quantile Filtered MAE'
 };
 
 let charts = {};
 
 function getMetricData(metric, data) {
-  // For Brier MAE, normalized_amae, and normalized_quantile_filtered_amae, only use 4 models (remove pi0_base)
-  const useModels = ['brier-mae', 'normalized_amae', 'normalized_quantile_filtered_amae'].includes(metric) 
+  // For Brier MAE, normalized_mae, and normalized_quantile_filtered_mae, only use 4 models (remove pi0_base)
+  const useModels = ['brier-mae', 'normalized_mae', 'normalized_quantile_filtered_mae'].includes(metric) 
     ? models.slice(0, 4)  // Use first 4 models (excluding pi0_base)
     : models;  // Use all models for other metrics
   
   // Map the metric names from the UI to the actual keys in the data
   const metricKeyMap = {
-    'brier-mae': 'amae',
-    'normalized_amae': 'normalized_amae',
-    'normalized_quantile_filtered_amae': 'normalized_quantile_filtered_amae',
+    'brier-mae': 'mae',
+    'normalized_mae': 'normalized_mae',
+    'normalized_quantile_filtered_mae': 'normalized_quantile_filtered_mae',
     'micro-precision': 'micro_precision',
     'micro-recall': 'micro_recall',
     'micro-f1': 'micro_f1',
@@ -97,7 +97,7 @@ function renderCharts(data) {
       chartsContainer.appendChild(chartDiv);
   
       const ctx = chartDiv.querySelector('canvas').getContext('2d');
-      const useModels = ['brier-mae', 'normalized_amae', 'normalized_quantile_filtered_amae'].includes(metric) 
+      const useModels = ['brier-mae', 'normalized_mae', 'normalized_quantile_filtered_mae'].includes(metric) 
         ? models.slice(0, 4)
         : models;
   
@@ -185,7 +185,7 @@ function renderCharts(data) {
                       weight: 'bold'
                     }
                   },
-                  ...(['brier-mae', 'normalized_amae', 'normalized_quantile_filtered_amae'].includes(metric) ? {
+                  ...(['brier-mae', 'normalized_mae', 'normalized_quantile_filtered_mae'].includes(metric) ? {
                     min: 0,
                     max: 2,
                     ticks: {
