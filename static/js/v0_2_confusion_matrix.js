@@ -56,8 +56,6 @@ function createDatasetSidebar() {
     btn.className = 'metric-button' + (dataset === currentDataset ? ' active' : '');
     btn.style.display = 'block';
     btn.style.width = '100%';
-    btn.style.padding = '0.75rem';
-    btn.style.margin = '0.5rem 0';
     btn.style.textAlign = 'left';
     btn.style.background = dataset === currentDataset ? '#363636' : '#f5f5f5';
     btn.style.color = dataset === currentDataset ? 'white' : 'black';
@@ -171,12 +169,14 @@ function renderConfusionMatrix() {
   table.style.fontSize = '12px';
   table.style.tableLayout = 'fixed'; // Fixed layout for consistent cell sizes
   table.style.position = 'relative';
+  table.style.maxWidth = '100%'; // Ensure table doesn't exceed container width
+  table.style.overflowX = 'auto'; // Allow horizontal scrolling if needed
   
   // Add Prediction label above the table
   const predictionLabel = document.createElement('div');
   predictionLabel.textContent = 'Prediction';
   predictionLabel.style.position = 'absolute';
-  predictionLabel.style.top = '-8%';
+  predictionLabel.style.top = '5px';
   predictionLabel.style.left = '50%';
   predictionLabel.style.transform = 'translateX(-50%)';
   predictionLabel.style.fontWeight = 'bold';
@@ -189,11 +189,12 @@ function renderConfusionMatrix() {
   const gtLabel = document.createElement('div');
   gtLabel.textContent = 'Ground Truth';
   gtLabel.style.position = 'absolute';
-  gtLabel.style.left = '-11%';  // Position at 25% of the left padding
+  gtLabel.style.left = '-20px';
   gtLabel.style.top = '50%';
   gtLabel.style.transform = 'translateY(-50%) rotate(-90deg)';
   gtLabel.style.fontWeight = 'bold';
   gtLabel.style.fontSize = '14px';
+  gtLabel.style.whiteSpace = 'nowrap';
   container.appendChild(gtLabel);
   
   // Create header row

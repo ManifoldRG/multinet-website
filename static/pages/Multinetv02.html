@@ -276,6 +276,8 @@
       gap: 2rem;
       margin: 2rem 0;
       height: 500px; /* Fixed height for the container */
+      max-width: 100%; /* Ensure it doesn't overflow parent */
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
     }
 
     .metrics-sidebar {
@@ -283,6 +285,7 @@
       position: sticky;
       top: 2rem;
       z-index: 2;
+      padding-right: 1rem; /* Add padding to prevent scrollbar overlap */
     }
 
     .metric-button {
@@ -324,6 +327,8 @@
     .metrics-charts {
       height: 100%;
       position: relative;
+      overflow: hidden;
+      padding-left: 1rem; /* Add padding to prevent scrollbar overlap */
     }
 
     .metric-chart {
@@ -341,6 +346,43 @@
       position: relative;
     }
 
+    /* Add style for confusion matrix canvas container */
+    #confusion-matrix-canvas-container {
+      position: relative;
+      padding: 25px 40px;
+      overflow: hidden !important;
+    }
+
+    /* Add styles to hide scrollbars while maintaining functionality */
+    .metrics-charts::-webkit-scrollbar,
+    #confusion-matrix-canvas-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .metrics-charts,
+    #confusion-matrix-canvas-container {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
+    /* Style for confusion matrix labels */
+    #confusion-matrix-canvas-container > div {
+      position: absolute;
+      z-index: 2;
+    }
+
+    #confusion-matrix-canvas-container > div:first-child {
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #confusion-matrix-canvas-container > div:last-child {
+      left: 5px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+    }
+
     @media (max-width: 900px) {
       .metrics-container {
         grid-template-columns: 1fr;
@@ -352,6 +394,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
+        padding-right: 0; /* Remove padding on mobile */
       }
       .metric-button {
         width: auto;
@@ -359,11 +402,96 @@
         margin: 0.25rem 0;
       }
       .metrics-charts {
-        height: 600px; /* Fixed height for mobile */
+        height: 600px;
+        padding-left: 0; /* Remove padding on mobile */
       }
       .metric-chart {
         height: 100%;
       }
+    }
+
+    .table-container {
+      max-width: 100%; /* Keeps the container within parent boundaries */
+      width: 100%; /* Take up the full width of its parent (content area) */
+      margin: 0 auto;  /* Centers the container */
+      overflow-x: auto; /* Enables horizontal scrolling */
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+    }
+    
+    /* Make these styles specific to the dataset coverage table */
+    .dataset-coverage-table {
+      border-collapse: collapse;
+      min-width: 1800px; /* Forces table to be wider than container */
+      width: auto !important; /* Prevents table from expanding container */
+      margin-bottom: 10px;
+    }
+    
+    .dataset-coverage-table th,
+    .dataset-coverage-table td {
+      padding: 8px; /* Reduced padding for wider table */
+      text-align: left;
+      border: 1px solid #ddd; /* Added border for all cells */
+      vertical-align: middle; /* Align content to middle, esp for GIFs */
+    }
+    
+    /* Set width for all standard columns (not the first column) */
+    .dataset-coverage-table th:not(:first-child),
+    .dataset-coverage-table td:not(:first-child) {
+      min-width: 180px; /* Increased from default */
+      width: 180px; /* Fixed width for consistency */
+    }
+    
+    .dataset-coverage-table th {
+      background-color: #f5f5f5;
+      font-weight: bold;
+      text-align: left; /* Changed from center to left */
+    }
+
+    /* Style for the first column (row headers) */
+    .dataset-coverage-table tbody td:first-child {
+      font-weight: bold;
+      background-color: #f9f9f9;
+      min-width: 150px; /* Give row headers some space */
+      text-align: left; /* Changed from right to left */
+      padding-right: 15px;
+      position: sticky; /* Make it sticky */
+      left: 0; /* Pin to left edge */
+      z-index: 1; /* Ensure it appears above other cells */
+      border-right: 2px solid #ddd; /* Add a border for visual separation */
+    }
+    
+    /* Also make the first column header sticky */
+    .dataset-coverage-table thead th:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 2; /* Higher than row headers to stay on top at corner */
+      background-color: #f5f5f5;
+      border-right: 2px solid #ddd;
+    }
+    
+    .dataset-coverage-table tr:hover {
+      background-color: #f9f9f9;
+    }
+    
+    .caption {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .table-notes {
+      font-size: 0.9em;
+      color: #666;
+      text-align: center;
+      margin-top: 10px;
+      font-style: italic;
+    }
+    
+    .procgen-gif {
+      max-width: 100px; /* Control GIF size */
+      display: block;
+      margin: 0 auto; /* Center GIF if cell is wider */
     }
   </style>
 </head>
@@ -489,154 +617,95 @@
               designed to evaluate visual and motor skills of RL agents. Each dataset within Procgen exhibits diverse environment layouts, tasks, objectives, reward structures, and discrete actionspaces, 
               predominantly involving directional movements and specific game-related interactions.
             </p>
-            <style>
-          .table-container {
-              max-width: 100%;
-              margin: 20px auto;
-              overflow-x: auto;
-              font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-          }
-          
-          table {
-              border-collapse: collapse;
-              width: 100%;
-              margin-bottom: 10px;
-          }
-          
-          th, td {
-              padding: 12px;
-              text-align: left;
-              border-bottom: 1px solid #ddd;
-          }
-          
-          th {
-              background-color: #f5f5f5;
-              font-weight: bold;
-          }
-          
-          tr:hover {
-              background-color: #f9f9f9;
-          }
-          
-          .caption {
-              font-size: 1.2em;
-              font-weight: bold;
-              margin-bottom: 15px;
-              text-align: center;
-          }
-          
-          .table-notes {
-              font-size: 0.9em;
-              color: #666;
-              text-align: center;
-              margin-top: 10px;
-              font-style: italic;
-          }
-          
-          .checkmark {
-              color: green;
-              font-weight: bold;
-          }
-      </style>
-      <div class="table-container">
-          <div class="caption">Dataset Coverage and Action Space Characteristics</div>
-          
-          <table>
-              <thead>
-                  <tr>
-                      <th>Dataset Name</th>
-                      <th>Environment Description</th>
-                      <th>Action Space Type</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td>Bigfish</td>
-                      <td>Eat smaller fish to grow while avoiding larger fish</td>
-                      <td>8 directions + no-op</td>
-                  </tr>
-                  <tr>
-                      <td>Bossfight</td>
-                      <td>Dodge projectiles and damage the boss when shields are down</td>
-                      <td>8 directions + no-op + fire bullet</td>
-                  </tr>
-                  <tr>
-                      <td>Caveflyer</td>
-                      <td>Navigate caves, destroy targets, and avoid obstacles to reach exit</td>
-                      <td>8 directions + no-op + fire bullet</td>
-                  </tr>
-                  <tr>
-                      <td>Chaser</td>
-                      <td>Collect orbs and stars to make enemies vulnerable for consumption</td>
-                      <td>8 directions + no-op</td>
-                  </tr>
-                  <tr>
-                      <td>Climber</td>
-                      <td>Climb platforms and collect stars while avoiding flying monsters</td>
-                      <td>8 directions + no-op</td>
-                  </tr>
-                  <tr>
-                      <td>Coinrun</td>
-                      <td>Reach the coin while avoiding saws, enemies, and chasms</td>
-                      <td>8 directions + no-op</td>
-                  </tr>
-                  <tr>
-                      <td>Dodgeball</td>
-                      <td>Hit enemies with balls and reach the unlocked platform</td>
-                      <td>8 directions + no-op + fire ball</td>
-                  </tr>
-                  <tr>
-                      <td>Fruitbot</td>
-                      <td>Collect fruit, avoid non-fruit, and use keys to unlock gates</td>
-                      <td>8 directions + no-op + fire key</td>
-                  </tr>
-                  <tr>
-                      <td>Heist</td>
-                      <td>Collect colored keys to unlock doors and steal the gem</td>
-                      <td>8 directions + no-op</td>
-                  </tr>
-                  <tr>
-                      <td>Jumper</td>
-                      <td>Use double jump to navigate platforms and find the carrot</td>
-                      <td>8 directions + no-op</td>
-                  </tr>
-                  <tr>
-                      <td>Leaper</td>
-                      <td>Cross lanes by avoiding cars and hopping on logs</td>
-                      <td>8 directions + no-op</td>
-                  </tr>
-                  <tr>
-                      <td>Maze</td>
-                      <td>Navigate the maze to find and collect the cheese</td>
-                      <td>8 directions + no-op</td>
-                  </tr>
-                  <tr>
-                      <td>Miner</td>
-                      <td>Dig through dirt, collect diamonds, and avoid falling objects</td>
-                      <td>8 directions + no-op</td>
-                  </tr>
-                  <tr>
-                      <td>Ninja</td>
-                      <td>Jump across ledges and use throwing stars to clear bombs</td>
-                      <td>8 directions + no-op + 4 throwing star directions</td>
-                  </tr>
-                  <tr>
-                      <td>Plunder</td>
-                      <td>Fire cannonballs at enemy ships while avoiding friendly ships</td>
-                      <td>8 directions + no-op + fire cannonball</td>
-                  </tr>
-                  <tr>
-                      <td>Starpilot</td>
-                      <td>Dodge projectiles and defeat enemies while navigating obstacles</td>
-                      <td>8 directions + no-op + 2 fire bullet directions</td>
-                  </tr>
-              </tbody>
-          </table>
-          
-          <div class="table-notes">
-              Action space dimensions include: movement actions (8 directions + no-op) and special actions (varies by environment)
-          </div>
-      </div>
+            <div class="container is-max-desktop">
+              <div class="table-container">
+                <table class="dataset-coverage-table">
+                    <thead>
+                        <tr>
+                            <th><!-- Empty for row headers --></th>
+                            <th>Bigfish</th>
+                            <th>Bossfight</th>
+                            <th>Caveflyer</th>
+                            <th>Chaser</th>
+                            <th>Climber</th>
+                            <th>Coinrun</th>
+                            <th>Dodgeball</th>
+                            <th>Fruitbot</th>
+                            <th>Heist</th>
+                            <th>Jumper</th>
+                            <th>Leaper</th>
+                            <th>Maze</th>
+                            <th>Miner</th>
+                            <th>Ninja</th>
+                            <th>Plunder</th>
+                            <th>Starpilot</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Description</td>
+                            <td><img src="../images/procgen_gifs/bigfish.gif" alt="Bigfish Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/bossfight.gif" alt="Bossfight Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/caveflyer.gif" alt="Caveflyer Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/chaser.gif" alt="Chaser Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/climber.gif" alt="Climber Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/coinrun.gif" alt="Coinrun Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/dodgeball.gif" alt="Dodgeball Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/fruitbot.gif" alt="Fruitbot Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/heist.gif" alt="Heist Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/jumper.gif" alt="Jumper Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/leaper.gif" alt="Leaper Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/maze.gif" alt="Maze Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/miner.gif" alt="Miner Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/ninja.gif" alt="Ninja Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/plunder.gif" alt="Plunder Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/starpilot.gif" alt="Starpilot Gameplay" class="procgen-gif"></td>
+                        </tr>
+                        <tr>
+                            <td>Environment Description</td>
+                            <td>Eat smaller fish to grow while avoiding larger fish</td>
+                            <td>Dodge projectiles and damage the boss when shields are down</td>
+                            <td>Navigate caves, destroy targets, and avoid obstacles to reach exit</td>
+                            <td>Collect orbs and stars to make enemies vulnerable for consumption</td>
+                            <td>Climb platforms and collect stars while avoiding flying monsters</td>
+                            <td>Reach the coin while avoiding saws, enemies, and chasms</td>
+                            <td>Hit enemies with balls and reach the unlocked platform</td>
+                            <td>Collect fruit, avoid non-fruit, and use keys to unlock gates</td>
+                            <td>Collect colored keys to unlock doors and steal the gem</td>
+                            <td>Use double jump to navigate platforms and find the carrot</td>
+                            <td>Cross lanes by avoiding cars and hopping on logs</td>
+                            <td>Navigate the maze to find and collect the cheese</td>
+                            <td>Dig through dirt, collect diamonds, and avoid falling objects</td>
+                            <td>Jump across ledges and use throwing stars to clear bombs</td>
+                            <td>Fire cannonballs at enemy ships while avoiding friendly ships</td>
+                            <td>Dodge projectiles and defeat enemies while navigating obstacles</td>
+                        </tr>
+                        <tr>
+                            <td>Action Space Type</td>
+                            <td>8 directions + no-op</td>
+                            <td>8 directions + no-op + fire bullet</td>
+                            <td>8 directions + no-op + fire bullet</td>
+                            <td>8 directions + no-op</td>
+                            <td>8 directions + no-op</td>
+                            <td>8 directions + no-op</td>
+                            <td>8 directions + no-op + fire ball</td>
+                            <td>8 directions + no-op + fire key</td>
+                            <td>8 directions + no-op</td>
+                            <td>8 directions + no-op</td>
+                            <td>8 directions + no-op</td>
+                            <td>8 directions + no-op</td>
+                            <td>8 directions + no-op</td>
+                            <td>8 directions + no-op + 4 throwing star directions</td>
+                            <td>8 directions + no-op + fire cannonball</td>
+                            <td>8 directions + no-op + 2 fire bullet directions</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+              </div>
+              <div class="table-notes">
+                  Action space dimensions include: movement actions (8 directions + no-op) and special actions (varies by environment)
+              </div>
           </div>
         </div>
       </div>
@@ -649,83 +718,76 @@
         <div class="column">
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Results and Analysis</h2>
-            <p>
-              <div class="container is-max-desktop">
-                <div class="columns is-centered">
-                    <div class="column">
                     <div class="content has-text-centered">
+                      <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Overall Performance</h4>
                       <div class="metrics-container">
                         <div class="metrics-sidebar">
-                          <button class="metric-button active" data-metric="brier-mae">Brier MAE</button>
-                          <button class="metric-button" data-metric="normalized_amae">Normalized AMAE</button>
-                          <button class="metric-button" data-metric="normalized_quantile_filtered_amae">Normalized Quantile Filtered AMAE</button>
+                          <button class="metric-button active" data-metric="macro-precision">Macro Precision</button>
+                          <button class="metric-button" data-metric="macro-recall">Macro Recall</button>
+                          <button class="metric-button" data-metric="macro-f1">Macro F1</button>
                           <button class="metric-button" data-metric="micro-precision">Micro Precision</button>
                           <button class="metric-button" data-metric="micro-recall">Micro Recall</button>
                           <button class="metric-button" data-metric="micro-f1">Micro F1</button>
-                          <button class="metric-button" data-metric="macro-precision">Macro Precision</button>
-                          <button class="metric-button" data-metric="macro-recall">Macro Recall</button>
-                          <button class="metric-button" data-metric="macro-f1">Macro F1</button>
+                          <button class="metric-button" data-metric="brier-mae">Brier MAE</button>
+                          <button class="metric-button" data-metric="normalized_amae">Normalized AMAE</button>
+                          <button class="metric-button" data-metric="normalized_quantile_filtered_amae">Normalized Quantile Filtered AMAE</button>
                         </div>
                         
                         <div class="metrics-charts">
                           <!-- Charts will be dynamically inserted here -->
                         </div>
                       </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </p>
-            
-            <p>
-              <!-- Interactive Confusion Matrix Block -->
-              <div id="confusion-matrix-section" class="box" style="margin-top:2rem;">
-                <div class="confusion-matrix-controls" style="display:flex;flex-direction:column;gap:1rem;align-items:stretch;">
-                  <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
-                    <div style="width:120px;"></div>  <!-- Spacer to match sidebar width -->
-                    <div style="flex:1;position:relative;padding:20px 0 0 50px;">
-                      <div class="confusion-matrix-models" style="display:flex;justify-content:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
-                        <!-- Model buttons will be injected here -->
-                      </div>
-                    </div>
-                  </div>
-                  <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
-                    <div class="confusion-matrix-datasets" style="display:flex;flex-direction:column;height:500px;overflow-y:auto;min-width:120px;gap:0.25rem;padding-top:20px;padding-right: 20px;box-sizing: border-box;">
-                      <!-- Dataset buttons will be injected here -->
-                    </div>
-                    <div style="flex:1;position:relative;padding:20px 0 0 50px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;">
-                      <div id="confusion-matrix-dynamic-title" style="font-size: 1.1em; font-weight: bold; margin-bottom: 15px; text-align: center; color: #363636;"></div>
-                      <div id="confusion-matrix-canvas-container" style="width:100%;height:500px;position:relative;">
-                        <!-- Canvas was here, but JS replaces content with a table -->
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </p>
 
+                      <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Action Class-wise Confusion Matrix</h4>
+                      <div id="confusion-matrix-section" style="margin-top:1rem;max-width:100%;overflow-x:auto;">
+                        <div class="confusion-matrix-controls" style="display:flex;flex-direction:column;gap:1rem;align-items:stretch;max-width:100%;">
+                          <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
+                            <div style="width:200px;"></div>  <!-- Changed from 120px to 200px to match metrics-sidebar -->
+                            <div style="flex:1;position:relative;padding:20px 0 0 50px;max-width:calc(100% - 250px);"> <!-- Adjusted max-width calculation -->
+                              <div class="confusion-matrix-models" style="display:flex;justify-content:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+                                <!-- Model buttons will be injected here -->
+                              </div>
+                            </div>
+                          </div>
+        
+                          <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
+                            <div class="confusion-matrix-datasets" style="display:flex;flex-direction:column;height:500px;overflow-y:auto;min-width:200px;gap:0.5rem;padding-top:20px;padding-right:10px;margin-right:5px;"> <!-- Changed min-width from 120px to 200px -->
+                              <!-- Dataset buttons will be injected here -->
+                            </div>
+        
+                            <div style="flex:1;position:relative;padding:20px 0 0 50px;display:flex;justify-content:center;max-width:calc(100% - 250px);"> <!-- Adjusted max-width calculation -->
+                              <div id="confusion-matrix-canvas-container" style="width:100%;height:500px;position:relative;overflow-x:auto;">
+                                <canvas id="confusion-matrix-canvas"></canvas>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
             <p>
-                Our analysis highlighted significant limitations arising from architectural constraints, training
-                paradigms, and input-output biases inherent to the models. The
-                stark domain discrepancy between training data—primarily
-                continuous-action robotics datasets, and general web-scale
-                vision language data—and discrete-action game environments
-                emerged as a critical barrier to effective zero-shot generalization.
-                We identified notable differences in model behaviors linked
-                directly to their architectures, training strategies, and input/output processing techniques. OpenVLA's robust action-space
-                clamping technique consistently provided superior generalization, minimizing invalid outputs and exhibiting relative
-                resilience to out-of-distribution scenarios. Conversely, autoregressive models like GPT-4x displayed substantial difficulties
-                in generalizing, especially under complex image conditions,
-                and frequently defaulted to overly simplistic or biased action choices. Additionally, Pi0 models showed intermediate
-                performance influenced heavily by their diffusion-based (Pi0
-                Base) or autoregressive (Pi0 FAST) decoding methods, with
-                Pi0 FAST notably sensitive to image complexity and unable
-                to restrict majority of its predictions to a desired output range.
-                For a more thorough look at the results and our analysis, please refer to the <a href="https://arxiv.org/pdf/2505.05540" target="_blank">paper</a>.
+              Our analysis highlighted significant limitations arising from architectural constraints, training
+              paradigms, and input-output biases inherent to the models. The
+              stark domain discrepancy between training data—primarily
+              continuous-action robotics datasets, and general web-scale
+              vision language data—and discrete-action game environments
+              emerged as a critical barrier to effective zero-shot generalization.
+              We identified notable differences in model behaviors linked
+              directly to their architectures, training strategies, and input/output processing techniques. OpenVLA's robust action-space
+              clamping technique consistently provided superior generalization, minimizing invalid outputs and exhibiting relative
+              resilience to out-of-distribution scenarios. Conversely, autoregressive models like GPT-4x displayed substantial difficulties
+              in generalizing, especially under complex image conditions,
+              and frequently defaulted to overly simplistic or biased action choices. Additionally, Pi0 models showed intermediate
+              performance influenced heavily by their diffusion-based (Pi0
+              Base) or autoregressive (Pi0 FAST) decoding methods, with
+              Pi0 FAST notably sensitive to image complexity and unable
+              to restrict majority of its predictions to a desired output range.
+              For a more thorough look at the results and our analysis, please refer to the <a href="https://arxiv.org/pdf/2505.05540" target="_blank">paper</a>.
             </p>
 
           </div>
         </div>
+
+
       </div>
     </div>
   </section>

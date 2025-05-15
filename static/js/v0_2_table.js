@@ -4,28 +4,28 @@ const datasets = [
   'heist', 'jumper', 'leaper', 'maze', 'miner', 'ninja', 'plunder', 'starpilot'
 ];
 const metrics = [
-  'brier-mae',
-  'normalized_amae',
-  'normalized_quantile_filtered_amae',
+  'macro-precision',
+  'macro-recall',
+  'macro-f1',
   'micro-precision',
   'micro-recall',
   'micro-f1',
-  'macro-precision',
-  'macro-recall',
-  'macro-f1'
+  'brier-mae',
+  'normalized_amae',
+  'normalized_quantile_filtered_amae'
 ];
 
 // Map metric to display name
 const metricDisplay = {
-  'brier-mae': 'Brier MAE',
-  'normalized_amae': 'Normalized AMAE',
-  'normalized_quantile_filtered_amae': 'Normalized Quantile Filtered AMAE',
+  'macro-precision': 'Macro Precision',
+  'macro-recall': 'Macro Recall',
+  'macro-f1': 'Macro F1',
   'micro-precision': 'Micro Precision',
   'micro-recall': 'Micro Recall',
   'micro-f1': 'Micro F1',
-  'macro-precision': 'Macro Precision',
-  'macro-recall': 'Macro Recall',
-  'macro-f1': 'Macro F1'
+  'brier-mae': 'Brier MAE',
+  'normalized_amae': 'Normalized AMAE',
+  'normalized_quantile_filtered_amae': 'Normalized Quantile Filtered AMAE'
 };
 
 let charts = {};
@@ -75,7 +75,7 @@ function createChartContainer(metric) {
   const div = document.createElement('div');
   div.className = 'metric-chart';
   div.dataset.metric = metric;
-  if (metric === 'brier-mae') div.classList.add('active');
+  if (metric === 'macro-precision') div.classList.add('active');
   const canvas = document.createElement('canvas');
   canvas.id = `chart-${metric}`;
   div.appendChild(canvas);
@@ -172,8 +172,8 @@ function renderCharts(data) {
                   offset: true,
                   categoryPercentage: 0.9,
                   afterFit: function(scaleInstance) {
-                    scaleInstance.paddingRight = 20;
-                    scaleInstance.paddingLeft = 20;
+                    scaleInstance.paddingRight = 5;
+                    scaleInstance.paddingLeft = 5;
                   }
                 },
                 y: { 
@@ -206,10 +206,10 @@ function renderCharts(data) {
               },
               layout: {
                 padding: {
-                  top: 20,
-                  right: 20,
-                  bottom: 20,
-                  left: 20
+                  top: 10,
+                  right: 10,
+                  bottom: 10,
+                  left: 10
                 }
               }
             }
