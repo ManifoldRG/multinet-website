@@ -232,9 +232,8 @@ function renderConfusionMatrix() {
       td.style.backgroundColor = 
         `rgba(255, ${Math.round(248 - 248 * value)}, ${Math.round(178 - 178 * value)}, 0.85)`;
       
-      // Display 0.0% for zero values, otherwise format the percentage
-      td.textContent = `${(value * 100).toFixed(1)}%`; 
-      // td.title = `Raw count: ${raw[i][j]}`; // Removed as raw counts are no longer available
+      // Display the raw value without formatting as a percentage
+      td.textContent = value.toFixed(2); // Show value with 2 decimal places
       tr.appendChild(td);
     });
     tbody.appendChild(tr);
