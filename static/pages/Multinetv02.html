@@ -286,13 +286,16 @@
       top: 2rem;
       z-index: 2;
       padding-right: 1rem; /* Add padding to prevent scrollbar overlap */
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem; /* Add consistent gap between buttons */
     }
 
     .metric-button {
       display: block;
       width: 100%;
       padding: 0.75rem;
-      margin: 0.5rem 0;
+      margin: 0; /* Remove margin since we're using gap */
       text-align: left;
       background: #f5f5f5;
       border: none;
@@ -381,6 +384,19 @@
       left: 5px;
       top: 50%;
       transform: translateY(-50%) rotate(-90deg);
+    }
+
+    /* Add styles for confusion matrix sidebar */
+    .confusion-matrix-datasets {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem; /* Match the gap from metrics-sidebar */
+      height: 500px;
+      overflow-y: auto;
+      min-width: 200px;
+      padding-top: 20px;
+      padding-right: 10px;
+      margin-right: 5px;
     }
 
     @media (max-width: 900px) {
