@@ -12,7 +12,8 @@ const metrics = [
   'micro-f1',
   'brier-mae',
   'normalized_mae',
-  'normalized_quantile_filtered_mae'
+  'normalized_quantile_filtered_mae',
+  'invalid_percentage'
 ];
 
 // Map metric to display name
@@ -25,7 +26,8 @@ const metricDisplay = {
   'micro-f1': 'Micro F1',
   'brier-mae': 'Brier MAE',
   'normalized_mae': 'Normalized MAE',
-  'normalized_quantile_filtered_mae': 'Normalized Quantile Filtered MAE'
+  'normalized_quantile_filtered_mae': 'Normalized Quantile Filtered MAE',
+  'invalid_percentage': 'Invalid Percentage'
 };
 
 let charts = {};
@@ -46,7 +48,8 @@ function getMetricData(metric, data) {
     'micro-f1': 'micro_f1',
     'macro-precision': 'macro_precision',
     'macro-recall': 'macro_recall',
-    'macro-f1': 'macro_f1'
+    'macro-f1': 'macro_f1',
+    'invalid_percentage': 'invalid_percentage'
   };
 
   return useModels.map(model => {
