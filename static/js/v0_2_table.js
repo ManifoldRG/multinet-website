@@ -4,16 +4,16 @@ const datasets = [
   'heist', 'jumper', 'leaper', 'maze', 'miner', 'ninja', 'plunder', 'starpilot'
 ];
 const metrics = [
-  'macro-precision',
   'macro-recall',
+  'macro-precision',
   'macro-f1',
-  'micro-precision',
   'micro-recall',
+  'micro-precision',
   'micro-f1',
+  'invalid_percentage',
   'brier-mae',
   'normalized_mae',
-  'normalized_quantile_filtered_mae',
-  'invalid_percentage'
+  'normalized_quantile_filtered_mae'
 ];
 
 // Map metric to display name
@@ -56,21 +56,27 @@ function getMetricData(metric, data) {
     const metricKey = metricKeyMap[metric];
     if (!metricKey) {
       console.error(`No mapping found for metric: ${metric}`);
-      return Array(16).fill(null);
+      return { values: Array(datasets.length).fill(null), std: Array(datasets.length).fill(null) };
     }
     
-    // Get the data for this model and metric
-    const modelData = data[model] && data[model][metricKey];
-    if (!modelData) {
-      console.warn(`No data found for model ${model} and metric ${metricKey}`);
-      return Array(16).fill(null);
+    const modelDataRoot = data[model];
+    if (!modelDataRoot) {
+      console.warn(`No data found for model ${model}`);
+      return { values: Array(datasets.length).fill(null), std: Array(datasets.length).fill(null) };
     }
-    
-    // Convert the data to numbers and handle any undefined values
-    return modelData.slice(0, 16).map(value => {
-      if (value === undefined || value === null) return null;
-      return Number(value);
-    });
+
+    const metricValues = modelDataRoot[metricKey];
+    const stdValues = modelDataRoot[`${metricKey}_std`]; // Attempt to get _std version
+
+    const processedValues = metricValues 
+      ? metricValues.slice(0, datasets.length).map(value => (value === undefined || value === null) ? null : Number(value))
+      : Array(datasets.length).fill(null);
+
+    const processedStd = stdValues
+      ? stdValues.slice(0, datasets.length).map(value => (value === undefined || value === null) ? null : Number(value))
+      : Array(datasets.length).fill(null); // Fill with nulls if _std data doesn't exist
+
+    return { values: processedValues, std: processedStd };
   });
 }
 
@@ -94,6 +100,84 @@ function renderCharts(data) {
     }
     chartsContainer.innerHTML = '';
     
+    // Create a custom plugin to draw error bars
+    const errorBarPlugin = {
+      id: 'errorBar',
+      afterDatasetsDraw: function(chart) {
+        const metric = chart.config._config.metric; // Get metric from chart config
+        console.log('Drawing error bars for metric:', metric);
+        
+        // Only apply to metrics that should have error bars
+        if (!['micro-precision', 'micro-recall', 'micro-f1', 'macro-precision', 'macro-recall', 'macro-f1'].includes(metric)) {
+          return;
+        }
+        
+        const ctx = chart.ctx;
+        
+        chart.data.datasets.forEach((dataset, datasetIndex) => {
+          // Skip if dataset isn't visible or doesn't have std data
+          const meta = chart.getDatasetMeta(datasetIndex);
+          if (!meta.visible) return;
+          
+          // Get std data stored in dataset
+          const stdData = dataset.stdData;
+          if (!stdData || !stdData.length) {
+            console.log(`No stdData found for dataset ${datasetIndex}`, dataset);
+            return;
+          }
+          
+          // Draw error bars for each data point
+          ctx.save();
+          // Use consistent thin black lines for all error bars
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = 'rgba(197, 117, 117, 0.8)';
+          
+          meta.data.forEach((element, index) => {
+            const stdValue = stdData[index];
+            const value = dataset.data[index];
+            
+            // Skip if no std value or data point
+            if (stdValue === null || stdValue === undefined || value === null || value === undefined) {
+              return;
+            }
+            
+            console.log(`Drawing error bar for dataset ${datasetIndex}, index ${index}: value=${value}, std=${stdValue}`);
+            
+            // Get position for the current bar
+            const barX = element.x;
+            
+            // Get y scale
+            const yScale = chart.scales.y;
+            
+            // Calculate positions in pixels
+            const yCenter = element.y; // Center of the bar (value)
+            const yTop = yScale.getPixelForValue(value + stdValue); // Top of error bar
+            const yBottom = yScale.getPixelForValue(Math.max(0, value - stdValue)); // Bottom of error bar
+            
+            // Draw vertical line
+            ctx.beginPath();
+            ctx.moveTo(barX, yTop);
+            ctx.lineTo(barX, yBottom);
+            ctx.stroke();
+            
+            // Draw top whisker
+            ctx.beginPath();
+            ctx.moveTo(barX - 4, yTop);
+            ctx.lineTo(barX + 4, yTop);
+            ctx.stroke();
+            
+            // Draw bottom whisker
+            ctx.beginPath();
+            ctx.moveTo(barX - 4, yBottom);
+            ctx.lineTo(barX + 4, yBottom);
+            ctx.stroke();
+          });
+          
+          ctx.restore();
+        });
+      }
+    };
+    
     metrics.forEach(metric => {
       console.log(`Creating chart for metric: ${metric}`);
       const chartDiv = createChartContainer(metric);
@@ -111,15 +195,19 @@ function renderCharts(data) {
         'rgba(75, 192, 192, 0.7)',
         'rgba(153, 102, 255, 0.7)'
       ];
-  
+
+      // Get metric data for all models
+      const metricData = getMetricData(metric, data);
+      console.log(`Metric data for ${metric}:`, metricData);
+
       const chartData = {
         labels: datasets,
         datasets: useModels.map((model, i) => {
-          const modelData = getMetricData(metric, data)[i];
-          console.log(`Model ${model} data for ${metric}:`, modelData);
-          return {
+          const modelData = metricData[i];
+          
+          const dataset = {
             label: model,
-            data: modelData,
+            data: modelData.values,
             backgroundColor: colors[i % colors.length],
             borderColor: colors[i % colors.length].replace('0.7', '1'),
             borderWidth: 1,
@@ -127,6 +215,14 @@ function renderCharts(data) {
             barPercentage: 0.8,
             categoryPercentage: 0.6
           };
+          
+          // Store std data directly in the dataset for the plugin
+          if (modelData.std && modelData.std.some(s => s !== null && s !== undefined)) {
+            dataset.stdData = modelData.std; // Use stdData instead of _stdData
+            console.log(`Added std data for ${model}:`, modelData.std);
+          }
+          
+          return dataset;
         })
       };
   
@@ -134,7 +230,85 @@ function renderCharts(data) {
   
       try {
         if (!charts[metric]) {
-          charts[metric] = new Chart(ctx, {
+          // Calculate the Y-axis scale dynamically for metrics with error bars
+          let yAxisConfig = { 
+            beginAtZero: true,
+            title: { 
+              display: true, 
+              text: 'Metric Value',
+              font: {
+                weight: 'bold'
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)'
+            }
+          };
+          
+          // Special handling for specific metrics
+          if (['brier-mae', 'normalized_mae', 'normalized_quantile_filtered_mae'].includes(metric)) {
+            // Keep the fixed scale for these metrics
+            yAxisConfig = {
+              ...yAxisConfig,
+              min: 0,
+              max: 2,
+              ticks: {
+                stepSize: 0.2,
+                font: {
+                  size: 11
+                }
+              }
+            };
+          } else if (['micro-precision', 'micro-recall', 'micro-f1', 'macro-precision', 'macro-recall', 'macro-f1'].includes(metric)) {
+            // For metrics with error bars, dynamically calculate the max value
+            let maxValue = 0;
+            
+            chartData.datasets.forEach(dataset => {
+              if (dataset.data && dataset.stdData) {
+                dataset.data.forEach((value, index) => {
+                  if (value !== null && value !== undefined) {
+                    const stdValue = dataset.stdData[index];
+                    if (stdValue !== null && stdValue !== undefined) {
+                      // Consider value + std for maximum
+                      maxValue = Math.max(maxValue, value + stdValue);
+                    } else {
+                      maxValue = Math.max(maxValue, value);
+                    }
+                  }
+                });
+              } else if (dataset.data) {
+                // If no std data, just check the regular data values
+                dataset.data.forEach(value => {
+                  if (value !== null && value !== undefined) {
+                    maxValue = Math.max(maxValue, value);
+                  }
+                });
+              }
+            });
+            
+            // Add padding (20%) and round to a nice number
+            maxValue = maxValue * 1.2;
+            
+            // Round to a nice value based on the magnitude
+            const magnitude = Math.pow(10, Math.floor(Math.log10(maxValue)));
+            maxValue = Math.ceil(maxValue / magnitude) * magnitude;
+            
+            // Set the axis limits
+            yAxisConfig = {
+              ...yAxisConfig,
+              min: 0,
+              max: maxValue,
+              ticks: {
+                font: {
+                  size: 11
+                }
+              }
+            };
+            
+            console.log(`Calculated Y-axis max for ${metric}: ${maxValue}`);
+          }
+          
+          const chartConfig = {
             type: 'bar',
             data: chartData,
             options: {
@@ -179,29 +353,7 @@ function renderCharts(data) {
                     scaleInstance.paddingLeft = 5;
                   }
                 },
-                y: { 
-                  beginAtZero: true,
-                  title: { 
-                    display: true, 
-                    text: 'Metric Value',
-                    font: {
-                      weight: 'bold'
-                    }
-                  },
-                  ...(['brier-mae', 'normalized_mae', 'normalized_quantile_filtered_mae'].includes(metric) ? {
-                    min: 0,
-                    max: 2,
-                    ticks: {
-                      stepSize: 0.2,
-                      font: {
-                        size: 11
-                      }
-                    }
-                  } : {}),
-                  grid: {
-                    color: 'rgba(0, 0, 0, 0.1)'
-                  }
-                }
+                y: yAxisConfig // Use our calculated Y-axis configuration
               },
               animation: {
                 duration: 750,
@@ -215,10 +367,50 @@ function renderCharts(data) {
                   left: 10
                 }
               }
-            }
-          });
+            },
+            plugins: [errorBarPlugin],
+            metric: metric
+          };
+          
+          charts[metric] = new Chart(ctx, chartConfig);
         } else {
+          // For existing charts, recalculate max value when updating
+          if (['micro-precision', 'micro-recall', 'micro-f1', 'macro-precision', 'macro-recall', 'macro-f1'].includes(metric)) {
+            let maxValue = 0;
+            
+            chartData.datasets.forEach(dataset => {
+              if (dataset.data && dataset.stdData) {
+                dataset.data.forEach((value, index) => {
+                  if (value !== null && value !== undefined) {
+                    const stdValue = dataset.stdData[index];
+                    if (stdValue !== null && stdValue !== undefined) {
+                      maxValue = Math.max(maxValue, value + stdValue);
+                    } else {
+                      maxValue = Math.max(maxValue, value);
+                    }
+                  }
+                });
+              } else if (dataset.data) {
+                dataset.data.forEach(value => {
+                  if (value !== null && value !== undefined) {
+                    maxValue = Math.max(maxValue, value);
+                  }
+                });
+              }
+            });
+            
+            // Add padding and round
+            maxValue = maxValue * 1.2;
+            const magnitude = Math.pow(10, Math.floor(Math.log10(maxValue)));
+            maxValue = Math.ceil(maxValue / magnitude) * magnitude;
+            
+            // Update scale
+            charts[metric].options.scales.y.max = maxValue;
+            console.log(`Updated Y-axis max for ${metric}: ${maxValue}`);
+          }
+          
           charts[metric].data = chartData;
+          charts[metric].config._config.metric = metric;
           charts[metric].update();
         }
       } catch (error) {
