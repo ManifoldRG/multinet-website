@@ -426,6 +426,45 @@
       transition: transform 0.3s ease;
     }
 
+    /* Styles for interactive pie chart */
+    .pie-slice:hover,
+    .pie-slice.highlighted {
+        opacity: 0.7 !important; /* Increased emphasis */
+        stroke: #333; /* Add a stroke for better highlight */
+        stroke-width: 1px; /* Stroke width */
+        transform: scale(1.03); /* Pop out effect */
+        transform-origin: center; /* Ensure scaling is from the center of the slice if possible, though for paths this is complex. For a pie, center of the chart might be better. */
+    }
+    .legend-item:hover text,
+    .legend-item.highlighted text {
+        font-weight: bold;
+        /* fill: white; --- Reverted: Legend text should remain its default color (black) */
+    }
+    .legend-item:hover rect,
+    .legend-item.highlighted rect {
+        opacity: 0.85 !important; /* Adjusted opacity for better white text visibility */
+        stroke: #333; /* Add a stroke for better highlight */
+        stroke-width: 0.5px; /* Stroke width */
+    }
+    #pie-chart-tooltip {
+        position: absolute;
+        background-color: rgba(0,0,0,0.85);
+        color: white !important; /* Ensure all text within the tooltip is white */
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-family: "Google Sans", sans-serif;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+        white-space: nowrap;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+        z-index: 1050; /* Ensure tooltip is above other elements */
+        transform: translate(-50%, -120%); /* Position above cursor */
+    }
+    #pie-chart-tooltip strong {
+        color: white !important; /* Ensure bold text inside tooltip is also white */
+    }
   </style>
 </head>
 
@@ -609,7 +648,7 @@
                             However,both the model and the majority of its training datasets remain closed-source, limiting its impact on the broader research community.
                         </p>
                         <p>
-                            The emerging class of Vision-Language-Action models such as <a href="https://openvla.github.io/">OpenVLA</a>, and <a href="https://octo-models.github.io/">Octo</a> display impressive capabilities of taking vision-language-grounded action in control tasks. However, they are trained for a niche set of robotics tasks, their performance on vision-language understanding/generation tasks is not well understood.
+                            The emerging class of Vision-Language-Action models such as <a href="https://openvla.github.io/">OpenVLA</a>, <a href="https://www.physicalintelligence.company/blog/pi0">Pi0</a>, and <a href="https://www.physicalintelligence.company/research/fast">Pi0 with FAST</a> display impressive capabilities of taking vision-language-grounded action in control tasks. However, they are trained for a niche set of robotics tasks, their performance on vision-language understanding/generation tasks is not well understood.
                         </p>  
                         <p>
                             Building next generation "generalist" models requires training on diverse datasets that span multiple modalities and task types.
@@ -637,47 +676,61 @@
                             current SoTA VLMs and VLAs, illuminating paths toward more versatile and capable generalist AI systems.
                         </p>
 
-                        <!-- SVG Chart -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" style="width: 100%; max-width: 800px; height: auto; margin: 20px auto; display: block;">
-                            <!-- Title -->
-                            <text x="400" y="30" text-anchor="middle" font-size="20" font-family="Google Sans">Distribution of datasets across modalities in Multinet</text>
-                            
-                            <!-- Pie Chart -->
-                            <g transform="translate(250, 200)">
-                                <!-- Control segment (58%) -->
-                                <path d="M 0 0 L 100 0 A 100 100 0 1 1 -78.5 -62 Z" 
-                                      fill="#FFEB99" />
+                        <!-- Interactive Pie Chart Container -->
+                        <div id="pie-chart-container" style="position: relative; width: 100%; max-width: 800px; margin: 20px auto; -webkit-tap-highlight-color: transparent;">
+                            <!-- SVG Chart -->
+                            <svg id="multinet-pie-chart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" style="width: 100%; height: auto; display: block;">
+                                <!-- Title -->
+                                <text x="400" y="30" text-anchor="middle" font-size="20" font-family="Google Sans">Distribution of datasets across modalities in Multinet</text>
                                 
-                                <!-- Vision-Language segment (29%) -->
-                                <path d="M 0 0 L -78.5 -62 A 100 100 0 0 1 48.5 -87.5 Z" 
-                                      fill="#6666FF" />
+                                <!-- Pie Chart -->
+                                <g transform="translate(250, 200)">
+                                    <!-- Control segment (58%) -->
+                                    <path id="slice-control" class="pie-slice" data-name="Control" data-value="58%" data-legend-id="legend-control"
+                                          d="M 0 0 L 100 0 A 100 100 0 1 1 -78.5 -62 Z" 
+                                          fill="#FFEB99" style="cursor: pointer; transition: opacity 0.2s, stroke 0.2s, stroke-width 0.2s, transform 0.2s ease-out;" />
+                                    
+                                    <!-- Vision-Language segment (29%) -->
+                                    <path id="slice-vision-language" class="pie-slice" data-name="Vision-Language" data-value="29%" data-legend-id="legend-vision-language"
+                                          d="M 0 0 L -78.5 -62 A 100 100 0 0 1 48.5 -87.5 Z" 
+                                          fill="#6666FF" style="cursor: pointer; transition: opacity 0.2s, stroke 0.2s, stroke-width 0.2s, transform 0.2s ease-out;" />
+                                    
+                                    <!-- Language segment (13%) -->
+                                    <path id="slice-language" class="pie-slice" data-name="Language" data-value="13%" data-legend-id="legend-language"
+                                          d="M 0 0 L 48.5 -87.5 A 100 100 0 0 1 100 0 Z" 
+                                          fill="#66B2FF" style="cursor: pointer; transition: opacity 0.2s, stroke 0.2s, stroke-width 0.2s, transform 0.2s ease-out;" />
+                                </g>
                                 
-                                <!-- Language segment (13%) -->
-                                <path d="M 0 0 L 48.5 -87.5 A 100 100 0 0 1 100 0 Z" 
-                                      fill="#66B2FF" />
-                            </g>
-                            
-                            <!-- Legend -->
-                            <g transform="translate(500, 150)">
-                                <!-- Vision-Language -->
-                                <rect x="0" y="0" width="20" height="20" fill="#6666FF"/>
-                                <text x="30" y="15" font-size="16" font-family="Google Sans">Vision-Language (29%)</text>
+                                <!-- Legend -->
+                                <g transform="translate(500, 150)">
+                                    <!-- Vision-Language -->
+                                    <g id="legend-vision-language" class="legend-item" data-slice-id="slice-vision-language" style="cursor: pointer;">
+                                        <rect x="0" y="0" width="20" height="20" fill="#6666FF" style="transition: opacity 0.2s, stroke 0.2s, stroke-width 0.2s;"/>
+                                        <text x="30" y="15" font-size="16" font-family="Google Sans">Vision-Language (29%)</text>
+                                    </g>
+                                    
+                                    <!-- Language -->
+                                    <g id="legend-language" class="legend-item" data-slice-id="slice-language" style="cursor: pointer;" transform="translate(0, 35)">
+                                        <rect x="0" y="0" width="20" height="20" fill="#66B2FF" style="transition: opacity 0.2s, stroke 0.2s, stroke-width 0.2s;"/>
+                                        <text x="30" y="15" font-size="16" font-family="Google Sans">Language (13%)</text>
+                                    </g>
+                                    
+                                    <!-- Control -->
+                                    <g id="legend-control" class="legend-item" data-slice-id="slice-control" style="cursor: pointer;" transform="translate(0, 70)">
+                                        <rect x="0" y="0" width="20" height="20" fill="#FFEB99" style="transition: opacity 0.2s, stroke 0.2s, stroke-width 0.2s;"/>
+                                        <text x="30" y="15" font-size="16" font-family="Google Sans">Control (58%)</text>
+                                    </g>
+                                </g>
                                 
-                                <!-- Language -->
-                                <rect x="0" y="35" width="20" height="20" fill="#66B2FF"/>
-                                <text x="30" y="50" font-size="16" font-family="Google Sans">Language (13%)</text>
-                                
-                                <!-- Control -->
-                                <rect x="0" y="70" width="20" height="20" fill="#FFEB99"/>
-                                <text x="30" y="85" font-size="16" font-family="Google Sans">Control (58%)</text>
-                            </g>
-                            
-                            <!-- Caption -->
-                            <text x="400" y="350" text-anchor="middle" font-size="14" font-family="Google Sans" font-style="italic">
-                                <tspan x="400" dy="0">Control represents the largest portion (58%) due to the extensive OpenX-Embodiment collection,</tspan>
-                                <tspan x="400" dy="20">followed by Vision-Language (29%) and Language (13%) datasets.</tspan>
-                            </text>
-                        </svg>
+                                <!-- Caption -->
+                                <text x="400" y="350" text-anchor="middle" font-size="14" font-family="Google Sans" font-style="italic">
+                                    <tspan x="400" dy="0">Control represents the largest portion (58%) due to the extensive OpenX-Embodiment collection,</tspan>
+                                    <tspan x="400" dy="20">followed by Vision-Language (29%) and Language (13%) datasets.</tspan>
+                                </text>
+                            </svg>
+                            <!-- Tooltip -->
+                            <div id="pie-chart-tooltip"></div>
+                        </div>
 
                         <!-- Tables -->
                         <table>
@@ -1249,6 +1302,131 @@
         if (isHomePage && !document.querySelector('.side-navigation .active')) {
             const homeLink = document.querySelector('.side-navigation a.nav-item[href$="index.html"]'); // Match any link ending with index.html
             if(homeLink) homeLink.classList.add('active');
+        }
+    });
+  </script>
+  <script>
+    // Interactive Pie Chart Script
+    document.addEventListener('DOMContentLoaded', function () {
+        const pieChartContainer = document.getElementById('pie-chart-container');
+        if (!pieChartContainer) return;
+
+        const slices = pieChartContainer.querySelectorAll('.pie-slice');
+        const legendItems = pieChartContainer.querySelectorAll('.legend-item');
+        const tooltip = document.getElementById('pie-chart-tooltip');
+        const svgChart = document.getElementById('multinet-pie-chart');
+
+        if (!tooltip || !svgChart) return;
+
+        function showTooltip(event, name, value) {
+            tooltip.innerHTML = `<strong>${name}</strong>: ${value}`;
+            tooltip.style.opacity = '1';
+            
+            // Position tooltip relative to the SVG container
+            const chartRect = pieChartContainer.getBoundingClientRect();
+            let x = event.clientX - chartRect.left;
+            let y = event.clientY - chartRect.top;
+
+            // Adjust position to keep tooltip within container bounds
+            const tooltipRect = tooltip.getBoundingClientRect(); // get current size
+
+            // Attempt to center tooltip above cursor, then adjust
+            let newX = x - tooltipRect.width / 2;
+            let newY = y - tooltipRect.height - 15; // 15px offset above cursor
+
+            // Boundary checks for X
+            if (newX < 0) newX = 5; // Small padding from left edge
+            if (newX + tooltipRect.width > chartRect.width) newX = chartRect.width - tooltipRect.width - 5; // Small padding from right edge
+            
+            // Boundary checks for Y
+            if (newY < 0) newY = y + 20; // If too high, position below cursor
+            if (newY + tooltipRect.height > chartRect.height) newY = chartRect.height - tooltipRect.height - 5; // Keep within bottom
+
+
+            tooltip.style.left = `${newX}px`;
+            tooltip.style.top = `${newY}px`;
+            tooltip.style.transform = 'translate(0, 0)'; // Reset transform used for initial centering
+        }
+
+        function hideTooltip() {
+            tooltip.style.opacity = '0';
+        }
+
+        function highlightElements(sliceId, legendId) {
+            const slice = document.getElementById(sliceId);
+            const legend = document.getElementById(legendId);
+            if (slice) slice.classList.add('highlighted');
+            if (legend) legend.classList.add('highlighted');
+        }
+
+        function clearHighlights() {
+            slices.forEach(s => s.classList.remove('highlighted'));
+            legendItems.forEach(l => l.classList.remove('highlighted'));
+        }
+
+        slices.forEach(slice => {
+            slice.addEventListener('mouseover', function (event) {
+                clearHighlights(); // Clear previous before highlighting new
+                const name = this.dataset.name;
+                const value = this.dataset.value;
+                const legendId = this.dataset.legendId;
+                highlightElements(this.id, legendId);
+                showTooltip(event, name, value);
+            });
+            slice.addEventListener('mouseout', function () {
+                clearHighlights();
+                hideTooltip();
+            });
+            slice.addEventListener('mousemove', function (event) {
+                // Update tooltip position on mouse move if it's visible
+                if (tooltip.style.opacity === '1') {
+                    const name = this.dataset.name;
+                    const value = this.dataset.value;
+                    showTooltip(event, name, value); // Re-calculate position
+                }
+            });
+        });
+
+        legendItems.forEach(legend => {
+            legend.addEventListener('mouseover', function (event) {
+                clearHighlights(); // Clear previous before highlighting new
+                const sliceId = this.dataset.sliceId;
+                const slice = document.getElementById(sliceId);
+                if (slice) {
+                    const name = slice.dataset.name;
+                    const value = slice.dataset.value;
+                    highlightElements(sliceId, this.id);
+                    showTooltip(event, name, value);
+                }
+            });
+            legend.addEventListener('mouseout', function () {
+                clearHighlights();
+                hideTooltip();
+            });
+            legend.addEventListener('mousemove', function (event) {
+                 if (tooltip.style.opacity === '1') {
+                    const sliceId = this.dataset.sliceId;
+                    const slice = document.getElementById(sliceId);
+                    if (slice) {
+                        const name = slice.dataset.name;
+                        const value = slice.dataset.value;
+                        showTooltip(event, name, value); // Re-calculate position
+                    }
+                }
+            });
+        });
+        
+        // Optional: Hide tooltip if mouse leaves the entire chart container
+        if (pieChartContainer) {
+            pieChartContainer.addEventListener('mouseleave', function() {
+                // Small delay to prevent flickering if mouse quickly re-enters a slice/legend
+                setTimeout(() => {
+                    if (!pieChartContainer.querySelector('.pie-slice:hover') && !pieChartContainer.querySelector('.legend-item:hover')) {
+                        hideTooltip();
+                        clearHighlights();
+                    }
+                }, 50);
+            });
         }
     });
   </script>

@@ -1052,13 +1052,84 @@
     }
   </style>
 
+  <style>
+    .videos-section .title.is-2 { /* Main section title "Videos" */
+      margin-bottom: 1rem; 
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+      font-weight: 600;
+    }
+    .videos-section .is-size-5 { /* Paragraph below title */
+      margin-bottom: 2.5rem !important; /* More space before carousel */
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+    }
+    #videos-carousel .card {
+      margin: 0 10px; /* Spacing between cards in the carousel */
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1); 
+      border-radius: 10px; 
+      background-color: #fff;
+    }
+    #videos-carousel .card-image figure.image { /* Ensure figure itself is rounded for overflow hidden */
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      overflow: hidden; 
+    }
+    #videos-carousel .card-image iframe {
+      display: block; /* remove extra space below iframe */
+    }
+    #videos-carousel .card-content {
+      padding: 1.25rem; 
+    }
+    #videos-carousel .card-content .title.is-5 {
+      margin-bottom: 0; 
+      font-weight: 600;
+      color: #363636;
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+    }
+    /* Styling for Bulma Carousel arrows - making them more visible */
+    #videos-carousel .carousel-nav-left,
+    #videos-carousel .carousel-nav-right {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        top: calc(50% - 20px - 30px); /* Adjust for card content height, (half of arrow height) - (half of approx card-content height if iframe is dominant)  */
+    }
+    #videos-carousel .carousel-nav-left {
+        left: 10px; /* Position arrow 10px from the left edge */
+    }
+    #videos-carousel .carousel-nav-right {
+        right: 10px; /* Position arrow 10px from the right edge */
+    }
+    #videos-carousel .carousel-nav-left:hover,
+    #videos-carousel .carousel-nav-right:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+    #videos-carousel .carousel-nav-left .icon,
+    #videos-carousel .carousel-nav-right .icon {
+        font-size: 1.2rem;
+    }
+     /* Hide default dots, if any specific styling for them is needed, it can be added here */
+    #videos-carousel .carousel-dots {
+      margin-top: 1rem; /* Add some space if dots are visible */
+      /* display: none; */ /* Uncomment to hide dots */
+    }
+    #videos-carousel .carousel-dots .carousel-dot {
+        background-color: rgba(0,0,0,0.2); /* Lighter dots */
+    }
+    #videos-carousel .carousel-dots .carousel-dot.is-active {
+        background-color: rgba(0,0,0,0.6); /* Darker active dot */
+    }
+
+  </style>
+
   <!-- Collaborators/Partners Section -->
   <section class="section collaborators-section">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h2 class="title is-3 has-text-centered" style="font-family: 'Google Sans', sans-serif;">Collaborators</h2>
-          <p class="has-text-centered collaborators-description is-size-5"><strong>Multinet is a collaborative initiative with contributions from leading instituitions:</strong></p>
+          <p class="has-text-centered collaborators-description is-size-5"><strong>Multinet is a collaborative initiative with contributions from teams at leading instituitions:</strong></p>
           <div class="collaborator-logos">
             <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
               <img src="static/images/gtlogo.png" alt="Georgia Tech Logo" class="collaborator-logo">
@@ -1149,10 +1220,61 @@
     }
   </style>
 
+  <!-- Videos Section -->
+  <section class="section videos-section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-2 has-text-centered">Videos</h2>
+      <p class="has-text-centered is-size-5" style="margin-bottom: 2rem;">
+        Explore our collection of talks and presentations showcasing Multinet's vision, progress, and development journey!
+      </p>
+      <div id="videos-carousel" class="carousel">
+        <div class="item-1">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-16by9">
+                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/A6a2FIutCqY" title="YouTube video player for SPC talk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="item-2">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-16by9">
+                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/TnIHF2EbGbA" title="YouTube video player for Manifold CRC 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="item-3">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-16by9">
+                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/DzkaDwB71ZM" title="YouTube video player for Manifold CRC 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="item-3">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-16by9">
+                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/nzaux0RE6Ck?si=NzGTa0JWG0XeZ5T4" title="YouTube video player for Manifold CRC 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+  
+
   <!-- BibTeX Section -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
-      <h2 class="title has-text-centered">BibTeX</h2>
+      <h2 class="title has-text-centered">Citations</h2>
       <pre><code>
         <strong>Multinet v0.2 - Benchmarking Vision, Language, & Action Models in Procedurally Generated, Open Ended Action Environments</strong>
         <br>
@@ -1411,6 +1533,34 @@
         if ( (currentFullPath === '/' || currentFullPath.endsWith('/index.html')) && !document.querySelector('.side-navigation .nav-item.active') ) {
             const homeLink = document.querySelector('.side-navigation a.nav-item[href="index.html"]');
             if(homeLink) homeLink.classList.add('active');
+        }
+
+        // Initialize Videos Carousel
+        if (document.getElementById('videos-carousel')) {
+          bulmaCarousel.attach('#videos-carousel', {
+            slidesToScroll: 1,
+            slidesToShow: 3,
+            loop: true,
+            autoplay: true,
+            autoplaySpeed: 5000, // 5 seconds
+            pauseOnHover: true,
+            breakpoints: [{
+                changePoint: 480, // Mobile
+                slidesToShow: 1,
+                slidesToScroll: 1
+              },
+              {
+                changePoint: 768, // Tablet
+                slidesToShow: 2,
+                slidesToScroll: 1
+              },
+              {
+                changePoint: 1024, // Desktop
+                slidesToShow: 3,
+                slidesToScroll: 1
+              }
+            ]
+          });
         }
     });
   </script>
