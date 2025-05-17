@@ -645,6 +645,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@4.1.0/dist/chartjs-chart-matrix.umd.min.js"></script>
   <script src="../js/v0_2_table.js"></script>
   <script src="../js/v0_2_confusion_matrix.js"></script>
+  <script src="../js/entropy_correlation_plot.js"></script>
 
   <style>
     .metrics-container {
@@ -1190,11 +1191,11 @@
     </div>
   </section>
 
-  <section class="section"></section>
+  <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column">
-          <div class="content has-text-justified">
+          <div class="content">
             <h2 class="title is-3 has-text-centered">Results and Analysis</h2>
                     <div class="content has-text-centered">
                       <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Overall Performance</h4>
@@ -1212,11 +1213,16 @@
                           <button class="metric-button" data-metric="normalized_mae">Normalized Brier MAE</button>
                           <button class="metric-button" data-metric="normalized_quantile_filtered_mae">Normalized Quantile Filtered Brier MAE</button>
                         </div>
+
+                        
                         
                         <div class="metrics-charts">
                           <!-- Charts will be dynamically inserted here -->
                         </div>
                       </div>
+
+                      <br>
+                      <br>
 
                       <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Frequency of predicted action classes</h4>
                       <div id="confusion-matrix-section" style="margin-top:1rem;max-width:100%;overflow-x:auto;">
@@ -1248,6 +1254,25 @@
                         </div>
                       </div>
                     </div>
+                    <section class="section">
+                        <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Correlation matrix between image entropies and model performance</h4>
+                        <div id="entropy-correlation-container" style="width: 100%; height: 500px; position: relative; margin-top: 1rem;">
+                            <div id="entropy-correlation-plot" style="width: 100%; height: 100%; overflow-x: auto; position: relative; padding-top: 30px; padding-left: 40px; box-sizing: border-box;"></div>
+                            <div id="entropy-correlation-tooltip" 
+                               style="position: fixed; 
+                                      display: none; 
+                                      background-color: rgba(0,0,0,0.75); 
+                                      color: white;
+                                      border: 1px solid #333; 
+                                      padding: 8px 12px; 
+                                      border-radius: 5px; 
+                                      font-size: 12px;
+                                      pointer-events: none; 
+                                      z-index: 1000; 
+                                      white-space: nowrap;">
+                            </div>
+                        </div>
+                    </section>
             <p>
               Our analysis highlighted significant limitations arising from architectural constraints, training
               paradigms, and input-output biases inherent to the models. The
