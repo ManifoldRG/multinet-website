@@ -46,6 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return (r * 0.299 + g * 0.587 + b * 0.114) > 160 ? '#000000' : '#FFFFFF';
     }
 
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function processLabel(label) {
+        return label.replace(/_/g, ' ').split(' ').map(capitalizeFirstLetter).join(' ');
+    }
+
     fetch(dataPath)
         .then(response => {
             if (!response.ok) {
@@ -73,10 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
             labels.forEach(label => {
                 const th = document.createElement('th');
                 const labelDiv = document.createElement('div');
-                labelDiv.textContent = label.replace(/_/g, ' ');
+                labelDiv.textContent = processLabel(label);
                 labelDiv.style.whiteSpace = 'normal';
                 labelDiv.style.width = 'auto';
-                labelDiv.style.fontSize = '10px';
+                labelDiv.style.fontSize = '11px';
+                labelDiv.style.fontWeight = 'normal';
                 labelDiv.style.display = 'inline-block';
                 labelDiv.style.maxWidth = '100%';
 
@@ -94,8 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
             values.forEach((rowValues, i) => {
                 const row = tbody.insertRow();
                 const th = document.createElement('th');
-                th.textContent = labels[i].replace(/_/g, ' ');
-                th.style.fontSize = '10px';
+                th.textContent = processLabel(labels[i]);
+                th.style.fontSize = '11px';
+                th.style.fontWeight = 'normal';
                 th.style.width = `${100 / (labels.length + 1)}%`; // Set width for row header cells
                 row.appendChild(th);
 
@@ -106,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     cell.style.backgroundColor = bgColor;
                     cell.style.color = getTextColor(bgColor);
                     cell.style.textAlign = 'center';
-                    cell.style.fontWeight = 'bold';
+                    cell.style.fontWeight = 'normal';
                     cell.style.fontSize = '12px';
                     cell.style.width = `${100 / (labels.length +1)}%` // Distribute width
                     cell.style.height = '50px'; // Fixed height for cells
@@ -116,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             tooltip.style.display = 'block';
                             tooltip.style.left = `${e.pageX + 15}px`;
                             tooltip.style.top = `${e.pageY + 15}px`;
-                            tooltip.innerHTML = `Row: ${labels[i].replace(/_/g, ' ')}<br>Col: ${labels[j].replace(/_/g, ' ')}<br>Corr: ${value.toFixed(4)}`;
+                            tooltip.innerHTML = `Row: ${processLabel(labels[i])}<br>Col: ${processLabel(labels[j])}<br>Corr: ${value.toFixed(4)}`;
                         });
                         cell.addEventListener('mouseout', () => {
                             tooltip.style.display = 'none';
@@ -130,10 +140,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add some CSS for the table for better presentation if not using Bulma or if further styling needed
             const style = document.createElement('style');
             style.textContent = `
+                .correlation-matrix-table {
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; /* Common sans-serif stack */
+                }
                 /* .correlation-matrix-table th div { // This rule was for rotated text, may no longer be needed or be made more specific if other divs are transformed
                     transform-origin: left bottom;
                 } */
-                .correlation-matrix-table td, .correlation-matrix-table th { /* Common for td and all th */
+                .correlation-matrix-table td,
+                .correlation-matrix-table th:not(#empty-top-left-corner-cell) { /* Apply to td and actual th cells */
                     padding: 0.5em 0.5em;
                     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
                 }
@@ -150,16 +164,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 .correlation-matrix-table tbody th {
                     border: none !important; /* Kept important due to Bulma base styles */
                     position: relative; /* For z-index context */
+                    font-weight: normal; /* Ensure not bold */
                 }
 
                 /* Specific background for horizontal axis label boxes */
                 .correlation-matrix-table thead th:not(#empty-top-left-corner-cell) {
-                    background-image: linear-gradient(to right, #FAFAFA, #C0C0C0);
+                    /* background-image: linear-gradient(to right, #FAFAFA, #C0C0C0); */
+                    background-color: #F0F0F0; /* Flat light grey */
                 }
 
                 /* Specific background for vertical axis label boxes */
                 .correlation-matrix-table tbody th {
-                    background-image: linear-gradient(to bottom, #FAFAFA, #C0C0C0);
+                    /* background-image: linear-gradient(to bottom, #FAFAFA, #C0C0C0); */
+                    background-color: #F0F0F0; /* Flat light grey */
+                    text-align: right;       /* Align text to the right */
+                    vertical-align: middle;  /* Center text vertically */
+                    padding: 0.5em 1em 0.5em 0.5em; /* Adjust padding: T, R, B, L */
+                    font-weight: normal; /* Ensure not bold */
+                    /* Ensure text is straight, allow hover transform by removing !important */
+                    transform: none;
                 }
 
                 /* Hover effect for ALL actual label th (label boxes) */
@@ -170,19 +193,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     z-index: 5;
                 }
 
-                /* Specific styles for vertical axis labels (tbody th) */
-                .correlation-matrix-table tbody th {
-                    text-align: right;       /* Align text to the right */
-                    vertical-align: middle;  /* Center text vertically */
-                    padding: 0.5em 1em 0.5em 0.5em; /* Adjust padding: T, R, B, L */
-                    /* Ensure text is straight, allow hover transform by removing !important */
-                    transform: none;
-                }
-
                 /* Specific styles for horizontal axis labels (thead th) */
-                .correlation-matrix-table thead th {
+                .correlation-matrix-table thead th:not(#empty-top-left-corner-cell) {
+                    background-color: #F0F0F0; /* Flat light grey */
                     text-align: center;
                     vertical-align: middle;
+                    font-weight: normal; /* Ensure not bold */
                 }
 
                 /* Ensure data cells (td) explicitly have their borders, matching Bulma */
