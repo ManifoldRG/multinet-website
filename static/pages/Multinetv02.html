@@ -588,16 +588,12 @@
 
 
     #main-page-content {
-      padding-left: 70px; 
+      padding-left: 70px; /* Fixed padding, equivalent to collapsed sidebar width */
       padding-top: 0; 
-      transition: none; 
+      /* transition: padding-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); */ /* Removed as padding-left no longer changes */
       background-color: #ffffff; 
       width: 100%; 
       box-sizing: border-box; 
-    }
-
-    #main-page-content.collapsed {
-      padding-left: 70px; 
     }
 
     /* Style for main release links in dropdown menu */
@@ -894,7 +890,7 @@
 </head>
 <body>
 
-<div id="side-nav" class="side-navigation">
+<div id="side-nav" class="side-navigation collapsed">
   <div class="logo-container">
     <a href="../../index.html" class="site-title-logo">
       <img src="../images/Multinetlogo.png" alt="MultiNet Logo" style="height: 28px; margin-right: 8px; vertical-align: middle;">MultiNet
@@ -1607,9 +1603,9 @@
     </div>
   </section>
 
-  <section class="section" id="BibTeX">
+  <section class="section" id="Citation">
     <div class="container is-max-desktop content">
-      <h2 class="title has-text-centered">BibTeX</h2>
+      <h2 class="title has-text-centered">Citation</h2>
       <pre><code>@misc{guruprasad2025benchmarkingvisionlanguage,
         title={Benchmarking Vision, Language, & Action Models in Procedurally Generated, Open Ended Action Environments}, 
         author={Pranav Guruprasad and Yangyue Wang and Sudipta Chowdhury and Harshvardhan Sikka},
@@ -1680,10 +1676,11 @@
         const allNavLinks = document.querySelectorAll('.side-navigation .nav-item:not(.has-dropdown) > a, .side-navigation .sub-item:not(.has-dropdown), .side-navigation .dropdown-item > a'); // Links that can be active
 
         function expandSidebar() {
-            if (!sideNav || !mainContent) return; // Added mainContent check
+            if (!sideNav || !mainContent) return;
             if (sideNav.classList.contains('collapsed')) {
                 sideNav.classList.remove('collapsed');
-                if (mainContent) mainContent.classList.remove('collapsed'); // Changed from 'expanded'
+                // mainContent.classList.remove('collapsed'); // Removed this line
+                // Ensure all dropdowns are closed when expanding from fully collapsed hover state
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
                     const menu = openDropdown.querySelector('.dropdown-menu-items');
                     if (menu) menu.style.maxHeight = null; 
@@ -1699,10 +1696,12 @@
         }
 
         function collapseSidebar() {
-            if (!sideNav || !mainContent) return; // Added mainContent check
+            if (!sideNav || !mainContent) return;
             if (!sideNav.classList.contains('collapsed')) {
                 sideNav.classList.add('collapsed');
-                if (mainContent) mainContent.classList.add('collapsed'); // Changed from 'expanded'
+                // mainContent.classList.add('collapsed'); // Removed this line
+                
+                // Collapse all open dropdowns
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
                     openDropdown.classList.remove('open');
                     const toggle = openDropdown.querySelector('.dropdown-toggle');

@@ -110,6 +110,11 @@
         text-decoration: none;
         display: flex;
         align-items: center;
+        transition: transform 0.3s ease-out; /* Added transition for hover effect */
+    }
+
+    .side-navigation .site-title-logo:hover {
+      transform: translateY(-3px); /* Float up effect on hover */
     }
     
     .side-navigation.collapsed .site-title-logo {
@@ -380,16 +385,12 @@
 
 
     #main-page-content {
-      padding-left: 70px; 
-      padding-top: 0; 
-      transition: none; 
-      background-color: #ffffff; 
-      width: 100%; 
-      box-sizing: border-box; 
-    }
-
-    #main-page-content.collapsed {
-      padding-left: 70px; 
+      padding-left: 70px; /* Fixed padding, equivalent to collapsed sidebar width */
+      padding-top: 0;
+      /* transition: padding-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); */ /* Removed as padding-left no longer changes */
+      background-color: #ffffff;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     /* Style for main release links in dropdown menu */
@@ -435,11 +436,37 @@
       transition: transform 0.3s ease;
     }
 
+    section .column.has-text-centered p.is-size-5 a[href*="discord.gg"] .fab.fa-discord {
+      transition: transform 0.2s ease-in-out;
+      display: inline-block; /* Good for transform */
+    }
+
+    section .column.has-text-centered p.is-size-5 a[href*="discord.gg"]:hover .fab.fa-discord {
+      transform: scale(1.2); /* Scale up the icon on hover */
+    }
+
+    /* Hover effect for contact icons in collaborators section */
+    section.collaborators-section p.is-size-5 > a {
+      transition: transform 0.3s ease-out;
+    }
+
+    section.collaborators-section p.is-size-5 > a:hover {
+      transform: translateY(-5px);
+    }
+
+    section.collaborators-section p.is-size-4 > a {
+      transition: transform 0.3s ease-out;
+    }
+
+    section.collaborators-section p.is-size-4 > a:hover {
+      transform: translateY(-5px);
+    }
+
   </style>
 </head>
 <body>
   
-<div id="side-nav" class="side-navigation">
+<div id="side-nav" class="side-navigation collapsed">
   <div class="logo-container">
     <a href="index.html" class="site-title-logo">
       <img src="static/images/Multinetlogo.png" alt="MultiNet Logo" style="height: 28px; margin-right: 8px; vertical-align: middle;">MultiNet
@@ -530,7 +557,7 @@
             <h1 class="title is-1 publication-title">MultiNet: A Generalist Benchmark for Multimodal Action models</h1>
             <div class="is-size-5 publication-authors">
               <br>
-              <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:contact@metarch.ai"> here</a></strong></span>
+              
             </div>
 
             
@@ -919,9 +946,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <p class="is-size-5">
-            <strong><em>Interested in contributing/collaborating on this effort? Join the conversation on <a href="https://discord.gg/Rk4gAq5aYr" target="_blank">Discord</a>.</em></strong>
-          </p>
+          
         </div>
       </div>
     </div>
@@ -1128,8 +1153,8 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h2 class="title is-3 has-text-centered" style="font-family: 'Google Sans', sans-serif;">Collaborators</h2>
-          <p class="has-text-centered collaborators-description is-size-5"><strong>Multinet is a collaborative initiative with contributions from teams at leading instituitions:</strong></p>
+          <h2 class="title is-3 has-text-centered" style="font-family: 'Google Sans', sans-serif;">Collaborators and Partners</h2>
+          <p class="has-text-centered collaborators-description is-size-5">Multinet is a collaborative initiative with contributions from teams at leading instituitions:</p>
           <div class="collaborator-logos">
             <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
               <img src="static/images/gtlogo.png" alt="Georgia Tech Logo" class="collaborator-logo">
@@ -1145,6 +1170,15 @@
             </a>
             
           </div>
+          <br>
+          <br>
+          <br>
+          <p class="is-size-4">
+            <strong>To collaborate, reach out to us via </strong><a href="mailto:pranav@metarch.ai" style="display: inline-flex; align-items: center; text-decoration: none; vertical-align: middle;"><img src="static/images/apple mail icon.png" alt="Email" style="height: 1.8em; margin-right: 0.2em;"></a><strong> or join the working group on</strong>
+            <a href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; text-decoration: none; color: #5865F2; font-weight: bold; vertical-align: middle;">
+              <i class="fab fa-discord" style="font-size: 1.5em; margin-right: 0.3em;"></i>Discord
+            </a> <strong>!</strong>
+          </p>
         </div>
       </div>
     </div>
@@ -1214,7 +1248,7 @@
         gap: 2rem 1.5rem; /* Further reduced gap for very small screens */
       }
       .collaborator-logo {
-        max-height: 65px; 
+        max-height: 65px;
         max-width: 140px;
       }
     }
@@ -1333,7 +1367,7 @@
             if (!sideNav || !mainContent) return;
             if (sideNav.classList.contains('collapsed')) {
                 sideNav.classList.remove('collapsed');
-                mainContent.classList.remove('collapsed');
+                // mainContent.classList.remove('collapsed'); // Removed this line
                 // Ensure all dropdowns are closed when expanding from fully collapsed hover state
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
                     const menu = openDropdown.querySelector('.dropdown-menu-items');
@@ -1352,7 +1386,7 @@
             if (!sideNav || !mainContent) return;
             if (!sideNav.classList.contains('collapsed')) {
                 sideNav.classList.add('collapsed');
-                mainContent.classList.add('collapsed');
+                // mainContent.classList.add('collapsed'); // Removed this line
                 
                 // Collapse all open dropdowns
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {

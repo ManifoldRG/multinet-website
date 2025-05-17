@@ -371,16 +371,12 @@
 
 
     #main-page-content {
-      padding-left: 70px; /* Default padding for collapsed state */
+      padding-left: 70px; /* Fixed padding, equivalent to collapsed sidebar width */
       padding-top: 0; /* Or your desired top padding */
-      transition: padding-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Match sidebar transition */
+      /* transition: padding-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); */ /* Removed as padding-left no longer changes */
       background-color: #ffffff; /* Or your page background color */
       width: 100%; /* Take full width */
       box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    }
-
-    #main-page-content.expanded {
-      padding-left: 280px; /* Width of the expanded sidebar */
     }
 
     /* Style for main release links in dropdown menu */
@@ -465,11 +461,247 @@
     #pie-chart-tooltip strong {
         color: white !important; /* Ensure bold text inside tooltip is also white */
     }
+
+    /* Styles for Interactive Dataset Table */
+    .dataset-filter-controls {
+        /* This will center the buttons within this div */
+        display: flex; /* Ensure it's a flex container if not already by .buttons */
+        justify-content: center;
+    }
+    .dataset-filter-controls .button {
+        transition: all 0.3s ease;
+        border-radius: 6px;
+        font-weight: 500;
+        border: none; /* Remove border for cleaner solid color look */
+    }
+
+    /* Default state for non-active buttons */
+    .dataset-filter-controls .button.is-light {
+        background-color: #f5f5f5;
+        color: #363636;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .dataset-filter-controls .button.is-light:hover {
+        background-color: #e8e8e8;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+    /* Active button styling - General */
+    .dataset-filter-controls .button.is-link {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+        transform: translateY(-1px);
+        background-image: none !important; /* Ensure no gradients from previous attempts */
+    }
+
+    /* --- Specific SOLID Colors for Active Buttons & Table Backgrounds --- */
+    /* VISION-LANGUAGE category (Light Lavender/Pastel Purple-Blue) */
+    .dataset-filter-controls .button[data-filter="vision-language"].is-link {
+        background-color: #d1c4e9; /* Light Lavender */
+        color: #000000 !important; /* Black text */
+    }
+    .table-container.gradient-vl { 
+        background-color: #d1c4e9; 
+    }
+
+    /* LANGUAGE category (Very Light Pastel Blue) */
+    .dataset-filter-controls .button[data-filter="language"].is-link {
+        background-color: #e3f2fd; /* Very Light Pastel Blue */
+        color: #000000 !important; 
+    }
+    .table-container.gradient-language { 
+        background-color: #e3f2fd; 
+    }
+
+    /* CONTROL category (Very Pale Yellow) */
+    .dataset-filter-controls .button[data-filter="control"].is-link {
+        background-color: #fff9c4; /* Very Pale Yellow */
+        color: #000000 !important; 
+    }
+    .table-container.gradient-control { 
+        background-color: #fff9c4; 
+    }
+
+    /* --- Table Container Base Styling --- */
+    .table-container {
+        border-radius: 8px;
+        overflow: hidden; 
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        margin-top: 1rem;
+        transition: background-color 0.5s ease-in-out; /* Transition for background color change */
+    }
+    #multinet-dataset-table {
+        margin-bottom: 0;
+    }
+
+    /* --- Rules to make table elements transparent to show container background --- */
+    .table-container.gradient-vl #multinet-dataset-table,
+    .table-container.gradient-language #multinet-dataset-table,
+    .table-container.gradient-control #multinet-dataset-table,
+    /* Include is-striped rows for transparency */
+    .table-container.gradient-vl #multinet-dataset-table.is-striped tbody tr:nth-child(even),
+    .table-container.gradient-language #multinet-dataset-table.is-striped tbody tr:nth-child(even),
+    .table-container.gradient-control #multinet-dataset-table.is-striped tbody tr:nth-child(even),
+    /* All tbody rows */
+    .table-container.gradient-vl #multinet-dataset-table tbody tr,
+    .table-container.gradient-language #multinet-dataset-table tbody tr,
+    .table-container.gradient-control #multinet-dataset-table tbody tr {
+        background-color: transparent !important;
+    }
+
+    /* --- Text, border, and link colors for legibility on different backgrounds --- */
+
+    /* For ALL LIGHTER backgrounds (Vision-Language, Language, Control) */
+    /* This now applies to all categories since all backgrounds are light */
+    .table-container.gradient-vl #multinet-dataset-table td, /* VL is now light */
+    .table-container.gradient-language #multinet-dataset-table td,
+    .table-container.gradient-control #multinet-dataset-table td,
+    .table-container.gradient-vl #multinet-dataset-table thead th, /* VL is now light */
+    .table-container.gradient-language #multinet-dataset-table thead th,
+    .table-container.gradient-control #multinet-dataset-table thead th {
+        color: #000000 !important; /* Black text for all light backgrounds */
+        border-color: rgba(0, 0, 0, 0.1) !important;
+        font-weight: bold; /* Make all table text bold */
+    }
+
+    /* Make 2nd and 3rd column data cells normal weight */
+    .table-container.gradient-vl #multinet-dataset-table td:nth-child(2),
+    .table-container.gradient-language #multinet-dataset-table td:nth-child(2),
+    .table-container.gradient-control #multinet-dataset-table td:nth-child(2),
+    .table-container.gradient-vl #multinet-dataset-table td:nth-child(3),
+    .table-container.gradient-language #multinet-dataset-table td:nth-child(3),
+    .table-container.gradient-control #multinet-dataset-table td:nth-child(3) {
+        font-weight: normal;
+    }
+
+    .table-container.gradient-vl #multinet-dataset-table thead th, /* VL is now light */
+    .table-container.gradient-language #multinet-dataset-table thead th,
+    .table-container.gradient-control #multinet-dataset-table thead th {
+        border-color: rgba(0, 0, 0, 0.15) !important; /* Slightly more prominent header border */
+    }
+    .table-container.gradient-vl #multinet-dataset-table .dataset-link, /* VL is now light */
+    .table-container.gradient-language #multinet-dataset-table .dataset-link,
+    .table-container.gradient-control #multinet-dataset-table .dataset-link {
+        color: #000000 !important; /* Black links for all light backgrounds */
+        text-decoration: none !important; /* Remove underline */
+        /* font-weight: bold; is inherited from td */
+    }
+    .table-container.gradient-vl #multinet-dataset-table .dataset-link:hover, /* VL is now light */
+    .table-container.gradient-language #multinet-dataset-table .dataset-link:hover,
+    .table-container.gradient-control #multinet-dataset-table .dataset-link:hover {
+        color: #333333 !important; /* Dark grey on hover for all */
+        text-decoration: none !important; /* Ensure no underline on hover either */
+    }
+    .table-container.gradient-vl #multinet-dataset-table tbody tr:hover, /* VL is now light */
+    .table-container.gradient-language #multinet-dataset-table tbody tr:hover,
+    .table-container.gradient-control #multinet-dataset-table tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.05) !important; /* Subtle dark hover for all */
+    }
+
+    /* Common style for ALL table headers (font-weight and ensuring transparency for safety) */
+    /* This rule for font-weight is fine, but background settings here might be redundant if above are comprehensive */
+    #multinet-dataset-table thead th {
+        font-weight: bold; /* Explicitly set to bold, also covered by grouped rule */
+        background-image: none !important; /* Ensure no default Bulma/other header gradient */
+        background-color: transparent !important; /* Crucial for container background to show */
+    }
+
+    /* Styles for Interactive Benchmark Table */
+    .benchmark-filter-controls {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.5rem; /* Consistent with dataset filters */
+    }
+    .benchmark-filter-controls .button {
+        transition: all 0.3s ease;
+        border-radius: 6px;
+        font-weight: 500;
+        border: none;
+        margin: 0 5px; /* Spacing between buttons */
+    }
+    .benchmark-filter-controls .button.is-light {
+        background-color: #f5f5f5;
+        color: #363636;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .benchmark-filter-controls .button.is-light:hover {
+        background-color: #e8e8e8;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    .benchmark-filter-controls .button.is-link {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+        transform: translateY(-1px);
+        background-image: none !important;
+        color: #000000 !important; /* Black text for active buttons */
+    }
+
+    /* Specific SOLID Colors for Active Benchmark Buttons & Table Backgrounds */
+    .benchmark-filter-controls .button[data-filter="bench-caption"].is-link { background-color: #b2dfdb; } /* Light Teal */
+    .benchmark-filter-controls .button[data-filter="bench-vqa"].is-link { background-color: #ffccbc; } /* Light Salmon */
+    .benchmark-filter-controls .button[data-filter="bench-img-understand"].is-link { background-color: #b3e5fc; } /* Light Sky Blue */
+    .benchmark-filter-controls .button[data-filter="bench-reason"].is-link { background-color: #c8e6c9; } /* Light Green */
+    .benchmark-filter-controls .button[data-filter="bench-rl"].is-link { background-color: #cfd8dc; } /* Light Slate Gray */
+
+    .table-container.gradient-bench-caption { background-color: #b2dfdb; }
+    .table-container.gradient-bench-vqa { background-color: #ffccbc; }
+    .table-container.gradient-bench-img-understand { background-color: #b3e5fc; }
+    .table-container.gradient-bench-reason { background-color: #c8e6c9; }
+    .table-container.gradient-bench-rl { background-color: #cfd8dc; }
+
+    /* Rules for benchmark table elements transparency */
+    .table-container.gradient-bench-caption #multinet-benchmark-table,
+    .table-container.gradient-bench-vqa #multinet-benchmark-table,
+    .table-container.gradient-bench-img-understand #multinet-benchmark-table,
+    .table-container.gradient-bench-reason #multinet-benchmark-table,
+    .table-container.gradient-bench-rl #multinet-benchmark-table,
+    .table-container.gradient-bench-caption #multinet-benchmark-table tbody tr,
+    .table-container.gradient-bench-vqa #multinet-benchmark-table tbody tr,
+    .table-container.gradient-bench-img-understand #multinet-benchmark-table tbody tr,
+    .table-container.gradient-bench-reason #multinet-benchmark-table tbody tr,
+    .table-container.gradient-bench-rl #multinet-benchmark-table tbody tr {
+        background-color: transparent !important;
+    }
+
+    /* Text, border colors for benchmark table on new backgrounds */
+    .table-container.gradient-bench-caption #multinet-benchmark-table td,
+    .table-container.gradient-bench-vqa #multinet-benchmark-table td,
+    .table-container.gradient-bench-img-understand #multinet-benchmark-table td,
+    .table-container.gradient-bench-reason #multinet-benchmark-table td,
+    .table-container.gradient-bench-rl #multinet-benchmark-table td,
+    .table-container.gradient-bench-caption #multinet-benchmark-table thead th,
+    .table-container.gradient-bench-vqa #multinet-benchmark-table thead th,
+    .table-container.gradient-bench-img-understand #multinet-benchmark-table thead th,
+    .table-container.gradient-bench-reason #multinet-benchmark-table thead th,
+    .table-container.gradient-bench-rl #multinet-benchmark-table thead th {
+        color: #000000 !important; /* Black text */
+        border-color: rgba(0, 0, 0, 0.1) !important;
+        font-weight: normal; /* Normal weight for td, bold for th */
+    }
+    .table-container.gradient-bench-caption #multinet-benchmark-table thead th,
+    .table-container.gradient-bench-vqa #multinet-benchmark-table thead th,
+    .table-container.gradient-bench-img-understand #multinet-benchmark-table thead th,
+    .table-container.gradient-bench-reason #multinet-benchmark-table thead th,
+    .table-container.gradient-bench-rl #multinet-benchmark-table thead th {
+        font-weight: bold;
+        border-color: rgba(0, 0, 0, 0.15) !important;
+    }
+    .table-container.gradient-bench-caption #multinet-benchmark-table tbody tr:hover,
+    .table-container.gradient-bench-vqa #multinet-benchmark-table tbody tr:hover,
+    .table-container.gradient-bench-img-understand #multinet-benchmark-table tbody tr:hover,
+    .table-container.gradient-bench-reason #multinet-benchmark-table tbody tr:hover,
+    .table-container.gradient-bench-rl #multinet-benchmark-table tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.05) !important; /* Subtle dark hover */
+    }
+    #multinet-benchmark-table thead th {
+        background-color: transparent !important; /* Ensure header transparency */
+    }
+
   </style>
 </head>
 
 <body>
-<div id="side-nav" class="side-navigation">
+<div id="side-nav" class="side-navigation collapsed">
   <div class="logo-container">
     <a href="../../index.html" class="site-title-logo">
       <img src="../images/Multinetlogo.png" alt="MultiNet Logo" style="height: 28px; margin-right: 8px; vertical-align: middle;">MultiNet
@@ -585,7 +817,7 @@
               
                             <!-- Supplementary PDF link -->
                             <span class="link-block">
-                              <a href="static/pdfs/MultiNet_Dataset_Spec_Paper.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                              <a href="../pdfs/MultiNet_Dataset_Spec_Paper.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
                                 <span class="icon">
                                   <i class="fas fa-file-pdf"></i>
                                 </span>
@@ -676,6 +908,14 @@
                             current SoTA VLMs and VLAs, illuminating paths toward more versatile and capable generalist AI systems.
                         </p>
 
+                        <!-- Multinet Data Video -->
+                        <div class="video-container" style="margin: 2rem 0;">
+                            <video width="100%" autoplay loop muted playsinline controls style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                <source src="../videos/Multinet Data Video.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+
                         <!-- Interactive Pie Chart Container -->
                         <div id="pie-chart-container" style="position: relative; width: 100%; max-width: 800px; margin: 20px auto; -webkit-tap-highlight-color: transparent;">
                             <!-- SVG Chart -->
@@ -732,188 +972,170 @@
                             <div id="pie-chart-tooltip"></div>
                         </div>
 
-                        <!-- Tables -->
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th style="text-align: center;">Dataset</th>
-                                    <th style="text-align: center;">Task/Data type</th>
-                                    <th style="text-align: center;">Modality</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="text-align: center;">OBELICS</td>
-                                    <td style="text-align: center;">Interleaved Image-Text</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">COYO-700M</td>
-                                    <td style="text-align: center;">Image-Text pairs</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">MS COCO</td>
-                                    <td style="text-align: center;">Object detection, segmentation, key-point detection, captioning</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">Conceptual Captions</td>
-                                    <td style="text-align: center;">Image Captioning</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">A-OKVQA</td>
-                                    <td style="text-align: center;">Visual Question Answering</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">VQA-v2</td>
-                                    <td style="text-align: center;">Visual Question Answering</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">Datacomp-1B</td>
-                                    <td style="text-align: center;">Image-Text pairs</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">Fineweb-edu</td>
-                                    <td style="text-align: center;">High quality text corpus</td>
-                                    <td style="text-align: center;">Language</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <p style="text-align: center; font-weight: bold; margin-bottom: 3rem; margin-top: 1rem;">Categorization of Vision-Language and Language datasets that can be used for training, fine-tuning, and some of them for evaluation</p>
-
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th style="text-align: center;">Dataset</th>
-                                    <th style="text-align: center;">Task/Data type</th>
-                                    <th style="text-align: center;">Modality</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="text-align: center;">Flickr30k</td>
-                                    <td style="text-align: center;">Image Captioning</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">TextVQA</td>
-                                    <td style="text-align: center;">Visual Question Answering</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">VizWiz</td>
-                                    <td style="text-align: center;">Visual Question Answering</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">WinoGAViL</td>
-                                    <td style="text-align: center;">Vision-based Commonsense Reasoning</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">ImageNet-R</td>
-                                    <td style="text-align: center;">Image-Text Pairs</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">ObjectNet</td>
-                                    <td style="text-align: center;">Image-Text Pairs</td>
-                                    <td style="text-align: center;">Vision-Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">Hellaswag</td>
-                                    <td style="text-align: center;">Commonsense Reasoning</td>
-                                    <td style="text-align: center;">Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">ARC</td>
-                                    <td style="text-align: center;">Complex Reasoning and Knowledge Application</td>
-                                    <td style="text-align: center;">Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">CommonsenseQA</td>
-                                    <td style="text-align: center;">Commonsense Reasoning</td>
-                                    <td style="text-align: center;">Language</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">MMLU</td>
-                                    <td style="text-align: center;">Knowledge-intensive Question Answering</td>
-                                    <td style="text-align: center;">Language</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <p style="text-align: center; font-weight: bold; margin-bottom: 3rem; margin-top: 1rem;">Categorization of Vision-Language and Language datasets that are purely for evaluation</p>
-
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th style="text-align: center;">Dataset</th>
-                                    <th style="text-align: center;">Task/Data type</th>
-                                    <th style="text-align: center;">Control Category</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="text-align: center;">DM Lab</td>
-                                    <td style="text-align: center;">Teach RL Agents 3D vision</td>
-                                    <td style="text-align: center;">Navigation-based control</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">DM Control Suite</td>
-                                    <td style="text-align: center;">Physics-based simulation environments</td>
-                                    <td style="text-align: center;">Locomotion-based control</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">ALE Atari</td>
-                                    <td style="text-align: center;">Atari games</td>
-                                    <td style="text-align: center;">Game-based control</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">Baby AI</td>
-                                    <td style="text-align: center;">Language-grounded navigation</td>
-                                    <td style="text-align: center;">Navigation-based control</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">MuJoCo</td>
-                                    <td style="text-align: center;">Multi-joint dynamics</td>
-                                    <td style="text-align: center;">Locomotion-based control</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">Meta-World</td>
-                                    <td style="text-align: center;">Meta-RL and Multi-task learning</td>
-                                    <td style="text-align: center;">Manipulation-based control</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">V-D4RL</td>
-                                    <td style="text-align: center;">Pixel-based analogues of DM Control Suite</td>
-                                    <td style="text-align: center;">Locomotion-based control</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">Procgen</td>
-                                    <td style="text-align: center;">Procedurally generated Atari-like environments</td>
-                                    <td style="text-align: center;">Game-based control</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">Open X Embodiment</td>
-                                    <td style="text-align: center;">Real-world Robotics tasks</td>
-                                    <td style="text-align: center;">Manipulation-based control and Locomotion-based control</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">LocoMuJoCo</td>
-                                    <td style="text-align: center;">Imitation learning for locomotion</td>
-                                    <td style="text-align: center;">Locomotion-based control</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <p style="text-align: center; font-weight: bold; margin-top: 1rem;">Categorization of control datasets</p>
+                        <!-- Interactive Dataset Table Start -->
+                        <h3 class="title is-4 has-text-centered" style="margin-top: 3rem; margin-bottom: 1.5rem;">Explore Multinet Datasets</h3>
+                        <div class="dataset-filter-controls buttons are-centered" style="margin-bottom: 1.5rem;">
+                            <!-- <button class="button" data-filter="all">All Datasets</button> -->
+                            <button class="button" data-filter="vision-language">Vision-Language</button>
+                            <button class="button" data-filter="language">Language</button>
+                            <button class="button" data-filter="control">Control</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" id="multinet-dataset-table">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left; width: 25%;">Dataset</th>
+                                        <th style="text-align: left;">Description / Task Type</th>
+                                        <th style="text-align: center; width: 20%;">Category</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Vision-Language & Language Datasets -->
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/HuggingFaceM4/OBELICS" class="dataset-link">OBELICS</a></td>
+                                        <td style="text-align: left;">Interleaved Image-Text</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://github.com/kakaobrain/coyo-dataset" class="dataset-link">COYO-700M</a></td>
+                                        <td style="text-align: left;">Image-Text pairs</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/shunk031/MSCOCO" class="dataset-link">MS COCO</a></td>
+                                        <td style="text-align: left;">Object detection, segmentation, key-point detection, captioning</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/google-research-datasets/conceptual_captions" class="dataset-link">Conceptual Captions</a></td>
+                                        <td style="text-align: left;">Image Captioning</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/HuggingFaceM4/A-OKVQA" class="dataset-link">A-OKVQA</a></td>
+                                        <td style="text-align: left;">Visual Question Answering</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/HuggingFaceM4/VQAv2" class="dataset-link">VQA-v2</a></td>
+                                        <td style="text-align: left;">Visual Question Answering</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/mlfoundations/datacomp_1b" class="dataset-link">Datacomp-1B</a></td>
+                                        <td style="text-align: left;">Image-Text pairs</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="language">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu" class="dataset-link">Fineweb-edu</a></td>
+                                        <td style="text-align: left;">High quality text corpus</td>
+                                        <td style="text-align: center;">Language</td>
+                                    </tr>
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/nlphuji/flickr30k" class="dataset-link">Flickr30k</a></td>
+                                        <td style="text-align: left;">Image Captioning</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://textvqa.org/" class="dataset-link">TextVQA</a></td>
+                                        <td style="text-align: left;">Visual Question Answering</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://vizwiz.org/" class="dataset-link">VizWiz</a></td>
+                                        <td style="text-align: left;">Visual Question Answering</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://winogavil.github.io/" class="dataset-link">WinoGAViL</a></td>
+                                        <td style="text-align: left;">Vision-based Commonsense Reasoning</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://github.com/hendrycks/imagenet-r" class="dataset-link">ImageNet-R</a></td>
+                                        <td style="text-align: left;">Image-Text Pairs</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="vision-language">
+                                        <td style="text-align: left;"><a href="https://objectnet.dev/" class="dataset-link">ObjectNet</a></td>
+                                        <td style="text-align: left;">Image-Text Pairs</td>
+                                        <td style="text-align: center;">Vision-Language</td>
+                                    </tr>
+                                    <tr data-category="language">
+                                        <td style="text-align: left;"><a href="https://rowanzellers.com/hellaswag/" class="dataset-link">Hellaswag</a></td>
+                                        <td style="text-align: left;">Commonsense Reasoning</td>
+                                        <td style="text-align: center;">Language</td>
+                                    </tr>
+                                    <tr data-category="language">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/allenai/ai2_arc" class="dataset-link">ARC</a></td>
+                                        <td style="text-align: left;">Complex Reasoning and Knowledge Application</td>
+                                        <td style="text-align: center;">Language</td>
+                                    </tr>
+                                    <tr data-category="language">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/tau/commonsense_qa" class="dataset-link">CommonsenseQA</a></td>
+                                        <td style="text-align: left;">Commonsense Reasoning</td>
+                                        <td style="text-align: center;">Language</td>
+                                    </tr>
+                                    <tr data-category="language">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/cais/mmlu" class="dataset-link">MMLU</a></td>
+                                        <td style="text-align: left;">Knowledge-intensive Question Answering</td>
+                                        <td style="text-align: center;">Language</td>
+                                    </tr>
+                                    <!-- Control Datasets -->
+                                    <tr data-category="control">
+                                        <td style="text-align: left;"><a href="https://console.cloud.google.com/storage/browser/rl_unplugged;tab=objects?prefix=&forceOnObjectsSortingFiltering=false" class="dataset-link">DM Lab</a></td>
+                                        <td style="text-align: left;">Teach RL Agents 3D vision (Navigation-based control)</td>
+                                        <td style="text-align: center;">Control</td>
+                                    </tr>
+                                    <tr data-category="control">
+                                        <td style="text-align: left;"><a href="https://console.cloud.google.com/storage/browser/rl_unplugged/dm_control_suite_episodes?pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))" class="dataset-link">DM Control Suite</a></td>
+                                        <td style="text-align: left;">Physics-based simulation environments (Locomotion-based control)</td>
+                                        <td style="text-align: center;">Control</td>
+                                    </tr>
+                                    <tr data-category="control">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/jat-project/jat-dataset" class="dataset-link">ALE Atari</a></td>
+                                        <td style="text-align: left;">Atari games (Game-based control)</td>
+                                        <td style="text-align: center;">Control</td>
+                                    </tr>
+                                    <tr data-category="control">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/jat-project/jat-dataset" class="dataset-link">Baby AI</a></td>
+                                        <td style="text-align: left;">Language-grounded navigation (Navigation-based control)</td>
+                                        <td style="text-align: center;">Control</td>
+                                    </tr>
+                                    <tr data-category="control">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/jat-project/jat-dataset" class="dataset-link">MuJoCo</a></td>
+                                        <td style="text-align: left;">Multi-joint dynamics (Locomotion-based control)</td>
+                                        <td style="text-align: center;">Control</td>
+                                    </tr>
+                                    <tr data-category="control">
+                                        <td style="text-align: left;"><a href="https://huggingface.co/datasets/jat-project/jat-dataset" class="dataset-link">Meta-World</a></td>
+                                        <td style="text-align: left;">Meta-RL and Multi-task learning (Manipulation-based control)</td>
+                                        <td style="text-align: center;">Control</td>
+                                    </tr>
+                                    <tr data-category="control">
+                                        <td style="text-align: left;"><a href="https://github.com/conglu1997/v-d4rl" class="dataset-link">V-D4RL</a></td>
+                                        <td style="text-align: left;">Pixel-based analogues of DM Control Suite (Locomotion-based control)</td>
+                                        <td style="text-align: center;">Control</td>
+                                    </tr>
+                                    <tr data-category="control">
+                                        <td style="text-align: left;"><a href="https://github.com/facebookresearch/gen_dgrl/tree/main/procgen" class="dataset-link">Procgen</a></td>
+                                        <td style="text-align: left;">Procedurally generated Atari-like environments (Game-based control)</td>
+                                        <td style="text-align: center;">Control</td>
+                                    </tr>
+                                    <tr data-category="control">
+                                        <td style="text-align: left;"><a href="https://github.com/google-deepmind/open_x_embodiment" class="dataset-link">Open X Embodiment</a></td>
+                                        <td style="text-align: left;">Real-world Robotics tasks (Manipulation & Locomotion control)</td>
+                                        <td style="text-align: center;">Control</td>
+                                    </tr>
+                                    <tr data-category="control">
+                                        <td style="text-align: left;"><a href="https://loco-mujoco.readthedocs.io/en/v0.3.0/index.html" class="dataset-link">LocoMuJoCo</a></td>
+                                        <td style="text-align: left;">Imitation learning for locomotion (Locomotion-based control)</td>
+                                        <td style="text-align: center;">Control</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Interactive Dataset Table End -->
                     </div>
                 </div>
             </div>
@@ -932,41 +1154,60 @@
                             multimodal understanding of Vision-Language-Action Models (VLAs). Multinet addresses this gap by providing a
                             comprehensive benchmark that spans vision-language, language, RL, and Robotics tasks. Our work consolidates diverse,
                             high-quality datasets and establishes standardized evaluation metrics to enable systematic comparison of state-of-the-art
-                            models. For a detailed list of datasets and metrics included in Multinet, please refer to our <a href="static/pdfs/MultiNet_Dataset_Spec_Paper.pdf">dataset specification paper</a>
+                            models. For a detailed list of datasets and metrics included in Multinet, please refer to our <a href="../pdfs/MultiNet_Dataset_Spec_Paper.pdf">dataset specification paper</a>
                         </p>
 
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th style="text-align: center;">Metric</th>
-                                    <th style="text-align: center;">Evaluation Category</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="text-align: center;">CIDEr</td>
-                                    <td style="text-align: center;">Image Captioning, Image-based Text retrieval</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">VQA Accuracy</td>
-                                    <td style="text-align: center;">Visual Question Answering</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">Recall@K</td>
-                                    <td style="text-align: center;">Image understanding, Text-based image retrieval</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">Accuracy</td>
-                                    <td style="text-align: center;">VQA, Commonsense reasoning, Text understanding</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;">Mean Squared Error, Brier Mean Absolute Error, Precision, Recall, F1 Score</td>
-                                    <td style="text-align: center;">RL, Robotics</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <!-- Interactive Benchmark Table Start -->
+                        <h3 class="title is-4 has-text-centered" style="margin-top: 3rem; margin-bottom: 1.5rem;">Explore Benchmark Metrics & Categories</h3>
+                        <div class="benchmark-filter-controls buttons are-centered">
+                            <button class="button" data-filter="bench-rl">RL & Robotics</button>
+                            <button class="button" data-filter="bench-caption">Captioning & Retrieval</button>
+                            <button class="button" data-filter="bench-vqa">VQA</button>
+                            <button class="button" data-filter="bench-img-understand">Img. Understand/Retrieval</button>
+                            <button class="button" data-filter="bench-reason">Reasoning & Text</button>
+                        </div>
+                        <div class="table-container" id="benchmark-table-container">
+                            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" id="multinet-benchmark-table">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center; width: 40%;">Metric</th>
+                                        <th style="text-align: center; width: 60%;">Evaluation Category</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-category="bench-caption">
+                                        <td style="text-align: center;">CIDEr</td>
+                                        <td style="text-align: center;">Image Captioning, Image-based Text retrieval</td>
+                                    </tr>
+                                    <tr data-category="bench-vqa">
+                                        <td style="text-align: center;">VQA Accuracy</td>
+                                        <td style="text-align: center;">Visual Question Answering</td>
+                                    </tr>
+                                    <tr data-category="bench-img-understand">
+                                        <td style="text-align: center;">Recall@K</td>
+                                        <td style="text-align: center;">Image understanding, Text-based image retrieval</td>
+                                    </tr>
+                                    <tr data-category="bench-reason">
+                                        <td style="text-align: center;">Accuracy</td>
+                                        <td style="text-align: center;">VQA, Commonsense reasoning, Text understanding</td>
+                                    </tr>
+                                    <tr data-category="bench-rl">
+                                        <td style="text-align: center; vertical-align: middle;">
+                                            Mean Squared Error<br>
+                                            Brier Mean Absolute Error<br>
+                                            Precision (Micro, Macro, and Class-wise variants)<br>
+                                            Recall (Micro, Macro, and Class-wise variants)<br>
+                                            F1 Score (Micro, Macro, and Class-wise variants)<br>
+                                            Invalids Percentage
+                                        </td>
+                                        <td style="text-align: center; vertical-align: middle;">RL, Robotics</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Interactive Benchmark Table End -->
                         
-                        <p style="text-align: center; font-weight: bold;">Metrics in Multinet benchmark and the categories of tasks they each evaluate</p>
+                        <p style="text-align: center; font-weight: bold; margin-top: 1.5rem;">Metrics in Multinet benchmark and the categories of tasks they each evaluate</p>
                     </div>
                 </div>
             </div>
@@ -1031,9 +1272,9 @@
     </section>
     
     <!-- BibTeX Section -->
-    <section class="section" id="BibTeX">
+    <section class="section" id="Citation">
         <div class="container is-max-desktop content">
-          <h2 class="title has-text-centered">BibTeX</h2>
+          <h2 class="title has-text-centered">Citation</h2>
           <pre><code>@misc{guruprasad2024benchmarking,
         author    = {Guruprasad, Pranav and Sikka, Harshvardhan and Song, Jaewoo and Wang, Yangyue and Liang, Paul},
         title     = {Benchmarking Vision, Language, & Action Models on Robotic Learning Tasks},
@@ -1094,7 +1335,7 @@
                 sideNav.classList.remove('collapsed');
                 // Check if mainContent exists and has classList before trying to remove a class
                 if (mainContent && mainContent.classList) {
-                    mainContent.classList.remove('collapsed');
+                    // mainContent.classList.remove('collapsed'); // Removed this line
                 }
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
                     const menu = openDropdown.querySelector('.dropdown-menu-items');
@@ -1115,7 +1356,7 @@
             if (!sideNav.classList.contains('collapsed')) {
                 sideNav.classList.add('collapsed');
                  if (mainContent && mainContent.classList) {
-                    mainContent.classList.add('collapsed');
+                    // mainContent.classList.add('collapsed'); // Removed this line
                 }
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
                     openDropdown.classList.remove('open');
@@ -1430,5 +1671,172 @@
         }
     });
   </script>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const filterButtonsContainer = document.querySelector('.dataset-filter-controls');
+    if (!filterButtonsContainer) return; // Guard if controls not found
+
+    const filterButtons = filterButtonsContainer.querySelectorAll('.button');
+    const tableRows = document.querySelectorAll('#multinet-dataset-table tbody tr');
+    const tableContainer = document.querySelector('.table-container'); 
+
+    const initialActiveButton = filterButtonsContainer.querySelector('.button[data-filter="vision-language"]'); // Default to Vision-Language
+    if (initialActiveButton) {
+        initialActiveButton.classList.add('is-link');
+        if (tableContainer) tableContainer.classList.add('gradient-vl'); // Set VL as default background
+        // Show only vision-language rows initially
+        tableRows.forEach(row => {
+            if (row.tagName === 'TR' && row.dataset && row.dataset.category) {
+                if (row.dataset.category === 'vision-language') {
+                    row.style.display = ''; 
+                } else {
+                    row.style.display = 'none'; 
+                }
+            }
+        });
+    } else {
+        if(filterButtons.length > 0) {
+            filterButtons[0].classList.add('is-link'); // Fallback to the first available button
+            if (tableContainer) {
+                const fallbackFilter = filterButtons[0].dataset.filter;
+                if (fallbackFilter === 'vision-language') tableContainer.classList.add('gradient-vl');
+                else if (fallbackFilter === 'language') tableContainer.classList.add('gradient-language');
+                else if (fallbackFilter === 'control') tableContainer.classList.add('gradient-control');
+            }
+            // Show rows corresponding to the first button's filter
+            const fallbackFilterValue = filterButtons[0].dataset.filter;
+            tableRows.forEach(row => {
+                if (row.tagName === 'TR' && row.dataset && row.dataset.category) {
+                    if (row.dataset.category === fallbackFilterValue) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+        }
+    }
+
+    filterButtons.forEach(btn => {
+        if (!btn.classList.contains('is-link')) {
+            btn.classList.add('is-light');
+        }
+    });
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Manage active state for buttons
+            filterButtons.forEach(btn => {
+                btn.classList.remove('is-link');
+                btn.classList.add('is-light'); 
+            });
+            this.classList.add('is-link'); 
+            this.classList.remove('is-light');
+
+            const filterValue = this.dataset.filter;
+
+            if (tableContainer) {
+                tableContainer.classList.remove('gradient-vl', 'gradient-language', 'gradient-control'); 
+                if (filterValue === 'vision-language') {
+                    tableContainer.classList.add('gradient-vl');
+                } else if (filterValue === 'language') { 
+                    tableContainer.classList.add('gradient-language');
+                } else if (filterValue === 'control') {
+                    tableContainer.classList.add('gradient-control');
+                }
+            }
+
+            tableRows.forEach(row => {
+                if (row.tagName === 'TR' && row.dataset && row.dataset.category) {
+                    if (row.dataset.category === filterValue) { // Simplified filter logic
+                        row.style.display = ''; 
+                    } else {
+                        row.style.display = 'none'; 
+                    }
+                }
+            });
+        });
+    });
+});
+</script>
+<script>
+// Script for Interactive Benchmark Table
+document.addEventListener('DOMContentLoaded', function () {
+    const benchmarkFilterButtonsContainer = document.querySelector('.benchmark-filter-controls');
+    if (!benchmarkFilterButtonsContainer) return;
+
+    const benchmarkFilterButtons = benchmarkFilterButtonsContainer.querySelectorAll('.button');
+    const benchmarkTableRows = document.querySelectorAll('#multinet-benchmark-table tbody tr');
+    const benchmarkTableContainer = document.getElementById('benchmark-table-container');
+
+    // Set initial active state for benchmark table
+    const initialBenchmarkActiveButton = benchmarkFilterButtonsContainer.querySelector('.button[data-filter="bench-rl"]'); // Default to RL & Robotics
+    if (initialBenchmarkActiveButton && benchmarkTableContainer) {
+        initialBenchmarkActiveButton.classList.add('is-link');
+        benchmarkTableContainer.classList.add('gradient-bench-rl'); 
+        
+        benchmarkTableRows.forEach(row => {
+            if (row.tagName === 'TR' && row.dataset && row.dataset.category) {
+                if (row.dataset.category === 'bench-rl') {
+                    row.style.display = ''; 
+                } else {
+                    row.style.display = 'none'; 
+                }
+            }
+        });
+    } else if (benchmarkFilterButtons.length > 0 && benchmarkTableContainer) { // Fallback to first button (which should be RL & Robotics now)
+        benchmarkFilterButtons[0].classList.add('is-link');
+        const fallbackFilter = benchmarkFilterButtons[0].dataset.filter;
+        benchmarkTableContainer.classList.add('gradient-' + fallbackFilter);
+
+        const fallbackFilterValue = benchmarkFilterButtons[0].dataset.filter;
+            benchmarkTableRows.forEach(row => {
+                if (row.tagName === 'TR' && row.dataset && row.dataset.category) {
+                    if (row.dataset.category === fallbackFilterValue) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+    }
+
+    // Add is-light to non-active benchmark buttons
+    benchmarkFilterButtons.forEach(btn => {
+        if (!btn.classList.contains('is-link')) {
+            btn.classList.add('is-light');
+        }
+    });
+
+    benchmarkFilterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            benchmarkFilterButtons.forEach(btn => {
+                btn.classList.remove('is-link');
+                btn.classList.add('is-light'); 
+            });
+            this.classList.add('is-link'); 
+            this.classList.remove('is-light');
+
+            const filterValue = this.dataset.filter;
+
+            if (benchmarkTableContainer) {
+                // Remove all potential gradient classes
+                benchmarkTableContainer.className = 'table-container'; // Reset and then add the correct one
+                benchmarkTableContainer.classList.add('gradient-' + filterValue);
+            }
+
+            benchmarkTableRows.forEach(row => {
+                if (row.tagName === 'TR' && row.dataset && row.dataset.category) {
+                    if (row.dataset.category === filterValue) {
+                        row.style.display = ''; 
+                    } else {
+                        row.style.display = 'none'; 
+                    }
+                }
+            });
+        });
+    });
+});
+</script>
 </body>
 </html>
