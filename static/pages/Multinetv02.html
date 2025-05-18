@@ -262,12 +262,390 @@
     .tab-pane.is-active {
       display: block; /* Show only the active tab pane */
     }
+
+    /* Side Navigation Bar Styles */
+    body {
+      margin: 0;
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif; /* Match existing fonts */
+    }
+
+    .side-navigation {
+      height: 100%;
+      width: 280px; /* Expanded width */
+      position: fixed;
+      z-index: 1000; /* Ensure it's on top */
+      top: 0;
+      left: 0;
+      background-color: #f8f9fa; /* Light grey background */
+      overflow-x: hidden;
+      transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+      padding-top: 0; /* Adjusted for logo container */
+      box-shadow: 3px 0 6px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .side-navigation.collapsed {
+      width: 70px; /* Collapsed width - showing icons */
+      overflow-y: visible; /* Allow flyouts to show */
+    }
+
+    .side-navigation.collapsed .nav-text,
+    .side-navigation.collapsed .dropdown-arrow {
+      display: none;
+      opacity: 0;
+    }
+    
+    .side-navigation .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Pushes toggle to the right */
+      padding: 15px 20px;
+      background-color: #e9ecef; /* Slightly different bg for header */
+      min-height: 60px; /* Consistent height */
+      box-sizing: border-box;
+    }
+    
+    .side-navigation.collapsed .logo-container {
+        padding: 15px;
+        justify-content: center; /* Center icon when collapsed */
+    }
+
+    .side-navigation .site-title-logo {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #005A9C; /* Theme color */
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+    
+    .side-navigation.collapsed .site-title-logo {
+        display: none;
+    }
+
+    .nav-toggle-btn {
+      font-size: 22px;
+      color: #363636;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 5px;
+    }
+
+    .nav-toggle-btn:hover {
+      color: #005A9C; /* Theme color */
+    }
+
+    .side-navigation-menu {
+        flex-grow: 1;
+        overflow-y: auto; /* Allow scrolling for menu items if they exceed height */
+        padding-top: 10px;
+    }
+    .side-navigation.collapsed .side-navigation-menu {
+        overflow-y: visible; /* Needed for flyouts in collapsed mode */
+    }
+
+
+    .side-navigation .nav-item,
+    .side-navigation .nav-link {
+      padding: 12px 20px; /* Slightly reduced padding for more items */
+      text-decoration: none;
+      font-size: 0.95rem; /* Slightly reduced font size */
+      color: #363636;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s ease-out;
+      white-space: nowrap;
+      position: relative; 
+    }
+    /* For dropdown toggles specifically if they are <a> tags */
+    .side-navigation .dropdown-toggle {
+        padding: 12px 20px;
+        text-decoration: none;
+        font-size: 0.95rem;
+        color: #363636;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        transition: background-color 0.3s, color 0.3s;
+        white-space: nowrap;
+        justify-content: space-between; /* Ensure arrow is on the right */
+    }
+
+
+    .side-navigation .nav-item:hover,
+    .side-navigation .nav-link:hover,
+    .side-navigation .dropdown-toggle:hover {
+      background-color: #e9ecef;
+      color: #005A9C;
+      /* transform: translateX(4px); */ /* Removing nudge for dropdown items for now */
+    }
+    .side-navigation .nav-item > .nav-link:hover { /* Apply nudge only to direct nav-links */
+        transform: translateX(4px);
+    }
+
+    
+    .side-navigation .nav-item:hover .icon i,
+    .side-navigation .nav-link:hover .icon i,
+    .side-navigation .dropdown-toggle:hover .icon i {
+        transform: scale(1.1); 
+    }
+
+    .side-navigation .nav-item.active,
+    .side-navigation .nav-link.active,
+    .side-navigation .nav-item.has-dropdown.open > .dropdown-toggle { /* Style for open dropdown toggle */
+      background-color: #005A9C;
+      color: white;
+    }
+    .side-navigation .nav-item.active .icon,
+    .side-navigation .nav-link.active .icon,
+    .side-navigation .nav-item.has-dropdown.open > .dropdown-toggle .icon,
+    .side-navigation .nav-item.has-dropdown.open > .dropdown-toggle .dropdown-arrow {
+      color: white;
+    }
+
+
+    .side-navigation .nav-item .icon,
+    .side-navigation .nav-link .icon,
+    .side-navigation .dropdown-toggle .icon {
+      margin-right: 16px;
+      min-width: 24px;
+      text-align: center;
+      font-size: 1rem; /* Unified icon size */
+      transition: margin-right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s ease-out; 
+    }
+
+    .side-navigation.collapsed .nav-item .icon,
+    .side-navigation.collapsed .nav-link .icon,
+    .side-navigation.collapsed .dropdown-toggle .icon {
+      margin-right: 0;
+    }
+    
+    .side-navigation .nav-item .icon i, 
+    .side-navigation .nav-link .icon i,
+    .side-navigation .dropdown-toggle .icon i {
+        display: inline-block; 
+        transition: transform 0.2s ease-out;
+    }
+
+    .side-navigation.collapsed .nav-text {
+        opacity: 0;
+        transform: translateX(-10px); 
+    }
+    .side-navigation .nav-text {
+      transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s;
+      opacity: 1;
+      transform: translateX(0);
+      flex-grow: 1; /* Allow text to take remaining space */
+    }
+
+    .dropdown-arrow {
+        margin-left: auto; /* Pushes arrow to the far right if text doesn't fill */
+        padding-left: 10px; /* Space between text and arrow */
+        font-size: 0.8rem;
+        transition: transform 0.3s ease;
+    }
+    .side-navigation.collapsed .dropdown-arrow {
+      display: none;
+    }
+    
+    .nav-item.has-dropdown.open > .dropdown-toggle .dropdown-arrow .fas.fa-chevron-down,
+    .nav-item.has-dropdown.open > .dropdown-toggle .dropdown-arrow .fas.fa-chevron-right {
+      transform: rotate(180deg);
+    }
+    .nav-item.has-dropdown .dropdown-toggle .dropdown-arrow .fas.fa-chevron-right.rotated {
+        transform: rotate(90deg); /* For level 2 when open */
+    }
+
+
+    .dropdown-menu-items {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease-out, padding 0.35s ease-out, background-color 0.3s;
+      background-color: #f0f2f5; 
+      list-style-type: none;
+      padding-left: 0; 
+      margin-left: 0;
+    }
+    .nav-item.has-dropdown.open > .dropdown-menu-items {
+        /* max-height will be set by JS for accordion, but overridden for flyout */
+        padding-top: 5px;
+        padding-bottom: 5px;
+        /* For non-flyout (accordion style), overflow should be conditionally hidden or managed by JS */
+    }
+
+    /* New styles for non-collapsed flyout - Level 1 */
+    .side-navigation:not(.collapsed) .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 {
+      position: absolute;
+      left: 0; /* Align with parent's left edge */
+      top: 100%; /* Position below the parent item */
+      width: max-content; /* Allow content to define width */
+      min-width: 100%; /* Ensure it's at least as wide as the parent button */
+      background-color: #f8f9fa; /* Match collapsed flyout background */
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1); /* Add shadow for better visibility */
+      border-radius: 0 0 4px 4px; /* Optional: round bottom corners */
+      max-height: none !important; /* Override JS-set max-height */
+      overflow: visible !important; /* Ensure content is not clipped */
+      z-index: 1000; /* Ensure it's above other elements */
+      margin-left: 0; /* Override any inherited margin */
+      padding-left: 0; /* Reset padding for the main flyout container */
+    }
+
+    /* Adjust padding for items directly within the non-collapsed flyout */
+    .side-navigation:not(.collapsed) .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 > .dropdown-item,
+    .side-navigation:not(.collapsed) .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 > .nav-item > .dropdown-toggle {
+        padding-left: 15px; /* Consistent padding for items inside flyout */
+        padding-right: 15px;
+    }
+
+    .dropdown-menu-items .nav-item, /* For nested .has-dropdown */
+    .dropdown-menu-items .sub-item { /* For direct links */
+      padding-left: 30px; /* Indent level 1 sub-items */
+      font-size: 0.9rem;
+      color: #4a4a4a;
+    }
+    /* Specific style for toggles within dropdowns */
+    .dropdown-menu-items .nav-item.has-dropdown > .dropdown-toggle {
+        padding-left: 30px;
+        font-size: 0.9rem;
+        color: #4a4a4a;
+    }
+    .dropdown-menu-items .nav-item.has-dropdown > .dropdown-toggle:hover,
+    .dropdown-menu-items .sub-item:hover {
+      background-color: #dfe4e8;
+      color: #005A9C;
+    }
+    
+    /* Level 2 dropdown menu items */
+    .dropdown-menu-items.level-2 {
+        background-color: #e9ecef; /* Slightly different for level 2 */
+    }
+    .dropdown-menu-items.level-2 .sub-item {
+      padding-left: 45px; /* Further indent level 2 sub-items */
+      font-size: 0.85rem;
+    }
+    .dropdown-menu-items.level-2 .sub-item:hover {
+      background-color: #d8dde1;
+    }
+    
+    .dropdown-menu-items .nav-item.active,
+    .dropdown-menu-items .sub-item.active {
+      background-color: #005A9C;
+      color: white;
+    }
+    .dropdown-menu-items .nav-item.active .icon,
+    .dropdown-menu-items .sub-item.active .icon {
+       color: white;
+    }
+
+
+    /* Flyout menu for collapsed state - Level 1 */
+    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items.level-1 {
+      display: block;
+      position: absolute;
+      left: 70px; 
+      top: 0; /* Align with parent item's top */
+      width: max-content; /* Changed from min-width to allow content to define width */
+      background-color: #f8f9fa;
+      box-shadow: 3px 0 6px rgba(0,0,0,0.15);
+      border-radius: 0 5px 5px 0;
+      max-height: none; 
+      z-index: 1001;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      overflow: visible; /* Allow content to overflow */
+    }
+    /* Ensure nav-text is visible in flyouts */
+    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items .nav-text,
+    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items .dropdown-arrow {
+        display: inline-block;
+        opacity: 1;
+        transform: translateX(0);
+    }
+    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items .icon {
+        margin-right: 16px; /* Restore icon margin */
+    }
+
+
+    /* Flyout menu for collapsed state - Level 2 */
+    .side-navigation.collapsed .dropdown-menu-items.level-1 .nav-item.has-dropdown:hover > .dropdown-menu-items.level-2 {
+      display: block;
+      position: absolute;
+      left: 100%; /* Position next to its parent flyout item */
+      top: 0; /* Align with parent item's top */
+      width: max-content; /* Changed from min-width to allow content to define width */
+      background-color: #e9ecef; /* Slightly different for level 2 flyout */
+      box-shadow: 3px 3px 6px rgba(0,0,0,0.15);
+      border-radius: 0 5px 5px 0;
+      max-height: none;
+      z-index: 1002; /* Above level 1 flyout */
+      padding-top: 5px;
+      padding-bottom: 5px;
+      overflow: visible; /* Allow content to overflow */
+    }
+
+
+    #main-page-content {
+      padding-left: 70px; /* Fixed padding, equivalent to collapsed sidebar width */
+      padding-top: 0; 
+      /* transition: padding-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); */ /* Removed as padding-left no longer changes */
+      background-color: #ffffff; 
+      width: 100%; 
+      box-sizing: border-box; 
+    }
+
+    /* Style for main release links in dropdown menu */
+    .side-navigation .dropdown-menu-items a.main-release-link {
+        display: flex !important; /* Ensure flex layout for icon and text */
+        align-items: center !important; /* Vertically align icon and text */
+        padding: 8px 15px;         /* Consistent padding, adjust as needed */
+        font-size: 0.9rem;         /* Consistent font size with other sub-items */
+        color: #4a4a4a;            /* Consistent text color */
+        text-decoration: none;
+    }
+
+    .side-navigation .dropdown-menu-items a.main-release-link:hover {
+        background-color: #dfe4e8; /* Consistent hover background */
+        color: #005A9C;            /* Consistent hover text color */
+    }
+
+    .side-navigation .dropdown-menu-items a.main-release-link > .icon {
+        margin-right: 10px;       /* Space between icon and text */
+        min-width: 20px;          /* Ensure icon has some space */
+        font-size: 0.9rem;        /* Match text size */
+    }
+
+    .side-navigation .dropdown-menu-items a.main-release-link > .nav-text {
+        flex-grow: 1;             /* Allow text to take remaining space */
+        opacity: 1 !important;    /* Ensure text is fully visible */
+        /* white-space: nowrap; is already on the span element via inline style */
+        display: block !important; /* Ensure block behavior and override more specific conflicting rules */
+    }
+
+    /* Active state for main release links */
+    .side-navigation .dropdown-menu-items a.main-release-link.active {
+        background-color: #005A9C;
+        color: white;
+    }
+    .side-navigation .dropdown-menu-items a.main-release-link.active > .icon {
+        color: white;
+    }
+
+    /* Rotate arrow on hover for dropdown items like "Releases" */
+    .side-navigation .nav-item.has-dropdown:hover > .dropdown-toggle .dropdown-arrow > i.fa-chevron-right {
+      transform: rotate(90deg);
+      transition: transform 0.3s ease;
+    }
+
   </style>
   <!-- Add Chart.js before our custom script -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@4.1.0/dist/chartjs-chart-matrix.umd.min.js"></script>
   <script src="../js/v0_2_table.js"></script>
   <script src="../js/v0_2_confusion_matrix.js"></script>
+  <script src="../js/entropy_correlation_plot.js"></script>
 
   <style>
     .metrics-container {
@@ -512,6 +890,88 @@
   </style>
 </head>
 <body>
+
+<div id="side-nav" class="side-navigation collapsed">
+  <div class="logo-container">
+    <a href="../../index.html" class="site-title-logo">
+      <img src="../images/Multinetlogo.png" alt="MultiNet Logo" style="height: 28px; margin-right: 8px; vertical-align: middle;">MultiNet
+    </a>
+    <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+  <div class="side-navigation-menu">
+    <a href="../../index.html" class="nav-item active">
+      <span class="icon"><i class="fas fa-home"></i></span>
+      <span class="nav-text">Home</span>
+    </a>
+    <a href="Multinet.html" class="nav-item">
+      <span class="icon"><i class="fas fa-eye"></i></span>
+      <span class="nav-text">Multinet Vision</span>
+    </a>
+
+    <div class="nav-item has-dropdown" style="padding: 0;" 
+         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
+         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+            <span class="icon"><i class="fas fa-rocket"></i></span> <!-- Changed icon -->
+            <span class="nav-text">Releases</span>
+            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span> <!-- Initial arrow state -->
+        </a>
+        <div class="dropdown-menu-items level-1">
+            <!-- Multinet v0.2 Section -->
+            <a href="Multinetv02.html" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-gamepad"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">Multinet v0.2</span>
+            </a>
+            <!-- Multinet v0.1 Section -->
+            <a href="Multinetv01.html" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-robot"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">Multinet v0.1</span>
+            </a>
+        </div>
+    </div>
+
+    <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="nav-item">
+      <span class="icon"><i class="fas fa-atom"></i></span>
+      <span class="nav-text">GenESIS framework</span>
+    </a>
+    <!-- Technical Blogs/Reports Dropdown -->
+    <div class="nav-item has-dropdown" style="padding: 0;"
+         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
+         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+            <span class="icon"><i class="fas fa-file-alt"></i></span>
+            <span class="nav-text">Technical Blogs/Reports</span>
+            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+        </a>
+        <div class="dropdown-menu-items level-1">
+            <a href="Technicalblog.html" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-project-diagram"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">Adapting VLAs to discrete spaces</span>
+            </a>
+        </div>
+    </div>
+    <!-- Adjacent Research Dropdown -->
+    <div class="nav-item has-dropdown" style="padding: 0;"
+         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
+         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+            <span class="icon"><i class="fas fa-microscope"></i></span>
+            <span class="nav-text">Adjacent Research</span>
+            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+        </a>
+        <div class="dropdown-menu-items level-1">
+            <a href="https://github.com/eihli/mugato" target="_blank" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-file-code"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">μGato</span>
+            </a>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-page-content">
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
@@ -531,9 +991,8 @@
                         <a href="https://www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>123</sup>,</span>
                         </span>
                         </div>
-      
+
                         <div class="is-size-5 publication-authors">
-                          <span class="author-block"><a href="https://www.manifoldrg.com/">Manifold Research</a><sup>1</sup>, <a href="https://metarch.ai/">Metarch.ai</a><sup>2</sup>, Georgia Institute of Technology<sup>3</sup><br>This work is sponsored by <a href="https://metarch.ai/">Metarch.ai.</a> </span>
                           <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
                           <br>
                           <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:contact@metarch.ai"> here</a></strong></span>
@@ -541,48 +1000,32 @@
 
                         <div class="column has-text-centered">
                             <div class="publication-links">
-                                 <!-- Link to paper -->
                               <span class="link-block">
-                                <a href="https://arxiv.org/abs/2505.05540" target="_blank"
-                                class="external-link button is-normal is-rounded is-dark">
-                                <span class="icon">
-                                  <i class="fas fa-file-pdf"></i>
-                                </span>
-                                <span>Paper</span>
-                              </a>
-                            </span>
-        
-                          <!-- Github link -->
-                          <span class="link-block">
-                            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank"
-                            class="external-link button is-normal is-rounded is-dark">
-                            <span class="icon">
-                              <i class="fab fa-github"></i>
-                            </span>
-                            <span>Code</span>
-                          </a>
-                        </span>
-        
-                        <!-- Link to VLM-Action framework -->
-                        <span class="link-block">
-                          <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank"
-                          class="external-link button is-normal is-rounded is-dark">
-                          <span class="icon">
-                            <i class="fas fa-code"></i>
-                          </span>
-                          <span>GenESIS framework</span>
-                        </a>
-                      </span>
-
-                        <span class="link-block">
-                          <a href="Technicalblog.html" target="_blank"
-                          class="external-link button is-normal is-rounded is-dark">
-                          <span class="icon">
-                            <i class="fas fa-file-alt"></i>
-                          </span>
-                          <span>Extracting probabilties from VLAs - Technical Blog</span>
-                        </a>
-                      </span>
+                                <a href="https://arxiv.org/abs/2505.05540" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                  <span class="icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                  </span>
+                                  <span>Paper</span>
+                                </a>
+                              </span>
+                              <span class="link-block">
+                                <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                  <span class="icon">
+                                    <i class="fab fa-github"></i>
+                                  </span>
+                                  <span>Code</span>
+                                </a>
+                              </span>
+                              <span class="link-block">
+                                <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                  <span class="icon">
+                                    <i class="fas fa-atom"></i>
+                                  </span>
+                                  <span>GenESIS framework</span>
+                                </a>
+                              </span>
+                            </div>
+                        </div>
           </div>
         </div>
       </div>
@@ -606,13 +1049,33 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Abstract</h2>
             <p>
-                Vision-language-action (VLA) models represent an important step toward general-purpose robotic systems by integrating visual perception, language understanding, and action execution. However, systematic evaluation of these models, particularly their zero-shot generalization capabilities in procedurally generated out-of-distribution (OOD) environments, remains limited. In this work, we introduce MultiNet v0.2, a comprehensive benchmark designed to evaluate and analyze the generalization performance of state-of-the-art VLM and VLA models—including GPT-4o, GPT-4.1, OpenVLA, Pi0 Base, and Pi0 FAST—on diverse procedural tasks from the <a href="https://openai.com/index/procgen-benchmark/" target="_blank">Procgen benchmark</a>. Our analysis reveals several critical insights:
+              Vision-language-action (VLA) models represent an
+              important step toward general-purpose robotic systems by in-
+              tegrating visual perception, language understanding, and action
+              execution. However, systematic evaluation of these models, partic-
+              ularly their zero-shot generalization capabilities in procedurally
+              out-of-distribution (OOD) environments, remains limited. In this
+              paper, we introduce MultiNet v0.2, a comprehensive benchmark
+              designed to evaluate and analyze the generalization performance
+              of state-of-the-art VLMs and VLAs—including GPT-4o, GPT-4.1,
+              OpenVLA, Pi0 Base, and Pi0 FAST—on diverse procedural tasks
+              from the Procgen benchmark. Our analysis reveals several critical
+              insights: 
                 <ul>
-                  <li>All evaluated models exhibit significant limitations in zero-shot generalization to OOD tasks, with performance heavily influenced by factors such as action representation and task complexity.</li>
-                  <li>VLAs generally outperform other models due to their robust architectural design.</li>
-                  <li>VLM variants demonstrate substantial improvements when constrained appropriately, highlighting the sensitivity of model performance to precise prompt engineering.</li>
+                  <li>All evaluated models exhibit significant limitations
+                    in zero-shot generalization to OOD tasks, with performance
+                    heavily influenced by factors such as action representation
+                    and task complexity</li>
+                  <li>VLAs generally outperforms other
+                    models due to their robust architectural design.</li>
+                  <li> VLM
+                    variants demonstrate substantial improvements when constrained
+                    appropriately, highlighting the sensitivity of model performance
+                    to precise prompt engineering. </li>
                 </ul>
-            
+                We release our benchmark, valuation framework, and findings to enable the assessment of
+                future VLA models and identify critical areas for improvement
+                in their application to out of distibrution digital tasks.
             </p>
           </div>
         </div>
@@ -639,88 +1102,88 @@
                     <thead>
                         <tr>
                             <th><!-- Empty for row headers --></th>
-                            <th>Bigfish</th>
-                            <th>Bossfight</th>
-                            <th>Caveflyer</th>
-                            <th>Chaser</th>
-                            <th>Climber</th>
-                            <th>Coinrun</th>
-                            <th>Dodgeball</th>
-                            <th>Fruitbot</th>
-                            <th>Heist</th>
-                            <th>Jumper</th>
-                            <th>Leaper</th>
-                            <th>Maze</th>
-                            <th>Miner</th>
-                            <th>Ninja</th>
-                            <th>Plunder</th>
-                            <th>Starpilot</th>
+                            <th style="text-align: center;">Bigfish</th>
+                            <th style="text-align: center;">Bossfight</th>
+                            <th style="text-align: center;">Caveflyer</th>
+                            <th style="text-align: center;">Chaser</th>
+                            <th style="text-align: center;">Climber</th>
+                            <th style="text-align: center;">Coinrun</th>
+                            <th style="text-align: center;">Dodgeball</th>
+                            <th style="text-align: center;">Fruitbot</th>
+                            <th style="text-align: center;">Heist</th>
+                            <th style="text-align: center;">Jumper</th>
+                            <th style="text-align: center;">Leaper</th>
+                            <th style="text-align: center;">Maze</th>
+                            <th style="text-align: center;">Miner</th>
+                            <th style="text-align: center;">Ninja</th>
+                            <th style="text-align: center;">Plunder</th>
+                            <th style="text-align: center;">Starpilot</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Environment</td>
-                            <td><img src="../images/procgen_gifs/bigfish_trim.gif" alt="Bigfish Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/bossfight_trim.gif" alt="Bossfight Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/caveflyer_trim.gif" alt="Caveflyer Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/chaser_trim.gif" alt="Chaser Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/climber_trim.gif" alt="Climber Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/coinrun_trim.gif" alt="Coinrun Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/dodgeball_trim.gif" alt="Dodgeball Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/fruitbot_trim.gif" alt="Fruitbot Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/heist_trim.gif" alt="Heist Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/jumper_trim.gif" alt="Jumper Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/leaper_trim.gif" alt="Leaper Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/maze_trim.gif" alt="Maze Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/miner_trim.gif" alt="Miner Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/ninja_trim.gif" alt="Ninja Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/plunder_trim.gif" alt="Plunder Gameplay" class="procgen-gif"></td>
-                            <td><img src="../images/procgen_gifs/starpilot_trim.gif" alt="Starpilot Gameplay" class="procgen-gif"></td>
+                            <td><img src="../images/procgen_gifs/bigfish_trim.gif" alt="Bigfish Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/bossfight_trim.gif" alt="Bossfight Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/caveflyer_trim.gif" alt="Caveflyer Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/chaser_trim.gif" alt="Chaser Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/climber_trim.gif" alt="Climber Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/coinrun_trim.gif" alt="Coinrun Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/dodgeball_trim.gif" alt="Dodgeball Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/fruitbot_trim.gif" alt="Fruitbot Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/heist_trim.gif" alt="Heist Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/jumper_trim.gif" alt="Jumper Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/leaper_trim.gif" alt="Leaper Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/maze_trim.gif" alt="Maze Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/miner_trim.gif" alt="Miner Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/ninja_trim.gif" alt="Ninja Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/plunder_trim.gif" alt="Plunder Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
+                            <td><img src="../images/procgen_gifs/starpilot_trim.gif" alt="Starpilot Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
                         </tr>
                         <tr>
-                            <td>Task Description</td>
-                            <td>Eat smaller fish to grow while avoiding larger fish</td>
-                            <td>Dodge projectiles and damage the boss when shields are down</td>
-                            <td>Navigate caves, destroy targets, and avoid obstacles to reach exit</td>
-                            <td>Collect orbs and stars to make enemies vulnerable for consumption</td>
-                            <td>Climb platforms and collect stars while avoiding flying monsters</td>
-                            <td>Reach the coin while avoiding saws, enemies, and chasms</td>
-                            <td>Hit enemies with balls and reach the unlocked platform</td>
-                            <td>Collect fruit, avoid non-fruit, and use keys to unlock gates</td>
-                            <td>Collect colored keys to unlock doors and steal the gem</td>
-                            <td>Use double jump to navigate platforms and find the carrot</td>
-                            <td>Cross lanes by avoiding cars and hopping on logs</td>
-                            <td>Navigate the maze to find and collect the cheese</td>
-                            <td>Dig through dirt, collect diamonds, and avoid falling objects</td>
-                            <td>Jump across ledges and use throwing stars to clear bombs</td>
-                            <td>Fire cannonballs at enemy ships while avoiding friendly ships</td>
-                            <td>Dodge projectiles and defeat enemies while navigating obstacles</td>
+                            <td class="has-text-left">Task Description</td>
+                            <td class="has-text-left">Eat smaller fish to grow while avoiding larger fish</td>
+                            <td class="has-text-left">Dodge projectiles and damage the boss when shields are down</td>
+                            <td class="has-text-left">Navigate caves, destroy targets, and avoid obstacles to reach exit</td>
+                            <td class="has-text-left">Collect orbs and stars to make enemies vulnerable for consumption</td>
+                            <td class="has-text-left">Climb platforms and collect stars while avoiding flying monsters</td>
+                            <td class="has-text-left">Reach the coin while avoiding saws, enemies, and chasms</td>
+                            <td class="has-text-left">Hit enemies with balls and reach the unlocked platform</td>
+                            <td class="has-text-left">Collect fruit, avoid non-fruit, and use keys to unlock gates</td>
+                            <td class="has-text-left">Collect colored keys to unlock doors and steal the gem</td>
+                            <td class="has-text-left">Use double jump to navigate platforms and find the carrot</td>
+                            <td class="has-text-left">Cross lanes by avoiding cars and hopping on logs</td>
+                            <td class="has-text-left">Navigate the maze to find and collect the cheese</td>
+                            <td class="has-text-left">Dig through dirt, collect diamonds, and avoid falling objects</td>
+                            <td class="has-text-left">Jump across ledges and use throwing stars to clear bombs</td>
+                            <td class="has-text-left">Fire cannonballs at enemy ships while avoiding friendly ships</td>
+                            <td class="has-text-left">Dodge projectiles and defeat enemies while navigating obstacles</td>
                         </tr>
                         <tr>
-                            <td>Action Space</td>
-                            <td>8 directions + no-op</td>
-                            <td>8 directions + no-op + fire bullet</td>
-                            <td>8 directions + no-op + fire bullet</td>
-                            <td>8 directions + no-op</td>
-                            <td>8 directions + no-op</td>
-                            <td>8 directions + no-op</td>
-                            <td>8 directions + no-op + fire ball</td>
-                            <td>8 directions + no-op + fire key</td>
-                            <td>8 directions + no-op</td>
-                            <td>8 directions + no-op</td>
-                            <td>8 directions + no-op</td>
-                            <td>8 directions + no-op</td>
-                            <td>8 directions + no-op</td>
-                            <td>8 directions + no-op + 4 throwing star directions</td>
-                            <td>8 directions + no-op + fire cannonball</td>
-                            <td>8 directions + no-op + 2 fire bullet directions</td>
+                            <td class="has-text-left">Action Space</td>
+                            <td class="has-text-left">8 directions + no-op</td>
+                            <td class="has-text-left">8 directions + no-op + fire bullet</td>
+                            <td class="has-text-left">8 directions + no-op + fire bullet</td>
+                            <td class="has-text-left">8 directions + no-op</td>
+                            <td class="has-text-left">8 directions + no-op</td>
+                            <td class="has-text-left">8 directions + no-op</td>
+                            <td class="has-text-left">8 directions + no-op + fire ball</td>
+                            <td class="has-text-left">8 directions + no-op + fire key</td>
+                            <td class="has-text-left">8 directions + no-op</td>
+                            <td class="has-text-left">8 directions + no-op</td>
+                            <td class="has-text-left">8 directions + no-op</td>
+                            <td class="has-text-left">8 directions + no-op</td>
+                            <td class="has-text-left">8 directions + no-op</td>
+                            <td class="has-text-left">8 directions + no-op + 4 throwing star directions</td>
+                            <td class="has-text-left">8 directions + no-op + fire cannonball</td>
+                            <td class="has-text-left">8 directions + no-op + 2 fire bullet directions</td>
                         </tr>
                     </tbody>
                 </table>
                 
               </div>
               <div class="table-notes">
-                  Action space dimensions include: movement actions (8 directions + no-op) and special actions (varies by environment)
+                  Action space dimensions include: movement actions (8 directions + no-op) and special actions (varies by environment). To understand more about these environments and their action spaces, please refer to the <a href="https://github.com/openai/procgen" target="_blank">Procgen benchmark</a>.
               </div>
           </div>
         </div>
@@ -728,16 +1191,17 @@
     </div>
   </section>
 
-  <section class="section"></section>
+  <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column">
-          <div class="content has-text-justified">
+          <div class="content">
             <h2 class="title is-3 has-text-centered">Results and Analysis</h2>
                     <div class="content has-text-centered">
                       <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Overall Performance</h4>
                       <div class="metrics-container">
                         <div class="metrics-sidebar">
+                          <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Evaluation metrics</p>
                           <button class="metric-button active" data-metric="macro-recall">Macro Recall</button>
                           <button class="metric-button" data-metric="macro-precision">Macro Precision</button>
                           <button class="metric-button" data-metric="macro-f1">Macro F1</button>
@@ -749,18 +1213,24 @@
                           <button class="metric-button" data-metric="normalized_mae">Normalized Brier MAE</button>
                           <button class="metric-button" data-metric="normalized_quantile_filtered_mae">Normalized Quantile Filtered Brier MAE</button>
                         </div>
+
+                        
                         
                         <div class="metrics-charts">
                           <!-- Charts will be dynamically inserted here -->
                         </div>
                       </div>
 
-                      <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Action Class-wise Confusion Matrix</h4>
+                      <br>
+                      <br>
+
+                      <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Frequency of predicted action classes</h4>
                       <div id="confusion-matrix-section" style="margin-top:1rem;max-width:100%;overflow-x:auto;">
                         <div class="confusion-matrix-controls" style="display:flex;flex-direction:column;gap:1rem;align-items:stretch;max-width:100%;">
                           <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
                             <div style="width:200px;"></div>  <!-- Changed from 120px to 200px to match metrics-sidebar -->
                             <div style="flex:1;position:relative;padding:20px 0 0 50px;max-width:calc(100% - 250px);"> <!-- Adjusted max-width calculation -->
+                              <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Models</p>
                               <div class="confusion-matrix-models" style="display:flex;justify-content:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
                                 <!-- Model buttons will be injected here -->
                               </div>
@@ -768,10 +1238,13 @@
                           </div>
         
                           <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
-                            <div class="confusion-matrix-datasets" style="display:flex;flex-direction:column;height:500px;overflow-y:auto;min-width:200px;gap:0.5rem;padding-top:20px;padding-right:10px;margin-right:5px;"> <!-- Changed min-width from 120px to 200px -->
-                              <!-- Dataset buttons will be injected here -->
+                            <div style="display: flex; flex-direction: column; min-width: 200px;">
+                              <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Procgen Datasets</p>
+                              <div class="confusion-matrix-datasets" style="display:flex;flex-direction:column;height:500px;overflow-y:auto;gap:0.5rem;padding-right:10px;margin-right:5px;"> <!-- Original comment: Changed min-width from 120px to 200px. Note: min-width is now on this div\'s parent. padding-top:20px also removed. -->
+                                <!-- Dataset buttons will be injected here -->
+                              </div>
                             </div>
-        
+  
                             <div style="flex:1;position:relative;padding:20px 0 0 50px;display:flex;justify-content:center;max-width:calc(100% - 250px);"> <!-- Adjusted max-width calculation -->
                               <div id="confusion-matrix-canvas-container" style="width:100%;height:500px;position:relative;overflow-x:auto;">
                                 <canvas id="confusion-matrix-canvas"></canvas>
@@ -781,6 +1254,25 @@
                         </div>
                       </div>
                     </div>
+                    <section class="section">
+                        <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Correlation matrix between image entropies and model performance</h4>
+                        <div id="entropy-correlation-container" style="width: 100%; height: 500px; position: relative; margin-top: 1rem;">
+                            <div id="entropy-correlation-plot" style="width: 100%; height: 100%; overflow-x: auto; position: relative; padding-top: 30px; padding-left: 40px; box-sizing: border-box;"></div>
+                            <div id="entropy-correlation-tooltip" 
+                               style="position: fixed; 
+                                      display: none; 
+                                      background-color: rgba(0,0,0,0.75); 
+                                      color: white;
+                                      border: 1px solid #333; 
+                                      padding: 8px 12px; 
+                                      border-radius: 5px; 
+                                      font-size: 12px;
+                                      pointer-events: none; 
+                                      z-index: 1000; 
+                                      white-space: nowrap;">
+                            </div>
+                        </div>
+                    </section>
             <p>
               Our analysis highlighted significant limitations arising from architectural constraints, training
               paradigms, and input-output biases inherent to the models. The
@@ -1136,9 +1628,9 @@
     </div>
   </section>
 
-  <section class="section" id="BibTeX">
+  <section class="section" id="Citation">
     <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
+      <h2 class="title has-text-centered">Citation</h2>
       <pre><code>@misc{guruprasad2025benchmarkingvisionlanguage,
         title={Benchmarking Vision, Language, & Action Models in Procedurally Generated, Open Ended Action Environments}, 
         author={Pranav Guruprasad and Yangyue Wang and Sudipta Chowdhury and Harshvardhan Sikka},
@@ -1201,7 +1693,264 @@
       });
     });
   </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navToggleBtn = document.getElementById('navToggleBtn');
+        const sideNav = document.getElementById('side-nav');
+        const mainContent = document.getElementById('main-page-content');
+        const allNavLinks = document.querySelectorAll('.side-navigation .nav-item:not(.has-dropdown) > a, .side-navigation .sub-item:not(.has-dropdown), .side-navigation .dropdown-item > a'); // Links that can be active
 
+        function expandSidebar() {
+            if (!sideNav || !mainContent) return;
+            if (sideNav.classList.contains('collapsed')) {
+                sideNav.classList.remove('collapsed');
+                // mainContent.classList.remove('collapsed'); // Removed this line
+                // Ensure all dropdowns are closed when expanding from fully collapsed hover state
+                document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
+                    const menu = openDropdown.querySelector('.dropdown-menu-items');
+                    if (menu) menu.style.maxHeight = null; 
+                    openDropdown.classList.remove('open');
+                    const toggle = openDropdown.querySelector('.dropdown-toggle');
+                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                    const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
+                    if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
+                        arrowIcon.classList.remove('rotated');
+                    }
+                });
+            }
+        }
+
+        function collapseSidebar() {
+            if (!sideNav || !mainContent) return;
+            if (!sideNav.classList.contains('collapsed')) {
+                sideNav.classList.add('collapsed');
+                // mainContent.classList.add('collapsed'); // Removed this line
+                
+                // Collapse all open dropdowns
+                document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
+                    openDropdown.classList.remove('open');
+                    const toggle = openDropdown.querySelector('.dropdown-toggle');
+                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                    const menu = openDropdown.querySelector('.dropdown-menu-items');
+                    if (menu) menu.style.maxHeight = null;
+                    const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
+                     if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
+                        arrowIcon.classList.remove('rotated');
+                    }
+                });
+            }
+        }
+        
+        function masterToggleSidebar() {
+            if (!sideNav) return;
+            const isCollapsed = sideNav.classList.contains('collapsed');
+            if (isCollapsed) {
+                // sideNav.classList.remove('collapsed'); // Handled by expandSidebar
+                // if (mainContent) mainContent.classList.remove('collapsed'); // Handled by expandSidebar
+                expandSidebar();
+            } else {
+                // sideNav.classList.add('collapsed'); // Handled by collapseSidebar
+                // if (mainContent) mainContent.classList.add('collapsed'); // Handled by collapseSidebar
+                collapseSidebar();
+                 // Close all dropdowns when collapsing sidebar
+                document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
+                    openDropdown.classList.remove('open');
+                    const toggle = openDropdown.querySelector('.dropdown-toggle');
+                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                    const menu = openDropdown.querySelector('.dropdown-menu-items');
+                    if (menu) menu.style.maxHeight = null;
+                    const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
+                    if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
+                        arrowIcon.classList.remove('rotated');
+                    }
+                });
+            }
+        }
+
+        if (navToggleBtn) {
+            const icon = navToggleBtn.querySelector('i');
+            if (icon) icon.className = 'fas fa-bars';
+            navToggleBtn.addEventListener('click', masterToggleSidebar);
+            
+            // Add mouseenter event for hover-to-expand
+            navToggleBtn.addEventListener('mouseenter', () => {
+                if (sideNav && sideNav.classList.contains('collapsed')) {
+                    expandSidebar();
+                }
+            });
+        }
+        
+        document.addEventListener('click', function(event) {
+            if (!sideNav || !navToggleBtn ) return;
+            const isClickInsideNav = sideNav.contains(event.target);
+            const isClickOnToggleBtn = navToggleBtn.contains(event.target);
+
+            if (!sideNav.classList.contains('collapsed') && !isClickInsideNav && !isClickOnToggleBtn) {
+                if (event.target.closest('.dropdown-menu-items')) {
+                    return;
+                }
+                // masterToggleSidebar(); // Changed to collapseSidebar
+                collapseSidebar(); // Collapse if open and click is outside
+            }
+        });
+
+        const dropdownToggles = document.querySelectorAll('.side-navigation .nav-item.has-dropdown > .dropdown-toggle');
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation(); 
+
+                const parentNavItem = this.parentElement; 
+                const dropdownMenu = parentNavItem.querySelector(':scope > .dropdown-menu-items');
+                
+                if (!dropdownMenu) return;
+
+                if (sideNav.classList.contains('collapsed')) {
+                     // When collapsed, hovering handles flyouts (CSS driven)
+                    // Click might be interpreted as wanting to expand the main sidebar first
+                    masterToggleSidebar(); // Expand main sidebar
+                     // Then, if we want to immediately open this specific dropdown:
+                    setTimeout(() => { 
+                        if (!parentNavItem.classList.contains('open')) {
+                            parentNavItem.classList.add('open');
+                            this.setAttribute('aria-expanded', 'true');
+                            dropdownMenu.style.maxHeight = dropdownMenu.scrollHeight + "px";
+                            const arrowIcon = this.querySelector('.dropdown-arrow .fas');
+                            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
+                                arrowIcon.classList.add('rotated');
+                            }
+                             // Close other open dropdowns
+                            const parentMenu = parentNavItem.parentElement;
+                            if (parentMenu) {
+                                const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
+                                    child.classList.contains('has-dropdown') && child !== parentNavItem
+                                );
+                                siblingDropdowns.forEach(sib => {
+                                    sib.classList.remove('open');
+                                    const sibToggle = sib.querySelector('.dropdown-toggle');
+                                    if (sibToggle) sibToggle.setAttribute('aria-expanded', 'false');
+                                    const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
+                                    if (sibMenu) sibMenu.style.maxHeight = null;
+                                    const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
+                                    if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
+                                        sibArrowIcon.classList.remove('rotated');
+                                    }
+                                });
+                            }
+                        }
+                    }, 50); 
+                    return;
+                }
+                
+                // If sidebar is not collapsed, handle as accordion
+                const isOpen = parentNavItem.classList.toggle('open');
+                this.setAttribute('aria-expanded', isOpen.toString());
+                dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
+                
+                const arrowIcon = this.querySelector('.dropdown-arrow .fas');
+                if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
+                    arrowIcon.classList.toggle('rotated', isOpen);
+                }
+
+                // Accordion: Close other open dropdowns at the same level
+                const parentMenu = parentNavItem.parentElement; 
+                if (parentMenu) {
+                    const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
+                        child.classList.contains('has-dropdown') && child !== parentNavItem
+                    );
+                    siblingDropdowns.forEach(sib => {
+                        sib.classList.remove('open');
+                        const sibToggle = sib.querySelector('.dropdown-toggle');
+                        if (sibToggle) sibToggle.setAttribute('aria-expanded', 'false');
+                        const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
+                        if (sibMenu) sibMenu.style.maxHeight = null;
+                        const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
+                        if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
+                            sibArrowIcon.classList.remove('rotated');
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Initial state based on screen width or preference (optional)
+        // Let's start expanded, and ensure main content is also marked accordingly.
+        if (sideNav && mainContent) { // Added mainContent check
+            if (sideNav.classList.contains('collapsed')) {
+                mainContent.classList.add('collapsed');
+            } else {
+                mainContent.classList.remove('collapsed');
+            }
+        }
+
+        // Active link handling
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        const currentFullPath = window.location.pathname;
+
+        allNavLinks.forEach(linkElement => {
+            if (!linkElement) return;
+
+            const itemLink = linkElement.getAttribute('href');
+            if (itemLink) {
+                let isMatch = false;
+                const itemLinkFilename = itemLink.split('/').pop();
+
+                if (itemLink.startsWith('http')) {
+                    // External links: typically not marked active
+                } else if (itemLink.includes('index.html')) { 
+                    if ( (currentFullPath === '/' || currentFullPath.endsWith('/index.html') || currentPath === 'index.html') && 
+                         (itemLink.endsWith('index.html') || itemLink === '../../index.html') ) {
+                        isMatch = true;
+                    }
+                } else if (itemLinkFilename === currentPath && currentPath !== 'index.html') {
+                     isMatch = true;
+                }
+
+                if (isMatch) {
+                    document.querySelectorAll('.side-navigation .nav-item.active, .side-navigation .sub-item.active, .side-navigation .dropdown-item.active, .side-navigation .main-release-link.active').forEach(activeEl => activeEl.classList.remove('active'));
+                    
+                    let elToActivate = linkElement;
+                    if (linkElement.classList.contains('dropdown-item') || linkElement.classList.contains('main-release-link') || linkElement.classList.contains('sub-item')) {
+                         // Already the correct element or its anchor
+                    } else {
+                        elToActivate = linkElement.closest('.nav-item') || linkElement;
+                    }
+                    if(elToActivate) elToActivate.classList.add('active');
+
+                    let parentDropdownMenu = elToActivate.closest('.dropdown-menu-items');
+                    while(parentDropdownMenu) {
+                        const mainDropdownItem = parentDropdownMenu.parentElement; 
+                        if (mainDropdownItem && mainDropdownItem.classList.contains('has-dropdown') && !mainDropdownItem.classList.contains('open')) {
+                            // mainDropdownItem.classList.add('open'); // This line (original 2204) should be commented
+                            const toggle = mainDropdownItem.querySelector('.dropdown-toggle');
+                            // if (toggle) toggle.setAttribute('aria-expanded', 'true'); // This line (original 2206) should be commented
+                            // parentDropdownMenu.style.maxHeight = parentDropdownMenu.scrollHeight + "px"; // This line (original 2207) should be commented
+                            const arrowIcon = mainDropdownItem.querySelector('.dropdown-arrow .fas');
+                            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
+                               // arrowIcon.classList.add('rotated'); // This line (original 2210) should be commented
+                            }
+                        }
+                        if (mainDropdownItem && mainDropdownItem.parentElement) {
+                           parentDropdownMenu = mainDropdownItem.parentElement.closest('.nav-item.has-dropdown > .dropdown-menu-items');
+                        } else {
+                            parentDropdownMenu = null; 
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Fallback for home page if on root index.html
+        if ( (currentFullPath === '/' || currentFullPath.endsWith('/index.html')) && currentFullPath.split('/').length <= (currentFullPath.startsWith('../../') ? 3 : 2) ) { 
+            const homeSideBarLink = document.querySelector('.side-navigation a.nav-item[href="../../index.html"], .side-navigation a.nav-item[href="index.html"]');
+             if(homeSideBarLink && !document.querySelector('.side-navigation .active')){ // only if nothing else is active
+                homeSideBarLink.classList.add('active');
+             }
+        }
+    });
+  </script>
+</div>
 </body>
 </html>
+
 
