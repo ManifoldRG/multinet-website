@@ -518,7 +518,7 @@
          onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
         <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
             <span class="icon"><i class="fas fa-file-alt"></i></span>
-            <span class="nav-text">Technical Blogs/Reports</span>
+            <span class="nav-text">Blog</span>
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
         </a>
         <div class="dropdown-menu-items level-1">
@@ -556,7 +556,6 @@
           <div class="column has-text-centered">
             <h1 class="title is-1 publication-title">MultiNet: A Generalist Benchmark for Multimodal Action models</h1>
             <div class="is-size-5 publication-authors">
-              <br>
               
             </div>
 
@@ -567,10 +566,16 @@
       <div class="columns is-centered">
           <div class="column">
               <div class="content has-text-justified">
-                  <h2 class="title is-3 has-text-centered">Introducing Multinet</h2>
+                  <!-- <h2 class="title is-3 has-text-centered">Introducing Multinet</h2> -->
                   <p>
                       </p>
-                      <p>We present <a href="static/pages/Multinet.html">Multinet</a>, a comprehensive benchmark for evaluating generalist models across vision, language, and action. It consolidates diverse datasets and standardizes protocols to assess multimodal understanding and action generation capabilities of SoTA VLMs and VLAs. Multinet provides extensive training data (800M+ image-text pairs, 1.3T language tokens, 35TB+ control data), varied evaluation tasks (e.g., captioning, VQA, robotics, game-playing, commonsense reasoning, simulated locomotion and manipulation, etc.), and an open-source toolkit to standardize the process of obtaining and utilizing robotics/RL data, aiming to highlight current model limitations and drive development of truly generalist AI.</p>
+                      <p><a href="static/pages/Multinet.html">Multinet</a> is a comprehensive benchmarking initiative for evaluating generalist models across vision, language, and action. It provides:</p>
+                      <ul style="margin-left: 2em; margin-top: 0.75em; list-style-type: disc;">
+                          <li>Consolidation of diverse datasets and standardized protocols for assessing multimodal understanding</li>
+                          <li>Extensive training data (800M+ image-text pairs, 1.3T language tokens, 35TB+ control data)</li>
+                          <li>Varied evaluation tasks including captioning, VQA, robotics, game-playing, commonsense reasoning, and simulated locomotion/manipulation</li>
+                          <li>Open-source toolkit to standardize the process of obtaining and utilizing robotics/RL data</li>
+                      </ul>
                   </p>
               </div>
           </div>
@@ -710,15 +715,15 @@
                 <div class="flip-card">
                   <div class="flip-card-inner">
                     <div class="flip-card-front">
-                      <h3 class="title is-4">Technical Blogs and Reports</h3>
-                      <p>Technical blog posts and reports about our research and engineering achievements along the way</p>
+                      <h3 class="title is-4">Technical Blog</h3>
+                      <p>Technical blog posts and reports about key research and engineering achievements along the path to building Multinet.</p>
                       <img src="static/images/reporticon.png" alt="Technical report icon">
                     </div>
                     <div class="flip-card-back">
                       <div class="scrollable-content">
                         <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Technical Blogs and Reports</h3>
-                          <p class="description-intro">Explore our technical blogs and reports section for key discoveries and research and engineering achievements from our cutting-edge work in Vision-Language-Action models, action data, and benchmarking.</p>
+                          <h3 class="title is-4">Technical Blog</h3>
+                          <p class="description-intro">Explore our technical blog posts and reports section for key discoveries and research and engineering achievements from our cutting-edge work in Vision-Language-Action models, action data, and benchmarking.</p>
                         </div>
                       </div>
                     </div>
@@ -789,7 +794,7 @@
       justify-content: center;
       align-items: center;
       padding: 20px; /* Adjusted padding for smaller card size */
-    }
+    } 
 
     .flip-card-front {
       background-color: #ffffff; 
@@ -962,7 +967,7 @@
               <div class="news-item">
                 <div class="news-icon">🏆</div>
                 <div class="news-content">
-                  <p><strong>Multinet v0.2 released!</strong> How well do state-of-the-art VLAs and VLMs perform in procedurally generated Out-of-Distribution (OOD) environments? Read more on our <a href="Multinetv0.2.html">v0.2 Release Page</a>.</p>
+                  <p><strong>Multinet v0.2 released!</strong> We systematically profile state-of-the-art VLAs and VLMs perform in procedurally generated OOD game environments. Read more about our recent release <a href="Multinetv0.2.html">here</a>.</p>
                 </div>
               </div>
               <div class="news-item">
