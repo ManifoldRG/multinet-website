@@ -35,7 +35,7 @@
 
 
   <title>Multinet</title>
-  <link rel="icon" type="image/x-icon" href="static/images/Multinetlogo.png"> 
+  <link rel="icon" type="image/x-icon" href="static/images/multinet_logo_square.png"> 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
 
@@ -469,7 +469,7 @@
 <div id="side-nav" class="side-navigation collapsed">
   <div class="logo-container">
     <a href="index.html" class="site-title-logo">
-      <img src="static/images/Multinetlogo.png" alt="MultiNet Logo" style="height: 28px; margin-right: 8px; vertical-align: middle;">MultiNet
+      <img src="static/images/multinet_no_text.png" alt="MultiNet Logo" style="height: 40px; margin-right: 8px; vertical-align: middle; border-radius: 8px;">MultiNet
     </a>
     <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
@@ -517,7 +517,7 @@
                 <span class="icon"><i class="fas fa-file-code"></i></span>
                 <span class="nav-text" style="white-space: nowrap;">μGato</span>
             </a>
-            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="nav-item">
+            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" class="dropdown-item main-release-link">
               <span class="icon"><i class="fas fa-code"></i></span>
               <span class="nav-text">GenESIS framework</span>
             </a>
@@ -578,6 +578,7 @@
       </div>
     </div>
   </div>
+<br>
 <br>
             
 
@@ -965,23 +966,14 @@
     }
   </style>
 
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="news-section">
+  <section class="news-section" style="padding: 10px 0;">
     <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="content has-text-justified">
-            <h2 class="title is-3 has-text-centered">News</h2>
-            <div class="news-container">
+      <div class="columns is-centered" style="margin-top: 0; margin-bottom: 0;">
+        <div class="column" style="padding-top: 0; padding-bottom: 0;">
+          <div class="content has-text-justified" style="margin-bottom: 0;">
+            <h2 class="title is-3 has-text-centered" style="margin-bottom: 1rem;">News</h2>
+            <div class="news-container" style="padding: 15px;">
               <div class="news-item">
                 <div class="news-icon">🏆</div>
                 <div class="news-content">
@@ -1026,30 +1018,30 @@
     }
 
     .news-section {
-      padding: 20px 0;
-      max-height: 400px;
+      padding: 10px 0;
+      max-height: 350px;
       overflow-y: auto;
     }
 
     .news-title {
       font-size: 24px;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .news-container {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       background-color: #f5f5f5;
-      padding: 20px;
+      padding: 15px;
       border-radius: 5px;
     }
 
     .news-item {
       display: flex;
       align-items: center;
-      padding: 10px;
+      padding: 8px;
       background-color: white;
       border-radius: 5px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
