@@ -894,80 +894,72 @@
 <div id="side-nav" class="side-navigation collapsed">
   <div class="logo-container">
     <a href="../../index.html" class="site-title-logo">
-      <img src="../images/MultiNetlogo.png" alt="MultiNet Logo" style="height: 28px; margin-right: 8px; vertical-align: middle;">MultiNet
+      <img src="../images/multinet_no_text.png" alt="MultiNet Logo" style="height: 40px; margin-right: 8px; vertical-align: middle; border-radius: 8px;">MultiNet
     </a>
     <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
   </div>
   <div class="side-navigation-menu">
-    <a href="../../index.html" class="nav-item active">
+    <a href="../../index.html" class="nav-item">
       <span class="icon"><i class="fas fa-home"></i></span>
       <span class="nav-text">Home</span>
     </a>
-    <a href="MultiNet.html" class="nav-item">
-      <span class="icon"><i class="fas fa-eye"></i></span>
-      <span class="nav-text">MultiNet Vision</span>
-    </a>
 
+    <!-- Releases Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;" 
          onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
          onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
         <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-rocket"></i></span> <!-- Changed icon -->
-            <span class="nav-text">Releases</span>
-            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span> <!-- Initial arrow state -->
-        </a>
-        <div class="dropdown-menu-items level-1">
-            <!-- MultiNet v0.2 Section -->
-            <a href="MultiNetv02.html" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-gamepad"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">MultiNet v0.2</span>
-            </a>
-            <!-- MultiNet v0.1 Section -->
-            <a href="MultiNetv01.html" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-robot"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">MultiNet v0.1</span>
-            </a>
-        </div>
-    </div>
-
-    <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="nav-item">
-      <span class="icon"><i class="fas fa-atom"></i></span>
-      <span class="nav-text">GenESIS framework</span>
-    </a>
-    <!-- Technical Blogs/Reports Dropdown -->
-    <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-file-alt"></i></span>
-            <span class="nav-text">Technical Blogs/Reports</span>
+            <span class="icon"><i class="fas fa-microscope"></i></span>
+            <span class="nav-text">Benchmark Releases</span>
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
         </a>
         <div class="dropdown-menu-items level-1">
-            <a href="Technicalblog.html" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-project-diagram"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">Adapting VLAs to discrete spaces</span>
+            <!-- Multinet v0.2 Section -->
+            <a href="Multinetv02.html" class="dropdown-item main-release-link active">
+                <span class="icon"><i class="fas fa-gamepad"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">v0.2 - Gameplay</span>
+            </a>
+            <!-- Multinet v0.1 Section -->
+            <a href="Multinetv01.html" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-robot"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">v0.1 - Robotics</span>
             </a>
         </div>
     </div>
-    <!-- Adjacent Research Dropdown -->
+    <!-- Related Research Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;"
          onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
          onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
         <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-microscope"></i></span>
-            <span class="nav-text">Adjacent Research</span>
+            <span class="icon"><i class="fas fa-rocket"></i></span>
+            <span class="nav-text">Related Releases</span>
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
         </a>
         <div class="dropdown-menu-items level-1">
             <a href="https://github.com/eihli/mugato" target="_blank" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-file-code"></i></span>
+                <span class="icon"><i class="fas fa-microchip"></i></span>
                 <span class="nav-text" style="white-space: nowrap;">μGato</span>
+            </a>
+            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" class="dropdown-item main-release-link">
+              <span class="icon"><i class="fas fa-code"></i></span>
+              <span class="nav-text">GenESIS framework</span>
             </a>
         </div>
     </div>
+    <a href="Multinet.html" class="nav-item">
+      <span class="icon"><i class="fas fa-eye"></i></span>
+      <span class="nav-text">Multinet Vision</span>
+    </a>
+    <a href="Technicalblog.html" class="nav-item">
+      <span class="icon"><i class="fas fa-file-alt"></i></span>
+      <span class="nav-text">Blog</span>
+    </a>
+    <a href="../../index.html#BibTeX" class="nav-item">
+      <span class="icon"><i class="fas fa-quote-right"></i></span>
+      <span class="nav-text">Citations</span>
+    </a>
   </div>
 </div>
 
