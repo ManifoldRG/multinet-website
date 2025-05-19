@@ -13,9 +13,9 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Multinetv0.2</title>
+  <title><b>MultiNet</b>v0.2</title>
   
-  <link rel="icon" type="image/x-icon" href="../images/Multinetlogo.png">
+  <link rel="icon" type="image/x-icon" href="../images/<b>MultiNet</b>logo.png">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   
   <link rel="stylesheet" href="../css/bulma.min.css">
@@ -894,7 +894,7 @@
 <div id="side-nav" class="side-navigation collapsed">
   <div class="logo-container">
     <a href="../../index.html" class="site-title-logo">
-      <img src="../images/Multinetlogo.png" alt="MultiNet Logo" style="height: 28px; margin-right: 8px; vertical-align: middle;">MultiNet
+      <img src="../images/<b>MultiNet</b>logo.png" alt="<b>MultiNet</b> Logo" style="height: 28px; margin-right: 8px; vertical-align: middle;"><b>MultiNet</b>
     </a>
     <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
@@ -905,9 +905,9 @@
       <span class="icon"><i class="fas fa-home"></i></span>
       <span class="nav-text">Home</span>
     </a>
-    <a href="Multinet.html" class="nav-item">
+    <a href="<b>MultiNet</b>.html" class="nav-item">
       <span class="icon"><i class="fas fa-eye"></i></span>
-      <span class="nav-text">Multinet Vision</span>
+      <span class="nav-text"><b>MultiNet</b> Vision</span>
     </a>
 
     <div class="nav-item has-dropdown" style="padding: 0;" 
@@ -919,20 +919,20 @@
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span> <!-- Initial arrow state -->
         </a>
         <div class="dropdown-menu-items level-1">
-            <!-- Multinet v0.2 Section -->
-            <a href="Multinetv02.html" class="dropdown-item main-release-link">
+            <!-- <b>MultiNet</b> v0.2 Section -->
+            <a href="<b>MultiNet</b>v02.html" class="dropdown-item main-release-link">
                 <span class="icon"><i class="fas fa-gamepad"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">Multinet v0.2</span>
+                <span class="nav-text" style="white-space: nowrap;"><b>MultiNet</b> v0.2</span>
             </a>
-            <!-- Multinet v0.1 Section -->
-            <a href="Multinetv01.html" class="dropdown-item main-release-link">
+            <!-- <b>MultiNet</b> v0.1 Section -->
+            <a href="<b>MultiNet</b>v01.html" class="dropdown-item main-release-link">
                 <span class="icon"><i class="fas fa-robot"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">Multinet v0.1</span>
+                <span class="nav-text" style="white-space: nowrap;"><b>MultiNet</b> v0.1</span>
             </a>
         </div>
     </div>
 
-    <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="nav-item">
+    <a href="https://github.com/ManifoldRG/<b>MultiNet</b>/tree/main/src/modules" target="_blank" class="nav-item">
       <span class="icon"><i class="fas fa-atom"></i></span>
       <span class="nav-text">GenESIS framework</span>
     </a>
@@ -1009,7 +1009,7 @@
                                 </a>
                               </span>
                               <span class="link-block">
-                                <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                <a href="https://github.com/ManifoldRG/<b>MultiNet</b>" target="_blank" class="external-link button is-normal is-rounded is-dark">
                                   <span class="icon">
                                     <i class="fab fa-github"></i>
                                   </span>
@@ -1017,7 +1017,7 @@
                                 </a>
                               </span>
                               <span class="link-block">
-                                <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                <a href="https://github.com/ManifoldRG/<b>MultiNet</b>/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
                                   <span class="icon">
                                     <i class="fas fa-atom"></i>
                                   </span>
@@ -1035,7 +1035,7 @@
       <div class="columns is-centered">
         <div class="column">
           <div class="content has-text-centered">
-            <img src="../images/v0_2_visual.png" alt="Multinet v0.2 Release Visual" width="85%">
+            <img src="../images/v0_2_visual.png" alt="<b>MultiNet</b> v0.2 Release Visual" width="85%">
           </div>
         </div>
       </div>
@@ -1055,7 +1055,7 @@
               execution. However, systematic evaluation of these models, partic-
               ularly their zero-shot generalization capabilities in procedurally
               out-of-distribution (OOD) environments, remains limited. In this
-              paper, we introduce MultiNet v0.2, a comprehensive benchmark
+              paper, we introduce <b>MultiNet</b> v0.2, a comprehensive benchmark
               designed to evaluate and analyze the generalization performance
               of state-of-the-art VLMs and VLAs—including GPT-4o, GPT-4.1,
               OpenVLA, Pi0 Base, and Pi0 FAST—on diverse procedural tasks
@@ -1089,13 +1089,8 @@
         <div class="column">
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Dataset coverage</h2>
-            <p>
-              All 5 models - OpenVLA, Pi0 Base, Pi0 FAST, GPT 4o and GPT 4.1 were evaluated on offline trajectories from expert reinforcement
-              learning (RL) agents trained on the Procgen dataset, which were sourced from Facebook's publicly available repository (https://dl.fbaipublicfiles.com/DGRL/1M/expert/). 
-              The test splits for each of the 16 Procgen datasets consisted of randomly sampled 10% of the total episodes in the dataset.  Procgen environments are procedurally generated, Atari-like 2D games 
-              designed to evaluate visual and motor skills of RL agents. Each dataset within Procgen exhibits diverse environment layouts, tasks, objectives, reward structures, and discrete actionspaces, 
-              predominantly involving directional movements and specific game-related interactions.
-            </p>
+            <p>Below we present an overview of the Procgen dataset used in MultiNet V0.2. Each sub-dataset within Procgen exhibits diverse environment layouts, tasks, objectives, reward structures, and discrete actionspaces, 
+            predominantly involving directional movements and specific game-related interactions.</p>
             <div class="container is-max-desktop">
               <div class="table-container">
                 <table class="dataset-coverage-table">
@@ -1185,6 +1180,14 @@
               <div class="table-notes">
                   Action space dimensions include: movement actions (8 directions + no-op) and special actions (varies by environment). To understand more about these environments and their action spaces, please refer to the <a href="https://github.com/openai/procgen" target="_blank">Procgen benchmark</a>.
               </div>
+              <br>
+              <p>
+                All 5 models - OpenVLA, Pi0 Base, Pi0 FAST, GPT 4o and GPT 4.1 were evaluated on offline trajectories from expert reinforcement
+                learning (RL) agents trained on the Procgen dataset, which were sourced from Facebook's publicly available repository (https://dl.fbaipublicfiles.com/DGRL/1M/expert/). 
+                The test splits for each of the 16 Procgen datasets consisted of a random selection of 10% of the total episodes in the dataset.  Procgen environments are procedurally generated, Atari-like 2D games 
+                designed to evaluate visual and motor skills of RL agents. Each dataset within Procgen exhibits diverse environment layouts, tasks, objectives, reward structures, and discrete actionspaces, 
+                predominantly involving directional movements and specific game-related interactions.
+              </p>
           </div>
         </div>
       </div>
@@ -1655,7 +1658,7 @@
                 </span>
                 <span>Paper</span>
               </a>
-              <a href="https://github.com/ManifoldRG/MultiNet" class="button is-small is-dark" target="_blank">
+              <a href="https://github.com/ManifoldRG/<b>MultiNet</b>" class="button is-small is-dark" target="_blank">
                 <span class="icon">
                   <i class="fab fa-github"></i>
                 </span>
@@ -1663,7 +1666,7 @@
               </a>
             </div>
   
-            <p>For questions or issues, please <a href="https://github.com/ManifoldRG/MultiNet/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
+            <p>For questions or issues, please <a href="https://github.com/ManifoldRG/<b>MultiNet</b>/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
 
           </div>
         </div>
