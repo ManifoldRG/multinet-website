@@ -1222,31 +1222,28 @@
 
     <section class="section">
         <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column">
-                    <div class="content has-text-justified">
-                        <h2 class="title is-3 has-text-centered">What's Next?</h2>
-                        <p>The release of Multinet marks an important first step toward a new paradigm of foundation models, but significant
-                            opportunities remain for expansion and improvement.</p>
-                        <ul>
-                            <li>While current VLAs show promising but inconsistent results on robotics control tasks, and very poor performance on simulated, procedurally generated 2D game-playing environments, we plan to systematically evaluate their performance on pure vision-language and language tasks to assess whether fine-tuning or co-fine-tuning on control tasks compromises their capabilities in individual modalities.</li>
-                            <li>We also aim to broaden our evaluation scope beyond the OpenX-Embodiment and Procgen datasets. By incorporating the diverse
-                                control tasks described above, we can better understand how VLAs and generalist models perform on completely
-                                out-of-distribution data. </li>
-                            <li>Currently, our profiling efforts as seen in our <a href="static/pages/Multinetv01.html">first release</a> and <a href="static/pages/Multinetv02.html">latest release</a> focus on zero-shot performance, future work will explore few-shot learning and
-                                fine-tuning scenarios.</li>
-                            <li>We are especially interested in fine-tuning and transferring VLAs to novel domains.
-                                We are exploring how these models might be adapted to software environments, potentially enabling more capable
-                                digital agents by leveraging insights from embodied learning.</li>
-                            <li>Finally, we envision transforming Multinet from its current offline form into an online benchmark. This evolution may
-                                include the development of simulation environments for both 2D and 3D control tasks, enabling more dynamic and
-                                interactive evaluation of model capabilities.</li>
-                        </ul>
-                    </div>
-                </div>
+          <div class="columns is-centered">
+            <div class="column">
+              <div class="content has-text-justified">
+                <h2 class="title is-3 has-text-centered">What's Next</h2>
+                <p>The release of Multinet is a preliminary but importantstep toward next-generation AI systems, with ambitious research directions planned for future iterations:</p>
+                <ul>
+                  <li><strong>Comprehensive Modality Analysis:</strong> Systematically evaluate how control-task training affects vision-language capabilities in VLAs. This investigation will provide crucial insights into architectural trade-offs when developing truly generalist models.</li>
+                  
+                  <li><strong>Expanded Evaluation Horizons:</strong> Integrate diverse control tasks beyond OpenX-Embodiment and Procgen to thoroughly assess generalization to completely unseen environments. This will rigorously identify architectural bottlenecks and generalization boundaries.</li>
+                  
+                  <li><strong>Advanced Transfer Learning:</strong> Extend beyond zero-shot performance to explore few-shot learning and fine-tuning paradigms, with particular emphasis on transfer to novel domains like software environments. This research will advance our understanding of learning transferable representations across embodied and digital tasks.</li>
+                  
+                  <li><strong>Simulation-Based Online Evaluation:</strong> Transform Multinet from its current offline form into an interactive online benchmark leveraging state-of-the-art simulation environments. We're developing world models to power these simulations for both 2D and 3D control tasks, enabling dynamic assessment of model capabilities in responsive environments.</li>
+                  
+                  <li><strong>Multi-Domain Expertise:</strong> Research cross-domain adaptation mechanisms that allow models to seamlessly operate across diverse environmental contexts, from robotics to software agents and game environments.</li>
+                </ul>
+                <p>Through these research directions, we aim to establish Multinet as a comprehensive platform advancing generalist AI research. By developing sophisticated evaluation environments and methodologies, we will accelerate progress toward more versatile and robust artificial intelligence systems capable of generalizing across an unprecedented range of tasks and domains.</p>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </section>
     
     <!-- BibTeX Section -->
     <section class="section" id="Citation">
