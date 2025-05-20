@@ -13,9 +13,9 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Multinetv0.2</title>
+  <title>MultiNetv0.2</title>
   
-  <link rel="icon" type="image/x-icon" href="../images/Multinetlogo.png">
+  <link rel="icon" type="image/x-icon" href="../images/MultiNetlogo.png">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   
   <link rel="stylesheet" href="../css/bulma.min.css">
@@ -894,80 +894,72 @@
 <div id="side-nav" class="side-navigation collapsed">
   <div class="logo-container">
     <a href="../../index.html" class="site-title-logo">
-      <img src="../images/Multinetlogo.png" alt="MultiNet Logo" style="height: 28px; margin-right: 8px; vertical-align: middle;">MultiNet
+      <img src="../images/multinet_no_text.png" alt="MultiNet Logo" style="height: 40px; margin-right: 8px; vertical-align: middle; border-radius: 8px;">MultiNet
     </a>
     <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
   </div>
   <div class="side-navigation-menu">
-    <a href="../../index.html" class="nav-item active">
+    <a href="../../index.html" class="nav-item">
       <span class="icon"><i class="fas fa-home"></i></span>
       <span class="nav-text">Home</span>
     </a>
-    <a href="Multinet.html" class="nav-item">
-      <span class="icon"><i class="fas fa-eye"></i></span>
-      <span class="nav-text">Multinet Vision</span>
-    </a>
 
+    <!-- Releases Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;" 
          onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
          onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
         <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-rocket"></i></span> <!-- Changed icon -->
-            <span class="nav-text">Releases</span>
-            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span> <!-- Initial arrow state -->
+            <span class="icon"><i class="fas fa-microscope"></i></span>
+            <span class="nav-text">Benchmark Releases</span>
+            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
         </a>
         <div class="dropdown-menu-items level-1">
             <!-- Multinet v0.2 Section -->
-            <a href="Multinetv02.html" class="dropdown-item main-release-link">
+            <a href="Multinetv02.html" class="dropdown-item main-release-link active">
                 <span class="icon"><i class="fas fa-gamepad"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">Multinet v0.2</span>
+                <span class="nav-text" style="white-space: nowrap;">v0.2 - Gameplay</span>
             </a>
             <!-- Multinet v0.1 Section -->
             <a href="Multinetv01.html" class="dropdown-item main-release-link">
                 <span class="icon"><i class="fas fa-robot"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">Multinet v0.1</span>
+                <span class="nav-text" style="white-space: nowrap;">v0.1 - Robotics</span>
             </a>
         </div>
     </div>
-
-    <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="nav-item">
-      <span class="icon"><i class="fas fa-atom"></i></span>
-      <span class="nav-text">GenESIS framework</span>
-    </a>
-    <!-- Technical Blogs/Reports Dropdown -->
+    <!-- Related Research Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;"
          onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
          onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
         <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-file-alt"></i></span>
-            <span class="nav-text">Technical Blogs/Reports</span>
-            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
-        </a>
-        <div class="dropdown-menu-items level-1">
-            <a href="Technicalblog.html" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-project-diagram"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">Adapting VLAs to discrete spaces</span>
-            </a>
-        </div>
-    </div>
-    <!-- Adjacent Research Dropdown -->
-    <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-microscope"></i></span>
-            <span class="nav-text">Adjacent Research</span>
+            <span class="icon"><i class="fas fa-rocket"></i></span>
+            <span class="nav-text">Related Releases</span>
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
         </a>
         <div class="dropdown-menu-items level-1">
             <a href="https://github.com/eihli/mugato" target="_blank" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-file-code"></i></span>
+                <span class="icon"><i class="fas fa-microchip"></i></span>
                 <span class="nav-text" style="white-space: nowrap;">μGato</span>
+            </a>
+            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" class="dropdown-item main-release-link">
+              <span class="icon"><i class="fas fa-code"></i></span>
+              <span class="nav-text">GenESIS framework</span>
             </a>
         </div>
     </div>
+    <a href="Multinet.html" class="nav-item">
+      <span class="icon"><i class="fas fa-eye"></i></span>
+      <span class="nav-text">Multinet Vision</span>
+    </a>
+    <a href="Technicalblog.html" class="nav-item">
+      <span class="icon"><i class="fas fa-file-alt"></i></span>
+      <span class="nav-text">Blog</span>
+    </a>
+    <a href="../../index.html#BibTeX" class="nav-item">
+      <span class="icon"><i class="fas fa-quote-right"></i></span>
+      <span class="nav-text">Citations</span>
+    </a>
   </div>
 </div>
 
@@ -1035,8 +1027,9 @@
       <div class="columns is-centered">
         <div class="column">
           <div class="content has-text-centered">
-            <img src="../images/v0_2_visual.png" alt="Multinet v0.2 Release Visual" width="85%">
+            <img src="../images/v0_2_visual.png" alt="MultiNet v0.2 Release Visual" width="85%">
           </div>
+          <p class="has-text-centered is-size-6 is-italic"> MultiNet v0.2 extends the MultiNet benchmark to effectively evaluate SoTA VLAs and VLMs on multistep action trajectories in procedurally generated, open ended game environments. </p>
         </div>
       </div>
     </div>
@@ -1055,7 +1048,7 @@
               execution. However, systematic evaluation of these models, partic-
               ularly their zero-shot generalization capabilities in procedurally
               out-of-distribution (OOD) environments, remains limited. In this
-              paper, we introduce MultiNet v0.2, a comprehensive benchmark
+              paper, we introduce <b>MultiNet v0.2</b>, a comprehensive benchmark
               designed to evaluate and analyze the generalization performance
               of state-of-the-art VLMs and VLAs—including GPT-4o, GPT-4.1,
               OpenVLA, Pi0 Base, and Pi0 FAST—on diverse procedural tasks
@@ -1073,7 +1066,7 @@
                     appropriately, highlighting the sensitivity of model performance
                     to precise prompt engineering. </li>
                 </ul>
-                We release our benchmark, valuation framework, and findings to enable the assessment of
+                We release our benchmark, evaluation framework, and findings to enable the assessment of
                 future VLA models and identify critical areas for improvement
                 in their application to out of distibrution digital tasks.
             </p>
@@ -1089,13 +1082,8 @@
         <div class="column">
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Dataset coverage</h2>
-            <p>
-              All 5 models - OpenVLA, Pi0 Base, Pi0 FAST, GPT 4o and GPT 4.1 were evaluated on offline trajectories from expert reinforcement
-              learning (RL) agents trained on the Procgen dataset, which were sourced from Facebook's publicly available repository (https://dl.fbaipublicfiles.com/DGRL/1M/expert/). 
-              The test splits for each of the 16 Procgen datasets consisted of randomly sampled 10% of the total episodes in the dataset.  Procgen environments are procedurally generated, Atari-like 2D games 
-              designed to evaluate visual and motor skills of RL agents. Each dataset within Procgen exhibits diverse environment layouts, tasks, objectives, reward structures, and discrete actionspaces, 
-              predominantly involving directional movements and specific game-related interactions.
-            </p>
+            <p>Below we present an overview of the Procgen dataset used in MultiNet V0.2. Each sub-dataset within Procgen exhibits diverse environment layouts, tasks, objectives, reward structures, and discrete actionspaces, 
+            predominantly involving directional movements and specific game-related interactions.</p>
             <div class="container is-max-desktop">
               <div class="table-container">
                 <table class="dataset-coverage-table">
@@ -1185,11 +1173,345 @@
               <div class="table-notes">
                   Action space dimensions include: movement actions (8 directions + no-op) and special actions (varies by environment). To understand more about these environments and their action spaces, please refer to the <a href="https://github.com/openai/procgen" target="_blank">Procgen benchmark</a>.
               </div>
+              <br>
+              <p>
+                All 5 models - OpenVLA, Pi0 Base, Pi0 FAST, GPT 4o and GPT 4.1 were evaluated on offline trajectories from expert reinforcement
+                learning (RL) agents trained on the Procgen dataset, which were sourced from Meta AI's publically available <a href="https://dl.fbaipublicfiles.com/DGRL/1M/expert/" target="_blank"></a>repository</a>.
+                The test splits for each of the 16 Procgen datasets consisted of a random selection of 10% of the total episodes in the dataset.  Procgen environments are procedurally generated, Atari-like 2D games 
+                designed to evaluate visual and motor skills of RL agents. Each dataset within Procgen exhibits diverse environment layouts, tasks, objectives, reward structures, and discrete actionspaces, 
+                predominantly involving directional movements and specific game-related interactions.
+              </p>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+<section class="section"></section>
+<div class="container is-max-desktop">
+  <div class="columns is-centered">
+    <div class="column">
+      <div class="content has-text-justified">
+        <h2 class="title is-3 has-text-centered">Metrics and Benchmark</h2>
+        <p>
+            In order to evaluate the performance of each of these models on offline trajectories of expert RL agents in these environments with discrete action spaces on a per-timestep basis, we use a variety of metrics to best capture the performance of the models and assess them as fair as possible. The following key metrics are used:
+        </p>
+
+        <div class="tabs is-centered is-boxed" style="margin-top: 2rem;">
+          <ul>
+            <li class="is-active" data-tab="1"><a><span>Brier Scores</span></a></li>
+            <li data-tab="2"><a><span>Exact Match metrics</span></a></li>
+            <li data-tab="3"><a><span>Macro scores</span></a></li>
+            <li data-tab="4"><a><span>Action class-wise scores</span></a></li>
+          </ul>
+        </div>
+
+        <div id="tab-content-container" style="margin-bottom: 2rem;">
+          <!-- Tab 1: Brier Family Content -->
+          <div class="tab-pane is-active" data-content="1">
+            <div class="columns is-multiline is-centered">
+              <!-- Card 1: Brier MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-chart-line fa-lg"></i></span>
+                        <h3 class="title is-5">Brier MAE</h3>
+                        <p>Mean Absolute Error of Brier scores.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Brier MAE</h3>
+                        <p style="font-size: 0.7rem;">Brier Score: <br> <sup>1</sup>&frasl;<sub>N</sub> &sum;<sub>t=1</sub><sup>N</sup> &sum;<sub>i=1</sub><sup>R</sup> (f<sub>ti</sub> - o<sub>ti</sub>)<sup>2</sup></p>
+                        <p style="font-size: 0.65rem;">f<sub>ti</sub>: pred prob class i, time t<br>o<sub>ti</sub>: ground truth<br>R: num classes, N: num timesteps.<br>Brier MAE is a variation of the original Brier score
+                        which is a useful method to measure the accuracy of probabilistic predictions. </p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              
+              <!-- Card 2: Normalized Brier MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-ruler-combined fa-lg"></i></span>
+                        <h3 class="title is-5">Normalized Brier MAE</h3>
+                        <p>Normalized version of Brier MAE.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Normalized Brier MAE</h3>
+                        <p>Description:</p>
+                        <p style="font-size: 0.7rem;">Average of Brier Absolute Errors that have been min-max normalized using the overall min and max Brier absolute errors across all timesteps.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 3: Norm. Quantile Filtered Brier MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-filter fa-lg"></i></span>
+                        <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered Brier MAE</h3>
+                        <p>Normalized Brier MAE filtered by quantiles.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered Brier MAE</h3>
+                        <p>Description:</p>
+                        <p style="font-size: 0.7rem;">Brier MAE values are filtered (only considering the error values that are within the 5th to 95th percentile), and then normalized based on the quantile filtered min/max errors.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 4: Max Relative Brier MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-mountain fa-lg"></i></span>
+                        <h3 class="title is-5">Max Relative Brier MAE</h3>
+                        <p>Max relative error of Brier scores.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Max Relative Brier MAE</h3>
+                        <p>max(MAE) / median(MAE)</p>
+                        <p style="font-size: 0.7rem;">Quantifies how the worst-case error deviates from the typical (median) error for a given subdataset.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: Overall Performance Content -->
+          <div class="tab-pane" data-content="2">
+            <div class="columns is-multiline is-centered">
+              <!-- Card 5: Percentage Invalid Actions -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-ban fa-lg"></i></span>
+                        <h3 class="title is-5">% Invalid Actions</h3>
+                        <p>Predicted actions outside the valid action space.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">% Invalid Actions</h3>
+                        <p>(Timesteps w/ invalid preds / Total timesteps) * 100</p>
+                        <p style="font-size: 0.7rem;">Percentage of predictions falling outside the valid action space of a Procgen subdataset.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 6: Micro Precision -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-bullseye fa-lg"></i></span>
+                        <h3 class="title is-5">Micro Precision</h3>
+                        <p>Precision of the model across all timesteps.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Micro Precision</h3>
+                        <p>Micro Precision:<br>True Positives / (True Positives + False Positives)</p>
+                        <p style="font-size: 0.7rem;">Calculated globally across all timesteps.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 7: Micro Recall -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-search-plus fa-lg"></i></span>
+                        <h3 class="title is-5">Micro Recall</h3>
+                        <p>Recall of the model across all timesteps.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Micro Recall</h3>
+                        <p>Micro Recall:<br>True Positives / (True Positives + False Negatives)</p>
+                        <p style="font-size: 0.7rem;">Calculated globally across all timesteps.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 8: Micro F1 Score -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-balance-scale-right fa-lg"></i></span>
+                        <h3 class="title is-5">Micro F1 Score</h3>
+                        <p>Harmonic mean of Micro Precision and Recall.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Micro F1 Score</h3>
+                        <p>Micro F1:<br>2 * (Micro Prec * Micro Rec) / (Micro Prec + Micro Rec)</p>
+                        <p style="font-size: 0.7rem;">Balanced measure for global performance.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3: Macro-Averaged Content -->
+          <div class="tab-pane" data-content="3">
+            <div class="columns is-multiline is-centered">
+              <!-- Card 9: Macro Precision -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-layer-group fa-lg"></i></span>
+                        <h3 class="title is-5">Macro Precision</h3>
+                        <p>Avg. of class-wise precision.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Macro Precision</h3>
+                        <p style="font-size: 0.7rem;">Calculated by averaging class-wise precision scores across all classes. Treats all classes equally.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 11: Macro Recall -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-layer-group fa-lg"></i></span>
+                        <h3 class="title is-5">Macro Recall</h3>
+                        <p>Avg. of class-wise recall.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Macro Recall</h3>
+                        <p style="font-size: 0.7rem;">Calculated by averaging class-wise recall scores across all classes. Important for imbalanced datasets.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 13: Macro F1 Score -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-layer-group fa-lg"></i></span>
+                        <h3 class="title is-5">Macro F1 Score</h3>
+                        <p>Avg. of class-wise F1 scores.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Macro F1 Score</h3>
+                        <p style="font-size: 0.7rem;">Calculated by averaging class-wise F1 scores. Balanced macro-average performance.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 4: Class-wise Content -->
+          <div class="tab-pane" data-content="4">
+            <div class="columns is-multiline is-centered">
+              <!-- Card 10: Class-wise Precision -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-tag fa-lg"></i></span>
+                        <h3 class="title is-5">Class-wise Precision</h3>
+                        <p>Precision for each action class.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Class-wise Precision</h3>
+                        <p style="font-size: 0.7rem;">Precision calculated individually for each action class. Helps understand bias towards specific classes.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 12: Class-wise Recall -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-tag fa-lg"></i></span>
+                        <h3 class="title is-5">Class-wise Recall</h3>
+                        <p>Recall for each action class.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Class-wise Recall</h3>
+                        <p style="font-size: 0.7rem;">Recall calculated individually for each action class. Shows per-class identification performance.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 14: Class-wise F1 Score -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-tag fa-lg"></i></span>
+                        <h3 class="title is-5">Class-wise F1 Score</h3>
+                        <p>F1 for each action class.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Class-wise F1 Score</h3>
+                        <p style="font-size: 0.7rem;">F1 score calculated individually for each action class. Balanced per-class performance.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div> <!-- end tab-content-container -->
+
+        <p>
+            To visualize the effects of model architecture, training methods, and output processing techniques on the concentrated VS diffused nature of the models' predicted actions, we use confusion matrices depicting the frequency of predictions on a per-action class basis, and the frequency of correct predictions. Additionally, to observe the correlation between model performance and image complexity, we use correlation matrices between Shannon Entropy and Delentropy values of
+            the images and the Macro Recall values of the models. To learn more about the metrics, please refer to the <a href="https://arxiv.org/pdf/2505.05540" target="_blank">paper</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 
   <section class="section">
     <div class="container is-max-desktop">
@@ -1197,6 +1519,14 @@
         <div class="column">
           <div class="content">
             <h2 class="title is-3 has-text-centered">Results and Analysis</h2>
+            <p> We find significant limitations in model performancearising from architectural constraints, training
+              paradigms, and input-output biases inherent to the models. The
+              stark domain discrepancy between training data—primarily
+              continuous-action robotics datasets, and general web-scale
+              vision language data—and discrete-action game environments
+              emerged as a critical barrier to effective zero-shot generalization.
+              We also identified notable differences in model behaviors linked
+              directly to their architectures, training strategies, and input/output processing techniques.</p>
                     <div class="content has-text-centered">
                       <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Overall Performance</h4>
                       <div class="metrics-container">
@@ -1274,14 +1604,7 @@
                         </div>
                     </section>
             <p>
-              Our analysis highlighted significant limitations arising from architectural constraints, training
-              paradigms, and input-output biases inherent to the models. The
-              stark domain discrepancy between training data—primarily
-              continuous-action robotics datasets, and general web-scale
-              vision language data—and discrete-action game environments
-              emerged as a critical barrier to effective zero-shot generalization.
-              We identified notable differences in model behaviors linked
-              directly to their architectures, training strategies, and input/output processing techniques. OpenVLA's robust action-space
+              OpenVLA's robust action-space
               clamping technique consistently provided superior generalization, minimizing invalid outputs and exhibiting relative
               resilience to out-of-distribution scenarios. Conversely, autoregressive models like GPT-4x displayed substantial difficulties
               in generalizing, especially under complex image conditions,
@@ -1297,333 +1620,6 @@
         </div>
 
 
-      </div>
-    </div>
-  </section>
-
-  <section class="section"></section>
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="content has-text-justified">
-            <h2 class="title is-3 has-text-centered">Metrics and Benchmark</h2>
-            <p>
-                We benchmark SoTA VLMs and VLAs on 16 diverse datasets from the Procgen dataset collection.
-                In order to evaluate the performance of each of these models on offline trajectories of expert RL agents in these environments with discrete action spaces on a per-timestep basis, we use a variety of metrics to best capture the performance of the models and assess them as fair as possible. The following key metrics are used:
-            </p>
-
-            <div class="tabs is-centered is-boxed" style="margin-top: 2rem;">
-              <ul>
-                <li class="is-active" data-tab="1"><a><span>Brier Scores</span></a></li>
-                <li data-tab="2"><a><span>Exact Match metrics</span></a></li>
-                <li data-tab="3"><a><span>Macro scores</span></a></li>
-                <li data-tab="4"><a><span>Action class-wise scores</span></a></li>
-              </ul>
-            </div>
-
-            <div id="tab-content-container" style="margin-bottom: 2rem;">
-              <!-- Tab 1: Brier Family Content -->
-              <div class="tab-pane is-active" data-content="1">
-                <div class="columns is-multiline is-centered">
-                  <!-- Card 1: Brier MAE -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-chart-line fa-lg"></i></span>
-                            <h3 class="title is-5">Brier MAE</h3>
-                            <p>Mean Absolute Error of Brier scores.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">Brier MAE</h3>
-                            <p style="font-size: 0.7rem;">Brier Score: <br> <sup>1</sup>&frasl;<sub>N</sub> &sum;<sub>t=1</sub><sup>N</sup> &sum;<sub>i=1</sub><sup>R</sup> (f<sub>ti</sub> - o<sub>ti</sub>)<sup>2</sup></p>
-                            <p style="font-size: 0.65rem;">f<sub>ti</sub>: pred prob class i, time t<br>o<sub>ti</sub>: ground truth<br>R: num classes, N: num timesteps.<br>Brier MAE is a variation of the original Brier score
-                            which is a useful method to measure the accuracy of probabilistic predictions. </p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  
-                  <!-- Card 2: Normalized Brier MAE -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-ruler-combined fa-lg"></i></span>
-                            <h3 class="title is-5">Normalized Brier MAE</h3>
-                            <p>Normalized version of Brier MAE.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">Normalized Brier MAE</h3>
-                            <p>Description:</p>
-                            <p style="font-size: 0.7rem;">Average of Brier Absolute Errors that have been min-max normalized using the overall min and max Brier absolute errors across all timesteps.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <!-- Card 3: Norm. Quantile Filtered Brier MAE -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-filter fa-lg"></i></span>
-                            <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered Brier MAE</h3>
-                            <p>Normalized Brier MAE filtered by quantiles.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered Brier MAE</h3>
-                            <p>Description:</p>
-                            <p style="font-size: 0.7rem;">Brier MAE values are filtered (only considering the error values that are within the 5th to 95th percentile), and then normalized based on the quantile filtered min/max errors.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <!-- Card 4: Max Relative Brier MAE -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-mountain fa-lg"></i></span>
-                            <h3 class="title is-5">Max Relative Brier MAE</h3>
-                            <p>Max relative error of Brier scores.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">Max Relative Brier MAE</h3>
-                            <p>max(MAE) / median(MAE)</p>
-                            <p style="font-size: 0.7rem;">Quantifies how the worst-case error deviates from the typical (median) error for a given subdataset.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tab 2: Overall Performance Content -->
-              <div class="tab-pane" data-content="2">
-                <div class="columns is-multiline is-centered">
-                  <!-- Card 5: Percentage Invalid Actions -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-ban fa-lg"></i></span>
-                            <h3 class="title is-5">% Invalid Actions</h3>
-                            <p>Predicted actions outside the valid action space.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">% Invalid Actions</h3>
-                            <p>(Timesteps w/ invalid preds / Total timesteps) * 100</p>
-                            <p style="font-size: 0.7rem;">Percentage of predictions falling outside the valid action space of a Procgen subdataset.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <!-- Card 6: Micro Precision -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-bullseye fa-lg"></i></span>
-                            <h3 class="title is-5">Micro Precision</h3>
-                            <p>Precision of the model across all timesteps.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">Micro Precision</h3>
-                            <p>Micro Precision:<br>True Positives / (True Positives + False Positives)</p>
-                            <p style="font-size: 0.7rem;">Calculated globally across all timesteps.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <!-- Card 7: Micro Recall -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-search-plus fa-lg"></i></span>
-                            <h3 class="title is-5">Micro Recall</h3>
-                            <p>Recall of the model across all timesteps.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">Micro Recall</h3>
-                            <p>Micro Recall:<br>True Positives / (True Positives + False Negatives)</p>
-                            <p style="font-size: 0.7rem;">Calculated globally across all timesteps.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <!-- Card 8: Micro F1 Score -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-balance-scale-right fa-lg"></i></span>
-                            <h3 class="title is-5">Micro F1 Score</h3>
-                            <p>Harmonic mean of Micro Precision and Recall.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">Micro F1 Score</h3>
-                            <p>Micro F1:<br>2 * (Micro Prec * Micro Rec) / (Micro Prec + Micro Rec)</p>
-                            <p style="font-size: 0.7rem;">Balanced measure for global performance.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tab 3: Macro-Averaged Content -->
-              <div class="tab-pane" data-content="3">
-                <div class="columns is-multiline is-centered">
-                  <!-- Card 9: Macro Precision -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-layer-group fa-lg"></i></span>
-                            <h3 class="title is-5">Macro Precision</h3>
-                            <p>Avg. of class-wise precision.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">Macro Precision</h3>
-                            <p style="font-size: 0.7rem;">Calculated by averaging class-wise precision scores across all classes. Treats all classes equally.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <!-- Card 11: Macro Recall -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-layer-group fa-lg"></i></span>
-                            <h3 class="title is-5">Macro Recall</h3>
-                            <p>Avg. of class-wise recall.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">Macro Recall</h3>
-                            <p style="font-size: 0.7rem;">Calculated by averaging class-wise recall scores across all classes. Important for imbalanced datasets.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <!-- Card 13: Macro F1 Score -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-layer-group fa-lg"></i></span>
-                            <h3 class="title is-5">Macro F1 Score</h3>
-                            <p>Avg. of class-wise F1 scores.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">Macro F1 Score</h3>
-                            <p style="font-size: 0.7rem;">Calculated by averaging class-wise F1 scores. Balanced macro-average performance.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tab 4: Class-wise Content -->
-              <div class="tab-pane" data-content="4">
-                <div class="columns is-multiline is-centered">
-                  <!-- Card 10: Class-wise Precision -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-tag fa-lg"></i></span>
-                            <h3 class="title is-5">Class-wise Precision</h3>
-                            <p>Precision for each action class.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">Class-wise Precision</h3>
-                            <p style="font-size: 0.7rem;">Precision calculated individually for each action class. Helps understand bias towards specific classes.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <!-- Card 12: Class-wise Recall -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-tag fa-lg"></i></span>
-                            <h3 class="title is-5">Class-wise Recall</h3>
-                            <p>Recall for each action class.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">Class-wise Recall</h3>
-                            <p style="font-size: 0.7rem;">Recall calculated individually for each action class. Shows per-class identification performance.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <!-- Card 14: Class-wise F1 Score -->
-                  <div class="column is-one-quarter-desktop is-half-tablet">
-                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
-                      <div class="flip-card-metric">
-                        <div class="flip-card-inner-metric">
-                          <div class="flip-card-front-metric">
-                            <span class="icon is-medium metric-icon"><i class="fas fa-tag fa-lg"></i></span>
-                            <h3 class="title is-5">Class-wise F1 Score</h3>
-                            <p>F1 for each action class.</p>
-                          </div>
-                          <div class="flip-card-back-metric">
-                            <h3 class="title is-5">Class-wise F1 Score</h3>
-                            <p style="font-size: 0.7rem;">F1 score calculated individually for each action class. Balanced per-class performance.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div> <!-- end tab-content-container -->
-
-            <p>
-                To visualize the effects of model architecture, training methods, and output processing techniques on the concentrated VS diffused nature of the models' predicted actions, we use confusion matrices depicting the frequency of predictions on a per-action class basis, and the frequency of correct predictions. Finally, to observe the correlation between model performance and image complexity, we use correlation matrices between Shannon Entropy and Delentropy values of
-                the images and the Macro Recall values of the models. To learn more about the metrics, please refer to the <a href="https://arxiv.org/pdf/2505.05540" target="_blank">paper</a>.
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   </section>

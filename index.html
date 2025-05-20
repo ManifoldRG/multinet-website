@@ -35,7 +35,7 @@
 
 
   <title>Multinet</title>
-  <link rel="icon" type="image/x-icon" href="static/images/Multinetlogo.png"> 
+  <link rel="icon" type="image/x-icon" href="static/images/multinet_logo_square.png"> 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
 
@@ -469,7 +469,7 @@
 <div id="side-nav" class="side-navigation collapsed">
   <div class="logo-container">
     <a href="index.html" class="site-title-logo">
-      <img src="static/images/Multinetlogo.png" alt="MultiNet Logo" style="height: 28px; margin-right: 8px; vertical-align: middle;">MultiNet
+      <img src="static/images/multinet_no_text.png" alt="MultiNet Logo" style="height: 40px; margin-right: 8px; vertical-align: middle; border-radius: 8px;">MultiNet
     </a>
     <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
@@ -480,70 +480,61 @@
       <span class="icon"><i class="fas fa-home"></i></span>
       <span class="nav-text">Home</span>
     </a>
-    <a href="static/pages/Multinet.html" class="nav-item">
-      <span class="icon"><i class="fas fa-eye"></i></span>
-      <span class="nav-text">Multinet Vision</span>
-    </a>
 
     <!-- Releases Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;" 
          onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
          onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
         <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-rocket"></i></span> <!-- Changed icon -->
-            <span class="nav-text">Releases</span>
+            <span class="icon"><i class="fas fa-microscope"></i></span> <!-- Changed icon -->
+            <span class="nav-text">Benchmark Releases</span>
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span> <!-- Initial arrow state -->
         </a>
         <div class="dropdown-menu-items level-1">
             <!-- Multinet v0.2 Section -->
             <a href="static/pages/Multinetv02.html" class="dropdown-item main-release-link">
                 <span class="icon"><i class="fas fa-gamepad"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">Multinet v0.2</span>
+                <span class="nav-text" style="white-space: nowrap;">v0.2 - Gameplay</span>
             </a>
             <!-- Multinet v0.1 Section -->
             <a href="static/pages/Multinetv01.html" class="dropdown-item main-release-link">
                 <span class="icon"><i class="fas fa-robot"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">Multinet v0.1</span>
+                <span class="nav-text" style="white-space: nowrap;">v0.1 - Robotics</span>
             </a>
         </div>
     </div>
-
-    <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="nav-item">
-      <span class="icon"><i class="fas fa-atom"></i></span>
-      <span class="nav-text">GenESIS framework</span>
-    </a>
-    <!-- Technical Blogs/Reports Dropdown -->
+    <!-- Related Research Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;"
          onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
          onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
         <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-file-alt"></i></span>
-            <span class="nav-text">Technical Blogs/Reports</span>
-            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
-        </a>
-        <div class="dropdown-menu-items level-1">
-            <a href="static/pages/Technicalblog.html" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-project-diagram"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">Adapting VLAs to discrete spaces</span>
-            </a>
-        </div>
-    </div>
-    <!-- Adjacent Research Dropdown -->
-    <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-microscope"></i></span>
-            <span class="nav-text">Adjacent Research</span>
+            <span class="icon"><i class="fas fa-rocket"></i></span>
+            <span class="nav-text">Related Releases</span>
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
         </a>
         <div class="dropdown-menu-items level-1">
             <a href="https://github.com/eihli/mugato" target="_blank" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-file-code"></i></span>
+                <span class="icon"><i class="fas fa-microchip"></i></span>
                 <span class="nav-text" style="white-space: nowrap;">μGato</span>
+            </a>
+            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" class="dropdown-item main-release-link">
+              <span class="icon"><i class="fas fa-code"></i></span>
+              <span class="nav-text">GenESIS framework</span>
             </a>
         </div>
     </div>
+    <a href="static/pages/Multinet.html" class="nav-item">
+      <span class="icon"><i class="fas fa-eye"></i></span>
+      <span class="nav-text">Multinet Vision</span>
+    </a>
+    <a href="static/pages/Technicalblog.html" class="nav-item">
+      <span class="icon"><i class="fas fa-file-alt"></i></span>
+      <span class="nav-text">Blog</span>
+    </a>
+    <a href="#BibTeX" class="nav-item">
+      <span class="icon"><i class="fas fa-quote-right"></i></span>
+      <span class="nav-text">Citations</span>
+    </a>
   </div>
 </div>
 
@@ -556,10 +547,39 @@
           <div class="column has-text-centered">
             <h1 class="title is-1 publication-title">MultiNet: A Generalist Benchmark for Multimodal Action models</h1>
             <div class="is-size-5 publication-authors">
-              <br>
-              
-            </div>
-
+              <!-- Collaborators/Partners Section -->
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <p class="has-text-centered collaborators-description is-size-">Multinet is a collaborative initiative with contributions from leading research teams at instituitions like:</p>
+          <div class="collaborator-logos">
+            <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
+              <img src="static/images/manifoldlogo.png" alt="Manifold Research Logo" class="collaborator-logo">
+            </a>
+            <a href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
+              <img src="static/images/mitlogo_alt.png" alt="MIT Logo" class="collaborator-logo">
+            </a>
+            <a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
+              <img src="static/images/metarchlogo.jpg" alt="Metarch.ai Logo" class="collaborator-logo">
+            </a>
+            
+            <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
+              <img src="static/images/gtlogo_alt.png" alt="Georgia Tech Logo" class="collaborator-logo">
+            </a>
+            
+          </div>
+          <br>
+          <p class="is-size-5">
+            Interested in Collaborating? Reach out to us </strong><a href="mailto:pranav@metarch.ai" style="display: inline-flex; align-items: center; text-decoration: none; vertical-align: middle;"><img src="static/images/apple mail icon.png" alt="Email" style="height: 1.8em; margin-right: 0.2em;"></a>or join the working group on
+            <a href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; text-decoration: none; color: #5865F2; font-weight: bold; vertical-align: middle;">
+              <i class="fab fa-discord" style="font-size: 1.5em; margin-right: 0.3em;"></i>Discord</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
+<br>
             
 
 <section class="section">
@@ -567,10 +587,14 @@
       <div class="columns is-centered">
           <div class="column">
               <div class="content has-text-justified">
-                  <h2 class="title is-3 has-text-centered">Introducing Multinet</h2>
-                  <p>
-                      </p>
-                      <p>We present <a href="static/pages/Multinet.html">Multinet</a>, a comprehensive benchmark for evaluating generalist models across vision, language, and action. It consolidates diverse datasets and standardizes protocols to assess multimodal understanding and action generation capabilities of SoTA VLMs and VLAs. Multinet provides extensive training data (800M+ image-text pairs, 1.3T language tokens, 35TB+ control data), varied evaluation tasks (e.g., captioning, VQA, robotics, game-playing, commonsense reasoning, simulated locomotion and manipulation, etc.), and an open-source toolkit to standardize the process of obtaining and utilizing robotics/RL data, aiming to highlight current model limitations and drive development of truly generalist AI.</p>
+                  <h2 class="title is-3 has-text-centered">Systems, Algorithms, and Research for evaluating Next Generation Action Models</h2>
+                      <p><a href="static/pages/Multinet.html">Multinet</a> is a comprehensive benchmarking initiative for evaluating generalist models across vision, language, and action. It provides:</p>
+                      <ul style="margin-left: 2em; margin-top: 0.75em; list-style-type: disc;">
+                          <li>Consolidation of diverse datasets and standardized protocols for assessing multimodal understanding</li>
+                          <li>Extensive training data (800M+ image-text pairs, 1.3T language tokens, 35TB+ control data)</li>
+                          <li>Varied evaluation tasks including captioning, VQA, robotics, game-playing, commonsense reasoning, and simulated locomotion/manipulation</li>
+                          <li>Open-source toolkit to standardize the process of obtaining and utilizing robotics/RL data</li>
+                      </ul>
                   </p>
               </div>
           </div>
@@ -583,7 +607,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column">
-          <h2 class="title is-3 has-text-centered">Dive deeper into our research</h2>
+          <h2 class="title is-3 has-text-centered">Explore our Research</h2>
           
           <div class="columns is-multiline is-centered">
             <!-- Card 1 -->
@@ -710,15 +734,15 @@
                 <div class="flip-card">
                   <div class="flip-card-inner">
                     <div class="flip-card-front">
-                      <h3 class="title is-4">Technical Blogs and Reports</h3>
-                      <p>Technical blog posts and reports about our research and engineering achievements along the way</p>
+                      <h3 class="title is-4">Technical Blog</h3>
+                      <p>Technical blog posts and reports about key research and engineering achievements along the path to building Multinet.</p>
                       <img src="static/images/reporticon.png" alt="Technical report icon">
                     </div>
                     <div class="flip-card-back">
                       <div class="scrollable-content">
                         <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Technical Blogs and Reports</h3>
-                          <p class="description-intro">Explore our technical blogs and reports section for key discoveries and research and engineering achievements from our cutting-edge work in Vision-Language-Action models, action data, and benchmarking.</p>
+                          <h3 class="title is-4">Technical Blog</h3>
+                          <p class="description-intro">Explore our technical blog posts and reports section for key discoveries and research and engineering achievements from our cutting-edge work in Vision-Language-Action models, action data, and benchmarking.</p>
                         </div>
                       </div>
                     </div>
@@ -789,7 +813,7 @@
       justify-content: center;
       align-items: center;
       padding: 20px; /* Adjusted padding for smaller card size */
-    }
+    } 
 
     .flip-card-front {
       background-color: #ffffff; 
@@ -942,27 +966,18 @@
     }
   </style>
 
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="news-section">
+  <section class="news-section" style="padding: 10px 0;">
     <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="content has-text-justified">
-            <h2 class="title is-3 has-text-centered">News</h2>
-            <div class="news-container">
+      <div class="columns is-centered" style="margin-top: 0; margin-bottom: 0;">
+        <div class="column" style="padding-top: 0; padding-bottom: 0;">
+          <div class="content has-text-justified" style="margin-bottom: 0;">
+            <h2 class="title is-3 has-text-centered" style="margin-bottom: 1rem;">News</h2>
+            <div class="news-container" style="padding: 15px;">
               <div class="news-item">
                 <div class="news-icon">🏆</div>
                 <div class="news-content">
-                  <p><strong>Multinet v0.2 released!</strong> How well do state-of-the-art VLAs and VLMs perform in procedurally generated Out-of-Distribution (OOD) environments? Read more on our <a href="Multinetv0.2.html">v0.2 Release Page</a>.</p>
+                  <p><strong>Multinet v0.2 released!</strong> We systematically profile state-of-the-art VLAs and VLMs perform in procedurally generated OOD game environments. Read more about our recent release <a href="Multinetv0.2.html">here</a>.</p>
                 </div>
               </div>
               <div class="news-item">
@@ -1003,30 +1018,30 @@
     }
 
     .news-section {
-      padding: 20px 0;
-      max-height: 400px;
+      padding: 10px 0;
+      max-height: 350px;
       overflow-y: auto;
     }
 
     .news-title {
       font-size: 24px;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .news-container {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       background-color: #f5f5f5;
-      padding: 20px;
+      padding: 15px;
       border-radius: 5px;
     }
 
     .news-item {
       display: flex;
       align-items: center;
-      padding: 10px;
+      padding: 8px;
       background-color: white;
       border-radius: 5px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -1148,41 +1163,7 @@
 
   </style>
 
-  <!-- Collaborators/Partners Section -->
-  <section class="section collaborators-section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h2 class="title is-3 has-text-centered" style="font-family: 'Google Sans', sans-serif;">Collaborators and Partners</h2>
-          <p class="has-text-centered collaborators-description is-size-5">Multinet is a collaborative initiative with contributions from teams at leading instituitions:</p>
-          <div class="collaborator-logos">
-            <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/gtlogo.png" alt="Georgia Tech Logo" class="collaborator-logo">
-            </a>
-            <a href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/mitlogo.png" alt="MIT Logo" class="collaborator-logo">
-            </a>
-            <a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/metarchlogo.jpg" alt="Metarch.ai Logo" class="collaborator-logo">
-            </a>
-            <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/manifoldlogo.png" alt="Manifold Research Logo" class="collaborator-logo">
-            </a>
-            
-          </div>
-          <br>
-          <br>
-          <br>
-          <p class="is-size-4">
-            <strong>To collaborate, reach out to us via </strong><a href="mailto:pranav@metarch.ai" style="display: inline-flex; align-items: center; text-decoration: none; vertical-align: middle;"><img src="static/images/apple mail icon.png" alt="Email" style="height: 1.8em; margin-right: 0.2em;"></a><strong> or join the working group on</strong>
-            <a href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; text-decoration: none; color: #5865F2; font-weight: bold; vertical-align: middle;">
-              <i class="fab fa-discord" style="font-size: 1.5em; margin-right: 0.3em;"></i>Discord
-            </a> <strong>!</strong>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <style>
     .collaborators-section {
@@ -1217,8 +1198,8 @@
     }
 
     .collaborator-logo {
-      max-height: 90px; /* Significantly increased logo height */
-      max-width: 200px; /* Significantly increased logo width */
+      max-height: 75px; /* Slightly smaller logos on mobile */
+        max-width: 170px;
       object-fit: contain;
       opacity: 0.8; /* Start slightly transparent */
       transition: opacity 0.3s ease-out; /* Smooth transition for opacity */
@@ -1257,9 +1238,9 @@
   <!-- Videos Section -->
   <section class="section videos-section">
     <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Videos</h2>
+      <h2 class="title is-2 has-text-centered">Research Talks & Demos</h2>
       <p class="has-text-centered is-size-5" style="margin-bottom: 2rem;">
-        Explore our collection of talks and presentations showcasing Multinet's vision, progress, and development journey!
+        Explore our collection of presentations showcasing Multinet's vision, progress, and development journey!
       </p>
       <div id="videos-carousel" class="carousel">
         <div class="item-1">
@@ -1573,9 +1554,9 @@
         if (document.getElementById('videos-carousel')) {
           bulmaCarousel.attach('#videos-carousel', {
             slidesToScroll: 1,
-            slidesToShow: 3,
+            slidesToShow: 2,
             loop: true,
-            autoplay: true,
+            autoplay: false,
             autoplaySpeed: 5000, // 5 seconds
             pauseOnHover: true,
             breakpoints: [{
