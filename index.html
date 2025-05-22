@@ -462,6 +462,44 @@
       transform: translateY(-5px);
     }
 
+    /* Hover effect for Email and Discord links in the 'Interested in Collaborating' section */
+    .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="mailto:"],
+    .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="discord.gg"] {
+      /* The display: inline-flex is already on the elements via inline styles, which is good for transform. */
+      transition: transform 0.3s ease-out;
+    }
+
+    .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="mailto:"]:hover,
+    .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="discord.gg"]:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Card 6 (μGato - Brown/Bronze Theme) */
+    .columns > .column:nth-child(6) .flip-card-front .title.is-4 {
+      color: #A0522D; /* Sienna (Brown) for title */
+    }
+    .columns > .column:nth-child(6) .flip-card-back {
+      background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%); /* SaddleBrown to Sienna gradient */
+    }
+    /* Make μGato card icon much larger */
+    .columns > .column:nth-child(6) .flip-card-front img {
+      max-width: 120px;
+      max-height: 120px;
+      margin-top: 10px; /* Adjust margin for larger icon */
+    }
+
+    /* Card 7 (NEKO - Teal Theme) */
+    .columns > .column:nth-child(7) .flip-card-front .title.is-4 {
+      color: #008080; /* Teal for title */
+    }
+    .columns > .column:nth-child(7) .flip-card-back {
+      background: linear-gradient(135deg, #20B2AA 0%, #008080 100%); /* LightSeaGreen to Teal gradient */
+    }
+    .columns > .column:nth-child(7) .flip-card-front img {
+      max-width: 90px; /* Adjusted for NEKO logo */
+      max-height: 90px;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -503,13 +541,13 @@
             </a>
         </div>
     </div>
-    <!-- Related Research Dropdown -->
+    <!-- Model Releases Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;"
          onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
          onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
         <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-rocket"></i></span>
-            <span class="nav-text">Related Releases</span>
+            <span class="icon"><i class="fas fa-rocket"></i></span> <!-- Icon for Model Releases -->
+            <span class="nav-text">Model Releases</span>
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
         </a>
         <div class="dropdown-menu-items level-1">
@@ -517,19 +555,35 @@
                 <span class="icon"><i class="fas fa-microchip"></i></span>
                 <span class="nav-text" style="white-space: nowrap;">μGato</span>
             </a>
-            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" class="dropdown-item main-release-link">
+            <a href="https://github.com/ManifoldRG/NEKO" target="_blank" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-cat"></i></span> <!-- Icon for NEKO -->
+                <span class="nav-text" style="white-space: nowrap;">NEKO</span>
+            </a>
+        </div>
+    </div>
+    <!-- Software Releases Dropdown -->
+    <div class="nav-item has-dropdown" style="padding: 0;"
+         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
+         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+            <span class="icon"><i class="fas fa-code-branch"></i></span> <!-- Icon for Software Releases -->
+            <span class="nav-text">Software Releases</span>
+            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+        </a>
+        <div class="dropdown-menu-items level-1">
+            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link"> <!-- Link to codebase -->
+              <span class="icon"><i class="fas fa-tasks"></i></span> <!-- Icon for Multinet Eval Harness -->
+              <span class="nav-text" style="white-space: nowrap;">Multinet Eval Harness</span>
+            </a>
+            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="dropdown-item main-release-link">
               <span class="icon"><i class="fas fa-code"></i></span>
-              <span class="nav-text">GenESIS framework</span>
+              <span class="nav-text" style="white-space: nowrap;">GenESIS framework</span>
             </a>
         </div>
     </div>
     <a href="static/pages/Multinet.html" class="nav-item">
-      <span class="icon"><i class="fas fa-eye"></i></span>
-      <span class="nav-text">Multinet Vision</span>
-    </a>
-    <a href="static/pages/Technicalblog.html" class="nav-item">
-      <span class="icon"><i class="fas fa-file-alt"></i></span>
-      <span class="nav-text">Blog</span>
+      <span class="icon"><i class="fas fa-info-circle"></i></span> <!-- Changed icon for About Multinet -->
+      <span class="nav-text">About Multinet</span> <!-- Changed text -->
     </a>
     <a href="#BibTeX" class="nav-item">
       <span class="icon"><i class="fas fa-quote-right"></i></span>
@@ -572,7 +626,7 @@
           <p class="is-size-5">
             Interested in Collaborating? Reach out to us </strong><a href="mailto:pranav@metarch.ai" style="display: inline-flex; align-items: center; text-decoration: none; vertical-align: middle;"><img src="static/images/apple mail icon.png" alt="Email" style="height: 1.8em; margin-right: 0.2em;"></a>or join the working group on
             <a href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; text-decoration: none; color: #5865F2; font-weight: bold; vertical-align: middle;">
-              <i class="fab fa-discord" style="font-size: 1.5em; margin-right: 0.3em;"></i>Discord</a>
+              <i class="fab fa-discord" style="font-size: 1.5em; margin-right: 0.3em; color: #5865F2;"></i><span style="color: #5865F2;">Discord</span></a>
           </p>
         </div>
       </div>
@@ -616,14 +670,14 @@
                 <div class="flip-card">
                   <div class="flip-card-inner">
                     <div class="flip-card-front">
-                      <h3 class="title is-4">Multinet Vision</h3>
+                      <h3 class="title is-4">About Multinet</h3>
                       <p>A comprehensive benchmark for evaluating Multimodal Action Models</p>
-                      <img src="static/images/Multinetlogo.png" alt="Multinet Icon">
+                      <img src="static/images/multinet_logo_square copy.png" alt="Multinet Icon">
                     </div>
                     <div class="flip-card-back">
                       <div class="scrollable-content">
                         <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Multinet Vision</h3>
+                          <h3 class="title is-4">About Multinet</h3>
                           <p class="description-intro">Key contributions include:</p>
                           <ul>
                             <li>Comprehensive dataset for evaluating multimodal models</li>
@@ -697,6 +751,40 @@
                 </div>
               </a>
             </div>
+
+            <!-- Card 5: New Card -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="static/pdfs/MultiNet_Dataset_Spec_Paper.pdf" target="_blank" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">Dataset Specification</h3>
+                      <p>Potentially the largest open-source generalist dataset, consolidating diverse modalities and tasks suitable for pre-training,
+                        fine-tuning, and evaluation</p>
+                      <img src="static/images/reporticon.png" alt="Technical report icon">
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div> <!-- Content wrapper -->
+                          <h3 class="title is-4">Dataset Specification</h3>
+                          <p class="description-intro">MultiNet addresses the gap in holistic evaluation by assessing both Vision-Language Model (VLM) action capabilities and Vision-Language-Action Model (VLA) multimodal understanding across vision-language, language, and control tasks:</p>
+                          <ul>
+                            <li>As a part of this effort we consolidate a diverse set of high-quality datasets (e.g., OBELICS, COYO-700M, OpenX-Embodiment, Mujoco, Procgen, Atari, WinoGAViL, VQA-v2, etc.).</li>
+                            <li>Carefully curated training data and corresponding evaluation data, which includes:
+                                <ul style="margin-top: 5px; padding-left: 20px;">
+                                    <li>Over 800M image-text pairs for vision-language association.</li>
+                                    <li>1.3T tokens for language understanding.</li>
+                                    <li>Over 35 TB of data for robotics and RL control tasks.</li>
+                                </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
             
             <!-- Card 4 -->
             <div class="column is-half-tablet is-one-third-desktop">
@@ -728,21 +816,28 @@
               </a>
             </div>
 
-            <!-- Card 5: New Card -->
+            <!-- Card 6: Mugato -->
             <div class="column is-half-tablet is-one-third-desktop">
-              <a href="static/pages/Technicalblog.html" target="_blank" class="flip-card-anchor">
+              <a href="https://github.com/eihli/mugato" target="_blank" class="flip-card-anchor">
                 <div class="flip-card">
                   <div class="flip-card-inner">
                     <div class="flip-card-front">
-                      <h3 class="title is-4">Technical Blog</h3>
-                      <p>Technical blog posts and reports about key research and engineering achievements along the path to building Multinet.</p>
-                      <img src="static/images/reporticon.png" alt="Technical report icon">
+                      <h3 class="title is-4">μGato</h3>
+                      <p> A simple, open-source implementation of what is described in DeepMind's Gato paper</p>
+                      <img src="static/images/gatologo.png" alt="μGato Icon">
                     </div>
                     <div class="flip-card-back">
                       <div class="scrollable-content">
                         <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Technical Blog</h3>
-                          <p class="description-intro">Explore our technical blog posts and reports section for key discoveries and research and engineering achievements from our cutting-edge work in Vision-Language-Action models, action data, and benchmarking.</p>
+                          <h3 class="title is-4">μGato</h3>
+                          <p class="description-intro">This project marks our initial step towards building a multimodal generalist action model. The current version offers:</p>
+                          <ul>
+                            <li><strong>Simplicity:</strong> Easy-to-understand GATO implementation.</li>
+                            <li><strong>Baseline Model:</strong> A basic generalist model that can be used as a baseline for what we build in the future</li>
+                            <li><strong>Experimentation:</strong> Designed for iterability and exploration.</li>
+                            <li><strong>Unified Data:</strong> Simplifies handling of diverse modalities.</li>
+                            <li><strong>Learning Tool:</strong> Interactive notebook included.</li>
+                          </ul>
                         </div>
                       </div>
                     </div>
@@ -751,6 +846,34 @@
               </a>
             </div>
 
+            <!-- Card 6: Mugato -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="https://github.com/ManifoldRG/NEKO" target="_blank" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">NEKO</h3>
+                      <p>An open-source GATO-style generalist multimodal model for image, text, RL, and robotics tasks.</p>
+                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-cat"></i></span>
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div> <!-- Content wrapper -->
+                          <h3 class="title is-4">NEKO</h3>
+                          <p class="description-intro">NEKO is a distributed, open-source effort to build a Large Multimodal Model tackling "massively multimodal" scenarios (3+ modalities) to advance generalist AI.</p>
+                          <ul>
+                            <li><strong>Massively Multimodal:</strong> Aims to handle images, text, audio, video, control & proprioception.</li>
+                            <li><strong>Generalist vision:</strong> Designed for numerous objectives across diverse tasks, adapting to new domains.</li>
+                            <li><strong>Open Source & Community:</strong> Fosters collective progress and understanding in AI systems.</li>
+                            <li><strong>GATO-Inspired, future-focused:</strong> Builds on generalist principles with cutting-edge advancements.</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -964,6 +1087,34 @@
     .columns > .column:nth-child(5) .flip-card-back {
       background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); 
     }
+
+    /* Card 6 (μGato - Brown/Bronze Theme) */
+    .columns > .column:nth-child(6) .flip-card-front .title.is-4 {
+      color: #A0522D; /* Sienna (Brown) for title */
+    }
+    .columns > .column:nth-child(6) .flip-card-back {
+      background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%); /* SaddleBrown to Sienna gradient */
+    }
+
+    /* Make μGato card icon larger */
+    .columns > .column:nth-child(6) .flip-card-front img {
+      max-width: 120px;
+      max-height: 120px;
+      margin-top: 10px; /* Adjust margin for larger icon */
+    }
+
+    /* Card 7 (NEKO - Teal Theme) */
+    .columns > .column:nth-child(7) .flip-card-front .title.is-4 {
+      color: #008080; /* Teal for title */
+    }
+    .columns > .column:nth-child(7) .flip-card-back {
+      background: linear-gradient(135deg, #20B2AA 0%, #008080 100%); /* LightSeaGreen to Teal gradient */
+    }
+    .columns > .column:nth-child(7) .flip-card-front img {
+      max-width: 90px; /* Adjusted for NEKO logo */
+      max-height: 90px;
+      margin-top: 10px;
+    }
   </style>
 
 
@@ -977,7 +1128,7 @@
               <div class="news-item">
                 <div class="news-icon">🏆</div>
                 <div class="news-content">
-                  <p><strong>Multinet v0.2 released!</strong> We systematically profile state-of-the-art VLAs and VLMs perform in procedurally generated OOD game environments. Read more about our recent release <a href="Multinetv0.2.html">here</a>.</p>
+                  <p><strong>Multinet v0.2 released!</strong> We systematically profile state-of-the-art VLAs and VLMs perform in procedurally generated OOD game environments. Read more about our recent release <a href="static/pages/Multinetv02.html">here</a>.</p>
                 </div>
               </div>
               <div class="news-item">
