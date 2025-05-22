@@ -488,6 +488,18 @@
       margin-top: 10px; /* Adjust margin for larger icon */
     }
 
+    /* Card 7 (NEKO - Teal Theme) */
+    .columns > .column:nth-child(7) .flip-card-front .title.is-4 {
+      color: #008080; /* Teal for title */
+    }
+    .columns > .column:nth-child(7) .flip-card-back {
+      background: linear-gradient(135deg, #20B2AA 0%, #008080 100%); /* LightSeaGreen to Teal gradient */
+    }
+    .columns > .column:nth-child(7) .flip-card-front img {
+      max-width: 90px; /* Adjusted for NEKO logo */
+      max-height: 90px;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -658,14 +670,14 @@
                 <div class="flip-card">
                   <div class="flip-card-inner">
                     <div class="flip-card-front">
-                      <h3 class="title is-4">Multinet Vision</h3>
+                      <h3 class="title is-4">About Multinet</h3>
                       <p>A comprehensive benchmark for evaluating Multimodal Action Models</p>
-                      <img src="static/images/Multinetlogo.png" alt="Multinet Icon">
+                      <img src="static/images/multinet_logo_square copy.png" alt="Multinet Icon">
                     </div>
                     <div class="flip-card-back">
                       <div class="scrollable-content">
                         <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Multinet Vision</h3>
+                          <h3 class="title is-4">About Multinet</h3>
                           <p class="description-intro">Key contributions include:</p>
                           <ul>
                             <li>Comprehensive dataset for evaluating multimodal models</li>
@@ -739,6 +751,40 @@
                 </div>
               </a>
             </div>
+
+            <!-- Card 5: New Card -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="static/pdfs/MultiNet_Dataset_Spec_Paper.pdf" target="_blank" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">Dataset Specification</h3>
+                      <p>Potentially the largest open-source generalist dataset, consolidating diverse modalities and tasks suitable for pre-training,
+                        fine-tuning, and evaluation</p>
+                      <img src="static/images/reporticon.png" alt="Technical report icon">
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div> <!-- Content wrapper -->
+                          <h3 class="title is-4">Dataset Specification</h3>
+                          <p class="description-intro">MultiNet addresses the gap in holistic evaluation by assessing both Vision-Language Model (VLM) action capabilities and Vision-Language-Action Model (VLA) multimodal understanding across vision-language, language, and control tasks:</p>
+                          <ul>
+                            <li>As a part of this effort we consolidate a diverse set of high-quality datasets (e.g., OBELICS, COYO-700M, OpenX-Embodiment, Mujoco, Procgen, Atari, WinoGAViL, VQA-v2, etc.).</li>
+                            <li>Carefully curated training data and corresponding evaluation data, which includes:
+                                <ul style="margin-top: 5px; padding-left: 20px;">
+                                    <li>Over 800M image-text pairs for vision-language association.</li>
+                                    <li>1.3T tokens for language understanding.</li>
+                                    <li>Over 35 TB of data for robotics and RL control tasks.</li>
+                                </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
             
             <!-- Card 4 -->
             <div class="column is-half-tablet is-one-third-desktop">
@@ -770,29 +816,6 @@
               </a>
             </div>
 
-            <!-- Card 5: New Card -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <a href="static/pages/Technicalblog.html" target="_blank" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">Technical Blog</h3>
-                      <p>Technical blog posts and reports about key research and engineering achievements along the path to building Multinet.</p>
-                      <img src="static/images/reporticon.png" alt="Technical report icon">
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Technical Blog</h3>
-                          <p class="description-intro">Explore our technical blog posts and reports section for key discoveries and research and engineering achievements from our cutting-edge work in Vision-Language-Action models, action data, and benchmarking.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
             <!-- Card 6: Mugato -->
             <div class="column is-half-tablet is-one-third-desktop">
               <a href="https://github.com/eihli/mugato" target="_blank" class="flip-card-anchor">
@@ -814,6 +837,35 @@
                             <li><strong>Experimentation:</strong> Designed for iterability and exploration.</li>
                             <li><strong>Unified Data:</strong> Simplifies handling of diverse modalities.</li>
                             <li><strong>Learning Tool:</strong> Interactive notebook included.</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Card 6: Mugato -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="https://github.com/ManifoldRG/NEKO" target="_blank" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">NEKO</h3>
+                      <p>An open-source GATO-style generalist multimodal model for image, text, RL, and robotics tasks.</p>
+                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-cat"></i></span>
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div> <!-- Content wrapper -->
+                          <h3 class="title is-4">NEKO</h3>
+                          <p class="description-intro">NEKO is a distributed, open-source effort to build a Large Multimodal Model tackling "massively multimodal" scenarios (3+ modalities) to advance generalist AI.</p>
+                          <ul>
+                            <li><strong>Massively Multimodal:</strong> Aims to handle images, text, audio, video, control & proprioception.</li>
+                            <li><strong>Generalist vision:</strong> Designed for numerous objectives across diverse tasks, adapting to new domains.</li>
+                            <li><strong>Open Source & Community:</strong> Fosters collective progress and understanding in AI systems.</li>
+                            <li><strong>GATO-Inspired, future-focused:</strong> Builds on generalist principles with cutting-edge advancements.</li>
                           </ul>
                         </div>
                       </div>
@@ -1049,6 +1101,19 @@
       max-width: 120px;
       max-height: 120px;
       margin-top: 10px; /* Adjust margin for larger icon */
+    }
+
+    /* Card 7 (NEKO - Teal Theme) */
+    .columns > .column:nth-child(7) .flip-card-front .title.is-4 {
+      color: #008080; /* Teal for title */
+    }
+    .columns > .column:nth-child(7) .flip-card-back {
+      background: linear-gradient(135deg, #20B2AA 0%, #008080 100%); /* LightSeaGreen to Teal gradient */
+    }
+    .columns > .column:nth-child(7) .flip-card-front img {
+      max-width: 90px; /* Adjusted for NEKO logo */
+      max-height: 90px;
+      margin-top: 10px;
     }
   </style>
 
