@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Multinetv0.1</title>
   
-  <link rel="icon" type="image/x-icon" href="../images/Multinetlogo.png">
+  <link rel="icon" type="image/x-icon" href="../images/multinet_logo_square.png">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   
   <link rel="stylesheet" href="../css/bulma.min.css">
@@ -31,73 +31,535 @@
   <script src="../js/bulma-carousel.min.js"></script>
   <script src="../js/bulma-slider.min.js"></script>
   <script src="../js/index.js"></script>
+
+  <style>
+    /* Side Navigation Bar Styles */
+    body {
+      margin: 0;
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif; /* Match existing fonts */
+    }
+
+    .side-navigation {
+      height: 100%;
+      width: 280px; /* Expanded width */
+      position: fixed;
+      z-index: 1000; /* Ensure it's on top */
+      top: 0;
+      left: 0;
+      background-color: #f8f9fa; /* Light grey background */
+      overflow-x: hidden;
+      transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+      padding-top: 0; /* Adjusted for logo container */
+      box-shadow: 3px 0 6px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .side-navigation.collapsed {
+      width: 70px; /* Collapsed width - showing icons */
+      overflow-y: visible; /* Allow flyouts to show */
+    }
+
+    .side-navigation.collapsed .nav-text,
+    .side-navigation.collapsed .dropdown-arrow {
+      display: none;
+      opacity: 0;
+    }
+    
+    .side-navigation .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Pushes toggle to the right */
+      padding: 15px 20px;
+      background-color: #e9ecef; /* Slightly different bg for header */
+      min-height: 60px; /* Consistent height */
+      box-sizing: border-box;
+    }
+    
+    .side-navigation.collapsed .logo-container {
+        padding: 15px;
+        justify-content: center; /* Center icon when collapsed */
+    }
+
+    .side-navigation .site-title-logo {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #005A9C; /* Theme color */
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+    
+    .side-navigation.collapsed .site-title-logo {
+        display: none;
+    }
+
+    .nav-toggle-btn {
+      font-size: 22px;
+      color: #363636;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 5px;
+    }
+
+    .nav-toggle-btn:hover {
+      color: #005A9C; /* Theme color */
+    }
+
+    .side-navigation-menu {
+        flex-grow: 1;
+        overflow-y: auto; /* Allow scrolling for menu items if they exceed height */
+        padding-top: 10px;
+    }
+    .side-navigation.collapsed .side-navigation-menu {
+        overflow-y: visible; /* Needed for flyouts in collapsed mode */
+    }
+
+
+    .side-navigation .nav-item,
+    .side-navigation .nav-link {
+      padding: 12px 20px; /* Slightly reduced padding for more items */
+      text-decoration: none;
+      font-size: 0.95rem; /* Slightly reduced font size */
+      color: #363636;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s ease-out;
+      white-space: nowrap;
+      position: relative; 
+    }
+    /* For dropdown toggles specifically if they are <a> tags */
+    .side-navigation .dropdown-toggle {
+        padding: 12px 20px;
+        text-decoration: none;
+        font-size: 0.95rem;
+        color: #363636;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        transition: background-color 0.3s, color 0.3s;
+        white-space: nowrap;
+        justify-content: space-between; /* Ensure arrow is on the right */
+    }
+
+
+    .side-navigation .nav-item:hover,
+    .side-navigation .nav-link:hover,
+    .side-navigation .dropdown-toggle:hover {
+      background-color: #e9ecef;
+      color: #005A9C;
+      /* transform: translateX(4px); */ /* Removing nudge for dropdown items for now */
+    }
+    .side-navigation .nav-item > .nav-link:hover { /* Apply nudge only to direct nav-links */
+        transform: translateX(4px);
+    }
+
+    
+    .side-navigation .nav-item:hover .icon i,
+    .side-navigation .nav-link:hover .icon i,
+    .side-navigation .dropdown-toggle:hover .icon i {
+        transform: scale(1.1); 
+    }
+
+    .side-navigation .nav-item.active,
+    .side-navigation .nav-link.active,
+    .side-navigation .nav-item.has-dropdown.open > .dropdown-toggle { /* Style for open dropdown toggle */
+      background-color: #005A9C;
+      color: white;
+    }
+    .side-navigation .nav-item.active .icon,
+    .side-navigation .nav-link.active .icon,
+    .side-navigation .nav-item.has-dropdown.open > .dropdown-toggle .icon,
+    .side-navigation .nav-item.has-dropdown.open > .dropdown-toggle .dropdown-arrow {
+      color: white;
+    }
+
+
+    .side-navigation .nav-item .icon,
+    .side-navigation .nav-link .icon,
+    .side-navigation .dropdown-toggle .icon {
+      margin-right: 16px;
+      min-width: 24px;
+      text-align: center;
+      font-size: 1rem; /* Unified icon size */
+      transition: margin-right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s ease-out; 
+    }
+
+    .side-navigation.collapsed .nav-item .icon,
+    .side-navigation.collapsed .nav-link .icon,
+    .side-navigation.collapsed .dropdown-toggle .icon {
+      margin-right: 0;
+    }
+    
+    .side-navigation .nav-item .icon i, 
+    .side-navigation .nav-link .icon i,
+    .side-navigation .dropdown-toggle .icon i {
+        display: inline-block; 
+        transition: transform 0.2s ease-out;
+    }
+
+    .side-navigation.collapsed .nav-text {
+        opacity: 0;
+        transform: translateX(-10px); 
+    }
+    .side-navigation .nav-text {
+      transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s;
+      opacity: 1;
+      transform: translateX(0);
+      flex-grow: 1; /* Allow text to take remaining space */
+    }
+
+    .dropdown-arrow {
+        margin-left: auto; /* Pushes arrow to the far right if text doesn't fill */
+        padding-left: 10px; /* Space between text and arrow */
+        font-size: 0.8rem;
+        transition: transform 0.3s ease;
+    }
+    .side-navigation.collapsed .dropdown-arrow {
+      display: none;
+    }
+    
+    .nav-item.has-dropdown.open > .dropdown-toggle .dropdown-arrow .fas.fa-chevron-down,
+    .nav-item.has-dropdown.open > .dropdown-toggle .dropdown-arrow .fas.fa-chevron-right {
+      transform: rotate(180deg);
+    }
+    .nav-item.has-dropdown .dropdown-toggle .dropdown-arrow .fas.fa-chevron-right.rotated {
+        transform: rotate(90deg); /* For level 2 when open */
+    }
+
+
+    .dropdown-menu-items {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease-out, padding 0.35s ease-out, background-color 0.3s;
+      background-color: #f0f2f5; 
+      list-style-type: none;
+      padding-left: 0; 
+      margin-left: 0;
+    }
+    .nav-item.has-dropdown.open > .dropdown-menu-items {
+        /* max-height will be set by JS for accordion, but overridden for flyout */
+        padding-top: 5px;
+        padding-bottom: 5px;
+        /* For non-flyout (accordion style), overflow should be conditionally hidden or managed by JS */
+    }
+
+    /* New styles for non-collapsed flyout - Level 1 */
+    .side-navigation:not(.collapsed) .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 {
+      position: absolute;
+      left: 0; /* Align with parent's left edge */
+      top: 100%; /* Position below the parent item */
+      width: max-content; /* Allow content to define width */
+      min-width: 100%; /* Ensure it's at least as wide as the parent button */
+      background-color: #f8f9fa; /* Match collapsed flyout background */
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1); /* Add shadow for better visibility */
+      border-radius: 0 0 4px 4px; /* Optional: round bottom corners */
+      max-height: none !important; /* Override JS-set max-height */
+      overflow: visible !important; /* Ensure content is not clipped */
+      z-index: 1000; /* Ensure it's above other elements */
+      margin-left: 0; /* Override any inherited margin */
+      padding-left: 0; /* Reset padding for the main flyout container */
+    }
+
+    /* Adjust padding for items directly within the non-collapsed flyout */
+    .side-navigation:not(.collapsed) .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 > .dropdown-item,
+    .side-navigation:not(.collapsed) .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 > .nav-item > .dropdown-toggle {
+        padding-left: 15px; /* Consistent padding for items inside flyout */
+        padding-right: 15px;
+    }
+
+    .dropdown-menu-items .nav-item, /* For nested .has-dropdown */
+    .dropdown-menu-items .sub-item { /* For direct links */
+      padding-left: 30px; /* Indent level 1 sub-items */
+      font-size: 0.9rem;
+      color: #4a4a4a;
+    }
+    /* Specific style for toggles within dropdowns */
+    .dropdown-menu-items .nav-item.has-dropdown > .dropdown-toggle {
+        padding-left: 30px;
+        font-size: 0.9rem;
+        color: #4a4a4a;
+    }
+    .dropdown-menu-items .nav-item.has-dropdown > .dropdown-toggle:hover,
+    .dropdown-menu-items .sub-item:hover {
+      background-color: #dfe4e8;
+      color: #005A9C;
+    }
+    
+    /* Level 2 dropdown menu items */
+    .dropdown-menu-items.level-2 {
+        background-color: #e9ecef; /* Slightly different for level 2 */
+    }
+    .dropdown-menu-items.level-2 .sub-item {
+      padding-left: 45px; /* Further indent level 2 sub-items */
+      font-size: 0.85rem;
+    }
+    .dropdown-menu-items.level-2 .sub-item:hover {
+      background-color: #d8dde1;
+    }
+    
+    .dropdown-menu-items .nav-item.active,
+    .dropdown-menu-items .sub-item.active {
+      background-color: #005A9C;
+      color: white;
+    }
+    .dropdown-menu-items .nav-item.active .icon,
+    .dropdown-menu-items .sub-item.active .icon {
+       color: white;
+    }
+
+
+    /* Flyout menu for collapsed state - Level 1 */
+    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items.level-1 {
+      display: block;
+      position: absolute;
+      left: 70px; 
+      top: 0; /* Align with parent item's top */
+      width: max-content; /* Changed from min-width to allow content to define width */
+      background-color: #f8f9fa;
+      box-shadow: 3px 0 6px rgba(0,0,0,0.15);
+      border-radius: 0 5px 5px 0;
+      max-height: none; 
+      z-index: 1001;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      overflow: visible; /* Allow content to overflow */
+    }
+    /* Ensure nav-text is visible in flyouts */
+    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items .nav-text,
+    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items .dropdown-arrow {
+        display: inline-block;
+        opacity: 1;
+        transform: translateX(0);
+    }
+    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items .icon {
+        margin-right: 16px; /* Restore icon margin */
+    }
+
+
+    /* Flyout menu for collapsed state - Level 2 */
+    .side-navigation.collapsed .dropdown-menu-items.level-1 .nav-item.has-dropdown:hover > .dropdown-menu-items.level-2 {
+      display: block;
+      position: absolute;
+      left: 100%; /* Position next to its parent flyout item */
+      top: 0; /* Align with parent item's top */
+      width: max-content; /* Changed from min-width to allow content to define width */
+      background-color: #e9ecef; /* Slightly different for level 2 flyout */
+      box-shadow: 3px 3px 6px rgba(0,0,0,0.15);
+      border-radius: 0 5px 5px 0;
+      max-height: none;
+      z-index: 1002; /* Above level 1 flyout */
+      padding-top: 5px;
+      padding-bottom: 5px;
+      overflow: visible; /* Allow content to overflow */
+    }
+
+
+    #main-page-content {
+      padding-left: 70px; /* Fixed padding, equivalent to collapsed sidebar width */
+      padding-top: 0; 
+      /* transition: padding-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); */ /* Removed as padding-left no longer changes */
+      background-color: #ffffff; 
+      width: 100%; 
+      box-sizing: border-box; 
+    }
+
+    /* Style for main release links in dropdown menu */
+    .side-navigation .dropdown-menu-items a.main-release-link {
+        display: flex !important; /* Ensure flex layout for icon and text */
+        align-items: center !important; /* Vertically align icon and text */
+        padding: 8px 15px;         /* Consistent padding, adjust as needed */
+        font-size: 0.9rem;         /* Consistent font size with other sub-items */
+        color: #4a4a4a;            /* Consistent text color */
+        text-decoration: none;
+    }
+
+    .side-navigation .dropdown-menu-items a.main-release-link:hover {
+        background-color: #dfe4e8; /* Consistent hover background */
+        color: #005A9C;            /* Consistent hover text color */
+    }
+
+    .side-navigation .dropdown-menu-items a.main-release-link > .icon {
+        margin-right: 10px;       /* Space between icon and text */
+        min-width: 20px;          /* Ensure icon has some space */
+        font-size: 0.9rem;        /* Match text size */
+    }
+
+    .side-navigation .dropdown-menu-items a.main-release-link > .nav-text {
+        flex-grow: 1;             /* Allow text to take remaining space */
+        opacity: 1 !important;    /* Ensure text is fully visible */
+        /* white-space: nowrap; is already on the span element via inline style */
+        display: block !important; /* Ensure block behavior and override more specific conflicting rules */
+    }
+
+    /* Active state for main release links */
+    .side-navigation .dropdown-menu-items a.main-release-link.active {
+        background-color: #005A9C;
+        color: white;
+    }
+    .side-navigation .dropdown-menu-items a.main-release-link.active > .icon {
+        color: white;
+    }
+
+    /* Rotate arrow on hover for dropdown items like "Releases" */
+    .side-navigation .nav-item.has-dropdown:hover > .dropdown-toggle .dropdown-arrow > i.fa-chevron-right {
+      transform: rotate(90deg);
+      transition: transform 0.3s ease;
+    }
+  </style>
 </head>
 <body>
+
+<div id="side-nav" class="side-navigation collapsed">
+  <div class="logo-container">
+    <a href="../../index.html" class="site-title-logo">
+      <img src="../images/multinet_no_text.png" alt="MultiNet Logo" style="height: 40px; margin-right: 8px; vertical-align: middle; border-radius: 8px;">MultiNet
+    </a>
+    <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+  <div class="side-navigation-menu">
+    <a href="../../index.html" class="nav-item">
+      <span class="icon"><i class="fas fa-home"></i></span>
+      <span class="nav-text">Home</span>
+    </a>
+
+    <!-- Releases Dropdown -->
+    <div class="nav-item has-dropdown" style="padding: 0;" 
+         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
+         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+            <span class="icon"><i class="fas fa-microscope"></i></span>
+            <span class="nav-text">Benchmark Releases</span>
+            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+        </a>
+        <div class="dropdown-menu-items level-1">
+            <a href="Multinetv02.html" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-gamepad"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">v0.2 - Gameplay</span>
+            </a>
+            <a href="Multinetv01.html" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-robot"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">v0.1 - Robotics</span>
+            </a>
+        </div>
+    </div>
+    <!-- Model Releases Dropdown -->
+    <div class="nav-item has-dropdown" style="padding: 0;"
+         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
+         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+            <span class="icon"><i class="fas fa-rocket"></i></span>
+            <span class="nav-text">Model Releases</span>
+            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+        </a>
+        <div class="dropdown-menu-items level-1">
+            <a href="https://github.com/eihli/mugato" target="_blank" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-microchip"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">μGato</span>
+            </a>
+            <a href="https://github.com/ManifoldRG/NEKO" target="_blank" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-cat"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">NEKO</span>
+            </a>
+        </div>
+    </div>
+    <!-- Software Releases Dropdown -->
+    <div class="nav-item has-dropdown" style="padding: 0;"
+         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
+         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+            <span class="icon"><i class="fas fa-code-branch"></i></span>
+            <span class="nav-text">Software Releases</span>
+            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+        </a>
+        <div class="dropdown-menu-items level-1">
+            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
+              <span class="icon"><i class="fas fa-tasks"></i></span>
+              <span class="nav-text" style="white-space: nowrap;">Multinet Eval Harness</span>
+            </a>
+            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="dropdown-item main-release-link">
+              <span class="icon"><i class="fas fa-code"></i></span>
+              <span class="nav-text" style="white-space: nowrap;">GenESIS framework</span>
+            </a>
+        </div>
+    </div>
+    <a href="Multinet.html" class="nav-item">
+      <span class="icon"><i class="fas fa-info-circle"></i></span>
+      <span class="nav-text">About Multinet</span>
+    </a>
+    <a href="../../index.html#BibTeX" class="nav-item">
+      <span class="icon"><i class="fas fa-quote-right"></i></span>
+      <span class="nav-text">Citations</span>
+    </a>
+  </div>
+</div>
+
+<div id="main-page-content">
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
-          <div class="column has-text-centered">
+          <div class="column has-text-centered"> <!-- This column now correctly wraps all content -->
             <h1 class="title is-1 publication-title">Benchmarking Vision, Language, & Action Models On
                 Robotic Learning Tasks</h1>
-                <div class="is-size-5 publication-authors">
-                    <!-- Paper authors -->
-                    <span class="author-block">
-                      <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank">Pranav Guruprasad</a><sup>*12</sup>,</span>
-                      <span class="author-block">
-                        <a href="https://www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>*123</sup>,</span>
-                        <span class="author-block">
-                          <a href="https://songstudio.info/" target="_blank">Jaewoo Song</a><sup>*1</sup>,</span>
-                          <span class="author-block">
-                            <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>1</sup>,</span>
-                            <span class="author-block">
-                              <a href="https://pliang279.github.io/" target="_blank">Paul Pu Liang</a><sup>4</sup>,</span>
-                        </span>
-                        </div>
-      
-                        <div class="is-size-5 publication-authors">
-                          <span class="author-block"><a href="https://www.manifoldrg.com/">Manifold Research</a><sup>1</sup>, <a href="https://metarch.ai/">Metarch.ai</a><sup>2</sup>, Georgia Institute of Technology<sup>3</sup>, MIT<sup>4</sup><br>This work is sponsored by <a href="https://metarch.ai/">Metarch.ai.</a> </span>
-                          <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                        </div>
+            <div class="is-size-5 publication-authors">
+                <!-- Paper authors -->
+                <span class="author-block">
+                  <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank">Pranav Guruprasad</a><sup>*12</sup>,</span>
+                <span class="author-block">
+                  <a href="https://www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>*123</sup>,</span>
+                <span class="author-block">
+                  <a href="https://songstudio.info/" target="_blank">Jaewoo Song</a><sup>*1</sup>,</span>
+                <span class="author-block">
+                  <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>1</sup>,</span>
+                <span class="author-block">
+                  <a href="https://pliang279.github.io/" target="_blank">Paul Pu Liang</a><sup>4</sup>,</span>
+                <!-- Removed extra </span> that was here -->
+            </div> <!-- Closes .is-size-5.publication-authors -->
+            <!-- Removed extra </div> that prematurely closed .column.has-text-centered -->
 
-                        <div class="column has-text-centered">
-                            <div class="publication-links">
-                                 <!-- Link to paper -->
-                              <span class="link-block">
-                                <a href="../pdfs/Benchmarking Vision Language Action Models.pdf" target="_blank"
-                                class="external-link button is-normal is-rounded is-dark">
-                                <span class="icon">
-                                  <i class="fas fa-file-pdf"></i>
-                                </span>
-                                <span>Paper</span>
-                              </a>
-                            </span>
-        
-                          <!-- Github link -->
-                          <span class="link-block">
-                            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank"
-                            class="external-link button is-normal is-rounded is-dark">
-                            <span class="icon">
-                              <i class="fab fa-github"></i>
-                            </span>
-                            <span>Code</span>
-                          </a>
-                        </span>
-        
-                        <!-- Link to VLM-Action framework -->
-                        <span class="link-block">
-                          <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank"
-                          class="external-link button is-normal is-rounded is-dark">
-                          <span class="icon">
-                            <i class="fas fa-code"></i>
-                          </span>
-                          <span>GenESIS framework</span>
-                        </a>
-                      </span>
-          </div>
-        </div>
-      </div>
-    </div>
+            <!-- Affiliations and contact are now correctly inside the main column -->
+            <div class="is-size-5 publication-authors">
+              <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+              <br>
+              <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:pranav@metarch.ai"> here</a></strong></span>
+            </div>
+
+            <!-- Publication links are now correctly inside the main column, without an extra wrapping column div -->
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="../pdfs/Benchmarking Vision Language Action Models.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-atom"></i>
+                  </span>
+                  <span>GenESIS framework</span>
+                </a>
+              </span>
+            </div>
+          </div> <!-- Closes .column.has-text-centered -->
+        </div> <!-- Closes .columns.is-centered -->
+      </div> <!-- Closes .container.is-max-desktop -->
+    </div> <!-- Closes .hero-body -->
   </section>
   <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -122,11 +584,13 @@
                 remains limited. In this work, we present a comprehensive evaluation framework and benchmark suite
                 for assessing VLA models. We profile three state-of-the-art VLM and VLAs —GPT-4o, OpenVLA,
                 and JAT—across 20 diverse datasets from the Open-X-Embodiment collection, evaluating their
-                performance on various manipulation tasks. Our analysis reveals several key insights: (1) current
-                VLA models show significant variation in performance across different tasks and robot platforms, with
-                GPT-4o demonstrating the most consistent performance through sophisticated prompt engineering,
-                (2) all models struggle with complex manipulation tasks requiring multi-step planning, and (3) model
-                performance is notably sensitive to action space characteristics and environmental factors. We release
+                performance on various manipulation tasks. Our analysis reveals several key insights:
+                <ul>
+                  <li>Current VLA models show significant variation in performance across different tasks and robot platforms, with GPT-4o demonstrating the most consistent performance through sophisticated prompt engineering.</li>
+                  <li>All models struggle with complex manipulation tasks requiring multi-step planning.</li>
+                  <li>Model performance is notably sensitive to action space characteristics and environmental factors.</li>
+                </ul>
+                We release
                 our evaluation framework and findings to facilitate systematic assessment of future VLA models and
                 identify critical areas for improvement in the development of general-purpose robotic systems.
             
@@ -358,7 +822,7 @@
                 The NAMSE is a metric that allows comparison of a given model's performance across different datasets. 
             </p>
             <p>     
-                We also assess successful completion of an episode in a given task, by comparing final predicted actions with ground truth final actions. While this serves as an approximate measure of task completion, it provides valuable insights into the models’ ability to reach target states across trajectories.
+                We also assess successful completion of an episode in a given task, by comparing final predicted actions with ground truth final actions. While this serves as an approximate measure of task completion, it provides valuable insights into the models' ability to reach target states across trajectories.
                 We will be actively updating this benchmark as we profile SoTA VLMs and VLAs on more OpenX-Embodiment datasets, other RL and Robotics datasets, and in few-shot and fine-tuned settings.
            </p>
           </div>
@@ -491,7 +955,7 @@
 
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
+      <h2 class="title has-text-centered">Citation</h2>
       <pre><code>@misc{guruprasad2024benchmarkingvisionlanguage,
         title={Benchmarking Vision, Language, & Action Models on Robotic Learning Tasks}, 
         author={Pranav Guruprasad and Harshvardhan Sikka and Jaewoo Song and Yangyue Wang and Paul Pu Liang},
@@ -532,6 +996,308 @@
     </div>
   </footer>
 
+</div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navToggleBtn = document.getElementById('navToggleBtn');
+        const sideNav = document.getElementById('side-nav');
+        const mainContent = document.getElementById('main-page-content');
+        const allNavLinks = document.querySelectorAll('.side-navigation .nav-item:not(.has-dropdown) > a, .side-navigation .sub-item:not(.has-dropdown)'); // Links that can be active
+
+        function expandSidebar() {
+            if (!sideNav || !mainContent) return;
+            if (sideNav.classList.contains('collapsed')) {
+                sideNav.classList.remove('collapsed');
+                // mainContent.classList.remove('collapsed'); // Removed this line
+                // Ensure all dropdowns are closed when expanding from fully collapsed hover state
+                document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
+                    const menu = openDropdown.querySelector('.dropdown-menu-items');
+                    if (menu) menu.style.maxHeight = null; // Collapse menu
+                    openDropdown.classList.remove('open');
+                    openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                    const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
+                    if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
+                        arrowIcon.classList.remove('rotated');
+                    }
+                });
+            }
+        }
+
+        function collapseSidebar() {
+            if (!sideNav || !mainContent) return;
+            if (!sideNav.classList.contains('collapsed')) {
+                sideNav.classList.add('collapsed');
+                // mainContent.classList.add('collapsed'); // Removed this line
+                
+                // Collapse all open dropdowns
+                document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
+                    openDropdown.classList.remove('open');
+                    openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                    const menu = openDropdown.querySelector('.dropdown-menu-items');
+                    if (menu) menu.style.maxHeight = null;
+                    const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
+                     if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
+                        arrowIcon.classList.remove('rotated');
+                    }
+                });
+            }
+        }
+
+        function masterToggleSidebar() {
+            if (!sideNav) return;
+            if (sideNav.classList.contains('collapsed')) {
+                expandSidebar();
+            } else {
+                collapseSidebar();
+            }
+        }
+
+        if (navToggleBtn) {
+            const icon = navToggleBtn.querySelector('i');
+            if (icon) icon.className = 'fas fa-bars';
+            navToggleBtn.addEventListener('click', masterToggleSidebar);
+            navToggleBtn.addEventListener('mouseenter', () => {
+                if (sideNav.classList.contains('collapsed')) expandSidebar();
+            });
+        }
+
+        document.addEventListener('click', function(event) {
+            if (!sideNav || !navToggleBtn || !mainContent) return;
+            const isClickInsideNav = sideNav.contains(event.target);
+            if (!sideNav.classList.contains('collapsed') && !isClickInsideNav) {
+                collapseSidebar();
+            }
+        });
+
+        // New Dropdown Handling for multiple levels
+        const dropdownToggles = document.querySelectorAll('.side-navigation .nav-item.has-dropdown > .dropdown-toggle');
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation(); // Prevent click from bubbling to document listener
+
+                const parentNavItem = this.parentElement; // The .nav-item.has-dropdown
+                const dropdownMenu = parentNavItem.querySelector(':scope > .dropdown-menu-items');
+                
+                if (!dropdownMenu) return;
+
+                // Do not allow click to toggle dropdowns if sidebar is collapsed (hover only)
+                if (sideNav.classList.contains('collapsed')) {
+                    // If user clicks on an item that *would* be a flyout, briefly expand sidebar
+                    expandSidebar(); 
+                    // And then open the item they clicked on
+                     setTimeout(() => { // allow sidebar to expand
+                        const isOpen = parentNavItem.classList.toggle('open');
+                        this.setAttribute('aria-expanded', isOpen.toString());
+                        dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
+                        const arrowIcon = this.querySelector('.dropdown-arrow .fas');
+                        if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
+                            arrowIcon.classList.toggle('rotated', isOpen);
+                        }
+                     }, 50); // Small delay for visual transition
+                    return;
+                }
+
+                const isOpen = parentNavItem.classList.toggle('open');
+                this.setAttribute('aria-expanded', isOpen.toString());
+                dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
+                
+                const arrowIcon = this.querySelector('.dropdown-arrow .fas');
+                if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
+                    arrowIcon.classList.toggle('rotated', isOpen);
+                }
+
+
+                // Accordion behavior: Close sibling dropdowns at the same level
+                const parentMenu = parentNavItem.parentElement; // This is either .side-navigation-menu or a .dropdown-menu-items
+                if (parentMenu) {
+                    const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
+                        child.classList.contains('has-dropdown') && child !== parentNavItem
+                    );
+                    siblingDropdowns.forEach(sib => {
+                        sib.classList.remove('open');
+                        sib.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                        const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
+                        if (sibMenu) sibMenu.style.maxHeight = null;
+                        const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
+                        if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
+                            sibArrowIcon.classList.remove('rotated');
+                        }
+                    });
+                }
+            });
+        });
+        
+        /// Handle hover for flyouts when collapsed
+        document.querySelectorAll('.side-navigation.collapsed .nav-item.has-dropdown').forEach(dropdownItem => {
+            dropdownItem.addEventListener('mouseenter', function() {
+                if (sideNav.classList.contains('collapsed')) {
+                    const menu = this.querySelector(':scope > .dropdown-menu-items');
+                    if (menu) {
+                        // Position flyout correctly (JS might be needed if CSS is not enough for multi-level)
+                        // For now, CSS handles :hover to display.
+                    }
+                }
+            });
+            dropdownItem.addEventListener('mouseleave', function() {
+                if (sideNav.classList.contains('collapsed')) {
+                    // CSS will hide on mouseleave from the :hover target
+                }
+            });
+        });
+
+
+        // Active link handling
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        const currentFullPath = window.location.pathname;
+
+        allNavLinks.forEach(item => {
+            // Make sure item is an <a> tag, could be .nav-item directly if it's not a dropdown
+            const linkElement = item.matches('a') ? item : item.querySelector('a');
+            if (!linkElement) return;
+
+            const itemLink = linkElement.getAttribute('href');
+            if (itemLink) {
+                let isMatch = false;
+                // Handle absolute URLs (external)
+                if (itemLink.startsWith('http')) {
+                    if (itemLink === window.location.href) {
+                        // isMatch = true; // Usually don't mark external as active
+                    }
+                } 
+                // Handle root index.html
+                else if (itemLink === '../../index.html' || itemLink === '../index.html' || itemLink === 'index.html') { // Adjusted for relative paths
+                    // Check if current page is effectively an index page at the corresponding level
+                    const pathSegments = currentFullPath.split('/').filter(Boolean);
+                    const itemLinkSegments = itemLink.split('/').filter(Boolean);
+                    
+                    let effectiveCurrentPath = currentPath;
+                    if (currentPath === 'Multinetv01.html' || currentPath === 'Multinetv02.html' || currentPath === 'Multinet.html' || currentPath === 'Technicalblog.html') {
+                         // these are files in static/pages/
+                         // relative to them, ../../index.html is the root index.html
+                        if (itemLink === '../../index.html' && (pathSegments.length === 0 || (pathSegments.length > 0 && pathSegments[pathSegments.length -1] === 'index.html'))) {
+                           // This condition is tricky. Let's simplify by matching currentPath to itemLink's filename
+                        }
+                    }
+                     if ( (currentFullPath.endsWith('/index.html') || currentPath === 'index.html' ) && itemLink.endsWith('index.html')) {
+                         // More specific check for index.html files
+                         if (itemLink === '../../index.html' && currentFullPath.includes('/static/pages/')) isMatch = true;
+                         else if (itemLink === 'index.html' && !currentFullPath.includes('/static/pages/')) isMatch = true; // if index.html is at root
+                     }
+                }
+                // Handle other relative links
+                const itemLinkFilename = itemLink.split('/').pop();
+                if (itemLinkFilename === currentPath && currentPath !== 'index.html') { // for pages like Multinetv01.html matching Multinetv01.html
+                     isMatch = true;
+                }
+                 // Specific case for home on subpages
+                if (itemLink === '../../index.html' && (currentPath === 'index.html' || currentFullPath === '/' || currentFullPath.endsWith("/"))) {
+                    // if current page is a root index, and link is to root index
+                    isMatch = true;
+                } else if (itemLink === '../../index.html' && currentFullPath.includes('/static/pages/') && (currentFullPath.endsWith('/index.html') || currentPath === 'index.html')) {
+                     // if current page is an index.html inside static/pages, and link is to root index, don't mark root active unless it IS the current page
+                }
+
+
+                if (isMatch) {
+                    // Remove active from all other items first
+                    document.querySelectorAll('.side-navigation .nav-item.active, .side-navigation .sub-item.active, .side-navigation .main-release-link.active').forEach(activeEl => activeEl.classList.remove('active'));
+                    
+                    // Add active to current item
+                    let elToActivate = linkElement;
+                     if (linkElement.classList.contains('dropdown-item') || linkElement.classList.contains('main-release-link') || linkElement.classList.contains('sub-item')) {
+                         // Already the correct element or its anchor
+                    } else {
+                        elToActivate = linkElement.closest('.nav-item') || linkElement;
+                    }
+                    if(elToActivate && !elToActivate.hasAttribute('target')) elToActivate.classList.add('active');
+
+
+                    // Open parent dropdowns if active item is inside
+                    let parentDropdownMenu = elToActivate.closest('.dropdown-menu-items');
+                    while(parentDropdownMenu) {
+                        const mainDropdownItem = parentDropdownMenu.parentElement; // The .nav-item.has-dropdown
+                        if (mainDropdownItem && mainDropdownItem.classList.contains('has-dropdown') && !mainDropdownItem.classList.contains('open')) {
+                            // mainDropdownItem.classList.add('open');
+                            const toggle = mainDropdownItem.querySelector('.dropdown-toggle');
+                            // if (toggle) toggle.setAttribute('aria-expanded', 'true');
+                            // parentDropdownMenu.style.maxHeight = parentDropdownMenu.scrollHeight + "px";
+                            const arrowIcon = mainDropdownItem.querySelector('.dropdown-arrow .fas');
+                            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
+                                // arrowIcon.classList.add('rotated');
+                            }
+                        }
+                         if (mainDropdownItem && mainDropdownItem.parentElement) {
+                           parentDropdownMenu = mainDropdownItem.parentElement.closest('.nav-item.has-dropdown > .dropdown-menu-items');
+                        } else {
+                            parentDropdownMenu = null; 
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Fallback for home page if on root index.html for sub-pages
+         if ( (currentFullPath.includes('/static/pages/') && (currentPath === 'index.html' || currentFullPath.endsWith('/'))) ) {
+            // This case is if we are on an index.html within static/pages, which is not expected by current structure
+         } else if ( (currentFullPath === '/' || currentFullPath.endsWith('/index.html')) && !currentFullPath.includes('/static/pages/')) {
+             // We are on the main root index.html
+             const homeSideBarLink = document.querySelector('.side-navigation a.nav-item[href="../../index.html"]'); // This path is for sub-pages
+             // For root index.html, the link would be href="index.html"
+             const rootHomeLink = document.querySelector('.side-navigation a.nav-item[href="index.html"], .side-navigation a.nav-item[href="./index.html"]');
+             if(rootHomeLink && !document.querySelector('.side-navigation .active')) {
+                rootHomeLink.classList.add('active');
+             }
+         } else {
+            // Check current page and set active
+            const pageName = currentPath.split('.')[0]; //e.g. Multinetv01
+            const links = document.querySelectorAll('.side-navigation .nav-item a, .side-navigation .dropdown-item a, .side-navigation .main-release-link');
+            let activeSet = false;
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.includes(currentPath) && currentPath !== 'index.html') {
+                    // Clear previous active
+                    document.querySelectorAll('.side-navigation .active').forEach(el => el.classList.remove('active'));
+                    
+                    let elToActivate = link;
+                    if (link.classList.contains('dropdown-item') || link.classList.contains('main-release-link') || link.classList.contains('sub-item')) {
+                        // Direct link in dropdown
+                    } else {
+                         elToActivate = link.closest('.nav-item') || link;
+                    }
+                    if(elToActivate && !elToActivate.hasAttribute('target')) elToActivate.classList.add('active');
+                    activeSet = true;
+
+                    let parentDropdownMenu = elToActivate.closest('.dropdown-menu-items');
+                    while(parentDropdownMenu) {
+                        const mainDropdownItem = parentDropdownMenu.parentElement; 
+                        if (mainDropdownItem && mainDropdownItem.classList.contains('has-dropdown') && !mainDropdownItem.classList.contains('open')) {
+                            // mainDropdownItem.classList.add('open');
+                            const toggle = mainDropdownItem.querySelector('.dropdown-toggle');
+                            // if (toggle) toggle.setAttribute('aria-expanded', 'true');
+                            // parentDropdownMenu.style.maxHeight = parentDropdownMenu.scrollHeight + "px";
+                            const arrowIcon = mainDropdownItem.querySelector('.dropdown-arrow .fas');
+                            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
+                                // arrowIcon.classList.add('rotated');
+                            }
+                        }
+                        if (mainDropdownItem && mainDropdownItem.parentElement) {
+                           parentDropdownMenu = mainDropdownItem.parentElement.closest('.nav-item.has-dropdown > .dropdown-menu-items');
+                        } else {
+                            parentDropdownMenu = null; 
+                        }
+                    }
+                }
+            });
+            if (!activeSet && (currentFullPath === '/' || currentFullPath.endsWith('/index.html') || currentPath === 'index.html')) {
+                 const homeLink = document.querySelector('.side-navigation a.nav-item[href="../../index.html"]');
+                 if(homeLink && !document.querySelector('.side-navigation .active')){
+                     homeLink.classList.add('active');
+                 }
+            }
+         }
+    });
+  </script>
 </body>
 </html>
 
