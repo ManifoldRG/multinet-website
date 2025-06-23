@@ -612,7 +612,7 @@
     </button>
     <div class="container is-max-desktop">
       <p style="margin: 0; font-size: 1.1rem; font-weight: 500;">
-        Need to Run Evaluations on Production Multimodal, Computer Use, or Robotics AI System? We can help!
+        Need to Run Evaluations on Production Multimodal, Computer Use, or Robotics AI Systems? We can help!
         <a href="https://forms.gle/SBrtZtyzr6DBp8HM9" target="_blank" rel="noopener noreferrer" style="color: #90EE90; text-decoration: underline; font-weight: 600; margin-left: 10px;">
           Get Started
         </a>
@@ -672,7 +672,7 @@
                       <p><a href="static/pages/Multinet.html">Multinet</a> is a comprehensive benchmarking initiative for evaluating generalist models across vision, language, and action. It provides:</p>
                       <ul style="margin-left: 2em; margin-top: 0.75em; list-style-type: disc;">
                           <li>Consolidation of diverse datasets and standardized protocols for assessing multimodal understanding</li>
-                          <li>Extensive training data (800M+ image-text pairs, 1.3T language tokens, 35TB+ control data)</li>
+                          <li>Extensive training data (800M+ image-text pairs, Trillion+ language tokens, 35TB+ control data)</li>
                           <li>Varied evaluation tasks including captioning, VQA, robotics, game-playing, commonsense reasoning, and simulated locomotion/manipulation</li>
                           <li>Open-source toolkit to standardize the process of obtaining and utilizing robotics/RL data</li>
                       </ul>
@@ -723,7 +723,7 @@
 
             <!-- Card 2: Open Source Effort -->
             <div class="column is-half-tablet is-one-third-desktop">
-              <a href="static/pdfs/An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" class="flip-card-anchor">
+              <a href="https://arxiv.org/abs/2506.09172" target="_blank" class="flip-card-anchor">
                 <div class="flip-card">
                   <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -1523,6 +1523,19 @@
         }
 </code></pre>
       <pre><code>
+        <strong>Open-Source Evaluation Harness and Toolkit (accepted at ICML 2025)</strong>
+        <br>
+        @misc{guruprasad2025opensourcesoftwaretoolkit,
+        title={An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models}, 
+        author={Pranav Guruprasad and Yangyue Wang and Sudipta Chowdhury and Jaewoo Song and Harshvardhan Sikka},
+        year={2025},
+        eprint={2506.09172},
+        archivePrefix={arXiv},
+        primaryClass={cs.LG},
+        url={https://arxiv.org/abs/2506.09172}, 
+        }
+</code></pre>
+      <pre><code>
         <strong>Multinet v0.1 - Benchmarking Vision, Language, & Action Models on Robotic Learning Tasks</strong>
         <br>
         @misc{guruprasad2024benchmarkingvisionlanguage,
@@ -1626,7 +1639,7 @@
             if (!sideNav.classList.contains('collapsed') && !isClickInsideNav) {
                 collapseSidebar();
             }
-        // });
+        });
 
         // New Dropdown Handling for multiple levels
         const dropdownToggles = document.querySelectorAll('.side-navigation .nav-item.has-dropdown > .dropdown-toggle');
