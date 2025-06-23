@@ -605,6 +605,21 @@
 </div>
 
 <div id="main-page-content">
+  <!-- CTA Banner -->
+  <div id="cta-banner" class="cta-banner" style="background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%); color: white; padding: 15px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: relative;">
+    <button id="cta-close-btn" style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 18px; cursor: pointer; padding: 8px; line-height: 1; opacity: 0.9; transition: all 0.3s ease; z-index: 10; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px;" title="Close banner" onclick="document.getElementById('cta-banner').style.display='none';">
+      ×
+    </button>
+    <div class="container is-max-desktop">
+      <p style="margin: 0; font-size: 1.1rem; font-weight: 500;">
+        Need to Run Evaluations on Production Multimodal, Computer Use, or Robotics AI System? We can help!
+        <a href="https://forms.gle/SBrtZtyzr6DBp8HM9" target="_blank" rel="noopener noreferrer" style="color: #90EE90; text-decoration: underline; font-weight: 600; margin-left: 10px;">
+          Get Started
+        </a>
+      </p>
+    </div>
+  </div>
+
   <!-- Old navbar removed, content starts here -->
   <section class="hero">
     <div class="hero-body">
@@ -617,7 +632,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <p class="has-text-centered collaborators-description is-size-">Multinet is a collaborative initiative with contributions from leading research teams at instituitions like:</p>
+          <p class="has-text-centered collaborators-description is-size-">Multinet is an open science initiative with contributions from leading research teams at instituitions like:</p>
           <div class="collaborator-logos">
             <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
               <img src="static/images/manifoldlogo.png" alt="Manifold Research Logo" class="collaborator-logo">
@@ -678,66 +693,6 @@
           <div class="columns is-multiline is-centered">
             <!-- Card 1 -->
             <div class="column is-half-tablet is-one-third-desktop">
-              <a href="static/pages/Multinet.html" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">About Multinet</h3>
-                      <p>A comprehensive benchmark for evaluating Multimodal Action Models</p>
-                      <img src="static/images/multinet_logo_square copy.png" alt="Multinet Icon">
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">About Multinet</h3>
-                          <p class="description-intro">Key contributions include:</p>
-                          <ul>
-                            <li>Comprehensive dataset for evaluating multimodal models</li>
-                            <li>Tools for standardizing robotics and RL data</li>
-                            <li>Framework for mapping language models to actions</li>
-                            <li>Evaluation suite for vision-language agents</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <!-- Card 2: Open Source Effort -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <a href="static/pdfs/An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">An Open-Source Effort</h3>
-                      <p>An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-hands-helping"></i></span>
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">An Open-Source Effort</h3>
-                          <p class="description-intro">Through Multinet, we aim to provide the community with the essential resources—datasets, tools, and standardized evaluation protocols—to systematically compare different approaches, gain deeper insights into the challenges and opportunities in building generalist AI, and ultimately accelerate the development of truly general-purpose intelligent systems. This includes:</p>
-                          <ul>
-                            <li>A Large-Scale Generalist Dataset</li>
-                            <li>An Open-Source Data Curation SDK</li>
-                            <li>A Systematic Evaluation Harness</li>
-                            <li>Open-source adaptations for SoTA VLA models and VLMs</li>
-                            <li>In-depth Experiments and Analysis</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            
-
-            <!-- Card 3 -->
-            <div class="column is-half-tablet is-one-third-desktop">
               <a href="static/pages/Multinetv02.html" class="flip-card-anchor">
                 <div class="flip-card">
                   <div class="flip-card-inner">
@@ -765,7 +720,39 @@
               </a>
             </div>
             
-            <!-- Card 2 -->
+
+            <!-- Card 2: Open Source Effort -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="static/pdfs/An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">Evaluation Harness and Toolkit</h3>
+                      <p>An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models</p>
+                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-wrench"></i></span>
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div> <!-- Content wrapper -->
+                          <h3 class="title is-4">Evaluation Harness and Toolkit</h3>
+                          <p class="description-intro">Beyond the benchmark we aim to provide the community with the essential resources—datasets, tools, and standardized evaluation protocols—to systematically compare different approaches, gain deeper insights into the challenges and opportunities in building generalist AI, and ultimately accelerate the development of truly general-purpose intelligent systems. This includes:</p>
+                          <ul>
+                            <li>A Large-Scale Generalist Dataset</li>
+                            <li>An Open-Source Data Curation SDK</li>
+                            <li>A Systematic Evaluation Harness</li>
+                            <li>Open-source adaptations for SoTA VLA models and VLMs</li>
+                            <li>In-depth Experiments and Analysis</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            
+
+            <!-- Card 3 -->
             <div class="column is-half-tablet is-one-third-desktop">
               <a href="static/pages/Multinetv01.html" class="flip-card-anchor">
                 <div class="flip-card">
@@ -794,6 +781,9 @@
                 </div>
               </a>
             </div>
+            
+            <!-- Card 2 -->
+            
 
             <!-- Card 5: New Card -->
             <div class="column is-half-tablet is-one-third-desktop">
@@ -889,7 +879,6 @@
               </a>
             </div>
 
-            <!-- Card 6: Mugato -->
             <div class="column is-half-tablet is-one-third-desktop">
               <a href="https://github.com/ManifoldRG/NEKO" target="_blank" class="flip-card-anchor">
                 <div class="flip-card">
@@ -917,6 +906,37 @@
                 </div>
               </a>
             </div>
+
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="static/pages/Multinet.html" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">About Multinet</h3>
+                      <p>A comprehensive benchmark for evaluating Multimodal Action Models</p>
+                      <img src="static/images/multinet_logo_square copy.png" alt="Multinet Icon">
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div> <!-- Content wrapper -->
+                          <h3 class="title is-4">About Multinet</h3>
+                          <p class="description-intro">Key contributions include:</p>
+                          <ul>
+                            <li>Comprehensive dataset for evaluating multimodal models</li>
+                            <li>Tools for standardizing robotics and RL data</li>
+                            <li>Framework for mapping language models to actions</li>
+                            <li>Evaluation suite for vision-language agents</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Card 6: Mugato -->
+  
           </div>
         </div>
       </div>
@@ -1364,7 +1384,6 @@
   </style>
 
 
-
   <style>
     .collaborators-section {
       padding-top: 4rem;
@@ -1607,7 +1626,7 @@
             if (!sideNav.classList.contains('collapsed') && !isClickInsideNav) {
                 collapseSidebar();
             }
-        });
+        // });
 
         // New Dropdown Handling for multiple levels
         const dropdownToggles = document.querySelectorAll('.side-navigation .nav-item.has-dropdown > .dropdown-toggle');
@@ -1777,7 +1796,35 @@
             ]
           });
         }
+
+        // CTA Banner close functionality
+        const ctaCloseBtn = document.getElementById('cta-close-btn');
+        const ctaBanner = document.getElementById('cta-banner');
+        
+        console.log('CTA Close Button:', ctaCloseBtn);
+        console.log('CTA Banner:', ctaBanner);
+        
+        if (ctaCloseBtn && ctaBanner) {
+          ctaCloseBtn.addEventListener('click', function(e) {
+            console.log('Close button clicked!');
+            e.preventDefault();
+            e.stopPropagation();
+            ctaBanner.style.display = 'none';
+          });
+          
+          // Add hover effect for close button
+          ctaCloseBtn.addEventListener('mouseenter', function() {
+            this.style.opacity = '1';
+          });
+          
+          ctaCloseBtn.addEventListener('mouseleave', function() {
+            this.style.opacity = '0.8';
+          });
+        } else {
+          console.log('CTA elements not found');
+        }
     });
   </script>
 </body>
 </html>
+
