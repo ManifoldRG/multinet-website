@@ -418,187 +418,577 @@
       transform: rotate(90deg);
       transition: transform 0.3s ease;
     }
+
+    /* Mobile Responsive Styles */
+    @media screen and (max-width: 768px) {
+      /* Prevent horizontal overflow and ensure full width usage */
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      * {
+        box-sizing: border-box;
+      }
+      
+      /* Global text overflow prevention */
+      h1, h2, h3, h4, h5, h6, p, span, div, a {
+        word-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
+        overflow-wrap: break-word;
+      }
+      
+      /* Prevent specific long words from breaking layout */
+      .publication-title {
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+      }
+      
+      /* Hide sidebar by default on mobile, make it overlay when shown */
+      .side-navigation {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1050;
+      }
+      
+      .side-navigation:not(.collapsed) {
+        transform: translateX(0);
+      }
+      
+      /* Adjust main content for mobile */
+      #main-page-content {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      
+      /* Mobile navigation toggle - make it visible and positioned */
+      .mobile-nav-toggle {
+        display: block !important;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1060;
+        background: rgba(0, 90, 156, 0.9);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      }
+      
+      /* Overlay for mobile sidebar */
+      .mobile-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1040;
+      }
+      
+      .mobile-overlay.active {
+        display: block;
+      }
+      
+      body.mobile-nav-open .mobile-nav-toggle {
+        display: none !important;
+      }
+      
+      /* Hero section adjustments */
+      .hero {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      
+      .hero .hero-body {
+        padding: 1.5rem 1rem;
+      }
+      
+      .hero .title.is-1 {
+        font-size: 2rem !important;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      /* Collaborator logos - stack vertically on mobile */
+      .collaborator-logos {
+        flex-direction: column;
+        gap: 2rem !important;
+      }
+      
+      .collaborator-logo {
+        max-height: 60px !important;
+        max-width: 120px !important;
+      }
+      
+      /* Flip cards - single column on mobile */
+      .columns {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      
+      .columns.is-multiline .column.is-half-tablet.is-one-third-desktop {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        margin: 0 auto;
+      }
+      
+      .flip-card-anchor {
+        width: 100% !important;
+        max-width: 300px;
+        height: 260px !important;
+        margin: 0 auto 20px auto;
+      }
+      
+      .flip-card-front {
+        padding: 15px !important;
+      }
+      
+      .flip-card-front .title.is-4 {
+        font-size: 1.1rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.75rem !important;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .flip-card-front p {
+        font-size: 0.8rem !important;
+        line-height: 1.4 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .flip-card-back {
+        padding: 15px !important;
+      }
+      
+      .flip-card-back .title.is-4 {
+        font-size: 1.1rem !important;
+        line-height: 1.3 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .flip-card-back ul {
+        font-size: 0.75rem !important;
+        line-height: 1.4 !important;
+      }
+      
+      .flip-card-back p.description-intro {
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      /* CTA Banner adjustments */
+      .cta-banner {
+        padding: 15px 45px 15px 15px !important; /* Extra right padding for close button */
+        text-align: left !important;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+      
+      .cta-banner .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        max-width: 100% !important;
+      }
+      
+      .cta-banner p {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+        margin: 0 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+        padding-right: 0;
+      }
+      
+      .cta-banner a {
+        display: inline-block !important;
+        margin-top: 8px !important;
+        margin-left: 0 !important;
+        word-wrap: break-word;
+      }
+      
+      #cta-close-btn {
+        top: 10px !important;
+        right: 10px !important;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 18px !important;
+        flex-shrink: 0;
+      }
+      
+      /* Section spacing adjustments */
+      .section {
+        padding: 2rem 1rem;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      
+      /* Container adjustments for mobile */
+      .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .container.is-max-desktop {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      
+      .title.is-2 {
+        font-size: 1.75rem !important;
+      }
+      
+      .title.is-3 {
+        font-size: 1.5rem !important;
+      }
+      
+      /* News section mobile optimization */
+      .news-section {
+        max-height: none;
+        overflow-y: visible;
+        padding: 1.5rem 0;
+      }
+      
+      .news-container {
+        padding: 12px;
+      }
+      
+      .news-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding: 12px;
+      }
+      
+      .news-icon {
+        margin-bottom: 8px;
+        margin-right: 0;
+      }
+      
+      /* Videos carousel mobile adjustments */
+      #videos-carousel .card {
+        margin: 0 5px;
+      }
+      
+      /* Citation section mobile */
+      .section#BibTeX pre {
+        font-size: 0.8rem;
+        overflow-x: auto;
+      }
+      
+      /* Contact links mobile optimization */
+      .publication-authors p.is-size-5 {
+        font-size: 0.9rem !important;
+      }
+      
+      /* Button and link touch targets */
+      .nav-toggle-btn,
+      .mobile-nav-toggle,
+      #cta-close-btn {
+        min-height: 44px;
+        min-width: 44px;
+      }
+      
+      /* Ensure proper spacing for touch */
+      .side-navigation .nav-item,
+      .side-navigation .dropdown-toggle {
+        padding: 15px 20px;
+        min-height: 48px;
+      }
+      
+      /* Mobile dropdown improvements */
+      .side-navigation .nav-item.has-dropdown > .dropdown-toggle {
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+      
+      /* Disable hover CSS effects on mobile for dropdowns */
+      .side-navigation .nav-item.has-dropdown:hover > .dropdown-menu-items.level-1 {
+        display: none !important;
+      }
+      
+      /* Only show dropdown when explicitly opened via JS */
+      .side-navigation .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 {
+        display: block !important;
+      }
+      
+      /* Make dropdown arrows more touch-friendly */
+      .side-navigation .dropdown-arrow {
+        padding: 8px;
+        margin-left: 5px;
+        border-radius: 4px;
+      }
+      
+      /* Improve touch targets */
+      .side-navigation .nav-item.has-dropdown {
+        position: relative;
+      }
+    }
+    
+    /* Extra small mobile devices */
+    @media screen and (max-width: 480px) {
+      .hero .title.is-1 {
+        font-size: 1.75rem !important;
+      }
+      
+      .flip-card-anchor {
+        height: 240px !important;
+        max-width: 280px;
+      }
+      
+      .section {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .container,
+      .container.is-max-desktop {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .columns.is-multiline .column.is-half-tablet.is-one-third-desktop {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      
+      /* Extra small CTA banner adjustments */
+      .cta-banner {
+        padding: 12px 40px 12px 12px !important;
+      }
+      
+      .cta-banner p {
+        font-size: 0.85rem !important;
+        line-height: 1.3 !important;
+      }
+      
+      #cta-close-btn {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 16px !important;
+        top: 8px !important;
+        right: 8px !important;
+      }
+      
+      .publication-title {
+        font-size: 1.6rem !important;
+      }
+    }
   </style>
 </head>
 <body>
-
-<div id="side-nav" class="side-navigation collapsed">
-  <div class="logo-container">
-    <a href="../../index.html" class="site-title-logo">
-      <img src="../images/multinet_no_text.png" alt="MultiNet Logo" style="height: 40px; margin-right: 8px; vertical-align: middle; border-radius: 8px;">MultiNet
-    </a>
-    <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation">
-      <i class="fas fa-bars"></i>
-    </button>
-  </div>
-  <div class="side-navigation-menu">
-    <a href="../../index.html" class="nav-item">
-      <span class="icon"><i class="fas fa-home"></i></span>
-      <span class="nav-text">Home</span>
-    </a>
-
-    <!-- Releases Dropdown -->
-    <div class="nav-item has-dropdown" style="padding: 0;" 
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-microscope"></i></span>
-            <span class="nav-text">Benchmark Releases</span>
-            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
-        </a>
-        <div class="dropdown-menu-items level-1">
-            <a href="Multinetv02.html" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-gamepad"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">v0.2 - Gameplay</span>
-            </a>
-            <a href="Multinetv01.html" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-robot"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">v0.1 - Robotics</span>
-            </a>
-        </div>
+  <!-- Mobile Navigation Toggle -->
+  <button class="mobile-nav-toggle" id="mobileNavToggle" style="display: none;" aria-label="Toggle mobile navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  
+  <div id="side-nav" class="side-navigation collapsed">
+    <div class="logo-container">
+      <a href="../../index.html" class="site-title-logo">
+        <img src="../images/multinet_no_text.png" alt="MultiNet Logo" style="height: 40px; margin-right: 8px; vertical-align: middle; border-radius: 8px;">MultiNet
+      </a>
+      <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
-    <!-- Model Releases Dropdown -->
-    <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-rocket"></i></span>
-            <span class="nav-text">Model Releases</span>
-            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
-        </a>
-        <div class="dropdown-menu-items level-1">
-            <a href="https://github.com/eihli/mugato" target="_blank" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-microchip"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">μGato</span>
-            </a>
-            <a href="https://github.com/ManifoldRG/NEKO" target="_blank" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-cat"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">NEKO</span>
-            </a>
-        </div>
-    </div>
-    <!-- Software Releases Dropdown -->
-    <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-code-branch"></i></span>
-            <span class="nav-text">Software Releases</span>
-            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
-        </a>
-        <div class="dropdown-menu-items level-1">
-            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
-              <span class="icon"><i class="fas fa-tasks"></i></span>
-              <span class="nav-text" style="white-space: nowrap;">Multinet Eval Harness</span>
-            </a>
-            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="dropdown-item main-release-link">
-              <span class="icon"><i class="fas fa-atom"></i></span>
-              <span class="nav-text" style="white-space: nowrap;">GenESIS framework</span>
-            </a>
-        </div>
-    </div>
-    <a href="Multinet.html" class="nav-item">
-      <span class="icon"><i class="fas fa-info-circle"></i></span>
-      <span class="nav-text">About Multinet</span>
-    </a>
-    <a href="../../index.html#BibTeX" class="nav-item">
-      <span class="icon"><i class="fas fa-quote-right"></i></span>
-      <span class="nav-text">Citations</span>
-    </a>
-  </div>
-</div>
+    <div class="side-navigation-menu">
+      <a href="../../index.html" class="nav-item">
+        <span class="icon"><i class="fas fa-home"></i></span>
+        <span class="nav-text">Home</span>
+      </a>
 
-<div id="main-page-content">
-  <!-- CTA Banner -->
-  <div id="cta-banner" class="cta-banner" style="background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%); color: white; padding: 15px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: relative;">
-    <button id="cta-close-btn" style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 18px; cursor: pointer; padding: 8px; line-height: 1; opacity: 0.9; transition: all 0.3s ease; z-index: 10; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px;" title="Close banner" onclick="document.getElementById('cta-banner').style.display='none';">
-      ×
-    </button>
-    <div class="container is-max-desktop">
-      <p style="margin: 0; font-size: 1.1rem; font-weight: 500;">
-        Need to Run Evaluations on Production Multimodal, Computer Use, or Robotics AI Systems? We can help!
-        <a href="https://forms.gle/SBrtZtyzr6DBp8HM9" target="_blank" rel="noopener noreferrer" style="color: #90EE90; text-decoration: underline; font-weight: 600; margin-left: 10px;">
-          Get Started
-        </a>
-      </p>
-    </div>
-  </div>
-
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered"> <!-- This column now correctly wraps all content -->
-            <h1 class="title is-1 publication-title">Benchmarking Vision, Language, & Action Models On
-                Robotic Learning Tasks</h1>
-            <div class="is-size-5 publication-authors">
-                <!-- Paper authors -->
-                <span class="author-block">
-                  <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank">Pranav Guruprasad</a><sup>*12</sup>,</span>
-                <span class="author-block">
-                  <a href="https://www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>*123</sup>,</span>
-                <span class="author-block">
-                  <a href="https://songstudio.info/" target="_blank">Jaewoo Song</a><sup>*1</sup>,</span>
-                <span class="author-block">
-                  <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>1</sup>,</span>
-                <span class="author-block">
-                  <a href="https://pliang279.github.io/" target="_blank">Paul Pu Liang</a><sup>4</sup>,</span>
-            </div> <!-- Closes .is-size-5.publication-authors -->
-
-            <!-- Affiliations and contact are now correctly inside the main column -->
-            <div class="is-size-5 publication-authors">
-              <span class="author-affiliations" style="font-size: 1rem; color: #666; margin-top: 0.5rem;">
-                <sup>1</sup> Manifold Research, <sup>2</sup> Metarch AI, <sup>3</sup> Georgia Tech, <sup>4</sup> MIT
-              </span>
-              <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-              <br>
-              <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:pranav@metarch.ai"> here</a></strong></span>
-              <br>
-            </div>
-
-            <!-- Publication links are now correctly inside the main column, without an extra wrapping column div -->
-            <div class="publication-links">
-              <span class="link-block">
-                <a href="../pdfs/Benchmarking Vision Language Action Models.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="fas fa-atom"></i>
-                  </span>
-                  <span>GenESIS framework</span>
-                </a>
-              </span>
-            </div>
-          </div> <!-- Closes .column.has-text-centered -->
-        </div> <!-- Closes .columns.is-centered -->
-      </div> <!-- Closes .container.is-max-desktop -->
-    </div> <!-- Closes .hero-body -->
-  </section>
-  <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="content has-text-centered">
-            <img src="../images/Multinet v0.1 release visual 3.0.png" alt="Multinet v0.1 Release Visual" width="85%">
+      <!-- Releases Dropdown -->
+      <div class="nav-item has-dropdown" style="padding: 0;" onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }" onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
+              <span class="icon"><i class="fas fa-microscope"></i></span>
+              <span class="nav-text">Benchmark Releases</span>
+              <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+          </a>
+          <div class="dropdown-menu-items level-1">
+              <a href="Multinetv02.html" class="dropdown-item main-release-link">
+                  <span class="icon"><i class="fas fa-gamepad"></i></span>
+                  <span class="nav-text" style="white-space: nowrap;">v0.2 - Gameplay</span>
+              </a>
+              <a href="Multinetv01.html" class="dropdown-item main-release-link">
+                  <span class="icon"><i class="fas fa-robot"></i></span>
+                  <span class="nav-text" style="white-space: nowrap;">v0.1 - Robotics</span>
+              </a>
           </div>
-        </div>
+      </div>
+      <!-- Model Releases Dropdown -->
+      <div class="nav-item has-dropdown" style="padding: 0;" onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }" onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
+              <span class="icon"><i class="fas fa-rocket"></i></span>
+              <span class="nav-text">Model Releases</span>
+              <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+          </a>
+          <div class="dropdown-menu-items level-1">
+              <a href="https://github.com/eihli/mugato" target="_blank" class="dropdown-item main-release-link">
+                  <span class="icon"><i class="fas fa-microchip"></i></span>
+                  <span class="nav-text" style="white-space: nowrap;">μGato</span>
+              </a>
+              <a href="https://github.com/ManifoldRG/NEKO" target="_blank" class="dropdown-item main-release-link">
+                  <span class="icon"><i class="fas fa-cat"></i></span>
+                  <span class="nav-text" style="white-space: nowrap;">NEKO</span>
+              </a>
+          </div>
+      </div>
+      <!-- Software Releases Dropdown -->
+      <div class="nav-item has-dropdown" style="padding: 0;" onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }" onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
+              <span class="icon"><i class="fas fa-code-branch"></i></span>
+              <span class="nav-text">Software Releases</span>
+              <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+          </a>
+          <div class="dropdown-menu-items level-1">
+              <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-tasks"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">Multinet Eval Harness</span>
+              </a>
+              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-code"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">GenESIS framework</span>
+              </a>
+          </div>
+      </div>
+      <a href="Multinet.html" class="nav-item">
+        <span class="icon"><i class="fas fa-info-circle"></i></span>
+        <span class="nav-text">About Multinet</span>
+      </a>
+      <a href="../../index.html#BibTeX" class="nav-item">
+        <span class="icon"><i class="fas fa-quote-right"></i></span>
+        <span class="nav-text">Citations</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="main-page-content">
+    <!-- CTA Banner -->
+    <div id="cta-banner" class="cta-banner" style="background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%); color: white; padding: 15px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: relative;">
+      <button id="cta-close-btn" style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 18px; cursor: pointer; padding: 8px; line-height: 1; opacity: 0.9; transition: all 0.3s ease; z-index: 10; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px;" title="Close banner" onclick="document.getElementById('cta-banner').style.display='none';">
+        ×
+      </button>
+      <div class="container is-max-desktop">
+        <p style="margin: 0; font-size: 1.1rem; font-weight: 500;">
+          Need to Run Evaluations on Production Multimodal, Computer Use, or Robotics AI Systems? We can help!
+          <a href="https://forms.gle/SBrtZtyzr6DBp8HM9" target="_blank" rel="noopener noreferrer" style="color: #90EE90; text-decoration: underline; font-weight: 600; margin-left: 10px;">
+            Get Started
+          </a>
+        </p>
       </div>
     </div>
 
-  <section class="section"></section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Benchmarking Vision, Language, & Action Models On
+              Robotic Learning Tasks</h1>
+          <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank">Pranav Guruprasad</a><sup>*12</sup>,</span>
+              <span class="author-block">
+                <a href="https.www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>*123</sup>,</span>
+              <span class="author-block">
+                <a href="https://songstudio.info/" target="_blank">Jaewoo Song</a><sup>*1</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://pliang279.github.io/" target="_blank">Paul Pu Liang</a><sup>4</sup></span>
+          </div>
+
+          <!-- Affiliations and contact are now correctly inside the main column -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-affiliations" style="font-size: 1rem; color: #666; margin-top: 0.5rem;">
+              <sup>1</sup> Manifold Research, <sup>2</sup> Metarch AI, <sup>3</sup> Georgia Tech, <sup>4</sup> MIT
+            </span>
+            <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+            <br>
+            <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:pranav@metarch.ai"> here</a></strong></span>
+          </div>
+
+          <!-- Publication links are now correctly inside the main column, without an extra wrapping column div -->
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="../pdfs/Benchmarking Vision Language Action Models.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-atom"></i>
+                </span>
+                <span>GenESIS framework</span>
+              </a>
+            </span>
+          </div>
+        </div> <!-- Closes .column.has-text-centered -->
+        </div> <!-- Closes .columns.is-centered -->
+        </div> <!-- Closes .container.is-max-desktop -->
+        </div> <!-- Closes .hero-body -->
+        </section>
+        
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+        <div class="column">
+        <div class="content has-text-centered">
+          <img src="../images/Multinet v0.1 release visual 3.0.png" alt="Multinet v0.1 Release Visual" width="85%">
+        </div>
+        </div>
+        </div>
+        </div>
+        
+
+        <section class="section"></section>
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column">
@@ -628,414 +1018,459 @@
     </div>
   </section>
 
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="content has-text-justified">
-            <h2 class="title is-3 has-text-centered">Dataset coverage</h2>
-            <p>
-              All 3 models - HuggingFace's JAT (novel generalist model, OS implementation of GATO), GPT-4o (SoTA VLM), and OpenVLA (SoTA VLA) were evaluated across the 20 diverse datasets from the Open-X-Embodiment collection listed below, thus evaluating their
-              performance on various manipulation tasks. JAT was also evaluated on 33 more OpenX Embodiment datasets, and GPT-4o was evaluated on 2 more OpenX Embodiment datasets. You can find the results of these evaluations in the <a href="../pdfs/Benchmarking Vision Language Action Models.pdf">paper</a>
-            </p>
-            <style>
-          .table-container {
-              max-width: 100%;
-              margin: 20px auto;
-              overflow-x: auto;
-              font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-          }
-          
-          table {
-              border-collapse: collapse;
-              width: 100%;
-              margin-bottom: 10px;
-          }
-          
-          th, td {
-              padding: 12px;
-              text-align: left;
-              border-bottom: 1px solid #ddd;
-          }
-          
-          th {
-              background-color: #f5f5f5;
-              font-weight: bold;
-          }
-          
-          tr:hover {
-              background-color: #f9f9f9;
-          }
-          
-          .caption {
-              font-size: 1.2em;
-              font-weight: bold;
-              margin-bottom: 15px;
-              text-align: center;
-          }
-          
-          .table-notes {
-              font-size: 0.9em;
-              color: #666;
-              text-align: center;
-              margin-top: 10px;
-              font-style: italic;
-          }
-          
-          .checkmark {
-              color: green;
-              font-weight: bold;
-          }
-      </style>
-      <div class="table-container">
-          <div class="caption">Dataset Coverage and Action Space Characteristics</div>
-          
-          <table>
-              <thead>
-                  <tr>
-                      <th>Dataset Name</th>
-                      <th>Registered Dataset Name</th>
-                      <th>In Pretraining for OpenVLA</th>
-                      <th>Action Space Type</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td>Jaco Play</td>
-                      <td>jaco_play</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>4D (1 grip, 3 pos)</td>
-                  </tr>
-                  <tr>
-                      <td>Berkeley Cable Routing</td>
-                      <td>berkeley_cable_routing</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>7D (3 ang, 3 pos, 1 term)</td>
-                  </tr>
-                  <tr>
-                      <td>NYU Door Opening</td>
-                      <td>nyu_door_opening_surprising_effectiveness</td>
-                      <td></td>
-                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
-                  </tr>
-                  <tr>
-                      <td>VIOLA</td>
-                      <td>viola</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
-                  </tr>
-                  <tr>
-                      <td>Berkeley Autolab UR5</td>
-                      <td>berkeley_autolab_ur5</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
-                  </tr>
-                  <tr>
-                      <td>TOTO</td>
-                      <td>toto</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>7D (3 ang, 3 pos, 1 term)</td>
-                  </tr>
-                  <tr>
-                      <td>Columbia PushT</td>
-                      <td>columbia_cairlab_pusht_real</td>
-                      <td></td>
-                      <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
-                  </tr>
-                  <tr>
-                      <td>NYU ROT</td>
-                      <td>nyu_rot_dataset_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>7D (3 pos, 3 ang, 1 grip)</td>
-                  </tr>
-                  <tr>
-                      <td>Stanford HYDRA</td>
-                      <td>stanford_hydra_dataset_converted_externally_to_rlds</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>7D (3 pos, 3 ang, 1 grip)</td>
-                  </tr>
-                  <tr>
-                      <td>UCSD Kitchen</td>
-                      <td>ucsd_kitchen_dataset_converted_externally_to_rlds</td>
-                      <td><span class="checkmark">✓</span></td>
-                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
-                  </tr>
-                  <tr>
-                      <td>UCSD Pick Place</td>
-                      <td>ucsd_pick_and_place_dataset_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>4D (3 vel, 1 grip torque)</td>
-                  </tr>
-                  <tr>
-                      <td>USC Cloth Sim</td>
-                      <td>usc_cloth_sim_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>4D (3 pos, 1 grip)</td>
-                  </tr>
-                  <tr>
-                      <td>Tokyo PR2 Fridge</td>
-                      <td>utokyo_pr2_opening_fridge_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
-                  </tr>
-                  <tr>
-                      <td>Tokyo PR2 Tabletop</td>
-                      <td>utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
-                  </tr>
-                  <tr>
-                      <td>UTokyo xArm Pick-Place</td>
-                      <td>utokyo_xarm_pick_and_place_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>7D (3 pos, 3 ang, 1 grip)</td>
-                  </tr>
-                  <tr>
-                      <td>Stanford MaskVIT</td>
-                      <td>stanford_mask_vit_converted_externally_to_rlds</td>
-                      <td></td>
-                      <td>5D (3 pos, 1 ang, 1 grip)</td>
-                  </tr>
-                  <tr>
-                      <td>ETH Agent Affordances</td>
-                      <td>eth_agent_affordances</td>
-                      <td></td>
-                      <td>6D (3 vel, 3 ang vel)</td>
-                  </tr>
-                  <tr>
-                      <td>Imperial Sawyer</td>
-                      <td>imperialcollege_sawyer_wrist_cam</td>
-                      <td></td>
-                      <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
-                  </tr>
-                  <tr>
-                      <td>ConqHose</td>
-                      <td>conq_hose_manipulation</td>
-                      <td></td>
-                      <td>7D (3 pos, 3 ang, 1 grip)</td>
-                  </tr>
-                  <tr>
-                      <td>Plex RoboSuite</td>
-                      <td>plex_robosuite</td>
-                      <td></td>
-                      <td>7D (3 pos, 3 ang, 1 grip)</td>
-                  </tr>
-              </tbody>
-          </table>
-          
-          <div class="table-notes">
-              pos: position, grip: gripper, term: terminate, vel: velocity, ang: angular
-          </div>
-      </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+   
 
-  <section class="section"></section>
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="content has-text-justified">
-            <h2 class="title is-3 has-text-centered">Benchmark</h2>
-            <p>
-                We benchmark a SoTA VLM (GPT-4o), a SoTA VLA (OpenVLA), and a novel generalist model (JAT) in zero-shot settings across 20 diverse datasets from the Open-X-Embodiment collection. 
-                In order to evaluate each of these models on offline Robotics trajectories, we utilize Mean Squared Error (MSE) as a metric to compare the predicted action of the model and the ground truth action from the dataset on a per-timestep basis. This metric seemed most appropriate given the offline nature of the dataset, and no access to physical robots or the simulated environments corresponding to the datasets.
-                The MSEs per timestep are averaged over all the timesteps in the eval split of the dataset to give an Averaged Mean Squared Error (AMSE) for the whole dataset. This metric is used to compare the performance of the different models given a dataset.
-            </p>
-            <p>   
-                In order to account for the difference in the scales of the action spaces (and therefore, the MSEs) across datasets, we normalize the per-timestep MSEs using the minimum and maximum MSE values observed in the evaluation (timestep MSE - min MSE) / (max MSE - min MSE). These are then averaged over the entire dataset to give a Normalized Average Mean Squared Error (NAMSE) for each dataset.
-                The NAMSE is a metric that allows comparison of a given model's performance across different datasets. 
-            </p>
-            <p>     
-                We also assess successful completion of an episode in a given task, by comparing final predicted actions with ground truth final actions. While this serves as an approximate measure of task completion, it provides valuable insights into the models' ability to reach target states across trajectories.
-                We will be actively updating this benchmark as we profile SoTA VLMs and VLAs on more OpenX-Embodiment datasets, other RL and Robotics datasets, and in few-shot and fine-tuned settings.
-           </p>
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content has-text-justified">
+              <h2 class="title is-3 has-text-centered">Dataset coverage</h2>
+              <p>
+                All 3 models - HuggingFace's JAT (novel generalist model, OS implementation of GATO), GPT-4o (SoTA VLM), and OpenVLA (SoTA VLA) were evaluated across the 20 diverse datasets from the Open-X-Embodiment collection listed below, thus evaluating their
+                performance on various manipulation tasks. JAT was also evaluated on 33 more OpenX Embodiment datasets, and GPT-4o was evaluated on 2 more OpenX Embodiment datasets. You can find the results of these evaluations in the <a href="../pdfs/Benchmarking Vision Language Action Models.pdf">paper</a>
+              </p>
+              <style>
+            .table-container {
+                max-width: 100%;
+                margin: 20px auto;
+                overflow-x: auto;
+                font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+            }
+            
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            th, td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+            
+            th {
+                background-color: #f5f5f5;
+                font-weight: bold;
+            }
+            
+            tr:hover {
+                background-color: #f9f9f9;
+            }
+            
+            .caption {
+                font-size: 1.2em;
+                font-weight: bold;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            
+            .table-notes {
+                font-size: 0.9em;
+                color: #666;
+                text-align: center;
+                margin-top: 10px;
+                font-style: italic;
+            }
+            
+            .checkmark {
+                color: green;
+                font-weight: bold;
+            }
+        </style>
+        <div class="table-container">
+            <div class="caption">Dataset Coverage and Action Space Characteristics</div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dataset Name</th>
+                        <th>Registered Dataset Name</th>
+                        <th>In Pretraining for OpenVLA</th>
+                        <th>Action Space Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jaco Play</td>
+                        <td>jaco_play</td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td>4D (1 grip, 3 pos)</td>
+                    </tr>
+                    <tr>
+                        <td>Berkeley Cable Routing</td>
+                        <td>berkeley_cable_routing</td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td>7D (3 ang, 3 pos, 1 term)</td>
+                    </tr>
+                    <tr>
+                        <td>NYU Door Opening</td>
+                        <td>nyu_door_opening_surprising_effectiveness</td>
+                        <td></td>
+                        <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                    </tr>
+                    <tr>
+                        <td>VIOLA</td>
+                        <td>viola</td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                    </tr>
+                    <tr>
+                        <td>Berkeley Autolab UR5</td>
+                        <td>berkeley_autolab_ur5</td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                    </tr>
+                    <tr>
+                        <td>TOTO</td>
+                        <td>toto</td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td>7D (3 ang, 3 pos, 1 term)</td>
+                    </tr>
+                    <tr>
+                        <td>Columbia PushT</td>
+                        <td>columbia_cairlab_pusht_real</td>
+                        <td></td>
+                        <td>8D (1 grip, 3 ang, 3 pos, 1 term)</td>
+                    </tr>
+                    <tr>
+                        <td>NYU ROT</td>
+                        <td>nyu_rot_dataset_converted_externally_to_rlds</td>
+                        <td></td>
+                        <td>7D (3 pos, 3 ang, 1 grip)</td>
+                    </tr>
+                    <tr>
+                        <td>Stanford HYDRA</td>
+                        <td>stanford_hydra_dataset_converted_externally_to_rlds</td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td>7D (3 pos, 3 ang, 1 grip)</td>
+                    </tr>
+                    <tr>
+                        <td>UCSD Kitchen</td>
+                        <td>ucsd_kitchen_dataset_converted_externally_to_rlds</td>
+                        <td><span class="checkmark">✓</span></td>
+                        <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                    </tr>
+                    <tr>
+                        <td>UCSD Pick Place</td>
+                        <td>ucsd_pick_and_place_dataset_converted_externally_to_rlds</td>
+                        <td></td>
+                        <td>4D (3 vel, 1 grip torque)</td>
+                    </tr>
+                    <tr>
+                        <td>USC Cloth Sim</td>
+                        <td>usc_cloth_sim_converted_externally_to_rlds</td>
+                        <td></td>
+                        <td>4D (3 pos, 1 grip)</td>
+                    </tr>
+                    <tr>
+                        <td>Tokyo PR2 Fridge</td>
+                        <td>utokyo_pr2_opening_fridge_converted_externally_to_rlds</td>
+                        <td></td>
+                        <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                    </tr>
+                    <tr>
+                        <td>Tokyo PR2 Tabletop</td>
+                        <td>utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds</td>
+                        <td></td>
+                        <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                    </tr>
+                    <tr>
+                        <td>UTokyo xArm Pick-Place</td>
+                        <td>utokyo_xarm_pick_and_place_converted_externally_to_rlds</td>
+                        <td></td>
+                        <td>7D (3 pos, 3 ang, 1 grip)</td>
+                    </tr>
+                    <tr>
+                        <td>Stanford MaskVIT</td>
+                        <td>stanford_mask_vit_converted_externally_to_rlds</td>
+                        <td></td>
+                        <td>5D (3 pos, 1 ang, 1 grip)</td>
+                    </tr>
+                    <tr>
+                        <td>ETH Agent Affordances</td>
+                        <td>eth_agent_affordances</td>
+                        <td></td>
+                        <td>6D (3 vel, 3 ang vel)</td>
+                    </tr>
+                    <tr>
+                        <td>Imperial Sawyer</td>
+                        <td>imperialcollege_sawyer_wrist_cam</td>
+                        <td></td>
+                        <td>8D (3 pos, 3 ang, 1 grip, 1 term)</td>
+                    </tr>
+                    <tr>
+                        <td>ConqHose</td>
+                        <td>conq_hose_manipulation</td>
+                        <td></td>
+                        <td>7D (3 pos, 3 ang, 1 grip)</td>
+                    </tr>
+                    <tr>
+                        <td>Plex RoboSuite</td>
+                        <td>plex_robosuite</td>
+                        <td></td>
+                        <td>7D (3 pos, 3 ang, 1 grip)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="table-notes">
+                pos: position, grip: gripper, term: terminate, vel: velocity, ang: angular
+            </div>
+        </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column">
-        <div class="content has-text-centered">
-          <img src="../images/trajectory mse visual.png" alt="Trajectory similarity" width="63%">
+    <section class="section"></section>
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content has-text-justified">
+              <h2 class="title is-3 has-text-centered">Benchmark</h2>
+              <p>
+                  We benchmark a SoTA VLM (GPT-4o), a SoTA VLA (OpenVLA), and a novel generalist model (JAT) in zero-shot settings across 20 diverse datasets from the Open-X-Embodiment collection. 
+                  In order to evaluate each of these models on offline Robotics trajectories, we utilize Mean Squared Error (MSE) as a metric to compare the predicted action of the model and the ground truth action from the dataset on a per-timestep basis. This metric seemed most appropriate given the offline nature of the dataset, and no access to physical robots or the simulated environments corresponding to the datasets.
+                  The MSEs per timestep are averaged over all the timesteps in the eval split of the dataset to give an Averaged Mean Squared Error (AMSE) for the whole dataset. This metric is used to compare the performance of the different models given a dataset.
+              </p>
+              <p>   
+                  In order to account for the difference in the scales of the action spaces (and therefore, the MSEs) across datasets, we normalize the per-timestep MSEs using the minimum and maximum MSE values observed in the evaluation (timestep MSE - min MSE) / (max MSE - min MSE). These are then averaged over the entire dataset to give a Normalized Average Mean Squared Error (NAMSE) for each dataset.
+                  The NAMSE is a metric that allows comparison of a given model's performance across different datasets. 
+              </p>
+              <p>     
+                  We also assess successful completion of an episode in a given task, by comparing final predicted actions with ground truth final actions. While this serves as an approximate measure of task completion, it provides valuable insights into the models' ability to reach target states across trajectories.
+                  We will be actively updating this benchmark as we profile SoTA VLMs and VLAs on more OpenX-Embodiment datasets, other RL and Robotics datasets, and in few-shot and fine-tuned settings.
+             </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="container is-max-desktop"></div>
-    <div class="columns is-centered">
-      <div class="column">
-        <div class="content has-text-centered">
-          <img src="../images/action completion visual.png" alt="Action completion" width="50%">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column">
-          <div class="content has-text-justified">
-            <h2 class="title is-3 has-text-centered">Analysis</h2>
-            <p>
-                We conduct thorough quantitative analyses to observe the performance of the different models across different OpenX Embodiment datasets. We investigate the performance difference between models by comparing their AMSE scores across datasets. 
-                We also do a model-specific analysis to understand performance patterns of models that may be attributable to several architectural and training differences between
-                them, which in turn helps guide future research in this direction. While absolute performance metrics like AMSE provide insight into task-specific capabilities, looking into the NAMSE scores allows us to understand how each model performs across different tasks relative to its own
-                capabilities. NAMSE proves to be particularly valuable for understanding inherent task difficulty and model behavior patterns independent of action space scale. Here is an overview of our analysis:
-            </p>
-            <div class="content has-text-centered">
-                <img src="../images/AMSE All.png" alt="AMSE across all datasets" width="100%">
-                <p class="caption">AMSE across all datasets</p>
-            </div>
-            <div class="content has-text-centered">
-              <img src="../images/AMSE in MM.png" alt="AMSE across datasets with the action space unit in millimeters" width="100%">
-              <p class="caption">AMSE across datasets with the action space unit in millimeters</p>
-            </div>
-            <div class="content has-text-centered">
-              <img src="../images/Namse GPT.png" alt="Normalized AMSE For GPT-4o" width="100%">
-              <p class="caption">Normalized AMSE For GPT-4o</p>
-            </div>
-            <div class="content has-text-centered">
-              <img src="../images/Namse Jat.png" alt="Normalized AMSE For JAT" width="100%">
-              <p class="caption">Normalized AMSE For JAT</p>
-            </div>
-            <div class="content has-text-centered">
-              <img src="../images/Namse OpenVLA.png" alt="Normalized AMSE For OpenVLA" width="100%">
-              <p class="caption">Normalized AMSE For OpenVLA</p>
-            </div>
-            <p>
-              We observe that while JAT consistently shows higher AMSE (indicating worse performance) across most datasets, OpenVLA and GPT demonstrate more comparable performance levels, with AMSE typically below 0.5 for most datasets.
-              For OpenVLA, we observe generally consistent performance across most datasets with AMSE in the 0.1-0.5 range, with best performance of all 3 models for tasks that fall within its training distribution, with notable exceptions in complex manipulation tasks. GPT shows comparable or slightly better performance on many
-              datasets, particularly excelling in precise manipulation tasks. Both models maintain relatively stable performance across
-              similar task types, though with different error profiles. 
-              The normalized analyses reveals that while absolute performance varies significantly, there are consistent patterns in
-              what tasks are relatively more challenging for each model architecture. The success of GPT-4o's prompt engineering
-              approach, in particular, suggests that providing structured context about action spaces and environmental constraints
-              may be a key factor in achieving consistent performance across diverse tasks. This observation could inform future
-              development of VLA models, suggesting that incorporating more explicit task and action space information could
-              improve robustness and generalization capabilities.
-            </p>
+          <div class="content has-text-centered">
+            <img src="../images/trajectory mse visual.png" alt="Trajectory similarity" width="63%">
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <section class="section"></section>
-    <div class="container is-max-desktop">
+    <div class="container is-max-desktop"></div>
       <div class="columns is-centered">
         <div class="column">
-          <div class="content has-text-justified">
-            <h2 class="title is-3 has-text-centered">Supporting Technical Contributions</h2>
-            <p>
-               Apart from open-sourcing our evaluation framework and profiling code, 2 technical contributions that we believe are novel to this work are:
-            </p>
-            <p>
-              The <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules">GenESIS (Generalizable Extendable Stratified Inference System) framework</a> - A general framework for mapping VLMs to other modality classes, with particular emphasis on action spaces. 
-              This framework allows one to adapt a wide range of models to multiple types of tasks or datasets for scaling effectively while reducing the amount of engineering effort required. 
-              In MultiNet v0.1, GenESIS is used to evaluate GPT-4-o on the OpenX datasets. Since the GPT-4o is a VLM for general-purpose tasks, this involved setting up a well-researched instruction prompt, pre-processing of the input data in each dataset into a form that GPT-4 can consume, the management of chat history list for correct API calls, and conversion of the generated text outputs from the model to a format comparable with the ground truth action.
-            </p>
+          <div class="content has-text-centered">
+            <img src="../images/action completion visual.png" alt="Action completion" width="50%">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content has-text-justified">
+              <h2 class="title is-3 has-text-centered">Analysis</h2>
+              <p>
+                  We conduct thorough quantitative analyses to observe the performance of the different models across different OpenX Embodiment datasets. We investigate the performance difference between models by comparing their AMSE scores across datasets. 
+                  We also do a model-specific analysis to understand performance patterns of models that may be attributable to several architectural and training differences between
+                  them, which in turn helps guide future research in this direction. While absolute performance metrics like AMSE provide insight into task-specific capabilities, looking into the NAMSE scores allows us to understand how each model performs across different tasks relative to its own
+                  capabilities. NAMSE proves to be particularly valuable for understanding inherent task difficulty and model behavior patterns independent of action space scale. Here is an overview of our analysis:
+              </p>
+              <div class="content has-text-centered">
+                  <img src="../images/AMSE All.png" alt="AMSE across all datasets" width="100%">
+                  <p class="caption">AMSE across all datasets</p>
+              </div>
+              <div class="content has-text-centered">
+                <img src="../images/AMSE in MM.png" alt="AMSE across datasets with the action space unit in millimeters" width="100%">
+                <p class="caption">AMSE across datasets with the action space unit in millimeters</p>
+              </div>
+              <div class="content has-text-centered">
+                <img src="../images/Namse GPT.png" alt="Normalized AMSE For GPT-4o" width="100%">
+                <p class="caption">Normalized AMSE For GPT-4o</p>
+              </div>
+              <div class="content has-text-centered">
+                <img src="../images/Namse Jat.png" alt="Normalized AMSE For JAT" width="100%">
+                <p class="caption">Normalized AMSE For JAT</p>
+              </div>
+              <div class="content has-text-centered">
+                <img src="../images/Namse OpenVLA.png" alt="Normalized AMSE For OpenVLA" width="100%">
+                <p class="caption">Normalized AMSE For OpenVLA</p>
+              </div>
+              <p>
+                We observe that while JAT consistently shows higher AMSE (indicating worse performance) across most datasets, OpenVLA and GPT demonstrate more comparable performance levels, with AMSE typically below 0.5 for most datasets.
+                For OpenVLA, we observe generally consistent performance across most datasets with AMSE in the 0.1-0.5 range, with best performance of all 3 models for tasks that fall within its training distribution, with notable exceptions in complex manipulation tasks. GPT shows comparable or slightly better performance on many
+                datasets, particularly excelling in precise manipulation tasks. Both models maintain relatively stable performance across
+                similar task types, though with different error profiles. 
+                The normalized analyses reveals that while absolute performance varies significantly, there are consistent patterns in
+                what tasks are relatively more challenging for each model architecture. The success of GPT-4o's prompt engineering
+                approach, in particular, suggests that providing structured context about action spaces and environmental constraints
+                may be a key factor in achieving consistent performance across diverse tasks. This observation could inform future
+                development of VLA models, suggesting that incorporating more explicit task and action space information could
+                improve robustness and generalization capabilities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section"></section>
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content has-text-justified">
+              <h2 class="title is-3 has-text-centered">Supporting Technical Contributions</h2>
+              <p>
+                 Apart from open-sourcing our evaluation framework and profiling code, 2 technical contributions that we believe are novel to this work are:
+              </p>
+              <p>
+                The <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules">GenESIS (Generalizable Extendable Stratified Inference System) framework</a> - A general framework for mapping VLMs to other modality classes, with particular emphasis on action spaces. 
+                This framework allows one to adapt a wide range of models to multiple types of tasks or datasets for scaling effectively while reducing the amount of engineering effort required. 
+                In MultiNet v0.1, GenESIS is used to evaluate GPT-4-o on the OpenX datasets. Since the GPT-4o is a VLM for general-purpose tasks, this involved setting up a well-researched instruction prompt, pre-processing of the input data in each dataset into a form that GPT-4 can consume, the management of chat history list for correct API calls, and conversion of the generated text outputs from the model to a format comparable with the ground truth action.
+              </p>
               
               <div class="content has-text-centered">
                 <img src="../images/Framework Figure.png" alt="GenESIS Framework" width="100%">
                 <p class="caption">GenESIS Framework - used to adapt GPT-4o to the OpenX datasets</p>
+              </div>
+
+              <p> We also open-source the code to easily download any dataset within Multinet - typically from a variety of different sources.
+                  Lots of rich, diverse, highly valuable datasets in RL and Robotics are of different formats, from various different sources, in badly maintained states, with insufficient documentation. 
+                  We open-source simple code that allows one to translate the downloaded control dataset shards into tensorflow dataset shards.
+                  Once translated to TFDS, the datasets can easily be utilized for training, fine-tuning, and evaluation.
+              </p>
             </div>
-
-            <p> We also open-source the code to easily download any dataset within Multinet - typically from a variety of different sources.
-                Lots of rich, diverse, highly valuable datasets in RL and Robotics are of different formats, from various different sources, in badly maintained states, with insufficient documentation. 
-                We open-source simple code that allows one to translate the downloaded control dataset shards into tensorflow dataset shards.
-                Once translated to TFDS, the datasets can easily be utilized for training, fine-tuning, and evaluation.
-            </p>
-            
-            
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section"></section>
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="content has-text-justified">
-            <h2 class="title is-3 has-text-centered">Acknowledgements</h2>
-            <p>
-              We thank <a href="https://agarwl.github.io/">Rishabh Agarwal</a>, <a href="https://snats.xyz/index.html">Santiago Pedroza</a>, <a href="https://kickitlikeshika.github.io/">Ahmed Khaled</a>,  <a href="https://people.eecs.berkeley.edu/~jianlanluo/">Jianlan Luo</a>, <a href="https://www.stoneztao.com/">Stone Tao</a>, <a href="https://sites.google.com/view/jaehyungkim">Jaehyung Kim</a>, <a href="https://www.alexirpan.com/">Alex Irpan</a>, <a href="https://jeffcui.com/">Jeff Cui</a>,
-              <a href="https://yuchencui.cc/publications.html">Yuchen Cui</a>, <a href="https://arthurliu-website.web.app/">I-Chun Liu</a>, <a href="https://russellmendonca.github.io/">Russell Mendonca</a>, <a href="https://zhuyifengzju.github.io/">Yifeng Zhu</a>, <a href="https://frt03.github.io/">Hiroki Furuta</a>, <a href="https://mahis.life/">Nur Muhammad Shafiullah</a>,
-              <a href="https://siddhanthaldar.github.io/">Siddhant Haldar</a>, <a href="https://www.lilichen.me/">Lili Chen</a>, <a href="https://ehsanik.github.io/">Kiana Ehsani</a>, <a href="https://ben-eysenbach.github.io/">Benjamin Eysenbach</a>, <a href="https://robodhruv.github.io/">Dhruv Shah</a>, <a href="https://rosehendrix.com/">Rose Hendrix</a>,
-              <a href="https://shahrutav.github.io/">Rutav Shah</a>, <a href="https://scholar.google.com/citations?user=t97UbkoAAAAJ&hl=en">Giulio Schiavi</a>, <a href="https://homerwalke.com/">Homer Walke</a>, <a href="https://people.eecs.berkeley.edu/~ilija/">Ilija Radosavovic</a>, <a href="https://shivindass.github.io/">Shivin Dass</a> for their contributions and helpful feedback in various capacities on this work.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title has-text-centered">Citation</h2>
-      <pre><code>@misc{guruprasad2024benchmarkingvisionlanguage,
-        title={Benchmarking Vision, Language, & Action Models on Robotic Learning Tasks}, 
-        author={Pranav Guruprasad and Harshvardhan Sikka and Jaewoo Song and Yangyue Wang and Paul Pu Liang},
-        year={2024},
-        eprint={2411.05821},
-        archivePrefix={arXiv},
-        primaryClass={cs.RO},
-        url={https://arxiv.org/abs/2411.05821},
-  }</code></pre>
-    </div>
-  </section>
-
-  <footer class="footer" style="background-color: #363636;">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content" style="color: #fff;">
-            <div class="buttons is-centered mb-4">
-              <a href="../pdfs/Benchmarking Vision Language Action Models.pdf" class="button is-small is-dark" target="_blank">
-                <span class="icon">
-                  <i class="fas fa-file-pdf"></i>
-                </span>
-                <span>Paper</span>
-              </a>
-              <a href="https://github.com/ManifoldRG/MultiNet" class="button is-small is-dark" target="_blank">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <span>Code</span>
-              </a>
+    <section class="section"></section>
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content has-text-justified">
+              <h2 class="title is-3 has-text-centered">Acknowledgements</h2>
+              <p>
+                We thank <a href="https://agarwl.github.io/">Rishabh Agarwal</a>, <a href="https://snats.xyz/index.html">Santiago Pedroza</a>, <a href="https://kickitlikeshika.github.io/">Ahmed Khaled</a>,  <a href="https://people.eecs.berkeley.edu/~jianlanluo/">Jianlan Luo</a>, <a href="https://www.stoneztao.com/">Stone Tao</a>, <a href="https://sites.google.com/view/jaehyungkim">Jaehyung Kim</a>, <a href="https://www.alexirpan.com/">Alex Irpan</a>, <a href="https://jeffcui.com/">Jeff Cui</a>,
+                <a href="https://yuchencui.cc/publications.html">Yuchen Cui</a>, <a href="https://arthurliu-website.web.app/">I-Chun Liu</a>, <a href="https://russellmendonca.github.io/">Russell Mendonca</a>, <a href="https://zhuyifengzju.github.io/">Yifeng Zhu</a>, <a href="https://frt03.github.io/">Hiroki Furuta</a>, <a href="https://mahis.life/">Nur Muhammad Shafiullah</a>,
+                <a href="https://siddhanthaldar.github.io/">Siddhant Haldar</a>, <a href="https://www.lilichen.me/">Lili Chen</a>, <a href="https://ehsanik.github.io/">Kiana Ehsani</a>, <a href="https://ben-eysenbach.github.io/">Benjamin Eysenbach</a>, <a href="https://robodhruv.github.io/">Dhruv Shah</a>, <a href="https://rosehendrix.com/">Rose Hendrix</a>,
+                <a href="https://shahrutav.github.io/">Rutav Shah</a>, <a href="https://scholar.google.com/citations?user=t97UbkoAAAAJ&hl=en">Giulio Schiavi</a>, <a href="https://homerwalke.com/">Homer Walke</a>, <a href="https://people.eecs.berkeley.edu/~ilija/">Ilija Radosavovic</a>, <a href="https://shivindass.github.io/">Shivin Dass</a> for their contributions and helpful feedback in various capacities on this work.
+              </p>
             </div>
-  
-            <p>For questions or issues, please <a href="https://github.com/ManifoldRG/MultiNet/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
-
           </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </section>
 
-</div>
+
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title has-text-centered">Citation</h2>
+        <pre><code>@misc{guruprasad2024benchmarkingvisionlanguage,
+          title={Benchmarking Vision, Language, & Action Models on Robotic Learning Tasks}, 
+          author={Pranav Guruprasad and Harshvardhan Sikka and Jaewoo Song and Yangyue Wang and Paul Pu Liang},
+          year={2024},
+          eprint={2411.05821},
+          archivePrefix={arXiv},
+          primaryClass={cs.RO},
+          url={https://arxiv.org/abs/2411.05821},
+        }</code></pre>
+      </div>
+    </section>
+
+    <footer class="footer" style="background-color: #363636;">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content" style="color: #fff;">
+              <div class="buttons is-centered mb-4">
+                <a href="../pdfs/Benchmarking Vision Language Action Models.pdf" class="button is-small is-dark" target="_blank">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+                <a href="https://github.com/ManifoldRG/MultiNet" class="button is-small is-dark" target="_blank">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </div>
+    
+              <p>For questions or issues, please <a href="https://github.com/ManifoldRG/MultiNet/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
         const navToggleBtn = document.getElementById('navToggleBtn');
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileOverlay = document.getElementById('mobileOverlay');
         const sideNav = document.getElementById('side-nav');
         const mainContent = document.getElementById('main-page-content');
         const allNavLinks = document.querySelectorAll('.side-navigation .nav-item:not(.has-dropdown) > a, .side-navigation .sub-item:not(.has-dropdown)'); // Links that can be active
+        
+        // Check if mobile
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        // Global function for mobile device detection (used in inline handlers)
+        window.isMobileDevice = function() {
+            return window.innerWidth <= 768;
+        }
+
+        // Dropdown toggle function
+        function toggleDropdown(parentNavItem, dropdownMenu, toggle) {
+            const isOpen = parentNavItem.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', isOpen.toString());
+            dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
+            
+            const arrowIcon = toggle.querySelector('.dropdown-arrow .fas');
+            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
+                arrowIcon.classList.toggle('rotated', isOpen);
+            }
+
+            // Close sibling dropdowns (accordion behavior)
+            const parentMenu = parentNavItem.parentElement;
+            if (parentMenu && isOpen) {
+                const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
+                    child.classList.contains('has-dropdown') && child !== parentNavItem
+                );
+                siblingDropdowns.forEach(sib => {
+                    sib.classList.remove('open');
+                    sib.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                    const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
+                    if (sibMenu) sibMenu.style.maxHeight = null;
+                    const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
+                    if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
+                        sibArrowIcon.classList.remove('rotated');
+                    }
+                });
+            }
+        }
 
         function expandSidebar() {
             if (!sideNav || !mainContent) return;
             if (sideNav.classList.contains('collapsed')) {
                 sideNav.classList.remove('collapsed');
-                // mainContent.classList.remove('collapsed'); // Removed this line
+                if (isMobile()) {
+                    mobileOverlay.classList.add('active');
+                    document.body.classList.add('mobile-nav-open');
+                }
                 // Ensure all dropdowns are closed when expanding from fully collapsed hover state
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
                     const menu = openDropdown.querySelector('.dropdown-menu-items');
@@ -1054,7 +1489,10 @@
             if (!sideNav || !mainContent) return;
             if (!sideNav.classList.contains('collapsed')) {
                 sideNav.classList.add('collapsed');
-                // mainContent.classList.add('collapsed'); // Removed this line
+                if (isMobile()) {
+                    mobileOverlay.classList.remove('active');
+                    document.body.classList.remove('mobile-nav-open');
+                }
                 
                 // Collapse all open dropdowns
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
@@ -1084,14 +1522,25 @@
             if (icon) icon.className = 'fas fa-bars';
             navToggleBtn.addEventListener('click', masterToggleSidebar);
             navToggleBtn.addEventListener('mouseenter', () => {
-                if (sideNav.classList.contains('collapsed')) expandSidebar();
+                if (sideNav.classList.contains('collapsed') && !isMobile()) expandSidebar();
             });
+        }
+
+        // Mobile navigation toggle
+        if (mobileNavToggle) {
+            mobileNavToggle.addEventListener('click', masterToggleSidebar);
+        }
+
+        // Mobile overlay click to close
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', collapseSidebar);
         }
 
         document.addEventListener('click', function(event) {
             if (!sideNav || !navToggleBtn || !mainContent) return;
             const isClickInsideNav = sideNav.contains(event.target);
-            if (!sideNav.classList.contains('collapsed') && !isClickInsideNav) {
+            const isClickOnToggle = navToggleBtn.contains(event.target) || (mobileNavToggle && mobileNavToggle.contains(event.target));
+            if (!sideNav.classList.contains('collapsed') && !isClickInsideNav && !isClickOnToggle) {
                 collapseSidebar();
             }
         });
@@ -1108,50 +1557,27 @@
                 
                 if (!dropdownMenu) return;
 
-                // Do not allow click to toggle dropdowns if sidebar is collapsed (hover only)
-                if (sideNav.classList.contains('collapsed')) {
-                    // If user clicks on an item that *would* be a flyout, briefly expand sidebar
-                    expandSidebar(); 
-                    // And then open the item they clicked on
-                     setTimeout(() => { // allow sidebar to expand
-                        const isOpen = parentNavItem.classList.toggle('open');
-                        this.setAttribute('aria-expanded', isOpen.toString());
-                        dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
-                        const arrowIcon = this.querySelector('.dropdown-arrow .fas');
-                        if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
-                            arrowIcon.classList.toggle('rotated', isOpen);
-                        }
-                     }, 50); // Small delay for visual transition
+                // On mobile, always ensure sidebar is expanded first
+                if (isMobile() && sideNav.classList.contains('collapsed')) {
+                    expandSidebar();
+                    // Wait for sidebar to expand before toggling dropdown
+                    setTimeout(() => {
+                        toggleDropdown(parentNavItem, dropdownMenu, this);
+                    }, 150);
                     return;
                 }
 
-                const isOpen = parentNavItem.classList.toggle('open');
-                this.setAttribute('aria-expanded', isOpen.toString());
-                dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
-                
-                const arrowIcon = this.querySelector('.dropdown-arrow .fas');
-                if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
-                    arrowIcon.classList.toggle('rotated', isOpen);
+                // For desktop collapsed or mobile expanded, toggle dropdown immediately
+                if (!isMobile() && sideNav.classList.contains('collapsed')) {
+                    expandSidebar(); 
+                    setTimeout(() => {
+                        toggleDropdown(parentNavItem, dropdownMenu, this);
+                    }, 50);
+                    return;
                 }
 
-
-                // Accordion behavior: Close sibling dropdowns at the same level
-                const parentMenu = parentNavItem.parentElement; // This is either .side-navigation-menu or a .dropdown-menu-items
-                if (parentMenu) {
-                    const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
-                        child.classList.contains('has-dropdown') && child !== parentNavItem
-                    );
-                    siblingDropdowns.forEach(sib => {
-                        sib.classList.remove('open');
-                        sib.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
-                        const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
-                        if (sibMenu) sibMenu.style.maxHeight = null;
-                        const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
-                        if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
-                            sibArrowIcon.classList.remove('rotated');
-                        }
-                    });
-                }
+                // Normal toggle
+                toggleDropdown(parentNavItem, dropdownMenu, this);
             });
         });
         
@@ -1323,6 +1749,26 @@
                  }
             }
          }
+
+        // Handle window resize for mobile/desktop switching
+        window.addEventListener('resize', function() {
+            if (isMobile()) {
+                // Ensure sidebar is collapsed on mobile
+                if (!sideNav.classList.contains('collapsed')) {
+                    collapseSidebar();
+                }
+            } else {
+                // Remove mobile overlay if switching to desktop
+                if (mobileOverlay) {
+                    mobileOverlay.classList.remove('active');
+                }
+            }
+        });
+
+        // Initial mobile check
+        if (isMobile()) {
+            collapseSidebar();
+        }
     });
   </script>
 </body>
