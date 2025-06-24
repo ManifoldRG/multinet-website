@@ -913,185 +913,62 @@
       </div>
     </div>
 
-    <!-- Model Releases Dropdown -->
-    <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-rocket"></i></span>
-            <span class="nav-text">Model Releases</span>
-            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
-        </a>
-        <div class="dropdown-menu-items level-1">
-            <a href="https://github.com/eihli/mugato" target="_blank" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-microchip"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">μGato</span>
-            </a>
-            <a href="https://github.com/ManifoldRG/NEKO" target="_blank" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-cat"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">NEKO</span>
-            </a>
-        </div>
-    </div>
-    <!-- Software Releases Dropdown -->
-    <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-            <span class="icon"><i class="fas fa-code-branch"></i></span>
-            <span class="nav-text">Software Releases</span>
-            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
-        </a>
-        <div class="dropdown-menu-items level-1">
-            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
-              <span class="icon"><i class="fas fa-tasks"></i></span>
-              <span class="nav-text" style="white-space: nowrap;">Multinet Eval Harness</span>
-            </a>
-            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="dropdown-item main-release-link">
-              <span class="icon"><i class="fas fa-atom"></i></span>
-              <span class="nav-text" style="white-space: nowrap;">GenESIS framework</span>
-            </a>
-        </div>
-    </div>
-    <a href="Multinet.html" class="nav-item">
-      <span class="icon"><i class="fas fa-info-circle"></i></span>
-      <span class="nav-text">About Multinet</span>
-    </a>
-    <a href="../../index.html#BibTeX" class="nav-item">
-      <span class="icon"><i class="fas fa-quote-right"></i></span>
-      <span class="nav-text">Citations</span>
-    </a>
-  </div>
-</div>
 
-
-    <section class="hero">
-      <div class="hero-body">
-        <div class="container is-max-desktop">
-          <div class="columns is-centered">
-            <div class="column has-text-centered"> <!-- This column now correctly wraps all content -->
-              <h1 class="title is-1 publication-title">Benchmarking Vision, Language, & Action Models On
-                  Robotic Learning Tasks</h1>
-              <div class="is-size-5 publication-authors">
-                  <!-- Paper authors -->
-                  <span class="author-block">
-                    <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank">Pranav Guruprasad</a><sup>*12</sup>,</span>
-                  <span class="author-block">
-                    <a href="https://www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>*123</sup>,</span>
-                  <span class="author-block">
-                    <a href="https://songstudio.info/" target="_blank">Jaewoo Song</a><sup>*1</sup>,</span>
-                  <span class="author-block">
-                    <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>1</sup>,</span>
-                  <span class="author-block">
-                    <a href="https://pliang279.github.io/" target="_blank">Paul Pu Liang</a><sup>4</sup>,</span>
-                  <!-- Removed extra </span> that was here -->
-              </div> <!-- Closes .is-size-5.publication-authors -->
-              <!-- Removed extra </div> that prematurely closed .column.has-text-centered -->
-
-              <!-- Affiliations and contact are now correctly inside the main column -->
-              <div class="is-size-5 publication-authors">
-                <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                <br>
-                <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:pranav@metarch.ai"> here</a></strong></span>
-              </div>
-
-              <!-- Publication links are now correctly inside the main column, without an extra wrapping column div -->
-              <div class="publication-links">
-                <span class="link-block">
-                  <a href="../pdfs/Benchmarking Vision Language Action Models.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                    </span>
-                    <span>Paper</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fas fa-atom"></i>
-                    </span>
-                    <span>GenESIS framework</span>
-                  </a>
-                </span>
-              </div>
-            </div> <!-- Closes .column.has-text-centered -->
-          </div> <!-- Closes .columns.is-centered -->
-        </div> <!-- Closes .container.is-max-desktop -->
-      </div> <!-- Closes .hero-body -->
-    </section>
+  <section class="section">
     <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column">
-            <div class="content has-text-centered">
-              <img src="../images/Multinet v0.1 release visual 3.0.png" alt="Multinet v0.1 Release Visual" width="85%">
-            </div>
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Benchmarking Vision, Language, & Action Models On
+              Robotic Learning Tasks</h1>
+          <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank">Pranav Guruprasad</a><sup>*12</sup>,</span>
+              <span class="author-block">
+                <a href="https.www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>*123</sup>,</span>
+              <span class="author-block">
+                <a href="https://songstudio.info/" target="_blank">Jaewoo Song</a><sup>*1</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://pliang279.github.io/" target="_blank">Paul Pu Liang</a><sup>4</sup></span>
+          </div>
+
+          <!-- Affiliations and contact are now correctly inside the main column -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-affiliations" style="font-size: 1rem; color: #666; margin-top: 0.5rem;">
+              <sup>1</sup> Manifold Research, <sup>2</sup> Metarch AI, <sup>3</sup> Georgia Tech, <sup>4</sup> MIT
+            </span>
+            <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+            <br>
+            <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:pranav@metarch.ai"> here</a></strong></span>
+          </div>
+
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Abstract</h2>
+            <p>
+                Vision-language-action (VLA) models represent a promising direction for developing general-purpose
+                robotic systems, demonstrating the ability to combine visual understanding, language comprehension,
+                and action generation. However, systematic evaluation of these models across diverse robotic tasks
+                remains limited. In this work, we present a comprehensive evaluation framework and benchmark suite
+                for assessing VLA models. We profile three state-of-the-art VLM and VLAs —GPT-4o, OpenVLA,
+                and JAT—across 20 diverse datasets from the Open-X-Embodiment collection, evaluating their
+                performance on various manipulation tasks. Our analysis reveals several key insights:
+                </p><ul>
+                  <li>Current VLA models show significant variation in performance across different tasks and robot platforms, with GPT-4o demonstrating the most consistent performance through sophisticated prompt engineering.</li>
+                  <li>All models struggle with complex manipulation tasks requiring multi-step planning.</li>
+                  <li>Model performance is notably sensitive to action space characteristics and environmental factors.</li>
+                </ul>
+                We release
+                our evaluation framework and findings to facilitate systematic assessment of future VLA models and
+                identify critical areas for improvement in the development of general-purpose robotic systems.
+            
+            <p></p>
           </div>
         </div>
       </div>
-
-    <section class="section"></section>
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered"> <!-- This column now correctly wraps all content -->
-            <h1 class="title is-1 publication-title">Benchmarking Vision, Language, & Action Models On
-                Robotic Learning Tasks</h1>
-            <div class="is-size-5 publication-authors">
-                <!-- Paper authors -->
-                <span class="author-block">
-                  <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank">Pranav Guruprasad</a><sup>*12</sup>,</span>
-                <span class="author-block">
-                  <a href="https://www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>*123</sup>,</span>
-                <span class="author-block">
-                  <a href="https://songstudio.info/" target="_blank">Jaewoo Song</a><sup>*1</sup>,</span>
-                <span class="author-block">
-                  <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>1</sup>,</span>
-                <span class="author-block">
-                  <a href="https://pliang279.github.io/" target="_blank">Paul Pu Liang</a><sup>4</sup>,</span>
-            </div> <!-- Closes .is-size-5.publication-authors -->
-
-            <!-- Affiliations and contact are now correctly inside the main column -->
-            <div class="is-size-5 publication-authors">
-              <span class="author-affiliations" style="font-size: 1rem; color: #666; margin-top: 0.5rem;">
-                <sup>1</sup> Manifold Research, <sup>2</sup> Metarch AI, <sup>3</sup> Georgia Tech, <sup>4</sup> MIT
-              </span>
-              <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-              <br>
-              <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:pranav@metarch.ai"> here</a></strong></span>
-              <br>
-          <div class="column">
-            <div class="content has-text-justified">
-              <h2 class="title is-3 has-text-centered">Abstract</h2>
-              <p>
-                  Vision-language-action (VLA) models represent a promising direction for developing general-purpose
-                  robotic systems, demonstrating the ability to combine visual understanding, language comprehension,
-                  and action generation. However, systematic evaluation of these models across diverse robotic tasks
-                  remains limited. In this work, we present a comprehensive evaluation framework and benchmark suite
-                  for assessing VLA models. We profile three state-of-the-art VLM and VLAs —GPT-4o, OpenVLA,
-                  and JAT—across 20 diverse datasets from the Open-X-Embodiment collection, evaluating their
-                  performance on various manipulation tasks. Our analysis reveals several key insights:
-                  <ul>
-                    <li>Current VLA models show significant variation in performance across different tasks and robot platforms, with GPT-4o demonstrating the most consistent performance through sophisticated prompt engineering.</li>
-                    <li>All models struggle with complex manipulation tasks requiring multi-step planning.</li>
-                    <li>Model performance is notably sensitive to action space characteristics and environmental factors.</li>
-                  </ul>
-                  We release
-                  our evaluation framework and findings to facilitate systematic assessment of future VLA models and
-                  identify critical areas for improvement in the development of general-purpose robotic systems.
-              
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
     <section class="section">
       <div class="container is-max-desktop">
