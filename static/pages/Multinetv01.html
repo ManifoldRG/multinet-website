@@ -944,6 +944,54 @@
             <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:pranav@metarch.ai"> here</a></strong></span>
           </div>
 
+          <!-- Publication links are now correctly inside the main column, without an extra wrapping column div -->
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="../pdfs/Benchmarking Vision Language Action Models.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-atom"></i>
+                </span>
+                <span>GenESIS framework</span>
+              </a>
+            </span>
+          </div>
+        </div> <!-- Closes .column.has-text-centered -->
+        </div> <!-- Closes .columns.is-centered -->
+        </div> <!-- Closes .container.is-max-desktop -->
+        </div> <!-- Closes .hero-body -->
+        </section>
+        
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+        <div class="column">
+        <div class="content has-text-centered">
+          <img src="../images/Multinet v0.1 release visual 3.0.png" alt="Multinet v0.1 Release Visual" width="85%">
+        </div>
+        </div>
+        </div>
+        </div>
+        
+
+        <section class="section"></section>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Abstract</h2>
             <p>
@@ -954,7 +1002,7 @@
                 for assessing VLA models. We profile three state-of-the-art VLM and VLAs —GPT-4o, OpenVLA,
                 and JAT—across 20 diverse datasets from the Open-X-Embodiment collection, evaluating their
                 performance on various manipulation tasks. Our analysis reveals several key insights:
-                </p><ul>
+                <ul>
                   <li>Current VLA models show significant variation in performance across different tasks and robot platforms, with GPT-4o demonstrating the most consistent performance through sophisticated prompt engineering.</li>
                   <li>All models struggle with complex manipulation tasks requiring multi-step planning.</li>
                   <li>Model performance is notably sensitive to action space characteristics and environmental factors.</li>
@@ -963,12 +1011,14 @@
                 our evaluation framework and findings to facilitate systematic assessment of future VLA models and
                 identify critical areas for improvement in the development of general-purpose robotic systems.
             
-            <p></p>
+            </p>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+   
 
     <section class="section">
       <div class="container is-max-desktop">
