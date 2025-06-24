@@ -54,15 +54,6 @@ function createDatasetSidebar() {
   DATASET_ORDER.forEach(dataset => {
     const btn = document.createElement('button');
     btn.className = 'metric-button' + (dataset === currentDataset ? ' active' : '');
-    btn.style.display = 'block';
-    btn.style.width = '100%';
-    btn.style.textAlign = 'left';
-    btn.style.background = dataset === currentDataset ? '#363636' : '#f5f5f5';
-    btn.style.color = dataset === currentDataset ? 'white' : 'black';
-    btn.style.border = 'none';
-    btn.style.borderRadius = '4px';
-    btn.style.cursor = 'pointer';
-    btn.style.transition = 'all 0.3s ease';
     btn.textContent = DATASET_DISPLAY_NAMES[dataset];
     btn.onclick = () => {
       if (currentDataset !== dataset) {

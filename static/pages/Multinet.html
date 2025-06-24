@@ -111,6 +111,11 @@
         text-decoration: none;
         display: flex;
         align-items: center;
+        transition: transform 0.3s ease-out; /* Added transition for hover effect */
+    }
+
+    .side-navigation .site-title-logo:hover {
+      transform: translateY(-3px); /* Float up effect on hover */
     }
     
     .side-navigation.collapsed .site-title-logo {
@@ -477,6 +482,7 @@
         /* This will center the buttons within this div */
         display: flex; /* Ensure it's a flex container if not already by .buttons */
         justify-content: center;
+        flex-wrap: wrap;
     }
     .dataset-filter-controls .button {
         transition: all 0.3s ease;
@@ -620,6 +626,7 @@
     .benchmark-filter-controls {
         display: flex;
         justify-content: center;
+        flex-wrap: wrap;
         margin-bottom: 1.5rem; /* Consistent with dataset filters */
     }
     .benchmark-filter-controls .button {
@@ -627,7 +634,7 @@
         border-radius: 6px;
         font-weight: 500;
         border: none;
-        margin: 0 5px; /* Spacing between buttons */
+        margin: 5px; /* Spacing between buttons */
     }
     .benchmark-filter-controls .button.is-light {
         background-color: #f5f5f5;
@@ -708,9 +715,310 @@
     }
 
   </style>
+  <style>
+    /* Rotate arrow on hover for dropdown items like "Releases" */
+    .side-navigation .nav-item.has-dropdown:hover > .dropdown-toggle .dropdown-arrow > i.fa-chevron-right {
+      transform: rotate(90deg);
+      transition: transform 0.3s ease;
+    }
+
+    /* Mobile Responsive Styles */
+    @media screen and (max-width: 768px) {
+      /* Prevent horizontal overflow and ensure full width usage */
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      * {
+        box-sizing: border-box;
+      }
+      
+      /* Global text overflow prevention */
+      h1, h2, h3, h4, h5, h6, p, span, div, a {
+        word-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
+        overflow-wrap: break-word;
+      }
+      
+      /* Prevent specific long words from breaking layout */
+      .publication-title {
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+      }
+      
+      /* Hide sidebar by default on mobile, make it overlay when shown */
+      .side-navigation {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1050;
+      }
+      
+      .side-navigation:not(.collapsed) {
+        transform: translateX(0);
+      }
+      
+      /* Adjust main content for mobile */
+      #main-page-content {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      
+      /* Mobile navigation toggle - make it visible and positioned */
+      .mobile-nav-toggle {
+        display: block !important;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1060;
+        background: rgba(0, 90, 156, 0.9);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      }
+      
+      /* Overlay for mobile sidebar */
+      .mobile-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1040;
+      }
+      
+      .mobile-overlay.active {
+        display: block;
+      }
+      
+      body.mobile-nav-open .mobile-nav-toggle {
+        display: none !important;
+      }
+      
+      /* Hero section adjustments */
+      .hero {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      
+      .hero .hero-body {
+        padding: 1.5rem 1rem;
+      }
+      
+      .hero .title.is-1 {
+        font-size: 2rem !important;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      /* Section spacing adjustments */
+      .section {
+        padding: 2rem 1rem;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      
+      /* Container adjustments for mobile */
+      .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .container.is-max-desktop {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      
+      .title.is-2 {
+        font-size: 1.75rem !important;
+      }
+      
+      .title.is-3 {
+        font-size: 1.5rem !important;
+      }
+      
+      /* Video container mobile optimization */
+      .video-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 1rem 0 !important;
+      }
+      
+      .video-container video {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+      }
+      
+      /* Pie chart and data visualization mobile adjustments */
+      .pie-chart-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: auto;
+      }
+      
+      /* Table responsive adjustments */
+      .table-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      table {
+        min-width: 600px;
+        font-size: 0.85rem;
+      }
+      
+      table th,
+      table td {
+        padding: 8px 6px;
+        white-space: nowrap;
+      }
+      
+      /* Button and link touch targets */
+      .nav-toggle-btn,
+      .mobile-nav-toggle {
+        min-height: 44px;
+        min-width: 44px;
+      }
+      
+      /* Ensure proper spacing for touch */
+      .side-navigation .nav-item,
+      .side-navigation .dropdown-toggle {
+        padding: 15px 20px;
+        min-height: 48px;
+      }
+      
+      /* Mobile dropdown improvements */
+      .side-navigation .nav-item.has-dropdown > .dropdown-toggle {
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+      
+      /* Disable hover CSS effects on mobile for dropdowns */
+      .side-navigation .nav-item.has-dropdown:hover > .dropdown-menu-items.level-1 {
+        display: none !important;
+      }
+      
+      /* Only show dropdown when explicitly opened via JS */
+      .side-navigation .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 {
+        display: block !important;
+      }
+      
+      /* Make dropdown arrows more touch-friendly */
+      .side-navigation .dropdown-arrow {
+        padding: 8px;
+        margin-left: 5px;
+        border-radius: 4px;
+      }
+      
+      /* Improve touch targets */
+      .side-navigation .nav-item.has-dropdown {
+        position: relative;
+      }
+      
+      /* Chart and visualization mobile adjustments */
+      svg {
+        max-width: 100%;
+        height: auto;
+      }
+      
+      /* Content text mobile adjustments */
+      .content p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      
+      .content ul {
+        padding-left: 1.5rem;
+      }
+      
+      .content ul li {
+        margin-bottom: 0.5rem;
+      }
+    }
+    
+    /* Extra small mobile devices */
+    @media screen and (max-width: 480px) {
+      .hero .title.is-1 {
+        font-size: 1.75rem !important;
+      }
+      
+      .section {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .container,
+      .container.is-max-desktop {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .publication-title {
+        font-size: 1.6rem !important;
+      }
+      
+      .title.is-2 {
+        font-size: 1.5rem !important;
+      }
+      
+      .title.is-3 {
+        font-size: 1.25rem !important;
+      }
+      
+      table {
+        font-size: 0.8rem;
+      }
+      
+      table th,
+      table td {
+        padding: 6px 4px;
+      }
+      
+      .content p {
+        font-size: 0.9rem;
+      }
+    }
+
+
+</style>
 </head>
 
 <body>
+  <!-- Mobile Navigation Toggle -->
+  <button class="mobile-nav-toggle" id="mobileNavToggle" style="display: none;" aria-label="Toggle mobile navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  
     <div id="side-nav" class="side-navigation collapsed">
         <div class="logo-container">
           <a href="../../index.html" class="site-title-logo">
@@ -721,25 +1029,27 @@
           </button>
         </div>
         <div class="side-navigation-menu">
-          <a href="../../index.html" class="nav-item"> <!-- 'active' class removed for template -->
+          <a href="../../index.html" class="nav-item">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="nav-text">Home</span>
           </a>
 
           <!-- Releases Dropdown -->
           <div class="nav-item has-dropdown" style="padding: 0;" 
-               onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-               onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-              <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-                  <span class="icon"><i class="fas fa-microscope"></i></span>
+               onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }"
+               onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
+              <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
+                  <span class="icon"><i class="fas fa-microscope"></i></span> <!-- Changed icon -->
                   <span class="nav-text">Benchmark Releases</span>
-                  <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+                  <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span> <!-- Initial arrow state -->
               </a>
               <div class="dropdown-menu-items level-1">
+                  <!-- Multinet v0.2 Section -->
                   <a href="Multinetv02.html" class="dropdown-item main-release-link">
                       <span class="icon"><i class="fas fa-gamepad"></i></span>
                       <span class="nav-text" style="white-space: nowrap;">v0.2 - Gameplay</span>
                   </a>
+                  <!-- Multinet v0.1 Section -->
                   <a href="Multinetv01.html" class="dropdown-item main-release-link">
                       <span class="icon"><i class="fas fa-robot"></i></span>
                       <span class="nav-text" style="white-space: nowrap;">v0.1 - Robotics</span>
@@ -748,10 +1058,10 @@
           </div>
           <!-- Model Releases Dropdown -->
           <div class="nav-item has-dropdown" style="padding: 0;"
-               onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-               onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-              <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-                  <span class="icon"><i class="fas fa-rocket"></i></span>
+               onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }"
+               onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
+              <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
+                  <span class="icon"><i class="fas fa-rocket"></i></span> <!-- Icon for Model Releases -->
                   <span class="nav-text">Model Releases</span>
                   <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
               </a>
@@ -761,23 +1071,23 @@
                       <span class="nav-text" style="white-space: nowrap;">μGato</span>
                   </a>
                   <a href="https://github.com/ManifoldRG/NEKO" target="_blank" class="dropdown-item main-release-link">
-                      <span class="icon"><i class="fas fa-cat"></i></span>
+                      <span class="icon"><i class="fas fa-cat"></i></span> <!-- Icon for NEKO -->
                       <span class="nav-text" style="white-space: nowrap;">NEKO</span>
                   </a>
               </div>
           </div>
           <!-- Software Releases Dropdown -->
           <div class="nav-item has-dropdown" style="padding: 0;"
-               onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-               onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-              <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
-                  <span class="icon"><i class="fas fa-code-branch"></i></span>
+               onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }"
+               onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
+              <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
+                  <span class="icon"><i class="fas fa-code-branch"></i></span> <!-- Icon for Software Releases -->
                   <span class="nav-text">Software Releases</span>
                   <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
               </a>
               <div class="dropdown-menu-items level-1">
-                  <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
-                    <span class="icon"><i class="fas fa-tasks"></i></span>
+                  <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link"> <!-- Link to codebase -->
+                    <span class="icon"><i class="fas fa-tasks"></i></span> <!-- Icon for Multinet Eval Harness -->
                     <span class="nav-text" style="white-space: nowrap;">Multinet Eval Harness</span>
                   </a>
                   <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="dropdown-item main-release-link">
@@ -787,10 +1097,10 @@
               </div>
           </div>
           <a href="Multinet.html" class="nav-item">
-            <span class="icon"><i class="fas fa-info-circle"></i></span>
-            <span class="nav-text">About Multinet</span>
+            <span class="icon"><i class="fas fa-info-circle"></i></span> <!-- Changed icon for About Multinet -->
+            <span class="nav-text">About Multinet</span> <!-- Changed text -->
           </a>
-          <a href="../../index.html#BibTeX" class="nav-item">
+          <a href="#Citation" class="nav-item">
             <span class="icon"><i class="fas fa-quote-right"></i></span>
             <span class="nav-text">Citations</span>
           </a>
@@ -1338,26 +1648,68 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const navToggleBtn = document.getElementById('navToggleBtn');
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileOverlay = document.getElementById('mobileOverlay');
         const sideNav = document.getElementById('side-nav');
         const mainContent = document.getElementById('main-page-content');
-        const allNavLinks = document.querySelectorAll('.side-navigation .nav-item:not(.has-dropdown) > a, .side-navigation .sub-item:not(.has-dropdown), .side-navigation .dropdown-item > a'); // Links that can be active - updated to include dropdown items
+        const allNavLinks = document.querySelectorAll('.side-navigation .nav-item:not(.has-dropdown) > a, .side-navigation .sub-item:not(.has-dropdown)'); // Links that can be active
+        
+        // Check if mobile
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        // Global function for mobile device detection (used in inline handlers)
+        window.isMobileDevice = function() {
+            return window.innerWidth <= 768;
+        }
+
+        // Dropdown toggle function
+        function toggleDropdown(parentNavItem, dropdownMenu, toggle) {
+            const isOpen = parentNavItem.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', isOpen.toString());
+            dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
+            
+            const arrowIcon = toggle.querySelector('.dropdown-arrow .fas');
+            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
+                arrowIcon.classList.toggle('rotated', isOpen);
+            }
+
+            // Close sibling dropdowns (accordion behavior)
+            const parentMenu = parentNavItem.parentElement;
+            if (parentMenu && isOpen) {
+                const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
+                    child.classList.contains('has-dropdown') && child !== parentNavItem
+                );
+                siblingDropdowns.forEach(sib => {
+                    sib.classList.remove('open');
+                    sib.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                    const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
+                    if (sibMenu) sibMenu.style.maxHeight = null;
+                    const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
+                    if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
+                        sibArrowIcon.classList.remove('rotated');
+                    }
+                });
+            }
+        }
 
         function expandSidebar() {
             if (!sideNav || !mainContent) return;
             if (sideNav.classList.contains('collapsed')) {
                 sideNav.classList.remove('collapsed');
-                // Check if mainContent exists and has classList before trying to remove a class
-                if (mainContent && mainContent.classList) {
-                    // mainContent.classList.remove('collapsed'); // Removed this line
+                if (isMobile()) {
+                    mobileOverlay.classList.add('active');
+                    document.body.classList.add('mobile-nav-open');
                 }
+                // Ensure all dropdowns are closed when expanding from fully collapsed hover state
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
                     const menu = openDropdown.querySelector('.dropdown-menu-items');
-                    if (menu) menu.style.maxHeight = null; 
+                    if (menu) menu.style.maxHeight = null; // Collapse menu
                     openDropdown.classList.remove('open');
-                    const toggle = openDropdown.querySelector('.dropdown-toggle');
-                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                    openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
                     const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
-                    if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
+                    if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
                         arrowIcon.classList.remove('rotated');
                     }
                 });
@@ -1368,17 +1720,19 @@
             if (!sideNav || !mainContent) return;
             if (!sideNav.classList.contains('collapsed')) {
                 sideNav.classList.add('collapsed');
-                 if (mainContent && mainContent.classList) {
-                    // mainContent.classList.add('collapsed'); // Removed this line
+                if (isMobile()) {
+                    mobileOverlay.classList.remove('active');
+                    document.body.classList.remove('mobile-nav-open');
                 }
+                
+                // Collapse all open dropdowns
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
                     openDropdown.classList.remove('open');
-                    const toggle = openDropdown.querySelector('.dropdown-toggle');
-                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                    openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
                     const menu = openDropdown.querySelector('.dropdown-menu-items');
                     if (menu) menu.style.maxHeight = null;
                     const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
-                     if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
+                     if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
                         arrowIcon.classList.remove('rotated');
                     }
                 });
@@ -1398,164 +1752,142 @@
             const icon = navToggleBtn.querySelector('i');
             if (icon) icon.className = 'fas fa-bars';
             navToggleBtn.addEventListener('click', masterToggleSidebar);
-            
-            // Enhanced mouseenter for reliable expansion
-            let enterTimeout;
             navToggleBtn.addEventListener('mouseenter', () => {
-                clearTimeout(enterTimeout); // Clear any pending timeout
-                if (sideNav && sideNav.classList.contains('collapsed')) {
-                     expandSidebar();
-                }
+                if (sideNav.classList.contains('collapsed') && !isMobile()) expandSidebar();
             });
         }
-        
-        // Close sidebar if clicking outside, only when expanded
-        document.addEventListener('click', function(event) {
-            if (!sideNav || !navToggleBtn ) return; // Removed mainContent check as it might not always exist or be relevant for this logic
-            const isClickInsideNav = sideNav.contains(event.target);
-            const isClickOnToggleBtn = navToggleBtn.contains(event.target);
 
-            if (!sideNav.classList.contains('collapsed') && !isClickInsideNav && !isClickOnToggleBtn) {
-                 // Check if the click is on a dropdown item, if so, don't collapse
-                if (event.target.closest('.dropdown-menu-items')) {
-                    return;
-                }
+        // Mobile navigation toggle
+        if (mobileNavToggle) {
+            mobileNavToggle.addEventListener('click', masterToggleSidebar);
+        }
+
+        // Mobile overlay click to close
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', collapseSidebar);
+        }
+
+        document.addEventListener('click', function(event) {
+            if (!sideNav || !navToggleBtn || !mainContent) return;
+            const isClickInsideNav = sideNav.contains(event.target);
+            const isClickOnToggle = navToggleBtn.contains(event.target) || (mobileNavToggle && mobileNavToggle.contains(event.target));
+            if (!sideNav.classList.contains('collapsed') && !isClickInsideNav && !isClickOnToggle) {
                 collapseSidebar();
             }
         });
 
+        // New Dropdown Handling for multiple levels
         const dropdownToggles = document.querySelectorAll('.side-navigation .nav-item.has-dropdown > .dropdown-toggle');
         dropdownToggles.forEach(toggle => {
             toggle.addEventListener('click', function (event) {
                 event.preventDefault();
-                event.stopPropagation(); 
+                event.stopPropagation(); // Prevent click from bubbling to document listener
 
-                const parentNavItem = this.parentElement; 
+                const parentNavItem = this.parentElement; // The .nav-item.has-dropdown
                 const dropdownMenu = parentNavItem.querySelector(':scope > .dropdown-menu-items');
                 
                 if (!dropdownMenu) return;
 
-                if (sideNav.classList.contains('collapsed')) {
-                    expandSidebar(); 
-                     setTimeout(() => { 
-                        const isOpen = parentNavItem.classList.toggle('open');
-                        this.setAttribute('aria-expanded', isOpen.toString());
-                        dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
-                        const arrowIcon = this.querySelector('.dropdown-arrow .fas');
-                        if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
-                            arrowIcon.classList.toggle('rotated', isOpen);
-                        }
-                     }, 50); 
+                // On mobile, always ensure sidebar is expanded first
+                if (isMobile() && sideNav.classList.contains('collapsed')) {
+                    expandSidebar();
+                    // Wait for sidebar to expand before toggling dropdown
+                    setTimeout(() => {
+                        toggleDropdown(parentNavItem, dropdownMenu, this);
+                    }, 150);
                     return;
                 }
 
-                const isOpen = parentNavItem.classList.toggle('open');
-                this.setAttribute('aria-expanded', isOpen.toString());
-                dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
-                
-                const arrowIcon = this.querySelector('.dropdown-arrow .fas');
-                if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
-                    arrowIcon.classList.toggle('rotated', isOpen);
+                // For desktop collapsed or mobile expanded, toggle dropdown immediately
+                if (!isMobile() && sideNav.classList.contains('collapsed')) {
+                    expandSidebar(); 
+                    setTimeout(() => {
+                        toggleDropdown(parentNavItem, dropdownMenu, this);
+                    }, 50);
+                    return;
                 }
 
-                const parentMenu = parentNavItem.parentElement; 
-                if (parentMenu) {
-                    const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
-                        child.classList.contains('has-dropdown') && child !== parentNavItem
-                    );
-                    siblingDropdowns.forEach(sib => {
-                        sib.classList.remove('open');
-                        const sibToggle = sib.querySelector('.dropdown-toggle');
-                        if (sibToggle) sibToggle.setAttribute('aria-expanded', 'false');
-                        const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
-                        if (sibMenu) sibMenu.style.maxHeight = null;
-                        const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
-                        if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
-                            sibArrowIcon.classList.remove('rotated');
-                        }
-                    });
-                }
+                // Normal toggle
+                toggleDropdown(parentNavItem, dropdownMenu, this);
             });
         });
         
+        // Handle hover for flyouts when collapsed
         document.querySelectorAll('.side-navigation.collapsed .nav-item.has-dropdown').forEach(dropdownItem => {
-            // Hover effects are mainly CSS driven for flyouts when collapsed
+            dropdownItem.addEventListener('mouseenter', function() {
+                if (sideNav.classList.contains('collapsed')) {
+                    const menu = this.querySelector(':scope > .dropdown-menu-items');
+                    if (menu) {
+                        // Position flyout correctly (JS might be needed if CSS is not enough for multi-level)
+                        // For now, CSS handles :hover to display.
+                    }
+                }
+            });
+            dropdownItem.addEventListener('mouseleave', function() {
+                if (sideNav.classList.contains('collapsed')) {
+                    // CSS will hide on mouseleave from the :hover target
+                }
+            });
         });
 
+
+        // Active link handling
         const currentPath = window.location.pathname.split('/').pop() || 'index.html';
         const currentFullPath = window.location.pathname;
+        const allLinks = document.querySelectorAll('.side-navigation a');
 
-        allNavLinks.forEach(linkElement => {
+        allLinks.forEach(linkElement => {
             if (!linkElement) return;
 
             const itemLink = linkElement.getAttribute('href');
             if (itemLink) {
                 let isMatch = false;
-                const itemLinkFilename = itemLink.split('/').pop();
+                
+                // Normalize the link's href to compare with the current path
+                const absoluteLink = new URL(itemLink, window.location.href).pathname;
 
-                if (itemLink.startsWith('http')) {
-                    // External links: typically not marked active
-                } else if (itemLink.endsWith('index.html')) { // Matches ../../index.html or index.html
-                    // True if current page is an index.html at any valid depth that matches the link
-                    if (currentPath === 'index.html' && (currentFullPath === itemLink || currentFullPath.endsWith(itemLink))) {
-                        isMatch = true;
-                    } else if (currentPath === 'index.html' && itemLink.includes('index.html')) { // Broader match for home
-                         //This condition handles cases where index.html is linked like "../../index.html"
-                         //and current page is the root index.html or a nested index.html
-                         //Consider if `currentFullPath` matches the expected path of `itemLink` from root
-                        let tempPath = currentFullPath;
-                        if (tempPath.endsWith('/')) tempPath += 'index.html';
-                        if (!tempPath.endsWith('index.html')) tempPath += '/index.html'; // Normalize
-
-                        let tempItemLink = itemLink;
-                         // Normalize itemLink relative to currentFullPath's directory structure
-                        // This is complex. A simpler check might be needed if paths are tricky.
-                        // For now, rely on exact match or currentPath === itemLinkFilename
-                        if (currentPath === 'index.html' && itemLink.includes('index.html')) isMatch = true;
-
-
-                    }
-                } else if (itemLinkFilename === currentPath && currentPath !== 'index.html') {
-                     isMatch = true;
+                if (currentFullPath === absoluteLink) {
+                    isMatch = true;
+                }
+                
+                // Specific check for the main 'About Multinet' page link
+                if (linkElement.href.endsWith('Multinet.html') && currentPath.includes('Multinet.html')) {
+                    isMatch = true;
                 }
 
 
                 if (isMatch) {
-                    document.querySelectorAll('.side-navigation .nav-item.active, .side-navigation .sub-item.active, .side-navigation .dropdown-item.active, .side-navigation .main-release-link.active').forEach(activeEl => activeEl.classList.remove('active'));
+                    document.querySelectorAll('.side-navigation .active').forEach(activeEl => activeEl.classList.remove('active'));
                     
                     const parentNavItem = linkElement.closest('.nav-item, .sub-item, .dropdown-item, .main-release-link');
                     if(parentNavItem) parentNavItem.classList.add('active');
 
-                    let parentDropdownMenu = linkElement.closest('.dropdown-menu-items');
-                    while(parentDropdownMenu) {
-                        const mainDropdownItem = parentDropdownMenu.parentElement; 
+                    let parentDropdown = linkElement.closest('.dropdown-menu-items');
+                    while(parentDropdown) {
+                        const mainDropdownItem = parentDropdown.parentElement; 
                         if (mainDropdownItem && mainDropdownItem.classList.contains('has-dropdown') && !mainDropdownItem.classList.contains('open')) {
-                            mainDropdownItem.classList.add('open');
-                            const toggle = mainDropdownItem.querySelector('.dropdown-toggle');
-                            if (toggle) toggle.setAttribute('aria-expanded', 'true');
-                            parentDropdownMenu.style.maxHeight = parentDropdownMenu.scrollHeight + "px";
-                            const arrowIcon = mainDropdownItem.querySelector('.dropdown-arrow .fas');
-                            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
-                                arrowIcon.classList.add('rotated');
-                            }
+                           if (!isMobile() || (isMobile() && !sideNav.classList.contains('collapsed'))) {
+                                mainDropdownItem.classList.add('open');
+                                const toggle = mainDropdownItem.querySelector('.dropdown-toggle');
+                                if (toggle) toggle.setAttribute('aria-expanded', 'true');
+                                parentDropdown.style.maxHeight = parentDropdown.scrollHeight + "px";
+                                const arrowIcon = mainDropdownItem.querySelector('.dropdown-arrow .fas');
+                                if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
+                                    arrowIcon.classList.add('rotated');
+                                }
+                           }
                         }
-                        // Ascend to the next parent that might be a dropdown menu's container
-                        if (mainDropdownItem && mainDropdownItem.parentElement) {
-                           parentDropdownMenu = mainDropdownItem.parentElement.closest('.nav-item.has-dropdown > .dropdown-menu-items');
-                        } else {
-                            parentDropdownMenu = null; // Break loop if no further parent structure
-                        }
+                        parentDropdown = mainDropdownItem.parentElement ? mainDropdownItem.parentElement.closest('.dropdown-menu-items') : null;
                     }
                 }
             }
         });
         
-        // Fallback for home page if no other link matched and current page is an index.html
-        // This is a simplified check. `currentFullPath` could be just "/" for root.
-        const isHomePage = currentPath === 'index.html'; // More robust check might be needed depending on server config
+        // Fallback for home page if no other link matched
+        const isHomePage = currentPath === 'index.html' || currentFullPath.endsWith('/');
         if (isHomePage && !document.querySelector('.side-navigation .active')) {
-            const homeLink = document.querySelector('.side-navigation a.nav-item[href$="index.html"]'); // Match any link ending with index.html
-            if(homeLink) homeLink.classList.add('active');
+            const homeLink = document.querySelector('.side-navigation a.nav-item[href$="index.html"]');
+            if(homeLink) homeLink.closest('.nav-item').classList.add('active');
         }
     });
   </script>
