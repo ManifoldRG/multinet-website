@@ -153,15 +153,14 @@ function renderConfusionMatrix() {
 
   // Create a table-based confusion matrix
   const table = document.createElement('table');
-  table.style.width = '100%';
+  table.style.width = 'auto';
   table.style.height = '100%'; // Fill the container height
   table.style.borderCollapse = 'collapse';
   table.style.textAlign = 'center';
   table.style.fontSize = '12px';
-  table.style.tableLayout = 'fixed'; // Fixed layout for consistent cell sizes
+  table.style.tableLayout = 'auto'; // Auto-size columns based on content
   table.style.position = 'relative';
-  table.style.maxWidth = '100%'; // Ensure table doesn't exceed container width
-  table.style.overflowX = 'auto'; // Allow horizontal scrolling if needed
+  table.style.minWidth = '100%';
   
   // Add Prediction label above the table
   const predictionLabel = document.createElement('div');
@@ -216,8 +215,9 @@ function renderConfusionMatrix() {
     // Add cells
     row.forEach((value, j) => {
       const td = document.createElement('td');
-      td.style.padding = '4px';
+      td.style.padding = '4px 8px';
       td.style.border = '1px solid #ddd';
+      td.style.whiteSpace = 'nowrap';
       // Apply the pastel color scheme for all values.
       // When value is 0, this becomes rgba(255, 248, 178, 0.85) (pastel yellow).
       td.style.backgroundColor = 
