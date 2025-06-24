@@ -512,9 +512,404 @@
       max-height: 90px;
       margin-top: 10px;
     }
+
+    /* Mobile Responsive Styles */
+    @media screen and (max-width: 768px) {
+      /* Prevent horizontal overflow and ensure full width usage */
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      * {
+        box-sizing: border-box;
+      }
+      
+      /* Global text overflow prevention */
+      h1, h2, h3, h4, h5, h6, p, span, div, a {
+        word-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
+        overflow-wrap: break-word;
+      }
+      
+      /* Prevent specific long words from breaking layout */
+      .publication-title {
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+      }
+      
+      /* Hide sidebar by default on mobile, make it overlay when shown */
+      .side-navigation {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1050;
+      }
+      
+      .side-navigation:not(.collapsed) {
+        transform: translateX(0);
+      }
+      
+      /* Adjust main content for mobile */
+      #main-page-content {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      
+      /* Mobile navigation toggle - make it visible and positioned */
+      .mobile-nav-toggle {
+        display: block !important;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1060;
+        background: rgba(0, 90, 156, 0.9);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      }
+      
+      /* Overlay for mobile sidebar */
+      .mobile-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1040;
+      }
+      
+      .mobile-overlay.active {
+        display: block;
+      }
+      
+      body.mobile-nav-open .mobile-nav-toggle {
+        display: none !important;
+      }
+      
+      /* Hero section adjustments */
+      .hero {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      
+      .hero .hero-body {
+        padding: 1.5rem 1rem;
+      }
+      
+      .hero .title.is-1 {
+        font-size: 2rem !important;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      /* Collaborator logos - stack vertically on mobile */
+      .collaborator-logos {
+        flex-direction: column;
+        gap: 2rem !important;
+      }
+      
+      .collaborator-logo {
+        max-height: 60px !important;
+        max-width: 120px !important;
+      }
+      
+      /* Flip cards - single column on mobile */
+      .columns {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      
+      .columns.is-multiline .column.is-half-tablet.is-one-third-desktop {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        margin: 0 auto;
+      }
+      
+      .flip-card-anchor {
+        width: 100% !important;
+        max-width: 300px;
+        height: 260px !important;
+        margin: 0 auto 20px auto;
+      }
+      
+      .flip-card-front {
+        padding: 15px !important;
+      }
+      
+      .flip-card-front .title.is-4 {
+        font-size: 1.1rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.75rem !important;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .flip-card-front p {
+        font-size: 0.8rem !important;
+        line-height: 1.4 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .flip-card-back {
+        padding: 15px !important;
+      }
+      
+      .flip-card-back .title.is-4 {
+        font-size: 1.1rem !important;
+        line-height: 1.3 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .flip-card-back ul {
+        font-size: 0.75rem !important;
+        line-height: 1.4 !important;
+      }
+      
+      .flip-card-back p.description-intro {
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      /* CTA Banner adjustments */
+      .cta-banner {
+        padding: 15px 45px 15px 15px !important; /* Extra right padding for close button */
+        text-align: left !important;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+      
+      .cta-banner .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        max-width: 100% !important;
+      }
+      
+      .cta-banner p {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+        margin: 0 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+        padding-right: 0;
+      }
+      
+      .cta-banner a {
+        display: inline-block !important;
+        margin-top: 8px !important;
+        margin-left: 0 !important;
+        word-wrap: break-word;
+      }
+      
+      #cta-close-btn {
+        top: 10px !important;
+        right: 10px !important;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 18px !important;
+        flex-shrink: 0;
+      }
+      
+      /* Section spacing adjustments */
+      .section {
+        padding: 2rem 1rem;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      
+      /* Container adjustments for mobile */
+      .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .container.is-max-desktop {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      
+      .title.is-2 {
+        font-size: 1.75rem !important;
+      }
+      
+      .title.is-3 {
+        font-size: 1.5rem !important;
+      }
+      
+      /* News section mobile optimization */
+      .news-section {
+        max-height: none;
+        overflow-y: visible;
+        padding: 1.5rem 0;
+      }
+      
+      .news-container {
+        padding: 12px;
+      }
+      
+      .news-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding: 12px;
+      }
+      
+      .news-icon {
+        margin-bottom: 8px;
+        margin-right: 0;
+      }
+      
+      /* Videos carousel mobile adjustments */
+      #videos-carousel .card {
+        margin: 0 5px;
+      }
+      
+      /* Citation section mobile */
+      .section#BibTeX pre {
+        font-size: 0.8rem;
+        overflow-x: auto;
+      }
+      
+      /* Contact links mobile optimization */
+      .publication-authors p.is-size-5 {
+        font-size: 0.9rem !important;
+      }
+      
+      /* Button and link touch targets */
+      .nav-toggle-btn,
+      .mobile-nav-toggle,
+      #cta-close-btn {
+        min-height: 44px;
+        min-width: 44px;
+      }
+      
+      /* Ensure proper spacing for touch */
+      .side-navigation .nav-item,
+      .side-navigation .dropdown-toggle {
+        padding: 15px 20px;
+        min-height: 48px;
+      }
+      
+      /* Mobile dropdown improvements */
+      .side-navigation .nav-item.has-dropdown > .dropdown-toggle {
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+      
+      /* Disable hover CSS effects on mobile for dropdowns */
+      .side-navigation .nav-item.has-dropdown:hover > .dropdown-menu-items.level-1 {
+        display: none !important;
+      }
+      
+      /* Only show dropdown when explicitly opened via JS */
+      .side-navigation .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 {
+        display: block !important;
+      }
+      
+      /* Make dropdown arrows more touch-friendly */
+      .side-navigation .dropdown-arrow {
+        padding: 8px;
+        margin-left: 5px;
+        border-radius: 4px;
+      }
+      
+      /* Improve touch targets */
+      .side-navigation .nav-item.has-dropdown {
+        position: relative;
+      }
+    }
+    
+    /* Extra small mobile devices */
+    @media screen and (max-width: 480px) {
+      .hero .title.is-1 {
+        font-size: 1.75rem !important;
+      }
+      
+      .flip-card-anchor {
+        height: 240px !important;
+        max-width: 280px;
+      }
+      
+      .section {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .container,
+      .container.is-max-desktop {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .columns.is-multiline .column.is-half-tablet.is-one-third-desktop {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      
+      /* Extra small CTA banner adjustments */
+      .cta-banner {
+        padding: 12px 40px 12px 12px !important;
+      }
+      
+      .cta-banner p {
+        font-size: 0.85rem !important;
+        line-height: 1.3 !important;
+      }
+      
+      #cta-close-btn {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 16px !important;
+        top: 8px !important;
+        right: 8px !important;
+      }
+      
+      .publication-title {
+        font-size: 1.6rem !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Mobile Navigation Toggle -->
+  <button class="mobile-nav-toggle" id="mobileNavToggle" style="display: none;" aria-label="Toggle mobile navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
   
 <div id="side-nav" class="side-navigation collapsed">
   <div class="logo-container">
@@ -533,9 +928,9 @@
 
     <!-- Releases Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;" 
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+         onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }"
+         onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
             <span class="icon"><i class="fas fa-microscope"></i></span> <!-- Changed icon -->
             <span class="nav-text">Benchmark Releases</span>
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span> <!-- Initial arrow state -->
@@ -555,9 +950,9 @@
     </div>
     <!-- Model Releases Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+         onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }"
+         onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
             <span class="icon"><i class="fas fa-rocket"></i></span> <!-- Icon for Model Releases -->
             <span class="nav-text">Model Releases</span>
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
@@ -575,9 +970,9 @@
     </div>
     <!-- Software Releases Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+         onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }"
+         onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
             <span class="icon"><i class="fas fa-code-branch"></i></span> <!-- Icon for Software Releases -->
             <span class="nav-text">Software Releases</span>
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
@@ -1572,15 +1967,60 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
         const navToggleBtn = document.getElementById('navToggleBtn');
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileOverlay = document.getElementById('mobileOverlay');
         const sideNav = document.getElementById('side-nav');
         const mainContent = document.getElementById('main-page-content');
         const allNavLinks = document.querySelectorAll('.side-navigation .nav-item:not(.has-dropdown) > a, .side-navigation .sub-item:not(.has-dropdown)'); // Links that can be active
+        
+        // Check if mobile
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        // Global function for mobile device detection (used in inline handlers)
+        window.isMobileDevice = function() {
+            return window.innerWidth <= 768;
+        }
+
+        // Dropdown toggle function
+        function toggleDropdown(parentNavItem, dropdownMenu, toggle) {
+            const isOpen = parentNavItem.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', isOpen.toString());
+            dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
+            
+            const arrowIcon = toggle.querySelector('.dropdown-arrow .fas');
+            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
+                arrowIcon.classList.toggle('rotated', isOpen);
+            }
+
+            // Close sibling dropdowns (accordion behavior)
+            const parentMenu = parentNavItem.parentElement;
+            if (parentMenu && isOpen) {
+                const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
+                    child.classList.contains('has-dropdown') && child !== parentNavItem
+                );
+                siblingDropdowns.forEach(sib => {
+                    sib.classList.remove('open');
+                    sib.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                    const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
+                    if (sibMenu) sibMenu.style.maxHeight = null;
+                    const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
+                    if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
+                        sibArrowIcon.classList.remove('rotated');
+                    }
+                });
+            }
+        }
 
         function expandSidebar() {
             if (!sideNav || !mainContent) return;
             if (sideNav.classList.contains('collapsed')) {
                 sideNav.classList.remove('collapsed');
-                // mainContent.classList.remove('collapsed'); // Removed this line
+                if (isMobile()) {
+                    mobileOverlay.classList.add('active');
+                    document.body.classList.add('mobile-nav-open');
+                }
                 // Ensure all dropdowns are closed when expanding from fully collapsed hover state
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
                     const menu = openDropdown.querySelector('.dropdown-menu-items');
@@ -1599,7 +2039,10 @@
             if (!sideNav || !mainContent) return;
             if (!sideNav.classList.contains('collapsed')) {
                 sideNav.classList.add('collapsed');
-                // mainContent.classList.add('collapsed'); // Removed this line
+                if (isMobile()) {
+                    mobileOverlay.classList.remove('active');
+                    document.body.classList.remove('mobile-nav-open');
+                }
                 
                 // Collapse all open dropdowns
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
@@ -1629,14 +2072,25 @@
             if (icon) icon.className = 'fas fa-bars';
             navToggleBtn.addEventListener('click', masterToggleSidebar);
             navToggleBtn.addEventListener('mouseenter', () => {
-                if (sideNav.classList.contains('collapsed')) expandSidebar();
+                if (sideNav.classList.contains('collapsed') && !isMobile()) expandSidebar();
             });
+        }
+
+        // Mobile navigation toggle
+        if (mobileNavToggle) {
+            mobileNavToggle.addEventListener('click', masterToggleSidebar);
+        }
+
+        // Mobile overlay click to close
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', collapseSidebar);
         }
 
         document.addEventListener('click', function(event) {
             if (!sideNav || !navToggleBtn || !mainContent) return;
             const isClickInsideNav = sideNav.contains(event.target);
-            if (!sideNav.classList.contains('collapsed') && !isClickInsideNav) {
+            const isClickOnToggle = navToggleBtn.contains(event.target) || (mobileNavToggle && mobileNavToggle.contains(event.target));
+            if (!sideNav.classList.contains('collapsed') && !isClickInsideNav && !isClickOnToggle) {
                 collapseSidebar();
             }
         });
@@ -1653,50 +2107,27 @@
                 
                 if (!dropdownMenu) return;
 
-                // Do not allow click to toggle dropdowns if sidebar is collapsed (hover only)
-                if (sideNav.classList.contains('collapsed')) {
-                    // If user clicks on an item that *would* be a flyout, briefly expand sidebar
-                    expandSidebar(); 
-                    // And then open the item they clicked on
-                     setTimeout(() => { // allow sidebar to expand
-                        const isOpen = parentNavItem.classList.toggle('open');
-                        this.setAttribute('aria-expanded', isOpen.toString());
-                        dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
-                        const arrowIcon = this.querySelector('.dropdown-arrow .fas');
-                        if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
-                            arrowIcon.classList.toggle('rotated', isOpen);
-                        }
-                     }, 50); // Small delay for visual transition
+                // On mobile, always ensure sidebar is expanded first
+                if (isMobile() && sideNav.classList.contains('collapsed')) {
+                    expandSidebar();
+                    // Wait for sidebar to expand before toggling dropdown
+                    setTimeout(() => {
+                        toggleDropdown(parentNavItem, dropdownMenu, this);
+                    }, 150);
                     return;
                 }
 
-                const isOpen = parentNavItem.classList.toggle('open');
-                this.setAttribute('aria-expanded', isOpen.toString());
-                dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
-                
-                const arrowIcon = this.querySelector('.dropdown-arrow .fas');
-                if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
-                    arrowIcon.classList.toggle('rotated', isOpen);
+                // For desktop collapsed or mobile expanded, toggle dropdown immediately
+                if (!isMobile() && sideNav.classList.contains('collapsed')) {
+                    expandSidebar(); 
+                    setTimeout(() => {
+                        toggleDropdown(parentNavItem, dropdownMenu, this);
+                    }, 50);
+                    return;
                 }
 
-
-                // Accordion behavior: Close sibling dropdowns at the same level
-                const parentMenu = parentNavItem.parentElement; // This is either .side-navigation-menu or a .dropdown-menu-items
-                if (parentMenu) {
-                    const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
-                        child.classList.contains('has-dropdown') && child !== parentNavItem
-                    );
-                    siblingDropdowns.forEach(sib => {
-                        sib.classList.remove('open');
-                        sib.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
-                        const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
-                        if (sibMenu) sibMenu.style.maxHeight = null;
-                        const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
-                        if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
-                            sibArrowIcon.classList.remove('rotated');
-                        }
-                    });
-                }
+                // Normal toggle
+                toggleDropdown(parentNavItem, dropdownMenu, this);
             });
         });
         
@@ -1835,6 +2266,26 @@
           });
         } else {
           console.log('CTA elements not found');
+        }
+
+        // Handle window resize for mobile/desktop switching
+        window.addEventListener('resize', function() {
+            if (isMobile()) {
+                // Ensure sidebar is collapsed on mobile
+                if (!sideNav.classList.contains('collapsed')) {
+                    collapseSidebar();
+                }
+            } else {
+                // Remove mobile overlay if switching to desktop
+                if (mobileOverlay) {
+                    mobileOverlay.classList.remove('active');
+                }
+            }
+        });
+
+        // Initial mobile check
+        if (isMobile()) {
+            collapseSidebar();
         }
     });
   </script>

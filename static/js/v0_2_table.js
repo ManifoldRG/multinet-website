@@ -319,7 +319,13 @@ function renderCharts(data) {
                   position: 'top',
                   labels: {
                     boxWidth: 12,
-                    padding: 15
+                    padding: 15,
+                    generateLabels: function(chart) {
+                      if (window.innerWidth < 768) {
+                        return [];
+                      }
+                      return Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                    }
                   }
                 },
                 title: { 
@@ -337,8 +343,8 @@ function renderCharts(data) {
                     }
                   },
                   ticks: {
-                    maxRotation: 45,
-                    minRotation: 45,
+                    maxRotation: window.innerWidth < 768 ? 90 : 45,
+                    minRotation: window.innerWidth < 768 ? 90 : 45,
                     font: {
                       size: 11
                     }

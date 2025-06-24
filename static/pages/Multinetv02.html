@@ -649,6 +649,406 @@
       transition: transform 0.3s ease;
     }
 
+    /* Mobile Responsive Styles */
+    @media screen and (max-width: 768px) {
+      /* Prevent horizontal overflow and ensure full width usage */
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      * {
+        box-sizing: border-box;
+      }
+      
+      /* Global text overflow prevention */
+      h1, h2, h3, h4, h5, h6, p, span, div, a {
+        word-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
+        overflow-wrap: break-word;
+      }
+      
+      /* Prevent specific long words from breaking layout */
+      .publication-title {
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+      }
+      
+      /* Hide sidebar by default on mobile, make it overlay when shown */
+      .side-navigation {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1050;
+      }
+      
+      .side-navigation:not(.collapsed) {
+        transform: translateX(0);
+      }
+      
+      /* Adjust main content for mobile */
+      #main-page-content {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      
+      /* Mobile navigation toggle - make it visible and positioned */
+      .mobile-nav-toggle {
+        display: block !important;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1060;
+        background: rgba(0, 90, 156, 0.9);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      }
+
+      body.mobile-nav-open .mobile-nav-toggle {
+        display: none !important;
+      }
+      
+      /* Overlay for mobile sidebar */
+      .mobile-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1040;
+      }
+      
+      .mobile-overlay.active {
+        display: block;
+      }
+      
+      /* Hero section adjustments */
+      .hero {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      
+      .hero .hero-body {
+        padding: 1.5rem 1rem;
+      }
+      
+      .hero .title.is-1 {
+        font-size: 2rem !important;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      /* Collaborator logos - stack vertically on mobile */
+      .collaborator-logos {
+        flex-direction: column;
+        gap: 2rem !important;
+      }
+      
+      .collaborator-logo {
+        max-height: 60px !important;
+        max-width: 120px !important;
+      }
+      
+      /* Flip cards - single column on mobile */
+      .columns {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      
+      .columns.is-multiline .column.is-half-tablet.is-one-third-desktop {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        margin: 0 auto;
+      }
+      
+      .flip-card-anchor {
+        width: 100% !important;
+        max-width: 300px;
+        height: 260px !important;
+        margin: 0 auto 20px auto;
+      }
+      
+      .flip-card-front {
+        padding: 15px !important;
+      }
+      
+      .flip-card-front .title.is-4 {
+        font-size: 1.1rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.75rem !important;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .flip-card-front p {
+        font-size: 0.8rem !important;
+        line-height: 1.4 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .flip-card-back {
+        padding: 15px !important;
+      }
+      
+      .flip-card-back .title.is-4 {
+        font-size: 1.1rem !important;
+        line-height: 1.3 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .flip-card-back ul {
+        font-size: 0.75rem !important;
+        line-height: 1.4 !important;
+      }
+      
+      .flip-card-back p.description-intro {
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      /* CTA Banner adjustments */
+      .cta-banner {
+        padding: 15px 45px 15px 15px !important; /* Extra right padding for close button */
+        text-align: left !important;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+      
+      .cta-banner .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        max-width: 100% !important;
+      }
+      
+      .cta-banner p {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+        margin: 0 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+        padding-right: 0;
+      }
+      
+      .cta-banner a {
+        display: inline-block !important;
+        margin-top: 8px !important;
+        margin-left: 0 !important;
+        word-wrap: break-word;
+      }
+      
+      #cta-close-btn {
+        top: 10px !important;
+        right: 10px !important;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 18px !important;
+        flex-shrink: 0;
+      }
+      
+      /* Section spacing adjustments */
+      .section {
+        padding: 2rem 1rem;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      
+      /* Container adjustments for mobile */
+      .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .container.is-max-desktop {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      
+      .title.is-2 {
+        font-size: 1.75rem !important;
+      }
+      
+      .title.is-3 {
+        font-size: 1.5rem !important;
+      }
+      
+      /* News section mobile optimization */
+      .news-section {
+        max-height: none;
+        overflow-y: visible;
+        padding: 1.5rem 0;
+      }
+      
+      .news-container {
+        padding: 12px;
+      }
+      
+      .news-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding: 12px;
+      }
+      
+      .news-icon {
+        margin-bottom: 8px;
+        margin-right: 0;
+      }
+      
+      /* Videos carousel mobile adjustments */
+      #videos-carousel .card {
+        margin: 0 5px;
+      }
+      
+      /* Citation section mobile */
+      .section#BibTeX pre {
+        font-size: 0.8rem;
+        overflow-x: auto;
+      }
+      
+      /* Contact links mobile optimization */
+      .publication-authors p.is-size-5 {
+        font-size: 0.9rem !important;
+      }
+      
+      /* Button and link touch targets */
+      .nav-toggle-btn,
+      .mobile-nav-toggle,
+      #cta-close-btn {
+        min-height: 44px;
+        min-width: 44px;
+      }
+      
+      /* Ensure proper spacing for touch */
+      .side-navigation .nav-item,
+      .side-navigation .dropdown-toggle {
+        padding: 15px 20px;
+        min-height: 48px;
+      }
+      
+      /* Mobile dropdown improvements */
+      .side-navigation .nav-item.has-dropdown > .dropdown-toggle {
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+      
+      /* Disable hover CSS effects on mobile for dropdowns */
+      .side-navigation .nav-item.has-dropdown:hover > .dropdown-menu-items.level-1 {
+        display: none !important;
+      }
+      
+      /* Only show dropdown when explicitly opened via JS */
+      .side-navigation .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 {
+        display: block !important;
+      }
+      
+      /* Make dropdown arrows more touch-friendly */
+      .side-navigation .dropdown-arrow {
+        padding: 8px;
+        margin-left: 5px;
+        border-radius: 4px;
+      }
+      
+      /* Improve touch targets */
+      .side-navigation .nav-item.has-dropdown {
+        position: relative;
+      }
+    }
+    
+    /* Extra small mobile devices */
+    @media screen and (max-width: 480px) {
+      .hero .title.is-1 {
+        font-size: 1.75rem !important;
+      }
+      
+      .flip-card-anchor {
+        height: 240px !important;
+        max-width: 280px;
+      }
+      
+      .section {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .container,
+      .container.is-max-desktop {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .columns.is-multiline .column.is-half-tablet.is-one-third-desktop {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      
+      /* Extra small CTA banner adjustments */
+      .cta-banner {
+        padding: 12px 40px 12px 12px !important;
+      }
+      
+      .cta-banner p {
+        font-size: 0.85rem !important;
+        line-height: 1.3 !important;
+      }
+      
+      #cta-close-btn {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 16px !important;
+        top: 8px !important;
+        right: 8px !important;
+      }
+      
+      .publication-title {
+        font-size: 1.6rem !important;
+      }
+    }
+
+    .procgen-gif {
+      max-width: 100px; /* Control GIF size */
+      display: block;
+      margin: 0 auto; /* Center GIF if cell is wider */
+    }
+
+    .visualization-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch; /* Smoother scrolling on mobile */
+      padding-bottom: 10px; /* Give some space for scrollbar */
+    }
   </style>
   <!-- Add Chart.js before our custom script -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -741,7 +1141,6 @@
     #confusion-matrix-canvas-container {
       position: relative;
       padding: 25px 40px;
-      overflow: hidden !important;
     }
 
     /* Add styles to hide scrollbars while maintaining functionality */
@@ -789,28 +1188,62 @@
 
     @media (max-width: 900px) {
       .metrics-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 120px 1fr; /* Keep two columns, adjust sidebar width */
+        gap: 1rem;
         height: auto;
       }
       .metrics-sidebar {
+        /* Revert to vertical flex layout by removing mobile overrides */
         width: 100%;
-        position: static;
+        position: relative; /* Changed from static */
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column; /* Ensure vertical stacking */
+        flex-wrap: nowrap; /* Prevent wrapping */
         gap: 0.5rem;
-        padding-right: 0; /* Remove padding on mobile */
+        padding-right: 0;
       }
       .metric-button {
-        width: auto;
-        flex: 1 1 40%;
-        margin: 0.25rem 0;
+        /* Revert to full-width buttons */
+        width: 100%;
+        flex: 0 0 auto; /* Do not grow or shrink */
+        margin: 0;
+        text-align: left; /* Ensure text is left-aligned */
       }
       .metrics-charts {
-        height: 600px;
-        padding-left: 0; /* Remove padding on mobile */
+        height: 500px; /* Adjust height for mobile */
+        padding-left: 0;
+        min-width: 450px; /* Give chart minimum width to prevent cramping */
       }
       .metric-chart {
         height: 100%;
+      }
+
+      /* Responsive styles for confusion matrix */
+      #confusion-matrix-section .confusion-matrix-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 1rem;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+      
+      #confusion-matrix-section .confusion-matrix-controls .model-button {
+        width: 100%;
+        margin: 0;
+      }
+      
+      #confusion-matrix-section .confusion-matrix-controls .dataset-selector {
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+      
+      #confusion-matrix-section .confusion-matrix-canvas-container {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        overflow-x: auto;
       }
     }
 
@@ -900,6 +1333,14 @@
   </style>
 </head>
 <body>
+
+<!-- Mobile Navigation Toggle -->
+<button class="mobile-nav-toggle" id="mobileNavToggle" style="display: none;" aria-label="Toggle mobile navigation">
+  <i class="fas fa-bars"></i>
+</button>
+
+<!-- Mobile Overlay -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
 
 <div id="side-nav" class="side-navigation collapsed">
   <div class="logo-container">
@@ -1021,9 +1462,12 @@
                         <span class="author-block">
                         <a href="https://www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>123</sup>,</span>
                         </span>
+                        <span class="author-block">
+                          <a href="https://pliang279.github.io/" target="_blank">Paul Pu Liang</a><sup>4</sup>,</span>
                         </div>
 
                         <div class="is-size-5 publication-authors">
+                          <sup>1</sup> Manifold Research, <sup>2</sup> Metarch AI, <sup>3</sup> Georgia Tech, <sup>4</sup> MIT
                           <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
                           <br>
                           <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:pranav@metarch.ai"> here</a></strong></span>
@@ -1566,25 +2010,27 @@
               directly to their architectures, training strategies, and input/output processing techniques.</p>
                     <div class="content has-text-centered">
                       <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Overall Performance</h4>
-                      <div class="metrics-container">
-                        <div class="metrics-sidebar">
-                          <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Evaluation metrics</p>
-                          <button class="metric-button active" data-metric="macro-recall">Macro Recall</button>
-                          <button class="metric-button" data-metric="macro-precision">Macro Precision</button>
-                          <button class="metric-button" data-metric="macro-f1">Macro F1</button>
-                          <button class="metric-button" data-metric="micro-recall">Micro Recall</button>
-                          <button class="metric-button" data-metric="micro-precision">Micro Precision</button>
-                          <button class="metric-button" data-metric="micro-f1">Micro F1</button>
-                          <button class="metric-button" data-metric="invalid_percentage">Invalid Percentage</button>
-                          <button class="metric-button" data-metric="brier-mae">Brier MAE</button>
-                          <button class="metric-button" data-metric="normalized_mae">Normalized Brier MAE</button>
-                          <button class="metric-button" data-metric="normalized_quantile_filtered_mae">Normalized Quantile Filtered Brier MAE</button>
-                        </div>
+                      <div class="visualization-wrapper">
+                        <div class="metrics-container" style="min-width: 600px;">
+                          <div class="metrics-sidebar">
+                            <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Evaluation metrics</p>
+                            <button class="metric-button active" data-metric="macro-recall">Macro Recall</button>
+                            <button class="metric-button" data-metric="macro-precision">Macro Precision</button>
+                            <button class="metric-button" data-metric="macro-f1">Macro F1</button>
+                            <button class="metric-button" data-metric="micro-recall">Micro Recall</button>
+                            <button class="metric-button" data-metric="micro-precision">Micro Precision</button>
+                            <button class="metric-button" data-metric="micro-f1">Micro F1</button>
+                            <button class="metric-button" data-metric="invalid_percentage">Invalid Percentage</button>
+                            <button class="metric-button" data-metric="brier-mae">Brier MAE</button>
+                            <button class="metric-button" data-metric="normalized_mae">Normalized Brier MAE</button>
+                            <button class="metric-button" data-metric="normalized_quantile_filtered_mae">Normalized Quantile Filtered Brier MAE</button>
+                          </div>
 
-                        
-                        
-                        <div class="metrics-charts">
-                          <!-- Charts will be dynamically inserted here -->
+                          
+                          
+                          <div class="metrics-charts">
+                            <!-- Charts will be dynamically inserted here -->
+                          </div>
                         </div>
                       </div>
 
@@ -1592,29 +2038,31 @@
                       <br>
 
                       <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Frequency of predicted action classes</h4>
-                      <div id="confusion-matrix-section" style="margin-top:1rem;max-width:100%;overflow-x:auto;">
-                        <div class="confusion-matrix-controls" style="display:flex;flex-direction:column;gap:1rem;align-items:stretch;max-width:100%;">
-                          <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
-                            <div style="width:200px;"></div>  <!-- Changed from 120px to 200px to match metrics-sidebar -->
-                            <div style="flex:1;position:relative;padding:20px 0 0 50px;max-width:calc(100% - 250px);"> <!-- Adjusted max-width calculation -->
-                              <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Models</p>
-                              <div class="confusion-matrix-models" style="display:flex;justify-content:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
-                                <!-- Model buttons will be injected here -->
+                      <div class="visualization-wrapper">
+                        <div id="confusion-matrix-section" style="min-width: 700px;">
+                          <div class="confusion-matrix-controls" style="display:flex;flex-direction:column;gap:1rem;align-items:stretch;max-width:100%;">
+                            <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
+                              <div style="width:200px;"></div>  <!-- Changed from 120px to 200px to match metrics-sidebar -->
+                              <div style="flex:1;position:relative;padding:20px 0 0 50px;max-width:calc(100% - 250px);"> <!-- Adjusted max-width calculation -->
+                                <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Models</p>
+                                <div class="confusion-matrix-models" style="display:flex;justify-content:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+                                  <!-- Model buttons will be injected here -->
+                                </div>
                               </div>
                             </div>
-                          </div>
         
-                          <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
-                            <div style="display: flex; flex-direction: column; min-width: 200px;">
-                              <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Procgen Datasets</p>
-                              <div class="confusion-matrix-datasets" style="display:flex;flex-direction:column;height:500px;overflow-y:auto;gap:0.5rem;padding-right:10px;margin-right:5px;"> <!-- Original comment: Changed min-width from 120px to 200px. Note: min-width is now on this div\'s parent. padding-top:20px also removed. -->
-                                <!-- Dataset buttons will be injected here -->
+                            <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
+                              <div style="display: flex; flex-direction: column; min-width: 200px;">
+                                <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Procgen Datasets</p>
+                                <div class="confusion-matrix-datasets" style="display:flex;flex-direction:column;height:500px;overflow-y:auto;gap:0.5rem;padding-right:10px;margin-right:5px;"> <!-- Original comment: Changed min-width from 120px to 200px. Note: min-width is now on this div\'s parent. padding-top:20px also removed. -->
+                                  <!-- Dataset buttons will be injected here -->
+                                </div>
                               </div>
-                            </div>
   
-                            <div style="flex:1;position:relative;padding:20px 0 0 50px;display:flex;justify-content:center;max-width:calc(100% - 250px);"> <!-- Adjusted max-width calculation -->
-                              <div id="confusion-matrix-canvas-container" style="width:100%;height:500px;position:relative;overflow-x:auto;">
-                                <canvas id="confusion-matrix-canvas"></canvas>
+                              <div style="flex:1;position:relative;padding:20px 0 0 50px;display:flex;justify-content:center;max-width:calc(100% - 250px);"> <!-- Adjusted max-width calculation -->
+                                <div id="confusion-matrix-canvas-container" style="width:100%;height:500px;position:relative;overflow-x:auto;">
+                                  <canvas id="confusion-matrix-canvas"></canvas>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -1623,21 +2071,23 @@
                     </div>
                     <section class="section">
                         <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Correlation matrix between image entropies and model performance</h4>
-                        <div id="entropy-correlation-container" style="width: 100%; height: 500px; position: relative; margin-top: 1rem;">
-                            <div id="entropy-correlation-plot" style="width: 100%; height: 100%; overflow-x: auto; position: relative; padding-top: 30px; padding-left: 40px; box-sizing: border-box;"></div>
-                            <div id="entropy-correlation-tooltip" 
-                               style="position: fixed; 
-                                      display: none; 
-                                      background-color: rgba(0,0,0,0.75); 
-                                      color: white;
-                                      border: 1px solid #333; 
-                                      padding: 8px 12px; 
-                                      border-radius: 5px; 
-                                      font-size: 12px;
-                                      pointer-events: none; 
-                                      z-index: 1000; 
-                                      white-space: nowrap;">
-                            </div>
+                        <div class="visualization-wrapper">
+                          <div id="entropy-correlation-container" style="min-width: 700px; width: 100%; height: 500px; position: relative; margin-top: 1rem;">
+                              <div id="entropy-correlation-plot" style="width: 100%; height: 100%; position: relative; padding-top: 30px; padding-left: 40px; box-sizing: border-box;"></div>
+                              <div id="entropy-correlation-tooltip" 
+                                 style="position: fixed; 
+                                        display: none; 
+                                        background-color: rgba(0,0,0,0.75); 
+                                        color: white;
+                                        border: 1px solid #333; 
+                                        padding: 8px 12px; 
+                                        border-radius: 5px; 
+                                        font-size: 12px;
+                                        pointer-events: none; 
+                                        z-index: 1000; 
+                                        white-space: nowrap;">
+                              </div>
+                          </div>
                         </div>
                     </section>
             <p>
@@ -1729,24 +2179,68 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
         const navToggleBtn = document.getElementById('navToggleBtn');
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileOverlay = document.getElementById('mobileOverlay');
         const sideNav = document.getElementById('side-nav');
         const mainContent = document.getElementById('main-page-content');
-        const allNavLinks = document.querySelectorAll('.side-navigation .nav-item:not(.has-dropdown) > a, .side-navigation .sub-item:not(.has-dropdown), .side-navigation .dropdown-item > a'); // Links that can be active
+        const allNavLinks = document.querySelectorAll('.side-navigation .nav-item:not(.has-dropdown) > a, .side-navigation .sub-item:not(.has-dropdown)'); // Links that can be active
+        
+        // Check if mobile
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        // Global function for mobile device detection (used in inline handlers)
+        window.isMobileDevice = function() {
+            return window.innerWidth <= 768;
+        }
+
+        // Dropdown toggle function
+        function toggleDropdown(parentNavItem, dropdownMenu, toggle) {
+            const isOpen = parentNavItem.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', isOpen.toString());
+            dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
+            
+            const arrowIcon = toggle.querySelector('.dropdown-arrow .fas');
+            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
+                arrowIcon.classList.toggle('rotated', isOpen);
+            }
+
+            // Close sibling dropdowns (accordion behavior)
+            const parentMenu = parentNavItem.parentElement;
+            if (parentMenu && isOpen) {
+                const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
+                    child.classList.contains('has-dropdown') && child !== parentNavItem
+                );
+                siblingDropdowns.forEach(sib => {
+                    sib.classList.remove('open');
+                    sib.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                    const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
+                    if (sibMenu) sibMenu.style.maxHeight = null;
+                    const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
+                    if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
+                        sibArrowIcon.classList.remove('rotated');
+                    }
+                });
+            }
+        }
 
         function expandSidebar() {
             if (!sideNav || !mainContent) return;
             if (sideNav.classList.contains('collapsed')) {
                 sideNav.classList.remove('collapsed');
-                // mainContent.classList.remove('collapsed'); // Removed this line
+                if (isMobile()) {
+                    mobileOverlay.classList.add('active');
+                    document.body.classList.add('mobile-nav-open');
+                }
                 // Ensure all dropdowns are closed when expanding from fully collapsed hover state
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
                     const menu = openDropdown.querySelector('.dropdown-menu-items');
-                    if (menu) menu.style.maxHeight = null; 
+                    if (menu) menu.style.maxHeight = null; // Collapse menu
                     openDropdown.classList.remove('open');
-                    const toggle = openDropdown.querySelector('.dropdown-toggle');
-                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                    openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
                     const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
-                    if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
+                    if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
                         arrowIcon.classList.remove('rotated');
                     }
                 });
@@ -1757,46 +2251,31 @@
             if (!sideNav || !mainContent) return;
             if (!sideNav.classList.contains('collapsed')) {
                 sideNav.classList.add('collapsed');
-                // mainContent.classList.add('collapsed'); // Removed this line
+                if (isMobile()) {
+                    mobileOverlay.classList.remove('active');
+                    document.body.classList.remove('mobile-nav-open');
+                }
                 
                 // Collapse all open dropdowns
                 document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
                     openDropdown.classList.remove('open');
-                    const toggle = openDropdown.querySelector('.dropdown-toggle');
-                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                    openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
                     const menu = openDropdown.querySelector('.dropdown-menu-items');
                     if (menu) menu.style.maxHeight = null;
                     const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
-                     if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
+                     if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
                         arrowIcon.classList.remove('rotated');
                     }
                 });
             }
         }
-        
+
         function masterToggleSidebar() {
             if (!sideNav) return;
-            const isCollapsed = sideNav.classList.contains('collapsed');
-            if (isCollapsed) {
-                // sideNav.classList.remove('collapsed'); // Handled by expandSidebar
-                // if (mainContent) mainContent.classList.remove('collapsed'); // Handled by expandSidebar
+            if (sideNav.classList.contains('collapsed')) {
                 expandSidebar();
             } else {
-                // sideNav.classList.add('collapsed'); // Handled by collapseSidebar
-                // if (mainContent) mainContent.classList.add('collapsed'); // Handled by collapseSidebar
                 collapseSidebar();
-                 // Close all dropdowns when collapsing sidebar
-                document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
-                    openDropdown.classList.remove('open');
-                    const toggle = openDropdown.querySelector('.dropdown-toggle');
-                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
-                    const menu = openDropdown.querySelector('.dropdown-menu-items');
-                    if (menu) menu.style.maxHeight = null;
-                    const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
-                    if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
-                        arrowIcon.classList.remove('rotated');
-                    }
-                });
             }
         }
 
@@ -1804,166 +2283,166 @@
             const icon = navToggleBtn.querySelector('i');
             if (icon) icon.className = 'fas fa-bars';
             navToggleBtn.addEventListener('click', masterToggleSidebar);
-            
-            // Add mouseenter event for hover-to-expand
             navToggleBtn.addEventListener('mouseenter', () => {
-                if (sideNav && sideNav.classList.contains('collapsed')) {
-                    expandSidebar();
-                }
+                if (sideNav.classList.contains('collapsed') && !isMobile()) expandSidebar();
             });
         }
-        
-        document.addEventListener('click', function(event) {
-            if (!sideNav || !navToggleBtn ) return;
-            const isClickInsideNav = sideNav.contains(event.target);
-            const isClickOnToggleBtn = navToggleBtn.contains(event.target);
 
-            if (!sideNav.classList.contains('collapsed') && !isClickInsideNav && !isClickOnToggleBtn) {
-                if (event.target.closest('.dropdown-menu-items')) {
-                    return;
-                }
-                // masterToggleSidebar(); // Changed to collapseSidebar
-                collapseSidebar(); // Collapse if open and click is outside
+        // Mobile navigation toggle
+        if (mobileNavToggle) {
+            mobileNavToggle.addEventListener('click', masterToggleSidebar);
+        }
+
+        // Mobile overlay click to close
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', collapseSidebar);
+        }
+
+        document.addEventListener('click', function(event) {
+            if (!sideNav || !navToggleBtn || !mainContent) return;
+            const isClickInsideNav = sideNav.contains(event.target);
+            const isClickOnToggle = navToggleBtn.contains(event.target) || (mobileNavToggle && mobileNavToggle.contains(event.target));
+            if (!sideNav.classList.contains('collapsed') && !isClickInsideNav && !isClickOnToggle) {
+                collapseSidebar();
             }
         });
 
+        // New Dropdown Handling for multiple levels
         const dropdownToggles = document.querySelectorAll('.side-navigation .nav-item.has-dropdown > .dropdown-toggle');
         dropdownToggles.forEach(toggle => {
             toggle.addEventListener('click', function (event) {
                 event.preventDefault();
-                event.stopPropagation(); 
+                event.stopPropagation(); // Prevent click from bubbling to document listener
 
-                const parentNavItem = this.parentElement; 
+                const parentNavItem = this.parentElement; // The .nav-item.has-dropdown
                 const dropdownMenu = parentNavItem.querySelector(':scope > .dropdown-menu-items');
                 
                 if (!dropdownMenu) return;
 
-                if (sideNav.classList.contains('collapsed')) {
-                     // When collapsed, hovering handles flyouts (CSS driven)
-                    // Click might be interpreted as wanting to expand the main sidebar first
-                    masterToggleSidebar(); // Expand main sidebar
-                     // Then, if we want to immediately open this specific dropdown:
-                    setTimeout(() => { 
-                        if (!parentNavItem.classList.contains('open')) {
-                            parentNavItem.classList.add('open');
-                            this.setAttribute('aria-expanded', 'true');
-                            dropdownMenu.style.maxHeight = dropdownMenu.scrollHeight + "px";
-                            const arrowIcon = this.querySelector('.dropdown-arrow .fas');
-                            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
-                                arrowIcon.classList.add('rotated');
-                            }
-                             // Close other open dropdowns
-                            const parentMenu = parentNavItem.parentElement;
-                            if (parentMenu) {
-                                const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
-                                    child.classList.contains('has-dropdown') && child !== parentNavItem
-                                );
-                                siblingDropdowns.forEach(sib => {
-                                    sib.classList.remove('open');
-                                    const sibToggle = sib.querySelector('.dropdown-toggle');
-                                    if (sibToggle) sibToggle.setAttribute('aria-expanded', 'false');
-                                    const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
-                                    if (sibMenu) sibMenu.style.maxHeight = null;
-                                    const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
-                                    if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
-                                        sibArrowIcon.classList.remove('rotated');
-                                    }
-                                });
-                            }
-                        }
-                    }, 50); 
+                // On mobile, always ensure sidebar is expanded first
+                if (isMobile() && sideNav.classList.contains('collapsed')) {
+                    expandSidebar();
+                    // Wait for sidebar to expand before toggling dropdown
+                    setTimeout(() => {
+                        toggleDropdown(parentNavItem, dropdownMenu, this);
+                    }, 150);
                     return;
                 }
-                
-                // If sidebar is not collapsed, handle as accordion
-                const isOpen = parentNavItem.classList.toggle('open');
-                this.setAttribute('aria-expanded', isOpen.toString());
-                dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
-                
-                const arrowIcon = this.querySelector('.dropdown-arrow .fas');
-                if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { 
-                    arrowIcon.classList.toggle('rotated', isOpen);
+
+                // For desktop collapsed or mobile expanded, toggle dropdown immediately
+                if (!isMobile() && sideNav.classList.contains('collapsed')) {
+                    expandSidebar(); 
+                    setTimeout(() => {
+                        toggleDropdown(parentNavItem, dropdownMenu, this);
+                    }, 50);
+                    return;
                 }
 
-                // Accordion: Close other open dropdowns at the same level
-                const parentMenu = parentNavItem.parentElement; 
-                if (parentMenu) {
-                    const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
-                        child.classList.contains('has-dropdown') && child !== parentNavItem
-                    );
-                    siblingDropdowns.forEach(sib => {
-                        sib.classList.remove('open');
-                        const sibToggle = sib.querySelector('.dropdown-toggle');
-                        if (sibToggle) sibToggle.setAttribute('aria-expanded', 'false');
-                        const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
-                        if (sibMenu) sibMenu.style.maxHeight = null;
-                        const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
-                        if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
-                            sibArrowIcon.classList.remove('rotated');
-                        }
-                    });
-                }
+                // Normal toggle
+                toggleDropdown(parentNavItem, dropdownMenu, this);
             });
         });
         
-        // Initial state based on screen width or preference (optional)
-        // Let's start expanded, and ensure main content is also marked accordingly.
-        if (sideNav && mainContent) { // Added mainContent check
-            if (sideNav.classList.contains('collapsed')) {
-                mainContent.classList.add('collapsed');
-            } else {
-                mainContent.classList.remove('collapsed');
-            }
-        }
+        /// Handle hover for flyouts when collapsed
+        document.querySelectorAll('.side-navigation.collapsed .nav-item.has-dropdown').forEach(dropdownItem => {
+            dropdownItem.addEventListener('mouseenter', function() {
+                if (sideNav.classList.contains('collapsed')) {
+                    const menu = this.querySelector(':scope > .dropdown-menu-items');
+                    if (menu) {
+                        // Position flyout correctly (JS might be needed if CSS is not enough for multi-level)
+                        // For now, CSS handles :hover to display.
+                    }
+                }
+            });
+            dropdownItem.addEventListener('mouseleave', function() {
+                if (sideNav.classList.contains('collapsed')) {
+                    // CSS will hide on mouseleave from the :hover target
+                }
+            });
+        });
+
 
         // Active link handling
         const currentPath = window.location.pathname.split('/').pop() || 'index.html';
         const currentFullPath = window.location.pathname;
 
-        allNavLinks.forEach(linkElement => {
+        allNavLinks.forEach(item => {
+            // Make sure item is an <a> tag, could be .nav-item directly if it's not a dropdown
+            const linkElement = item.matches('a') ? item : item.querySelector('a');
             if (!linkElement) return;
 
             const itemLink = linkElement.getAttribute('href');
             if (itemLink) {
                 let isMatch = false;
-                const itemLinkFilename = itemLink.split('/').pop();
-
+                // Handle absolute URLs (external)
                 if (itemLink.startsWith('http')) {
-                    // External links: typically not marked active
-                } else if (itemLink.includes('index.html')) { 
-                    if ( (currentFullPath === '/' || currentFullPath.endsWith('/index.html') || currentPath === 'index.html') && 
-                         (itemLink.endsWith('index.html') || itemLink === '../../index.html') ) {
-                        isMatch = true;
+                    if (itemLink === window.location.href) {
+                        // isMatch = true; // Usually don't mark external as active
                     }
-                } else if (itemLinkFilename === currentPath && currentPath !== 'index.html') {
+                } 
+                // Handle root index.html
+                else if (itemLink === '../../index.html' || itemLink === '../index.html' || itemLink === 'index.html') { // Adjusted for relative paths
+                    // Check if current page is effectively an index page at the corresponding level
+                    const pathSegments = currentFullPath.split('/').filter(Boolean);
+                    const itemLinkSegments = itemLink.split('/').filter(Boolean);
+                    
+                    let effectiveCurrentPath = currentPath;
+                    if (currentPath === 'Multinetv01.html' || currentPath === 'Multinetv02.html' || currentPath === 'Multinet.html' || currentPath === 'Technicalblog.html') {
+                         // these are files in static/pages/
+                         // relative to them, ../../index.html is the root index.html
+                        if (itemLink === '../../index.html' && (pathSegments.length === 0 || (pathSegments.length > 0 && pathSegments[pathSegments.length -1] === 'index.html'))) {
+                           // This condition is tricky. Let's simplify by matching currentPath to itemLink's filename
+                        }
+                    }
+                     if ( (currentFullPath.endsWith('/index.html') || currentPath === 'index.html' ) && itemLink.endsWith('index.html')) {
+                         // More specific check for index.html files
+                         if (itemLink === '../../index.html' && currentFullPath.includes('/static/pages/')) isMatch = true;
+                         else if (itemLink === 'index.html' && !currentFullPath.includes('/static/pages/')) isMatch = true; // if index.html is at root
+                     }
+                }
+                // Handle other relative links
+                const itemLinkFilename = itemLink.split('/').pop();
+                if (itemLinkFilename === currentPath && currentPath !== 'index.html') { // for pages like Multinetv01.html matching Multinetv01.html
                      isMatch = true;
                 }
+                 // Specific case for home on subpages
+                if (itemLink === '../../index.html' && (currentPath === 'index.html' || currentFullPath === '/' || currentFullPath.endsWith("/"))) {
+                    // if current page is a root index, and link is to root index
+                    isMatch = true;
+                } else if (itemLink === '../../index.html' && currentFullPath.includes('/static/pages/') && (currentFullPath.endsWith('/index.html') || currentPath === 'index.html')) {
+                     // if current page is an index.html inside static/pages, and link is to root index, don't mark root active unless it IS the current page
+                }
+
 
                 if (isMatch) {
-                    document.querySelectorAll('.side-navigation .nav-item.active, .side-navigation .sub-item.active, .side-navigation .dropdown-item.active, .side-navigation .main-release-link.active').forEach(activeEl => activeEl.classList.remove('active'));
+                    // Remove active from all other items first
+                    document.querySelectorAll('.side-navigation .nav-item.active, .side-navigation .sub-item.active, .side-navigation .main-release-link.active').forEach(activeEl => activeEl.classList.remove('active'));
                     
+                    // Add active to current item
                     let elToActivate = linkElement;
-                    if (linkElement.classList.contains('dropdown-item') || linkElement.classList.contains('main-release-link') || linkElement.classList.contains('sub-item')) {
+                     if (linkElement.classList.contains('dropdown-item') || linkElement.classList.contains('main-release-link') || linkElement.classList.contains('sub-item')) {
                          // Already the correct element or its anchor
                     } else {
                         elToActivate = linkElement.closest('.nav-item') || linkElement;
                     }
-                    if(elToActivate) elToActivate.classList.add('active');
+                    if(elToActivate && !elToActivate.hasAttribute('target')) elToActivate.classList.add('active');
 
+
+                    // Open parent dropdowns if active item is inside
                     let parentDropdownMenu = elToActivate.closest('.dropdown-menu-items');
                     while(parentDropdownMenu) {
-                        const mainDropdownItem = parentDropdownMenu.parentElement; 
+                        const mainDropdownItem = parentDropdownMenu.parentElement; // The .nav-item.has-dropdown
                         if (mainDropdownItem && mainDropdownItem.classList.contains('has-dropdown') && !mainDropdownItem.classList.contains('open')) {
-                            // mainDropdownItem.classList.add('open'); // This line (original 2204) should be commented
+                            // mainDropdownItem.classList.add('open');
                             const toggle = mainDropdownItem.querySelector('.dropdown-toggle');
-                            // if (toggle) toggle.setAttribute('aria-expanded', 'true'); // This line (original 2206) should be commented
-                            // parentDropdownMenu.style.maxHeight = parentDropdownMenu.scrollHeight + "px"; // This line (original 2207) should be commented
+                            // if (toggle) toggle.setAttribute('aria-expanded', 'true');
+                            // parentDropdownMenu.style.maxHeight = parentDropdownMenu.scrollHeight + "px";
                             const arrowIcon = mainDropdownItem.querySelector('.dropdown-arrow .fas');
                             if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
-                               // arrowIcon.classList.add('rotated'); // This line (original 2210) should be commented
+                                // arrowIcon.classList.add('rotated');
                             }
                         }
-                        if (mainDropdownItem && mainDropdownItem.parentElement) {
+                         if (mainDropdownItem && mainDropdownItem.parentElement) {
                            parentDropdownMenu = mainDropdownItem.parentElement.closest('.nav-item.has-dropdown > .dropdown-menu-items');
                         } else {
                             parentDropdownMenu = null; 
@@ -1973,17 +2452,90 @@
             }
         });
         
-        // Fallback for home page if on root index.html
-        if ( (currentFullPath === '/' || currentFullPath.endsWith('/index.html')) && currentFullPath.split('/').length <= (currentFullPath.startsWith('../../') ? 3 : 2) ) { 
-            const homeSideBarLink = document.querySelector('.side-navigation a.nav-item[href="../../index.html"], .side-navigation a.nav-item[href="index.html"]');
-             if(homeSideBarLink && !document.querySelector('.side-navigation .active')){ // only if nothing else is active
-                homeSideBarLink.classList.add('active');
+        // Fallback for home page if on root index.html for sub-pages
+         if ( (currentFullPath.includes('/static/pages/') && (currentPath === 'index.html' || currentFullPath.endsWith('/'))) ) {
+            // This case is if we are on an index.html within static/pages, which is not expected by current structure
+         } else if ( (currentFullPath === '/' || currentFullPath.endsWith('/index.html')) && !currentFullPath.includes('/static/pages/')) {
+             // We are on the main root index.html
+             const homeSideBarLink = document.querySelector('.side-navigation a.nav-item[href="../../index.html"]'); // This path is for sub-pages
+             // For root index.html, the link would be href="index.html"
+             const rootHomeLink = document.querySelector('.side-navigation a.nav-item[href="index.html"], .side-navigation a.nav-item[href="./index.html"]');
+             if(rootHomeLink && !document.querySelector('.side-navigation .active')) {
+                rootHomeLink.classList.add('active');
              }
+         } else {
+            // Check current page and set active
+            const pageName = currentPath.split('.')[0]; //e.g. Multinetv01
+            const links = document.querySelectorAll('.side-navigation .nav-item a, .side-navigation .dropdown-item a, .side-navigation .main-release-link');
+            let activeSet = false;
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.includes(currentPath) && currentPath !== 'index.html') {
+                    // Clear previous active
+                    document.querySelectorAll('.side-navigation .active').forEach(el => el.classList.remove('active'));
+                    
+                    let elToActivate = link;
+                    if (link.classList.contains('dropdown-item') || link.classList.contains('main-release-link') || link.classList.contains('sub-item')) {
+                        // Direct link in dropdown
+                    } else {
+                         elToActivate = link.closest('.nav-item') || link;
+                    }
+                    if(elToActivate && !elToActivate.hasAttribute('target')) elToActivate.classList.add('active');
+                    activeSet = true;
+
+                    let parentDropdownMenu = elToActivate.closest('.dropdown-menu-items');
+                    while(parentDropdownMenu) {
+                        const mainDropdownItem = parentDropdownMenu.parentElement; 
+                        if (mainDropdownItem && mainDropdownItem.classList.contains('has-dropdown') && !mainDropdownItem.classList.contains('open')) {
+                            // mainDropdownItem.classList.add('open');
+                            const toggle = mainDropdownItem.querySelector('.dropdown-toggle');
+                            // if (toggle) toggle.setAttribute('aria-expanded', 'true');
+                            // parentDropdownMenu.style.maxHeight = parentDropdownMenu.scrollHeight + "px";
+                            const arrowIcon = mainDropdownItem.querySelector('.dropdown-arrow .fas');
+                            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
+                                // arrowIcon.classList.add('rotated');
+                            }
+                        }
+                        if (mainDropdownItem && mainDropdownItem.parentElement) {
+                           parentDropdownMenu = mainDropdownItem.parentElement.closest('.nav-item.has-dropdown > .dropdown-menu-items');
+                        } else {
+                            parentDropdownMenu = null; 
+                        }
+                    }
+                }
+            });
+            if (!activeSet && (currentFullPath === '/' || currentFullPath.endsWith('/index.html') || currentPath === 'index.html')) {
+                 const homeLink = document.querySelector('.side-navigation a.nav-item[href="../../index.html"]');
+                 if(homeLink && !document.querySelector('.side-navigation .active')){
+                     homeLink.classList.add('active');
+                 }
+            }
+         }
+
+        // Handle window resize for mobile/desktop switching
+        window.addEventListener('resize', function() {
+            if (isMobile()) {
+                // Ensure sidebar is collapsed on mobile
+                if (!sideNav.classList.contains('collapsed')) {
+                    collapseSidebar();
+                }
+            } else {
+                // Remove mobile overlay if switching to desktop
+                if (mobileOverlay) {
+                    mobileOverlay.classList.remove('active');
+                }
+            }
+        });
+
+        // Initial mobile check
+        if (isMobile()) {
+            collapseSidebar();
         }
     });
   </script>
 </div>
 </body>
 </html>
+
 
 
