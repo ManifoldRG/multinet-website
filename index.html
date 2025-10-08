@@ -26,7 +26,7 @@
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
   <meta name="description" content="MultiNet is a generalist benchmark for evaluating multimodal action models across vision, language, and action, consolidating diverse datasets and offering tools and metrics for standardized assessment.">
-  <meta property="og:title" content="MultiNet: A Generalist Benchmark for Multimodal Action Models"/>
+  <meta property="og:title" content="MultiNet: A Generalist Benchmark for the Next Generation of Multimodal Models"/>
   <meta property="og:description" content="MultiNet is a generalist benchmark for evaluating multimodal action models across vision, language, and action, consolidating diverse datasets and offering tools and metrics for standardized assessment."/>
   <meta property="og:url" content="https://multinet.ai/"/>
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
@@ -36,7 +36,7 @@
 
 
 
-  <meta name="twitter:title" content="MultiNet: A Generalist Benchmark for Multimodal Action Models">
+  <meta name="twitter:title" content="MultiNet: A Generalist Benchmark for the Next Generation of Multimodal Models">
   <meta name="twitter:description" content="MultiNet is a generalist benchmark for evaluating multimodal action models across vision, language, and action, consolidating diverse datasets and offering tools and metrics for standardized assessment.">
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
   <meta name="twitter:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg">
@@ -484,33 +484,6 @@
     .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="mailto:"]:hover,
     .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="discord.gg"]:hover {
       transform: translateY(-5px);
-    }
-
-    /* Card 6 (μGato - Brown/Bronze Theme) */
-    .columns > .column:nth-child(6) .flip-card-front .title.is-4 {
-      color: #A0522D; /* Sienna (Brown) for title */
-    }
-    .columns > .column:nth-child(6) .flip-card-back {
-      background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%); /* SaddleBrown to Sienna gradient */
-    }
-    /* Make μGato card icon much larger */
-    .columns > .column:nth-child(6) .flip-card-front img {
-      max-width: 120px;
-      max-height: 120px;
-      margin-top: 10px; /* Adjust margin for larger icon */
-    }
-
-    /* Card 7 (NEKO - Teal Theme) */
-    .columns > .column:nth-child(7) .flip-card-front .title.is-4 {
-      color: #008080; /* Teal for title */
-    }
-    .columns > .column:nth-child(7) .flip-card-back {
-      background: linear-gradient(135deg, #20B2AA 0%, #008080 100%); /* LightSeaGreen to Teal gradient */
-    }
-    .columns > .column:nth-child(7) .flip-card-front img {
-      max-width: 90px; /* Adjusted for NEKO logo */
-      max-height: 90px;
-      margin-top: 10px;
     }
 
     /* Mobile Responsive Styles */
@@ -1021,7 +994,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">MultiNet: A Generalist Benchmark for Multimodal Action models</h1>
+            <h1 class="title is-1 publication-title">MultiNet: A Generalist Benchmark for the Next Generation of Multimodal Models</h1>
             <div class="is-size-5 publication-authors">
               <!-- Collaborators/Partners Section -->
     <div class="container is-max-desktop">
@@ -1029,18 +1002,20 @@
         <div class="column has-text-centered">
           <p class="has-text-centered collaborators-description is-size-">Multinet is an open science initiative with contributions from leading research teams at instituitions like:</p>
           <div class="collaborator-logos">
+            <a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
+              <img src="static/images/metarchlogo.jpg" alt="Metarch.ai Logo" class="collaborator-logo">
+            </a>
             <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
               <img src="static/images/manifoldlogo.png" alt="Manifold Research Logo" class="collaborator-logo">
             </a>
             <a href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
               <img src="static/images/mitlogo_alt.png" alt="MIT Logo" class="collaborator-logo">
             </a>
-            <a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/metarchlogo.jpg" alt="Metarch.ai Logo" class="collaborator-logo">
-            </a>
-            
             <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
               <img src="static/images/gtlogo_alt.png" alt="Georgia Tech Logo" class="collaborator-logo">
+            </a>
+            <a href="https://www.tufts.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
+              <img src="static/images/tuftslogo.jpg" alt="Tufts Logo" class="collaborator-logo">
             </a>
             
           </div>
@@ -1063,12 +1038,11 @@
       <div class="columns is-centered">
           <div class="column">
               <div class="content has-text-justified">
-                  <h2 class="title is-3 has-text-centered">Systems, Algorithms, and Research for evaluating Next Generation Action Models</h2>
-                      <p><a href="static/pages/Multinet.html">Multinet</a> is a comprehensive benchmarking initiative for evaluating generalist models across vision, language, and action. It provides:</p>
+                <h2 class="title is-3 has-text-centered">Software and Research for evaluating Next Generation Action Models</h2>
+                      <p><a href="static/pages/Multinet.html">Multinet</a> is a comprehensive benchmarking initiative for evaluating generalist multimodal models across vision, language, and action. It provides:</p>
                       <ul style="margin-left: 2em; margin-top: 0.75em; list-style-type: disc;">
-                          <li>Consolidation of diverse datasets and standardized protocols for assessing multimodal understanding</li>
-                          <li>Extensive training data (800M+ image-text pairs, Trillion+ language tokens, 35TB+ control data)</li>
-                          <li>Varied evaluation tasks including captioning, VQA, robotics, game-playing, commonsense reasoning, and simulated locomotion/manipulation</li>
+                          <li>Well-reasoned and curated set of evaluation datasets to assess multimodal understanding and action taking capabilities of SoTA multimodal models</li>
+                          <li>Varied evaluation tasks including Common Sense Reasoning, Object Detection in the wild, Spatial Reasoning, Visual Question Answering, Robotics, and complex Multi-Agent game-playing</li>
                           <li>Open-source toolkit to standardize the process of obtaining and utilizing robotics/RL data</li>
                       </ul>
                   </p>
@@ -1086,95 +1060,121 @@
           <h2 class="title is-3 has-text-centered">Explore our Research</h2>
           
           <div class="columns is-multiline is-centered">
-            <!-- Card 1 -->
+            <!-- Card 1: Benchmark Releases (Consolidated v0.1 and v0.2) -->
             <div class="column is-half-tablet is-one-third-desktop">
-              <a href="static/pages/Multinetv02.html" class="flip-card-anchor">
+              <div class="flip-card-anchor" style="cursor: pointer;">
                 <div class="flip-card">
                   <div class="flip-card-inner">
                     <div class="flip-card-front">
-                      <h3 class="title is-4">Multinet v0.2</h3>
-                      <p>Benchmarking Vision, Language, & Action Models in Procedurally
-                        Generated, Open Ended Action Environments</p>
-                      <img src="static/images/procgenicon.png" alt="Procgen Icon">
+                      <h3 class="title is-4">Previous Benchmark Releases</h3>
+                      <p>Comprehensive benchmarks for evaluating multimodal models across various modalities and tasks</p>
+                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-chart-line"></i></span>
                     </div>
                     <div class="flip-card-back">
                       <div class="scrollable-content">
                         <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Multinet v0.2</h3>
-                          <p class="description-intro">Key contributions include:</p>
-                          <ul>
-                            <li>Benchmarking SOTA models in procedurally generated environments.</li>
-                            <li>Impact of architecture, data, & processing on model generalization.</li>
-                            <li>Insights on action space & image complexity for generalist AI.</li>
+                          <h3 class="title is-4">Benchmark Releases</h3>
+                          <p class="description-intro">Our benchmarking efforts:</p>
+                          <ul style="list-style-type: none; padding-left: 0;">
+                            <li style="margin-bottom: 15px;">
+                              <a href="static/pages/Multinetv02.html" style="color: #90EE90; text-decoration: none; font-weight: 600;">
+                                <strong>v0.2 - Gameplay:</strong>
+                              </a>
+                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Benchmarking models in procedurally generated game environments</span>
+                            </li>
+                            <li style="margin-bottom: 15px;">
+                              <a href="static/pages/Multinetv01.html" style="color: #90EE90; text-decoration: none; font-weight: 600;">
+                                <strong>v0.1 - Robotics:</strong>
+                              </a>
+                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Evaluating models on real-world robotics tasks</span>
+                            </li>
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
-            
 
-            <!-- Card 2: Open Source Effort -->
+            <!-- Card 2: Model Releases (Consolidated μGato and NEKO) -->
             <div class="column is-half-tablet is-one-third-desktop">
-              <a href="https://arxiv.org/abs/2506.09172" target="_blank" class="flip-card-anchor">
+              <div class="flip-card-anchor" style="cursor: pointer;">
                 <div class="flip-card">
                   <div class="flip-card-inner">
                     <div class="flip-card-front">
-                      <h3 class="title is-4">Evaluation Harness and Toolkit</h3>
-                      <p>An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-wrench"></i></span>
+                      <h3 class="title is-4">Model Releases</h3>
+                      <p>Open-source generalist multimodal action models for research and development</p>
+                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-brain"></i></span>
                     </div>
                     <div class="flip-card-back">
                       <div class="scrollable-content">
                         <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Evaluation Harness and Toolkit</h3>
-                          <p class="description-intro">Beyond the benchmark we aim to provide the community with the essential resources—datasets, tools, and standardized evaluation protocols—to systematically compare different approaches, gain deeper insights into the challenges and opportunities in building generalist AI, and ultimately accelerate the development of truly general-purpose intelligent systems. This includes:</p>
-                          <ul>
-                            <li>A Large-Scale Generalist Dataset</li>
-                            <li>An Open-Source Data Curation SDK</li>
-                            <li>A Systematic Evaluation Harness</li>
-                            <li>Open-source adaptations for SoTA VLA models and VLMs</li>
-                            <li>In-depth Experiments and Analysis</li>
+                          <h3 class="title is-4">Model Releases</h3>
+                          <p class="description-intro">Our model implementations:</p>
+                          <ul style="list-style-type: none; padding-left: 0;">
+                            <li style="margin-bottom: 15px;">
+                              <a href="https://github.com/eihli/mugato" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
+                                <strong>μGato:</strong>
+                              </a>
+                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Simple, open-source implementation of DeepMind's Gato</span>
+                            </li>
+                            <li style="margin-bottom: 15px;">
+                              <a href="https://github.com/ManifoldRG/NEKO" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
+                                <strong>NEKO:</strong>
+                              </a>
+                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">GATO-style model for image, text, RL, and robotics tasks</span>
+                            </li>
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
-            
 
-            <!-- Card 3 -->
+            <!-- Card 3: Software Releases (Consolidated) -->
             <div class="column is-half-tablet is-one-third-desktop">
-              <a href="static/pages/Multinetv01.html" class="flip-card-anchor">
+              <div class="flip-card-anchor" style="cursor: pointer;">
                 <div class="flip-card">
                   <div class="flip-card-inner">
                     <div class="flip-card-front">
-                      <h3 class="title is-4">Multinet v0.1</h3>
-                      <p>Benchmarking Vision, Language, and Action models on Robotics tasks</p>
-                      <img src="static/images/roboticon.jpg" alt="Multinet Robotics Icon">
+                      <h3 class="title is-4">Software Releases</h3>
+                      <p>Open-source tools and frameworks for building and evaluating multimodal models of the future</p>
+                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-tools"></i></span>
                     </div>
                     <div class="flip-card-back">
                       <div class="scrollable-content">
                         <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Multinet v0.1</h3>
-                          <p class="description-intro">Key contributions include:</p>
-                          <ul>
-                            <li>Profiling results for VLM, VLA, and generalist models</li>
-                            <li>Analysis of model generalization to robotics tasks</li>
-                            <li>Evaluation metrics for OpenX Dataset</li>
-                            <li>Framework for mapping VLMs to actions</li>
-                            <li>Open-source benchmark infrastructure</li>
+                          <h3 class="title is-4">Software Releases</h3>
+                          <p class="description-intro">Our software contributions:</p>
+                          <ul style="list-style-type: none; padding-left: 0;">
+                            <li style="margin-bottom: 15px;">
+                              <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
+                                <strong>Eval Harness:</strong>
+                              </a>
+                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Systematic evaluation framework for multimodal models</span>
+                            </li>
+                            <li style="margin-bottom: 15px;">
+                              <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
+                                <strong>Toolkit:</strong>
+                              </a>
+                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Data curation SDK for evaluation datasets</span>
+                            </li>
+                            <li style="margin-bottom: 15px;">
+                              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
+                                <strong>GenESIS:</strong>
+                              </a>
+                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Framework for mapping language models to actions</span>
+                            </li>
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
             
             <!-- Card 2 -->
@@ -1214,94 +1214,7 @@
               </a>
             </div>
             
-            <!-- Card 4 -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">GenESIS</h3>
-                      <p>Generalizable Extendable Stratified Inference System - A framework for mapping language models to actions</p>
-                      <img src="static/images/genesisicon.png" alt="GenESIS Icon">
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">GenESIS</h3>
-                          <p class="description-intro">GenESIS structures prompts for action generation using:</p>
-                          <ul>
-                            <li>System-level goals and constraints.</li>
-                            <li>Task and environment context/rules.</li>
-                            <li>Integration of visual input</li>
-                            <li>Clear action space definitions.</li>
-                            <li>Precise output formatting instructions.</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <!-- Card 6: Mugato -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <a href="https://github.com/eihli/mugato" target="_blank" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">μGato</h3>
-                      <p> A simple, open-source implementation of what is described in DeepMind's Gato paper</p>
-                      <img src="static/images/gatologo.png" alt="μGato Icon">
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">μGato</h3>
-                          <p class="description-intro">This project marks our initial step towards building a multimodal generalist action model. The current version offers:</p>
-                          <ul>
-                            <li><strong>Simplicity:</strong> Easy-to-understand GATO implementation.</li>
-                            <li><strong>Baseline Model:</strong> A basic generalist model that can be used as a baseline for what we build in the future</li>
-                            <li><strong>Experimentation:</strong> Designed for iterability and exploration.</li>
-                            <li><strong>Unified Data:</strong> Simplifies handling of diverse modalities.</li>
-                            <li><strong>Learning Tool:</strong> Interactive notebook included.</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div class="column is-half-tablet is-one-third-desktop">
-              <a href="https://github.com/ManifoldRG/NEKO" target="_blank" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">NEKO</h3>
-                      <p>An open-source GATO-style generalist multimodal model for image, text, RL, and robotics tasks.</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-cat"></i></span>
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">NEKO</h3>
-                          <p class="description-intro">NEKO is a distributed, open-source effort to build a Large Multimodal Model tackling "massively multimodal" scenarios (3+ modalities) to advance generalist AI.</p>
-                          <ul>
-                            <li><strong>Massively Multimodal:</strong> Aims to handle images, text, audio, video, control & proprioception.</li>
-                            <li><strong>Generalist vision:</strong> Designed for numerous objectives across diverse tasks, adapting to new domains.</li>
-                            <li><strong>Open Source & Community:</strong> Fosters collective progress and understanding in AI systems.</li>
-                            <li><strong>GATO-Inspired, future-focused:</strong> Builds on generalist principles with cutting-edge advancements.</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
+            <!-- Card 4: Dataset Specification (keeping this) -->
             <div class="column is-half-tablet is-one-third-desktop">
               <a href="static/pages/Multinet.html" class="flip-card-anchor">
                 <div class="flip-card">
@@ -1329,8 +1242,6 @@
                 </div>
               </a>
             </div>
-
-            <!-- Card 6: Mugato -->
   
           </div>
         </div>
@@ -1506,7 +1417,7 @@
 
     /* Card-specific styles */
 
-    /* Card 1 (Multinet - Blue Theme) */
+    /* Card 1 (Benchmark Releases - Blue Theme) */
     .columns > .column:nth-child(1) .flip-card-front .title.is-4 {
       color: #005A9C; 
     }
@@ -1514,64 +1425,36 @@
       background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%);
     }
 
-    /* Card 2 (An Open-Source Effort - Slate Blue Theme) */
+    /* Card 2 (Model Releases - Purple Theme) */
     .columns > .column:nth-child(2) .flip-card-front .title.is-4 {
-      color: #34495E; /* Dark Slate Blue for title */
-    }
-    .columns > .column:nth-child(2) .flip-card-back {
-      background: linear-gradient(135deg, #34495E 0%, #2C3E50 100%); /* Dark Slate Blue to Midnight Blue gradient */
-    }
-
-    /* Card 3 (Multinet v0.2 - Orange Theme) */
-    .columns > .column:nth-child(3) .flip-card-front .title.is-4 {
-      color: #D35400; 
-    }
-    .columns > .column:nth-child(3) .flip-card-back {
-      background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); 
-    }
-
-    /* Card 4 (GenESIS - Purple Theme, was GoEX) */
-    .columns > .column:nth-child(4) .flip-card-front .title.is-4 {
       color: #8E44AD; 
     }
-    .columns > .column:nth-child(4) .flip-card-back {
+    .columns > .column:nth-child(2) .flip-card-back {
       background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); 
     }
 
-    /* Card 5 (Technical Blog - Red Theme, was Open X-Embodiment) */
-    .columns > .column:nth-child(5) .flip-card-front .title.is-4 {
+    /* Card 3 (Software Releases - Slate Blue Theme) */
+    .columns > .column:nth-child(3) .flip-card-front .title.is-4 {
+      color: #34495E; 
+    }
+    .columns > .column:nth-child(3) .flip-card-back {
+      background: linear-gradient(135deg, #34495E 0%, #2C3E50 100%); 
+    }
+
+    /* Card 4 (Dataset Specification - Red Theme) */
+    .columns > .column:nth-child(4) .flip-card-front .title.is-4 {
       color: #C0392B; 
     }
-    .columns > .column:nth-child(5) .flip-card-back {
+    .columns > .column:nth-child(4) .flip-card-back {
       background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); 
     }
 
-    /* Card 6 (μGato - Brown/Bronze Theme) */
-    .columns > .column:nth-child(6) .flip-card-front .title.is-4 {
-      color: #A0522D; /* Sienna (Brown) for title */
+    /* Card 5 (About Multinet - Orange Theme) */
+    .columns > .column:nth-child(5) .flip-card-front .title.is-4 {
+      color: #D35400; 
     }
-    .columns > .column:nth-child(6) .flip-card-back {
-      background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%); /* SaddleBrown to Sienna gradient */
-    }
-
-    /* Make μGato card icon larger */
-    .columns > .column:nth-child(6) .flip-card-front img {
-      max-width: 120px;
-      max-height: 120px;
-      margin-top: 10px; /* Adjust margin for larger icon */
-    }
-
-    /* Card 7 (NEKO - Teal Theme) */
-    .columns > .column:nth-child(7) .flip-card-front .title.is-4 {
-      color: #008080; /* Teal for title */
-    }
-    .columns > .column:nth-child(7) .flip-card-back {
-      background: linear-gradient(135deg, #20B2AA 0%, #008080 100%); /* LightSeaGreen to Teal gradient */
-    }
-    .columns > .column:nth-child(7) .flip-card-front img {
-      max-width: 90px; /* Adjusted for NEKO logo */
-      max-height: 90px;
-      margin-top: 10px;
+    .columns > .column:nth-child(5) .flip-card-back {
+      background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); 
     }
   </style>
 
@@ -1583,6 +1466,12 @@
           <div class="content has-text-justified" style="margin-bottom: 0;">
             <h2 class="title is-3 has-text-centered" style="margin-bottom: 1rem;">News</h2>
             <div class="news-container" style="padding: 15px;">
+              <div class="news-item">
+                <div class="news-icon">🌟</div>
+                <div class="news-content">
+                  <p><strong>Multinet v1 released!</strong> We release our most comprehensive benchmark yet - evaluating a SoTA VLM, VLA, and generalist model on a wide variety of multimodal understanding and action datasets. Read more <a href="#">here</a>.</p>
+                </div>
+              </div>
               <div class="news-item">
                 <div class="news-icon">🏆</div>
                 <div class="news-content">
@@ -1796,10 +1685,11 @@
 
     .collaborator-logos {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: center;
       align-items: center;
-      gap: 3rem 4rem; /* Spacing: 3rem row-gap, 4rem column-gap */
+      gap: 2rem; /* Reduced gap to fit all logos on one line */
+      overflow-x: auto; /* Allow horizontal scrolling if needed on very small screens */
     }
 
     .collaborator-link {
@@ -1812,11 +1702,12 @@
     }
 
     .collaborator-logo {
-      max-height: 75px; /* Slightly smaller logos on mobile */
-        max-width: 170px;
+      max-height: 75px;
+      max-width: 140px; /* Reduced width to ensure all logos fit on one line */
       object-fit: contain;
       opacity: 0.8; /* Start slightly transparent */
       transition: opacity 0.3s ease-out; /* Smooth transition for opacity */
+      flex-shrink: 0; /* Prevent logos from shrinking too much */
     }
 
     .collaborator-link:hover .collaborator-logo {
@@ -1829,22 +1720,22 @@
         margin-bottom: 2.5rem;
       }
       .collaborator-logos {
-        gap: 2.5rem; /* Reduced gap for smaller screens */
+        gap: 1.5rem; /* Reduced gap for smaller screens */
       }
       .collaborator-logo {
-        max-height: 75px; /* Slightly smaller logos on mobile */
-        max-width: 170px;
+        max-height: 65px; /* Slightly smaller logos on tablets */
+        max-width: 120px;
       }
     }
     
     /* Responsive adjustments for mobile phones */
     @media screen and (max-width: 480px) {
       .collaborator-logos {
-        gap: 2rem 1.5rem; /* Further reduced gap for very small screens */
+        gap: 1rem; /* Further reduced gap for very small screens */
       }
       .collaborator-logo {
-        max-height: 65px;
-        max-width: 140px;
+        max-height: 55px;
+        max-width: 100px;
       }
     }
   </style>
@@ -1861,7 +1752,7 @@
           <div class="card">
             <div class="card-image">
               <figure class="image is-16by9">
-                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/A6a2FIutCqY" title="YouTube video player for SPC talk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/wWuAdrMP1cg?t=1540" title="YouTube video player for latest presentation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
               </figure>
             </div>
           </div>
@@ -1870,7 +1761,7 @@
           <div class="card">
             <div class="card-image">
               <figure class="image is-16by9">
-                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/TnIHF2EbGbA" title="YouTube video player for Manifold CRC 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/A6a2FIutCqY" title="YouTube video player for SPC talk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
               </figure>
             </div>
           </div>
@@ -1879,12 +1770,21 @@
           <div class="card">
             <div class="card-image">
               <figure class="image is-16by9">
+                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/TnIHF2EbGbA" title="YouTube video player for Manifold CRC 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="item-4">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-16by9">
                 <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/DzkaDwB71ZM" title="YouTube video player for Manifold CRC 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
               </figure>
             </div>
           </div>
         </div>
-        <div class="item-3">
+        <div class="item-5">
           <div class="card">
             <div class="card-image">
               <figure class="image is-16by9">
