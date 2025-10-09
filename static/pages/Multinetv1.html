@@ -264,6 +264,63 @@
       background: linear-gradient(135deg, #90A4AE 0%, #607D8B 100%);
     }
 
+    /* Additional color themes for new categories (Cards 15-22) */
+    /* Card 15: Dark Blue Theme (Action MSE) */
+    .columns > .column:nth-child(15) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(15) .flip-card-front-metric .metric-icon { color: #1565C0; }
+    .columns > .column:nth-child(15) .flip-card-back-metric {
+      background: linear-gradient(135deg, #42A5F5 0%, #1565C0 100%);
+    }
+
+    /* Card 16: Emerald Theme (Action MAE) */
+    .columns > .column:nth-child(16) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(16) .flip-card-front-metric .metric-icon { color: #00695C; }
+    .columns > .column:nth-child(16) .flip-card-back-metric {
+      background: linear-gradient(135deg, #26A69A 0%, #00695C 100%);
+    }
+
+    /* Card 17: Coral Theme (Task Success Rate) */
+    .columns > .column:nth-child(17) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(17) .flip-card-front-metric .metric-icon { color: #D84315; }
+    .columns > .column:nth-child(17) .flip-card-back-metric {
+      background: linear-gradient(135deg, #FF7043 0%, #D84315 100%);
+    }
+
+    /* Card 18: Violet Theme (Action Diversity) */
+    .columns > .column:nth-child(18) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(18) .flip-card-front-metric .metric-icon { color: #6A1B9A; }
+    .columns > .column:nth-child(18) .flip-card-back-metric {
+      background: linear-gradient(135deg, #AB47BC 0%, #6A1B9A 100%);
+    }
+
+    /* Card 19: Navy Theme (Cosine Similarity) */
+    .columns > .column:nth-child(19) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(19) .flip-card-front-metric .metric-icon { color: #0D47A1; }
+    .columns > .column:nth-child(19) .flip-card-back-metric {
+      background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
+    }
+
+    /* Card 20: Forest Green Theme (Euclidean Distance) */
+    .columns > .column:nth-child(20) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(20) .flip-card-front-metric .metric-icon { color: #2E7D32; }
+    .columns > .column:nth-child(20) .flip-card-back-metric {
+      background: linear-gradient(135deg, #66BB6A 0%, #2E7D32 100%);
+    }
+
+    /* Card 21: Amber Theme (Trajectory Similarity) */
+    .columns > .column:nth-child(21) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(21) .flip-card-front-metric .metric-icon { color: #FF8F00; }
+    .columns > .column:nth-child(21) .flip-card-back-metric {
+      background: linear-gradient(135deg, #FFCA28 0%, #FF8F00 100%);
+    }
+
+    /* Card 22: Plum Theme (Semantic Similarity) */
+    .columns > .column:nth-child(22) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(22) .flip-card-front-metric .metric-icon { color: #4A148C; }
+    .columns > .column:nth-child(22) .flip-card-back-metric {
+      background: linear-gradient(135deg, #8E24AA 0%, #4A148C 100%);
+    }
+
     /* Styles for Tabbed Interface */
     .tab-pane {
       display: none; /* Hide all tab panes by default */
@@ -1258,7 +1315,7 @@
     /* Make these styles specific to the dataset coverage table */
     .dataset-coverage-table {
       border-collapse: collapse;
-      min-width: 1800px; /* Forces table to be wider than container */
+      min-width: 2200px; /* Adjusted for 6 columns with large images (350px * 6 + 100px first column) */
       width: auto !important; /* Prevents table from expanding container */
       margin-bottom: 10px;
     }
@@ -1274,22 +1331,23 @@
     /* Set width for all standard columns (not the first column) */
     .dataset-coverage-table th:not(:first-child),
     .dataset-coverage-table td:not(:first-child) {
-      min-width: 180px; /* Increased from default */
-      width: 180px; /* Fixed width for consistency */
+      min-width: 350px; /* Increased significantly for larger images */
+      width: 350px; /* Fixed width for consistency */
     }
     
     .dataset-coverage-table th {
       background-color: #f5f5f5;
       font-weight: bold;
-      text-align: left; /* Changed from center to left */
+      text-align: center; /* Center align headers */
     }
 
     /* Style for the first column (row headers) */
     .dataset-coverage-table tbody td:first-child {
       font-weight: bold;
       background-color: #f9f9f9;
-      min-width: 150px; /* Give row headers some space */
-      text-align: left; /* Changed from right to left */
+      min-width: 100px; /* Reduced from 150px to make first column smaller */
+      width: 100px; /* Fixed width */
+      text-align: left;
       padding-right: 15px;
       position: sticky; /* Make it sticky */
       left: 0; /* Pin to left edge */
@@ -1304,6 +1362,8 @@
       z-index: 2; /* Higher than row headers to stay on top at corner */
       background-color: #f5f5f5;
       border-right: 2px solid #ddd;
+      min-width: 100px; /* Match first column width */
+      width: 100px;
     }
     
     .dataset-coverage-table tr:hover {
@@ -1329,6 +1389,96 @@
       max-width: 100px; /* Control GIF size */
       display: block;
       margin: 0 auto; /* Center GIF if cell is wider */
+    }
+
+    /* Dataset image hover and click styles */
+    .dataset-coverage-table .dataset-image {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dataset-coverage-table .dataset-image:hover {
+      transform: scale(1.5);
+      z-index: 100;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3) !important;
+    }
+
+    /* Lightbox modal styles */
+    .image-lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .image-lightbox.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      animation: zoomIn 0.3s ease;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 30px;
+      right: 45px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      background: none;
+      border: none;
+      padding: 10px 20px;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-close:focus {
+      color: #bbb;
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #f1f1f1;
+      font-size: 18px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); }
+      to { transform: scale(1); }
+    }
+
+    /* Prevent hover zoom on mobile */
+    @media screen and (max-width: 768px) {
+      .dataset-coverage-table .dataset-image:hover {
+        transform: none;
+        z-index: 1;
+      }
     }
   </style>
 </head>
@@ -1580,17 +1730,84 @@
         <div class="column">
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Dataset Coverage</h2>
-            <p>MultiNet v1 provides comprehensive evaluation across three major domains, encompassing over 10 diverse datasets that test different aspects of multimodal AI capabilities:</p>
-              
-              <p style="margin-top: 1rem;">
-                MultiNet v1 represents the most comprehensive evaluation of multimodal AI systems to date, spanning robotics manipulation, procedural gameplay, and multimodal reasoning tasks. Our unified evaluation framework enables fair comparison across different model architectures and provides insights into the strengths and limitations of current approaches. For detailed dataset specifications and evaluation protocols, please refer to our <a href="https://arxiv.org/abs/2505.05540" target="_blank">technical report</a>.
+            <p>MultiNet v1 provides comprehensive evaluation across three major domains, encompassing over 10 diverse datasets that test different aspects of multimodal AI capabilities. Each dataset presents unique challenges in vision-language-action understanding, from robotic manipulation to complex reasoning tasks.</p>
+            
+            <div class="container is-max-desktop">
+              <div class="table-container" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+                <table class="dataset-coverage-table">
+                    <thead>
+                        <tr>
+                            <th><!-- Empty for row headers --></th>
+                            <th style="text-align: center;">OpenX</th>
+                            <th style="text-align: center;">Overcooked</th>
+                            <th style="text-align: center;">PIQA</th>
+                            <th style="text-align: center;">ODINW</th>
+                            <th style="text-align: center;">SQA3D</th>
+                            <th style="text-align: center;">BFCL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="height: 280px;">
+                            <td>Dataset</td>
+                            <td><img src="../images/openx.png" alt="OpenX Dataset" class="dataset-image" data-caption="OpenX - Large-scale Robotics Dataset" style="width: 320px; height: 240px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></td>
+                            <td><img src="../images/overcooked.png" alt="Overcooked Dataset" class="dataset-image" data-caption="Overcooked - Multi-Agent Coordination" style="width: 320px; height: 240px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></td>
+                            <td><img src="../images/piqa.png" alt="PIQA Dataset" class="dataset-image" data-caption="PIQA - Physical Interaction QA" style="width: 320px; height: 240px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></td>
+                            <td><img src="../images/odinw.png" alt="ODINW Dataset" class="dataset-image" data-caption="ODINW - Object Detection in the Wild" style="width: 320px; height: 240px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></td>
+                            <td><img src="../images/sqa3d.png" alt="SQA3D Dataset" class="dataset-image" data-caption="SQA3D - 3D Scene Understanding" style="width: 320px; height: 240px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></td>
+                            <td><img src="../images/bfcl.png" alt="BFCL Dataset" class="dataset-image" data-caption="BFCL - Function Calling Benchmark" style="width: 320px; height: 240px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-left">Description</td>
+                            <td class="has-text-left">Large-scale robotics dataset with diverse manipulation tasks across multiple robot embodiments and environments</td>
+                            <td class="has-text-left">Cooperative cooking simulation requiring coordination, planning, and multi-agent interaction in kitchen environments</td>
+                            <td class="has-text-left">Physical interaction question answering dataset testing common-sense reasoning about object properties and interactions</td>
+                            <td class="has-text-left">Object detection dataset with diverse domains testing visual recognition across varied contexts and object categories</td>
+                            <td class="has-text-left">3D scene understanding dataset combining spatial reasoning with question answering in complex indoor environments</td>
+                            <td class="has-text-left">Berkeley function calling leaderboard dataset for evaluating multi-turn conversational function calling capabilities</td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-left">Domain</td>
+                            <td class="has-text-left">Robotics & Manipulation</td>
+                            <td class="has-text-left">Multi-Agent Coordination</td>
+                            <td class="has-text-left">Physical Reasoning</td>
+                            <td class="has-text-left">Computer Vision</td>
+                            <td class="has-text-left">3D Spatial Reasoning</td>
+                            <td class="has-text-left">Function Calling</td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-left">Task Type</td>
+                            <td class="has-text-left">Vision-Language-Action</td>
+                            <td class="has-text-left">Sequential Decision Making</td>
+                            <td class="has-text-left">Multiple Choice QA</td>
+                            <td class="has-text-left">Object Detection</td>
+                            <td class="has-text-left">Visual Question Answering</td>
+                            <td class="has-text-left">Multi-turn Function Calling</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+              <div class="table-notes">
+                  MultiNet v1 evaluates models across diverse modalities and task types, from low-level robotic control to high-level reasoning. For complete dataset specifications and evaluation protocols, please refer to our <a href="https://arxiv.org/abs/2505.05540" target="_blank">technical report</a>.
+              </div>
+              <br>
+              <p>
+                MultiNet v1 represents the most comprehensive evaluation of multimodal AI systems to date, spanning robotics manipulation, procedural gameplay, and multimodal reasoning tasks. Our unified evaluation framework enables fair comparison across different model architectures and provides insights into the strengths and limitations of current approaches across these diverse domains.
               </p>
-            </div>
+              <p style="text-align: center; font-style: italic; color: #666; margin-top: 1rem;">
+                💡 <strong>Tip:</strong> Hover over images to zoom, or click to view full-size in lightbox
+              </p>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Image Lightbox Modal -->
+  <div id="imageLightbox" class="image-lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img class="lightbox-content" id="lightboxImage" alt="Dataset preview">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
 
 <section class="section"></section>
 <div class="container is-max-desktop">
@@ -1604,92 +1821,94 @@
 
         <div class="tabs is-centered is-boxed" style="margin-top: 2rem;">
           <ul>
-            <li class="is-active" data-tab="1"><a><span>Robotics Metrics</span></a></li>
-            <li data-tab="2"><a><span>Gameplay Metrics</span></a></li>
-            <li data-tab="3"><a><span>Multimodal Metrics</span></a></li>
-            <li data-tab="4"><a><span>Cross-Domain Analysis</span></a></li>
+            <li class="is-active" data-tab="1"><a><span>Brier Scores</span></a></li>
+            <li data-tab="2"><a><span>Exact Match metrics</span></a></li>
+            <li data-tab="3"><a><span>Macro scores</span></a></li>
+            <li data-tab="4"><a><span>Class-wise scores</span></a></li>
+            <li data-tab="5"><a><span>Continuous space metrics</span></a></li>
+            <li data-tab="6"><a><span>Embedding similarity</span></a></li>
           </ul>
         </div>
 
         <div id="tab-content-container" style="margin-bottom: 2rem;">
-          <!-- Tab 1: Robotics Metrics Content -->
+          <!-- Tab 1: Brier Family Content -->
           <div class="tab-pane is-active" data-content="1">
-            <h4 class="title is-5 has-text-centered" style="margin-bottom: 1rem; color: #005A9C;">Robotics Domain Evaluation</h4>
             <div class="columns is-multiline is-centered">
-              <!-- Card 1: Action MSE -->
+              <!-- Card 1: Brier MAE -->
               <div class="column is-one-quarter-desktop is-half-tablet">
                 <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
                   <div class="flip-card-metric">
                     <div class="flip-card-inner-metric">
                       <div class="flip-card-front-metric">
-                        <span class="icon is-medium metric-icon"><i class="fas fa-robot fa-lg"></i></span>
-                        <h3 class="title is-5">Action MSE</h3>
-                        <p>Mean Squared Error for continuous action prediction.</p>
+                        <span class="icon is-medium metric-icon"><i class="fas fa-chart-line fa-lg"></i></span>
+                        <h3 class="title is-5">Brier MAE</h3>
+                        <p>Mean Absolute Error of Brier scores.</p>
                       </div>
                       <div class="flip-card-back-metric">
-                        <h3 class="title is-5">Action MSE</h3>
-                        <p style="font-size: 0.7rem;">MSE = <sup>1</sup>&frasl;<sub>N</sub> &sum;<sub>t=1</sub><sup>N</sup> ||a<sub>pred</sub> - a<sub>gt</sub>||<sup>2</sup></p>
-                        <p style="font-size: 0.65rem;">Measures accuracy of continuous action predictions in robotics tasks. Lower values indicate better performance.</p>
+                        <h3 class="title is-5">Brier MAE</h3>
+                        <p style="font-size: 0.7rem;">Brier Score: <br> <sup>1</sup>&frasl;<sub>N</sub> &sum;<sub>t=1</sub><sup>N</sup> &sum;<sub>i=1</sub><sup>R</sup> (f<sub>ti</sub> - o<sub>ti</sub>)<sup>2</sup></p>
+                        <p style="font-size: 0.65rem;">f<sub>ti</sub>: pred prob class i, time t<br>o<sub>ti</sub>: ground truth<br>R: num classes, N: num timesteps.<br>Brier MAE is a variation of the original Brier score
+                        which is a useful method to measure the accuracy of probabilistic predictions. </p>
                       </div>
                     </div>
                   </div>
                 </a>
               </div>
               
-              <!-- Card 2: Task Success Rate -->
+              <!-- Card 2: Normalized Brier MAE -->
               <div class="column is-one-quarter-desktop is-half-tablet">
                 <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
                   <div class="flip-card-metric">
                     <div class="flip-card-inner-metric">
                       <div class="flip-card-front-metric">
-                        <span class="icon is-medium metric-icon"><i class="fas fa-check-circle fa-lg"></i></span>
-                        <h3 class="title is-5">Task Success Rate</h3>
-                        <p>Percentage of successfully completed manipulation tasks.</p>
+                        <span class="icon is-medium metric-icon"><i class="fas fa-ruler-combined fa-lg"></i></span>
+                        <h3 class="title is-5">Normalized Brier MAE</h3>
+                        <p>Normalized version of Brier MAE.</p>
                       </div>
                       <div class="flip-card-back-metric">
-                        <h3 class="title is-5">Task Success Rate</h3>
-                        <p style="font-size: 0.7rem;">Success Rate = (Successful Tasks / Total Tasks) × 100%</p>
-                        <p style="font-size: 0.65rem;">Measures the percentage of manipulation tasks completed successfully according to task-specific success criteria.</p>
+                        <h3 class="title is-5">Normalized Brier MAE</h3>
+                        <p>Description:</p>
+                        <p style="font-size: 0.7rem;">Average of Brier Absolute Errors that have been min-max normalized using the overall min and max Brier absolute errors across all timesteps.</p>
                       </div>
                     </div>
                   </div>
                 </a>
               </div>
 
-              <!-- Card 3: Trajectory Similarity -->
+              <!-- Card 3: Norm. Quantile Filtered Brier MAE -->
               <div class="column is-one-quarter-desktop is-half-tablet">
                 <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
                   <div class="flip-card-metric">
                     <div class="flip-card-inner-metric">
                       <div class="flip-card-front-metric">
-                        <span class="icon is-medium metric-icon"><i class="fas fa-route fa-lg"></i></span>
-                        <h3 class="title is-5">Trajectory Similarity</h3>
-                        <p>Similarity between predicted and expert trajectories.</p>
+                        <span class="icon is-medium metric-icon"><i class="fas fa-filter fa-lg"></i></span>
+                        <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered Brier MAE</h3>
+                        <p>Normalized Brier MAE filtered by quantiles.</p>
                       </div>
                       <div class="flip-card-back-metric">
-                        <h3 class="title is-5">Trajectory Similarity</h3>
-                        <p style="font-size: 0.7rem;">Dynamic Time Warping (DTW) distance between predicted and ground truth action sequences.</p>
-                        <p style="font-size: 0.65rem;">Measures how closely the model follows expert demonstration patterns.</p>
+                        <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered Brier MAE</h3>
+                        <p>Description:</p>
+                        <p style="font-size: 0.7rem;">Brier MAE values are filtered (only considering the error values that are within the 5th to 95th percentile), and then normalized based on the quantile filtered min/max errors.</p>
                       </div>
                     </div>
                   </div>
                 </a>
               </div>
 
-              <!-- Card 4: Action Diversity -->
+              <!-- Card 4: Max Relative Brier MAE -->
               <div class="column is-one-quarter-desktop is-half-tablet">
                 <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
                   <div class="flip-card-metric">
                     <div class="flip-card-inner-metric">
                       <div class="flip-card-front-metric">
-                        <span class="icon is-medium metric-icon"><i class="fas fa-expand-arrows-alt fa-lg"></i></span>
-                        <h3 class="title is-5">Action Diversity</h3>
-                        <p>Diversity of predicted action distributions.</p>
+                        <span class="icon is-medium metric-icon"><i class="fas fa-mountain fa-lg"></i></span>
+                        <h3 class="title is-5">Max Relative Brier MAE</h3>
+                        <p>Max relative error of Brier scores.</p>
                       </div>
                       <div class="flip-card-back-metric">
-                        <h3 class="title is-5">Action Diversity</h3>
-                        <p style="font-size: 0.7rem;">Entropy of action distributions across different contexts and tasks.</p>
-                        <p style="font-size: 0.65rem;">Measures model's ability to produce diverse, context-appropriate actions.</p>
+                        <h3 class="title is-5">Max Relative Brier MAE</h3>
+                        <p>max(MAE) / median(MAE)</p>
+                        <p style="font-size: 0.7rem;">Quantifies how the worst-case error deviates from the typical (median) error for a given subdataset.</p>
                       </div>
                     </div>
                   </div>
@@ -1698,24 +1917,23 @@
             </div>
           </div>
 
-          <!-- Tab 2: Gameplay Metrics Content -->
+          <!-- Tab 2: Overall Performance Content -->
           <div class="tab-pane" data-content="2">
-            <h4 class="title is-5 has-text-centered" style="margin-bottom: 1rem; color: #005A9C;">Gameplay Domain Evaluation</h4>
             <div class="columns is-multiline is-centered">
-              <!-- Card 5: Action Accuracy -->
+              <!-- Card 5: Percentage Invalid Actions -->
               <div class="column is-one-quarter-desktop is-half-tablet">
                 <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
                   <div class="flip-card-metric">
                     <div class="flip-card-inner-metric">
                       <div class="flip-card-front-metric">
-                        <span class="icon is-medium metric-icon"><i class="fas fa-gamepad fa-lg"></i></span>
-                        <h3 class="title is-5">Action Accuracy</h3>
-                        <p>Exact match accuracy for discrete action prediction.</p>
+                        <span class="icon is-medium metric-icon"><i class="fas fa-ban fa-lg"></i></span>
+                        <h3 class="title is-5">% Invalid Actions</h3>
+                        <p>Predictions outside the valid prediction space.</p>
                       </div>
                       <div class="flip-card-back-metric">
-                        <h3 class="title is-5">Action Accuracy</h3>
-                        <p style="font-size: 0.7rem;">Accuracy = (Correct Actions / Total Actions) × 100%</p>
-                        <p style="font-size: 0.65rem;">Percentage of timesteps where predicted action exactly matches ground truth action.</p>
+                        <h3 class="title is-5">% Invalid Actions</h3>
+                        <p>(Invalid predictions / Total predictions) * 100</p>
+                        <p style="font-size: 0.7rem;">Percentage of predictions falling outside the valid prediction space of a subdataset.</p>
                       </div>
                     </div>
                   </div>
@@ -1730,12 +1948,12 @@
                       <div class="flip-card-front-metric">
                         <span class="icon is-medium metric-icon"><i class="fas fa-bullseye fa-lg"></i></span>
                         <h3 class="title is-5">Micro Precision</h3>
-                        <p>Precision of the model across all timesteps.</p>
+                        <p>Precision of the model across all predictions.</p>
                       </div>
                       <div class="flip-card-back-metric">
                         <h3 class="title is-5">Micro Precision</h3>
                         <p>Micro Precision:<br>True Positives / (True Positives + False Positives)</p>
-                        <p style="font-size: 0.7rem;">Calculated globally across all timesteps.</p>
+                        <p style="font-size: 0.7rem;">Calculated globally across all predictions.</p>
                       </div>
                     </div>
                   </div>
@@ -1750,12 +1968,12 @@
                       <div class="flip-card-front-metric">
                         <span class="icon is-medium metric-icon"><i class="fas fa-search-plus fa-lg"></i></span>
                         <h3 class="title is-5">Micro Recall</h3>
-                        <p>Recall of the model across all timesteps.</p>
+                        <p>Recall of the model across all predictions.</p>
                       </div>
                       <div class="flip-card-back-metric">
                         <h3 class="title is-5">Micro Recall</h3>
                         <p>Micro Recall:<br>True Positives / (True Positives + False Negatives)</p>
-                        <p style="font-size: 0.7rem;">Calculated globally across all timesteps.</p>
+                        <p style="font-size: 0.7rem;">Calculated globally across all predictions.</p>
                       </div>
                     </div>
                   </div>
@@ -1857,11 +2075,11 @@
                       <div class="flip-card-front-metric">
                         <span class="icon is-medium metric-icon"><i class="fas fa-tag fa-lg"></i></span>
                         <h3 class="title is-5">Class-wise Precision</h3>
-                        <p>Precision for each action class.</p>
+                        <p>Precision for each class.</p>
                       </div>
                       <div class="flip-card-back-metric">
                         <h3 class="title is-5">Class-wise Precision</h3>
-                        <p style="font-size: 0.7rem;">Precision calculated individually for each action class. Helps understand bias towards specific classes.</p>
+                        <p style="font-size: 0.7rem;">Precision calculated individually for each class. Helps understand bias towards specific classes.</p>
                       </div>
                     </div>
                   </div>
@@ -1876,11 +2094,11 @@
                       <div class="flip-card-front-metric">
                         <span class="icon is-medium metric-icon"><i class="fas fa-tag fa-lg"></i></span>
                         <h3 class="title is-5">Class-wise Recall</h3>
-                        <p>Recall for each action class.</p>
+                        <p>Recall for each class.</p>
                       </div>
                       <div class="flip-card-back-metric">
                         <h3 class="title is-5">Class-wise Recall</h3>
-                        <p style="font-size: 0.7rem;">Recall calculated individually for each action class. Shows per-class identification performance.</p>
+                        <p style="font-size: 0.7rem;">Recall calculated individually for each class. Shows per-class identification performance.</p>
                       </div>
                     </div>
                   </div>
@@ -1895,17 +2113,186 @@
                       <div class="flip-card-front-metric">
                         <span class="icon is-medium metric-icon"><i class="fas fa-tag fa-lg"></i></span>
                         <h3 class="title is-5">Class-wise F1 Score</h3>
-                        <p>F1 for each action class.</p>
+                        <p>F1 for each class.</p>
                       </div>
                       <div class="flip-card-back-metric">
                         <h3 class="title is-5">Class-wise F1 Score</h3>
-                        <p style="font-size: 0.7rem;">F1 score calculated individually for each action class. Balanced per-class performance.</p>
+                        <p style="font-size: 0.7rem;">F1 score calculated individually for each class. Balanced per-class performance.</p>
                       </div>
                     </div>
                   </div>
                 </a>
               </div>
             </div>
+          </div>
+
+          <!-- Tab 5: Regression Metrics Content -->
+          <div class="tab-pane" data-content="5">
+            <div class="columns is-multiline is-centered">
+              <!-- Card 15: Action MSE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-robot fa-lg"></i></span>
+                        <h3 class="title is-5">MSE</h3>
+                        <p>Mean Squared Error for continuous action prediction.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Action MSE</h3>
+                        <p style="font-size: 0.7rem;">MSE = <sup>1</sup>&frasl;<sub>N</sub> &sum;<sub>t=1</sub><sup>N</sup> ||a<sub>pred</sub> - a<sub>gt</sub>||<sup>2</sup></p>
+                        <p style="font-size: 0.65rem;">Measures accuracy of continuous action predictions in robotics tasks. Lower values indicate better performance.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 16: Action MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-calculator fa-lg"></i></span>
+                        <h3 class="title is-5">Action MAE</h3>
+                        <p>Mean Absolute Error for continuous action prediction.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Action MAE</h3>
+                        <p style="font-size: 0.7rem;">MAE = <sup>1</sup>&frasl;<sub>N</sub> &sum;<sub>t=1</sub><sup>N</sup> |a<sub>pred</sub> - a<sub>gt</sub>|</p>
+                        <p style="font-size: 0.65rem;">Measures average absolute deviation between predicted and ground truth actions. More robust to outliers than MSE.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 17: Task Success Rate -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-check-circle fa-lg"></i></span>
+                        <h3 class="title is-5">Success Rate</h3>
+                        <p>Percentage of predictions that match exactly with the corresponding ground truth.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Success Rate</h3>
+                        <p style="font-size: 0.7rem;">Success Rate = (Successful Predictions / Total Predictions) × 100%</p>
+                        <p style="font-size: 0.65rem;">Measures the percentage of predictions that match exactly with ground truth according to task-specific success criteria.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 18: Normalized MSE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-ruler-combined fa-lg"></i></span>
+                        <h3 class="title is-5">Normalized MSE</h3>
+                        <p>Normalized version of Mean Squared Error.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Normalized MSE</h3>
+                        <p>Description:</p>
+                        <p style="font-size: 0.7rem;">Average of Mean Squared Errors that have been min-max normalized using the overall min and max MSE values across all timesteps.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 19: Normalized MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-ruler-combined fa-lg"></i></span>
+                        <h3 class="title is-5">Normalized MAE</h3>
+                        <p>Normalized version of Mean Absolute Error.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Normalized MAE</h3>
+                        <p>Description:</p>
+                        <p style="font-size: 0.7rem;">Average of Mean Absolute Errors that have been min-max normalized using the overall min and max MAE values across all timesteps.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 20: Norm. Quantile Filtered MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-filter fa-lg"></i></span>
+                        <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered MAE</h3>
+                        <p>Normalized MAE filtered by quantiles.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered MAE</h3>
+                        <p>Description:</p>
+                        <p style="font-size: 0.7rem;">MAE values are filtered (only considering the error values that are within the 5th to 95th percentile), and then normalized based on the quantile filtered min/max errors.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 21: Max Relative MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-mountain fa-lg"></i></span>
+                        <h3 class="title is-5">Max Relative MAE</h3>
+                        <p>Max relative error of MAE values.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Max Relative MAE</h3>
+                        <p>max(MAE) / median(MAE)</p>
+                        <p style="font-size: 0.7rem;">Quantifies how the worst-case MAE deviates from the typical (median) MAE for a given subdataset.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 6: Embedding Similarity Content -->
+          <div class="tab-pane" data-content="6">
+            <div class="columns is-multiline is-centered">
+              <!-- Card 19: Cosine Similarity -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-vector-square fa-lg"></i></span>
+                        <h3 class="title is-5">Cosine Similarity</h3>
+                        <p>Cosine similarity between predicted and ground truth text answer embeddings.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Cosine Similarity</h3>
+                        <p style="font-size: 0.7rem;">cos(θ) = (A · B) / (||A|| ||B||)</p>
+                        <p style="font-size: 0.65rem;">Measures the cosine of the angle between predicted and ground truth text answer embedding vectors. Values range from -1 to 1, with 1 indicating perfect alignment.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
           </div>
         </div> <!-- end tab-content-container -->
 
@@ -2379,6 +2766,46 @@
             collapseSidebar();
         }
     });
+  </script>
+
+  <script>
+    // Dataset Image Lightbox Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const lightbox = document.getElementById('imageLightbox');
+      const lightboxImg = document.getElementById('lightboxImage');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const datasetImages = document.querySelectorAll('.dataset-image');
+
+      // Add click event to all dataset images
+      datasetImages.forEach(img => {
+        img.addEventListener('click', function() {
+          lightbox.classList.add('active');
+          lightboxImg.src = this.src;
+          lightboxCaption.textContent = this.dataset.caption || this.alt;
+          document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+      });
+
+      // Close lightbox when clicking outside the image
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+          closeLightbox();
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+          closeLightbox();
+        }
+      });
+    });
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('imageLightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
   </script>
 </div>
 </body>
