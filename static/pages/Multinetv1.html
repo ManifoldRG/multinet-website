@@ -1460,9 +1460,7 @@
                 <div class="is-size-5 publication-authors">
                     <!-- Paper authors -->
                     <span class="author-block">
-                      <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank">Pranav Guruprasad</a><sup>*12</sup>,</span>
-                        <span class="author-block">
-                            <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>*12</sup>,</span>
+                      <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank">Pranav Guruprasad</a><sup>12</sup>,</span>
                         <span class="author-block">
                             <a href="https://www.linkedin.com/in/sudipta-chowdhury-3610a3303/" target="_blank">Sudipta Chowdhury</a><sup>12</sup>,</span>
                         <span class="author-block">
@@ -1474,6 +1472,8 @@
                         <span class="author-block">
                             <a href="https://www.linkedin.com/in/aryan-khurana-3a0761288/" target="_blank">Aryan Khurana</a><sup>1</sup>,</span>
                         <span class="author-block">
+                        <span class="author-block">
+                            <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>12</sup>,</span>
                         <a href="https://www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>123</sup>,</span>
                         </span>
                         <span class="author-block">
@@ -1482,7 +1482,6 @@
 
                         <div class="is-size-5 publication-authors">
                           <sup>1</sup> Manifold Research, <sup>2</sup> Metarch AI, <sup>3</sup> Georgia Tech, <sup>4</sup> MIT
-                          <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
                           <br>
                           <span class="author-block"><strong>Interested in evaluating your model on generalist multimodal datasets? Reach out <a href="mailto:pranav@metarch.ai"> here</a></strong></span>
                         </div>
@@ -1582,152 +1581,6 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Dataset Coverage</h2>
             <p>MultiNet v1 provides comprehensive evaluation across three major domains, encompassing over 10 diverse datasets that test different aspects of multimodal AI capabilities:</p>
-            
-            <div class="tabs is-centered is-boxed" style="margin-top: 2rem;">
-              <ul>
-                <li class="is-active" data-tab="robotics"><a><span>Robotics Domain</span></a></li>
-                <li data-tab="gameplay"><a><span>Gameplay Domain</span></a></li>
-                <li data-tab="multimodal"><a><span>Multimodal Reasoning</span></a></li>
-              </ul>
-              </div>
-
-            <div id="domain-content-container" style="margin-bottom: 2rem;">
-              <!-- Robotics Domain Content -->
-              <div class="tab-pane is-active" data-content="robotics">
-                <h4 class="title is-5 has-text-centered" style="margin-top: 1rem; color: #005A9C;">Open-X-Embodiment Robotics Datasets</h4>
-                <p>We evaluate models across 20+ diverse robotics manipulation datasets from the Open-X-Embodiment collection, covering various robotic platforms, manipulation tasks, and action spaces:</p>
-                
-                <div class="columns is-multiline" style="margin-top: 1rem;">
-                  <div class="column is-half">
-                    <div class="box">
-                      <h5 class="title is-6">Manipulation Tasks</h5>
-                      <ul>
-                        <li>Object grasping and placement</li>
-                        <li>Tool use and manipulation</li>
-                        <li>Multi-step assembly tasks</li>
-                        <li>Precise positioning and alignment</li>
-                      </ul>
-              </div>
-                  </div>
-                  <div class="column is-half">
-                    <div class="box">
-                      <h5 class="title is-6">Robotic Platforms</h5>
-                      <ul>
-                        <li>Robotic arms (various DOF)</li>
-                        <li>Mobile manipulation systems</li>
-                        <li>Humanoid robot platforms</li>
-                        <li>Specialized manipulation devices</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Gameplay Domain Content -->
-              <div class="tab-pane" data-content="gameplay">
-                <h4 class="title is-5 has-text-centered" style="margin-top: 1rem; color: #005A9C;">Procgen Gameplay Environments</h4>
-                <p>Evaluation across 16 procedurally generated game environments from the Procgen benchmark, testing visual reasoning, planning, and action selection in dynamic environments:</p>
-                
-                <div class="columns is-multiline" style="margin-top: 1rem;">
-                  <div class="column is-one-third">
-                    <div class="box">
-                      <h5 class="title is-6">Navigation & Exploration</h5>
-                      <ul>
-                        <li>Maze navigation</li>
-                        <li>Platform jumping</li>
-                        <li>Cave exploration</li>
-                        <li>Multi-level traversal</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="column is-one-third">
-                    <div class="box">
-                      <h5 class="title is-6">Combat & Strategy</h5>
-                      <ul>
-                        <li>Enemy avoidance</li>
-                        <li>Projectile dodging</li>
-                        <li>Strategic positioning</li>
-                        <li>Resource management</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="column is-one-third">
-                    <div class="box">
-                      <h5 class="title is-6">Collection & Puzzle</h5>
-                      <ul>
-                        <li>Item collection</li>
-                        <li>Key-door puzzles</li>
-                        <li>Sequence completion</li>
-                        <li>Goal-oriented tasks</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Multimodal Reasoning Content -->
-              <div class="tab-pane" data-content="multimodal">
-                <h4 class="title is-5 has-text-centered" style="margin-top: 1rem; color: #005A9C;">Multimodal Reasoning Tasks</h4>
-                <p>Comprehensive evaluation of vision-language understanding and reasoning capabilities across diverse multimodal benchmarks:</p>
-                
-                <div class="columns is-multiline" style="margin-top: 1rem;">
-                  <div class="column is-half">
-                    <div class="box">
-                      <h5 class="title is-6">Vision-Language Understanding</h5>
-                      <ul>
-                        <li>Image captioning and description</li>
-                        <li>Visual question answering</li>
-                        <li>Scene understanding</li>
-                        <li>Object recognition and localization</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="column is-half">
-                    <div class="box">
-                      <h5 class="title is-6">Reasoning & Planning</h5>
-                      <ul>
-                        <li>Multi-step reasoning</li>
-                        <li>Causal understanding</li>
-                        <li>Temporal reasoning</li>
-                        <li>Abstract concept learning</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="content has-text-centered" style="margin-top: 2rem;">
-              <h4 class="title is-5">Comprehensive Evaluation Summary</h4>
-              <div class="columns is-multiline">
-                <div class="column is-one-third">
-                  <div class="box has-text-centered">
-                    <span class="icon is-large has-text-primary">
-                      <i class="fas fa-robot fa-2x"></i>
-                    </span>
-                    <h5 class="title is-6">20+ Robotics Datasets</h5>
-                    <p>Open-X-Embodiment collection covering diverse manipulation tasks and robotic platforms</p>
-                  </div>
-                </div>
-                <div class="column is-one-third">
-                  <div class="box has-text-centered">
-                    <span class="icon is-large has-text-success">
-                      <i class="fas fa-gamepad fa-2x"></i>
-                    </span>
-                    <h5 class="title is-6">16 Gameplay Environments</h5>
-                    <p>Procgen procedurally generated environments testing visual reasoning and planning</p>
-                  </div>
-                </div>
-                <div class="column is-one-third">
-                  <div class="box has-text-centered">
-                    <span class="icon is-large has-text-info">
-                      <i class="fas fa-brain fa-2x"></i>
-                    </span>
-                    <h5 class="title is-6">15+ Reasoning Tasks</h5>
-                    <p>Multimodal benchmarks evaluating vision-language understanding and reasoning</p>
-                  </div>
-                </div>
-              </div>
               
               <p style="margin-top: 1rem;">
                 MultiNet v1 represents the most comprehensive evaluation of multimodal AI systems to date, spanning robotics manipulation, procedural gameplay, and multimodal reasoning tasks. Our unified evaluation framework enables fair comparison across different model architectures and provides insights into the strengths and limitations of current approaches. For detailed dataset specifications and evaluation protocols, please refer to our <a href="https://arxiv.org/abs/2505.05540" target="_blank">technical report</a>.
@@ -2072,76 +1925,6 @@
           <div class="content">
             <h2 class="title is-3 has-text-centered">Key Findings and Analysis</h2>
             <p>Our comprehensive evaluation across multiple domains reveals critical insights into the current state of multimodal AI systems. We identify significant performance variations across domains, with models showing distinct strengths and weaknesses depending on their architectural design and training paradigms. Key findings include:</p>
-            
-            <div class="columns is-multiline" style="margin-top: 1.5rem;">
-              <div class="column is-half">
-                <div class="box">
-                  <h4 class="title is-5" style="color: #005A9C;">🤖 Robotics Domain</h4>
-                  <ul>
-                    <li><strong>OpenVLA</strong> demonstrates superior performance on manipulation tasks due to specialized robotics training</li>
-                    <li><strong>GPT-4o</strong> shows strong reasoning but struggles with precise action prediction</li>
-                    <li><strong>JAT</strong> provides balanced performance across diverse robotic platforms</li>
-                    <li>Action space complexity significantly impacts model performance</li>
-                  </ul>
-                          </div>
-                        </div>
-              <div class="column is-half">
-                <div class="box">
-                  <h4 class="title is-5" style="color: #005A9C;">🎮 Gameplay Domain</h4>
-                  <ul>
-                    <li>All models struggle with long-horizon planning in procedural environments</li>
-                    <li>Visual complexity correlates strongly with performance degradation</li>
-                    <li>Action space constraints improve model reliability</li>
-                    <li>Prompt engineering has significant impact on VLM performance</li>
-                  </ul>
-                                </div>
-                              </div>
-                            </div>
-        
-            <div class="columns">
-              <div class="column">
-                <div class="box">
-                  <h4 class="title is-5" style="color: #005A9C;">🧠 Cross-Domain Analysis</h4>
-                  <ul>
-                    <li><strong>Domain Transfer:</strong> Limited generalization between robotics and gameplay domains</li>
-                    <li><strong>Architectural Impact:</strong> Transformer-based models show better adaptability than CNN-based approaches</li>
-                    <li><strong>Training Data Bias:</strong> Models exhibit strong bias toward their primary training domains</li>
-                    <li><strong>Scaling Effects:</strong> Larger models don't always translate to better cross-domain performance</li>
-                  </ul>
-                                </div>
-                              </div>
-                                </div>
-            <div class="content has-text-centered" style="margin-top: 2rem;">
-              <h4 class="title is-5">Performance Summary Across Domains</h4>
-              <div class="columns is-multiline">
-                <div class="column is-one-third">
-                  <div class="box">
-                    <h5 class="title is-6" style="color: #005A9C;">Best Overall Model</h5>
-                    <p><strong>OpenVLA</strong> for robotics tasks</p>
-                    <p><strong>GPT-4o</strong> for reasoning tasks</p>
-                    <p><strong>JAT</strong> for cross-domain consistency</p>
-                              </div>
-                            </div>
-                <div class="column is-one-third">
-                  <div class="box">
-                    <h5 class="title is-6" style="color: #005A9C;">Key Challenges</h5>
-                    <p>• Long-horizon planning</p>
-                    <p>• Cross-domain generalization</p>
-                    <p>• Action space adaptation</p>
-                    <p>• Visual complexity handling</p>
-                          </div>
-                        </div>
-                <div class="column is-one-third">
-                  <div class="box">
-                    <h5 class="title is-6" style="color: #005A9C;">Future Directions</h5>
-                    <p>• Unified training frameworks</p>
-                    <p>• Better action representations</p>
-                    <p>• Domain adaptation techniques</p>
-                    <p>• Hierarchical planning</p>
-                      </div>
-                    </div>
-                              </div>
-                          </div>
             <p>
               Our comprehensive analysis reveals that current multimodal AI systems exhibit significant domain-specific biases and limitations in cross-domain generalization. While specialized models like OpenVLA excel in their target domains (robotics), general-purpose models like GPT-4o demonstrate strong reasoning capabilities but struggle with precise action prediction. The GenESIS framework proves effective for model adaptation, but fundamental architectural improvements are needed for truly unified multimodal systems.
               
