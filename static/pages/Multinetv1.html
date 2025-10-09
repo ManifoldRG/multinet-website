@@ -1405,6 +1405,18 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.3) !important;
     }
 
+    /* Hover effect for standalone images (like release visual) */
+    .content .dataset-image:not(.dataset-coverage-table .dataset-image) {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .content .dataset-image:not(.dataset-coverage-table .dataset-image):hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3) !important;
+    }
+
     /* Lightbox modal styles */
     .image-lightbox {
       display: none;
@@ -1673,7 +1685,7 @@
       <div class="columns is-centered">
         <div class="column">
           <div class="content has-text-centered">
-            <img src="../images/Multinet v1 release visual transparent.png" alt="MultiNet v1 Release Visual" >
+            <img src="../images/Multinet v1 release visual transparent.png" alt="MultiNet v1 Release Visual" class="dataset-image" data-caption="MultiNet v1 - Comprehensive Benchmark for Vision-Language-Action Models" style="cursor: pointer; transition: all 0.3s ease; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
           </div>
           <p class="has-text-centered is-size-6 is-italic"> MultiNet v1 provides a comprehensive benchmark suite for evaluating state-of-the-art Vision-Language-Action models across diverse domains including robotics, gameplay, and multimodal tasks. </p>
         </div>
