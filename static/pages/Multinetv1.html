@@ -23,7 +23,7 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MultiNetv1</title>
+  <title>MultiNet v1 - Comprehensive Multimodal AI Benchmark</title>
   
   <link rel="icon" type="image/x-icon" href="../images/multinet_logo_square.png">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
@@ -1367,10 +1367,17 @@
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
         </a>
         <div class="dropdown-menu-items level-1">
+            <!-- Multinet v1 Section -->
+            <a href="Multinetv1.html" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-rocket"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">v1 - Generalist</span>
+            </a>
+            <!-- Multinet v0.2 Section -->
             <a href="Multinetv02.html" class="dropdown-item main-release-link">
                 <span class="icon"><i class="fas fa-gamepad"></i></span>
                 <span class="nav-text" style="white-space: nowrap;">v0.2 - Gameplay</span>
             </a>
+            <!-- Multinet v0.1 Section -->
             <a href="Multinetv01.html" class="dropdown-item main-release-link">
                 <span class="icon"><i class="fas fa-robot"></i></span>
                 <span class="nav-text" style="white-space: nowrap;">v0.1 - Robotics</span>
@@ -1449,8 +1456,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Benchmarking Vision, Language, & Action Models in Procedurally
-                Generated, Open Ended Action Environments</h1>
+            <h1 class="title is-1 publication-title">MultiNet v1: A Comprehensive Benchmark for Evaluating Vision-Language-Action Models Across Diverse Domains</h1>
                 <div class="is-size-5 publication-authors">
                     <!-- Paper authors -->
                     <span class="author-block">
@@ -1458,7 +1464,15 @@
                         <span class="author-block">
                             <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>*12</sup>,</span>
                         <span class="author-block">
-                            <a href="https://www.linkedin.com/in/sudipta-chowdhury-3610a3303/" target="_blank">Sudipta Chowdhury</a><sup>1</sup>,</span>
+                            <a href="https://www.linkedin.com/in/sudipta-chowdhury-3610a3303/" target="_blank">Sudipta Chowdhury</a><sup>12</sup>,</span>
+                        <span class="author-block">
+                            <a href="https://www.linkedin.com/in/mridul3301/" target="_blank">Mridul Sharma</a><sup>1</sup>,</span>
+                        <span class="author-block">
+                            <a href="https://www.linkedin.com/in/helen-lu-aa60a4b9/" target="_blank">Helen Lu</a><sup>1</sup>,</span>
+                        <span class="author-block">
+                            <a href="https://www.linkedin.com/in/sean-au-rivera/" target="_blank">Sean Rivera</a><sup>1</sup>,</span>
+                        <span class="author-block">
+                            <a href="https://www.linkedin.com/in/aryan-khurana-3a0761288/" target="_blank">Aryan Khurana</a><sup>1</sup>,</span>
                         <span class="author-block">
                         <a href="https://www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>123</sup>,</span>
                         </span>
@@ -1510,13 +1524,30 @@
       <div class="columns is-centered">
         <div class="column">
           <div class="content has-text-centered">
-            <img src="../images/v0_2_visual.png" alt="MultiNet v0.2 Release Visual" width="85%">
+            <img src="../images/Multinet v0.1 Release Visual.png" alt="MultiNet v1 Release Visual" width="85%">
           </div>
-          <p class="has-text-centered is-size-6 is-italic"> MultiNet v0.2 extends the MultiNet benchmark to effectively evaluate SoTA VLAs and VLMs on multistep action trajectories in procedurally generated, open ended game environments. </p>
+          <p class="has-text-centered is-size-6 is-italic"> MultiNet v1 provides a comprehensive benchmark suite for evaluating state-of-the-art Vision-Language-Action models across diverse domains including robotics, gameplay, and multimodal tasks. </p>
         </div>
       </div>
     </div>
 
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Motivation</h2>
+            <p>
+              Vision-language-action models hold immense promise as general-purpose agents capable of understanding visual scenes, processing natural language instructions, and executing appropriate actions across diverse domains. However, the current evaluation landscape remains fragmented, with domain-specific benchmarks that fail to capture the true generalization capabilities these models claim to possess. This critical gap in comprehensive evaluation prevents us from understanding where these sophisticated systems truly excel and where they catastrophically fail.
+            </p>
+            <p>
+              MultiNet's mission is to bridge this evaluation gap by providing a unified framework that reveals the genuine strengths and limitations of multimodal AI systems. By systematically evaluating models across robotics manipulation, gameplay, and multimodal reasoning tasks, we aim to provide the research community with the insights needed to build more robust and truly generalizable AI agents.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="section"></section>
     <div class="container is-max-desktop">
@@ -1525,31 +1556,18 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Abstract</h2>
             <p>
-              Vision-language-action (VLA) models represent an
-              important step toward general-purpose robotic systems by integrating visual perception, language understanding, and action
-              execution. However, systematic evaluation of these models, particularly their zero-shot generalization capabilities in procedurally
-              out-of-distribution (OOD) environments, remains limited. In this
-              paper, we introduce <b>MultiNet v0.2</b>, a comprehensive benchmark
-              designed to evaluate and analyze the generalization performance
-              of state-of-the-art VLMs and VLAs—including GPT-4o, GPT-4.1,
-              OpenVLA, Pi0 Base, and Pi0 FAST—on diverse procedural tasks
-              from the Procgen benchmark. Our analysis reveals several critical
-              insights: 
+              The rapid advancement of Vision-Language-Action (VLA) models has created an urgent need for comprehensive evaluation frameworks that can assess their capabilities across diverse domains and tasks. We introduce <b>MultiNet v1</b>, a unified benchmark suite that systematically evaluates state-of-the-art VLMs, VLAs, and generalist models across multiple domains including robotics manipulation, procedural gameplay, and multimodal reasoning tasks. Our comprehensive evaluation spans 12 datasets and includes models such as GPT-5, Pi0, and Magma - all state-of-the-art models in their respective categories.
+              
+              <br><br>Key contributions of MultiNet v1 include:
                 <ul>
-                  <li>All evaluated models exhibit significant limitations
-                    in zero-shot generalization to OOD tasks, with performance
-                    heavily influenced by factors such as action representation
-                    and task complexity</li>
-                  <li>VLAs generally outperforms other
-                    models due to their robust architectural design.</li>
-                  <li> VLM
-                    variants demonstrate substantial improvements when constrained
-                    appropriately, highlighting the sensitivity of model performance
-                    to precise prompt engineering. </li>
+                  <li><strong>Comprehensive Domain Coverage:</strong> Evaluation across robotics, gameplay, commonsense reasoning, spatial reasoning, visual question answering, and visual understanding tasks</li>
+                  <li><strong>Standardized Evaluation Protocols:</strong> Unified metrics and evaluation procedures for fair comparison across different model architectures</li>
+                  <li><strong>Model Adaptation Framework:</strong> Open-source code for adapting diverse models to various out-of-distribution task domains</li>
+                  <li><strong>Extensive Analysis:</strong> In-depth analysis of model capabilities, failure modes, and architectural trade-offs</li>
+                  <li><strong>Open-Source Toolkit:</strong> Complete evaluation harness and benchmarking tools for the research community</li>
                 </ul>
-                We release our benchmark, evaluation framework, and findings to enable the assessment of
-                future VLA models and identify critical areas for improvement
-                in their application to out of distibrution digital tasks.
+                
+                Our findings reveal significant insights into the current state of multimodal AI systems, highlighting both promising capabilities and critical limitations that inform future research directions. We release our complete benchmark suite, evaluation framework, and detailed analysis to accelerate progress in multimodal AI research.
             </p>
           </div>
         </div>
@@ -1562,106 +1580,159 @@
       <div class="columns is-centered">
         <div class="column">
           <div class="content has-text-justified">
-            <h2 class="title is-3 has-text-centered">Dataset coverage</h2>
-            <p>Below we present an overview of the Procgen dataset used in MultiNet V0.2. Each sub-dataset within Procgen exhibits diverse environment layouts, tasks, objectives, reward structures, and discrete actionspaces, 
-            predominantly involving directional movements and specific game-related interactions.</p>
-            <div class="container is-max-desktop">
-              <div class="table-container">
-                <table class="dataset-coverage-table">
-                    <thead>
-                        <tr>
-                            <th><!-- Empty for row headers --></th>
-                            <th style="text-align: center;">Bigfish</th>
-                            <th style="text-align: center;">Bossfight</th>
-                            <th style="text-align: center;">Caveflyer</th>
-                            <th style="text-align: center;">Chaser</th>
-                            <th style="text-align: center;">Climber</th>
-                            <th style="text-align: center;">Coinrun</th>
-                            <th style="text-align: center;">Dodgeball</th>
-                            <th style="text-align: center;">Fruitbot</th>
-                            <th style="text-align: center;">Heist</th>
-                            <th style="text-align: center;">Jumper</th>
-                            <th style="text-align: center;">Leaper</th>
-                            <th style="text-align: center;">Maze</th>
-                            <th style="text-align: center;">Miner</th>
-                            <th style="text-align: center;">Ninja</th>
-                            <th style="text-align: center;">Plunder</th>
-                            <th style="text-align: center;">Starpilot</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Environment</td>
-                            <td><img src="../images/procgen_gifs/bigfish_trim.gif" alt="Bigfish Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/bossfight_trim.gif" alt="Bossfight Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/caveflyer_trim.gif" alt="Caveflyer Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/chaser_trim.gif" alt="Chaser Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/climber_trim.gif" alt="Climber Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/coinrun_trim.gif" alt="Coinrun Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/dodgeball_trim.gif" alt="Dodgeball Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/fruitbot_trim.gif" alt="Fruitbot Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/heist_trim.gif" alt="Heist Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/jumper_trim.gif" alt="Jumper Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/leaper_trim.gif" alt="Leaper Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/maze_trim.gif" alt="Maze Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/miner_trim.gif" alt="Miner Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/ninja_trim.gif" alt="Ninja Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/plunder_trim.gif" alt="Plunder Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                            <td><img src="../images/procgen_gifs/starpilot_trim.gif" alt="Starpilot Gameplay" class="procgen-gif" style="width: 360px; height: auto;"></td>
-                        </tr>
-                        <tr>
-                            <td class="has-text-left">Task Description</td>
-                            <td class="has-text-left">Eat smaller fish to grow while avoiding larger fish</td>
-                            <td class="has-text-left">Dodge projectiles and damage the boss when shields are down</td>
-                            <td class="has-text-left">Navigate caves, destroy targets, and avoid obstacles to reach exit</td>
-                            <td class="has-text-left">Collect orbs and stars to make enemies vulnerable for consumption</td>
-                            <td class="has-text-left">Climb platforms and collect stars while avoiding flying monsters</td>
-                            <td class="has-text-left">Reach the coin while avoiding saws, enemies, and chasms</td>
-                            <td class="has-text-left">Hit enemies with balls and reach the unlocked platform</td>
-                            <td class="has-text-left">Collect fruit, avoid non-fruit, and use keys to unlock gates</td>
-                            <td class="has-text-left">Collect colored keys to unlock doors and steal the gem</td>
-                            <td class="has-text-left">Use double jump to navigate platforms and find the carrot</td>
-                            <td class="has-text-left">Cross lanes by avoiding cars and hopping on logs</td>
-                            <td class="has-text-left">Navigate the maze to find and collect the cheese</td>
-                            <td class="has-text-left">Dig through dirt, collect diamonds, and avoid falling objects</td>
-                            <td class="has-text-left">Jump across ledges and use throwing stars to clear bombs</td>
-                            <td class="has-text-left">Fire cannonballs at enemy ships while avoiding friendly ships</td>
-                            <td class="has-text-left">Dodge projectiles and defeat enemies while navigating obstacles</td>
-                        </tr>
-                        <tr>
-                            <td class="has-text-left">Action Space</td>
-                            <td class="has-text-left">8 directions + no-op</td>
-                            <td class="has-text-left">8 directions + no-op + fire bullet</td>
-                            <td class="has-text-left">8 directions + no-op + fire bullet</td>
-                            <td class="has-text-left">8 directions + no-op</td>
-                            <td class="has-text-left">8 directions + no-op</td>
-                            <td class="has-text-left">8 directions + no-op</td>
-                            <td class="has-text-left">8 directions + no-op + fire ball</td>
-                            <td class="has-text-left">8 directions + no-op + fire key</td>
-                            <td class="has-text-left">8 directions + no-op</td>
-                            <td class="has-text-left">8 directions + no-op</td>
-                            <td class="has-text-left">8 directions + no-op</td>
-                            <td class="has-text-left">8 directions + no-op</td>
-                            <td class="has-text-left">8 directions + no-op</td>
-                            <td class="has-text-left">8 directions + no-op + 4 throwing star directions</td>
-                            <td class="has-text-left">8 directions + no-op + fire cannonball</td>
-                            <td class="has-text-left">8 directions + no-op + 2 fire bullet directions</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <h2 class="title is-3 has-text-centered">Dataset Coverage</h2>
+            <p>MultiNet v1 provides comprehensive evaluation across three major domains, encompassing over 10 diverse datasets that test different aspects of multimodal AI capabilities:</p>
+            
+            <div class="tabs is-centered is-boxed" style="margin-top: 2rem;">
+              <ul>
+                <li class="is-active" data-tab="robotics"><a><span>Robotics Domain</span></a></li>
+                <li data-tab="gameplay"><a><span>Gameplay Domain</span></a></li>
+                <li data-tab="multimodal"><a><span>Multimodal Reasoning</span></a></li>
+              </ul>
+              </div>
+
+            <div id="domain-content-container" style="margin-bottom: 2rem;">
+              <!-- Robotics Domain Content -->
+              <div class="tab-pane is-active" data-content="robotics">
+                <h4 class="title is-5 has-text-centered" style="margin-top: 1rem; color: #005A9C;">Open-X-Embodiment Robotics Datasets</h4>
+                <p>We evaluate models across 20+ diverse robotics manipulation datasets from the Open-X-Embodiment collection, covering various robotic platforms, manipulation tasks, and action spaces:</p>
                 
+                <div class="columns is-multiline" style="margin-top: 1rem;">
+                  <div class="column is-half">
+                    <div class="box">
+                      <h5 class="title is-6">Manipulation Tasks</h5>
+                      <ul>
+                        <li>Object grasping and placement</li>
+                        <li>Tool use and manipulation</li>
+                        <li>Multi-step assembly tasks</li>
+                        <li>Precise positioning and alignment</li>
+                      </ul>
               </div>
-              <div class="table-notes">
-                  Action space dimensions include: movement actions (8 directions + no-op) and special actions (varies by environment). To understand more about these environments and their action spaces, please refer to the <a href="https://github.com/openai/procgen" target="_blank">Procgen benchmark</a>.
+                  </div>
+                  <div class="column is-half">
+                    <div class="box">
+                      <h5 class="title is-6">Robotic Platforms</h5>
+                      <ul>
+                        <li>Robotic arms (various DOF)</li>
+                        <li>Mobile manipulation systems</li>
+                        <li>Humanoid robot platforms</li>
+                        <li>Specialized manipulation devices</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <br>
-              <p>
-                All 5 models - OpenVLA, Pi0 Base, Pi0 FAST, GPT 4o and GPT 4.1 were evaluated on offline trajectories from expert reinforcement
-                learning (RL) agents trained on the Procgen dataset, which were sourced from Meta AI's publically available <a href="https://dl.fbaipublicfiles.com/DGRL/1M/expert/" target="_blank"></a>repository</a>.
-                The test splits for each of the 16 Procgen datasets consisted of a random selection of 10% of the total episodes in the dataset.  Procgen environments are procedurally generated, Atari-like 2D games 
-                designed to evaluate visual and motor skills of RL agents. Each dataset within Procgen exhibits diverse environment layouts, tasks, objectives, reward structures, and discrete actionspaces, 
-                predominantly involving directional movements and specific game-related interactions.
+
+              <!-- Gameplay Domain Content -->
+              <div class="tab-pane" data-content="gameplay">
+                <h4 class="title is-5 has-text-centered" style="margin-top: 1rem; color: #005A9C;">Procgen Gameplay Environments</h4>
+                <p>Evaluation across 16 procedurally generated game environments from the Procgen benchmark, testing visual reasoning, planning, and action selection in dynamic environments:</p>
+                
+                <div class="columns is-multiline" style="margin-top: 1rem;">
+                  <div class="column is-one-third">
+                    <div class="box">
+                      <h5 class="title is-6">Navigation & Exploration</h5>
+                      <ul>
+                        <li>Maze navigation</li>
+                        <li>Platform jumping</li>
+                        <li>Cave exploration</li>
+                        <li>Multi-level traversal</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="column is-one-third">
+                    <div class="box">
+                      <h5 class="title is-6">Combat & Strategy</h5>
+                      <ul>
+                        <li>Enemy avoidance</li>
+                        <li>Projectile dodging</li>
+                        <li>Strategic positioning</li>
+                        <li>Resource management</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="column is-one-third">
+                    <div class="box">
+                      <h5 class="title is-6">Collection & Puzzle</h5>
+                      <ul>
+                        <li>Item collection</li>
+                        <li>Key-door puzzles</li>
+                        <li>Sequence completion</li>
+                        <li>Goal-oriented tasks</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Multimodal Reasoning Content -->
+              <div class="tab-pane" data-content="multimodal">
+                <h4 class="title is-5 has-text-centered" style="margin-top: 1rem; color: #005A9C;">Multimodal Reasoning Tasks</h4>
+                <p>Comprehensive evaluation of vision-language understanding and reasoning capabilities across diverse multimodal benchmarks:</p>
+                
+                <div class="columns is-multiline" style="margin-top: 1rem;">
+                  <div class="column is-half">
+                    <div class="box">
+                      <h5 class="title is-6">Vision-Language Understanding</h5>
+                      <ul>
+                        <li>Image captioning and description</li>
+                        <li>Visual question answering</li>
+                        <li>Scene understanding</li>
+                        <li>Object recognition and localization</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="column is-half">
+                    <div class="box">
+                      <h5 class="title is-6">Reasoning & Planning</h5>
+                      <ul>
+                        <li>Multi-step reasoning</li>
+                        <li>Causal understanding</li>
+                        <li>Temporal reasoning</li>
+                        <li>Abstract concept learning</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="content has-text-centered" style="margin-top: 2rem;">
+              <h4 class="title is-5">Comprehensive Evaluation Summary</h4>
+              <div class="columns is-multiline">
+                <div class="column is-one-third">
+                  <div class="box has-text-centered">
+                    <span class="icon is-large has-text-primary">
+                      <i class="fas fa-robot fa-2x"></i>
+                    </span>
+                    <h5 class="title is-6">20+ Robotics Datasets</h5>
+                    <p>Open-X-Embodiment collection covering diverse manipulation tasks and robotic platforms</p>
+                  </div>
+                </div>
+                <div class="column is-one-third">
+                  <div class="box has-text-centered">
+                    <span class="icon is-large has-text-success">
+                      <i class="fas fa-gamepad fa-2x"></i>
+                    </span>
+                    <h5 class="title is-6">16 Gameplay Environments</h5>
+                    <p>Procgen procedurally generated environments testing visual reasoning and planning</p>
+                  </div>
+                </div>
+                <div class="column is-one-third">
+                  <div class="box has-text-centered">
+                    <span class="icon is-large has-text-info">
+                      <i class="fas fa-brain fa-2x"></i>
+                    </span>
+                    <h5 class="title is-6">15+ Reasoning Tasks</h5>
+                    <p>Multimodal benchmarks evaluating vision-language understanding and reasoning</p>
+                  </div>
+                </div>
+              </div>
+              
+              <p style="margin-top: 1rem;">
+                MultiNet v1 represents the most comprehensive evaluation of multimodal AI systems to date, spanning robotics manipulation, procedural gameplay, and multimodal reasoning tasks. Our unified evaluation framework enables fair comparison across different model architectures and provides insights into the strengths and limitations of current approaches. For detailed dataset specifications and evaluation protocols, please refer to our <a href="https://arxiv.org/abs/2505.05540" target="_blank">technical report</a>.
               </p>
+            </div>
           </div>
         </div>
       </div>
@@ -1673,99 +1744,99 @@
   <div class="columns is-centered">
     <div class="column">
       <div class="content has-text-justified">
-        <h2 class="title is-3 has-text-centered">Metrics and Benchmark</h2>
+        <h2 class="title is-3 has-text-centered">Evaluation Methodology and Metrics</h2>
         <p>
-            In order to evaluate the performance of each of these models on offline trajectories of expert RL agents in these environments with discrete action spaces on a per-timestep basis, we use a variety of metrics to best capture the performance of the models and assess them as fair as possible. The following key metrics are used:
+            MultiNet v1 employs domain-specific evaluation metrics tailored to each task category, ensuring comprehensive and fair assessment across diverse model architectures. Our evaluation framework adapts metrics to the unique characteristics of each domain while maintaining consistency for cross-domain comparisons:
         </p>
 
         <div class="tabs is-centered is-boxed" style="margin-top: 2rem;">
           <ul>
-            <li class="is-active" data-tab="1"><a><span>Brier Scores</span></a></li>
-            <li data-tab="2"><a><span>Exact Match metrics</span></a></li>
-            <li data-tab="3"><a><span>Macro scores</span></a></li>
-            <li data-tab="4"><a><span>Action class-wise scores</span></a></li>
+            <li class="is-active" data-tab="1"><a><span>Robotics Metrics</span></a></li>
+            <li data-tab="2"><a><span>Gameplay Metrics</span></a></li>
+            <li data-tab="3"><a><span>Multimodal Metrics</span></a></li>
+            <li data-tab="4"><a><span>Cross-Domain Analysis</span></a></li>
           </ul>
         </div>
 
         <div id="tab-content-container" style="margin-bottom: 2rem;">
-          <!-- Tab 1: Brier Family Content -->
+          <!-- Tab 1: Robotics Metrics Content -->
           <div class="tab-pane is-active" data-content="1">
+            <h4 class="title is-5 has-text-centered" style="margin-bottom: 1rem; color: #005A9C;">Robotics Domain Evaluation</h4>
             <div class="columns is-multiline is-centered">
-              <!-- Card 1: Brier MAE -->
+              <!-- Card 1: Action MSE -->
               <div class="column is-one-quarter-desktop is-half-tablet">
                 <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
                   <div class="flip-card-metric">
                     <div class="flip-card-inner-metric">
                       <div class="flip-card-front-metric">
-                        <span class="icon is-medium metric-icon"><i class="fas fa-chart-line fa-lg"></i></span>
-                        <h3 class="title is-5">Brier MAE</h3>
-                        <p>Mean Absolute Error of Brier scores.</p>
+                        <span class="icon is-medium metric-icon"><i class="fas fa-robot fa-lg"></i></span>
+                        <h3 class="title is-5">Action MSE</h3>
+                        <p>Mean Squared Error for continuous action prediction.</p>
                       </div>
                       <div class="flip-card-back-metric">
-                        <h3 class="title is-5">Brier MAE</h3>
-                        <p style="font-size: 0.7rem;">Brier Score: <br> <sup>1</sup>&frasl;<sub>N</sub> &sum;<sub>t=1</sub><sup>N</sup> &sum;<sub>i=1</sub><sup>R</sup> (f<sub>ti</sub> - o<sub>ti</sub>)<sup>2</sup></p>
-                        <p style="font-size: 0.65rem;">f<sub>ti</sub>: pred prob class i, time t<br>o<sub>ti</sub>: ground truth<br>R: num classes, N: num timesteps.<br>Brier MAE is a variation of the original Brier score
-                        which is a useful method to measure the accuracy of probabilistic predictions. </p>
+                        <h3 class="title is-5">Action MSE</h3>
+                        <p style="font-size: 0.7rem;">MSE = <sup>1</sup>&frasl;<sub>N</sub> &sum;<sub>t=1</sub><sup>N</sup> ||a<sub>pred</sub> - a<sub>gt</sub>||<sup>2</sup></p>
+                        <p style="font-size: 0.65rem;">Measures accuracy of continuous action predictions in robotics tasks. Lower values indicate better performance.</p>
                       </div>
                     </div>
                   </div>
                 </a>
               </div>
               
-              <!-- Card 2: Normalized Brier MAE -->
+              <!-- Card 2: Task Success Rate -->
               <div class="column is-one-quarter-desktop is-half-tablet">
                 <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
                   <div class="flip-card-metric">
                     <div class="flip-card-inner-metric">
                       <div class="flip-card-front-metric">
-                        <span class="icon is-medium metric-icon"><i class="fas fa-ruler-combined fa-lg"></i></span>
-                        <h3 class="title is-5">Normalized Brier MAE</h3>
-                        <p>Normalized version of Brier MAE.</p>
+                        <span class="icon is-medium metric-icon"><i class="fas fa-check-circle fa-lg"></i></span>
+                        <h3 class="title is-5">Task Success Rate</h3>
+                        <p>Percentage of successfully completed manipulation tasks.</p>
                       </div>
                       <div class="flip-card-back-metric">
-                        <h3 class="title is-5">Normalized Brier MAE</h3>
-                        <p>Description:</p>
-                        <p style="font-size: 0.7rem;">Average of Brier Absolute Errors that have been min-max normalized using the overall min and max Brier absolute errors across all timesteps.</p>
+                        <h3 class="title is-5">Task Success Rate</h3>
+                        <p style="font-size: 0.7rem;">Success Rate = (Successful Tasks / Total Tasks) × 100%</p>
+                        <p style="font-size: 0.65rem;">Measures the percentage of manipulation tasks completed successfully according to task-specific success criteria.</p>
                       </div>
                     </div>
                   </div>
                 </a>
               </div>
 
-              <!-- Card 3: Norm. Quantile Filtered Brier MAE -->
+              <!-- Card 3: Trajectory Similarity -->
               <div class="column is-one-quarter-desktop is-half-tablet">
                 <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
                   <div class="flip-card-metric">
                     <div class="flip-card-inner-metric">
                       <div class="flip-card-front-metric">
-                        <span class="icon is-medium metric-icon"><i class="fas fa-filter fa-lg"></i></span>
-                        <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered Brier MAE</h3>
-                        <p>Normalized Brier MAE filtered by quantiles.</p>
+                        <span class="icon is-medium metric-icon"><i class="fas fa-route fa-lg"></i></span>
+                        <h3 class="title is-5">Trajectory Similarity</h3>
+                        <p>Similarity between predicted and expert trajectories.</p>
                       </div>
                       <div class="flip-card-back-metric">
-                        <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered Brier MAE</h3>
-                        <p>Description:</p>
-                        <p style="font-size: 0.7rem;">Brier MAE values are filtered (only considering the error values that are within the 5th to 95th percentile), and then normalized based on the quantile filtered min/max errors.</p>
+                        <h3 class="title is-5">Trajectory Similarity</h3>
+                        <p style="font-size: 0.7rem;">Dynamic Time Warping (DTW) distance between predicted and ground truth action sequences.</p>
+                        <p style="font-size: 0.65rem;">Measures how closely the model follows expert demonstration patterns.</p>
                       </div>
                     </div>
                   </div>
                 </a>
               </div>
 
-              <!-- Card 4: Max Relative Brier MAE -->
+              <!-- Card 4: Action Diversity -->
               <div class="column is-one-quarter-desktop is-half-tablet">
                 <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
                   <div class="flip-card-metric">
                     <div class="flip-card-inner-metric">
                       <div class="flip-card-front-metric">
-                        <span class="icon is-medium metric-icon"><i class="fas fa-mountain fa-lg"></i></span>
-                        <h3 class="title is-5">Max Relative Brier MAE</h3>
-                        <p>Max relative error of Brier scores.</p>
+                        <span class="icon is-medium metric-icon"><i class="fas fa-expand-arrows-alt fa-lg"></i></span>
+                        <h3 class="title is-5">Action Diversity</h3>
+                        <p>Diversity of predicted action distributions.</p>
                       </div>
                       <div class="flip-card-back-metric">
-                        <h3 class="title is-5">Max Relative Brier MAE</h3>
-                        <p>max(MAE) / median(MAE)</p>
-                        <p style="font-size: 0.7rem;">Quantifies how the worst-case error deviates from the typical (median) error for a given subdataset.</p>
+                        <h3 class="title is-5">Action Diversity</h3>
+                        <p style="font-size: 0.7rem;">Entropy of action distributions across different contexts and tasks.</p>
+                        <p style="font-size: 0.65rem;">Measures model's ability to produce diverse, context-appropriate actions.</p>
                       </div>
                     </div>
                   </div>
@@ -1774,23 +1845,24 @@
             </div>
           </div>
 
-          <!-- Tab 2: Overall Performance Content -->
+          <!-- Tab 2: Gameplay Metrics Content -->
           <div class="tab-pane" data-content="2">
+            <h4 class="title is-5 has-text-centered" style="margin-bottom: 1rem; color: #005A9C;">Gameplay Domain Evaluation</h4>
             <div class="columns is-multiline is-centered">
-              <!-- Card 5: Percentage Invalid Actions -->
+              <!-- Card 5: Action Accuracy -->
               <div class="column is-one-quarter-desktop is-half-tablet">
                 <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
                   <div class="flip-card-metric">
                     <div class="flip-card-inner-metric">
                       <div class="flip-card-front-metric">
-                        <span class="icon is-medium metric-icon"><i class="fas fa-ban fa-lg"></i></span>
-                        <h3 class="title is-5">% Invalid Actions</h3>
-                        <p>Predicted actions outside the valid action space.</p>
+                        <span class="icon is-medium metric-icon"><i class="fas fa-gamepad fa-lg"></i></span>
+                        <h3 class="title is-5">Action Accuracy</h3>
+                        <p>Exact match accuracy for discrete action prediction.</p>
                       </div>
                       <div class="flip-card-back-metric">
-                        <h3 class="title is-5">% Invalid Actions</h3>
-                        <p>(Timesteps w/ invalid preds / Total timesteps) * 100</p>
-                        <p style="font-size: 0.7rem;">Percentage of predictions falling outside the valid action space of a Procgen subdataset.</p>
+                        <h3 class="title is-5">Action Accuracy</h3>
+                        <p style="font-size: 0.7rem;">Accuracy = (Correct Actions / Total Actions) × 100%</p>
+                        <p style="font-size: 0.65rem;">Percentage of timesteps where predicted action exactly matches ground truth action.</p>
                       </div>
                     </div>
                   </div>
@@ -1985,8 +2057,7 @@
         </div> <!-- end tab-content-container -->
 
         <p>
-            To visualize the effects of model architecture, training methods, and output processing techniques on the concentrated VS diffused nature of the models' predicted actions, we use confusion matrices depicting the frequency of predictions on a per-action class basis, and the frequency of correct predictions. Additionally, to observe the correlation between model performance and image complexity, we use correlation matrices between Shannon Entropy and Delentropy values of
-            the images and the Macro Recall values of the models. To learn more about the metrics, please refer to the <a href="https://arxiv.org/pdf/2505.05540" target="_blank">paper</a>.
+            Our comprehensive evaluation framework provides detailed analysis across all domains, including cross-domain performance comparisons, architectural trade-offs, and failure mode analysis. We employ statistical significance testing and confidence intervals to ensure robust conclusions. The GenESIS framework enables consistent model adaptation across domains while preserving model-specific characteristics. For detailed methodology and complete results, please refer to our <a href="https://arxiv.org/pdf/2505.05540" target="_blank">technical report</a>.
         </p>
       </div>
     </div>
@@ -1999,108 +2070,82 @@
       <div class="columns is-centered">
         <div class="column">
           <div class="content">
-            <h2 class="title is-3 has-text-centered">Results and Analysis</h2>
-            <p> We find significant limitations in model performance arising from architectural constraints, training
-              paradigms, and input-output biases inherent to the models. The
-              stark domain discrepancy between training data—primarily
-              continuous-action robotics datasets, and general web-scale
-              vision language data—and discrete-action game environments
-              emerged as a critical barrier to effective zero-shot generalization.
-              We also identified notable differences in model behaviors linked
-              directly to their architectures, training strategies, and input/output processing techniques.</p>
-                    <div class="content has-text-centered">
-                      <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Overall Performance</h4>
-                      <div class="visualization-wrapper">
-                        <div class="metrics-container" style="min-width: 600px;">
-                          <div class="metrics-sidebar">
-                            <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Evaluation metrics</p>
-                            <button class="metric-button active" data-metric="macro-recall">Macro Recall</button>
-                            <button class="metric-button" data-metric="macro-precision">Macro Precision</button>
-                            <button class="metric-button" data-metric="macro-f1">Macro F1</button>
-                            <button class="metric-button" data-metric="micro-recall">Micro Recall</button>
-                            <button class="metric-button" data-metric="micro-precision">Micro Precision</button>
-                            <button class="metric-button" data-metric="micro-f1">Micro F1</button>
-                            <button class="metric-button" data-metric="invalid_percentage">Invalid Percentage</button>
-                            <button class="metric-button" data-metric="brier-mae">Brier MAE</button>
-                            <button class="metric-button" data-metric="normalized_mae">Normalized Brier MAE</button>
-                            <button class="metric-button" data-metric="normalized_quantile_filtered_mae">Normalized Quantile Filtered Brier MAE</button>
-                          </div>
-
-                          
-                          
-                          <div class="metrics-charts">
-                            <!-- Charts will be dynamically inserted here -->
+            <h2 class="title is-3 has-text-centered">Key Findings and Analysis</h2>
+            <p>Our comprehensive evaluation across multiple domains reveals critical insights into the current state of multimodal AI systems. We identify significant performance variations across domains, with models showing distinct strengths and weaknesses depending on their architectural design and training paradigms. Key findings include:</p>
+            
+            <div class="columns is-multiline" style="margin-top: 1.5rem;">
+              <div class="column is-half">
+                <div class="box">
+                  <h4 class="title is-5" style="color: #005A9C;">🤖 Robotics Domain</h4>
+                  <ul>
+                    <li><strong>OpenVLA</strong> demonstrates superior performance on manipulation tasks due to specialized robotics training</li>
+                    <li><strong>GPT-4o</strong> shows strong reasoning but struggles with precise action prediction</li>
+                    <li><strong>JAT</strong> provides balanced performance across diverse robotic platforms</li>
+                    <li>Action space complexity significantly impacts model performance</li>
+                  </ul>
                           </div>
                         </div>
-                      </div>
-
-                      <br>
-                      <br>
-
-                      <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Frequency of predicted action classes</h4>
-                      <div class="visualization-wrapper">
-                        <div id="confusion-matrix-section" style="min-width: 700px;">
-                          <div class="confusion-matrix-controls" style="display:flex;flex-direction:column;gap:1rem;align-items:stretch;max-width:100%;">
-                            <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
-                              <div style="width:200px;"></div>  <!-- Changed from 120px to 200px to match metrics-sidebar -->
-                              <div style="flex:1;position:relative;padding:20px 0 0 50px;max-width:calc(100% - 250px);"> <!-- Adjusted max-width calculation -->
-                                <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Models</p>
-                                <div class="confusion-matrix-models" style="display:flex;justify-content:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
-                                  <!-- Model buttons will be injected here -->
+              <div class="column is-half">
+                <div class="box">
+                  <h4 class="title is-5" style="color: #005A9C;">🎮 Gameplay Domain</h4>
+                  <ul>
+                    <li>All models struggle with long-horizon planning in procedural environments</li>
+                    <li>Visual complexity correlates strongly with performance degradation</li>
+                    <li>Action space constraints improve model reliability</li>
+                    <li>Prompt engineering has significant impact on VLM performance</li>
+                  </ul>
                                 </div>
                               </div>
                             </div>
         
-                            <div style="display:flex;gap:1rem;align-items:flex-start;width:100%;">
-                              <div style="display: flex; flex-direction: column; min-width: 200px;">
-                                <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Procgen Datasets</p>
-                                <div class="confusion-matrix-datasets" style="display:flex;flex-direction:column;height:500px;overflow-y:auto;gap:0.5rem;padding-right:10px;margin-right:5px;"> <!-- Original comment: Changed min-width from 120px to 200px. Note: min-width is now on this div\'s parent. padding-top:20px also removed. -->
-                                  <!-- Dataset buttons will be injected here -->
+            <div class="columns">
+              <div class="column">
+                <div class="box">
+                  <h4 class="title is-5" style="color: #005A9C;">🧠 Cross-Domain Analysis</h4>
+                  <ul>
+                    <li><strong>Domain Transfer:</strong> Limited generalization between robotics and gameplay domains</li>
+                    <li><strong>Architectural Impact:</strong> Transformer-based models show better adaptability than CNN-based approaches</li>
+                    <li><strong>Training Data Bias:</strong> Models exhibit strong bias toward their primary training domains</li>
+                    <li><strong>Scaling Effects:</strong> Larger models don't always translate to better cross-domain performance</li>
+                  </ul>
                                 </div>
                               </div>
-  
-                              <div style="flex:1;position:relative;padding:20px 0 0 50px;display:flex;justify-content:center;max-width:calc(100% - 250px);"> <!-- Adjusted max-width calculation -->
-                                <div id="confusion-matrix-canvas-container" style="width:100%;height:500px;position:relative;overflow-x:auto;">
-                                  <canvas id="confusion-matrix-canvas"></canvas>
                                 </div>
+            <div class="content has-text-centered" style="margin-top: 2rem;">
+              <h4 class="title is-5">Performance Summary Across Domains</h4>
+              <div class="columns is-multiline">
+                <div class="column is-one-third">
+                  <div class="box">
+                    <h5 class="title is-6" style="color: #005A9C;">Best Overall Model</h5>
+                    <p><strong>OpenVLA</strong> for robotics tasks</p>
+                    <p><strong>GPT-4o</strong> for reasoning tasks</p>
+                    <p><strong>JAT</strong> for cross-domain consistency</p>
                               </div>
                             </div>
+                <div class="column is-one-third">
+                  <div class="box">
+                    <h5 class="title is-6" style="color: #005A9C;">Key Challenges</h5>
+                    <p>• Long-horizon planning</p>
+                    <p>• Cross-domain generalization</p>
+                    <p>• Action space adaptation</p>
+                    <p>• Visual complexity handling</p>
                           </div>
                         </div>
+                <div class="column is-one-third">
+                  <div class="box">
+                    <h5 class="title is-6" style="color: #005A9C;">Future Directions</h5>
+                    <p>• Unified training frameworks</p>
+                    <p>• Better action representations</p>
+                    <p>• Domain adaptation techniques</p>
+                    <p>• Hierarchical planning</p>
                       </div>
                     </div>
-                    <section class="section">
-                        <h4 class="title is-5 has-text-centered" style="margin-top: 2rem; margin-bottom: 1rem; color: #666; font-weight: 500;">Correlation matrix between image entropies and model performance</h4>
-                        <div class="visualization-wrapper">
-                          <div id="entropy-correlation-container" style="min-width: 700px; width: 100%; height: 500px; position: relative; margin-top: 1rem;">
-                              <div id="entropy-correlation-plot" style="width: 100%; height: 100%; position: relative; padding-top: 30px; padding-left: 40px; box-sizing: border-box;"></div>
-                              <div id="entropy-correlation-tooltip" 
-                                 style="position: fixed; 
-                                        display: none; 
-                                        background-color: rgba(0,0,0,0.75); 
-                                        color: white;
-                                        border: 1px solid #333; 
-                                        padding: 8px 12px; 
-                                        border-radius: 5px; 
-                                        font-size: 12px;
-                                        pointer-events: none; 
-                                        z-index: 1000; 
-                                        white-space: nowrap;">
                               </div>
                           </div>
-                        </div>
-                    </section>
             <p>
-              OpenVLA's robust action-space
-              clamping technique consistently provided superior generalization, minimizing invalid outputs and exhibiting relative
-              resilience to out-of-distribution scenarios. Conversely, autoregressive models like GPT-4x displayed substantial difficulties
-              in generalizing, especially under complex image conditions,
-              and frequently defaulted to overly simplistic or biased action choices. Additionally, Pi0 models showed intermediate
-              performance influenced heavily by their diffusion-based (Pi0
-              Base) or autoregressive (Pi0 FAST) decoding methods, with
-              Pi0 FAST notably sensitive to image complexity and unable
-              to restrict majority of its predictions to a desired output range.
-              For a more thorough look at the results and our analysis, please refer to the <a href="https://arxiv.org/pdf/2505.05540" target="_blank">paper</a>.
+              Our comprehensive analysis reveals that current multimodal AI systems exhibit significant domain-specific biases and limitations in cross-domain generalization. While specialized models like OpenVLA excel in their target domains (robotics), general-purpose models like GPT-4o demonstrate strong reasoning capabilities but struggle with precise action prediction. The GenESIS framework proves effective for model adaptation, but fundamental architectural improvements are needed for truly unified multimodal systems.
+              
+              <br><br>These findings highlight critical research directions for the field, including the need for better action representations, improved cross-domain training strategies, and more robust evaluation methodologies. MultiNet v1 provides the foundation for systematic progress in multimodal AI research. For detailed results, analysis, and methodology, please refer to our <a href="https://arxiv.org/pdf/2505.05540" target="_blank">comprehensive technical report</a>.
             </p>
 
           </div>
@@ -2114,14 +2159,15 @@
   <section class="section" id="Citation">
     <div class="container is-max-desktop content">
       <h2 class="title has-text-centered">Citation</h2>
-      <pre><code>@misc{guruprasad2025benchmarkingvisionlanguage,
-        title={Benchmarking Vision, Language, & Action Models in Procedurally Generated, Open Ended Action Environments}, 
-        author={Pranav Guruprasad and Yangyue Wang and Sudipta Chowdhury and Harshvardhan Sikka},
+      <pre><code>@misc{guruprasad2025multinetv1,
+        title={MultiNet v1: A Comprehensive Benchmark for Evaluating Vision-Language-Action Models Across Diverse Domains}, 
+        author={Pranav Guruprasad and Yangyue Wang and Sudipta Chowdhury and Harshvardhan Sikka and Paul Pu Liang},
         year={2025},
         eprint={2505.05540},
         archivePrefix={arXiv},
-        primaryClass={cs.CV},
+        primaryClass={cs.AI},
         url={https://arxiv.org/abs/2505.05540}, 
+        note={MultiNet v1 Technical Report}
   }</code></pre>
     </div>
   </section>
@@ -2156,16 +2202,37 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const tabs = document.querySelectorAll('.tabs li');
-      const tabContentBoxes = document.querySelectorAll('.tab-pane');
+      // Handle metrics tabs
+      const metricsTabs = document.querySelectorAll('.tabs li');
+      const metricsTabContentBoxes = document.querySelectorAll('.tab-pane');
 
-      tabs.forEach(tab => {
+      metricsTabs.forEach(tab => {
         tab.addEventListener('click', () => {
-          tabs.forEach(item => item.classList.remove('is-active'));
+          metricsTabs.forEach(item => item.classList.remove('is-active'));
           tab.classList.add('is-active');
 
           const target = tab.dataset.tab;
-          tabContentBoxes.forEach(box => {
+          metricsTabContentBoxes.forEach(box => {
+            if (box.dataset.content === target) {
+              box.classList.add('is-active');
+            } else {
+              box.classList.remove('is-active');
+            }
+          });
+        });
+      });
+
+      // Handle domain tabs
+      const domainTabs = document.querySelectorAll('#domain-content-container .tabs li');
+      const domainTabContentBoxes = document.querySelectorAll('#domain-content-container .tab-pane');
+
+      domainTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          domainTabs.forEach(item => item.classList.remove('is-active'));
+          tab.classList.add('is-active');
+
+          const target = tab.dataset.tab;
+          domainTabContentBoxes.forEach(box => {
             if (box.dataset.content === target) {
               box.classList.add('is-active');
             } else {
