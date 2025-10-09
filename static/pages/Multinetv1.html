@@ -1690,7 +1690,7 @@
               Vision-language-action models hold immense promise as general-purpose agents capable of understanding visual scenes, processing natural language instructions, and executing appropriate actions across diverse domains. However, the current evaluation landscape remains fragmented, with domain-specific benchmarks that fail to capture the true generalization capabilities these models claim to possess. This critical gap in comprehensive evaluation prevents us from understanding where these sophisticated systems truly excel and where they catastrophically fail.
             </p>
             <p>
-              MultiNet's mission is to bridge this evaluation gap by providing a unified framework that reveals the genuine strengths and limitations of multimodal AI systems. By systematically evaluating models across robotics manipulation, gameplay, and multimodal reasoning tasks, we aim to provide the research community with the insights needed to build more robust and truly generalizable AI agents.
+              MultiNet's mission is to bridge this evaluation gap by providing a unified framework that reveals the genuine strengths and limitations of multimodal AI systems. By systematically evaluating models across robotics manipulation, gameplay, and multimodal reasoning tasks, we aim to provide the research community with the insights needed to build more robust and truly generalizable AI systems.
             </p>
           </div>
         </div>
@@ -1705,7 +1705,7 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Abstract</h2>
             <p>
-              The rapid advancement of Vision-Language-Action (VLA) models has created an urgent need for comprehensive evaluation frameworks that can assess their capabilities across diverse domains and tasks. We introduce <b>MultiNet v1</b>, a unified benchmark suite that systematically evaluates state-of-the-art VLMs, VLAs, and generalist models across multiple domains including robotics manipulation, procedural gameplay, and multimodal reasoning tasks. Our comprehensive evaluation spans 12 datasets and includes models such as GPT-5, Pi0, and Magma - all state-of-the-art models in their respective categories.
+              The rapid advancement of Vision-Language-Action (VLA) models has created an urgent need for comprehensive evaluation frameworks that can assess their capabilities across diverse domains and tasks. We introduce <b>MultiNet v1</b>, a unified benchmark suite that systematically evaluates state-of-the-art VLMs, VLAs, and generalist models across multiple domains including robotics, multi-agent gameplay, and multimodal reasoning tasks. Our comprehensive evaluation spans 11 datasets and includes models such as GPT-5, Pi0, and Magma - all state-of-the-art models in their respective categories.
               
               <br><br>Key contributions of MultiNet v1 include:
                 <ul>
@@ -1758,30 +1758,21 @@
                         </tr>
                         <tr>
                             <td class="has-text-left">Description</td>
-                            <td class="has-text-left">Large-scale robotics dataset with diverse manipulation tasks across multiple robot embodiments and environments</td>
+                            <td class="has-text-left">Large-scale robotics dataset with diverse manipulation and locomotion tasks across multiple robot embodiments and environments</td>
                             <td class="has-text-left">Cooperative cooking simulation requiring coordination, planning, and multi-agent interaction in kitchen environments</td>
                             <td class="has-text-left">Physical interaction question answering dataset testing common-sense reasoning about object properties and interactions</td>
-                            <td class="has-text-left">Object detection dataset with diverse domains testing visual recognition across varied contexts and object categories</td>
+                            <td class="has-text-left">Object detection dataset with diverse domains testing visual recognition across varied contexts and object categories in the wild</td>
                             <td class="has-text-left">3D scene understanding dataset combining spatial reasoning with question answering in complex indoor environments</td>
-                            <td class="has-text-left">Berkeley function calling leaderboard dataset for evaluating multi-turn conversational function calling capabilities</td>
+                            <td class="has-text-left">Berkeley function calling dataset for evaluating multi-turn conversational function calling capabilities</td>
                         </tr>
                         <tr>
                             <td class="has-text-left">Domain</td>
-                            <td class="has-text-left">Robotics & Manipulation</td>
-                            <td class="has-text-left">Multi-Agent Coordination</td>
-                            <td class="has-text-left">Physical Reasoning</td>
-                            <td class="has-text-left">Computer Vision</td>
+                            <td class="has-text-left">Robotics</td>
+                            <td class="has-text-left">Gameplay</td>
+                            <td class="has-text-left">Physical Commonsense Reasoning</td>
+                            <td class="has-text-left">Object detection</td>
                             <td class="has-text-left">3D Spatial Reasoning</td>
                             <td class="has-text-left">Function Calling</td>
-                        </tr>
-                        <tr>
-                            <td class="has-text-left">Task Type</td>
-                            <td class="has-text-left">Vision-Language-Action</td>
-                            <td class="has-text-left">Sequential Decision Making</td>
-                            <td class="has-text-left">Multiple Choice QA</td>
-                            <td class="has-text-left">Object Detection</td>
-                            <td class="has-text-left">Visual Question Answering</td>
-                            <td class="has-text-left">Multi-turn Function Calling</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1791,7 +1782,7 @@
               </div>
               <br>
               <p>
-                MultiNet v1 represents the most comprehensive evaluation of multimodal AI systems to date, spanning robotics manipulation, procedural gameplay, and multimodal reasoning tasks. Our unified evaluation framework enables fair comparison across different model architectures and provides insights into the strengths and limitations of current approaches across these diverse domains.
+                MultiNet v1 represents the most comprehensive evaluation of multimodal AI systems to date, spanning robotics manipulation, multi-agent gameplay, and multimodal reasoning tasks. Our unified evaluation framework enables fair comparison across different model architectures and provides insights into the strengths and limitations of current approaches across these diverse domains.
               </p>
               <p style="text-align: center; font-style: italic; color: #666; margin-top: 1rem;">
                 💡 <strong>Tip:</strong> Hover over images to zoom, or click to view full-size in lightbox
@@ -2297,7 +2288,8 @@
         </div> <!-- end tab-content-container -->
 
         <p>
-            Our comprehensive evaluation framework provides detailed analysis across all domains, including cross-domain performance comparisons, architectural trade-offs, and failure mode analysis. We employ statistical significance testing and confidence intervals to ensure robust conclusions. The GenESIS framework enables consistent model adaptation across domains while preserving model-specific characteristics. For detailed methodology and complete results, please refer to our <a href="https://arxiv.org/pdf/2505.05540" target="_blank">technical report</a>.
+        <br><br>
+            Our comprehensive evaluation framework provides detailed analysis across all domains, including cross-domain performance comparisons, architectural trade-offs, and failure mode analysis. For detailed methodology and complete results, please refer to our <a href="https://arxiv.org/pdf/2505.05540" target="_blank">technical report</a>.
         </p>
       </div>
     </div>
