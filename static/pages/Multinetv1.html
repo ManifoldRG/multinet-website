@@ -1053,9 +1053,7 @@
   <!-- Add Chart.js before our custom script -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@4.1.0/dist/chartjs-chart-matrix.umd.min.js"></script>
-  <script src="../js/v0_2_table.js"></script>
-  <script src="../js/v0_2_confusion_matrix.js"></script>
-  <script src="../js/entropy_correlation_plot.js"></script>
+  <script src="../js/v1_metrics_plots.js"></script>
 
   <style>
     .metrics-container {
@@ -1063,9 +1061,14 @@
       grid-template-columns: 200px 1fr;
       gap: 2rem;
       margin: 2rem 0;
-      height: 500px; /* Fixed height for the container */
+      height: 500px; /* Fixed height for single-chart datasets */
       max-width: 100%; /* Ensure it doesn't overflow parent */
       box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+    
+    .metrics-container.expanded {
+      height: auto; /* Allow expansion for multi-chart datasets like ODinW */
+      min-height: 500px;
     }
 
     .metrics-sidebar {
@@ -1119,7 +1122,13 @@
       height: 100%;
       position: relative;
       overflow: hidden;
-      padding-left: 1rem; /* Add padding to prevent scrollbar overlap */
+      padding-left: 0; /* Remove padding to avoid horizontal scrollbar */
+    }
+    
+    .metrics-container.expanded .metrics-charts {
+      height: auto; /* Allow charts container to expand for ODinW */
+      min-height: 900px; /* Ensure enough space for both ODinW charts (2x400px + margins) */
+      overflow: hidden; /* Keep overflow hidden to avoid scrollbars */
     }
 
     .metric-chart {
@@ -1135,6 +1144,12 @@
       opacity: 1;
       pointer-events: auto;
       position: relative;
+    }
+    
+    /* ODinW charts need special handling for height */
+    .metric-chart[data-metric="odinw"].active {
+      height: auto;
+      min-height: 900px; /* Ensure enough space for both charts */
     }
 
     /* Add style for confusion matrix canvas container */
@@ -1602,7 +1617,7 @@
             MultiNet v1 employs domain-specific evaluation metrics tailored to each task category, ensuring comprehensive and fair assessment across diverse model architectures. Our evaluation framework adapts metrics to the unique characteristics of each domain while maintaining consistency for cross-domain comparisons:
         </p>
 
-        <div class="tabs is-centered is-boxed" style="margin-top: 2rem;">
+        <div class="tabs is-centered is-boxed" id="metrics-tabs" style="margin-top: 2rem;">
           <ul>
             <li class="is-active" data-tab="1"><a><span>Robotics Metrics</span></a></li>
             <li data-tab="2"><a><span>Gameplay Metrics</span></a></li>
@@ -1922,6 +1937,212 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Results</h2>
+            <p>
+              Our comprehensive evaluation across diverse domains reveals significant insights into model performance and capabilities. Below we present detailed results for key benchmark datasets.
+            </p>
+            
+            <div class="visualization-wrapper" style="margin-top: 1rem;">
+              <!-- Dataset Dropdown -->
+              <div class="field" style="margin-bottom: 1.5rem;">
+                <label class="label">Select Dataset</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select id="dataset-selector">
+                      <option value="piqa" selected>PIQA</option>
+                      <option value="sqa3d">SQA3D</option>
+                      <option value="overcooked">Overcooked</option>
+                      <option value="robotvqa">Robot VQA</option>
+                      <option value="odinw">ODinW</option>
+                      <option value="bfclv3">BFCLv3</option>
+                      <option value="openx">OpenX</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Metrics Container with Sidebar -->
+              <div class="metrics-container" style="min-width: 600px; height: auto;">
+                <div class="metrics-sidebar" id="eval-metrics-sidebar">
+                  <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Evaluation Metrics</p>
+                  <button class="metric-button active" data-eval-metric="exact_match">Exact Match Rate</button>
+                </div>
+
+                <!-- Charts Container -->
+                <div class="metrics-charts" style="position:relative; height: 500px;">
+                  <!-- PIQA Exact Match -->
+                  <div class="metric-chart active" data-metric="piqa" data-eval-metric="exact_match" style="position:relative; height: 100%;">
+                    <canvas id="piqa-exact-match-chart"></canvas>
+                  </div>
+                  
+                  <!-- PIQA Invalid Percentage -->
+                  <div class="metric-chart" data-metric="piqa" data-eval-metric="invalid_percentage" style="position:relative; height: 100%;">
+                    <canvas id="piqa-invalid-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- SQA3D Exact Match -->
+                  <div class="metric-chart" data-metric="sqa3d" data-eval-metric="exact_match" style="position:relative; height: 100%;">
+                    <canvas id="sqa3d-exact-match-chart"></canvas>
+                  </div>
+                  
+                  <!-- SQA3D Average Similarity Score -->
+                  <div class="metric-chart" data-metric="sqa3d" data-eval-metric="avg_similarity_score" style="position:relative; height: 100%;">
+                    <canvas id="sqa3d-avg-similarity-score-chart"></canvas>
+                  </div>
+                  
+                  <!-- SQA3D High Similarity Percentage -->
+                  <div class="metric-chart" data-metric="sqa3d" data-eval-metric="high_similarity_percentage" style="position:relative; height: 100%;">
+                    <canvas id="sqa3d-high-similarity-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- Overcooked Exact Match -->
+                  <div class="metric-chart" data-metric="overcooked" data-eval-metric="exact_match" style="position:relative; height: 100%;">
+                    <canvas id="overcooked-exact-match-chart"></canvas>
+                  </div>
+                  
+                  <!-- Overcooked Macro Precision -->
+                  <div class="metric-chart" data-metric="overcooked" data-eval-metric="macro_precision" style="position:relative; height: 100%;">
+                    <canvas id="overcooked-macro-precision-chart"></canvas>
+                  </div>
+                  
+                  <!-- Overcooked Macro Recall -->
+                  <div class="metric-chart" data-metric="overcooked" data-eval-metric="macro_recall" style="position:relative; height: 100%;">
+                    <canvas id="overcooked-macro-recall-chart"></canvas>
+                  </div>
+                  
+                  <!-- Overcooked Macro F1 -->
+                  <div class="metric-chart" data-metric="overcooked" data-eval-metric="macro_f1" style="position:relative; height: 100%;">
+                    <canvas id="overcooked-macro-f1-chart"></canvas>
+                  </div>
+                  
+                  <!-- Overcooked Percentage Invalids -->
+                  <div class="metric-chart" data-metric="overcooked" data-eval-metric="percentage_invalids" style="position:relative; height: 100%;">
+                    <canvas id="overcooked-percentage-invalids-chart"></canvas>
+                  </div>
+                  
+                  <!-- Robot VQA Exact Match -->
+                  <div class="metric-chart" data-metric="robotvqa" data-eval-metric="exact_match" style="position:relative; height: 100%;">
+                    <canvas id="robotvqa-exact-match-chart"></canvas>
+                  </div>
+                  
+                  <!-- Robot VQA Average Similarity Score -->
+                  <div class="metric-chart" data-metric="robotvqa" data-eval-metric="avg_similarity_score" style="position:relative; height: 100%;">
+                    <canvas id="robotvqa-avg-similarity-score-chart"></canvas>
+                  </div>
+                  
+                  <!-- Robot VQA High Similarity Percentage -->
+                  <div class="metric-chart" data-metric="robotvqa" data-eval-metric="high_similarity_percentage" style="position:relative; height: 100%;">
+                    <canvas id="robotvqa-high-similarity-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- ODinW Exact Match (Both Parts in One Tab) -->
+                  <div class="metric-chart" data-metric="odinw" data-eval-metric="exact_match" style="position:relative;">
+                    <div style="position: relative; height: 400px; margin-bottom: 2rem; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-exact-match-part1-chart"></canvas>
+                    </div>
+                    <div style="position: relative; height: 400px; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-exact-match-part2-chart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <!-- ODinW Macro Precision (Both Parts in One Tab) -->
+                  <div class="metric-chart" data-metric="odinw" data-eval-metric="macro_precision" style="position:relative;">
+                    <div style="position: relative; height: 400px; margin-bottom: 2rem; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-macro-precision-part1-chart"></canvas>
+                    </div>
+                    <div style="position: relative; height: 400px; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-macro-precision-part2-chart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <!-- ODinW Macro Recall (Both Parts in One Tab) -->
+                  <div class="metric-chart" data-metric="odinw" data-eval-metric="macro_recall" style="position:relative;">
+                    <div style="position: relative; height: 400px; margin-bottom: 2rem; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-macro-recall-part1-chart"></canvas>
+                    </div>
+                    <div style="position: relative; height: 400px; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-macro-recall-part2-chart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <!-- ODinW Macro F1 (Both Parts in One Tab) -->
+                  <div class="metric-chart" data-metric="odinw" data-eval-metric="macro_f1" style="position:relative;">
+                    <div style="position: relative; height: 400px; margin-bottom: 2rem; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-macro-f1-part1-chart"></canvas>
+                    </div>
+                    <div style="position: relative; height: 400px; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-macro-f1-part2-chart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <!-- ODinW Invalid Percentage (Both Parts in One Tab) -->
+                  <div class="metric-chart" data-metric="odinw" data-eval-metric="invalid_percentage" style="position:relative;">
+                    <div style="position: relative; height: 400px; margin-bottom: 2rem; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-invalid-percentage-part1-chart"></canvas>
+                    </div>
+                    <div style="position: relative; height: 400px; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-invalid-percentage-part2-chart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <!-- BFCLv3 Invalid Turn Percentage -->
+                  <div class="metric-chart" data-metric="bfclv3" data-eval-metric="invalid_turn_percentage" style="position:relative; height: 100%;">
+                    <canvas id="bfclv3-invalid-turn-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- BFCLv3 Invalid Conversation Percentage -->
+                  <div class="metric-chart" data-metric="bfclv3" data-eval-metric="invalid_conversation_percentage" style="position:relative; height: 100%;">
+                    <canvas id="bfclv3-invalid-conversation-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- BFCLv3 Avg Valid Predicted Functions per Sample -->
+                  <div class="metric-chart" data-metric="bfclv3" data-eval-metric="avg_valid_predicted_functions_per_sample" style="position:relative; height: 100%;">
+                    <canvas id="bfclv3-avg-valid-predicted-functions-per-sample-chart"></canvas>
+                  </div>
+                  
+                  <!-- BFCLv3 High Quality Predictions -->
+                  <div class="metric-chart" data-metric="bfclv3" data-eval-metric="high_similarity_percentage" style="position:relative; height: 100%;">
+                    <canvas id="bfclv3-high-similarity-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- OpenX Action Success Rate -->
+                  <div class="metric-chart" data-metric="openx" data-eval-metric="action_success_rate" style="position:relative; height: 100%;">
+                    <canvas id="openx-action-success-rate-chart"></canvas>
+                  </div>
+                  
+                  <!-- OpenX Invalid Predictions Percentage -->
+                  <div class="metric-chart" data-metric="openx" data-eval-metric="invalid_predictions_percentage" style="position:relative; height: 100%;">
+                    <canvas id="openx-invalid-predictions-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- OpenX Total AMAE -->
+                  <div class="metric-chart" data-metric="openx" data-eval-metric="total_dataset_amae" style="position:relative; height: 100%;">
+                    <canvas id="openx-mean-absolute-error-chart"></canvas>
+                  </div>
+                  
+                  <!-- OpenX Normalized AMAE -->
+                  <div class="metric-chart" data-metric="openx" data-eval-metric="normalized_amae" style="position:relative; height: 100%;">
+                    <canvas id="openx-normalized-mae-chart"></canvas>
+                  </div>
+                  
+                  <!-- OpenX Normalized Quantile Filtered AMAE -->
+                  <div class="metric-chart" data-metric="openx" data-eval-metric="normalized_quantile_filtered_amae" style="position:relative; height: 100%;">
+                    <canvas id="openx-normalized-quantile-filtered-mae-chart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
           <div class="content">
             <h2 class="title is-3 has-text-centered">Key Findings and Analysis</h2>
             <p>Our comprehensive evaluation across multiple domains reveals critical insights into the current state of multimodal AI systems. We identify significant performance variations across domains, with models showing distinct strengths and weaknesses depending on their architectural design and training paradigms. Key findings include:</p>
@@ -1985,9 +2206,9 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Handle metrics tabs
-      const metricsTabs = document.querySelectorAll('.tabs li');
-      const metricsTabContentBoxes = document.querySelectorAll('.tab-pane');
+      // Handle metrics tabs (scoped to Evaluation Methodology section only)
+      const metricsTabs = document.querySelectorAll('#metrics-tabs li');
+      const metricsTabContentBoxes = document.querySelectorAll('#tab-content-container .tab-pane');
 
       metricsTabs.forEach(tab => {
         tab.addEventListener('click', () => {

@@ -1,0 +1,32 @@
+{
+    "gpt5": {
+        "exact_match_rate": [0.28],
+        "avg_similarity_score": [0.6672518711630255],
+        "max_similarity_score": [1.000000238418579],
+        "min_similarity_score": [-0.03610865771770477],
+        "similarity_std": [0.2798538015521157],
+        "high_similarity_percentage": [33.75],
+        "high_similarity_threshold": [0.8],
+        "percentage_invalids": [0.0]
+    },
+    "pi0": {
+        "exact_match_rate": [0.0],
+        "avg_similarity_score": [0.14615221079438925],
+        "max_similarity_score": [0.29521429538726807],
+        "min_similarity_score": [-0.033969566226005554],
+        "similarity_std": [0.052130618890949776],
+        "high_similarity_percentage": [0.0],
+        "high_similarity_threshold": [0.8],
+        "percentage_invalids": [0.0]
+    },
+    "magma": {
+        "exact_match_rate": [0.0825],
+        "avg_similarity_score": [0.36879913062322883],
+        "max_similarity_score": [1.0],
+        "min_similarity_score": [-0.07797218859195709],
+        "similarity_std": [0.28863293853192984],
+        "high_similarity_percentage": [0.105],
+        "high_similarity_threshold": [0.8],
+        "percentage_invalids": [0.0]
+    }
+}
