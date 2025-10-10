@@ -1,0 +1,36 @@
+{
+    "gpt5": {
+        "invalid_percentage": [0.0],
+        "exact_match_rate": [0.4763688760806916],
+        "total_predictions": [3470],
+        "invalid_predictions": [0],
+        "avg_similarity_score": [0.752820906032317],
+        "max_similarity_score": [1.000000238418579],
+        "min_similarity_score": [0.060819581151008606],
+        "similarity_std": [0.27563740068336434],
+        "high_similarity_percentage": [50.92219020172911],
+        "high_similarity_threshold": [0.8]
+    },
+    "pi0": {
+        "exact_match_rate": [0.0],
+        "total_predictions": [3470],
+        "invalid_predictions": [0],
+        "avg_similarity_score": [0.15534939240980947],
+        "max_similarity_score": [0.32622796297073364],
+        "min_similarity_score": [-0.01681661419570446],
+        "similarity_std": [0.05069097818966013],
+        "high_similarity_percentage": [0.0],
+        "high_similarity_threshold": [0.8]
+    },
+    "magma": {
+        "exact_match_rate": [0.3446685878962536],
+        "total_predictions": [3470],
+        "invalid_predictions": [0],
+        "avg_similarity_score": [0.6668919678444649],
+        "max_similarity_score": [1.000000238418579],
+        "min_similarity_score": [0.01858588680624962],
+        "similarity_std": [0.2855873691555019],
+        "high_similarity_percentage": [0.3631123919308357],
+        "high_similarity_threshold": [0.8]
+    }
+}

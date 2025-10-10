@@ -1,0 +1,26 @@
+{
+    "gpt5": {
+        "invalid_percentage": [0.0931098696461825],
+        "exact_match_rate": [0.9577508543025784],
+        "exact_match_rate_with_invalids": [0.9568590937306021],
+        "total_predictions": [3222],
+        "valid_predictions": [3219],
+        "invalid_predictions": [3]
+    },
+    "pi0": {
+        "invalid_percentage": [100.0],
+        "exact_match_rate": [0.0],
+        "exact_match_rate_with_invalids": [0.0],
+        "total_predictions": [3222],
+        "valid_predictions": [0],
+        "invalid_predictions": [3222]
+    },
+    "magma": {
+        "invalid_percentage": [0.031036623215394164],
+        "exact_match_rate": [0.6945048121701335],
+        "exact_match_rate_with_invalids": [0.6942892613283674],
+        "total_predictions": [3222],
+        "valid_predictions": [3221],
+        "invalid_predictions": [1]
+    }
+}
