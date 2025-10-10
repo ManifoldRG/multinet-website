@@ -2533,13 +2533,81 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Key Findings and Analysis</h2>
             <p>
-              MultiNet v1.0 reveals catastrophic failure at the boundaries of vision-language-action models. No current model achieves true cross-domain generalization — Pi0 performance drops to 0% on basic vision-language tasks after fine-tuning, while GPT-5 achieves <1% success on certain continuous control tasks despite strong VL capabilities. Fine-tuning for robotics seems to systematically corrupt language models (Pi0's repetitive "increa" token spam from corrupted end-of-sequence markers), Magma - the generalist model produces co-ordinates instead of text answers, and prompt engineering provides only marginal gains (~20% improvement) that cannot bridge fundamental architectural incompatibilities. These results demonstrate that current training paradigms create overspecialized models with incompatible domain-specific biases, requiring fundamental rethinking of modular architectures and progressive training strategies for truly unified multimodal systems. For detailed results, analysis, and methodology, please refer to our <a href="https://arxiv.org/pdf/2505.05540" target="_blank">comprehensive technical report</a>.
+              MultiNet v1.0 reveals catastrophic failure at the boundaries of vision-language-action models. No current model achieves true cross-domain generalization — Pi0 performance drops to 0% on basic vision-language tasks after fine-tuning, while GPT-5 achieves <1% success on certain continuous control tasks despite strong VL capabilities. Fine-tuning for robotics seems to systematically corrupt language models (Pi0's repetitive "increa" token spam). Magma - the generalist model produces co-ordinates instead of text answers. Prompt engineering provides only marginal gains (~20% improvement) that cannot bridge fundamental architectural incompatibilities. These results demonstrate that current training paradigms create overspecialized models with incompatible domain-specific biases, requiring fundamental rethinking of modular architectures and progressive training strategies for truly unified multimodal systems. For detailed results, analysis, and methodology, please refer to our <a href="https://arxiv.org/pdf/2505.05540" target="_blank">comprehensive technical report</a>.
             </p>
 
           </div>
         </div>
 
 
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered"> 
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Looking Forward</h2>
+            
+            <h3 class="title is-4 has-text-centered">Immediate Next Research Directions</h3>
+            <p>
+              Building on MultiNet v1.0's findings of catastrophic failure at domain boundaries, our immediate research priorities focus on understanding and mitigating the fundamental limitations of current vision-language-action models. These investigations target the core mechanisms behind knowledge degradation, architectural incompatibilities, and the emergence of failure modes that prevent true cross-domain generalization.
+            </p>
+
+              <h4 class="title is-5 has-text-centered">Investigating the Gibberish Outputs of VLAs</h4>
+            <ul>
+              <li><strong>Token degradation analysis:</strong> Examine how fine-tuning on action sequences corrupts language generation pathways, particularly the emergence of repetitive tokens like Pi0's "increa" spam</li>
+              <li><strong>Mitigation strategies:</strong> Develop strategies to mitigate the degradation of language generation pathways despite end-to-end fine-tuning on entirely new data distributions</li>
+            </ul>
+
+              <h4 class="title is-5 has-text-centered">Investigating SoM/ToM Outputs of Magma</h4>
+            <ul>
+              <li><strong>Cross-distribution generalization:</strong> Analyze how Magma's SoM/ToM capabilities emerge from training on completely different data distributions than the evaluation tasks</li>
+              <li><strong>Coordinate-text mapping errors:</strong> Investigate why Magma produces spatial coordinates instead of natural language responses, revealing fundamental misalignment in output modalities</li>
+            </ul>
+
+            <h4 class="title is-5 has-text-centered">Pi0.5 - SoTA Knowledge-Insulated VLA Performance on v1</h4>
+            <ul>
+              <li><strong>Architectural improvements:</strong> Evaluate next-generation knowledge insulation techniques in Pi0.5 against MultiNet v1's comprehensive benchmark suite</li>
+              <li><strong>Domain transfer efficiency:</strong> Measure how effectively Pi0.5 maintains performance across vision-language tasks while adapting to robotic control</li>
+              <li><strong>Failure mode comparison:</strong> Contrast Pi0.5's failure patterns with current models to validate architectural advances in preventing catastrophic forgetting</li>
+            </ul>
+
+             <h4 class="title is-5 has-text-centered">Knowledge Insulation Testing and Experiments</h4>
+            <ul>
+              <li><strong>Modular architecture evaluation:</strong> Test compartmentalized model designs that isolate domain-specific knowledge while maintaining shared representations for common reasoning tasks</li>
+              <li><strong>Progressive fine-tuning protocols:</strong> Investigate learning approaches that gradually introduce new domains without corrupting existing capabilities</li>
+            </ul>
+
+            <h3 class="title is-4 has-text-centered">Long-term Goals</h3>
+            <p>
+              Our long-term vision extends beyond addressing current limitations to fundamentally reimagining how we evaluate, understand, and build multimodal action models. These goals represent paradigm shifts toward more robust, adaptive, and truly general AI systems that can seamlessly operate across diverse domains while maintaining coherent reasoning capabilities.
+            </p>
+
+            <h4 class="title is-5 has-text-centered">Live Benchmarks</h4>
+            <ul>
+              <li><strong>Dynamic evaluation frameworks:</strong> Develop continuously updating benchmarks that adapt to model capabilities, preventing overfitting to static test sets</li>
+              <li><strong>Real-time performance monitoring:</strong> Create systems for ongoing assessment of deployed VLAs across diverse real-world scenarios</li>
+              <li><strong>Community-driven evaluation:</strong> Build platforms for researchers to contribute new tasks and domains, ensuring benchmark relevance as the field evolves</li>
+            </ul>
+
+            <h4 class="title is-5 has-text-centered">World Models as Evaluators</h4>
+            <ul>
+              <li><strong>Causal reasoning assessment:</strong> Build and leverage world models to evaluate whether VLAs understand causal relationships rather than just statistical correlations</li>
+              <li><strong>Counterfactual analysis:</strong> Deploy world models to test VLA robustness through systematic perturbation of environmental conditions and task parameters</li>
+            </ul>
+
+            <h4 class="title is-5 has-text-centered">Building the Next Generation of Multimodal Action Models</h4>
+            <ul>
+              <li><strong>Unified architecture design:</strong> Develop foundational architectures that natively support multiple modalities without domain-specific fine-tuning degradation</li>
+              <li><strong>Compositional reasoning systems:</strong> Create models that can decompose complex tasks into modular components, enabling flexible recombination across domains</li>
+              <li><strong>Meta-learning for rapid adaptation:</strong> Build systems that can quickly acquire new capabilities while preserving existing knowledge, moving beyond current catastrophic forgetting limitations</li>
+            </ul>
+
+          </div>
+        </div>
       </div>
     </div>
   </section>
