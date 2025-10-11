@@ -329,6 +329,24 @@
     .tab-pane.is-active {
       display: block; /* Show only the active tab pane */
     }
+    
+    /* Make tabs clickable */
+    #metrics-tabs li {
+      cursor: pointer;
+    }
+    
+    #metrics-tabs li a {
+      cursor: pointer;
+      text-decoration: none;
+    }
+    
+    #metrics-tabs li:hover {
+      background-color: #f5f5f5;
+    }
+    
+    #metrics-tabs li.is-active a {
+      color: #3273dc;
+    }
 
     /* Side Navigation Bar Styles */
     body {
@@ -1833,7 +1851,7 @@
               MultiNet v1.0 employs domain-specific evaluation metrics tailored to each task category, ensuring comprehensive and fair assessment across diverse model architectures. Our evaluation framework adapts metrics to the unique characteristics of each domain while maintaining consistency for cross-domain comparisons:
             </p>
 
-            <div class="tabs is-centered is-boxed" style="margin-top: 2rem;">
+            <div class="tabs is-centered is-boxed" id="metrics-tabs" style="margin-top: 2rem;">
               <ul>
                 <li class="is-active" data-tab="1"><a><span>Brier Scores</span></a></li>
                 <li data-tab="2"><a><span>Exact Match metrics</span></a></li>
@@ -2663,11 +2681,15 @@
       const metricsTabContentBoxes = document.querySelectorAll('#tab-content-container .tab-pane');
 
       metricsTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
+        // Add click event to both the li and the a element inside
+        const clickHandler = (e) => {
+          e.preventDefault();
+          
           metricsTabs.forEach(item => item.classList.remove('is-active'));
           tab.classList.add('is-active');
 
           const target = tab.dataset.tab;
+          
           metricsTabContentBoxes.forEach(box => {
             if (box.dataset.content === target) {
               box.classList.add('is-active');
@@ -2675,28 +2697,38 @@
               box.classList.remove('is-active');
             }
           });
-        });
+        };
+        
+        tab.addEventListener('click', clickHandler);
+        
+        // Also add event listener to the anchor tag inside
+        const anchor = tab.querySelector('a');
+        if (anchor) {
+          anchor.addEventListener('click', clickHandler);
+        }
       });
 
-      // Handle domain tabs
+      // Handle domain tabs (if they exist)
       const domainTabs = document.querySelectorAll('#domain-content-container .tabs li');
       const domainTabContentBoxes = document.querySelectorAll('#domain-content-container .tab-pane');
 
-      domainTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          domainTabs.forEach(item => item.classList.remove('is-active'));
-          tab.classList.add('is-active');
+      if (domainTabs.length > 0) {
+        domainTabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            domainTabs.forEach(item => item.classList.remove('is-active'));
+            tab.classList.add('is-active');
 
-          const target = tab.dataset.tab;
-          domainTabContentBoxes.forEach(box => {
-            if (box.dataset.content === target) {
-              box.classList.add('is-active');
-            } else {
-              box.classList.remove('is-active');
-            }
+            const target = tab.dataset.tab;
+            domainTabContentBoxes.forEach(box => {
+              if (box.dataset.content === target) {
+                box.classList.add('is-active');
+              } else {
+                box.classList.remove('is-active');
+              }
+            });
           });
         });
-      });
+      }
     });
   </script>
   <script>
