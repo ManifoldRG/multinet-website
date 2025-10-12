@@ -1728,10 +1728,10 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Motivation</h2>
             <p>
-              Vision-language-action models hold immense promise as general-purpose agents capable of understanding visual scenes, processing natural language instructions, and executing appropriate actions across diverse domains. However, the current evaluation landscape remains fragmented, with domain-specific benchmarks that fail to capture the true generalization capabilities these models claim to possess. This critical gap in comprehensive evaluation prevents us from understanding where these sophisticated systems truly excel and where they catastrophically fail.
+              Vision language & Action models hold immense promise as general-purpose agents capable of understanding visual scenes, processing natural language instructions, and executing appropriate actions across diverse domains. However, the current evaluation landscape remains fragmented, with domain-specific benchmarks that fail to capture the true generalization capabilities these models claim to possess. This critical gap in comprehensive evaluation prevents us from understanding where these sophisticated systems truly excel and where they catastrophically fail.
             </p>
             <p>
-              MultiNet's mission is to bridge this evaluation gap by providing a unified framework that reveals the genuine strengths and limitations of multimodal AI systems. By systematically evaluating models across robotics manipulation, gameplay, and multimodal reasoning tasks, we aim to provide the research community with the insights needed to build more robust and truly generalizable AI systems.
+              MultiNet's mission is to bridge this evaluation gap by providing a unified framework that reveals the genuine strengths and limitations of multimodal AI systems. By systematically evaluating models across continuous control, discrete actions, and multimodal reasoning tasks, we aim to provide the research community with the insights needed to build more robust and truly generalizable AI systems.
             </p>
           </div>
         </div>
@@ -1746,11 +1746,11 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Abstract</h2>
             <p>
-              The rapid advancement of Vision-Language-Action (VLA) models has created an urgent need for comprehensive evaluation frameworks that can assess their capabilities across diverse domains and tasks. We introduce <b>MultiNet v1.0</b>, a unified benchmark suite that systematically evaluates state-of-the-art VLMs, VLAs, and generalist models across multiple domains including robotics, multi-agent gameplay, and multimodal reasoning tasks. Our comprehensive evaluation spans 11 datasets and includes models such as GPT-5, Pi0, and Magma - all state-of-the-art models in their respective categories.
+              The rapid advancement of multimodal AI systems has created an urgent need for comprehensive evaluation frameworks that can assess diverse model capabilities across multiple domains and tasks. We introduce <b>MultiNet v1.0</b>, a unified benchmark suite that systematically evaluates state-of-the-art Vision-Language Models (VLMs), Vision-Language-Action (VLA) models, and generalist models to provide holistic performance insights across robotics, multi-agent gameplay, and multimodal reasoning tasks. Our evaluation suite spans 11 datasets and includes models such as GPT-5, Pi0, and Magma - all state-of-the-art models in their respective categories.
               
               <br><br>Key contributions of MultiNet v1.0 include:
                 <ul>
-                  <li><strong>Comprehensive Domain Coverage:</strong> Evaluation across robotics, gameplay, commonsense reasoning, spatial reasoning, visual question answering, and visual understanding tasks</li>
+                  <li><strong>Comprehensive Domain Coverage:</strong> Evaluation across robotics, gameplay, commonsense reasoning, spatial reasoning, visual question answering, and visual understanding tasks. We believe that these are important capabilities for a truly generalist model or system to possess.</li>
                   <li><strong>Standardized Evaluation Protocols:</strong> Unified metrics and evaluation procedures for fair comparison across different model architectures</li>
                   <li><strong>Model Adaptation Framework:</strong> Open-source code for adapting diverse models to various out-of-distribution task domains</li>
                   <li><strong>Extensive Analysis:</strong> In-depth analysis of model capabilities, failure modes, and architectural trade-offs</li>
@@ -1771,7 +1771,7 @@
         <div class="column">
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Dataset Coverage</h2>
-            <p>MultiNet v1.0 provides comprehensive evaluation across three major domains, encompassing over 10 diverse datasets that test different aspects of multimodal AI capabilities. Each dataset presents unique challenges in vision-language-action understanding, from robotic manipulation to complex reasoning tasks.</p>
+            <p>MultiNet v1.0 provides comprehensive evaluation across six major domains, encompassing 11 diverse datasets that test different aspects of multimodal AI capabilities. Each dataset presents unique challenges in vision-language-action understanding, from robotic manipulation to complex reasoning tasks.</p>
             
             <div class="container is-max-desktop">
               <div class="table-container" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
@@ -1822,9 +1822,6 @@
                   MultiNet v1.0 evaluates models across diverse modalities and task types, from low-level robotic control to high-level reasoning. For complete dataset specifications and evaluation protocols, please refer to our <a href="https://arxiv.org/abs/2505.05540" target="_blank">technical report</a>.
               </div>
               <br>
-              <p>
-                MultiNet v1.0 represents the most comprehensive evaluation of multimodal AI systems to date, spanning robotics manipulation, multi-agent gameplay, and multimodal reasoning tasks. Our unified evaluation framework enables fair comparison across different model architectures and provides insights into the strengths and limitations of current approaches across these diverse domains.
-              </p>
               <p style="text-align: center; font-style: italic; color: #666; margin-top: 1rem;">
                 💡 <strong>Tip:</strong> Hover over images to zoom, or click to view full-size in lightbox
               </p>
@@ -1848,7 +1845,7 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Evaluation Methodology and Metrics</h2>
             <p>
-              MultiNet v1.0 employs domain-specific evaluation metrics tailored to each task category, ensuring comprehensive and fair assessment across diverse model architectures. Our evaluation framework adapts metrics to the unique characteristics of each domain while maintaining consistency for cross-domain comparisons:
+              MultiNet v1.0 employs standardized evaluation metrics tailored to each task category, ensuring comprehensive and fair assessment across diverse model architectures. Our evaluation framework adapts metrics to the unique characteristics of each domain while maintaining consistency for cross-domain comparisons:
             </p>
 
             <div class="tabs is-centered is-boxed" id="metrics-tabs" style="margin-top: 2rem;">
@@ -2327,11 +2324,6 @@
                   </div>
                 </div>
               </div> <!-- end tab-content-container -->
-
-            <p>
-            <br><br>
-              Our comprehensive evaluation framework provides detailed analysis across all domains, including cross-domain performance comparisons, architectural trade-offs, and failure mode analysis. For detailed methodology and complete results, please refer to our <a href="https://arxiv.org/pdf/2505.05540" target="_blank">technical report</a>.
-            </p>
           </div>
         </div>
       </div>
@@ -2345,7 +2337,7 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Results</h2>
             <p>
-              Our comprehensive evaluation across diverse domains reveals significant insights into model performance and capabilities. Below we present detailed results for key benchmark datasets.
+              Our comprehensive evaluation across diverse domains reveals significant insights into model performance and capabilities. Below we present detailed results of all model performances on our evaluation suite.
             </p>
             
             <div class="visualization-wrapper" style="margin-top: 1rem;">
@@ -2551,7 +2543,13 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Key Findings and Analysis</h2>
             <p>
-              MultiNet v1.0 reveals catastrophic failure at the boundaries of vision-language-action models. No current model achieves true cross-domain generalization — Pi0 performance drops to 0% on basic vision-language tasks after fine-tuning, while GPT-5 achieves <1% success on certain continuous control tasks despite strong VL capabilities. Fine-tuning for robotics seems to systematically corrupt language models (Pi0's repetitive "increa" token spam). Magma - the generalist model produces co-ordinates instead of text answers. Prompt engineering provides only marginal gains (~20% improvement) that cannot bridge fundamental architectural incompatibilities. These results demonstrate that current training paradigms create overspecialized models with incompatible domain-specific biases, requiring fundamental rethinking of modular architectures and progressive training strategies for truly unified multimodal systems. For detailed results, analysis, and methodology, please refer to our <a href="https://arxiv.org/pdf/2505.05540" target="_blank">comprehensive technical report</a>.
+              MultiNet v1.0 reveals catastrophic failure at the boundaries of vision-language-action models. No current model achieves true cross-domain generalization — Pi0 performance drops to 0% on basic vision-language tasks, while GPT-5 achieves <1% success on certain continuous control tasks despite strong VL capabilities. 
+              <br><br>
+              Fine-tuning for robotics seems to systematically corrupt vision language models (Pi0's repetitive "increa" token spam). 
+              Magma - the generalist model produces co-ordinates instead of text answers. 
+              Prompt engineering seems to provide only marginal gains (~20% improvement) that cannot bridge fundamental architectural incompatibilities. 
+              <br><br>
+              These results demonstrate that current training paradigms create overspecialized models with incompatible domain-specific biases, requiring fundamental rethinking of modular architectures and progressive training strategies for truly unified multimodal systems. For detailed results, analysis, and methodology, please refer to our <a href="https://arxiv.org/pdf/2505.05540" target="_blank">comprehensive technical report</a>.
             </p>
 
           </div>
@@ -2571,7 +2569,7 @@
             
             <h3 class="title is-4 has-text-centered">Immediate Next Research Directions</h3>
             <p>
-              Building on MultiNet v1.0's findings of catastrophic failure at domain boundaries, our immediate research priorities focus on understanding and mitigating the fundamental limitations of current vision-language-action models. These investigations target the core mechanisms behind knowledge degradation, architectural incompatibilities, and the emergence of failure modes that prevent true cross-domain generalization.
+              Building on MultiNet v1.0's findings of catastrophic failure at domain boundaries, our immediate research priorities focus on understanding and mitigating the fundamental limitations of current vision-language & action models. These investigations target the core mechanisms behind knowledge degradation, architectural incompatibilities, and the emergence of failure modes that prevent true cross-domain generalization.
             </p>
 
               <h4 class="title is-5 has-text-centered">Investigating the Gibberish Outputs of VLAs</h4>
@@ -2582,15 +2580,15 @@
 
               <h4 class="title is-5 has-text-centered">Investigating SoM/ToM Outputs of Magma</h4>
             <ul>
-              <li><strong>Cross-distribution generalization:</strong> Analyze how Magma's SoM/ToM capabilities emerge from training on completely different data distributions than the evaluation tasks</li>
-              <li><strong>Coordinate-text mapping errors:</strong> Investigate why Magma produces spatial coordinates instead of natural language responses, revealing fundamental misalignment in output modalities</li>
+              <li><strong>Coordinate-text mapping errors:</strong> Investigate why Magma produces spatial coordinates instead of natural language responses when prompted with inputs of completely different domains, revealing fundamental misalignment in output modalities</li>
+              <li><strong>Output modality alignment:</strong> Develop fine-tuning/training techniques and architectural modifications to ensure proper alignment between input domains and output modalities, preventing cross-modal contamination in multi-task models</li>
             </ul>
 
-            <h4 class="title is-5 has-text-centered">Pi0.5 - SoTA Knowledge-Insulated VLA Performance on v1</h4>
+            <h4 class="title is-5 has-text-centered">Pi0.5 - SoTA Knowledge-Insulated VLA Performance on v1.0</h4>
             <ul>
               <li><strong>Architectural improvements:</strong> Evaluate next-generation knowledge insulation techniques in Pi0.5 against MultiNet v1's comprehensive benchmark suite</li>
               <li><strong>Domain transfer efficiency:</strong> Measure how effectively Pi0.5 maintains performance across vision-language tasks while adapting to robotic control</li>
-              <li><strong>Failure mode comparison:</strong> Contrast Pi0.5's failure patterns with current models to validate architectural advances in preventing catastrophic forgetting</li>
+              <li><strong>Failure mode comparison:</strong> Contrast Pi0.5's failure patterns with previous Vision-Language-Action models to validate architectural advances in preventing catastrophic forgetting</li>
             </ul>
 
              <h4 class="title is-5 has-text-centered">Knowledge Insulation Testing and Experiments</h4>
@@ -2613,8 +2611,8 @@
 
             <h4 class="title is-5 has-text-centered">World Models as Evaluators</h4>
             <ul>
-              <li><strong>Causal reasoning assessment:</strong> Build and leverage world models to evaluate whether VLAs understand causal relationships rather than just statistical correlations</li>
-              <li><strong>Counterfactual analysis:</strong> Deploy world models to test VLA robustness through systematic perturbation of environmental conditions and task parameters</li>
+              <li><strong>Causal reasoning assessment:</strong> Build and leverage world models to evaluate whether multimodal systems of the future understand causal relationships rather than just statistical correlations</li>
+              <li><strong>Counterfactual analysis:</strong> Deploy world models to test the robustness of multimodal systems through systematic perturbation of environmental conditions and task parameters</li>
             </ul>
 
             <h4 class="title is-5 has-text-centered">Building the Next Generation of Multimodal Action Models</h4>
