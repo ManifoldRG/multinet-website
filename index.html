@@ -1043,12 +1043,14 @@
       <div class="columns is-centered">
           <div class="column">
               <div class="content has-text-justified">
-                <h2 class="title is-3 has-text-centered">Software and Research for evaluating Next Generation Action Models</h2>
+                <h2 class="title is-3 has-text-centered">Research and Software for evaluating Next Generation Multimodal Models</h2>
                       <p><a href="static/pages/Multinet.html">Multinet</a> is a comprehensive benchmarking initiative for evaluating generalist multimodal models across vision, language, and action. It provides:</p>
                       <ul style="margin-left: 2em; margin-top: 0.75em; list-style-type: disc;">
                           <li>Well-reasoned and curated set of evaluation datasets to assess multimodal understanding and action taking capabilities of SoTA multimodal models</li>
                           <li>Varied evaluation tasks including Common Sense Reasoning, Object Detection in the wild, Spatial Reasoning, Visual Question Answering, Robotics, and complex Multi-Agent game-playing</li>
                           <li>Open-source toolkit to standardize the process of obtaining and utilizing data from various sources and of different formats</li>
+                          <li>Open-source adaptations of diverse models to various out-of-distribution task domains</li>
+                          <li>Comprehensive evaluation protocols for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets</li>
                       </ul>
                   </p>
               </div>
@@ -1212,43 +1214,8 @@
               </div>
             </div>
             
-            <!-- Card 2 -->
-            
-
-            <!-- Card 5: Dataset Specification -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <a href="static/pdfs/MultiNet_Dataset_Spec_Paper.pdf" target="_blank" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">Dataset Specification</h3>
-                      <p>Potentially the largest open-source generalist dataset, consolidating diverse modalities and tasks suitable for pre-training,
-                        fine-tuning, and evaluation</p>
-                      <img src="static/images/reporticon.png" alt="Technical report icon">
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Dataset Specification</h3>
-                          <p class="description-intro">MultiNet addresses the gap in holistic evaluation by assessing both Vision-Language Model (VLM) action capabilities and Vision-Language-Action Model (VLA) multimodal understanding across vision-language, language, and control tasks:</p>
-                          <ul>
-                            <li>As a part of this effort we consolidate a diverse set of high-quality datasets (e.g., OBELICS, COYO-700M, OpenX-Embodiment, Mujoco, Procgen, Atari, WinoGAViL, VQA-v2, etc.).</li>
-                            <li>Carefully curated training data and corresponding evaluation data, which includes:
-                                <ul style="margin-top: 5px; padding-left: 20px;">
-                                    <li>Over 800M image-text pairs for vision-language association.</li>
-                                    <li>1.3T tokens for language understanding.</li>
-                                    <li>Over 35 TB of data for robotics and RL control tasks.</li>
-                                </ul>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            
+          
+          
             <!-- Card 6: About Multinet -->
             <div class="column is-half-tablet is-one-third-desktop">
               <a href="static/pages/Multinet.html" class="flip-card-anchor">
@@ -1265,10 +1232,12 @@
                           <h3 class="title is-4">About Multinet</h3>
                           <p class="description-intro">Key contributions include:</p>
                           <ul>
-                            <li>Comprehensive dataset for evaluating multimodal models</li>
+                            <li>Comprehensive set of evaluation datasets for evaluating multimodal models</li>
                             <li>Tools for standardizing robotics and RL data</li>
                             <li>Framework for mapping language models to actions</li>
-                            <li>Evaluation suite for vision-language agents</li>
+                            <li>Evaluation suite for multimodal models</li>
+                            <li>Open-source adaptations of diverse models to various out-of-distribution task domains</li>
+                            <li>Comprehensive evaluation protocols for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets</li>
                           </ul>
                         </div>
                       </div>
