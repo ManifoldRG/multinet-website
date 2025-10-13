@@ -307,6 +307,58 @@ function renderConfusionMatrix() {
   table.appendChild(tbody);
   
   container.appendChild(table);
+  
+  // Add colorbar
+  addColorbar(table);
+}
+
+function addColorbar(table) {
+  // Get the actual height of the table
+  const tableHeight = table.offsetHeight;
+  
+  // Create colorbar container
+  const colorbarContainer = document.createElement('div');
+  colorbarContainer.style.position = 'absolute';
+  colorbarContainer.style.left = '100%';
+  colorbarContainer.style.marginLeft = '20px';
+  colorbarContainer.style.top = '50%';
+  colorbarContainer.style.transform = 'translateY(-50%)';
+  colorbarContainer.style.width = '20px';
+  colorbarContainer.style.height = `${tableHeight}px`;
+  colorbarContainer.style.border = '1px solid #ccc';
+  colorbarContainer.style.borderRadius = '3px';
+  colorbarContainer.style.overflow = 'visible';
+  
+  // Create gradient background
+  const gradient = document.createElement('div');
+  gradient.style.width = '100%';
+  gradient.style.height = '100%';
+  gradient.style.background = 'linear-gradient(to bottom, rgb(255,255,178), rgb(255,225,0), rgb(255,175,0), rgb(255,100,0), rgb(255,50,0), rgb(255,0,0))';
+  colorbarContainer.appendChild(gradient);
+  
+  // Add value labels
+  const values = [0.00, 0.025, 0.05, 0.10, 0.15, 0.20];
+  values.forEach((value, index) => {
+    const label = document.createElement('div');
+    label.textContent = value.toFixed(2);
+    label.style.position = 'absolute';
+    label.style.left = '25px';
+    label.style.top = `${(index / (values.length - 1)) * 100}%`;
+    label.style.transform = 'translateY(-50%)';
+    label.style.fontSize = '10px';
+    label.style.fontWeight = 'bold';
+    label.style.color = '#333';
+    label.style.whiteSpace = 'nowrap';
+    label.style.backgroundColor = 'white';
+    label.style.padding = '2px 4px';
+    label.style.borderRadius = '2px';
+    label.style.zIndex = '100';
+    label.style.border = '1px solid #ccc';
+    colorbarContainer.appendChild(label);
+  });
+  
+  
+  table.parentElement.appendChild(colorbarContainer);
 }
 
 function loadConfusionMatrixData() {

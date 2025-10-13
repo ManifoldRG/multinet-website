@@ -1128,29 +1128,30 @@
     /* Model Output Visualization Styles */
     .model-output-container {
       display: grid;
-      grid-template-columns: 225px 1fr;
-      gap: 3rem;
+      grid-template-columns: 450px 1fr;
+      gap: 1.5rem;
       margin: 2rem 0;
-      align-items: start;
+      align-items: stretch;
+      justify-content: start;
     }
 
     .image-question-section {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
     }
 
     .image-container {
       width: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
     }
 
     .model-output-section {
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 2rem;
-      align-items: stretch;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      height: 100%;
     }
 
     .model-tabs-container {
@@ -1161,13 +1162,15 @@
 
     .model-tabs {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .model-tab-button {
       display: block;
-      width: 100%;
+      flex: 1;
+      min-width: 80px;
       padding: 0.75rem;
       margin: 0;
       text-align: left;
@@ -1192,6 +1195,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      flex: 1;
     }
 
     .model-output-box {
@@ -1199,6 +1203,7 @@
       border-radius: 4px;
       padding: 1rem;
       background: #fafafa;
+      flex: 1;
       height: 100%;
       display: flex;
       align-items: flex-start;
@@ -1250,7 +1255,8 @@
     .confusion-matrix-section {
       margin: 2rem 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
     }
 
     #pi0-confusion-matrix-container {
@@ -2711,18 +2717,19 @@
       <div class="columns is-centered">
         <div class="column">
           <div class="content has-text-justified">
-            <h2 class="title is-3 has-text-centered">Model Output Comparison</h2>
+            <h3 class="title is-4 has-text-centered">Model Output Comparison</h3>
             <p class="has-text-centered" style="margin-bottom: 2rem;">
-              Compare how different models respond to the same visual input
+              Compare how different models respond to the same visual input from the ODinW selfdrivingCar dataset
             </p>
             
             <div class="model-output-container">
               <!-- Left side: Image and Question -->
               <div class="image-question-section">
+                <p class="has-text-weight-semibold" style="margin-bottom: 0.5rem; text-align: left; align-self: flex-start;">Input</p>
                 <div class="image-container">
                   <img src="../images/odinw_car_pic.jpg" alt="Sample image for model comparison" style="width: 100%; max-width: 400px; border: 1px solid #ddd; border-radius: 8px;">
                 </div>
-                <p style="margin-top: 1rem; font-weight: 500; text-align: left;">What object is shown in this image from the selfdrivingCar dataset?<br>Option 0: biker Option 1: car ...<br>Output the number (0-10) of the correct option only.</p>
+                <p class="prompt-text" style="margin-top: 1.5rem; font-weight: 500; text-align: left; background: #eaf4ff; border: 1px solid #cfe3ff; padding: 12px; border-radius: 6px; width: 100%; max-width: 400px;">What object is shown in this image from the selfdrivingCar dataset?<br>Option 0: biker Option 1: car ...<br>Output the number (0-10) of the correct option only.</p>
               </div>
               
               <!-- Right side: Model Tabs and Output -->
@@ -2758,13 +2765,16 @@
           <div class="content has-text-justified">
             <h3 class="title is-4 has-text-centered">Pi0's prediction space collapse visualized</h3>
             <p class="has-text-centered" style="margin-bottom: 2rem;">
-              Frequency of predicted action classes for Pi0 model on Overcooked dataset
+              Pi0 experiences prediction space collapse on the Overcooked dataset, centered around the action 24, which maps to (Player 1: STAY, Player 2: NORTH)
             </p>
             
             <div class="confusion-matrix-section">
               <div id="pi0-confusion-matrix-container">
                 <canvas id="pi0-confusion-matrix-canvas"></canvas>
               </div>
+              <p class="has-text-centered" style="margin-top: 1rem; font-style: italic; color: #666;">
+                Frequency of predicted action classes for Pi0 model on Overcooked dataset
+              </p>
             </div>
           </div>
         </div>
@@ -3370,7 +3380,7 @@
       let animatedModels = new Set();
 
       // Fetch model output data
-      fetch('../data/visualize_stuff.json')
+      fetch('../data/visualize_odinw_outputs.json')
         .then(response => response.json())
         .then(data => {
           modelData = data;

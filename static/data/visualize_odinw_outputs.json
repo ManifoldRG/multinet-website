@@ -1,4 +1,4 @@
 {"prompt": "What object is shown in this image from the selfdrivingCar dataset?\nOption 0: biker\nOption 1: car\nOption 2: pedestrian\nOption 3: trafficLight\nOption 4: trafficLight-Green\nOption 5: trafficLight-GreenLeft\nOption 6: trafficLight-Red\nOption 7: trafficLight-RedLeft\nOption 8: trafficLight-Yellow\nOption 9: trafficLight-YellowLeft\nOption 10: truck\nOutput the number (0-10) of the correct option only.",
 "gpt5": "1",
-"pi0": "this is a car",
+"pi0": "increa increa increa increa",
 "magma": "Option 1 at [163,21] should be moved, and their future positions are:\n\n\"Mark 1\": \"[[160,21],[156,21],[151,21],[145,21],[139,21],[132,21],[125,21],[118,21],[110,21],[102,21],[94,21]]\""}
