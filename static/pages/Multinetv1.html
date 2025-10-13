@@ -3378,6 +3378,7 @@
       const outputBox = document.getElementById('model-output');
       let modelData = {};
       let animatedModels = new Set();
+      let currentTypingTimeout = null;
 
       // Fetch model output data
       fetch('../data/visualize_odinw_outputs.json')
@@ -3409,6 +3410,12 @@
       });
 
       function updateOutput(model) {
+        // Cancel any ongoing typing animation
+        if (currentTypingTimeout) {
+          clearTimeout(currentTypingTimeout);
+          currentTypingTimeout = null;
+        }
+        
         const text = modelData[model] || 'No output available for this model';
         
         if (!animatedModels.has(model)) {
@@ -3429,7 +3436,9 @@
           if (i < text.length) {
             element.textContent = text.substring(0, i + 1);
             i++;
-            setTimeout(typeChar, speed);
+            currentTypingTimeout = setTimeout(typeChar, speed);
+          } else {
+            currentTypingTimeout = null;
           }
         }
         
