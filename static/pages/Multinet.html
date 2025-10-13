@@ -1047,7 +1047,7 @@
                   <!-- Multinet v1 Section -->
                   <a href="Multinetv1.html" class="dropdown-item main-release-link">
                       <span class="icon"><i class="fas fa-rocket"></i></span>
-                      <span class="nav-text" style="white-space: nowrap;">v1 - Generalist</span>
+                      <span class="nav-text" style="white-space: nowrap;">v1.0 - Generalist</span>
                   </a>
                   <!-- Multinet v0.2 Section -->
                   <a href="Multinetv02.html" class="dropdown-item main-release-link">
@@ -1146,7 +1146,7 @@
                                 <span class="icon">
                                   <i class="fas fa-rocket"></i>
                                 </span>
-                                <span>MultiNet v1</span>
+                                <span>MultiNet v1.0</span>
                               </a>
                             </span>
                             <span class="link-block">
@@ -1171,17 +1171,17 @@
               <div class="content has-text-justified">
                 <h2 class="title is-3 has-text-centered">A Benchmark for the Action Age</h2>
                 <p>
-                  Multinet is a comprehensive benchmark designed to evaluate and advance the development of multimodal action models—AI systems capable of processing visual input, understanding language, and generating appropriate actions. Our benchmark addresses a critical research gap by providing standardized evaluation frameworks that assess both the action capabilities of Vision-Language Models (VLMs) and the multimodal understanding of Vision-Language-Action Models (VLAs).
+                  Multinet is a comprehensive benchmark designed to evaluate and advance the development of multimodal action models—AI systems capable of processing visual input, understanding language, and generating appropriate actions. Our benchmark addresses a critical research gap by providing standardized evaluation frameworks that assess the various multimodal action capabilities that we believe are necessary to build truly capable multimodal systems of the next generation. 
                 </p>
                 <p>
                   Key contributions of Multinet include:
                 </p>
                 <ul>
                   <li>Large open-source generalist evaluation dataset, consolidating diverse modalities and tasks, meant to assess the capabilities of the next generation of multimodal models</li>
-                  <li>A unified benchmark for systematically assessing state-of-the-art models across vision-language association, language understanding, vision understanding, and control tasks</li>
+                  <li>A unified benchmark and comprehensive evaluation protocolsfor systematically assessing state-of-the-art models across vision-language association, language understanding, vision understanding, and control tasks</li>
                   <li>Open-source tools for standardizing complex reinforcement learning and robotics data from various sources</li>
                   <li>A framework for mapping VLMs to other modality classes, with particular emphasis on action spaces</li>
-                  <li>Comprehensive evaluation protocols for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets.</li>
+                  <li>Open-source adaptations of diverse models to various out-of-distribution task domains</li>
                 </ul>
               </div>
             </div>
@@ -1200,19 +1200,19 @@
                 <h2 class="title is-3 has-text-centered"> The Importance of Multinet</h2>
                 <p>
                   Recent advances in machine learning have demonstrated the potential of large-scale models to exhibit broad generalization capabilities across diverse tasks. 
-                 Emerging Vision-Language-Action (VLA) models such as <a href="https://www.physicalintelligence.company/blog/pi0">Pi0</a> demonstrate impressive capabilities in taking vision-language-grounded actions in control tasks. Yet, these models are typically specialized for a narrow set of robotics tasks, and their performance on broader vision-language understanding remains underexplored. Similarly, Vision-Language models such as <a href="https://openai.com/index/introducing-gpt-5/">GPT-5</a> demonstrate impressive capabilities in vision-language and language understanding tasks. Yet, their performance on broader control tasks remains underexplored.
+                 Emerging Vision-Language-Action (VLA) models such as <a href="https://www.physicalintelligence.company/blog/pi0">Pi0</a> demonstrate impressive capabilities in taking vision-language-grounded actions in control tasks. Yet, these models are typically specialized for a narrow set of robotics tasks, and their performance on broader vision-language understanding remains underexplored. Similarly, Vision-Language models such as <a href="https://openai.com/index/introducing-gpt-5/">GPT-5</a> demonstrate impressive capabilities in vision-language and language understanding and reasoning tasks. Yet, their performance on completely out of distribution tasks such as low-level robotics control or discrete action gameplay is not quantitatively analyzed. To build generalist multimodal systems that are capable of completing long-horizon tasks and actually bringing value to the world, we believe that we need to build multimodal systems of a new kind. Very important to this mission, is the ability to understand and evaluate the capabilities of these multimodal systems. 
                 </p>
                 <p>
                   Multinet addresses these limitations by:
                 </p>
                 <ul>
-                  <li><strong>Advancing Generalist Foundation Models:</strong> Providing a comprehensive benchmark to evaluate truly generalist models across multiple modalities and environments</li>
-                  <li><strong>Enabling Next-Generation Multimodal Models:</strong> Offering insights on failure modes of current models in generalizing to out-of-distribution tasks, and developing models that achieve state-of-the-art performance across all constituent tasks</li>
+                  <li><strong>Advancing Generalist Foundation Models:</strong> Providing a comprehensive benchmark to evaluate the generalist models of today across multiple modalities and environments</li>
+                  <li><strong>Enabling Next-Generation Multimodal Models:</strong> Offering insights on specific failure modes and capabilities of current models in generalizing to out-of-distribution tasks, thus informing the development of models that can achieve state-of-the-art performance across all constituent tasks</li>
                   <li><strong>Standardizing Evaluation:</strong> Creating unified assessment protocols for robotics foundation models beyond narrow control tasks, and vision-language foundation models beyond multimodal understanding tasks</li>
                   <li><strong>Democratizing Access:</strong> Releasing open-source tools that address challenges of outdated formats, poor maintenance, and accessibility issues in what are typically rich evaluation datasets</li>
                 </ul>
                 <p>
-                  Through our <a href="Multinetv01.html">initial release</a> and <a href="Multinetv02.html">latest work</a>, we've demonstrated significant capability gaps in current models when handling out-of-distribution tasks. These findings highlight the need for more versatile generalist architectures and provide a foundation for developing the next generation of truly generalist AI systems.
+                  Through our initial releases, and <a href="Multinetv02.html">latest work</a>, we've demonstrated significant capability gaps in current models when handling out-of-distribution tasks. These findings highlight the need for more versatile generalist architectures and provide a foundation for developing the next generation of truly generalist multimodal AI systems.
                 </p>
               </div>
             </div>
@@ -1227,9 +1227,9 @@
                     <div class="content has-text-justified">
                         <h2 class="title is-3 has-text-centered">Dataset Coverage and Analysis</h2>
                         <p>
-                            Multinet offers a rich collection of diverse datasets to understand comprehensive multimodal capabilities of state-of-the-art models across multiple domains. 
+                            Multinet offers a rich collection of diverse datasets to comprehensively understand multimodal capabilities of state-of-the-art models across multiple domains, tasks, and environments. 
                             It can also be utilized to understand pitfalls, and precise failure modes of current models on sophisticated vision-language association tasks, high quality language understanding and generation tasks, and reward-based action
-                            trajectories in a myriad of environments and tasks. This consolidation effort serves as a valuable benchmark for evaluating the capabilities of  current SoTA VLMs, VLAs, and generalist models, illuminating paths toward more versatile and capable generalist AI systems.
+                            trajectories. This consolidation effort serves as a valuable benchmark for evaluating the capabilities of  current SoTA VLMs, VLAs, and generalist models, illuminating paths toward more versatile and capable generalist AI systems.
                         </p>
 
                         <!-- Interactive Pie Chart Container -->
@@ -1241,34 +1241,34 @@
                                 
                                 <!-- Pie Chart -->
                                 <g transform="translate(300, 240)">
-                                    <!-- Robotics segment (58.33%) - LARGE BLUE SLICE starting from top -->
-                                    <path id="slice-robotics" class="pie-slice" data-name="Robotics" data-value="58.33%" data-legend-id="legend-robotics"
-                                          d="M 0,0 L 0,-120 A 120,120 0 1,1 -103.9,60 Z" 
+                                    <!-- Robotics segment (54.55%) - LARGE BLUE SLICE starting from top -->
+                                    <path id="slice-robotics" class="pie-slice" data-name="Robotics" data-value="54.55%" data-legend-id="legend-robotics"
+                                          d="M 0,0 L 0,-120 A 120,120 0 1,1 -96.6,75.6 Z" 
                                           fill="#5B8DEE" style="cursor: pointer; transition: opacity 0.2s, stroke 0.2s, stroke-width 0.2s;" stroke="#fff" stroke-width="2" />
                                     
-                                    <!-- Vision Understanding segment (8.33%) - PURPLE -->
-                                    <path id="slice-vision-understanding" class="pie-slice" data-name="Vision Understanding" data-value="8.33%" data-legend-id="legend-vision-understanding"
-                                          d="M 0,0 L -103.9,60 A 120,120 0 0,1 -60,103.9 Z" 
+                                    <!-- Vision Understanding segment (9.09%) - PURPLE -->
+                                    <path id="slice-vision-understanding" class="pie-slice" data-name="Vision Understanding" data-value="9.09%" data-legend-id="legend-vision-understanding"
+                                          d="M 0,0 L -96.6,75.6 A 120,120 0 0,1 -75.6,96.6 Z" 
                                           fill="#9D7FDB" style="cursor: pointer; transition: opacity 0.2s, stroke 0.2s, stroke-width 0.2s;" stroke="#fff" stroke-width="2" />
                                     
-                                    <!-- Gameplay segment (8.33%) - PINK -->
-                                    <path id="slice-gameplay" class="pie-slice" data-name="Gameplay" data-value="8.33%" data-legend-id="legend-gameplay"
-                                          d="M 0,0 L -60,103.9 A 120,120 0 0,1 0,120 Z" 
+                                    <!-- Gameplay segment (9.09%) - PINK -->
+                                    <path id="slice-gameplay" class="pie-slice" data-name="Gameplay" data-value="9.09%" data-legend-id="legend-gameplay"
+                                          d="M 0,0 L -75.6,96.6 A 120,120 0 0,1 -37.1,113.1 Z" 
                                           fill="#E88BA5" style="cursor: pointer; transition: opacity 0.2s, stroke 0.2s, stroke-width 0.2s;" stroke="#fff" stroke-width="2" />
                                     
-                                    <!-- Spatial Reasoning segment (8.33%) - ORANGE -->
-                                    <path id="slice-spatial-reasoning" class="pie-slice" data-name="Spatial Reasoning" data-value="8.33%" data-legend-id="legend-spatial-reasoning"
-                                          d="M 0,0 L 0,120 A 120,120 0 0,1 60,103.9 Z" 
+                                    <!-- Spatial Reasoning segment (9.09%) - ORANGE -->
+                                    <path id="slice-spatial-reasoning" class="pie-slice" data-name="Spatial Reasoning" data-value="9.09%" data-legend-id="legend-spatial-reasoning"
+                                          d="M 0,0 L -37.1,113.1 A 120,120 0 0,1 37.1,113.1 Z" 
                                           fill="#F5A962" style="cursor: pointer; transition: opacity 0.2s, stroke 0.2s, stroke-width 0.2s;" stroke="#fff" stroke-width="2" />
                                     
-                                    <!-- Language Understanding segment (8.33%) - GREEN -->
-                                    <path id="slice-language-understanding" class="pie-slice" data-name="Language Understanding" data-value="8.33%" data-legend-id="legend-language-understanding"
-                                          d="M 0,0 L 60,103.9 A 120,120 0 0,1 103.9,60 Z" 
+                                    <!-- Language Understanding segment (9.09%) - GREEN -->
+                                    <path id="slice-language-understanding" class="pie-slice" data-name="Language Understanding" data-value="9.09%" data-legend-id="legend-language-understanding"
+                                          d="M 0,0 L 37.1,113.1 A 120,120 0 0,1 75.6,96.6 Z" 
                                           fill="#7ABF87" style="cursor: pointer; transition: opacity 0.2s, stroke 0.2s, stroke-width 0.2s;" stroke="#fff" stroke-width="2" />
                                     
-                                    <!-- Function Calling segment (8.33%) - TEAL -->
-                                    <path id="slice-function-calling" class="pie-slice" data-name="Function Calling" data-value="8.33%" data-legend-id="legend-function-calling"
-                                          d="M 0,0 L 103.9,60 A 120,120 0 0,1 103.9,-60 Z" 
+                                    <!-- Function Calling segment (9.09%) - TEAL -->
+                                    <path id="slice-function-calling" class="pie-slice" data-name="Function Calling" data-value="9.09%" data-legend-id="legend-function-calling"
+                                          d="M 0,0 L 75.6,96.6 A 120,120 0 0,1 0,-120 Z" 
                                           fill="#63C2CC" style="cursor: pointer; transition: opacity 0.2s, stroke 0.2s, stroke-width 0.2s;" stroke="#fff" stroke-width="2" />
                                 </g>
                                 
@@ -1277,44 +1277,44 @@
                                     <!-- Robotics -->
                                     <g id="legend-robotics" class="legend-item" data-slice-id="slice-robotics" style="cursor: pointer;">
                                         <rect x="0" y="0" width="20" height="20" fill="#5B8DEE" stroke="#fff" stroke-width="1"/>
-                                        <text x="30" y="15" font-size="15" font-family="Arial, sans-serif">Robotics (58.33%)</text>
+                                        <text x="30" y="15" font-size="15" font-family="Arial, sans-serif">Robotics (54.55%)</text>
                                     </g>
                                     
                                     <!-- Vision Understanding -->
                                     <g id="legend-vision-understanding" class="legend-item" data-slice-id="slice-vision-understanding" style="cursor: pointer;" transform="translate(0, 28)">
                                         <rect x="0" y="0" width="20" height="20" fill="#9D7FDB" stroke="#fff" stroke-width="1"/>
-                                        <text x="30" y="15" font-size="15" font-family="Arial, sans-serif">Vision Understanding (8.33%)</text>
+                                        <text x="30" y="15" font-size="15" font-family="Arial, sans-serif">Vision Understanding (9.09%)</text>
                                     </g>
                                     
                                     <!-- Gameplay -->
                                     <g id="legend-gameplay" class="legend-item" data-slice-id="slice-gameplay" style="cursor: pointer;" transform="translate(0, 56)">
                                         <rect x="0" y="0" width="20" height="20" fill="#E88BA5" stroke="#fff" stroke-width="1"/>
-                                        <text x="30" y="15" font-size="15" font-family="Arial, sans-serif">Gameplay (8.33%)</text>
+                                        <text x="30" y="15" font-size="15" font-family="Arial, sans-serif">Gameplay (9.09%)</text>
                                     </g>
                                     
                                     <!-- Spatial Reasoning -->
                                     <g id="legend-spatial-reasoning" class="legend-item" data-slice-id="slice-spatial-reasoning" style="cursor: pointer;" transform="translate(0, 84)">
                                         <rect x="0" y="0" width="20" height="20" fill="#F5A962" stroke="#fff" stroke-width="1"/>
-                                        <text x="30" y="15" font-size="15" font-family="Arial, sans-serif">Spatial Reasoning (8.33%)</text>
+                                        <text x="30" y="15" font-size="15" font-family="Arial, sans-serif">Spatial Reasoning (9.09%)</text>
                                     </g>
                                     
                                     <!-- Language Understanding -->
                                     <g id="legend-language-understanding" class="legend-item" data-slice-id="slice-language-understanding" style="cursor: pointer;" transform="translate(0, 112)">
                                         <rect x="0" y="0" width="20" height="20" fill="#7ABF87" stroke="#fff" stroke-width="1"/>
-                                        <text x="30" y="15" font-size="15" font-family="Arial, sans-serif">Language Understanding (8.33%)</text>
+                                        <text x="30" y="15" font-size="15" font-family="Arial, sans-serif">Language Understanding (9.09%)</text>
                                     </g>
                                     
                                     <!-- Function Calling -->
                                     <g id="legend-function-calling" class="legend-item" data-slice-id="slice-function-calling" style="cursor: pointer;" transform="translate(0, 140)">
                                         <rect x="0" y="0" width="20" height="20" fill="#63C2CC" stroke="#fff" stroke-width="1"/>
-                                        <text x="30" y="15" font-size="15" font-family="Arial, sans-serif">Function Calling (8.33%)</text>
+                                        <text x="30" y="15" font-size="15" font-family="Arial, sans-serif">Function Calling (9.09%)</text>
                                     </g>
                                 </g>
                                 
                                 <!-- Caption -->
                                 <text x="400" y="420" text-anchor="middle" font-size="13" font-family="Arial, sans-serif" font-style="italic">
-                                    <tspan x="400" dy="0">Robotics represents the largest portion (58.33%) with 7 datasets from the OpenX-Embodiment collection,</tspan>
-                                    <tspan x="400" dy="16">while the remaining 5 categories each contribute equally (8.33%) with 1 dataset each.</tspan>
+                                    <tspan x="400" dy="0">Robotics represents the largest portion (54.55%) with 6 datasets from the OpenX-Embodiment collection,</tspan>
+                                    <tspan x="400" dy="16">while the remaining 5 categories each contribute equally (9.09%) with 1 dataset each.</tspan>
                                 </text>
                             </svg>
                             <!-- Tooltip -->
@@ -1391,7 +1391,7 @@
                             While existing benchmarks excel at evaluating specific capabilities and modalities, there remains a notable gap in
                             holistic evaluation frameworks that can assess both the action capabilities of Vision-Language Models (VLMs) and the
                             multimodal understanding of Vision-Language-Action Models (VLAs). Multinet addresses this gap by providing a
-                            comprehensive benchmark that spans vision-language, language, RL, and Robotics tasks. Our work consolidates diverse,
+                            comprehensive benchmark that spans vision-language and control tasks. Our work consolidates diverse,
                             high-quality datasets and establishes standardized evaluation metrics to enable systematic comparison of state-of-the-art
                             models. For a detailed list of datasets and metrics included in Multinet, please refer to our <a href="../pdfs/MultiNet_Dataset_Spec_Paper.pdf">dataset specification paper</a>
                         </p>
@@ -1474,19 +1474,19 @@
             <div class="column">
               <div class="content has-text-justified">
                 <h2 class="title is-3 has-text-centered">What's Next</h2>
-                <p>The release of Multinet is a preliminary but importantstep toward next-generation AI systems, with ambitious research directions planned for future iterations:</p>
+                <p>The release of Multinet is a preliminary but important step toward next-generation AI systems, with ambitious research directions planned for future iterations:</p>
                 <ul>
-                  <li><strong>Comprehensive Modality Analysis:</strong> Systematically evaluate how control-task training affects vision-language capabilities in VLAs. This investigation will provide crucial insights into architectural trade-offs when developing truly generalist models.</li>
+                  <li><strong>Knowledge Insulation Architecture:</strong> Investigate architectural designs that prevent domain-specific fine-tuning from corrupting existing capabilities from pre-training.</li>
                   
-                  <li><strong>Expanded Evaluation Horizons:</strong> Integrate diverse control tasks beyond OpenX-Embodiment and Procgen to thoroughly assess generalization to completely unseen environments. This will rigorously identify architectural bottlenecks and generalization boundaries.</li>
+                  <li><strong>Live Dynamic Benchmarks:</strong> Develop continuously updating evaluation frameworks that adapt to model capabilities, preventing overfitting to static test sets while enabling real-time assessment of deployed systems across diverse scenarios.</li>
                   
-                  <li><strong>Advanced Transfer Learning:</strong> Extend beyond zero-shot performance to explore few-shot learning and fine-tuning paradigms, with particular emphasis on transfer to novel domains like software environments. This research will advance our understanding of learning transferable representations across embodied and digital tasks.</li>
+                  <li><strong>Cross-Modal Failure Analysis:</strong> Systematically analyze why current models exhibit fundamental misalignment between input domains and output modalities, developing architectural modifications to prevent cross-modal contamination in multi-task scenarios.</li>
                   
-                  <li><strong>Simulation-Based Online Evaluation:</strong> Transform Multinet from its current offline form into an interactive online benchmark leveraging state-of-the-art simulation environments. We're developing world models to power these simulations for both 2D and 3D control tasks, enabling dynamic assessment of model capabilities in responsive environments.</li>
+                  <li><strong>Progressive Multi-Domain Training:</strong> Research learning paradigms that gradually introduce new domains without catastrophic forgetting, moving beyond current zero-shot limitations to enable meta-learning for rapid adaptation while preserving existing knowledge.</li>
                   
-                  <li><strong>Multi-Domain Expertise:</strong> Research cross-domain adaptation mechanisms that allow models to seamlessly operate across diverse environmental contexts, from robotics to software agents and game environments.</li>
+                  <li><strong>Causal World Model Evaluation:</strong> Build and leverage world models as evaluators to test whether next-generation multimodal systems understand causal relationships rather than statistical correlations, enabling counterfactual analysis through systematic environmental perturbation.</li>
                 </ul>
-                <p>Through these research directions, we aim to establish Multinet as a comprehensive platform advancing generalist AI research. By developing sophisticated evaluation environments and methodologies, we will accelerate progress toward more versatile and robust artificial intelligence systems capable of generalizing across an unprecedented range of tasks and domains.</p>
+                <p>Through these targeted investigations, we aim to establish the foundational principles for building truly unified multimodal action models capable of seamless operation across various domains such as robotics, software environments, and complex reasoning tasks without architectural degradation.</p>
               </div>
             </div>
           </div>
