@@ -947,27 +947,17 @@ function renderSQA3DAvgSimilarityScoreChart(data, canvas) {
   
   // Create single dataset with model values
   const modelValues = [];
-  const stdValues = [];
   
   v1Models.forEach((model, index) => {
     const modelData = getModelData(data, model);
     if (!modelData || !modelData.avg_similarity_score) {
       console.warn(`No average similarity score data found for model ${model}`);
       modelValues.push(0);
-      stdValues.push(0);
       return;
     }
     
     // Use the first value from avg_similarity_score array (assuming it's the overall average)
     modelValues.push(modelData.avg_similarity_score[0]);
-    
-    // Add std data for error bars
-    if (modelData.similarity_std && modelData.similarity_std[0] !== null && modelData.similarity_std[0] !== undefined) {
-      stdValues.push(modelData.similarity_std[0]);
-      console.log(`Added std data for ${model}:`, modelData.similarity_std[0]);
-    } else {
-      stdValues.push(0);
-    }
   });
   
   const colors = [
@@ -989,111 +979,25 @@ function renderSQA3DAvgSimilarityScoreChart(data, canvas) {
     borderColor: borderColors,
     borderWidth: 2,
     borderRadius: 4,
-    borderSkipped: false,
-    stdData: stdValues
+    borderSkipped: false
   }];
   
   const allValues = datasets.flatMap(d => d.data);
   const dataMax = Math.max(...allValues);
   const dataMin = Math.min(...allValues);
   
-  // Calculate the range including error bars
-  let maxWithError = dataMax;
-  let minWithError = dataMin;
-  
-  datasets.forEach(dataset => {
-    if (dataset.stdData) {
-      dataset.data.forEach((value, index) => {
-        const stdValue = dataset.stdData[index];
-        if (stdValue !== null && stdValue !== undefined) {
-          maxWithError = Math.max(maxWithError, value + stdValue);
-          minWithError = Math.min(minWithError, Math.max(0, value - stdValue));
-        }
-      });
-    }
-  });
-  
-  const maxValue = Math.min(1.0, maxWithError * 1.1); // Cap at 1.0 for similarity scores
-  const minValue = Math.max(0.0, minWithError * 0.9); // Cap at 0.0 for similarity scores
+  const maxValue = Math.min(1.0, dataMax * 1.1); // Cap at 1.0 for similarity scores
+  const minValue = Math.max(0.0, dataMin * 0.9); // Cap at 0.0 for similarity scores
   
   const chartData = {
     labels: v1Models.map(model => v1ModelDisplayNames[model]),
     datasets: datasets
   };
   
-  // Create a custom plugin to draw error bars
-  const errorBarPlugin = {
-    id: 'errorBar',
-    afterDatasetsDraw: function(chart) {
-      const ctx = chart.ctx;
-      
-      chart.data.datasets.forEach((dataset, datasetIndex) => {
-        // Skip if dataset isn't visible or doesn't have std data
-        const meta = chart.getDatasetMeta(datasetIndex);
-        if (!meta.visible) return;
-        
-        // Get std data stored in dataset
-        const stdData = dataset.stdData;
-        if (!stdData || !stdData.length) {
-          return;
-        }
-        
-        // Draw error bars for each data point
-        ctx.save();
-        // Use consistent thin black lines for all error bars
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
-        
-        meta.data.forEach((element, index) => {
-          const stdValue = stdData[index];
-          const value = dataset.data[index];
-          
-          // Skip if no std value or data point
-          if (stdValue === null || stdValue === undefined || value === null || value === undefined) {
-            return;
-          }
-          
-          console.log(`Drawing error bar for dataset ${datasetIndex}, index ${index}: value=${value}, std=${stdValue}`);
-          
-          // Get position for the current bar
-          const barX = element.x;
-          
-          // Get y scale
-          const yScale = chart.scales.y;
-          
-          // Calculate positions in pixels
-          const yCenter = element.y; // Center of the bar (value)
-          const yTop = yScale.getPixelForValue(value + stdValue); // Top of error bar
-          const yBottom = yScale.getPixelForValue(Math.max(0, value - stdValue)); // Bottom of error bar
-          
-          // Draw vertical line
-          ctx.beginPath();
-          ctx.moveTo(barX, yTop);
-          ctx.lineTo(barX, yBottom);
-          ctx.stroke();
-          
-          // Draw top whisker
-          ctx.beginPath();
-          ctx.moveTo(barX - 4, yTop);
-          ctx.lineTo(barX + 4, yTop);
-          ctx.stroke();
-          
-          // Draw bottom whisker
-          ctx.beginPath();
-          ctx.moveTo(barX - 4, yBottom);
-          ctx.lineTo(barX + 4, yBottom);
-          ctx.stroke();
-        });
-        
-        ctx.restore();
-      });
-    }
-  };
-  
   const chartConfig = {
     type: 'bar',
     data: chartData,
-    plugins: [errorBarPlugin],
+    plugins: [],
     options: {
       responsive: true,
       maintainAspectRatio: false,
@@ -2396,7 +2300,7 @@ function renderRobotVQAChart(data, canvas) {
   const ctx = canvas.getContext('2d');
   
   // Extract exact match rates for each model
-  const exactMatchRates = v1Models.map(model => {
+  const originalValues = v1Models.map(model => {
     const modelData = getModelData(data, model);
     if (!modelData || !modelData.exact_match_rate) {
       console.warn(`No exact match rate data found for model ${model}`);
@@ -2405,11 +2309,21 @@ function renderRobotVQAChart(data, canvas) {
     return modelData.exact_match_rate[0];
   });
   
+  // Calculate minimum visible value (1% of the max value, or 0.01 if max is very small)
+  const dataMax = Math.max(...originalValues);
+  const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+  
+  // Create display values that ensure small values are visible
+  const displayValues = originalValues.map(value => 
+    value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+  );
+  
   const chartData = {
     labels: v1Models.map(model => v1ModelDisplayNames[model]),
     datasets: [{
       label: 'Exact Match Rate',
-      data: exactMatchRates,
+      data: displayValues,
+      originalData: originalValues, // Store original values for tooltips
       backgroundColor: [
         'rgba(54, 162, 235, 0.7)',   // Blue for GPT-5
         'rgba(255, 99, 132, 0.7)',   // Red for Pi0
@@ -2427,7 +2341,6 @@ function renderRobotVQAChart(data, canvas) {
   };
   
   // Dynamic y-axis max: use 1.1x the max value, but cap at 1.0 (100%)
-  const dataMax = Math.max(...exactMatchRates);
   const maxValue = getNiceMaxValue(dataMax, 1.0);
   
   const chartConfig = {
@@ -2449,6 +2362,18 @@ function renderRobotVQAChart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${(originalValue * 100).toFixed(1)}%`;
+              }
+            }
           }
         }
       },
@@ -2554,29 +2479,28 @@ function renderRobotVQAAvgSimilarityScoreChart(data, canvas) {
   const ctx = canvas.getContext('2d');
   
   // Create single dataset with model values
-  const modelValues = [];
-  const stdValues = [];
+  const originalValues = [];
   
   v1Models.forEach((model, index) => {
     const modelData = getModelData(data, model);
     if (!modelData || !modelData.avg_similarity_score) {
       console.warn(`No average similarity score data found for model ${model}`);
-      modelValues.push(0);
-      stdValues.push(0);
+      originalValues.push(0);
       return;
     }
     
     // Use the first value from avg_similarity_score array (assuming it's the overall average)
-    modelValues.push(modelData.avg_similarity_score[0]);
-    
-    // Add std data for error bars
-    if (modelData.similarity_std && modelData.similarity_std[0] !== null && modelData.similarity_std[0] !== undefined) {
-      stdValues.push(modelData.similarity_std[0]);
-      console.log(`Added std data for ${model}:`, modelData.similarity_std[0]);
-    } else {
-      stdValues.push(0);
-    }
+    originalValues.push(modelData.avg_similarity_score[0]);
   });
+  
+  // Calculate minimum visible value (1% of the max value, or 0.01 if max is very small)
+  const dataMax = Math.max(...originalValues);
+  const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+  
+  // Create display values that ensure small values are visible
+  const displayValues = originalValues.map(value => 
+    value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+  );
   
   const colors = [
     'rgba(54, 162, 235, 0.7)',
@@ -2592,116 +2516,27 @@ function renderRobotVQAAvgSimilarityScoreChart(data, canvas) {
   
   const datasets = [{
     label: 'Average Similarity Score',
-    data: modelValues,
+    data: displayValues,
+    originalData: originalValues, // Store original values for tooltips
     backgroundColor: colors,
     borderColor: borderColors,
     borderWidth: 2,
     borderRadius: 4,
-    borderSkipped: false,
-    stdData: stdValues
+    borderSkipped: false
   }];
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
-  const dataMin = Math.min(...allValues);
-  
-  // Calculate the range including error bars
-  let maxWithError = dataMax;
-  let minWithError = dataMin;
-  
-  datasets.forEach(dataset => {
-    if (dataset.stdData) {
-      dataset.data.forEach((value, index) => {
-        const stdValue = dataset.stdData[index];
-        if (stdValue !== null && stdValue !== undefined) {
-          maxWithError = Math.max(maxWithError, value + stdValue);
-          minWithError = Math.min(minWithError, Math.max(0, value - stdValue));
-        }
-      });
-    }
-  });
-  
-  const maxValue = Math.min(1.0, maxWithError * 1.1); // Cap at 1.0 for similarity scores
-  const minValue = Math.max(0.0, minWithError * 0.9); // Cap at 0.0 for similarity scores
+  const maxValue = Math.min(1.0, dataMax * 1.1); // Cap at 1.0 for similarity scores
+  const minValue = Math.max(0.0, Math.min(...originalValues) * 0.9); // Cap at 0.0 for similarity scores
   
   const chartData = {
     labels: v1Models.map(model => v1ModelDisplayNames[model]),
     datasets: datasets
   };
   
-  // Create a custom plugin to draw error bars
-  const errorBarPlugin = {
-    id: 'errorBar',
-    afterDatasetsDraw: function(chart) {
-      const ctx = chart.ctx;
-      
-      chart.data.datasets.forEach((dataset, datasetIndex) => {
-        // Skip if dataset isn't visible or doesn't have std data
-        const meta = chart.getDatasetMeta(datasetIndex);
-        if (!meta.visible) return;
-        
-        // Get std data stored in dataset
-        const stdData = dataset.stdData;
-        if (!stdData || !stdData.length) {
-          return;
-        }
-        
-        // Draw error bars for each data point
-        ctx.save();
-        // Use consistent thin black lines for all error bars
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
-        
-        meta.data.forEach((element, index) => {
-          const stdValue = stdData[index];
-          const value = dataset.data[index];
-          
-          // Skip if no std value or data point
-          if (stdValue === null || stdValue === undefined || value === null || value === undefined) {
-            return;
-          }
-          
-          console.log(`Drawing error bar for dataset ${datasetIndex}, index ${index}: value=${value}, std=${stdValue}`);
-          
-          // Get position for the current bar
-          const barX = element.x;
-          
-          // Get y scale
-          const yScale = chart.scales.y;
-          
-          // Calculate positions in pixels
-          const yCenter = element.y; // Center of the bar (value)
-          const yTop = yScale.getPixelForValue(value + stdValue); // Top of error bar
-          const yBottom = yScale.getPixelForValue(Math.max(0, value - stdValue)); // Bottom of error bar
-          
-          // Draw vertical line
-          ctx.beginPath();
-          ctx.moveTo(barX, yTop);
-          ctx.lineTo(barX, yBottom);
-          ctx.stroke();
-          
-          // Draw top whisker
-          ctx.beginPath();
-          ctx.moveTo(barX - 4, yTop);
-          ctx.lineTo(barX + 4, yTop);
-          ctx.stroke();
-          
-          // Draw bottom whisker
-          ctx.beginPath();
-          ctx.moveTo(barX - 4, yBottom);
-          ctx.lineTo(barX + 4, yBottom);
-          ctx.stroke();
-        });
-        
-        ctx.restore();
-      });
-    }
-  };
-  
   const chartConfig = {
     type: 'bar',
     data: chartData,
-    plugins: [errorBarPlugin],
+    plugins: [],
     options: {
       responsive: true,
       maintainAspectRatio: false,
@@ -2718,6 +2553,18 @@ function renderRobotVQAAvgSimilarityScoreChart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(3)}`;
+              }
+            }
           }
         }
       },
@@ -2823,18 +2670,33 @@ function renderRobotVQAHighSimilarityPercentageChart(data, canvas) {
   const ctx = canvas.getContext('2d');
   
   // Create single dataset with model values
-  const modelValues = [];
+  const originalValues = [];
   
   v1Models.forEach((model, index) => {
     const modelData = getModelData(data, model);
     if (!modelData || !modelData.high_similarity_percentage) {
       console.warn(`No high similarity percentage data found for model ${model}`);
-      modelValues.push(0);
+      originalValues.push(0);
       return;
     }
     
     // Use the first value from high_similarity_percentage array (assuming it's the overall percentage)
-    modelValues.push(modelData.high_similarity_percentage[0]);
+    originalValues.push(modelData.high_similarity_percentage[0]);
+  });
+  
+  // Calculate minimum visible value (1% of the max value, or 0.1 if max is very small)
+  const dataMax = Math.max(...originalValues);
+  const minVisibleValue = Math.max(0.1, dataMax * 0.01);
+  
+  // Create display values that ensure small values are visible
+  const displayValues = originalValues.map(value => {
+    if (value === 0) {
+      return minVisibleValue;
+    } else if (value < minVisibleValue) {
+      return minVisibleValue * 1.5; // Make non-zero small values 50% bigger than minimum
+    } else {
+      return value;
+    }
   });
   
   const colors = [
@@ -2851,7 +2713,8 @@ function renderRobotVQAHighSimilarityPercentageChart(data, canvas) {
   
   const datasets = [{
     label: 'High Quality Predictions (%)',
-    data: modelValues,
+    data: displayValues,
+    originalData: originalValues, // Store original values for tooltips
     backgroundColor: colors,
     borderColor: borderColors,
     borderWidth: 2,
@@ -2859,12 +2722,8 @@ function renderRobotVQAHighSimilarityPercentageChart(data, canvas) {
     borderSkipped: false
   }];
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
-  const dataMin = Math.min(...allValues);
-  
   const maxValue = Math.min(100.0, getNiceMaxValue(dataMax, 100.0)); // Cap at 100% for percentages
-  const minValue = Math.max(0.0, dataMin * 0.9);
+  const minValue = Math.max(0.0, Math.min(...originalValues) * 0.9);
   
   const chartData = {
     labels: v1Models.map(model => v1ModelDisplayNames[model]),
@@ -2890,6 +2749,18 @@ function renderRobotVQAHighSimilarityPercentageChart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(1)}%`;
+              }
+            }
           }
         }
       },
@@ -3042,6 +2913,17 @@ function renderODinWPart1Chart(data, canvas) {
       return null;
     }
     
+    const originalValues = modelData.exact_match_rate.slice(0, 12);
+    
+    // Calculate minimum visible value for this model's data
+    const dataMax = Math.max(...originalValues);
+    const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
+    
     const colors = [
       'rgba(54, 162, 235, 0.7)',   // Blue for GPT-5
       'rgba(255, 99, 132, 0.7)',   // Red for Pi0
@@ -3056,7 +2938,8 @@ function renderODinWPart1Chart(data, canvas) {
     
     return {
         label: v1ModelDisplayNames[model],
-        data: modelData.exact_match_rate.slice(0, 12),
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -3067,9 +2950,9 @@ function renderODinWPart1Chart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  // Calculate dynamic y-axis max
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
+  const allOriginalValues = datasets.flatMap(d => d.originalData);
+  const dataMax = Math.max(...allOriginalValues);
   const maxValue = getNiceMaxValue(dataMax, 1.0);
   
   const chartData = {
@@ -3097,6 +2980,18 @@ function renderODinWPart1Chart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${(originalValue * 100).toFixed(1)}%`;
+              }
+            }
           }
         }
       },
@@ -3197,6 +3092,17 @@ function renderODinWPart2Chart(data, canvas) {
       return null;
     }
     
+    const originalValues = modelData.exact_match_rate.slice(12, 24);
+    
+    // Calculate minimum visible value for this model's data
+    const dataMax = Math.max(...originalValues);
+    const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
+    
     const colors = [
       'rgba(54, 162, 235, 0.7)',   // Blue for GPT-5
       'rgba(255, 99, 132, 0.7)',   // Red for Pi0
@@ -3211,7 +3117,8 @@ function renderODinWPart2Chart(data, canvas) {
     
     return {
         label: v1ModelDisplayNames[model],
-        data: modelData.exact_match_rate.slice(0, 12),
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -3222,9 +3129,9 @@ function renderODinWPart2Chart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  // Calculate dynamic y-axis max
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
+  const allOriginalValues = datasets.flatMap(d => d.originalData);
+  const dataMax = Math.max(...allOriginalValues);
   const maxValue = getNiceMaxValue(dataMax, 1.0);
   
   const chartData = {
@@ -3252,6 +3159,18 @@ function renderODinWPart2Chart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${(originalValue * 100).toFixed(1)}%`;
+              }
+            }
           }
         }
       },
@@ -3392,6 +3311,17 @@ function renderODinWMacroPrecisionPart1Chart(data, canvas) {
       return null;
     }
     
+    const originalValues = modelData.macro_precision.slice(0, 12);
+    
+    // Calculate minimum visible value for this model's data
+    const dataMax = Math.max(...originalValues);
+    const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
+    
     const colors = [
       'rgba(54, 162, 235, 0.7)',
       'rgba(255, 99, 132, 0.7)',
@@ -3406,7 +3336,8 @@ function renderODinWMacroPrecisionPart1Chart(data, canvas) {
     
     return {
         label: v1ModelDisplayNames[model],
-        data: modelData.macro_precision.slice(0, 12),
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -3417,8 +3348,9 @@ function renderODinWMacroPrecisionPart1Chart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
+  const allOriginalValues = datasets.flatMap(d => d.originalData);
+  const dataMax = Math.max(...allOriginalValues);
   const maxValue = getNiceMaxValue(dataMax, 1.0);
   
   const chartData = {
@@ -3446,6 +3378,18 @@ function renderODinWMacroPrecisionPart1Chart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${(originalValue * 100).toFixed(1)}%`;
+              }
+            }
           }
         }
       },
@@ -3541,6 +3485,17 @@ function renderODinWMacroPrecisionPart2Chart(data, canvas) {
       return null;
     }
     
+    const originalValues = modelData.macro_precision.slice(12, 24);
+    
+    // Calculate minimum visible value for this model's data
+    const dataMax = Math.max(...originalValues);
+    const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
+    
     const colors = [
       'rgba(54, 162, 235, 0.7)',
       'rgba(255, 99, 132, 0.7)',
@@ -3555,7 +3510,8 @@ function renderODinWMacroPrecisionPart2Chart(data, canvas) {
     
     return {
         label: v1ModelDisplayNames[model],
-        data: modelData.macro_precision.slice(12, 24),
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -3566,8 +3522,9 @@ function renderODinWMacroPrecisionPart2Chart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
+  const allOriginalValues = datasets.flatMap(d => d.originalData);
+  const dataMax = Math.max(...allOriginalValues);
   const maxValue = getNiceMaxValue(dataMax, 1.0);
   
   const chartData = {
@@ -3595,6 +3552,18 @@ function renderODinWMacroPrecisionPart2Chart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${(originalValue * 100).toFixed(1)}%`;
+              }
+            }
           }
         }
       },
@@ -3733,6 +3702,17 @@ function renderODinWMacroRecallPart1Chart(data, canvas) {
       return null;
     }
     
+    const originalValues = modelData.macro_recall.slice(0, 12);
+    
+    // Calculate minimum visible value for this model's data
+    const dataMax = Math.max(...originalValues);
+    const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
+    
     const colors = [
       'rgba(54, 162, 235, 0.7)',
       'rgba(255, 99, 132, 0.7)',
@@ -3747,7 +3727,8 @@ function renderODinWMacroRecallPart1Chart(data, canvas) {
     
     return {
         label: v1ModelDisplayNames[model],
-        data: modelData.macro_recall.slice(0, 12),
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -3758,8 +3739,9 @@ function renderODinWMacroRecallPart1Chart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
+  const allOriginalValues = datasets.flatMap(d => d.originalData);
+  const dataMax = Math.max(...allOriginalValues);
   const maxValue = getNiceMaxValue(dataMax, 1.0);
   
   const chartData = {
@@ -3787,6 +3769,18 @@ function renderODinWMacroRecallPart1Chart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${(originalValue * 100).toFixed(1)}%`;
+              }
+            }
           }
         }
       },
@@ -3882,6 +3876,17 @@ function renderODinWMacroRecallPart2Chart(data, canvas) {
       return null;
     }
     
+    const originalValues = modelData.macro_recall.slice(12, 24);
+    
+    // Calculate minimum visible value for this model's data
+    const dataMax = Math.max(...originalValues);
+    const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
+    
     const colors = [
       'rgba(54, 162, 235, 0.7)',
       'rgba(255, 99, 132, 0.7)',
@@ -3896,7 +3901,8 @@ function renderODinWMacroRecallPart2Chart(data, canvas) {
     
     return {
         label: v1ModelDisplayNames[model],
-        data: modelData.macro_recall.slice(12, 24),
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -3907,8 +3913,9 @@ function renderODinWMacroRecallPart2Chart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
+  const allOriginalValues = datasets.flatMap(d => d.originalData);
+  const dataMax = Math.max(...allOriginalValues);
   const maxValue = getNiceMaxValue(dataMax, 1.0);
   
   const chartData = {
@@ -3936,6 +3943,18 @@ function renderODinWMacroRecallPart2Chart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${(originalValue * 100).toFixed(1)}%`;
+              }
+            }
           }
         }
       },
@@ -4051,12 +4070,24 @@ function renderODinWMacroF1Part1Chart(data, canvas) {
       return null;
     }
     
+    const originalValues = modelData.macro_f1.slice(0, 12);
+    
+    // Calculate minimum visible value for this model's data
+    const dataMax = Math.max(...originalValues);
+    const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
+    
     const colors = ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)', 'rgba(255, 206, 86, 0.7)'];
     const borderColors = ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)'];
     
     return {
         label: v1ModelDisplayNames[model],
-        data: modelData.macro_f1.slice(0, 12),
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -4067,8 +4098,9 @@ function renderODinWMacroF1Part1Chart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
+  const allOriginalValues = datasets.flatMap(d => d.originalData);
+  const dataMax = Math.max(...allOriginalValues);
   const maxValue = getNiceMaxValue(dataMax, 1.0);
   
   const chartConfig = {
@@ -4084,6 +4116,18 @@ function renderODinWMacroF1Part1Chart(data, canvas) {
           text: 'Macro F1 on ODinW Sub-Datasets (Part 1 of 2)',
           font: { size: 16, weight: 'bold' },
           padding: { bottom: 20 }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${(originalValue * 100).toFixed(1)}%`;
+              }
+            }
+          }
         }
       },
       scales: {
@@ -4134,12 +4178,24 @@ function renderODinWMacroF1Part2Chart(data, canvas) {
       return null;
     }
     
+    const originalValues = modelData.macro_f1.slice(12, 24);
+    
+    // Calculate minimum visible value for this model's data
+    const dataMax = Math.max(...originalValues);
+    const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
+    
     const colors = ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)', 'rgba(255, 206, 86, 0.7)'];
     const borderColors = ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)'];
     
     return {
         label: v1ModelDisplayNames[model],
-        data: modelData.macro_f1.slice(12, 24),
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -4150,8 +4206,9 @@ function renderODinWMacroF1Part2Chart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
+  const allOriginalValues = datasets.flatMap(d => d.originalData);
+  const dataMax = Math.max(...allOriginalValues);
   const maxValue = getNiceMaxValue(dataMax, 1.0);
   
   const chartConfig = {
@@ -4167,6 +4224,18 @@ function renderODinWMacroF1Part2Chart(data, canvas) {
           text: 'Macro F1 on ODinW Sub-Datasets (Part 2 of 2)',
           font: { size: 16, weight: 'bold' },
           padding: { bottom: 20 }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${(originalValue * 100).toFixed(1)}%`;
+              }
+            }
+          }
         }
       },
       scales: {
@@ -4231,6 +4300,19 @@ function renderODinWInvalidPercentagePart1Chart(data, canvas) {
   const allDatasetNames = data.gpt5.dataset_name;
   const datasetNames = allDatasetNames.slice(0, 12);
   
+  // First, collect all original values to calculate a global minimum visible value
+  const allOriginalValues = [];
+  v1Models.forEach(model => {
+    const modelData = getModelData(data, model);
+    if (modelData && modelData.percentage_invalids) {
+      allOriginalValues.push(...modelData.percentage_invalids.slice(0, 12));
+    }
+  });
+  
+  // Calculate minimum visible value based on overall data range
+  const dataMax = Math.max(...allOriginalValues);
+  const minVisibleValue = Math.max(0.1, dataMax * 0.01);
+  
   const datasets = v1Models.map((model, index) => {
     const modelData = getModelData(data, model);
     if (!modelData || !modelData.percentage_invalids) {
@@ -4238,12 +4320,20 @@ function renderODinWInvalidPercentagePart1Chart(data, canvas) {
       return null;
     }
     
+    const originalValues = modelData.percentage_invalids.slice(0, 12);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
+    
     const colors = ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)', 'rgba(255, 206, 86, 0.7)'];
     const borderColors = ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)'];
     
     return {
         label: v1ModelDisplayNames[model],
-        data: modelData.percentage_invalids.slice(0, 12),
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -4254,8 +4344,7 @@ function renderODinWInvalidPercentagePart1Chart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
   const maxValue = Math.min(100, Math.max(10, dataMax * 1.1)); // Cap at 100% for invalid percentage
   
   const chartConfig = {
@@ -4271,6 +4360,18 @@ function renderODinWInvalidPercentagePart1Chart(data, canvas) {
           text: 'Invalid Percentage on ODinW Sub-Datasets (Part 1 of 2)',
           font: { size: 16, weight: 'bold' },
           padding: { bottom: 20 }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(1)}%`;
+              }
+            }
+          }
         }
       },
       scales: {
@@ -4314,6 +4415,19 @@ function renderODinWInvalidPercentagePart2Chart(data, canvas) {
   const allDatasetNames = data.gpt5.dataset_name;
   const datasetNames = allDatasetNames.slice(12, 24);
   
+  // First, collect all original values to calculate a global minimum visible value
+  const allOriginalValues = [];
+  v1Models.forEach(model => {
+    const modelData = getModelData(data, model);
+    if (modelData && modelData.percentage_invalids) {
+      allOriginalValues.push(...modelData.percentage_invalids.slice(12, 24));
+    }
+  });
+  
+  // Calculate minimum visible value based on overall data range
+  const dataMax = Math.max(...allOriginalValues);
+  const minVisibleValue = Math.max(0.1, dataMax * 0.01);
+  
   const datasets = v1Models.map((model, index) => {
     const modelData = getModelData(data, model);
     if (!modelData || !modelData.percentage_invalids) {
@@ -4321,12 +4435,20 @@ function renderODinWInvalidPercentagePart2Chart(data, canvas) {
       return null;
     }
     
+    const originalValues = modelData.percentage_invalids.slice(12, 24);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
+    
     const colors = ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)', 'rgba(255, 206, 86, 0.7)'];
     const borderColors = ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)'];
     
     return {
         label: v1ModelDisplayNames[model],
-        data: modelData.percentage_invalids.slice(12, 24),
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -4337,8 +4459,7 @@ function renderODinWInvalidPercentagePart2Chart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
   const maxValue = Math.min(100, Math.max(10, dataMax * 1.1)); // Cap at 100% for invalid percentage
   
   const chartConfig = {
@@ -4354,6 +4475,18 @@ function renderODinWInvalidPercentagePart2Chart(data, canvas) {
           text: 'Invalid Percentage on ODinW Sub-Datasets (Part 2 of 2)',
           font: { size: 16, weight: 'bold' },
           padding: { bottom: 20 }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(1)}%`;
+              }
+            }
+          }
         }
       },
       scales: {
@@ -4545,6 +4678,23 @@ function renderBFCLv3InvalidTurnPercentageChart(data, canvas) {
       return null;
     }
     
+    const originalValues = modelData.invalid_turn_percentage;
+    
+    // Calculate minimum visible value for this model's data (percentage)
+    const dataMax = Math.max(...originalValues);
+    const minVisibleValue = Math.max(0.1, dataMax * 0.01);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => {
+      if (value === 0) {
+        return minVisibleValue;
+      } else if (value < minVisibleValue) {
+        return minVisibleValue * 1.5; // Make non-zero small values 50% bigger than minimum
+      } else {
+        return value;
+      }
+    });
+    
     const colors = [
       'rgba(255, 206, 86, 0.7)',
       'rgba(255, 99, 132, 0.7)'
@@ -4557,7 +4707,8 @@ function renderBFCLv3InvalidTurnPercentageChart(data, canvas) {
     
     return {
         label: bfclv3ModelDisplayNames[model],
-        data: modelData.invalid_turn_percentage,
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -4566,8 +4717,9 @@ function renderBFCLv3InvalidTurnPercentageChart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
+  const allOriginalValues = datasets.flatMap(d => d.originalData);
+  const dataMax = Math.max(...allOriginalValues);
   const maxValue = getNiceMaxValue(dataMax, 100.0); // Cap at 100%
   
   const chartData = {
@@ -4595,6 +4747,18 @@ function renderBFCLv3InvalidTurnPercentageChart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(1)}%`;
+              }
+            }
           }
         }
       },
@@ -4714,6 +4878,23 @@ function renderBFCLv3InvalidConversationPercentageChart(data, canvas) {
       return null;
     }
     
+    const originalValues = modelData.invalid_conversation_percentage;
+    
+    // Calculate minimum visible value for this model's data (percentage)
+    const dataMax = Math.max(...originalValues);
+    const minVisibleValue = Math.max(0.1, dataMax * 0.01);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => {
+      if (value === 0) {
+        return minVisibleValue;
+      } else if (value < minVisibleValue) {
+        return minVisibleValue * 1.5; // Make non-zero small values 50% bigger than minimum
+      } else {
+        return value;
+      }
+    });
+    
     const colors = [
       'rgba(255, 206, 86, 0.7)',
       'rgba(255, 99, 132, 0.7)'
@@ -4726,7 +4907,8 @@ function renderBFCLv3InvalidConversationPercentageChart(data, canvas) {
     
     return {
         label: bfclv3ModelDisplayNames[model],
-        data: modelData.invalid_conversation_percentage,
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -4735,8 +4917,9 @@ function renderBFCLv3InvalidConversationPercentageChart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
+  const allOriginalValues = datasets.flatMap(d => d.originalData);
+  const dataMax = Math.max(...allOriginalValues);
   const maxValue = getNiceMaxValue(dataMax, 100.0); // Cap at 100%
   
   const chartData = {
@@ -4764,6 +4947,18 @@ function renderBFCLv3InvalidConversationPercentageChart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(1)}%`;
+              }
+            }
           }
         }
       },
@@ -4876,12 +5071,32 @@ function renderBFCLv3AvgValidPredictedFunctionsPerSampleChart(data, canvas) {
     'pi0': 'Pi0'
   };
   
+  // First, collect all original values to calculate a global minimum visible value
+  const allOriginalValues = [];
+  bfclv3Models.forEach(model => {
+    const modelData = data[model];
+    if (modelData && modelData.avg_valid_predicted_functions_per_sample) {
+      allOriginalValues.push(...modelData.avg_valid_predicted_functions_per_sample);
+    }
+  });
+  
+  // Calculate minimum visible value based on overall data range (decimal values)
+  const dataMax = Math.max(...allOriginalValues);
+  const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+  
   const datasets = bfclv3Models.map((model, index) => {
     const modelData = data[model];
     if (!modelData || !modelData.avg_valid_predicted_functions_per_sample) {
       console.warn(`No avg valid predicted functions per sample data found for model ${model}`);
       return null;
     }
+    
+    const originalValues = modelData.avg_valid_predicted_functions_per_sample;
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
     
     const colors = [
       'rgba(255, 206, 86, 0.7)',
@@ -4895,7 +5110,8 @@ function renderBFCLv3AvgValidPredictedFunctionsPerSampleChart(data, canvas) {
     
     return {
         label: bfclv3ModelDisplayNames[model],
-        data: modelData.avg_valid_predicted_functions_per_sample,
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -4904,8 +5120,7 @@ function renderBFCLv3AvgValidPredictedFunctionsPerSampleChart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
   const maxValue = getNiceMaxValue(dataMax, null); // No cap for function counts
   
   const chartData = {
@@ -4933,6 +5148,18 @@ function renderBFCLv3AvgValidPredictedFunctionsPerSampleChart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(3)}`;
+              }
+            }
           }
         }
       },
@@ -5047,12 +5274,32 @@ function renderBFCLv3HighSimilarityPercentageChart(data, canvas) {
     'pi0': 'Pi0'
   };
   
+  // First, collect all original values to calculate a global minimum visible value
+  const allOriginalValues = [];
+  bfclv3Models.forEach(model => {
+    const modelData = data[model];
+    if (modelData && modelData.high_similarity_percentage) {
+      allOriginalValues.push(...modelData.high_similarity_percentage);
+    }
+  });
+  
+  // Calculate minimum visible value based on overall data range
+  const dataMax = Math.max(...allOriginalValues);
+  const minVisibleValue = Math.max(0.1, dataMax * 0.01);
+  
   const datasets = bfclv3Models.map((model, index) => {
     const modelData = data[model];
     if (!modelData || !modelData.high_similarity_percentage) {
       console.warn(`No high similarity percentage data found for model ${model}`);
       return null;
     }
+    
+    const originalValues = modelData.high_similarity_percentage;
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
     
     const colors = [
       'rgba(255, 206, 86, 0.7)',
@@ -5066,7 +5313,8 @@ function renderBFCLv3HighSimilarityPercentageChart(data, canvas) {
     
     return {
         label: bfclv3ModelDisplayNames[model],
-        data: modelData.high_similarity_percentage,
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -5075,8 +5323,7 @@ function renderBFCLv3HighSimilarityPercentageChart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
   const maxValue = getNiceMaxValue(dataMax, 100.0); // Cap at 100%
   
   const chartData = {
@@ -5104,6 +5351,18 @@ function renderBFCLv3HighSimilarityPercentageChart(data, canvas) {
           },
           padding: {
             bottom: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(1)}%`;
+              }
+            }
           }
         }
       },
@@ -5237,6 +5496,23 @@ function renderOpenXActionSuccessRateChart(data, canvas) {
     
     console.log(`Action success rate for ${model}:`, modelData.action_success_rate);
     
+    const originalValues = modelData.action_success_rate;
+    
+    // Calculate minimum visible value for this model's data (percentage)
+    const dataMax = Math.max(...originalValues);
+    const minVisibleValue = Math.max(0.1, dataMax * 0.01);
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => {
+      if (value === 0) {
+        return minVisibleValue;
+      } else if (value < minVisibleValue) {
+        return minVisibleValue * 1.5; // Make non-zero small values 50% bigger than minimum
+      } else {
+        return value;
+      }
+    });
+    
     const colors = [
       'rgba(54, 162, 235, 0.7)',
       'rgba(255, 206, 86, 0.7)',
@@ -5251,7 +5527,8 @@ function renderOpenXActionSuccessRateChart(data, canvas) {
     
     const dataset = {
         label: v1ModelDisplayNames[model],
-        data: modelData.action_success_rate,
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -5267,9 +5544,10 @@ function renderOpenXActionSuccessRateChart(data, canvas) {
   
   console.log('Final datasets array:', datasets);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
-  console.log('OpenX Action Success Rate - All values:', allValues);
+  // Calculate dynamic y-axis max using original values
+  const allOriginalValues = datasets.flatMap(d => d.originalData);
+  const dataMax = Math.max(...allOriginalValues);
+  console.log('OpenX Action Success Rate - All original values:', allOriginalValues);
   console.log('OpenX Action Success Rate - Data max:', dataMax);
   
   // For very small values, use a smaller max to make them visible
@@ -5304,6 +5582,18 @@ function renderOpenXActionSuccessRateChart(data, canvas) {
         legend: {
           display: true,
           position: 'top'
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(1)}%`;
+              }
+            }
+          }
         }
       },
       scales: {
@@ -5394,6 +5684,19 @@ function renderOpenXInvalidPredictionsPercentageChart(data, canvas) {
   }
   console.log('OpenX Invalid Predictions Percentage - Dataset names:', datasetNames);
   
+  // First, collect all original values to calculate a global minimum visible value
+  const allOriginalValues = [];
+  v1Models.forEach(model => {
+    const modelData = data[model];
+    if (modelData && modelData.invalid_predictions_percentage) {
+      allOriginalValues.push(...modelData.invalid_predictions_percentage);
+    }
+  });
+  
+  // Calculate minimum visible value based on overall data range (percentage)
+  const dataMax = Math.max(...allOriginalValues);
+  const minVisibleValue = Math.max(0.1, dataMax * 0.01);
+  
   const datasets = v1Models.map((model, index) => {
     console.log(`Processing model: ${model}`);
     const modelData = data[model];
@@ -5405,6 +5708,13 @@ function renderOpenXInvalidPredictionsPercentageChart(data, canvas) {
     }
     
     console.log(`Invalid predictions percentage for ${model}:`, modelData.invalid_predictions_percentage);
+    
+    const originalValues = modelData.invalid_predictions_percentage;
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
     
     const colors = [
       'rgba(54, 162, 235, 0.7)',
@@ -5420,7 +5730,8 @@ function renderOpenXInvalidPredictionsPercentageChart(data, canvas) {
     
     const dataset = {
         label: v1ModelDisplayNames[model],
-        data: modelData.invalid_predictions_percentage,
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -5436,9 +5747,8 @@ function renderOpenXInvalidPredictionsPercentageChart(data, canvas) {
   
   console.log('Final datasets array:', datasets);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
-  console.log('OpenX Invalid Predictions Percentage - All values:', allValues);
+  // Use the already calculated dataMax from global calculation
+  console.log('OpenX Invalid Predictions Percentage - All original values:', allOriginalValues);
   console.log('OpenX Invalid Predictions Percentage - Data max:', dataMax);
   
   // For invalid percentage, cap at 100% and ensure minimum scale for visibility
@@ -5473,6 +5783,18 @@ function renderOpenXInvalidPredictionsPercentageChart(data, canvas) {
         legend: {
           display: true,
           position: 'top'
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(1)}%`;
+              }
+            }
+          }
         }
       },
       scales: {
@@ -5558,12 +5880,32 @@ function renderOpenXMeanAbsoluteErrorChart(data, canvas) {
     }
   }
   
+  // First, collect all original values to calculate a global minimum visible value
+  const allOriginalValues = [];
+  v1Models.forEach(model => {
+    const modelData = data[model];
+    if (modelData && modelData.total_dataset_amae) {
+      allOriginalValues.push(...modelData.total_dataset_amae);
+    }
+  });
+  
+  // Calculate minimum visible value based on overall data range (decimal values)
+  const dataMax = Math.max(...allOriginalValues);
+  const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+  
   const datasets = v1Models.map((model, index) => {
     const modelData = data[model];
     if (!modelData || !modelData.total_dataset_amae) {
       console.warn(`No total dataset AMAE data found for model ${model}`);
       return null;
     }
+    
+    const originalValues = modelData.total_dataset_amae;
+    
+    // Create display values that ensure small values are visible
+    const displayValues = originalValues.map(value => 
+      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
+    );
     
     const colors = [
       'rgba(54, 162, 235, 0.7)',
@@ -5579,7 +5921,8 @@ function renderOpenXMeanAbsoluteErrorChart(data, canvas) {
     
     return {
         label: v1ModelDisplayNames[model],
-        data: modelData.total_dataset_amae,
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -5590,8 +5933,7 @@ function renderOpenXMeanAbsoluteErrorChart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
   const maxValue = getNiceMaxValue(dataMax, null); // No cap for raw MAE values
   
   const chartData = {
@@ -5617,6 +5959,18 @@ function renderOpenXMeanAbsoluteErrorChart(data, canvas) {
         legend: {
           display: true,
           position: 'top'
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(3)}`;
+              }
+            }
+          }
         }
       },
       scales: {
@@ -5691,12 +6045,40 @@ function renderOpenXNormalizedMaeChart(data, canvas) {
     }
   }
   
+  // First, collect all original values to calculate a global minimum visible value
+  const allOriginalValues = [];
+  v1Models.forEach(model => {
+    const modelData = data[model];
+    if (modelData && modelData.normalized_amae) {
+      allOriginalValues.push(...modelData.normalized_amae);
+    }
+  });
+  
+  // Filter out null values for calculating dataMax and minVisibleValue
+  const validValues = allOriginalValues.filter(value => value !== null);
+  const dataMax = validValues.length > 0 ? Math.max(...validValues) : 0;
+  const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+  
   const datasets = v1Models.map((model, index) => {
     const modelData = data[model];
     if (!modelData || !modelData.normalized_amae) {
       console.warn(`No normalized AMAE data found for model ${model}`);
       return null;
     }
+    
+    // Keep null values as null (no bar will be displayed)
+    const originalValues = modelData.normalized_amae;
+    
+    // Create display values that ensure small values are visible, but keep null as null
+    const displayValues = originalValues.map(value => {
+      if (value === null) {
+        return null; // Keep null values as null (no bar will be displayed)
+      } else if (value === 0) {
+        return minVisibleValue;
+      } else {
+        return Math.max(value, minVisibleValue);
+      }
+    });
     
     const colors = [
       'rgba(54, 162, 235, 0.7)',
@@ -5710,12 +6092,10 @@ function renderOpenXNormalizedMaeChart(data, canvas) {
       'rgba(255, 99, 132, 1)'
     ];
     
-    // Handle null values by converting them to 0
-    const processedData = modelData.normalized_amae.map(val => val === null ? 0 : val);
-    
     return {
         label: v1ModelDisplayNames[model],
-        data: processedData,
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -5726,8 +6106,7 @@ function renderOpenXNormalizedMaeChart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
   const maxValue = getNiceMaxValue(dataMax, 1.0); // Cap at 1.0 for normalized values
   
   const chartData = {
@@ -5753,6 +6132,18 @@ function renderOpenXNormalizedMaeChart(data, canvas) {
         legend: {
           display: true,
           position: 'top'
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(3)}`;
+              }
+            }
+          }
         }
       },
       scales: {
@@ -5827,12 +6218,40 @@ function renderOpenXNormalizedQuantileFilteredMaeChart(data, canvas) {
     }
   }
   
+  // First, collect all original values to calculate a global minimum visible value
+  const allOriginalValues = [];
+  v1Models.forEach(model => {
+    const modelData = data[model];
+    if (modelData && modelData.normalized_quantile_filtered_amae) {
+      allOriginalValues.push(...modelData.normalized_quantile_filtered_amae);
+    }
+  });
+  
+  // Filter out null values for calculating dataMax and minVisibleValue
+  const validValues = allOriginalValues.filter(value => value !== null);
+  const dataMax = validValues.length > 0 ? Math.max(...validValues) : 0;
+  const minVisibleValue = Math.max(0.01, dataMax * 0.01);
+  
   const datasets = v1Models.map((model, index) => {
     const modelData = data[model];
     if (!modelData || !modelData.normalized_quantile_filtered_amae) {
       console.warn(`No normalized quantile filtered AMAE data found for model ${model}`);
       return null;
     }
+    
+    // Keep null values as null (no bar will be displayed)
+    const originalValues = modelData.normalized_quantile_filtered_amae;
+    
+    // Create display values that ensure small values are visible, but keep null as null
+    const displayValues = originalValues.map(value => {
+      if (value === null) {
+        return null; // Keep null values as null (no bar will be displayed)
+      } else if (value === 0) {
+        return minVisibleValue;
+      } else {
+        return Math.max(value, minVisibleValue);
+      }
+    });
     
     const colors = [
       'rgba(54, 162, 235, 0.7)',
@@ -5846,12 +6265,10 @@ function renderOpenXNormalizedQuantileFilteredMaeChart(data, canvas) {
       'rgba(255, 99, 132, 1)'
     ];
     
-    // Handle null values by converting them to 0
-    const processedData = modelData.normalized_quantile_filtered_amae.map(val => val === null ? 0 : val);
-    
     return {
         label: v1ModelDisplayNames[model],
-        data: processedData,
+        data: displayValues,
+        originalData: originalValues, // Store original values for tooltips
         backgroundColor: colors[index],
         borderColor: borderColors[index],
         borderWidth: 2,
@@ -5862,8 +6279,7 @@ function renderOpenXNormalizedQuantileFilteredMaeChart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  const allValues = datasets.flatMap(d => d.data);
-  const dataMax = Math.max(...allValues);
+  // Calculate dynamic y-axis max using original values
   const maxValue = getNiceMaxValue(dataMax, 1.0); // Cap at 1.0 for normalized values
   
   const chartData = {
@@ -5889,6 +6305,18 @@ function renderOpenXNormalizedQuantileFilteredMaeChart(data, canvas) {
         legend: {
           display: true,
           position: 'top'
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const originalValue = context.dataset.originalData[context.dataIndex];
+              if (originalValue === null) {
+                return `${context.dataset.label}: N/A (no data available)`;
+              } else {
+                return `${context.dataset.label}: ${originalValue.toFixed(3)}`;
+              }
+            }
+          }
         }
       },
       scales: {

@@ -1124,11 +1124,186 @@
       -webkit-overflow-scrolling: touch; /* Smoother scrolling on mobile */
       padding-bottom: 10px; /* Give some space for scrollbar */
     }
+
+    /* Model Output Visualization Styles */
+    .model-output-container {
+      display: grid;
+      grid-template-columns: 450px 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+      align-items: stretch;
+      justify-content: start;
+    }
+
+    .image-question-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .image-container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .model-output-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      height: 100%;
+    }
+
+    .model-tabs-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .model-tabs {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .model-tab-button {
+      display: block;
+      flex: 1;
+      min-width: 80px;
+      padding: 0.75rem;
+      margin: 0;
+      text-align: left;
+      background: #f5f5f5;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .model-tab-button.active {
+      background: #363636;
+      color: white;
+    }
+
+    .model-tab-button:hover:not(.active) {
+      background: #e8e8e8;
+    }
+
+    .output-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .model-output-box {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 1rem;
+      background: #fafafa;
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: flex-start;
+      font-size: 1rem;
+      line-height: 1.5;
+      position: relative;
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background-color: #333;
+      margin-left: 2px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* Responsive styles for model output visualization */
+    @media (max-width: 768px) {
+      .model-output-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .model-output-section {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .model-tabs {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      
+      .model-tab-button {
+        flex: 1;
+        min-width: 80px;
+        text-align: center;
+      }
+    }
+
+    /* Confusion Matrix Styles */
+    .confusion-matrix-section {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #pi0-confusion-matrix-container {
+      position: relative;
+      padding: 5px 40px 15px 80px;
+      width: 100%;
+      max-width: 1000px;
+      height: auto;
+      overflow: visible;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Hide scrollbars while maintaining functionality */
+    #pi0-confusion-matrix-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    #pi0-confusion-matrix-container {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
+    /* Style for confusion matrix labels */
+    #pi0-confusion-matrix-container > div {
+      position: absolute;
+      z-index: 2;
+    }
+
+    #pi0-confusion-matrix-container > div:first-child {
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #pi0-confusion-matrix-container > div:last-child {
+      left: 5px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+    }
   </style>
   <!-- Add Chart.js before our custom script -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@4.1.0/dist/chartjs-chart-matrix.umd.min.js"></script>
   <script src="../js/v1_metrics_plots.js"></script>
+  <script src="../js/v1_pi0_confusion_matrix.js"></script>
 
   <style>
     .metrics-container {
@@ -2536,6 +2711,77 @@
 </div>
 </section>
 
+  <!-- Model Output Visualization Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h3 class="title is-4 has-text-centered">Model Output Comparison</h3>
+            <p class="has-text-centered" style="margin-bottom: 2rem;">
+              Compare how different models respond to the same visual input from the ODinW selfdrivingCar dataset
+            </p>
+            
+            <div class="model-output-container">
+              <!-- Left side: Image and Question -->
+              <div class="image-question-section">
+                <p class="has-text-weight-semibold" style="margin-bottom: 0.5rem; text-align: left; align-self: flex-start;">Input</p>
+                <div class="image-container">
+                  <img src="../images/odinw_car_pic.jpg" alt="Sample image for model comparison" style="width: 100%; max-width: 400px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+                <p class="prompt-text" style="margin-top: 1.5rem; font-weight: 500; text-align: left; background: #eaf4ff; border: 1px solid #cfe3ff; padding: 12px; border-radius: 6px; width: 100%; max-width: 400px;">What object is shown in this image from the selfdrivingCar dataset?<br>Option 0: biker Option 1: car ...<br>Output the number (0-10) of the correct option only.</p>
+              </div>
+              
+              <!-- Right side: Model Tabs and Output -->
+              <div class="model-output-section">
+                <div class="model-tabs-container">
+                  <p class="has-text-weight-semibold" style="margin-bottom: 0.5rem;">Model</p>
+                  <div class="model-tabs">
+                    <button class="model-tab-button active" data-model="gpt5">GPT5</button>
+                    <button class="model-tab-button" data-model="pi0">Pi0</button>
+                    <button class="model-tab-button" data-model="magma">Magma</button>
+                  </div>
+                </div>
+                
+                <div class="output-container">
+                  <p class="has-text-weight-semibold" style="margin-bottom: 0.5rem;">Output</p>
+                  <div class="model-output-box" id="model-output">
+                    Loading...
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confusion Matrix Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h3 class="title is-4 has-text-centered">Pi0's prediction space collapse visualized</h3>
+            <p class="has-text-centered" style="margin-bottom: 2rem;">
+              Pi0 experiences prediction space collapse on the Overcooked dataset, centered around the action 24, which maps to (Player 1: STAY, Player 2: NORTH)
+            </p>
+            
+            <div class="confusion-matrix-section">
+              <div id="pi0-confusion-matrix-container">
+                <canvas id="pi0-confusion-matrix-canvas"></canvas>
+              </div>
+              <p class="has-text-centered" style="margin-top: 1rem; font-style: italic; color: #666;">
+                Frequency of predicted action classes for Pi0 model on Overcooked dataset
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered"> 
@@ -3125,6 +3371,80 @@
       lightbox.classList.remove('active');
       document.body.style.overflow = ''; // Restore scrolling
     }
+
+    // Model Output Visualization JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+      const modelButtons = document.querySelectorAll('.model-tab-button');
+      const outputBox = document.getElementById('model-output');
+      let modelData = {};
+      let animatedModels = new Set();
+      let currentTypingTimeout = null;
+
+      // Fetch model output data
+      fetch('../data/visualize_odinw_outputs.json')
+        .then(response => response.json())
+        .then(data => {
+          modelData = data;
+          // Initialize with GPT5 output
+          updateOutput('gpt5');
+        })
+        .catch(error => {
+          console.error('Error loading model data:', error);
+          outputBox.textContent = 'Error loading model data';
+        });
+
+      // Handle tab button clicks
+      modelButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const model = this.getAttribute('data-model');
+          
+          // Remove active class from all buttons
+          modelButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          // Update output
+          updateOutput(model);
+        });
+      });
+
+      function updateOutput(model) {
+        // Cancel any ongoing typing animation
+        if (currentTypingTimeout) {
+          clearTimeout(currentTypingTimeout);
+          currentTypingTimeout = null;
+        }
+        
+        const text = modelData[model] || 'No output available for this model';
+        
+        if (!animatedModels.has(model)) {
+          // First time for this model: show typing animation
+          typeText(outputBox, text);
+          animatedModels.add(model);
+        } else {
+          // Subsequent times for this model: show text instantly
+          outputBox.textContent = text;
+        }
+      }
+
+      function typeText(element, text, speed = 17) {
+        element.textContent = '';
+        let i = 0;
+        
+        function typeChar() {
+          if (i < text.length) {
+            element.textContent = text.substring(0, i + 1);
+            i++;
+            currentTypingTimeout = setTimeout(typeChar, speed);
+          } else {
+            currentTypingTimeout = null;
+          }
+        }
+        
+        typeChar();
+      }
+    });
   </script>
 </div>
 </body>
