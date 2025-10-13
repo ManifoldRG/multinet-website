@@ -6050,14 +6050,13 @@ function renderOpenXNormalizedMaeChart(data, canvas) {
   v1Models.forEach(model => {
     const modelData = data[model];
     if (modelData && modelData.normalized_amae) {
-      // Handle null values by converting them to 0 for calculation
-      const processedValues = modelData.normalized_amae.map(val => val === null ? 0 : val);
-      allOriginalValues.push(...processedValues);
+      allOriginalValues.push(...modelData.normalized_amae);
     }
   });
   
-  // Calculate minimum visible value based on overall data range (decimal values)
-  const dataMax = Math.max(...allOriginalValues);
+  // Filter out null values for calculating dataMax and minVisibleValue
+  const validValues = allOriginalValues.filter(value => value !== null);
+  const dataMax = validValues.length > 0 ? Math.max(...validValues) : 0;
   const minVisibleValue = Math.max(0.01, dataMax * 0.01);
   
   const datasets = v1Models.map((model, index) => {
@@ -6067,13 +6066,19 @@ function renderOpenXNormalizedMaeChart(data, canvas) {
       return null;
     }
     
-    // Handle null values by converting them to 0
-    const originalValues = modelData.normalized_amae.map(val => val === null ? 0 : val);
+    // Keep null values as null (no bar will be displayed)
+    const originalValues = modelData.normalized_amae;
     
-    // Create display values that ensure small values are visible
-    const displayValues = originalValues.map(value => 
-      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
-    );
+    // Create display values that ensure small values are visible, but keep null as null
+    const displayValues = originalValues.map(value => {
+      if (value === null) {
+        return null; // Keep null values as null (no bar will be displayed)
+      } else if (value === 0) {
+        return minVisibleValue;
+      } else {
+        return Math.max(value, minVisibleValue);
+      }
+    });
     
     const colors = [
       'rgba(54, 162, 235, 0.7)',
@@ -6218,14 +6223,13 @@ function renderOpenXNormalizedQuantileFilteredMaeChart(data, canvas) {
   v1Models.forEach(model => {
     const modelData = data[model];
     if (modelData && modelData.normalized_quantile_filtered_amae) {
-      // Handle null values by converting them to 0 for calculation
-      const processedValues = modelData.normalized_quantile_filtered_amae.map(val => val === null ? 0 : val);
-      allOriginalValues.push(...processedValues);
+      allOriginalValues.push(...modelData.normalized_quantile_filtered_amae);
     }
   });
   
-  // Calculate minimum visible value based on overall data range (decimal values)
-  const dataMax = Math.max(...allOriginalValues);
+  // Filter out null values for calculating dataMax and minVisibleValue
+  const validValues = allOriginalValues.filter(value => value !== null);
+  const dataMax = validValues.length > 0 ? Math.max(...validValues) : 0;
   const minVisibleValue = Math.max(0.01, dataMax * 0.01);
   
   const datasets = v1Models.map((model, index) => {
@@ -6235,13 +6239,19 @@ function renderOpenXNormalizedQuantileFilteredMaeChart(data, canvas) {
       return null;
     }
     
-    // Handle null values by converting them to 0
-    const originalValues = modelData.normalized_quantile_filtered_amae.map(val => val === null ? 0 : val);
+    // Keep null values as null (no bar will be displayed)
+    const originalValues = modelData.normalized_quantile_filtered_amae;
     
-    // Create display values that ensure small values are visible
-    const displayValues = originalValues.map(value => 
-      value === 0 ? minVisibleValue : Math.max(value, minVisibleValue)
-    );
+    // Create display values that ensure small values are visible, but keep null as null
+    const displayValues = originalValues.map(value => {
+      if (value === null) {
+        return null; // Keep null values as null (no bar will be displayed)
+      } else if (value === 0) {
+        return minVisibleValue;
+      } else {
+        return Math.max(value, minVisibleValue);
+      }
+    });
     
     const colors = [
       'rgba(54, 162, 235, 0.7)',
