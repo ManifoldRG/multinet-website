@@ -34,7 +34,7 @@ const taskInfo = {
   'RobotVQA': { fullName: 'Robot VQA', metric: 'EM' },
   'PIQA': { fullName: 'PIQA', metric: 'EM' },
   'OdinW': { fullName: 'OdinW', metric: 'F1' },
-  'BFCL': { fullName: 'BFCL', metric: 'EM' }
+  'BFCL': { fullName: 'BFCLv3', metric: 'EM' }
 };
 
 // Calculate wins for a model
@@ -210,10 +210,18 @@ function renderTable() {
                     }
                   }
                   
+                  // Handle display for different score types
+                  let displayValue;
+                  if (score === "N/A" || score === null || score === undefined || isNaN(score)) {
+                    displayValue = task === 'BFCL' ? 'N/A*' : 'N/A';
+                  } else {
+                    displayValue = task === 'OpenX' ? score.toFixed(3) : (score * 100).toFixed(1);
+                  }
+                  
                   return `
                     <td class="score-cell ${taskIdx === 0 ? 'first-in-group' : ''} ${taskIdx === tasks.length - 1 ? 'last-in-group' : ''}">
                       <div class="score-content">
-                        <span class="score-value ${isWinner ? 'winner' : ''}">${task === 'OpenX' ? score.toFixed(3) : (score * 100).toFixed(1)}</span>
+                        <span class="score-value ${isWinner ? 'winner' : ''}">${displayValue}</span>
                         ${isWinner ? '<span class="trophy">🏆</span>' : ''}
                       </div>
                     </td>

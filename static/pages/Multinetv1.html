@@ -1973,10 +1973,20 @@
     }
 
     .legend-metrics,
-    .legend-indicators {
+    .legend-indicators,
+    .legend-notes {
       display: flex;
       flex-direction: column;
       gap: 4px;
+    }
+    
+    .legend-notes a {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+    
+    .legend-notes a:hover {
+      color: #1d4ed8;
     }
 
     /* Mobile Responsive */
@@ -3080,6 +3090,12 @@
                       <span>Best score per task</span>
                     </div>
                     <div><strong>Wins:</strong> Number of tasks where model scored highest</div>
+                  </div>
+                </div>
+                <div class="column">
+                  <h4 class="title is-6">Notes:</h4>
+                  <div class="legend-notes">
+                    <div><strong>*</strong> We did not profile GPT5 on BFCLv3 with this release. See <a href="https://gorilla.cs.berkeley.edu/leaderboard.html" target="_blank" rel="noopener noreferrer">Gorilla leaderboard</a> for BFCLv4 results.</div>
                   </div>
                 </div>
               </div>
