@@ -1304,6 +1304,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@4.1.0/dist/chartjs-chart-matrix.umd.min.js"></script>
   <script src="../js/v1_metrics_plots.js"></script>
   <script src="../js/v1_pi0_confusion_matrix.js"></script>
+  <script src="../js/v1_leaderboard_table.js"></script>
 
   <style>
     .metrics-container {
@@ -1698,6 +1699,315 @@
       .dataset-coverage-table .dataset-image:hover {
         transform: none;
         z-index: 1;
+      }
+    }
+
+    /* Leaderboard Table Styles */
+    .leaderboard-table-container {
+      overflow-x: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: white;
+    }
+
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      font-size: 14px;
+    }
+
+    .leaderboard-table th,
+    .leaderboard-table td {
+      padding: 12px 8px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+    }
+
+    .leaderboard-table th {
+      background: #f8f9fa;
+      font-weight: 600;
+      color: #374151;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .rank-header,
+    .model-header {
+      background: #f1f5f9 !important;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .group-header {
+      font-weight: 700;
+      color: #1e293b;
+      border-left: 3px solid;
+      border-right: 3px solid;
+      text-align: center !important;
+    }
+
+    .group-header.border-purple-500 {
+      border-color: #8b5cf6;
+      background: #f3e8ff;
+    }
+
+    .group-header.border-blue-500 {
+      border-color: #3b82f6;
+      background: #eff6ff;
+    }
+
+    .group-header.border-cyan-500 {
+      border-color: #06b6d4;
+      background: #ecfeff;
+    }
+
+    .group-header.border-emerald-500 {
+      border-color: #10b981;
+      background: #ecfdf5;
+    }
+
+    .group-header.border-amber-500 {
+      border-color: #f59e0b;
+      background: #fffbeb;
+    }
+
+    .leaderboard-table .group-header {
+      text-align: center !important;
+    }
+
+    .task-header {
+      cursor: pointer;
+      transition: background-color 0.2s;
+      position: relative;
+    }
+
+    .task-header:hover {
+      background: #e5e7eb;
+    }
+
+    .task-header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .task-name {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .sort-icon {
+      font-size: 12px;
+      color: #9ca3af;
+      transition: color 0.2s;
+    }
+
+    .task-header.sortable:hover .sort-icon {
+      color: #6b7280;
+    }
+
+    .metric-name {
+      font-size: 10px;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+
+    .wins-header {
+      background: #f1f5f9 !important;
+      font-weight: 700;
+      color: #1e293b;
+      border-left: 2px solid #6b7280;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .wins-header:hover {
+      background: #e5e7eb !important;
+    }
+
+    .wins-header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .wins-title {
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .wins-metric {
+      font-size: 10px;
+      color: #6b7280;
+    }
+
+    .model-row {
+      transition: background-color 0.2s;
+    }
+
+    .model-row:hover {
+      background: #f8f9fa;
+    }
+
+    .model-row.first-place {
+      background: linear-gradient(90deg, #fef3c7 0%, transparent 100%);
+    }
+
+    .model-row.second-place {
+      background: linear-gradient(90deg, #f3f4f6 0%, transparent 100%);
+    }
+
+    .model-row.third-place {
+      background: linear-gradient(90deg, #fed7aa 0%, transparent 100%);
+    }
+
+    .rank-cell {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .rank-badge {
+      display: inline-block;
+    }
+
+    .model-cell {
+      text-align: left;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .model-name {
+      font-size: 16px;
+    }
+
+    .score-cell {
+      position: relative;
+    }
+
+    .score-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .score-value {
+      font-weight: 600;
+      color: #374151;
+      font-size: 15px;
+    }
+
+    .score-value.winner {
+      color: #059669;
+      font-weight: 700;
+    }
+
+    .trophy {
+      font-size: 12px;
+    }
+
+    .wins-cell {
+      font-weight: 700;
+      color: #059669;
+      font-size: 16px;
+    }
+
+    .wins-value {
+      color: #059669;
+    }
+
+    .first-in-group {
+      border-left: 2px solid #6b7280;
+    }
+
+    .last-in-group {
+      border-right: 2px solid #6b7280;
+    }
+
+    /* Legend Styles */
+    .leaderboard-legend {
+      font-size: 14px;
+    }
+
+    .legend-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .legend-color.purple {
+      background: #8b5cf6;
+    }
+
+    .legend-color.blue {
+      background: #3b82f6;
+    }
+
+    .legend-color.cyan {
+      background: #06b6d4;
+    }
+
+    .legend-color.emerald {
+      background: #10b981;
+    }
+
+    .legend-color.amber {
+      background: #f59e0b;
+    }
+
+    .legend-metrics,
+    .legend-indicators {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    /* Mobile Responsive */
+    @media screen and (max-width: 768px) {
+      .leaderboard-table {
+        font-size: 12px;
+      }
+
+      .leaderboard-table th,
+      .leaderboard-table td {
+        padding: 8px 4px;
+      }
+
+      .task-name {
+        font-size: 11px;
+      }
+
+      .metric-name {
+        font-size: 9px;
+      }
+
+      .model-name {
+        font-size: 14px;
+      }
+
+      .score-value {
+        font-size: 13px;
+      }
+
+      .leaderboard-legend .columns {
+        flex-direction: column;
       }
     }
   </style>
@@ -2710,6 +3020,75 @@
   </div>
 </div>
 </section>
+
+  <!-- Leaderboard Table Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h3 class="title is-4 has-text-centered">Model Performance Leaderboard</h3>
+            <p class="has-text-centered" style="margin-bottom: 2rem;">
+              Comprehensive evaluation across 7 benchmark tasks.
+            </p>
+            
+            <div id="leaderboard-container">
+              Loading leaderboard data...
+            </div>
+            
+            <!-- Legend -->
+            <div class="leaderboard-legend" style="margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
+              <div class="columns">
+                <div class="column">
+                  <h4 class="title is-6">Task Groups:</h4>
+                  <div class="legend-items">
+                    <div class="legend-item">
+                      <span class="legend-color purple"></span>
+                      <span>Robotics Control</span>
+                    </div>
+                    <div class="legend-item">
+                      <span class="legend-color blue"></span>
+                      <span>Digital Control</span>
+                    </div>
+                    <div class="legend-item">
+                      <span class="legend-color cyan"></span>
+                      <span>Spatial Reasoning</span>
+                    </div>
+                    <div class="legend-item">
+                      <span class="legend-color emerald"></span>
+                      <span>Image Classification</span>
+                    </div>
+                    <div class="legend-item">
+                      <span class="legend-color amber"></span>
+                      <span>Tool Use</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <h4 class="title is-6">Metrics:</h4>
+                  <div class="legend-metrics">
+                    <div><strong>EM:</strong> Exact Match Rate (%)</div>
+                    <div><strong>F1:</strong> Macro F1 Score (%)</div>
+                    <div><strong>MAE:</strong> Mean Absolute Error</div>
+                  </div>
+                </div>
+                <div class="column">
+                  <h4 class="title is-6">Visual Indicators:</h4>
+                  <div class="legend-indicators">
+                    <div class="legend-item">
+                      <span class="trophy">🏆</span>
+                      <span>Best score per task</span>
+                    </div>
+                    <div><strong>Wins:</strong> Number of tasks where model scored highest</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Model Output Visualization Section -->
   <section class="section">

@@ -1,0 +1,83 @@
+{
+  "results": {
+    "magma": {
+      "OpenX": 1.498,
+      "Overcooked": 0.0,
+      "SQA3D": 0.3446685878962536,
+      "RobotVQA": 0.0825,
+      "PIQA": 0.6945048121701335,
+      "OdinW": 0.205,
+      "BFCL": 0.0
+    },
+    "pi0": {
+      "OpenX": 0.315,
+      "Overcooked": 0.016592306604544492,
+      "SQA3D": 0.0,
+      "RobotVQA": 0.0,
+      "PIQA": 0.0,
+      "OdinW": 0.0,
+      "BFCL": 0.0
+    },
+    "gpt5": {
+      "OpenX": 0.185,
+      "Overcooked": 0.015191734824455926,
+      "SQA3D": 0.4763688760806916,
+      "RobotVQA": 0.28,
+      "PIQA": 0.9577508543025784,
+      "OdinW": 0.283,
+      "BFCL": "N/A"
+    }
+  },
+  "taskGroups": {
+    "Robotics Control": {
+      "tasks": ["OpenX"],
+      "color": "purple"
+    },
+    "Digital Control": {
+      "tasks": ["Overcooked"],
+      "color": "blue"
+    },
+    "Spatial Reasoning": {
+      "tasks": ["SQA3D", "RobotVQA", "PIQA"],
+      "color": "cyan"
+    },
+    "Image Classification": {
+      "tasks": ["OdinW"],
+      "color": "emerald"
+    },
+    "Tool Use": {
+      "tasks": ["BFCL"],
+      "color": "amber"
+    }
+  },
+  "taskInfo": {
+    "OpenX": {
+      "fullName": "OpenX",
+      "metric": "MAE"
+    },
+    "Overcooked": {
+      "fullName": "Overcooked",
+      "metric": "EM"
+    },
+    "SQA3D": {
+      "fullName": "SQA3D",
+      "metric": "EM"
+    },
+    "RobotVQA": {
+      "fullName": "Robot VQA",
+      "metric": "EM"
+    },
+    "PIQA": {
+      "fullName": "PIQA",
+      "metric": "EM"
+    },
+    "OdinW": {
+      "fullName": "OdinW",
+      "metric": "F1"
+    },
+    "BFCL": {
+      "fullName": "BFCL",
+      "metric": "EM"
+    }
+  }
+}
