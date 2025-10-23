@@ -259,7 +259,11 @@ function renderTable() {
 
 // Initialize leaderboard
 function initializeLeaderboard() {
-  fetch('../data/v1_leaderboard_metrics.json')
+  // Determine the correct path based on the current page location
+  const isHomePage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
+  const dataPath = isHomePage ? 'static/data/v1_leaderboard_metrics.json' : '../data/v1_leaderboard_metrics.json';
+  
+  fetch(dataPath)
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

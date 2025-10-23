@@ -25,9 +25,9 @@
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="MultiNet is a generalist benchmark for evaluating multimodal action models across vision, language, and action, consolidating diverse datasets and offering tools and metrics for standardized assessment.">
-  <meta property="og:title" content="MultiNet: A Generalist Benchmark for the Next Generation of Multimodal Models"/>
-  <meta property="og:description" content="MultiNet is a generalist benchmark for evaluating multimodal action models across vision, language, and action, consolidating diverse datasets and offering tools and metrics for standardized assessment."/>
+  <meta name="description" content="MultiNet is a comprehensive benchmark for evaluating multimodal generalization in next generation models across vision, language, and action, revealing critical insights into model capabilities and failure modes at distribution boundaries.">
+  <meta property="og:title" content="MultiNet: Evaluating Multimodal Generalization in Next Generation Models"/>
+  <meta property="og:description" content="MultiNet is a comprehensive benchmark for evaluating multimodal generalization in next generation models across vision, language, and action, revealing critical insights into model capabilities and failure modes at distribution boundaries."/>
   <meta property="og:url" content="https://multinet.ai/"/>
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
   <meta property="og:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg" />
@@ -36,17 +36,17 @@
 
 
 
-  <meta name="twitter:title" content="MultiNet: A Generalist Benchmark for the Next Generation of Multimodal Models">
-  <meta name="twitter:description" content="MultiNet is a generalist benchmark for evaluating multimodal action models across vision, language, and action, consolidating diverse datasets and offering tools and metrics for standardized assessment.">
+  <meta name="twitter:title" content="MultiNet: Evaluating Multimodal Generalization in Next Generation Models">
+  <meta name="twitter:description" content="MultiNet is a comprehensive benchmark for evaluating multimodal generalization in next generation models across vision, language, and action, revealing critical insights into model capabilities and failure modes at distribution boundaries.">
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
   <meta name="twitter:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="Generalist Benchmark, Multimodal Action Models, Vision, Language, Action, Robotics, Reinforcement Learning, Machine Learning, Artificial Intelligence, Benchmarking">
+  <meta name="keywords" content="Multimodal Generalization, Next Generation Models, Vision-Language-Action, Model Evaluation, Distribution Boundaries, Robotics, Reinforcement Learning, Machine Learning, Artificial Intelligence, Benchmarking">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <title>Multinet</title>
+  <title>MultiNet: Evaluating Multimodal Generalization in Next Generation Models</title>
   <link rel="icon" type="image/x-icon" href="static/images/multinet_logo_square.png"> 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
@@ -873,6 +873,325 @@
         font-size: 1.6rem !important;
       }
     }
+
+    /* Leaderboard Table Styles */
+    .leaderboard-table-container {
+      overflow-x: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: white;
+    }
+
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      font-size: 14px;
+    }
+
+    .leaderboard-table th,
+    .leaderboard-table td {
+      padding: 12px 8px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+    }
+
+    .leaderboard-table th {
+      background: #f8f9fa;
+      font-weight: 600;
+      color: #374151;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .rank-header,
+    .model-header {
+      background: #f1f5f9 !important;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .group-header {
+      font-weight: 700;
+      color: #1e293b;
+      border-left: 3px solid;
+      border-right: 3px solid;
+      text-align: center !important;
+    }
+
+    .group-header.border-purple-500 {
+      border-color: #8b5cf6;
+      background: #f3e8ff;
+    }
+
+    .group-header.border-blue-500 {
+      border-color: #3b82f6;
+      background: #eff6ff;
+    }
+
+    .group-header.border-cyan-500 {
+      border-color: #06b6d4;
+      background: #ecfeff;
+    }
+
+    .group-header.border-emerald-500 {
+      border-color: #10b981;
+      background: #ecfdf5;
+    }
+
+    .group-header.border-amber-500 {
+      border-color: #f59e0b;
+      background: #fffbeb;
+    }
+
+    .leaderboard-table .group-header {
+      text-align: center !important;
+    }
+
+    .task-header {
+      cursor: pointer;
+      transition: background-color 0.2s;
+      position: relative;
+    }
+
+    .task-header:hover {
+      background: #e5e7eb;
+    }
+
+    .task-header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .task-name {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .sort-icon {
+      font-size: 12px;
+      color: #9ca3af;
+      transition: color 0.2s;
+    }
+
+    .task-header.sortable:hover .sort-icon {
+      color: #6b7280;
+    }
+
+    .metric-name {
+      font-size: 10px;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+
+    .wins-header {
+      background: #f1f5f9 !important;
+      font-weight: 700;
+      color: #1e293b;
+      border-left: 2px solid #6b7280;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .wins-header:hover {
+      background: #e5e7eb !important;
+    }
+
+    .wins-header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .wins-title {
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .wins-metric {
+      font-size: 10px;
+      color: #6b7280;
+    }
+
+    .model-row {
+      transition: background-color 0.2s;
+    }
+
+    .model-row:hover {
+      background: #f8f9fa;
+    }
+
+    .model-row.first-place {
+      background: linear-gradient(90deg, #fef3c7 0%, transparent 100%);
+    }
+
+    .model-row.second-place {
+      background: linear-gradient(90deg, #f3f4f6 0%, transparent 100%);
+    }
+
+    .model-row.third-place {
+      background: linear-gradient(90deg, #fed7aa 0%, transparent 100%);
+    }
+
+    .rank-cell {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .rank-badge {
+      display: inline-block;
+    }
+
+    .model-cell {
+      text-align: left;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .model-name {
+      font-size: 16px;
+    }
+
+    .score-cell {
+      position: relative;
+    }
+
+    .score-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .score-value {
+      font-weight: 600;
+      color: #374151;
+      font-size: 15px;
+    }
+
+    .score-value.winner {
+      color: #059669;
+      font-weight: 700;
+    }
+
+    .trophy {
+      font-size: 12px;
+    }
+
+    .wins-cell {
+      font-weight: 700;
+      color: #059669;
+      font-size: 16px;
+    }
+
+    .wins-value {
+      color: #059669;
+    }
+
+    .first-in-group {
+      border-left: 2px solid #6b7280;
+    }
+
+    .last-in-group {
+      border-right: 2px solid #6b7280;
+    }
+
+    /* Legend Styles */
+    .leaderboard-legend {
+      font-size: 14px;
+    }
+
+    .legend-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .legend-color.purple {
+      background: #8b5cf6;
+    }
+
+    .legend-color.blue {
+      background: #3b82f6;
+    }
+
+    .legend-color.cyan {
+      background: #06b6d4;
+    }
+
+    .legend-color.emerald {
+      background: #10b981;
+    }
+
+    .legend-color.amber {
+      background: #f59e0b;
+    }
+
+    .legend-metrics,
+    .legend-indicators,
+    .legend-notes {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .legend-notes a {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+    
+    .legend-notes a:hover {
+      color: #1d4ed8;
+    }
+
+    /* Mobile Responsive */
+    @media screen and (max-width: 768px) {
+      .leaderboard-table {
+        font-size: 12px;
+      }
+
+      .leaderboard-table th,
+      .leaderboard-table td {
+        padding: 8px 4px;
+      }
+
+      .task-name {
+        font-size: 11px;
+      }
+
+      .metric-name {
+        font-size: 9px;
+      }
+
+      .model-name {
+        font-size: 14px;
+      }
+
+      .rank-cell {
+        font-size: 16px;
+      }
+
+      .score-value {
+        font-size: 13px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -972,7 +1291,7 @@
     </a>
     <a href="#BibTeX" class="nav-item">
       <span class="icon"><i class="fas fa-quote-right"></i></span>
-      <span class="nav-text">Citations</span>
+      <span class="nav-text">Citation</span>
     </a>
   </div>
 </div>
@@ -999,16 +1318,16 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">MultiNet: A Generalist Benchmark for the Next Generation of Multimodal Models</h1>
+            <h1 class="title is-1 publication-title">MultiNet: Evaluating Multimodal Generalization in Next Generation Models</h1>
             <div class="is-size-5 publication-authors">
               <!-- Collaborators/Partners Section -->
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <p class="has-text-centered collaborators-description is-size-">Multinet is an open science initiative with contributions from leading research teams at instituitions like:</p>
+          <p class="has-text-centered collaborators-description is-size-">Multinet is an open science initiative with contributions from leading research teams at institutions like:</p>
           <div class="collaborator-logos">
             <a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/metarchlogo.jpg" alt="Metarch.ai Logo" class="collaborator-logo">
+              <img src="static/images/fig_logo.png" alt="Fig AI Logo" class="collaborator-logo" style="max-height: 55px; max-width: 100px;">
             </a>
             <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
               <img src="static/images/manifoldlogo.png" alt="Manifold Research Logo" class="collaborator-logo">
@@ -1017,7 +1336,7 @@
               <img src="static/images/mitlogo_alt.png" alt="MIT Logo" class="collaborator-logo">
             </a>
             <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/gtlogo_alt.png" alt="Georgia Tech Logo" class="collaborator-logo">
+              <img src="static/images/GeorgiaTech_RGB.png" alt="Georgia Tech Logo" class="collaborator-logo">
             </a>
             <a href="https://www.tufts.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
               <img src="static/images/tuftslogo.jpg" alt="Tufts Logo" class="collaborator-logo">
@@ -1043,14 +1362,14 @@
       <div class="columns is-centered">
           <div class="column">
               <div class="content has-text-justified">
-                <h2 class="title is-3 has-text-centered">Research and Software for evaluating Next Generation Multimodal Models</h2>
-                      <p><a href="static/pages/Multinet.html">Multinet</a> is a comprehensive benchmarking initiative for evaluating generalist multimodal models across vision, language, and action. It provides:</p>
+                <h2 class="title is-3 has-text-centered">Research and Software for evaluating Next Generation Model Generalization on Diverse Multimodal Tasks </h2>
+                      <p><a href="static/pages/Multinet.html">Multinet</a> is a comprehensive benchmarking initiative for evaluating multimodal models across vision, language, and action tasks. It provides:</p>
                       <ul style="margin-left: 2em; margin-top: 0.75em; list-style-type: disc;">
-                          <li>Well-reasoned and curated set of evaluation datasets to assess multimodal understanding and action taking capabilities of SoTA multimodal models</li>
-                          <li>Varied evaluation tasks including Common Sense Reasoning, Object Detection in the wild, Spatial Reasoning, Visual Question Answering, Robotics, and complex Multi-Agent game-playing</li>
-                          <li>Open-source toolkit to standardize the process of obtaining and utilizing data from various sources and of different formats</li>
-                          <li>Open-source adaptations of diverse models to various out-of-distribution task domains</li>
-                          <li>Comprehensive evaluation protocols for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets</li>
+                          <li><strong>Well-reasoned and curated set of evaluation datasets</strong> to assess multimodal understanding and action taking capabilities of SoTA multimodal models</li>
+                          <li><strong>Varied evaluation tasks</strong> including Common Sense Reasoning, Object Detection in the wild, Spatial Reasoning, Visual Question Answering, Robotics, and complex Multi-Agent game-playing</li>
+                          <li><strong>Open-source toolkit</strong> to standardize the process of obtaining and utilizing data from various sources and of different formats</li>
+                          <li><strong>Open-source adaptations of diverse models</strong> to various out-of-distribution task domains</li>
+                          <li><strong>Comprehensive evaluation protocols</strong> for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets</li>
                       </ul>
                   </p>
               </div>
@@ -1058,6 +1377,95 @@
       </div>
   </div>
 </section>
+
+  <!-- Leaderboard Table Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h3 class="title is-4 has-text-centered">Multinet v1.0 Leaderboard</h3>
+            <p class="has-text-centered" style="margin-bottom: 2rem;">
+              Evaluation across 7 diverse tasks across robotics, digital control, and multimodal reasoning.
+            </p>
+            
+            <div id="leaderboard-container">
+              Loading leaderboard data...
+            </div>
+            
+            <!-- Collapsible Legend -->
+            <div class="leaderboard-legend" style="margin-top: 2rem;">
+              <div class="collapsible-trigger" style="cursor: pointer; user-select: none; padding: 1rem 1.5rem; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef; display: flex; align-items: center; justify-content: space-between;">
+                <h4 class="title is-6" style="margin: 0;">Leaderboard Legend and Notes</h4>
+                <span class="collapsible-icon" style="transition: transform 0.3s ease;">▼</span>
+              </div>
+              <div class="collapsible-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 0 0 8px 8px; border: 1px solid #e9ecef; border-top: none;">
+                  <p style="margin-bottom: 1.5rem;">
+                    To learn more about our preliminary analysis and methodology, check out our 
+                    <a href="static/pages/Multinetv1.html">V1 analysis page</a> and 
+                    <a href="https://arxiv.org/pdf/2505.05540" target="_blank">Technical report</a>. 
+                    To have your model evaluated, please reach out to <a href="mailto:pranav@metarch.ai">pranav@metarch.ai</a>
+                  </p>
+                  <div class="columns">
+                    <div class="column">
+                      <h4 class="title is-6">Task Groups:</h4>
+                      <div class="legend-items">
+                        <div class="legend-item">
+                          <span class="legend-color purple"></span>
+                          <span>Robotics Control</span>
+                        </div>
+                        <div class="legend-item">
+                          <span class="legend-color blue"></span>
+                          <span>Digital Control</span>
+                        </div>
+                        <div class="legend-item">
+                          <span class="legend-color cyan"></span>
+                          <span>Spatial Reasoning</span>
+                        </div>
+                        <div class="legend-item">
+                          <span class="legend-color emerald"></span>
+                          <span>Image Classification</span>
+                        </div>
+                        <div class="legend-item">
+                          <span class="legend-color amber"></span>
+                          <span>Tool Use</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <h4 class="title is-6">Metrics:</h4>
+                      <div class="legend-metrics">
+                        <div><strong>EM:</strong> Exact Match Rate (%)</div>
+                        <div><strong>F1:</strong> Macro F1 Score (%)</div>
+                        <div><strong>MAE:</strong> Mean Absolute Error</div>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <h4 class="title is-6">Visual Indicators:</h4>
+                      <div class="legend-indicators">
+                        <div class="legend-item">
+                          <span class="trophy">🏆</span>
+                          <span>Best score per task</span>
+                        </div>
+                        <div><strong>Wins:</strong> Number of tasks where model scored highest</div>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <h4 class="title is-6">Notes:</h4>
+                      <div class="legend-notes">
+                        <div><strong>*</strong> We did not profile GPT5 on BFCLv3 with this release. See <a href="https://gorilla.cs.berkeley.edu/leaderboard.html" target="_blank" rel="noopener noreferrer">Gorilla leaderboard</a> for BFCLv4 results.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Flip Cards Section -->
   <section class="section">
@@ -1097,7 +1505,30 @@
               </a>
             </div>
 
-            <!-- Card 2: Previous Benchmark Releases (Consolidated v0.1 and v0.2) -->
+            <!-- Card 2: Technical Report -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="https://blog.fig.inc/measuring-multimodal-generalization-in-reasoning-and-robotics-models/" target="_blank" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">Technical Report</h3>
+                      <p>Preliminary Analysis from Benchmarking SoTA Reasoning and Robotics Models on Multinet v1.0</p>
+                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-file-alt"></i></span>
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div> <!-- Content wrapper -->
+                          <h3 class="title is-4">Technical Report</h3>
+                          <p class="description-intro">Today's leading multimodal models promise general-purpose intelligence across vision, language, and action. Yet when we systematically evaluate them across diverse domains, a striking pattern emerges: catastrophic failure at the boundaries between their training distributions.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Card 3: Previous Benchmark Releases (Consolidated v0.1 and v0.2) -->
             <div class="column is-half-tablet is-one-third-desktop">
               <div class="flip-card-anchor" style="cursor: pointer;">
                 <div class="flip-card">
@@ -1134,7 +1565,7 @@
               </div>
             </div>
 
-            <!-- Card 3: Model Releases (Consolidated μGato and NEKO) -->
+            <!-- Card 4: Model Releases (Consolidated μGato and NEKO) -->
             <div class="column is-half-tablet is-one-third-desktop">
               <div class="flip-card-anchor" style="cursor: pointer;">
                 <div class="flip-card">
@@ -1171,7 +1602,7 @@
               </div>
             </div>
 
-            <!-- Card 4: Software Releases (Consolidated) -->
+            <!-- Card 5: Software Releases (Consolidated) -->
             <div class="column is-half-tablet is-one-third-desktop">
               <div class="flip-card-anchor" style="cursor: pointer;">
                 <div class="flip-card">
@@ -1473,7 +1904,7 @@
               <div class="news-item">
                 <div class="news-icon">🌟</div>
                 <div class="news-content">
-                  <p><strong>Multinet v1.0 released!</strong> We release our most comprehensive benchmark yet - evaluating a SoTA VLM, VLA, and generalist model on a wide variety of multimodal understanding and action datasets. Read more <a href="static/pages/Multinetv1.html">here</a>.</p>
+                  <p><strong>Multinet v1.0 released!</strong> We release our most comprehensive benchmark yet - evaluating a SoTA VLM, VLA, and generalist models on a wide variety of multimodal understanding and action datasets. Read more <a href="static/pages/Multinetv1.html">here</a>.</p>
                 </div>
               </div>
               <div class="news-item">
@@ -1497,7 +1928,7 @@
               <div class="news-item">
                 <div class="news-icon">🚀</div>
                 <div class="news-content">
-                  <p><strong>Introducing Multinet!</strong> A new generalist benchmark to evaluate Vision-Language & Action models. <a href="static/pages/Multinet.html">Learn more here</a>.</p>
+                  <p><strong>Introducing Multinet!</strong> A comprehensive benchmark for evaluating multimodal generalization in next generation models. <a href="static/pages/Multinet.html">Learn more here</a>.</p>
                 </div>
               </div>
               </div>
@@ -1807,58 +2238,51 @@
   <!-- BibTeX Section -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
-      <h2 class="title has-text-centered">Citations</h2>
-      <pre><code>
-        <strong>Multinet v0.2 - Benchmarking Vision, Language, & Action Models in Procedurally Generated, Open Ended Action Environments</strong>
-        <br>
-        @misc{guruprasad2025benchmarkingvisionlanguage,
-        title={Benchmarking Vision, Language, & Action Models in Procedurally Generated, Open Ended Action Environments}, 
-        author={Pranav Guruprasad and Yangyue Wang and Sudipta Chowdhury and Harshvardhan Sikka},
-        year={2025},
-        eprint={2505.05540},
-        archivePrefix={arXiv},
-        primaryClass={cs.CV},
-        url={https://arxiv.org/abs/2505.05540}, 
-        }
-</code></pre>
-      <pre><code>
-        <strong>Open-Source Evaluation Harness and Toolkit (accepted at ICML 2025)</strong>
-        <br>
-        @misc{guruprasad2025opensourcesoftwaretoolkit,
-        title={An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models}, 
-        author={Pranav Guruprasad and Yangyue Wang and Sudipta Chowdhury and Jaewoo Song and Harshvardhan Sikka},
-        year={2025},
-        eprint={2506.09172},
-        archivePrefix={arXiv},
-        primaryClass={cs.LG},
-        url={https://arxiv.org/abs/2506.09172}, 
-        }
-</code></pre>
-      <pre><code>
-        <strong>Multinet v0.1 - Benchmarking Vision, Language, & Action Models on Robotic Learning Tasks</strong>
-        <br>
-        @misc{guruprasad2024benchmarkingvisionlanguage,
-        title={Benchmarking Vision, Language, & Action Models on Robotic Learning Tasks}, 
-        author={Pranav Guruprasad and Harshvardhan Sikka and Jaewoo Song and Yangyue Wang and Paul Pu Liang},
-        year={2024},
-        eprint={2411.05821},
-        archivePrefix={arXiv},
-        primaryClass={cs.RO},
-        url={https://arxiv.org/abs/2411.05821},
-        }
-</code></pre>
-      <pre><code>
-        <strong>Multinet Vision and Dataset specification</strong>
-        <br>
-        @misc{guruprasad2024benchmarking,
-        author={Guruprasad, Pranav and Sikka, Harshvardhan and Song, Jaewoo and Wang, Yangyue and Liang, Paul},
-        title={Benchmarking Vision, Language, & Action Models on Robotic Learning Tasks},
-        DOI={10.20944/preprints202411.0494.v1},
-        year={2024},
-        }
-</code></pre>
+      <h2 class="title has-text-centered">Citation</h2>
+      <pre><code>@article{guruprasad2025multinet,
+  author = {Pranav Guruprasad and Sudipta Chowdhury and Harshvardhan Sikka and Mridul Sharma and Helen Lu and Sean Rivera and Aryan Khurana and Yangyue Wang},
+  title = {MultiNet v1.0: A Comprehensive Benchmark for Evaluating Multimodal Reasoning and Action Models Across Diverse Domains},
+  journal = {Manifold Research Publications},
+  year = {2025},
+  note = {https://multinet.ai/static/pages/Multinetv1.html},
+  doi = {10.5281/zenodo.17404313}
+}</code></pre>
     </div>
   </section>
+
+  <footer class="footer" style="background-color: #363636;">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content" style="color: #fff;">
+            <div class="buttons is-centered mb-4">
+              <a href="https://blog.fig.inc/measuring-multimodal-generalization-in-reasoning-and-robotics-models/" class="button is-small is-dark" target="_blank">
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Technical Report</span>
+              </a>
+              <a href="https://github.com/ManifoldRG/MultiNet" class="button is-small is-dark" target="_blank">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </div>
+  
+            <p>For questions or issues, please <a href="https://github.com/ManifoldRG/MultiNet/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
+  
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 
 <!-- Statcounter tracking code -->
@@ -2191,6 +2615,29 @@
         if (isMobile()) {
             collapseSidebar();
         }
+    });
+  </script>
+  <script src="static/js/v1_leaderboard_table.js"></script>
+  <script>
+    // Handle collapsible legend functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const collapsibleTrigger = document.querySelector('.collapsible-trigger');
+      const collapsibleContent = document.querySelector('.collapsible-content');
+      const collapsibleIcon = document.querySelector('.collapsible-icon');
+      
+      if (collapsibleTrigger && collapsibleContent && collapsibleIcon) {
+        collapsibleTrigger.addEventListener('click', function() {
+          if (collapsibleContent.style.maxHeight === '0px' || !collapsibleContent.style.maxHeight) {
+            // Expand
+            collapsibleContent.style.maxHeight = collapsibleContent.scrollHeight + 'px';
+            collapsibleIcon.style.transform = 'rotate(180deg)';
+          } else {
+            // Collapse
+            collapsibleContent.style.maxHeight = '0px';
+            collapsibleIcon.style.transform = 'rotate(0deg)';
+          }
+        });
+      }
     });
   </script>
 </body>
