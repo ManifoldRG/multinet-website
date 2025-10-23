@@ -1,0 +1,3979 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP82HPYSRH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PP82HPYSRH');
+  </script>
+
+    <!-- PostHog Analytics Tag -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init be ws Ss me ys capture Ne calculateEventProperties xs register register_once register_for_session unregister unregister_for_session Rs getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Is ks createPersonProfile Ps bs opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing $s debug Es getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_9rIWbSBBOFBaUcdMWUniUtiuukyTgzgY0EaxK6dmNvo', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2025-05-24',
+        person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
+    })
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MultiNet v1.0: A Comprehensive Benchmark for Evaluating Multimodal Reasoning and Action Models Across Diverse Domains</title>
+  
+  <link rel="icon" type="image/x-icon" href="../images/multinet_logo_square.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../css/bulma.min.css">
+  <link rel="stylesheet" href="../css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="../css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="../css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="../js/fontawesome.all.min.js"></script>
+  <script src="../js/bulma-carousel.min.js"></script>
+  <script src="../js/bulma-slider.min.js"></script>
+  <script src="../js/index.js"></script>
+
+  <style>
+    /* Styles for Metric Flip Cards */
+    .flip-card-anchor-metric {
+      display: block;
+      width: 200px; /* Adjusted card width */
+      height: 180px; /* Adjusted card height */
+      margin: 0 auto 20px auto;
+      text-decoration: none;
+      color: inherit;
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+    }
+    .flip-card-anchor-metric:hover {
+      text-decoration: none;
+    }
+
+    .flip-card-metric {
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+      perspective: 1000px;
+    }
+
+    .flip-card-inner-metric {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      border-radius: 10px;
+    }
+
+    .flip-card-metric:hover .flip-card-inner-metric {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front-metric, .flip-card-back-metric {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 15px; /* Adjusted padding */
+      box-sizing: border-box; /* Ensures padding doesn't increase size */
+    }
+
+    .flip-card-front-metric {
+      background-color: #ffffff;
+      color: #363636;
+      border: 1px solid #dbdbdb;
+    }
+
+    .flip-card-front-metric .title.is-5,
+    .flip-card-back-metric .title.is-5 {
+      color: #005A9C; /* Consistent title color */
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      font-size: 1.1rem; /* Adjusted for smaller card */
+    }
+    
+    .flip-card-front-metric p,
+    .flip-card-back-metric p {
+      font-size: 0.75rem; /* Adjusted for smaller card */
+      color: #4a4a4a;
+      line-height: 1.3;
+    }
+    
+    .flip-card-back-metric p {
+      color: #f5f5f5; /* Lighter text for dark background */
+    }
+    .flip-card-back-metric p i { /* Style for the placeholder note */
+        color: #cccccc;
+    }
+
+    .flip-card-back-metric {
+      background: linear-gradient(135deg, #4A90E2 0%, #005A9C 100%); /* A nice blue gradient */
+      color: white;
+      transform: rotateY(180deg);
+      overflow-y: auto; /* Allow scrolling if content overflows */
+    }
+
+    /* Basic scrollbar for webkit if needed on back */
+    .flip-card-back-metric::-webkit-scrollbar {
+      width: 5px;
+    }
+    .flip-card-back-metric::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 2.5px;
+    }
+    .flip-card-back-metric::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 2.5px;
+    }
+
+    /* Metric Card Color Themes */
+    /* Card 1: Blue Theme (Default, but made explicit) */
+    .columns > .column:nth-child(1) .flip-card-front-metric .title.is-5 {
+      color: #005A9C;
+    }
+    .columns > .column:nth-child(1) .flip-card-back-metric {
+      background: linear-gradient(135deg, #4A90E2 0%, #005A9C 100%);
+    }
+
+    /* Card 2: Green Theme */
+    .columns > .column:nth-child(2) .flip-card-front-metric .title.is-5 {
+      color: #1E8449;
+    }
+    .columns > .column:nth-child(2) .flip-card-back-metric {
+      background: linear-gradient(135deg, #27AE60 0%, #1E8449 100%);
+    }
+
+    /* Card 3: Orange Theme */
+    .columns > .column:nth-child(3) .flip-card-front-metric .title.is-5 {
+      color: #D35400;
+    }
+    .columns > .column:nth-child(3) .flip-card-back-metric {
+      background: linear-gradient(135deg, #E67E22 0%, #D35400 100%);
+    }
+
+    /* Card 4: Purple Theme */
+    .columns > .column:nth-child(4) .flip-card-front-metric .title.is-5 {
+      color: #8E44AD;
+    }
+    .columns > .column:nth-child(4) .flip-card-back-metric {
+      background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%);
+    }
+
+    /* Card 5: Red Theme */
+    .columns > .column:nth-child(5) .flip-card-front-metric .title.is-5 {
+      color: #C0392B;
+    }
+    .columns > .column:nth-child(5) .flip-card-back-metric {
+      background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+    }
+
+    /* Card 6: Teal Theme */
+    .columns > .column:nth-child(6) .flip-card-front-metric .title.is-5 {
+      color: #00796B; /* Teal */
+    }
+    .columns > .column:nth-child(6) .flip-card-back-metric {
+      background: linear-gradient(135deg, #4DB6AC 0%, #00796B 100%); /* Teal gradient */
+    }
+
+    /* Card 7: Indigo Theme */
+    .columns > .column:nth-child(7) .flip-card-front-metric .title.is-5 {
+      color: #3F51B5; /* Indigo */
+    }
+    .columns > .column:nth-child(7) .flip-card-back-metric {
+      background: linear-gradient(135deg, #7986CB 0%, #3F51B5 100%); /* Indigo gradient */
+    }
+
+    /* Card 8: Pink/Magenta Theme */
+    .columns > .column:nth-child(8) .flip-card-front-metric .title.is-5 {
+      color: #D81B60; /* Pink/Magenta */
+    }
+    .columns > .column:nth-child(8) .flip-card-back-metric {
+      background: linear-gradient(135deg, #EC407A 0%, #D81B60 100%); /* Pink/Magenta gradient */
+    }
+
+    .flip-card-front-metric .metric-icon {
+      margin-bottom: 0.5rem; /* Space between icon and title */
+      color: #363636; /* Default icon color, will be overridden by theme */
+    }
+    /* Themed icon colors */
+    .columns > .column:nth-child(1) .flip-card-front-metric .metric-icon { color: #005A9C; }
+    .columns > .column:nth-child(2) .flip-card-front-metric .metric-icon { color: #1E8449; }
+    .columns > .column:nth-child(3) .flip-card-front-metric .metric-icon { color: #D35400; }
+    .columns > .column:nth-child(4) .flip-card-front-metric .metric-icon { color: #8E44AD; }
+    .columns > .column:nth-child(5) .flip-card-front-metric .metric-icon { color: #C0392B; }
+    .columns > .column:nth-child(6) .flip-card-front-metric .metric-icon { color: #00796B; }
+    .columns > .column:nth-child(7) .flip-card-front-metric .metric-icon { color: #3F51B5; }
+    .columns > .column:nth-child(8) .flip-card-front-metric .metric-icon { color: #D81B60; }
+
+    /* New color themes for cards 9-14 */
+    /* Card 9: Yellow/Amber Theme (Macro Precision) */
+    .columns > .column:nth-child(9) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(9) .flip-card-front-metric .metric-icon { color: #FFC107; }
+    .columns > .column:nth-child(9) .flip-card-back-metric {
+      background: linear-gradient(135deg, #FFD54F 0%, #FFC107 100%);
+    }
+
+    /* Card 10: Cyan Theme (Class-wise Precision) */
+    .columns > .column:nth-child(10) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(10) .flip-card-front-metric .metric-icon { color: #00BCD4; }
+    .columns > .column:nth-child(10) .flip-card-back-metric {
+      background: linear-gradient(135deg, #4DD0E1 0%, #00BCD4 100%);
+    }
+
+    /* Card 11: Lime Theme (Macro Recall) */
+    .columns > .column:nth-child(11) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(11) .flip-card-front-metric .metric-icon { color: #8BC34A; }
+    .columns > .column:nth-child(11) .flip-card-back-metric {
+      background: linear-gradient(135deg, #AED581 0%, #8BC34A 100%);
+    }
+
+    /* Card 12: Deep Purple Theme (Class-wise Recall) */
+    .columns > .column:nth-child(12) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(12) .flip-card-front-metric .metric-icon { color: #673AB7; }
+    .columns > .column:nth-child(12) .flip-card-back-metric {
+      background: linear-gradient(135deg, #9575CD 0%, #673AB7 100%);
+    }
+
+    /* Card 13: Brown Theme (Macro F1 Score) */
+    .columns > .column:nth-child(13) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(13) .flip-card-front-metric .metric-icon { color: #795548; }
+    .columns > .column:nth-child(13) .flip-card-back-metric {
+      background: linear-gradient(135deg, #A1887F 0%, #795548 100%);
+    }
+
+    /* Card 14: Slate/Grey Theme (Class-wise F1 Score) */
+    .columns > .column:nth-child(14) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(14) .flip-card-front-metric .metric-icon { color: #607D8B; }
+    .columns > .column:nth-child(14) .flip-card-back-metric {
+      background: linear-gradient(135deg, #90A4AE 0%, #607D8B 100%);
+    }
+
+    /* Additional color themes for new categories (Cards 15-22) */
+    /* Card 15: Dark Blue Theme (Action MSE) */
+    .columns > .column:nth-child(15) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(15) .flip-card-front-metric .metric-icon { color: #1565C0; }
+    .columns > .column:nth-child(15) .flip-card-back-metric {
+      background: linear-gradient(135deg, #42A5F5 0%, #1565C0 100%);
+    }
+
+    /* Card 16: Emerald Theme (Action MAE) */
+    .columns > .column:nth-child(16) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(16) .flip-card-front-metric .metric-icon { color: #00695C; }
+    .columns > .column:nth-child(16) .flip-card-back-metric {
+      background: linear-gradient(135deg, #26A69A 0%, #00695C 100%);
+    }
+
+    /* Card 17: Coral Theme (Task Success Rate) */
+    .columns > .column:nth-child(17) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(17) .flip-card-front-metric .metric-icon { color: #D84315; }
+    .columns > .column:nth-child(17) .flip-card-back-metric {
+      background: linear-gradient(135deg, #FF7043 0%, #D84315 100%);
+    }
+
+    /* Card 18: Violet Theme (Action Diversity) */
+    .columns > .column:nth-child(18) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(18) .flip-card-front-metric .metric-icon { color: #6A1B9A; }
+    .columns > .column:nth-child(18) .flip-card-back-metric {
+      background: linear-gradient(135deg, #AB47BC 0%, #6A1B9A 100%);
+    }
+
+    /* Card 19: Navy Theme (Cosine Similarity) */
+    .columns > .column:nth-child(19) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(19) .flip-card-front-metric .metric-icon { color: #0D47A1; }
+    .columns > .column:nth-child(19) .flip-card-back-metric {
+      background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
+    }
+
+    /* Card 20: Forest Green Theme (Euclidean Distance) */
+    .columns > .column:nth-child(20) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(20) .flip-card-front-metric .metric-icon { color: #2E7D32; }
+    .columns > .column:nth-child(20) .flip-card-back-metric {
+      background: linear-gradient(135deg, #66BB6A 0%, #2E7D32 100%);
+    }
+
+    /* Card 21: Amber Theme (Trajectory Similarity) */
+    .columns > .column:nth-child(21) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(21) .flip-card-front-metric .metric-icon { color: #FF8F00; }
+    .columns > .column:nth-child(21) .flip-card-back-metric {
+      background: linear-gradient(135deg, #FFCA28 0%, #FF8F00 100%);
+    }
+
+    /* Card 22: Plum Theme (Semantic Similarity) */
+    .columns > .column:nth-child(22) .flip-card-front-metric .title.is-5,
+    .columns > .column:nth-child(22) .flip-card-front-metric .metric-icon { color: #4A148C; }
+    .columns > .column:nth-child(22) .flip-card-back-metric {
+      background: linear-gradient(135deg, #8E24AA 0%, #4A148C 100%);
+    }
+
+    /* Styles for Tabbed Interface */
+    .tab-pane {
+      display: none; /* Hide all tab panes by default */
+      padding-top: 1rem; /* Add some space above the cards within a tab */
+    }
+    .tab-pane.is-active {
+      display: block; /* Show only the active tab pane */
+    }
+    
+    /* Make tabs clickable */
+    #metrics-tabs li {
+      cursor: pointer;
+    }
+    
+    #metrics-tabs li a {
+      cursor: pointer;
+      text-decoration: none;
+    }
+    
+    #metrics-tabs li:hover {
+      background-color: #f5f5f5;
+    }
+    
+    #metrics-tabs li.is-active a {
+      color: #3273dc;
+    }
+
+    /* Side Navigation Bar Styles */
+    body {
+      margin: 0;
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif; /* Match existing fonts */
+    }
+
+    .side-navigation {
+      height: 100%;
+      width: 280px; /* Expanded width */
+      position: fixed;
+      z-index: 1000; /* Ensure it's on top */
+      top: 0;
+      left: 0;
+      background-color: #f8f9fa; /* Light grey background */
+      overflow-x: hidden;
+      transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+      padding-top: 0; /* Adjusted for logo container */
+      box-shadow: 3px 0 6px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .side-navigation.collapsed {
+      width: 70px; /* Collapsed width - showing icons */
+      overflow-y: visible; /* Allow flyouts to show */
+    }
+
+    .side-navigation.collapsed .nav-text,
+    .side-navigation.collapsed .dropdown-arrow {
+      display: none;
+      opacity: 0;
+    }
+    
+    .side-navigation .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Pushes toggle to the right */
+      padding: 15px 20px;
+      background-color: #e9ecef; /* Slightly different bg for header */
+      min-height: 60px; /* Consistent height */
+      box-sizing: border-box;
+    }
+    
+    .side-navigation.collapsed .logo-container {
+        padding: 15px;
+        justify-content: center; /* Center icon when collapsed */
+    }
+
+    .side-navigation .site-title-logo {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #005A9C; /* Theme color */
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+    
+    .side-navigation.collapsed .site-title-logo {
+        display: none;
+    }
+
+    .nav-toggle-btn {
+      font-size: 22px;
+      color: #363636;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 5px;
+    }
+
+    .nav-toggle-btn:hover {
+      color: #005A9C; /* Theme color */
+    }
+
+    .side-navigation-menu {
+        flex-grow: 1;
+        overflow-y: auto; /* Allow scrolling for menu items if they exceed height */
+        padding-top: 10px;
+    }
+    .side-navigation.collapsed .side-navigation-menu {
+        overflow-y: visible; /* Needed for flyouts in collapsed mode */
+    }
+
+
+    .side-navigation .nav-item,
+    .side-navigation .nav-link {
+      padding: 12px 20px; /* Slightly reduced padding for more items */
+      text-decoration: none;
+      font-size: 0.95rem; /* Slightly reduced font size */
+      color: #363636;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s ease-out;
+      white-space: nowrap;
+      position: relative; 
+    }
+    /* For dropdown toggles specifically if they are <a> tags */
+    .side-navigation .dropdown-toggle {
+        padding: 12px 20px;
+        text-decoration: none;
+        font-size: 0.95rem;
+        color: #363636;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        transition: background-color 0.3s, color 0.3s;
+        white-space: nowrap;
+        justify-content: space-between; /* Ensure arrow is on the right */
+    }
+
+
+    .side-navigation .nav-item:hover,
+    .side-navigation .nav-link:hover,
+    .side-navigation .dropdown-toggle:hover {
+      background-color: #e9ecef;
+      color: #005A9C;
+      /* transform: translateX(4px); */ /* Removing nudge for dropdown items for now */
+    }
+    .side-navigation .nav-item > .nav-link:hover { /* Apply nudge only to direct nav-links */
+        transform: translateX(4px);
+    }
+
+    
+    .side-navigation .nav-item:hover .icon i,
+    .side-navigation .nav-link:hover .icon i,
+    .side-navigation .dropdown-toggle:hover .icon i {
+        transform: scale(1.1); 
+    }
+
+    .side-navigation .nav-item.active,
+    .side-navigation .nav-link.active,
+    .side-navigation .nav-item.has-dropdown.open > .dropdown-toggle { /* Style for open dropdown toggle */
+      background-color: #005A9C;
+      color: white;
+    }
+    .side-navigation .nav-item.active .icon,
+    .side-navigation .nav-link.active .icon,
+    .side-navigation .nav-item.has-dropdown.open > .dropdown-toggle .icon,
+    .side-navigation .nav-item.has-dropdown.open > .dropdown-toggle .dropdown-arrow {
+      color: white;
+    }
+
+
+    .side-navigation .nav-item .icon,
+    .side-navigation .nav-link .icon,
+    .side-navigation .dropdown-toggle .icon {
+      margin-right: 16px;
+      min-width: 24px;
+      text-align: center;
+      font-size: 1rem; /* Unified icon size */
+      transition: margin-right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s ease-out; 
+    }
+
+    .side-navigation.collapsed .nav-item .icon,
+    .side-navigation.collapsed .nav-link .icon,
+    .side-navigation.collapsed .dropdown-toggle .icon {
+      margin-right: 0;
+    }
+    
+    .side-navigation .nav-item .icon i, 
+    .side-navigation .nav-link .icon i,
+    .side-navigation .dropdown-toggle .icon i {
+        display: inline-block; 
+        transition: transform 0.2s ease-out;
+    }
+
+    .side-navigation.collapsed .nav-text {
+        opacity: 0;
+        transform: translateX(-10px); 
+    }
+    .side-navigation .nav-text {
+      transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s;
+      opacity: 1;
+      transform: translateX(0);
+      flex-grow: 1; /* Allow text to take remaining space */
+    }
+
+    .dropdown-arrow {
+        margin-left: auto; /* Pushes arrow to the far right if text doesn't fill */
+        padding-left: 10px; /* Space between text and arrow */
+        font-size: 0.8rem;
+        transition: transform 0.3s ease;
+    }
+    .side-navigation.collapsed .dropdown-arrow {
+      display: none;
+    }
+    
+    .nav-item.has-dropdown.open > .dropdown-toggle .dropdown-arrow .fas.fa-chevron-down,
+    .nav-item.has-dropdown.open > .dropdown-toggle .dropdown-arrow .fas.fa-chevron-right {
+      transform: rotate(180deg);
+    }
+    .nav-item.has-dropdown .dropdown-toggle .dropdown-arrow .fas.fa-chevron-right.rotated {
+        transform: rotate(90deg); /* For level 2 when open */
+    }
+
+
+    .dropdown-menu-items {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease-out, padding 0.35s ease-out, background-color 0.3s;
+      background-color: #f0f2f5; 
+      list-style-type: none;
+      padding-left: 0; 
+      margin-left: 0;
+    }
+    .nav-item.has-dropdown.open > .dropdown-menu-items {
+        /* max-height will be set by JS for accordion, but overridden for flyout */
+        padding-top: 5px;
+        padding-bottom: 5px;
+        /* For non-flyout (accordion style), overflow should be conditionally hidden or managed by JS */
+    }
+
+    /* New styles for non-collapsed flyout - Level 1 */
+    .side-navigation:not(.collapsed) .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 {
+      position: absolute;
+      left: 0; /* Align with parent's left edge */
+      top: 100%; /* Position below the parent item */
+      width: max-content; /* Allow content to define width */
+      min-width: 100%; /* Ensure it's at least as wide as the parent button */
+      background-color: #f8f9fa; /* Match collapsed flyout background */
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1); /* Add shadow for better visibility */
+      border-radius: 0 0 4px 4px; /* Optional: round bottom corners */
+      max-height: none !important; /* Override JS-set max-height */
+      overflow: visible !important; /* Ensure content is not clipped */
+      z-index: 1000; /* Ensure it's above other elements */
+      margin-left: 0; /* Override any inherited margin */
+      padding-left: 0; /* Reset padding for the main flyout container */
+    }
+
+    /* Adjust padding for items directly within the non-collapsed flyout */
+    .side-navigation:not(.collapsed) .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 > .dropdown-item,
+    .side-navigation:not(.collapsed) .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 > .nav-item > .dropdown-toggle {
+        padding-left: 15px; /* Consistent padding for items inside flyout */
+        padding-right: 15px;
+    }
+
+    .dropdown-menu-items .nav-item, /* For nested .has-dropdown */
+    .dropdown-menu-items .sub-item { /* For direct links */
+      padding-left: 30px; /* Indent level 1 sub-items */
+      font-size: 0.9rem;
+      color: #4a4a4a;
+    }
+    /* Specific style for toggles within dropdowns */
+    .dropdown-menu-items .nav-item.has-dropdown > .dropdown-toggle {
+        padding-left: 30px;
+        font-size: 0.9rem;
+        color: #4a4a4a;
+    }
+    .dropdown-menu-items .nav-item.has-dropdown > .dropdown-toggle:hover,
+    .dropdown-menu-items .sub-item:hover {
+      background-color: #dfe4e8;
+      color: #005A9C;
+    }
+    
+    /* Level 2 dropdown menu items */
+    .dropdown-menu-items.level-2 {
+        background-color: #e9ecef; /* Slightly different for level 2 */
+    }
+    .dropdown-menu-items.level-2 .sub-item {
+      padding-left: 45px; /* Further indent level 2 sub-items */
+      font-size: 0.85rem;
+    }
+    .dropdown-menu-items.level-2 .sub-item:hover {
+      background-color: #d8dde1;
+    }
+    
+    .dropdown-menu-items .nav-item.active,
+    .dropdown-menu-items .sub-item.active {
+      background-color: #005A9C;
+      color: white;
+    }
+    .dropdown-menu-items .nav-item.active .icon,
+    .dropdown-menu-items .sub-item.active .icon {
+       color: white;
+    }
+
+
+    /* Flyout menu for collapsed state - Level 1 */
+    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items.level-1 {
+      display: block;
+      position: absolute;
+      left: 70px; 
+      top: 0; /* Align with parent item's top */
+      width: max-content; /* Changed from min-width to allow content to define width */
+      background-color: #f8f9fa;
+      box-shadow: 3px 0 6px rgba(0,0,0,0.15);
+      border-radius: 0 5px 5px 0;
+      max-height: none; 
+      z-index: 1001;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      overflow: visible; /* Allow content to overflow */
+    }
+    /* Ensure nav-text is visible in flyouts */
+    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items .nav-text,
+    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items .dropdown-arrow {
+        display: inline-block;
+        opacity: 1;
+        transform: translateX(0);
+    }
+    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items .icon {
+        margin-right: 16px; /* Restore icon margin */
+    }
+
+
+    /* Flyout menu for collapsed state - Level 2 */
+    .side-navigation.collapsed .dropdown-menu-items.level-1 .nav-item.has-dropdown:hover > .dropdown-menu-items.level-2 {
+      display: block;
+      position: absolute;
+      left: 100%; /* Position next to its parent flyout item */
+      top: 0; /* Align with parent item's top */
+      width: max-content; /* Changed from min-width to allow content to define width */
+      background-color: #e9ecef; /* Slightly different for level 2 flyout */
+      box-shadow: 3px 3px 6px rgba(0,0,0,0.15);
+      border-radius: 0 5px 5px 0;
+      max-height: none;
+      z-index: 1002; /* Above level 1 flyout */
+      padding-top: 5px;
+      padding-bottom: 5px;
+      overflow: visible; /* Allow content to overflow */
+    }
+
+
+    #main-page-content {
+      padding-left: 70px; /* Fixed padding, equivalent to collapsed sidebar width */
+      padding-top: 0; 
+      /* transition: padding-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); */ /* Removed as padding-left no longer changes */
+      background-color: #ffffff; 
+      width: 100%; 
+      box-sizing: border-box; 
+    }
+
+    /* Style for main release links in dropdown menu */
+    .side-navigation .dropdown-menu-items a.main-release-link {
+        display: flex !important; /* Ensure flex layout for icon and text */
+        align-items: center !important; /* Vertically align icon and text */
+        padding: 8px 15px;         /* Consistent padding, adjust as needed */
+        font-size: 0.9rem;         /* Consistent font size with other sub-items */
+        color: #4a4a4a;            /* Consistent text color */
+        text-decoration: none;
+    }
+
+    .side-navigation .dropdown-menu-items a.main-release-link:hover {
+        background-color: #dfe4e8; /* Consistent hover background */
+        color: #005A9C;            /* Consistent hover text color */
+    }
+
+    .side-navigation .dropdown-menu-items a.main-release-link > .icon {
+        margin-right: 10px;       /* Space between icon and text */
+        min-width: 20px;          /* Ensure icon has some space */
+        font-size: 0.9rem;        /* Match text size */
+    }
+
+    .side-navigation .dropdown-menu-items a.main-release-link > .nav-text {
+        flex-grow: 1;             /* Allow text to take remaining space */
+        opacity: 1 !important;    /* Ensure text is fully visible */
+        /* white-space: nowrap; is already on the span element via inline style */
+        display: block !important; /* Ensure block behavior and override more specific conflicting rules */
+    }
+
+    /* Active state for main release links */
+    .side-navigation .dropdown-menu-items a.main-release-link.active {
+        background-color: #005A9C;
+        color: white;
+    }
+    .side-navigation .dropdown-menu-items a.main-release-link.active > .icon {
+        color: white;
+    }
+
+    /* Rotate arrow on hover for dropdown items like "Releases" */
+    .side-navigation .nav-item.has-dropdown:hover > .dropdown-toggle .dropdown-arrow > i.fa-chevron-right {
+      transform: rotate(90deg);
+      transition: transform 0.3s ease;
+    }
+
+    /* Mobile Responsive Styles */
+    @media screen and (max-width: 768px) {
+      /* Prevent horizontal overflow and ensure full width usage */
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      * {
+        box-sizing: border-box;
+      }
+      
+      /* Global text overflow prevention */
+      h1, h2, h3, h4, h5, h6, p, span, div, a {
+        word-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
+        overflow-wrap: break-word;
+      }
+      
+      /* Prevent specific long words from breaking layout */
+      .publication-title {
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+      }
+      
+      /* Hide sidebar by default on mobile, make it overlay when shown */
+      .side-navigation {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1050;
+      }
+      
+      .side-navigation:not(.collapsed) {
+        transform: translateX(0);
+      }
+      
+      /* Adjust main content for mobile */
+      #main-page-content {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      
+      /* Mobile navigation toggle - make it visible and positioned */
+      .mobile-nav-toggle {
+        display: block !important;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1060;
+        background: rgba(0, 90, 156, 0.9);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      }
+
+      body.mobile-nav-open .mobile-nav-toggle {
+        display: none !important;
+      }
+      
+      /* Overlay for mobile sidebar */
+      .mobile-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1040;
+      }
+      
+      .mobile-overlay.active {
+        display: block;
+      }
+      
+      /* Hero section adjustments */
+      .hero {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      
+      .hero .hero-body {
+        padding: 1.5rem 1rem;
+      }
+      
+      .hero .title.is-1 {
+        font-size: 2rem !important;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      /* Collaborator logos - stack vertically on mobile */
+      .collaborator-logos {
+        flex-direction: column;
+        gap: 2rem !important;
+      }
+      
+      .collaborator-logo {
+        max-height: 60px !important;
+        max-width: 120px !important;
+      }
+      
+      /* Flip cards - single column on mobile */
+      .columns {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      
+      .columns.is-multiline .column.is-half-tablet.is-one-third-desktop {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        margin: 0 auto;
+      }
+      
+      .flip-card-anchor {
+        width: 100% !important;
+        max-width: 300px;
+        height: 260px !important;
+        margin: 0 auto 20px auto;
+      }
+      
+      .flip-card-front {
+        padding: 15px !important;
+      }
+      
+      .flip-card-front .title.is-4 {
+        font-size: 1.1rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.75rem !important;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .flip-card-front p {
+        font-size: 0.8rem !important;
+        line-height: 1.4 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .flip-card-back {
+        padding: 15px !important;
+      }
+      
+      .flip-card-back .title.is-4 {
+        font-size: 1.1rem !important;
+        line-height: 1.3 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .flip-card-back ul {
+        font-size: 0.75rem !important;
+        line-height: 1.4 !important;
+      }
+      
+      .flip-card-back p.description-intro {
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      /* CTA Banner adjustments */
+      .cta-banner {
+        padding: 15px 45px 15px 15px !important; /* Extra right padding for close button */
+        text-align: left !important;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+      
+      .cta-banner .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        max-width: 100% !important;
+      }
+      
+      .cta-banner p {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+        margin: 0 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+        padding-right: 0;
+      }
+      
+      .cta-banner a {
+        display: inline-block !important;
+        margin-top: 8px !important;
+        margin-left: 0 !important;
+        word-wrap: break-word;
+      }
+      
+      #cta-close-btn {
+        top: 10px !important;
+        right: 10px !important;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 18px !important;
+        flex-shrink: 0;
+      }
+      
+      /* Section spacing adjustments */
+      .section {
+        padding: 2rem 1rem;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      
+      /* Container adjustments for mobile */
+      .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .container.is-max-desktop {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      
+      .title.is-2 {
+        font-size: 1.75rem !important;
+      }
+      
+      .title.is-3 {
+        font-size: 1.5rem !important;
+      }
+      
+      /* News section mobile optimization */
+      .news-section {
+        max-height: none;
+        overflow-y: visible;
+        padding: 1.5rem 0;
+      }
+      
+      .news-container {
+        padding: 12px;
+      }
+      
+      .news-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding: 12px;
+      }
+      
+      .news-icon {
+        margin-bottom: 8px;
+        margin-right: 0;
+      }
+      
+      /* Videos carousel mobile adjustments */
+      #videos-carousel .card {
+        margin: 0 5px;
+      }
+      
+      /* Citation section mobile */
+      .section#BibTeX pre {
+        font-size: 0.8rem;
+        overflow-x: auto;
+      }
+      
+      /* Contact links mobile optimization */
+      .publication-authors p.is-size-5 {
+        font-size: 0.9rem !important;
+      }
+      
+      /* Button and link touch targets */
+      .nav-toggle-btn,
+      .mobile-nav-toggle,
+      #cta-close-btn {
+        min-height: 44px;
+        min-width: 44px;
+      }
+      
+      /* Ensure proper spacing for touch */
+      .side-navigation .nav-item,
+      .side-navigation .dropdown-toggle {
+        padding: 15px 20px;
+        min-height: 48px;
+      }
+      
+      /* Mobile dropdown improvements */
+      .side-navigation .nav-item.has-dropdown > .dropdown-toggle {
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+      
+      /* Disable hover CSS effects on mobile for dropdowns */
+      .side-navigation .nav-item.has-dropdown:hover > .dropdown-menu-items.level-1 {
+        display: none !important;
+      }
+      
+      /* Only show dropdown when explicitly opened via JS */
+      .side-navigation .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 {
+        display: block !important;
+      }
+      
+      /* Make dropdown arrows more touch-friendly */
+      .side-navigation .dropdown-arrow {
+        padding: 8px;
+        margin-left: 5px;
+        border-radius: 4px;
+      }
+      
+      /* Improve touch targets */
+      .side-navigation .nav-item.has-dropdown {
+        position: relative;
+      }
+    }
+    
+    /* Extra small mobile devices */
+    @media screen and (max-width: 480px) {
+      .hero .title.is-1 {
+        font-size: 1.75rem !important;
+      }
+      
+      .flip-card-anchor {
+        height: 240px !important;
+        max-width: 280px;
+      }
+      
+      .section {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .container,
+      .container.is-max-desktop {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .columns.is-multiline .column.is-half-tablet.is-one-third-desktop {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      
+      /* Extra small CTA banner adjustments */
+      .cta-banner {
+        padding: 12px 40px 12px 12px !important;
+      }
+      
+      .cta-banner p {
+        font-size: 0.85rem !important;
+        line-height: 1.3 !important;
+      }
+      
+      #cta-close-btn {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 16px !important;
+        top: 8px !important;
+        right: 8px !important;
+      }
+      
+      .publication-title {
+        font-size: 1.6rem !important;
+      }
+    }
+
+    .procgen-gif {
+      max-width: 100px; /* Control GIF size */
+      display: block;
+      margin: 0 auto; /* Center GIF if cell is wider */
+    }
+
+    .visualization-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch; /* Smoother scrolling on mobile */
+      padding-bottom: 10px; /* Give some space for scrollbar */
+    }
+
+    /* Model Output Visualization Styles */
+    .model-output-container {
+      display: grid;
+      grid-template-columns: 450px 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+      align-items: stretch;
+      justify-content: start;
+    }
+
+    .image-question-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .image-container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .model-output-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      height: 100%;
+    }
+
+    .model-tabs-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .model-tabs {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .model-tab-button {
+      display: block;
+      flex: 1;
+      min-width: 80px;
+      padding: 0.75rem;
+      margin: 0;
+      text-align: left;
+      background: #f5f5f5;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .model-tab-button.active {
+      background: #363636;
+      color: white;
+    }
+
+    .model-tab-button:hover:not(.active) {
+      background: #e8e8e8;
+    }
+
+    .output-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .model-output-box {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 1rem;
+      background: #fafafa;
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: flex-start;
+      font-size: 1rem;
+      line-height: 1.5;
+      position: relative;
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background-color: #333;
+      margin-left: 2px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* Responsive styles for model output visualization */
+    @media (max-width: 768px) {
+      .model-output-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .model-output-section {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .model-tabs {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      
+      .model-tab-button {
+        flex: 1;
+        min-width: 80px;
+        text-align: center;
+      }
+    }
+
+    /* Confusion Matrix Styles */
+    .confusion-matrix-section {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #pi0-confusion-matrix-container {
+      position: relative;
+      padding: 5px 40px 15px 80px;
+      width: 100%;
+      max-width: 1000px;
+      height: auto;
+      overflow: visible;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Hide scrollbars while maintaining functionality */
+    #pi0-confusion-matrix-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    #pi0-confusion-matrix-container {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
+    /* Style for confusion matrix labels */
+    #pi0-confusion-matrix-container > div {
+      position: absolute;
+      z-index: 2;
+    }
+
+    #pi0-confusion-matrix-container > div:first-child {
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #pi0-confusion-matrix-container > div:last-child {
+      left: 5px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+    }
+  </style>
+  <!-- Add Chart.js before our custom script -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@4.1.0/dist/chartjs-chart-matrix.umd.min.js"></script>
+  <script src="../js/v1_metrics_plots.js"></script>
+  <script src="../js/v1_pi0_confusion_matrix.js"></script>
+  <script src="../js/v1_leaderboard_table.js"></script>
+
+  <style>
+    .metrics-container {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+      height: 500px; /* Fixed height for single-chart datasets */
+      max-width: 100%; /* Ensure it doesn't overflow parent */
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+    
+    .metrics-container.expanded {
+      height: auto; /* Allow expansion for multi-chart datasets like ODinW */
+      min-height: 500px;
+    }
+
+    .metrics-sidebar {
+      height: 100%;
+      position: sticky;
+      top: 2rem;
+      z-index: 2;
+      padding-right: 1rem; /* Add padding to prevent scrollbar overlap */
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem; /* Add consistent gap between buttons */
+    }
+
+    .metric-button {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0; /* Remove margin since we're using gap */
+      text-align: left;
+      background: #f5f5f5;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .metric-button.active {
+      background: #363636;
+      color: white;
+    }
+
+    .model-button {
+      display: inline-block;
+      width: auto;
+      padding: 0.5rem 1rem;
+      margin: 0.25rem;
+      text-align: center;
+      background: #f5f5f5;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .model-button.active {
+      background: #363636;
+      color: white;
+    }
+
+    .metrics-charts {
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      padding-left: 0; /* Remove padding to avoid horizontal scrollbar */
+    }
+    
+    .metrics-container.expanded .metrics-charts {
+      height: auto; /* Allow charts container to expand for ODinW */
+      min-height: 900px; /* Ensure enough space for both ODinW charts (2x400px + margins) */
+      overflow: hidden; /* Keep overflow hidden to avoid scrollbars */
+    }
+
+    .metric-chart {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.4s;
+    }
+
+    .metric-chart.active {
+      opacity: 1;
+      pointer-events: auto;
+      position: relative;
+    }
+    
+    /* ODinW charts need special handling for height */
+    .metric-chart[data-metric="odinw"].active {
+      height: auto;
+      min-height: 900px; /* Ensure enough space for both charts */
+    }
+
+    /* Add style for confusion matrix canvas container */
+    #confusion-matrix-canvas-container {
+      position: relative;
+      padding: 25px 40px;
+    }
+
+    /* Add styles to hide scrollbars while maintaining functionality */
+    .metrics-charts::-webkit-scrollbar,
+    #confusion-matrix-canvas-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .metrics-charts,
+    #confusion-matrix-canvas-container {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
+    /* Style for confusion matrix labels */
+    #confusion-matrix-canvas-container > div {
+      position: absolute;
+      z-index: 2;
+    }
+
+    #confusion-matrix-canvas-container > div:first-child {
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #confusion-matrix-canvas-container > div:last-child {
+      left: 5px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+    }
+
+    /* Add styles for confusion matrix sidebar */
+    .confusion-matrix-datasets {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem; /* Match the gap from metrics-sidebar */
+      height: 500px;
+      overflow-y: auto;
+      min-width: 200px;
+      padding-top: 20px;
+      padding-right: 10px;
+      margin-right: 5px;
+    }
+
+    @media (max-width: 900px) {
+      .metrics-container {
+        grid-template-columns: 120px 1fr; /* Keep two columns, adjust sidebar width */
+        gap: 1rem;
+        height: auto;
+      }
+      .metrics-sidebar {
+        /* Revert to vertical flex layout by removing mobile overrides */
+        width: 100%;
+        position: relative; /* Changed from static */
+        display: flex;
+        flex-direction: column; /* Ensure vertical stacking */
+        flex-wrap: nowrap; /* Prevent wrapping */
+        gap: 0.5rem;
+        padding-right: 0;
+      }
+      .metric-button {
+        /* Revert to full-width buttons */
+        width: 100%;
+        flex: 0 0 auto; /* Do not grow or shrink */
+        margin: 0;
+        text-align: left; /* Ensure text is left-aligned */
+      }
+      .metrics-charts {
+        height: 500px; /* Adjust height for mobile */
+        padding-left: 0;
+        min-width: 450px; /* Give chart minimum width to prevent cramping */
+      }
+      .metric-chart {
+        height: 100%;
+      }
+
+      /* Responsive styles for confusion matrix */
+      #confusion-matrix-section .confusion-matrix-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 1rem;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+      
+      #confusion-matrix-section .confusion-matrix-controls .model-button {
+        width: 100%;
+        margin: 0;
+      }
+      
+      #confusion-matrix-section .confusion-matrix-controls .dataset-selector {
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+      
+      #confusion-matrix-section .confusion-matrix-canvas-container {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        overflow-x: auto;
+      }
+    }
+
+    .table-container {
+      max-width: 100%; /* Keeps the container within parent boundaries */
+      width: 100%; /* Take up the full width of its parent (content area) */
+      margin: 0 auto;  /* Centers the container */
+      overflow-x: auto; /* Enables horizontal scrolling */
+      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+    }
+    
+    /* Make these styles specific to the dataset coverage table */
+    .dataset-coverage-table {
+      border-collapse: collapse;
+      min-width: 2200px; /* Adjusted for 6 columns with large images (350px * 6 + 100px first column) */
+      width: auto !important; /* Prevents table from expanding container */
+      margin-bottom: 10px;
+    }
+    
+    .dataset-coverage-table th,
+    .dataset-coverage-table td {
+      padding: 8px; /* Reduced padding for wider table */
+      text-align: left;
+      border: 1px solid #ddd; /* Added border for all cells */
+      vertical-align: middle; /* Align content to middle, esp for GIFs */
+    }
+    
+    /* Set width for all standard columns (not the first column) */
+    .dataset-coverage-table th:not(:first-child),
+    .dataset-coverage-table td:not(:first-child) {
+      min-width: 350px; /* Increased significantly for larger images */
+      width: 350px; /* Fixed width for consistency */
+    }
+    
+    .dataset-coverage-table th {
+      background-color: #f5f5f5;
+      font-weight: bold;
+      text-align: center; /* Center align headers */
+    }
+
+    /* Style for the first column (row headers) */
+    .dataset-coverage-table tbody td:first-child {
+      font-weight: bold;
+      background-color: #f9f9f9;
+      min-width: 100px; /* Reduced from 150px to make first column smaller */
+      width: 100px; /* Fixed width */
+      text-align: left;
+      padding-right: 15px;
+      position: sticky; /* Make it sticky */
+      left: 0; /* Pin to left edge */
+      z-index: 1; /* Ensure it appears above other cells */
+      border-right: 2px solid #ddd; /* Add a border for visual separation */
+    }
+    
+    /* Also make the first column header sticky */
+    .dataset-coverage-table thead th:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 2; /* Higher than row headers to stay on top at corner */
+      background-color: #f5f5f5;
+      border-right: 2px solid #ddd;
+      min-width: 100px; /* Match first column width */
+      width: 100px;
+    }
+    
+    .dataset-coverage-table tr:hover {
+      background-color: #f9f9f9;
+    }
+    
+    .caption {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .table-notes {
+      font-size: 0.9em;
+      color: #666;
+      text-align: center;
+      margin-top: 10px;
+      font-style: italic;
+    }
+    
+    .procgen-gif {
+      max-width: 100px; /* Control GIF size */
+      display: block;
+      margin: 0 auto; /* Center GIF if cell is wider */
+    }
+
+    /* Dataset image hover and click styles */
+    .dataset-coverage-table .dataset-image {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dataset-coverage-table .dataset-image:hover {
+      transform: scale(1.5);
+      z-index: 100;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3) !important;
+    }
+
+    /* Hero image specific styles */
+    .hero-image {
+      max-width: 60%;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+      transition: max-width 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
+    }
+
+    .hero-image:hover {
+      max-width: 100% !important;
+      transform: scale(1) !important;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important;
+    }
+
+    /* Hover effect for standalone images (like release visual) */
+    .content .dataset-image:not(.dataset-coverage-table .dataset-image):not(.hero-image) {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .content .dataset-image:not(.dataset-coverage-table .dataset-image):not(.hero-image):hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3) !important;
+    }
+
+    /* Lightbox modal styles */
+    .image-lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .image-lightbox.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      animation: zoomIn 0.3s ease;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 30px;
+      right: 45px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      background: none;
+      border: none;
+      padding: 10px 20px;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-close:focus {
+      color: #bbb;
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #f1f1f1;
+      font-size: 18px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); }
+      to { transform: scale(1); }
+    }
+
+    /* Collapsible section styles */
+    .collapsible-trigger {
+      cursor: pointer;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .collapsible-trigger:hover {
+      opacity: 0.8;
+    }
+    
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.3s ease;
+      font-size: 0.8em;
+    }
+    
+    .collapsible-icon.collapsed {
+      transform: rotate(-90deg);
+    }
+    
+    .collapsible-content {
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      max-height: 5000px;
+    }
+    
+    .collapsible-content.collapsed {
+      max-height: 0;
+    }
+    
+    /* Add spacing between list items in Looking Forward section */
+    #lookingForwardSection li {
+      margin-bottom: 0.75rem;
+    }
+    
+    #lookingForwardSection li:last-child {
+      margin-bottom: 0;
+    }
+    
+    /* Add spacing between collapsible sections */
+    #lookingForwardSection .collapsible-content {
+      margin-bottom: 2rem;
+    }
+    
+    #lookingForwardSection .collapsible-trigger {
+      margin-top: 1.5rem;
+    }
+
+    /* Prevent hover zoom on mobile */
+    @media screen and (max-width: 768px) {
+      .dataset-coverage-table .dataset-image:hover {
+        transform: none;
+        z-index: 1;
+      }
+      
+      /* Hero image mobile styles */
+      .hero-image {
+        max-width: 85%;
+      }
+      
+      .hero-image:hover {
+        max-width: 85% !important;
+        transform: none !important;
+      }
+    }
+
+    /* Leaderboard Table Styles */
+    .leaderboard-table-container {
+      overflow-x: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: white;
+    }
+
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      font-size: 14px;
+    }
+
+    .leaderboard-table th,
+    .leaderboard-table td {
+      padding: 12px 8px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+    }
+
+    .leaderboard-table th {
+      background: #f8f9fa;
+      font-weight: 600;
+      color: #374151;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .rank-header,
+    .model-header {
+      background: #f1f5f9 !important;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .group-header {
+      font-weight: 700;
+      color: #1e293b;
+      border-left: 3px solid;
+      border-right: 3px solid;
+      text-align: center !important;
+    }
+
+    .group-header.border-purple-500 {
+      border-color: #8b5cf6;
+      background: #f3e8ff;
+    }
+
+    .group-header.border-blue-500 {
+      border-color: #3b82f6;
+      background: #eff6ff;
+    }
+
+    .group-header.border-cyan-500 {
+      border-color: #06b6d4;
+      background: #ecfeff;
+    }
+
+    .group-header.border-emerald-500 {
+      border-color: #10b981;
+      background: #ecfdf5;
+    }
+
+    .group-header.border-amber-500 {
+      border-color: #f59e0b;
+      background: #fffbeb;
+    }
+
+    .leaderboard-table .group-header {
+      text-align: center !important;
+    }
+
+    .task-header {
+      cursor: pointer;
+      transition: background-color 0.2s;
+      position: relative;
+    }
+
+    .task-header:hover {
+      background: #e5e7eb;
+    }
+
+    .task-header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .task-name {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .sort-icon {
+      font-size: 12px;
+      color: #9ca3af;
+      transition: color 0.2s;
+    }
+
+    .task-header.sortable:hover .sort-icon {
+      color: #6b7280;
+    }
+
+    .metric-name {
+      font-size: 10px;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+
+    .wins-header {
+      background: #f1f5f9 !important;
+      font-weight: 700;
+      color: #1e293b;
+      border-left: 2px solid #6b7280;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .wins-header:hover {
+      background: #e5e7eb !important;
+    }
+
+    .wins-header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .wins-title {
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .wins-metric {
+      font-size: 10px;
+      color: #6b7280;
+    }
+
+    .model-row {
+      transition: background-color 0.2s;
+    }
+
+    .model-row:hover {
+      background: #f8f9fa;
+    }
+
+    .model-row.first-place {
+      background: linear-gradient(90deg, #fef3c7 0%, transparent 100%);
+    }
+
+    .model-row.second-place {
+      background: linear-gradient(90deg, #f3f4f6 0%, transparent 100%);
+    }
+
+    .model-row.third-place {
+      background: linear-gradient(90deg, #fed7aa 0%, transparent 100%);
+    }
+
+    .rank-cell {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .rank-badge {
+      display: inline-block;
+    }
+
+    .model-cell {
+      text-align: left;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .model-name {
+      font-size: 16px;
+    }
+
+    .score-cell {
+      position: relative;
+    }
+
+    .score-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .score-value {
+      font-weight: 600;
+      color: #374151;
+      font-size: 15px;
+    }
+
+    .score-value.winner {
+      color: #059669;
+      font-weight: 700;
+    }
+
+    .trophy {
+      font-size: 12px;
+    }
+
+    .wins-cell {
+      font-weight: 700;
+      color: #059669;
+      font-size: 16px;
+    }
+
+    .wins-value {
+      color: #059669;
+    }
+
+    .first-in-group {
+      border-left: 2px solid #6b7280;
+    }
+
+    .last-in-group {
+      border-right: 2px solid #6b7280;
+    }
+
+    /* Legend Styles */
+    .leaderboard-legend {
+      font-size: 14px;
+    }
+
+    .legend-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .legend-color.purple {
+      background: #8b5cf6;
+    }
+
+    .legend-color.blue {
+      background: #3b82f6;
+    }
+
+    .legend-color.cyan {
+      background: #06b6d4;
+    }
+
+    .legend-color.emerald {
+      background: #10b981;
+    }
+
+    .legend-color.amber {
+      background: #f59e0b;
+    }
+
+    .legend-metrics,
+    .legend-indicators,
+    .legend-notes {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .legend-notes a {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+    
+    .legend-notes a:hover {
+      color: #1d4ed8;
+    }
+
+    /* Mobile Responsive */
+    @media screen and (max-width: 768px) {
+      .leaderboard-table {
+        font-size: 12px;
+      }
+
+      .leaderboard-table th,
+      .leaderboard-table td {
+        padding: 8px 4px;
+      }
+
+      .task-name {
+        font-size: 11px;
+      }
+
+      .metric-name {
+        font-size: 9px;
+      }
+
+      .model-name {
+        font-size: 14px;
+      }
+
+      .score-value {
+        font-size: 13px;
+      }
+
+      .leaderboard-legend .columns {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Mobile Navigation Toggle -->
+<button class="mobile-nav-toggle" id="mobileNavToggle" style="display: none;" aria-label="Toggle mobile navigation">
+  <i class="fas fa-bars"></i>
+</button>
+
+<!-- Mobile Overlay -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<div id="side-nav" class="side-navigation collapsed">
+  <div class="logo-container">
+    <a href="../../index.html" class="site-title-logo">
+      <img src="../images/multinet_no_text.png" alt="MultiNet Logo" style="height: 40px; margin-right: 8px; vertical-align: middle; border-radius: 8px;">MultiNet
+    </a>
+    <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+  <div class="side-navigation-menu">
+    <a href="../../index.html" class="nav-item"> <!-- 'active' class removed for template -->
+      <span class="icon"><i class="fas fa-home"></i></span>
+      <span class="nav-text">Home</span>
+    </a>
+
+    <!-- Releases Dropdown -->
+    <div class="nav-item has-dropdown" style="padding: 0;" 
+         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
+         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+            <span class="icon"><i class="fas fa-microscope"></i></span>
+            <span class="nav-text">Benchmark Releases</span>
+            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+        </a>
+        <div class="dropdown-menu-items level-1">
+            <!-- Multinet v1 Section -->
+            <a href="Multinetv1.html" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-rocket"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">v1.0 - Generalist</span>
+            </a>
+            <!-- Multinet v0.2 Section -->
+            <a href="Multinetv02.html" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-gamepad"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">v0.2 - Gameplay</span>
+            </a>
+            <!-- Multinet v0.1 Section -->
+            <a href="Multinetv01.html" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-robot"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">v0.1 - Robotics</span>
+            </a>
+        </div>
+    </div>
+    <!-- Model Releases Dropdown -->
+    <div class="nav-item has-dropdown" style="padding: 0;"
+         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
+         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+            <span class="icon"><i class="fas fa-rocket"></i></span>
+            <span class="nav-text">Model Releases</span>
+            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+        </a>
+        <div class="dropdown-menu-items level-1">
+            <a href="https://github.com/eihli/mugato" target="_blank" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-microchip"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">μGato</span>
+            </a>
+            <a href="https://github.com/ManifoldRG/NEKO" target="_blank" class="dropdown-item main-release-link">
+                <span class="icon"><i class="fas fa-cat"></i></span>
+                <span class="nav-text" style="white-space: nowrap;">NEKO</span>
+            </a>
+        </div>
+    </div>
+    <!-- Software Releases Dropdown -->
+    <div class="nav-item has-dropdown" style="padding: 0;"
+         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
+         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
+            <span class="icon"><i class="fas fa-code-branch"></i></span>
+            <span class="nav-text">Software Releases</span>
+            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
+        </a>
+        <div class="dropdown-menu-items level-1">
+            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
+              <span class="icon"><i class="fas fa-tasks"></i></span>
+              <span class="nav-text" style="white-space: nowrap;">Multinet Eval Harness</span>
+            </a>
+            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="dropdown-item main-release-link">
+              <span class="icon"><i class="fas fa-code"></i></span>
+              <span class="nav-text" style="white-space: nowrap;">GenESIS framework</span>
+            </a>
+        </div>
+    </div>
+    <a href="Multinet.html" class="nav-item">
+      <span class="icon"><i class="fas fa-info-circle"></i></span>
+      <span class="nav-text">About Multinet</span>
+    </a>
+    <a href="../../index.html#BibTeX" class="nav-item">
+      <span class="icon"><i class="fas fa-quote-right"></i></span>
+      <span class="nav-text">Citations</span>
+    </a>
+  </div>
+</div>
+
+<div id="main-page-content">
+  <!-- CTA Banner -->
+  <div id="cta-banner" class="cta-banner" style="background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%); color: white; padding: 15px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: relative;">
+    <button id="cta-close-btn" style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 18px; cursor: pointer; padding: 8px; line-height: 1; opacity: 0.9; transition: all 0.3s ease; z-index: 10; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px;" title="Close banner" onclick="document.getElementById('cta-banner').style.display='none';">
+      ×
+    </button>
+    <div class="container is-max-desktop">
+      <p style="margin: 0; font-size: 1.1rem; font-weight: 500;">
+        Need to Run Evaluations on Production Multimodal, Computer Use, or Robotics AI Systems? We can help!
+        <a href="https://forms.gle/SBrtZtyzr6DBp8HM9" target="_blank" rel="noopener noreferrer" style="color: #90EE90; text-decoration: underline; font-weight: 600; margin-left: 10px;">
+          Get Started
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">MultiNet v1.0: A Comprehensive Benchmark for Evaluating Multimodal Reasoning and Action Models Across Diverse Domains</h1>
+                <div class="is-size-5 publication-authors">
+                    <!-- Paper authors -->
+                    <span class="author-block">
+                      <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank">Pranav Guruprasad</a><sup>*12</sup>,</span>
+                        <span class="author-block">
+                            <a href="https://www.linkedin.com/in/sudipta-chowdhury-3610a3303/" target="_blank">Sudipta Chowdhury</a><sup>*12</sup>,</span>
+                        <span class="author-block">
+                            <a href="https://www.harshsikka.com/" target="_blank">Harsh Sikka</a><sup>*123</sup>,</span>
+                        <span class="author-block">
+                            <a href="https://mridul3301.github.io/" target="_blank">Mridul Sharma</a><sup>17</sup>,</span>
+                        <span class="author-block">
+                            <a href="https://www.linkedin.com/in/helen-lu-aa60a4b9/" target="_blank">Helen Lu</a><sup>14</sup>,</span>
+                        <span class="author-block">
+                            <a href="https://www.linkedin.com/in/sean-au-rivera/" target="_blank">Sean Rivera</a><sup>1</sup>,</span>
+                        <span class="author-block">
+                            <a href="https://www.linkedin.com/in/aryan-khurana-3a0761288/" target="_blank">Aryan Khurana</a><sup>16</sup>,</span>
+                        <span class="author-block">
+                            <a href="https://www.linkedin.com/in/yangyue-wang" target="_blank">Yangyue Wang</a><sup>12</sup>,</span>
+                        <span class="author-block">
+                            <a href="https://www.linkedin.com/in/hangliang-ren-b74bb2194/" target="_blank">Hangliang Ren</a><sup>15</sup></span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                          <sup>1</sup> Manifold Research, <sup>2</sup> Metarch AI, <sup>3</sup> Georgia Tech, <sup>4</sup> Tufts University,
+                          <sup>5</sup> Northeastern University, <sup>6</sup> Birla Institute of Technology and Science, Pilani 
+                          <sup>7</sup> Institute for Research and Innovation in Intelligent Systems (IRIIS)
+                          <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                              <span class="link-block">
+                                <a href="https://blog.fig.inc/measuring-multimodal-generalization-in-reasoning-and-robotics-models/" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                  <span class="icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                  </span>
+                                  <span>Technical Report</span>
+                                </a>
+                              </span>
+                              <span class="link-block">
+                                <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                  <span class="icon">
+                                    <i class="fab fa-github"></i>
+                                  </span>
+                                  <span>Code</span>
+                                </a>
+                              </span>
+                              <span class="link-block">
+                                <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                  <span class="icon">
+                                    <i class="fas fa-atom"></i>
+                                  </span>
+                                  <span>GenESIS framework</span>
+                                </a>
+                              </span>
+                            </div>
+                        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-centered">
+            <img src="../images/Multinet v1 release visual final.png" alt="MultiNet v1 Release Visual" class="dataset-image hero-image" data-caption="MultiNet v1.0 - Comprehensive Benchmark for Multimodal Reasoning and Action Models" style="cursor: pointer; transition: all 0.3s ease; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          </div>
+          <p class="has-text-centered is-size-6 is-italic"> MultiNet v1.0 provides a comprehensive benchmark suite for evaluating state-of-the-art multimodal reasoning and action models across diverse domains including robotics, gameplay, and multimodal understanding tasks. <br><span class="is-size-7" style="color: #666;">(Hover over the image to enlarge)</span></p>
+        </div>
+      </div>
+    </div>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Abstract</h2>
+            <p>
+              Multimodal reasoning and action models hold immense promise as general-purpose agents, yet the current evaluation landscape remains fragmented with domain-specific benchmarks that fail to capture true generalization capabilities. This critical gap prevents us from understanding where these sophisticated systems excel and where they fail. We introduce <b>MultiNet v1.0</b>, a unified benchmark suite that bridges this evaluation gap by systematically assessing state-of-the-art Vision-Language Models (VLMs), Vision-Language-Action (VLA) models, and generalist models across robotics, multi-agent gameplay, and multimodal reasoning tasks. Our evaluation suite spans 11 datasets and includes state-of-the-art models such as GPT-5, Pi0, and Magma in their respective categories.
+              
+              <br><br>Key contributions of MultiNet v1.0 include:
+                <ul>
+                  <li><strong>Comprehensive Domain Coverage:</strong> Evaluation across robotics, gameplay, commonsense reasoning, spatial reasoning, visual question answering, and visual understanding tasks. These capabilities are essential for generalist models and systems.</li>
+                  <li><strong>Standardized Evaluation Protocols:</strong> Unified metrics and evaluation procedures for fair comparison across different model architectures</li>
+                  <li><strong>Model Adaptation Framework:</strong> Open-source code for adapting diverse models to various out-of-distribution task domains</li>
+                  <li><strong>Extensive Analysis:</strong> In-depth analysis of model capabilities, failure modes, and architectural trade-offs</li>
+                  <li><strong>Open-Source Toolkit:</strong> Complete evaluation harness and benchmarking tools for the research community</li>
+                </ul>
+                
+                Our findings reveal significant insights into the current state of multimodal AI, highlighting both promising capabilities and critical limitations that inform future research directions. We release our complete benchmark suite, evaluation framework, and detailed analysis to accelerate progress in this field.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Dataset Coverage</h2>
+            <p>MultiNet v1.0 evaluates models across six major domains using 11 diverse datasets. Each dataset presents unique challenges in vision-language-action understanding, from robotic manipulation to complex reasoning tasks.</p>
+            
+            <div class="container is-max-desktop">
+              <div class="table-container" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+                <table class="dataset-coverage-table">
+                    <thead>
+                        <tr>
+                            <th><!-- Empty for row headers --></th>
+                            <th style="text-align: center;">OpenX</th>
+                            <th style="text-align: center;">Overcooked</th>
+                            <th style="text-align: center;">PIQA</th>
+                            <th style="text-align: center;">ODINW</th>
+                            <th style="text-align: center;">SQA3D</th>
+                            <th style="text-align: center;">BFCL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="height: 280px;">
+                            <td>Dataset</td>
+                            <td><img src="../images/openx.png" alt="OpenX Dataset" class="dataset-image" data-caption="OpenX - Large-scale Robotics Dataset" style="width: 320px; height: 240px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></td>
+                            <td><img src="../images/overcooked.png" alt="Overcooked Dataset" class="dataset-image" data-caption="Overcooked - Multi-Agent Coordination" style="width: 320px; height: 240px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></td>
+                            <td><img src="../images/piqa.png" alt="PIQA Dataset" class="dataset-image" data-caption="PIQA - Physical Interaction QA" style="width: 320px; height: 240px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></td>
+                            <td><img src="../images/odinw.png" alt="ODINW Dataset" class="dataset-image" data-caption="ODINW - Object Detection in the Wild" style="width: 320px; height: 240px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></td>
+                            <td><img src="../images/sqa3d.png" alt="SQA3D Dataset" class="dataset-image" data-caption="SQA3D - 3D Scene Understanding" style="width: 320px; height: 240px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></td>
+                            <td><img src="../images/bfcl.png" alt="BFCL Dataset" class="dataset-image" data-caption="BFCL - Function Calling Benchmark" style="width: 320px; height: 240px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-left">Description</td>
+                            <td class="has-text-left">Large-scale robotics dataset with diverse manipulation and locomotion tasks across multiple robot embodiments and environments</td>
+                            <td class="has-text-left">Cooperative cooking simulation requiring coordination, planning, and multi-agent interaction in kitchen environments</td>
+                            <td class="has-text-left">Physical interaction question answering dataset testing common-sense reasoning about object properties and interactions</td>
+                            <td class="has-text-left">Object detection dataset with diverse domains testing visual recognition across varied contexts and object categories in the wild</td>
+                            <td class="has-text-left">3D scene understanding dataset combining spatial reasoning with question answering in complex indoor environments</td>
+                            <td class="has-text-left">Berkeley function calling dataset for evaluating multi-turn conversational function calling capabilities</td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-left">Domain</td>
+                            <td class="has-text-left">Robotics</td>
+                            <td class="has-text-left">Gameplay</td>
+                            <td class="has-text-left">Physical Commonsense Reasoning</td>
+                            <td class="has-text-left">Object detection</td>
+                            <td class="has-text-left">3D Spatial Reasoning</td>
+                            <td class="has-text-left">Function Calling</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+              <div class="table-notes">
+                  MultiNet v1.0 evaluates models across diverse modalities and task types, from low-level robotic control to high-level reasoning. For complete dataset specifications and evaluation protocols, please refer to our <a href="https://arxiv.org/abs/2505.05540" target="_blank">technical report</a>.
+              </div>
+              <br>
+              <p style="text-align: center; font-style: italic; color: #666; margin-top: 1rem;">
+                💡 <strong>Tip:</strong> Hover over images to zoom, or click to view full-size in lightbox
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Lightbox Modal -->
+  <div id="imageLightbox" class="image-lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img class="lightbox-content" id="lightboxImage" alt="Dataset preview">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Evaluation Methodology and Metrics</h2>
+            <p>
+              MultiNet v1.0 employs standardized evaluation metrics tailored to each task category, ensuring comprehensive and fair assessment across diverse model architectures. Our evaluation framework adapts metrics to the unique characteristics of each domain while maintaining consistency for cross-domain comparisons:
+            </p>
+
+            <div class="tabs is-centered is-boxed" id="metrics-tabs" style="margin-top: 2rem;">
+              <ul>
+                <li class="is-active" data-tab="1"><a><span>Brier Scores</span></a></li>
+                <li data-tab="2"><a><span>Exact Match metrics</span></a></li>
+                <li data-tab="3"><a><span>Macro scores</span></a></li>
+                <li data-tab="4"><a><span>Class-wise scores</span></a></li>
+                <li data-tab="5"><a><span>Continuous space metrics</span></a></li>
+                <li data-tab="6"><a><span>Embedding similarity</span></a></li>
+              </ul>
+            </div>
+
+            <div id="tab-content-container" style="margin-bottom: 2rem;">
+              <!-- Tab 1: Brier Family Content -->
+              <div class="tab-pane is-active" data-content="1">
+                <div class="columns is-multiline is-centered">
+                  <!-- Card 1: Brier MAE -->
+                  <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-chart-line fa-lg"></i></span>
+                        <h3 class="title is-5">Brier MAE</h3>
+                        <p>Mean Absolute Error of Brier scores.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Brier MAE</h3>
+                        <p style="font-size: 0.7rem;">Brier Score: <br> <sup>1</sup>&frasl;<sub>N</sub> &sum;<sub>t=1</sub><sup>N</sup> &sum;<sub>i=1</sub><sup>R</sup> (f<sub>ti</sub> - o<sub>ti</sub>)<sup>2</sup></p>
+                        <p style="font-size: 0.65rem;">f<sub>ti</sub>: pred prob class i, time t<br>o<sub>ti</sub>: ground truth<br>R: num classes, N: num timesteps.<br>Brier MAE is a variation of the original Brier score
+                        which is a useful method to measure the accuracy of probabilistic predictions. </p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              
+              <!-- Card 2: Normalized Brier MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-ruler-combined fa-lg"></i></span>
+                        <h3 class="title is-5">Normalized Brier MAE</h3>
+                        <p>Normalized version of Brier MAE.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Normalized Brier MAE</h3>
+                        <p>Description:</p>
+                        <p style="font-size: 0.7rem;">Average of Brier Absolute Errors that have been min-max normalized using the overall min and max Brier absolute errors across all timesteps.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 3: Norm. Quantile Filtered Brier MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-filter fa-lg"></i></span>
+                        <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered Brier MAE</h3>
+                        <p>Normalized Brier MAE filtered by quantiles.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered Brier MAE</h3>
+                        <p>Description:</p>
+                        <p style="font-size: 0.7rem;">Brier MAE values are filtered (only considering the error values that are within the 5th to 95th percentile), and then normalized based on the quantile filtered min/max errors.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 4: Max Relative Brier MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-mountain fa-lg"></i></span>
+                        <h3 class="title is-5">Max Relative Brier MAE</h3>
+                        <p>Max relative error of Brier scores.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Max Relative Brier MAE</h3>
+                        <p>max(MAE) / median(MAE)</p>
+                        <p style="font-size: 0.7rem;">Quantifies how the worst-case error deviates from the typical (median) error for a given subdataset.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: Overall Performance Content -->
+          <div class="tab-pane" data-content="2">
+            <div class="columns is-multiline is-centered">
+              <!-- Card 5: Percentage Invalid Actions -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-ban fa-lg"></i></span>
+                        <h3 class="title is-5">% Invalid Actions</h3>
+                        <p>Predictions outside the valid prediction space.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">% Invalid Actions</h3>
+                        <p>(Invalid predictions / Total predictions) * 100</p>
+                        <p style="font-size: 0.7rem;">Percentage of predictions falling outside the valid prediction space of a subdataset.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 6: Micro Precision -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-bullseye fa-lg"></i></span>
+                        <h3 class="title is-5">Micro Precision</h3>
+                        <p>Precision of the model across all predictions.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Micro Precision</h3>
+                        <p>Micro Precision:<br>True Positives / (True Positives + False Positives)</p>
+                        <p style="font-size: 0.7rem;">Calculated globally across all predictions.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 7: Micro Recall -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-search-plus fa-lg"></i></span>
+                        <h3 class="title is-5">Micro Recall</h3>
+                        <p>Recall of the model across all predictions.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Micro Recall</h3>
+                        <p>Micro Recall:<br>True Positives / (True Positives + False Negatives)</p>
+                        <p style="font-size: 0.7rem;">Calculated globally across all predictions.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 8: Micro F1 Score -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-balance-scale-right fa-lg"></i></span>
+                        <h3 class="title is-5">Micro F1 Score</h3>
+                        <p>Harmonic mean of Micro Precision and Recall.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Micro F1 Score</h3>
+                        <p>Micro F1:<br>2 * (Micro Prec * Micro Rec) / (Micro Prec + Micro Rec)</p>
+                        <p style="font-size: 0.7rem;">Balanced measure for global performance.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3: Macro-Averaged Content -->
+          <div class="tab-pane" data-content="3">
+            <div class="columns is-multiline is-centered">
+              <!-- Card 9: Macro Precision -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-layer-group fa-lg"></i></span>
+                        <h3 class="title is-5">Macro Precision</h3>
+                        <p>Avg. of class-wise precision.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Macro Precision</h3>
+                        <p style="font-size: 0.7rem;">Calculated by averaging class-wise precision scores across all classes. Treats all classes equally.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 11: Macro Recall -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-layer-group fa-lg"></i></span>
+                        <h3 class="title is-5">Macro Recall</h3>
+                        <p>Avg. of class-wise recall.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Macro Recall</h3>
+                        <p style="font-size: 0.7rem;">Calculated by averaging class-wise recall scores across all classes. Important for imbalanced datasets.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 13: Macro F1 Score -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-layer-group fa-lg"></i></span>
+                        <h3 class="title is-5">Macro F1 Score</h3>
+                        <p>Avg. of class-wise F1 scores.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Macro F1 Score</h3>
+                        <p style="font-size: 0.7rem;">Calculated by averaging class-wise F1 scores. Balanced macro-average performance.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 4: Class-wise Content -->
+          <div class="tab-pane" data-content="4">
+            <div class="columns is-multiline is-centered">
+              <!-- Card 10: Class-wise Precision -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-tag fa-lg"></i></span>
+                        <h3 class="title is-5">Class-wise Precision</h3>
+                        <p>Precision for each class.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Class-wise Precision</h3>
+                        <p style="font-size: 0.7rem;">Precision calculated individually for each class. Helps understand bias towards specific classes.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 12: Class-wise Recall -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-tag fa-lg"></i></span>
+                        <h3 class="title is-5">Class-wise Recall</h3>
+                        <p>Recall for each class.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Class-wise Recall</h3>
+                        <p style="font-size: 0.7rem;">Recall calculated individually for each class. Shows per-class identification performance.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 14: Class-wise F1 Score -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-tag fa-lg"></i></span>
+                        <h3 class="title is-5">Class-wise F1 Score</h3>
+                        <p>F1 for each class.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Class-wise F1 Score</h3>
+                        <p style="font-size: 0.7rem;">F1 score calculated individually for each class. Balanced per-class performance.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 5: Regression Metrics Content -->
+          <div class="tab-pane" data-content="5">
+            <div class="columns is-multiline is-centered">
+              <!-- Card 15: Action MSE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-robot fa-lg"></i></span>
+                        <h3 class="title is-5">MSE</h3>
+                        <p>Mean Squared Error for continuous action prediction.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Action MSE</h3>
+                        <p style="font-size: 0.7rem;">MSE = <sup>1</sup>&frasl;<sub>N</sub> &sum;<sub>t=1</sub><sup>N</sup> ||a<sub>pred</sub> - a<sub>gt</sub>||<sup>2</sup></p>
+                        <p style="font-size: 0.65rem;">Measures accuracy of continuous action predictions in robotics tasks. Lower values indicate better performance.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 16: Action MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-calculator fa-lg"></i></span>
+                        <h3 class="title is-5">Action MAE</h3>
+                        <p>Mean Absolute Error for continuous action prediction.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Action MAE</h3>
+                        <p style="font-size: 0.7rem;">MAE = <sup>1</sup>&frasl;<sub>N</sub> &sum;<sub>t=1</sub><sup>N</sup> |a<sub>pred</sub> - a<sub>gt</sub>|</p>
+                        <p style="font-size: 0.65rem;">Measures average absolute deviation between predicted and ground truth actions. More robust to outliers than MSE.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 17: Task Success Rate -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-check-circle fa-lg"></i></span>
+                        <h3 class="title is-5">Success Rate</h3>
+                        <p>Percentage of predictions that match exactly with the corresponding ground truth.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Success Rate</h3>
+                        <p style="font-size: 0.7rem;">Success Rate = (Successful Predictions / Total Predictions) × 100%</p>
+                        <p style="font-size: 0.65rem;">Measures the percentage of predictions that match exactly with ground truth according to task-specific success criteria.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 18: Normalized MSE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-ruler-combined fa-lg"></i></span>
+                        <h3 class="title is-5">Normalized MSE</h3>
+                        <p>Normalized version of Mean Squared Error.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Normalized MSE</h3>
+                        <p>Description:</p>
+                        <p style="font-size: 0.7rem;">Average of Mean Squared Errors that have been min-max normalized using the overall min and max MSE values across all timesteps.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 19: Normalized MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-ruler-combined fa-lg"></i></span>
+                        <h3 class="title is-5">Normalized MAE</h3>
+                        <p>Normalized version of Mean Absolute Error.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Normalized MAE</h3>
+                        <p>Description:</p>
+                        <p style="font-size: 0.7rem;">Average of Mean Absolute Errors that have been min-max normalized using the overall min and max MAE values across all timesteps.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 20: Norm. Quantile Filtered MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-filter fa-lg"></i></span>
+                        <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered MAE</h3>
+                        <p>Normalized MAE filtered by quantiles.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5" style="font-size: 1rem;">Norm. Quantile Filtered MAE</h3>
+                        <p>Description:</p>
+                        <p style="font-size: 0.7rem;">MAE values are filtered (only considering the error values that are within the 5th to 95th percentile), and then normalized based on the quantile filtered min/max errors.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Card 21: Max Relative MAE -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-mountain fa-lg"></i></span>
+                        <h3 class="title is-5">Max Relative MAE</h3>
+                        <p>Max relative error of MAE values.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Max Relative MAE</h3>
+                        <p>max(MAE) / median(MAE)</p>
+                        <p style="font-size: 0.7rem;">Quantifies how the worst-case MAE deviates from the typical (median) MAE for a given subdataset.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 6: Embedding Similarity Content -->
+          <div class="tab-pane" data-content="6">
+            <div class="columns is-multiline is-centered">
+              <!-- Card 19: Cosine Similarity -->
+              <div class="column is-one-quarter-desktop is-half-tablet">
+                <a href="https://arxiv.org/pdf/2505.05540" target="_blank" class="flip-card-anchor-metric">
+                  <div class="flip-card-metric">
+                    <div class="flip-card-inner-metric">
+                      <div class="flip-card-front-metric">
+                        <span class="icon is-medium metric-icon"><i class="fas fa-vector-square fa-lg"></i></span>
+                        <h3 class="title is-5">Cosine Similarity</h3>
+                        <p>Cosine similarity between predicted and ground truth text answer embeddings.</p>
+                      </div>
+                      <div class="flip-card-back-metric">
+                        <h3 class="title is-5">Cosine Similarity</h3>
+                        <p style="font-size: 0.7rem;">cos(θ) = (A · B) / (||A|| ||B||)</p>
+                        <p style="font-size: 0.65rem;">Measures the cosine of the angle between predicted and ground truth text answer embedding vectors. Values range from -1 to 1, with 1 indicating perfect alignment.</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                  </div>
+                </div>
+              </div> <!-- end tab-content-container -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Results</h2>
+            <p>
+              Our evaluation across diverse domains reveals significant insights into model performance and capabilities. Below we present detailed results from our evaluation suite.
+            </p>
+            
+            <div class="visualization-wrapper" style="margin-top: 1rem;">
+              <!-- Dataset Dropdown -->
+              <div class="field" style="margin-bottom: 1.5rem;">
+                <label class="label">Select Dataset</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select id="dataset-selector">
+                      <option value="piqa" selected>PIQA</option>
+                      <option value="sqa3d">SQA3D</option>
+                      <option value="overcooked">Overcooked</option>
+                      <option value="robotvqa">Robot VQA</option>
+                      <option value="odinw">ODinW</option>
+                      <option value="bfclv3">BFCLv3</option>
+                      <option value="openx">OpenX</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Metrics Container with Sidebar -->
+              <div class="metrics-container" style="min-width: 600px; height: auto;">
+                <div class="metrics-sidebar" id="eval-metrics-sidebar">
+                  <p class="has-text-centered has-text-weight-semibold" style="margin-bottom: 0.5rem;">Evaluation Metrics</p>
+                  <button class="metric-button active" data-eval-metric="exact_match">Exact Match Rate</button>
+                </div>
+
+                <!-- Charts Container -->
+                <div class="metrics-charts" style="position:relative; height: 500px;">
+                  <!-- PIQA Exact Match -->
+                  <div class="metric-chart active" data-metric="piqa" data-eval-metric="exact_match" style="position:relative; height: 100%;">
+                    <canvas id="piqa-exact-match-chart"></canvas>
+                  </div>
+                  
+                  <!-- PIQA Invalid Percentage -->
+                  <div class="metric-chart" data-metric="piqa" data-eval-metric="invalid_percentage" style="position:relative; height: 100%;">
+                    <canvas id="piqa-invalid-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- SQA3D Exact Match -->
+                  <div class="metric-chart" data-metric="sqa3d" data-eval-metric="exact_match" style="position:relative; height: 100%;">
+                    <canvas id="sqa3d-exact-match-chart"></canvas>
+                  </div>
+                  
+                  <!-- SQA3D Average Similarity Score -->
+                  <div class="metric-chart" data-metric="sqa3d" data-eval-metric="avg_similarity_score" style="position:relative; height: 100%;">
+                    <canvas id="sqa3d-avg-similarity-score-chart"></canvas>
+                  </div>
+                  
+                  <!-- SQA3D High Similarity Percentage -->
+                  <div class="metric-chart" data-metric="sqa3d" data-eval-metric="high_similarity_percentage" style="position:relative; height: 100%;">
+                    <canvas id="sqa3d-high-similarity-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- Overcooked Exact Match -->
+                  <div class="metric-chart" data-metric="overcooked" data-eval-metric="exact_match" style="position:relative; height: 100%;">
+                    <canvas id="overcooked-exact-match-chart"></canvas>
+                  </div>
+                  
+                  <!-- Overcooked Macro Precision -->
+                  <div class="metric-chart" data-metric="overcooked" data-eval-metric="macro_precision" style="position:relative; height: 100%;">
+                    <canvas id="overcooked-macro-precision-chart"></canvas>
+                  </div>
+                  
+                  <!-- Overcooked Macro Recall -->
+                  <div class="metric-chart" data-metric="overcooked" data-eval-metric="macro_recall" style="position:relative; height: 100%;">
+                    <canvas id="overcooked-macro-recall-chart"></canvas>
+                  </div>
+                  
+                  <!-- Overcooked Macro F1 -->
+                  <div class="metric-chart" data-metric="overcooked" data-eval-metric="macro_f1" style="position:relative; height: 100%;">
+                    <canvas id="overcooked-macro-f1-chart"></canvas>
+                  </div>
+                  
+                  <!-- Overcooked Percentage Invalids -->
+                  <div class="metric-chart" data-metric="overcooked" data-eval-metric="percentage_invalids" style="position:relative; height: 100%;">
+                    <canvas id="overcooked-percentage-invalids-chart"></canvas>
+                  </div>
+                  
+                  <!-- Robot VQA Exact Match -->
+                  <div class="metric-chart" data-metric="robotvqa" data-eval-metric="exact_match" style="position:relative; height: 100%;">
+                    <canvas id="robotvqa-exact-match-chart"></canvas>
+                  </div>
+                  
+                  <!-- Robot VQA Average Similarity Score -->
+                  <div class="metric-chart" data-metric="robotvqa" data-eval-metric="avg_similarity_score" style="position:relative; height: 100%;">
+                    <canvas id="robotvqa-avg-similarity-score-chart"></canvas>
+                  </div>
+                  
+                  <!-- Robot VQA High Similarity Percentage -->
+                  <div class="metric-chart" data-metric="robotvqa" data-eval-metric="high_similarity_percentage" style="position:relative; height: 100%;">
+                    <canvas id="robotvqa-high-similarity-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- ODinW Exact Match (Both Parts in One Tab) -->
+                  <div class="metric-chart" data-metric="odinw" data-eval-metric="exact_match" style="position:relative;">
+                    <div style="position: relative; height: 400px; margin-bottom: 2rem; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-exact-match-part1-chart"></canvas>
+                    </div>
+                    <div style="position: relative; height: 400px; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-exact-match-part2-chart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <!-- ODinW Macro Precision (Both Parts in One Tab) -->
+                  <div class="metric-chart" data-metric="odinw" data-eval-metric="macro_precision" style="position:relative;">
+                    <div style="position: relative; height: 400px; margin-bottom: 2rem; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-macro-precision-part1-chart"></canvas>
+                    </div>
+                    <div style="position: relative; height: 400px; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-macro-precision-part2-chart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <!-- ODinW Macro Recall (Both Parts in One Tab) -->
+                  <div class="metric-chart" data-metric="odinw" data-eval-metric="macro_recall" style="position:relative;">
+                    <div style="position: relative; height: 400px; margin-bottom: 2rem; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-macro-recall-part1-chart"></canvas>
+                    </div>
+                    <div style="position: relative; height: 400px; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-macro-recall-part2-chart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <!-- ODinW Macro F1 (Both Parts in One Tab) -->
+                  <div class="metric-chart" data-metric="odinw" data-eval-metric="macro_f1" style="position:relative;">
+                    <div style="position: relative; height: 400px; margin-bottom: 2rem; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-macro-f1-part1-chart"></canvas>
+                    </div>
+                    <div style="position: relative; height: 400px; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-macro-f1-part2-chart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <!-- ODinW Invalid Percentage (Both Parts in One Tab) -->
+                  <div class="metric-chart" data-metric="odinw" data-eval-metric="invalid_percentage" style="position:relative;">
+                    <div style="position: relative; height: 400px; margin-bottom: 2rem; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-invalid-percentage-part1-chart"></canvas>
+                    </div>
+                    <div style="position: relative; height: 400px; width: 100%; box-sizing: border-box;">
+                      <canvas id="odinw-invalid-percentage-part2-chart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <!-- BFCLv3 Invalid Turn Percentage -->
+                  <div class="metric-chart" data-metric="bfclv3" data-eval-metric="invalid_turn_percentage" style="position:relative; height: 100%;">
+                    <canvas id="bfclv3-invalid-turn-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- BFCLv3 Invalid Conversation Percentage -->
+                  <div class="metric-chart" data-metric="bfclv3" data-eval-metric="invalid_conversation_percentage" style="position:relative; height: 100%;">
+                    <canvas id="bfclv3-invalid-conversation-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- BFCLv3 Avg Valid Predicted Functions per Sample -->
+                  <div class="metric-chart" data-metric="bfclv3" data-eval-metric="avg_valid_predicted_functions_per_sample" style="position:relative; height: 100%;">
+                    <canvas id="bfclv3-avg-valid-predicted-functions-per-sample-chart"></canvas>
+                  </div>
+                  
+                  <!-- BFCLv3 High Quality Predictions -->
+                  <div class="metric-chart" data-metric="bfclv3" data-eval-metric="high_similarity_percentage" style="position:relative; height: 100%;">
+                    <canvas id="bfclv3-high-similarity-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- OpenX Action Success Rate -->
+                  <div class="metric-chart" data-metric="openx" data-eval-metric="action_success_rate" style="position:relative; height: 100%;">
+                    <canvas id="openx-action-success-rate-chart"></canvas>
+                  </div>
+                  
+                  <!-- OpenX Invalid Predictions Percentage -->
+                  <div class="metric-chart" data-metric="openx" data-eval-metric="invalid_predictions_percentage" style="position:relative; height: 100%;">
+                    <canvas id="openx-invalid-predictions-percentage-chart"></canvas>
+                  </div>
+                  
+                  <!-- OpenX Total AMAE -->
+                  <div class="metric-chart" data-metric="openx" data-eval-metric="total_dataset_amae" style="position:relative; height: 100%;">
+                    <canvas id="openx-mean-absolute-error-chart"></canvas>
+                  </div>
+                  
+                  <!-- OpenX Normalized AMAE -->
+                  <div class="metric-chart" data-metric="openx" data-eval-metric="normalized_amae" style="position:relative; height: 100%;">
+                    <canvas id="openx-normalized-mae-chart"></canvas>
+                  </div>
+                  
+                  <!-- OpenX Normalized Quantile Filtered AMAE -->
+                  <div class="metric-chart" data-metric="openx" data-eval-metric="normalized_quantile_filtered_amae" style="position:relative; height: 100%;">
+                    <canvas id="openx-normalized-quantile-filtered-mae-chart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+  <!-- Leaderboard Table Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h3 class="title is-4 has-text-centered">Model Performance Comparison</h3>
+            <p class="has-text-centered" style="margin-bottom: 2rem;">
+              Evaluation across 7 diverse tasks across robotics, digital control, and multimodal reasoning.
+            </p>
+            
+            <div id="leaderboard-container">
+              Loading leaderboard data...
+            </div>
+            
+            <!-- Legend -->
+            <div class="leaderboard-legend" style="margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
+              <div class="columns">
+                <div class="column">
+                  <h4 class="title is-6">Task Groups:</h4>
+                  <div class="legend-items">
+                    <div class="legend-item">
+                      <span class="legend-color purple"></span>
+                      <span>Robotics Control</span>
+                    </div>
+                    <div class="legend-item">
+                      <span class="legend-color blue"></span>
+                      <span>Digital Control</span>
+                    </div>
+                    <div class="legend-item">
+                      <span class="legend-color cyan"></span>
+                      <span>Spatial Reasoning</span>
+                    </div>
+                    <div class="legend-item">
+                      <span class="legend-color emerald"></span>
+                      <span>Image Classification</span>
+                    </div>
+                    <div class="legend-item">
+                      <span class="legend-color amber"></span>
+                      <span>Tool Use</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <h4 class="title is-6">Metrics:</h4>
+                  <div class="legend-metrics">
+                    <div><strong>EM:</strong> Exact Match Rate (%)</div>
+                    <div><strong>F1:</strong> Macro F1 Score (%)</div>
+                    <div><strong>MAE:</strong> Mean Absolute Error</div>
+                  </div>
+                </div>
+                <div class="column">
+                  <h4 class="title is-6">Visual Indicators:</h4>
+                  <div class="legend-indicators">
+                    <div class="legend-item">
+                      <span class="trophy">🏆</span>
+                      <span>Best score per task</span>
+                    </div>
+                    <div><strong>Wins:</strong> Number of tasks where model scored highest</div>
+                  </div>
+                </div>
+                <div class="column">
+                  <h4 class="title is-6">Notes:</h4>
+                  <div class="legend-notes">
+                    <div><strong>*</strong> We did not profile GPT5 on BFCLv3 with this release. See <a href="https://gorilla.cs.berkeley.edu/leaderboard.html" target="_blank" rel="noopener noreferrer">Gorilla leaderboard</a> for BFCLv4 results.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Model Output Visualization Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h3 class="title is-4 has-text-centered">Model Output Comparison</h3>
+            <p class="has-text-centered" style="margin-bottom: 2rem;">
+              Compare how different models respond to the same visual input from the ODinW selfdrivingCar dataset
+            </p>
+            
+            <div class="model-output-container">
+              <!-- Left side: Image and Question -->
+              <div class="image-question-section">
+                <p class="has-text-weight-semibold" style="margin-bottom: 0.5rem; text-align: left; align-self: flex-start;">Input</p>
+                <div class="image-container">
+                  <img src="../images/odinw_car_pic.jpg" alt="Sample image for model comparison" style="width: 100%; max-width: 400px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+                <p class="prompt-text" style="margin-top: 1.5rem; font-weight: 500; text-align: left; background: #eaf4ff; border: 1px solid #cfe3ff; padding: 12px; border-radius: 6px; width: 100%; max-width: 400px;">What object is shown in this image from the selfdrivingCar dataset?<br>Option 0: biker Option 1: car ...<br>Output the number (0-10) of the correct option only.</p>
+              </div>
+              
+              <!-- Right side: Model Tabs and Output -->
+              <div class="model-output-section">
+                <div class="model-tabs-container">
+                  <p class="has-text-weight-semibold" style="margin-bottom: 0.5rem;">Model</p>
+                  <div class="model-tabs">
+                    <button class="model-tab-button active" data-model="gpt5">GPT5</button>
+                    <button class="model-tab-button" data-model="pi0">Pi0</button>
+                    <button class="model-tab-button" data-model="magma">Magma</button>
+                  </div>
+                </div>
+                
+                <div class="output-container">
+                  <p class="has-text-weight-semibold" style="margin-bottom: 0.5rem;">Output</p>
+                  <div class="model-output-box" id="model-output">
+                    Loading...
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confusion Matrix Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h3 class="title is-4 has-text-centered">Pi0's prediction space collapse visualized</h3>
+            <p class="has-text-centered" style="margin-bottom: 2rem;">
+              Pi0 experiences prediction space collapse on the Overcooked dataset, centered around the action 24, which maps to (Player 1: STAY, Player 2: NORTH)
+            </p>
+            
+            <div class="confusion-matrix-section">
+              <div id="pi0-confusion-matrix-container">
+                <canvas id="pi0-confusion-matrix-canvas"></canvas>
+              </div>
+              <p class="has-text-centered" style="margin-top: 1rem; font-style: italic; color: #666;">
+                Frequency of predicted action classes for Pi0 model on Overcooked dataset
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered"> 
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Key Findings and Analysis</h2>
+            
+            <p>
+              <strong>1. Catastrophic Cross-Domain Failure:</strong> MultiNet v1.0 reveals catastrophic failure at the boundaries of vision-language-action models. No current model achieves true cross-domain generalization — Pi0 performance drops to 0% on basic vision-language tasks. GPT-5 while performing relatively better, still does not achieve anywhere near the performance necessary for succesful task completion.
+            </p>
+            
+            <p>
+              <strong>2. Domain-Specific Fine-Tuning Corruption:</strong> Fine-tuning for robotics seems to systematically corrupt vision language models. Pi0 exhibits repetitive "increa" token spam, suggesting that action-oriented training degrades linguistic capabilities through catastrophic forgetting of language generation pathways.
+            </p>
+            
+            <p>
+              <strong>3. Output Modality Misalignment:</strong> Magma, designed as a generalist model, produces spatial coordinates instead of text answers when prompted with language tasks. This reveals fundamental misalignment between input processing and output generation across different task domains.
+            </p>
+            
+            <p>
+              <strong>4. Limited Impact of Prompt Engineering:</strong> Our prompt engineering experiments only led to marginal gains (~20% improvement) that cannot bridge fundamental architectural incompatibilities. This suggests that current model limitations are structural rather than interface-related.
+            </p>
+            
+            <p>
+              <strong>5. Need for Architectural Innovation:</strong> These results demonstrate that current training paradigms create overspecialized models with incompatible domain-specific biases. This necessitates fundamental rethinking of modular architectures and progressive training strategies for truly unified multimodal systems.
+            </p>
+            
+            <p style="margin-top: 2rem;">
+              For a detailed look at our results, analysis, and methodology, please refer to our <a href="https://arxiv.org/pdf/2505.05540" target="_blank">comprehensive technical report</a>.
+            </p>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="lookingForwardSection">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered"> 
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Looking Forward</h2>
+            
+            <p style="margin-bottom: 2rem;">
+              We are exploring several near-term experiments with collaborators, as well as larger-scale research directions that build on MultiNet's findings. If you're interested in contributing to the future of multimodal AI evaluation and development, we encourage you to get involved. Join our <a href="https://discord.gg/Rk4gAq5aYr" target="_blank">Discord community</a> to connect with researchers and explore <a href="https://www.manifoldrg.com/os-research-fellow-multinet/" target="_blank">opportunities to contribute</a> as part of the Manifold Research team.
+            </p>
+            
+            <h3 class="title is-4 has-text-centered">Near Term Experiments</h3>
+            <p>
+              Building on MultiNet v1.0's findings of catastrophic failure at domain boundaries, our immediate research priorities focus on understanding and mitigating the fundamental limitations of current vision-language & action models. These investigations target the core mechanisms behind knowledge degradation, architectural incompatibilities, and the emergence of failure modes that prevent true cross-domain generalization.
+            </p>
+
+            <h4 class="title is-5 has-text-centered collapsible-trigger" onclick="toggleCollapsible('gibberishContent', 'gibberishIcon')">
+              Investigating the Gibberish Outputs of VLAs
+              <span id="gibberishIcon" class="collapsible-icon collapsed">▼</span>
+            </h4>
+            <div id="gibberishContent" class="collapsible-content collapsed">
+            <ul>
+              <li><strong>Token degradation analysis:</strong> Examine how fine-tuning on action sequences corrupts language generation pathways, particularly the emergence of repetitive tokens like Pi0's "increa" spam</li>
+              <li><strong>Mitigation strategies:</strong> Develop strategies to mitigate the degradation of language generation pathways despite end-to-end fine-tuning on entirely new data distributions</li>
+            </ul>
+            </div>
+
+            <h4 class="title is-5 has-text-centered collapsible-trigger" onclick="toggleCollapsible('magmaContent', 'magmaIcon')">
+              Investigating SoM/ToM Outputs of Magma
+              <span id="magmaIcon" class="collapsible-icon collapsed">▼</span>
+            </h4>
+            <div id="magmaContent" class="collapsible-content collapsed">
+            <ul>
+              <li><strong>Coordinate-text mapping errors:</strong> Investigate why Magma produces spatial coordinates instead of natural language responses when prompted with inputs of completely different domains, revealing fundamental misalignment in output modalities</li>
+              <li><strong>Output modality alignment:</strong> Develop fine-tuning/training techniques and architectural modifications to ensure proper alignment between input domains and output modalities, preventing cross-modal contamination in multi-task models</li>
+            </ul>
+            </div>
+
+            <h4 class="title is-5 has-text-centered collapsible-trigger" onclick="toggleCollapsible('pi05Content', 'pi05Icon')">
+              Pi0.5 - SoTA Knowledge-Insulated VLA Performance on v1.0
+              <span id="pi05Icon" class="collapsible-icon collapsed">▼</span>
+            </h4>
+            <div id="pi05Content" class="collapsible-content collapsed">
+            <ul>
+              <li><strong>Architectural improvements:</strong> Evaluate next-generation knowledge insulation techniques in Pi0.5 against MultiNet v1's comprehensive benchmark suite</li>
+              <li><strong>Domain transfer efficiency:</strong> Measure how effectively Pi0.5 maintains performance across vision-language tasks while adapting to robotic control</li>
+              <li><strong>Failure mode comparison:</strong> Contrast Pi0.5's failure patterns with previous Vision-Language-Action models to validate architectural advances in preventing catastrophic forgetting</li>
+            </ul>
+            </div>
+
+            <h4 class="title is-5 has-text-centered collapsible-trigger" onclick="toggleCollapsible('knowledgeContent', 'knowledgeIcon')">
+              Knowledge Insulation Testing and Experiments
+              <span id="knowledgeIcon" class="collapsible-icon collapsed">▼</span>
+            </h4>
+            <div id="knowledgeContent" class="collapsible-content collapsed">
+            <ul>
+              <li><strong>Modular architecture evaluation:</strong> Test compartmentalized model designs that isolate domain-specific knowledge while maintaining shared representations for common reasoning tasks</li>
+              <li><strong>Progressive fine-tuning protocols:</strong> Investigate learning approaches that gradually introduce new domains without corrupting existing capabilities</li>
+            </ul>
+            </div>
+
+            <h3 class="title is-4 has-text-centered">Long-term Research Directions</h3>
+            <p>
+              Our long-term vision extends beyond addressing current limitations to fundamentally reimagining how we evaluate, understand, and build multimodal action models. These goals represent paradigm shifts toward more robust, adaptive, and truly general AI systems that can seamlessly operate across diverse domains while maintaining coherent reasoning capabilities.
+            </p>
+
+            <h4 class="title is-5 has-text-centered collapsible-trigger" onclick="toggleCollapsible('liveBenchmarksContent', 'liveBenchmarksIcon')">
+              Live Benchmarks
+              <span id="liveBenchmarksIcon" class="collapsible-icon collapsed">▼</span>
+            </h4>
+            <div id="liveBenchmarksContent" class="collapsible-content collapsed">
+            <ul>
+              <li><strong>Dynamic evaluation frameworks:</strong> Develop continuously updating benchmarks that adapt to model capabilities, preventing overfitting to static test sets</li>
+              <li><strong>Real-time performance monitoring:</strong> Create systems for ongoing assessment of deployed VLAs across diverse real-world scenarios</li>
+              <li><strong>Community-driven evaluation:</strong> Build platforms for researchers to contribute new tasks and domains, ensuring benchmark relevance as the field evolves</li>
+            </ul>
+            </div>
+
+            <h4 class="title is-5 has-text-centered collapsible-trigger" onclick="toggleCollapsible('worldModelsContent', 'worldModelsIcon')">
+              World Models as Evaluators
+              <span id="worldModelsIcon" class="collapsible-icon collapsed">▼</span>
+            </h4>
+            <div id="worldModelsContent" class="collapsible-content collapsed">
+            <ul>
+              <li><strong>Causal reasoning assessment:</strong> Build and leverage world models to evaluate whether multimodal systems of the future understand causal relationships rather than just statistical correlations</li>
+              <li><strong>Counterfactual analysis:</strong> Deploy world models to test the robustness of multimodal systems through systematic perturbation of environmental conditions and task parameters</li>
+            </ul>
+            </div>
+
+            <h4 class="title is-5 has-text-centered collapsible-trigger" onclick="toggleCollapsible('nextGenContent', 'nextGenIcon')">
+              Building the Next Generation of Multimodal Action Models
+              <span id="nextGenIcon" class="collapsible-icon collapsed">▼</span>
+            </h4>
+            <div id="nextGenContent" class="collapsible-content collapsed">
+            <ul>
+              <li><strong>Unified architecture design:</strong> Develop foundational architectures that natively support multiple modalities without domain-specific fine-tuning degradation</li>
+              <li><strong>Compositional reasoning systems:</strong> Create models that can decompose complex tasks into modular components, enabling flexible recombination across domains</li>
+              <li><strong>Meta-learning for rapid adaptation:</strong> Build systems that can quickly acquire new capabilities while preserving existing knowledge, moving beyond current catastrophic forgetting limitations</li>
+            </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="Citation">
+    <div class="container is-max-desktop content">
+      <h2 class="title has-text-centered">Citation</h2>
+      <pre><code>@article{guruprasad2025multinet,
+  author = {Pranav Guruprasad and Sudipta Chowdhury and Harshvardhan Sikka and Mridul Sharma and Helen Lu and Sean Rivera and Aryan Khurana and Yangyue Wang},
+  title = {MultiNet v1.0: A Comprehensive Benchmark for Evaluating Multimodal Reasoning and Action Models Across Diverse Domains},
+  journal = {Manifold Research Publications},
+  year = {2025},
+  note = {https://multinet.ai/static/pages/Multinetv1.html},
+  doi = {10.5281/zenodo.17404313}
+}</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer" style="background-color: #363636;">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content" style="color: #fff;">
+            <div class="buttons is-centered mb-4">
+              <a href="https://blog.fig.inc/measuring-multimodal-generalization-in-reasoning-and-robotics-models/" class="button is-small is-dark" target="_blank">
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Technical Report</span>
+              </a>
+              <a href="https://github.com/ManifoldRG/MultiNet" class="button is-small is-dark" target="_blank">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </div>
+  
+            <p>For questions or issues, please <a href="https://github.com/ManifoldRG/MultiNet/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Handle metrics tabs (scoped to Evaluation Methodology section only)
+      const metricsTabs = document.querySelectorAll('#metrics-tabs li');
+      const metricsTabContentBoxes = document.querySelectorAll('#tab-content-container .tab-pane');
+
+      metricsTabs.forEach(tab => {
+        // Add click event to both the li and the a element inside
+        const clickHandler = (e) => {
+          e.preventDefault();
+          
+          metricsTabs.forEach(item => item.classList.remove('is-active'));
+          tab.classList.add('is-active');
+
+          const target = tab.dataset.tab;
+          
+          metricsTabContentBoxes.forEach(box => {
+            if (box.dataset.content === target) {
+              box.classList.add('is-active');
+            } else {
+              box.classList.remove('is-active');
+            }
+          });
+        };
+        
+        tab.addEventListener('click', clickHandler);
+        
+        // Also add event listener to the anchor tag inside
+        const anchor = tab.querySelector('a');
+        if (anchor) {
+          anchor.addEventListener('click', clickHandler);
+        }
+      });
+
+      // Handle domain tabs (if they exist)
+      const domainTabs = document.querySelectorAll('#domain-content-container .tabs li');
+      const domainTabContentBoxes = document.querySelectorAll('#domain-content-container .tab-pane');
+
+      if (domainTabs.length > 0) {
+        domainTabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            domainTabs.forEach(item => item.classList.remove('is-active'));
+            tab.classList.add('is-active');
+
+            const target = tab.dataset.tab;
+            domainTabContentBoxes.forEach(box => {
+              if (box.dataset.content === target) {
+                box.classList.add('is-active');
+              } else {
+                box.classList.remove('is-active');
+              }
+            });
+          });
+        });
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navToggleBtn = document.getElementById('navToggleBtn');
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const sideNav = document.getElementById('side-nav');
+        const mainContent = document.getElementById('main-page-content');
+        const allNavLinks = document.querySelectorAll('.side-navigation .nav-item:not(.has-dropdown) > a, .side-navigation .sub-item:not(.has-dropdown)'); // Links that can be active
+        
+        // Check if mobile
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        // Global function for mobile device detection (used in inline handlers)
+        window.isMobileDevice = function() {
+            return window.innerWidth <= 768;
+        }
+
+        // Dropdown toggle function
+        function toggleDropdown(parentNavItem, dropdownMenu, toggle) {
+            const isOpen = parentNavItem.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', isOpen.toString());
+            dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
+            
+            const arrowIcon = toggle.querySelector('.dropdown-arrow .fas');
+            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
+                arrowIcon.classList.toggle('rotated', isOpen);
+            }
+
+            // Close sibling dropdowns (accordion behavior)
+            const parentMenu = parentNavItem.parentElement;
+            if (parentMenu && isOpen) {
+                const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
+                    child.classList.contains('has-dropdown') && child !== parentNavItem
+                );
+                siblingDropdowns.forEach(sib => {
+                    sib.classList.remove('open');
+                    sib.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                    const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
+                    if (sibMenu) sibMenu.style.maxHeight = null;
+                    const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
+                    if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
+                        sibArrowIcon.classList.remove('rotated');
+                    }
+                });
+            }
+        }
+
+        function expandSidebar() {
+            if (!sideNav || !mainContent) return;
+            if (sideNav.classList.contains('collapsed')) {
+                sideNav.classList.remove('collapsed');
+                if (isMobile()) {
+                    mobileOverlay.classList.add('active');
+                    document.body.classList.add('mobile-nav-open');
+                }
+                // Ensure all dropdowns are closed when expanding from fully collapsed hover state
+                document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
+                    const menu = openDropdown.querySelector('.dropdown-menu-items');
+                    if (menu) menu.style.maxHeight = null; // Collapse menu
+                    openDropdown.classList.remove('open');
+                    openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                    const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
+                    if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
+                        arrowIcon.classList.remove('rotated');
+                    }
+                });
+            }
+        }
+
+        function collapseSidebar() {
+            if (!sideNav || !mainContent) return;
+            if (!sideNav.classList.contains('collapsed')) {
+                sideNav.classList.add('collapsed');
+                if (isMobile()) {
+                    mobileOverlay.classList.remove('active');
+                    document.body.classList.remove('mobile-nav-open');
+                }
+                
+                // Collapse all open dropdowns
+                document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
+                    openDropdown.classList.remove('open');
+                    openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                    const menu = openDropdown.querySelector('.dropdown-menu-items');
+                    if (menu) menu.style.maxHeight = null;
+                    const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
+                     if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
+                        arrowIcon.classList.remove('rotated');
+                    }
+                });
+            }
+        }
+
+        function masterToggleSidebar() {
+            if (!sideNav) return;
+            if (sideNav.classList.contains('collapsed')) {
+                expandSidebar();
+            } else {
+                collapseSidebar();
+            }
+        }
+
+        if (navToggleBtn) {
+            const icon = navToggleBtn.querySelector('i');
+            if (icon) icon.className = 'fas fa-bars';
+            navToggleBtn.addEventListener('click', masterToggleSidebar);
+            navToggleBtn.addEventListener('mouseenter', () => {
+                if (sideNav.classList.contains('collapsed') && !isMobile()) expandSidebar();
+            });
+        }
+
+        // Mobile navigation toggle
+        if (mobileNavToggle) {
+            mobileNavToggle.addEventListener('click', masterToggleSidebar);
+        }
+
+        // Mobile overlay click to close
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', collapseSidebar);
+        }
+
+        document.addEventListener('click', function(event) {
+            if (!sideNav || !navToggleBtn || !mainContent) return;
+            const isClickInsideNav = sideNav.contains(event.target);
+            const isClickOnToggle = navToggleBtn.contains(event.target) || (mobileNavToggle && mobileNavToggle.contains(event.target));
+            if (!sideNav.classList.contains('collapsed') && !isClickInsideNav && !isClickOnToggle) {
+                collapseSidebar();
+            }
+        });
+
+        // New Dropdown Handling for multiple levels
+        const dropdownToggles = document.querySelectorAll('.side-navigation .nav-item.has-dropdown > .dropdown-toggle');
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation(); // Prevent click from bubbling to document listener
+
+                const parentNavItem = this.parentElement; // The .nav-item.has-dropdown
+                const dropdownMenu = parentNavItem.querySelector(':scope > .dropdown-menu-items');
+                
+                if (!dropdownMenu) return;
+
+                // On mobile, always ensure sidebar is expanded first
+                if (isMobile() && sideNav.classList.contains('collapsed')) {
+                    expandSidebar();
+                    // Wait for sidebar to expand before toggling dropdown
+                    setTimeout(() => {
+                        toggleDropdown(parentNavItem, dropdownMenu, this);
+                    }, 150);
+                    return;
+                }
+
+                // For desktop collapsed or mobile expanded, toggle dropdown immediately
+                if (!isMobile() && sideNav.classList.contains('collapsed')) {
+                    expandSidebar(); 
+                    setTimeout(() => {
+                        toggleDropdown(parentNavItem, dropdownMenu, this);
+                    }, 50);
+                    return;
+                }
+
+                // Normal toggle
+                toggleDropdown(parentNavItem, dropdownMenu, this);
+            });
+        });
+        
+        /// Handle hover for flyouts when collapsed
+        document.querySelectorAll('.side-navigation.collapsed .nav-item.has-dropdown').forEach(dropdownItem => {
+            dropdownItem.addEventListener('mouseenter', function() {
+                if (sideNav.classList.contains('collapsed')) {
+                    const menu = this.querySelector(':scope > .dropdown-menu-items');
+                    if (menu) {
+                        // Position flyout correctly (JS might be needed if CSS is not enough for multi-level)
+                        // For now, CSS handles :hover to display.
+                    }
+                }
+            });
+            dropdownItem.addEventListener('mouseleave', function() {
+                if (sideNav.classList.contains('collapsed')) {
+                    // CSS will hide on mouseleave from the :hover target
+                }
+            });
+        });
+
+
+        // Active link handling
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        const currentFullPath = window.location.pathname;
+
+        allNavLinks.forEach(item => {
+            // Make sure item is an <a> tag, could be .nav-item directly if it's not a dropdown
+            const linkElement = item.matches('a') ? item : item.querySelector('a');
+            if (!linkElement) return;
+
+            const itemLink = linkElement.getAttribute('href');
+            if (itemLink) {
+                let isMatch = false;
+                // Handle absolute URLs (external)
+                if (itemLink.startsWith('http')) {
+                    if (itemLink === window.location.href) {
+                        // isMatch = true; // Usually don't mark external as active
+                    }
+                } 
+                // Handle root index.html
+                else if (itemLink === '../../index.html' || itemLink === '../index.html' || itemLink === 'index.html') { // Adjusted for relative paths
+                    // Check if current page is effectively an index page at the corresponding level
+                    const pathSegments = currentFullPath.split('/').filter(Boolean);
+                    const itemLinkSegments = itemLink.split('/').filter(Boolean);
+                    
+                    let effectiveCurrentPath = currentPath;
+                    if (currentPath === 'Multinetv01.html' || currentPath === 'Multinetv02.html' || currentPath === 'Multinet.html' || currentPath === 'Technicalblog.html') {
+                         // these are files in static/pages/
+                         // relative to them, ../../index.html is the root index.html
+                        if (itemLink === '../../index.html' && (pathSegments.length === 0 || (pathSegments.length > 0 && pathSegments[pathSegments.length -1] === 'index.html'))) {
+                           // This condition is tricky. Let's simplify by matching currentPath to itemLink's filename
+                        }
+                    }
+                     if ( (currentFullPath.endsWith('/index.html') || currentPath === 'index.html' ) && itemLink.endsWith('index.html')) {
+                         // More specific check for index.html files
+                         if (itemLink === '../../index.html' && currentFullPath.includes('/static/pages/')) isMatch = true;
+                         else if (itemLink === 'index.html' && !currentFullPath.includes('/static/pages/')) isMatch = true; // if index.html is at root
+                     }
+                }
+                // Handle other relative links
+                const itemLinkFilename = itemLink.split('/').pop();
+                if (itemLinkFilename === currentPath && currentPath !== 'index.html') { // for pages like Multinetv01.html matching Multinetv01.html
+                     isMatch = true;
+                }
+                 // Specific case for home on subpages
+                if (itemLink === '../../index.html' && (currentPath === 'index.html' || currentFullPath === '/' || currentFullPath.endsWith("/"))) {
+                    // if current page is a root index, and link is to root index
+                    isMatch = true;
+                } else if (itemLink === '../../index.html' && currentFullPath.includes('/static/pages/') && (currentFullPath.endsWith('/index.html') || currentPath === 'index.html')) {
+                     // if current page is an index.html inside static/pages, and link is to root index, don't mark root active unless it IS the current page
+                }
+
+
+                if (isMatch) {
+                    // Remove active from all other items first
+                    document.querySelectorAll('.side-navigation .nav-item.active, .side-navigation .sub-item.active, .side-navigation .main-release-link.active').forEach(activeEl => activeEl.classList.remove('active'));
+                    
+                    // Add active to current item
+                    let elToActivate = linkElement;
+                     if (linkElement.classList.contains('dropdown-item') || linkElement.classList.contains('main-release-link') || linkElement.classList.contains('sub-item')) {
+                         // Already the correct element or its anchor
+                    } else {
+                        elToActivate = linkElement.closest('.nav-item') || linkElement;
+                    }
+                    if(elToActivate && !elToActivate.hasAttribute('target')) elToActivate.classList.add('active');
+
+
+                    // Open parent dropdowns if active item is inside
+                    let parentDropdownMenu = elToActivate.closest('.dropdown-menu-items');
+                    while(parentDropdownMenu) {
+                        const mainDropdownItem = parentDropdownMenu.parentElement; // The .nav-item.has-dropdown
+                        if (mainDropdownItem && mainDropdownItem.classList.contains('has-dropdown') && !mainDropdownItem.classList.contains('open')) {
+                            // mainDropdownItem.classList.add('open');
+                            const toggle = mainDropdownItem.querySelector('.dropdown-toggle');
+                            // if (toggle) toggle.setAttribute('aria-expanded', 'true');
+                            // parentDropdownMenu.style.maxHeight = parentDropdownMenu.scrollHeight + "px";
+                            const arrowIcon = mainDropdownItem.querySelector('.dropdown-arrow .fas');
+                            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
+                                // arrowIcon.classList.add('rotated');
+                            }
+                        }
+                         if (mainDropdownItem && mainDropdownItem.parentElement) {
+                           parentDropdownMenu = mainDropdownItem.parentElement.closest('.nav-item.has-dropdown > .dropdown-menu-items');
+                        } else {
+                            parentDropdownMenu = null; 
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Fallback for home page if on root index.html for sub-pages
+         if ( (currentFullPath.includes('/static/pages/') && (currentPath === 'index.html' || currentFullPath.endsWith('/'))) ) {
+            // This case is if we are on an index.html within static/pages, which is not expected by current structure
+         } else if ( (currentFullPath === '/' || currentFullPath.endsWith('/index.html')) && !currentFullPath.includes('/static/pages/')) {
+             // We are on the main root index.html
+             const homeSideBarLink = document.querySelector('.side-navigation a.nav-item[href="../../index.html"]'); // This path is for sub-pages
+             // For root index.html, the link would be href="index.html"
+             const rootHomeLink = document.querySelector('.side-navigation a.nav-item[href="index.html"], .side-navigation a.nav-item[href="./index.html"]');
+             if(rootHomeLink && !document.querySelector('.side-navigation .active')) {
+                rootHomeLink.classList.add('active');
+             }
+         } else {
+            // Check current page and set active
+            const pageName = currentPath.split('.')[0]; //e.g. Multinetv01
+            const links = document.querySelectorAll('.side-navigation .nav-item a, .side-navigation .dropdown-item a, .side-navigation .main-release-link');
+            let activeSet = false;
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.includes(currentPath) && currentPath !== 'index.html') {
+                    // Clear previous active
+                    document.querySelectorAll('.side-navigation .active').forEach(el => el.classList.remove('active'));
+                    
+                    let elToActivate = link;
+                    if (link.classList.contains('dropdown-item') || link.classList.contains('main-release-link') || link.classList.contains('sub-item')) {
+                        // Direct link in dropdown
+                    } else {
+                         elToActivate = link.closest('.nav-item') || link;
+                    }
+                    if(elToActivate && !elToActivate.hasAttribute('target')) elToActivate.classList.add('active');
+                    activeSet = true;
+
+                    let parentDropdownMenu = elToActivate.closest('.dropdown-menu-items');
+                    while(parentDropdownMenu) {
+                        const mainDropdownItem = parentDropdownMenu.parentElement; 
+                        if (mainDropdownItem && mainDropdownItem.classList.contains('has-dropdown') && !mainDropdownItem.classList.contains('open')) {
+                            // mainDropdownItem.classList.add('open');
+                            const toggle = mainDropdownItem.querySelector('.dropdown-toggle');
+                            // if (toggle) toggle.setAttribute('aria-expanded', 'true');
+                            // parentDropdownMenu.style.maxHeight = parentDropdownMenu.scrollHeight + "px";
+                            const arrowIcon = mainDropdownItem.querySelector('.dropdown-arrow .fas');
+                            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
+                                // arrowIcon.classList.add('rotated');
+                            }
+                        }
+                        if (mainDropdownItem && mainDropdownItem.parentElement) {
+                           parentDropdownMenu = mainDropdownItem.parentElement.closest('.nav-item.has-dropdown > .dropdown-menu-items');
+                        } else {
+                            parentDropdownMenu = null; 
+                        }
+                    }
+                }
+            });
+            if (!activeSet && (currentFullPath === '/' || currentFullPath.endsWith('/index.html') || currentPath === 'index.html')) {
+                 const homeLink = document.querySelector('.side-navigation a.nav-item[href="../../index.html"]');
+                 if(homeLink && !document.querySelector('.side-navigation .active')){
+                     homeLink.classList.add('active');
+                 }
+            }
+         }
+
+        // Handle window resize for mobile/desktop switching
+        window.addEventListener('resize', function() {
+            if (isMobile()) {
+                // Ensure sidebar is collapsed on mobile
+                if (!sideNav.classList.contains('collapsed')) {
+                    collapseSidebar();
+                }
+            } else {
+                // Remove mobile overlay if switching to desktop
+                if (mobileOverlay) {
+                    mobileOverlay.classList.remove('active');
+                }
+            }
+        });
+
+        // Initial mobile check
+        if (isMobile()) {
+            collapseSidebar();
+        }
+    });
+  </script>
+
+  <script>
+    // Dataset Image Lightbox Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const lightbox = document.getElementById('imageLightbox');
+      const lightboxImg = document.getElementById('lightboxImage');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const datasetImages = document.querySelectorAll('.dataset-image');
+
+      // Add click event to all dataset images
+      datasetImages.forEach(img => {
+        img.addEventListener('click', function() {
+          lightbox.classList.add('active');
+          lightboxImg.src = this.src;
+          lightboxCaption.textContent = this.dataset.caption || this.alt;
+          document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+      });
+
+      // Close lightbox when clicking outside the image
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+          closeLightbox();
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+          closeLightbox();
+        }
+      });
+    });
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('imageLightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+    
+    // Collapsible section functionality
+    function toggleCollapsible(contentId, iconId) {
+      const content = document.getElementById(contentId);
+      const icon = document.getElementById(iconId);
+      
+      if (content.classList.contains('collapsed')) {
+        content.classList.remove('collapsed');
+        icon.classList.remove('collapsed');
+        icon.textContent = '▼';
+      } else {
+        content.classList.add('collapsed');
+        icon.classList.add('collapsed');
+        icon.textContent = '▼';
+      }
+    }
+
+    // Model Output Visualization JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+      const modelButtons = document.querySelectorAll('.model-tab-button');
+      const outputBox = document.getElementById('model-output');
+      let modelData = {};
+      let animatedModels = new Set();
+      let currentTypingTimeout = null;
+
+      // Fetch model output data
+      fetch('../data/visualize_odinw_outputs.json')
+        .then(response => response.json())
+        .then(data => {
+          modelData = data;
+          // Initialize with GPT5 output
+          updateOutput('gpt5');
+        })
+        .catch(error => {
+          console.error('Error loading model data:', error);
+          outputBox.textContent = 'Error loading model data';
+        });
+
+      // Handle tab button clicks
+      modelButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const model = this.getAttribute('data-model');
+          
+          // Remove active class from all buttons
+          modelButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          // Update output
+          updateOutput(model);
+        });
+      });
+
+      function updateOutput(model) {
+        // Cancel any ongoing typing animation
+        if (currentTypingTimeout) {
+          clearTimeout(currentTypingTimeout);
+          currentTypingTimeout = null;
+        }
+        
+        const text = modelData[model] || 'No output available for this model';
+        
+        if (!animatedModels.has(model)) {
+          // First time for this model: show typing animation
+          typeText(outputBox, text);
+          animatedModels.add(model);
+        } else {
+          // Subsequent times for this model: show text instantly
+          outputBox.textContent = text;
+        }
+      }
+
+      function typeText(element, text, speed = 17) {
+        element.textContent = '';
+        let i = 0;
+        
+        function typeChar() {
+          if (i < text.length) {
+            element.textContent = text.substring(0, i + 1);
+            i++;
+            currentTypingTimeout = setTimeout(typeChar, speed);
+          } else {
+            currentTypingTimeout = null;
+          }
+        }
+        
+        typeChar();
+      }
+    });
+  </script>
+</div>
+</body>
+</html>
+
+
+

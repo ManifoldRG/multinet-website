@@ -1,0 +1,32 @@
+{
+    "gpt5": {
+        "exact_match_rate": [0.026292889109895575],
+        "micro_recall": [0.026292889109895575],
+        "micro_precision": [0.026292889109895575],
+        "micro_f1": [0.026292889109895575],
+        "macro_precision": [0.03279308602213647],
+        "macro_recall": [0.03904051263480153],
+        "macro_f1": [0.015191734824455926],
+        "percentage_invalids": [13.339134758826454]
+    },
+    "pi0": {
+        "exact_match_rate": [0.03956364992541024],
+        "micro_precision": [0.03956364992541024],
+        "micro_recall": [0.03956364992541024],
+        "micro_f1": [0.03956364992541024],
+        "macro_precision": [0.029075170093117147],
+        "macro_recall": [0.022849141703913615],
+        "macro_f1": [0.016592306604544492],
+        "percentage_invalids": [22.7312282446544]
+    },
+    "magma": {
+        "exact_match_rate": [0.0],
+        "micro_recall": [0.0],
+        "micro_precision": [0.0],
+        "micro_f1": [0.0],
+        "macro_precision": [0.0],
+        "macro_recall": [0.0],
+        "macro_f1": [0.0],
+        "percentage_invalids": [100.0]
+    }
+}
