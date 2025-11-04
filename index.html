@@ -1275,13 +1275,17 @@
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
         </a>
         <div class="dropdown-menu-items level-1">
-            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link"> <!-- Link to codebase -->
+            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" class="dropdown-item main-release-link">
               <span class="icon"><i class="fas fa-tasks"></i></span> <!-- Icon for Multinet Eval Harness -->
               <span class="nav-text" style="white-space: nowrap;">Multinet Eval Harness</span>
             </a>
             <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="dropdown-item main-release-link">
               <span class="icon"><i class="fas fa-code"></i></span>
               <span class="nav-text" style="white-space: nowrap;">GenESIS framework</span>
+            </a>
+            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
+              <span class="icon"><i class="fab fa-github"></i></span>
+              <span class="nav-text" style="white-space: nowrap;">Code</span>
             </a>
         </div>
     </div>
@@ -1371,6 +1375,10 @@
                           <li><strong>Open-source adaptations of diverse models</strong> to various out-of-distribution task domains</li>
                           <li><strong>Comprehensive evaluation protocols</strong> for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets</li>
                       </ul>
+                      <div id="announcement-box" class="box has-text-centered" style="margin-top: 1.5rem; margin-bottom: 0; background: #F5F0FF; border: 1px solid #E0D5F0; position: relative;">
+                        <button id="close-announcement" style="position: absolute; top: 0.5rem; right: 0.5rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #666; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; line-height: 1;" aria-label="Close announcement">&times;</button>
+                        <strong>The MultiNet evaluation harness is now available!</strong> To submit your model to the MultiNet leaderboard, follow the instructions on our <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" style="margin-right: 0.3em;"></i>github</a>!
+                      </div>
                   </p>
               </div>
           </div>
@@ -1403,8 +1411,7 @@
                 <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 0 0 8px 8px; border: 1px solid #e9ecef; border-top: none;">
                   <p style="margin-bottom: 1.5rem;">
                     To learn more about our preliminary analysis and methodology, check out our 
-                    <a href="static/pages/Multinetv1.html">V1 analysis page</a>. 
-                    To have your model evaluated, please reach out to <a href="mailto:pranav@metarch.ai">pranav@metarch.ai</a>
+                    <a href="static/pages/Multinetv1.html">V1 analysis page</a>.
                   </p>
                   <div class="columns">
                     <div class="column">
@@ -1595,7 +1602,7 @@
                           <p class="description-intro">Our software contributions:</p>
                           <ul style="list-style-type: none; padding-left: 0;">
                             <li style="margin-bottom: 15px;">
-                              <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
+                              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
                                 <strong>Eval Harness:</strong>
                               </a>
                               <span style="display: block; margin-top: 5px; color: #e0e0e0;">Systematic evaluation framework for multimodal models</span>
@@ -2609,6 +2616,15 @@
         });
       }
     });
+
+    // Handle announcement box close button
+    const closeAnnouncement = document.getElementById('close-announcement');
+    const announcementBox = document.getElementById('announcement-box');
+    if (closeAnnouncement && announcementBox) {
+      closeAnnouncement.addEventListener('click', function() {
+        announcementBox.style.display = 'none';
+      });
+    }
   </script>
 </body>
 </html>
