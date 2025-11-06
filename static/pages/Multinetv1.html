@@ -2125,8 +2125,8 @@
 
     <!-- Releases Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;" 
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+         onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }"
+         onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
         <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
             <span class="icon"><i class="fas fa-microscope"></i></span>
             <span class="nav-text">Benchmark Releases</span>
@@ -2152,8 +2152,8 @@
     </div>
     <!-- Model Releases Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+         onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }"
+         onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
         <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
             <span class="icon"><i class="fas fa-rocket"></i></span>
             <span class="nav-text">Model Releases</span>
@@ -2172,35 +2172,39 @@
     </div>
     <!-- Software Releases Dropdown -->
     <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');"
-         onmouseout="this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');">
+         onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }"
+         onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
         <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); /* Prevents navigation if JS is enabled, hover handles open/close */">
             <span class="icon"><i class="fas fa-code-branch"></i></span>
             <span class="nav-text">Software Releases</span>
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
         </a>
         <div class="dropdown-menu-items level-1">
-            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" class="dropdown-item main-release-link">
-              <span class="icon"><i class="fas fa-tasks"></i></span>
-              <span class="nav-text" style="white-space: nowrap;">Model Submission Software</span>
-            </a>
             <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="dropdown-item main-release-link">
               <span class="icon"><i class="fas fa-code"></i></span>
               <span class="nav-text" style="white-space: nowrap;">GenESIS framework</span>
             </a>
             <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
               <span class="icon"><i class="fab fa-github"></i></span>
-              <span class="nav-text" style="white-space: nowrap;">Code</span>
+              <span class="nav-text" style="white-space: nowrap;">Data Curation Toolkit</span>
+            </a>
+            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
+              <span class="icon"><i class="fas fa-microchip"></i></span>
+              <span class="nav-text" style="white-space: nowrap;">Model Adaptations</span>
             </a>
         </div>
     </div>
+    <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" class="nav-item">
+      <span class="icon"><i class="fas fa-paper-plane"></i></span>
+      <span class="nav-text">Submit</span>
+    </a>
     <a href="Multinet.html" class="nav-item">
       <span class="icon"><i class="fas fa-info-circle"></i></span>
       <span class="nav-text">About Multinet</span>
     </a>
     <a href="../../index.html#BibTeX" class="nav-item">
       <span class="icon"><i class="fas fa-quote-right"></i></span>
-      <span class="nav-text">Citations</span>
+      <span class="nav-text">Citation</span>
     </a>
   </div>
 </div>
@@ -2212,7 +2216,7 @@
       ×
     </button>
     <p style="margin: 0; font-size: 1.1rem; font-weight: 500; white-space: nowrap; overflow-x: auto;">
-      The Multinet model submission software is now available! To submit your model for evaluation, follow the instructions on our <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" rel="noopener noreferrer" style="color: #90EE90; text-decoration: underline;"><i class="fab fa-github" style="margin-right: 0.3em;"></i>github</a>!
+      Interested in evaluating your model? Follow the submission instructions <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" rel="noopener noreferrer" style="color: #90EE90; text-decoration: underline;"><i class="fab fa-github" style="margin-right: 0.3em;"></i>here</a>!
     </p>
   </div>
 
@@ -2264,9 +2268,9 @@
                               <span class="link-block" style="display: inline-flex; align-items: center;">
                                 <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" class="external-link button is-normal is-rounded is-dark">
                                   <span class="icon">
-                                    <i class="fas fa-upload"></i>
+                                    <i class="fas fa-paper-plane"></i>
                                   </span>
-                                  <span>Submission Software</span>
+                                  <span>Model Submissions</span>
                                 </a>
                               </span>
                               <span class="link-block" style="display: inline-flex; align-items: center;">

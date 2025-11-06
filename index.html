@@ -1275,20 +1275,24 @@
             <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
         </a>
         <div class="dropdown-menu-items level-1">
-            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" class="dropdown-item main-release-link"> <!-- Link to submission software -->
-              <span class="icon"><i class="fas fa-tasks"></i></span> <!-- Icon for Multinet Eval Harness -->
-              <span class="nav-text" style="white-space: nowrap;">Model Submission Software</span>
-            </a>
             <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="dropdown-item main-release-link">
               <span class="icon"><i class="fas fa-code"></i></span>
               <span class="nav-text" style="white-space: nowrap;">GenESIS framework</span>
             </a>
             <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
               <span class="icon"><i class="fab fa-github"></i></span>
-              <span class="nav-text" style="white-space: nowrap;">Code</span>
+              <span class="nav-text" style="white-space: nowrap;">Data Curation Toolkit</span>
+            </a>
+            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
+              <span class="icon"><i class="fas fa-microchip"></i></span>
+              <span class="nav-text" style="white-space: nowrap;">Model Adaptations</span>
             </a>
         </div>
     </div>
+    <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" class="nav-item">
+      <span class="icon"><i class="fas fa-paper-plane"></i></span>
+      <span class="nav-text">Submit</span>
+    </a>
     <a href="static/pages/Multinet.html" class="nav-item">
       <span class="icon"><i class="fas fa-info-circle"></i></span> <!-- Changed icon for About Multinet -->
       <span class="nav-text">About Multinet</span> <!-- Changed text -->
@@ -1307,7 +1311,7 @@
       ×
     </button>
     <p style="margin: 0; font-size: 1.1rem; font-weight: 500; white-space: nowrap; overflow-x: auto;">
-      The Multinet model submission software is now available! To submit your model for evaluation, follow the instructions on our <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" rel="noopener noreferrer" style="color: #90EE90; text-decoration: underline;"><i class="fab fa-github" style="margin-right: 0.3em;"></i>github</a>!
+      Interested in evaluating your model? Follow the submission instructions <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" rel="noopener noreferrer" style="color: #90EE90; text-decoration: underline;"><i class="fab fa-github" style="margin-right: 0.3em;"></i>here</a>!
     </p>
   </div>
 
@@ -1593,10 +1597,10 @@
                           <p class="description-intro">Our software contributions:</p>
                           <ul style="list-style-type: none; padding-left: 0;">
                             <li style="margin-bottom: 15px;">
-                              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>Model Submission Software:</strong>
+                              <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
+                                <strong>Model Adaptations:</strong>
                               </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Systematic evaluation framework for multimodal models</span>
+                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Model adaptations of SoTA VLAs to Multinet datasets, such as OpenVLA, Pi0 and Magma</span>
                             </li>
                             <li style="margin-bottom: 15px;">
                               <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
@@ -1643,6 +1647,35 @@
                             <li>Evaluation suite for multimodal models</li>
                             <li>Open-source adaptations of diverse models to various out-of-distribution task domains</li>
                             <li>Comprehensive evaluation protocols for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Card 6: Submission guide -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" class="flip-card-anchor">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h3 class="title is-4">Submission Guide</h3>
+                      <p>Step-by-step instructions for submitting your model to the MultiNet leaderboard</p>
+                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-paper-plane"></i></span>
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="scrollable-content">
+                        <div>
+                          <h3 class="title is-4">Submission Guide</h3>
+                          <p class="description-intro">This guide covers the complete submission process, including:</p>
+                          <ul>
+                            <li>How to implement the required dataset adapters for your model</li>
+                            <li>Preparing your environment and code using our Docker template</li>
+                            <li>Testing your model locally on sample data</li>
+                            <li>Example adapter implementations for reference</li>
                           </ul>
                         </div>
                       </div>
