@@ -2,23 +2,21 @@
     "pi0": {
       "dataset_name": ["openx_bimanual", "openx_quadrupedal", "openx_mobile_manipulation", "openx_single_arm", "openx_wheeled_robot"],
       "action_success_rate": [0.0, 0.0, 0.0, 0.0, 0.0],
-      "total_dataset_amse": [94.83, 3254.65, 965.44, 413.17, 2486.09],
-      "total_dataset_amae": [50.27, 1675.53, 2568.21, 829.43, 5692.94],
+      "total_dataset_amse": [105.53, 3251.65, 968.58, 355.17, 2470.05],
+      "total_dataset_amae": [54.24, 1702.11, 2556.70, 778.40, 5671.37],
       "num_timesteps": [126, 2268, 17808, 13537, 24507],
-      "avg_dataset_amse": [0.753, 1.435, 0.054, 0.031, 0.101],
-      "avg_dataset_amae": [0.399, 0.739, 0.144, 0.061, 0.232],
-      "normalized_amse": [0.11, 0.105, 0.075, 0.059, 0.223],
-      "normalized_amae": [0.277, 0.226, 0.222, 0.178, 0.382],
-      "normalized_quantile_filtered_amae": [0.316, 0.216, 0.26, 0.188, 0.424],
-      "max_relative_mae": [2.779, 4.177, 4.678, 8.856, 2.623],
-      "proportion_beyond_threshold_mae": [0.0, 0.022, 0.005, 0.181, 0.0],
-      "eval_time": [79.48, 803.81, 24648.46, 19334.07, 8423.77],
+      "avg_dataset_amse": [0.838, 1.434, 0.054, 0.026, 0.101],
+      "avg_dataset_amae": [0.430, 0.750, 0.144, 0.058, 0.231],
+      "normalized_amse": [0.215, 0.090, 0.068, 0.037, 0.213],
+      "normalized_amae": [0.311, 0.191, 0.202, 0.152, 0.396],
+      "normalized_quantile_filtered_amae": [0.333, 0.197, 0.254, 0.190, 0.414],
+      "max_relative_mae": [2.474, 4.574, 5.209, 9.933, 2.551],
+      "proportion_beyond_threshold_mae": [0.0, 0.019, 0.009, 0.151, 0.0],
+      "eval_time": [208.09, 3310.31, 27564.39, 19369.06, 34550.76],
       "total_invalid_preds": [0, 0, 0, 0, 0],
       "invalid_predictions_percentage": [0.0, 0.0, 0.0, 0.0, 0.0],
-      "total_batches": [3, 46, 1781, 1354, 491],
-      "total_timesteps": [126, 2268, 17808, 13537, 24507],
-      "namae_across_models": [0.516, 0.021, 1.0, 1.0, 1.0],
-      "namse_across_models": [0.453, 0.011, 1.0, 1.0, 1.0]
+      "total_batches": [13, 227, 1781, 1354, 2451],
+      "total_timesteps": [126, 2268, 17808, 13537, 24507]
     },
     "gpt5": {
       "dataset_name": ["openx_bimanual", "openx_quadrupedal", "openx_mobile_manipulation", "openx_single_arm", "openx_wheeled_robot"],
@@ -37,9 +35,7 @@
       "total_invalid_preds": [0, 1, 0, 0, 0],
       "invalid_predictions_percentage": [0.0, 0.044, 0.0, 0.0, 0.0],
       "total_batches": [3, 46, 1781, 1354, 491],
-      "total_timesteps": [126, 2268, 17808, 13537, 24507],
-      "namae_across_models": [0.0, 0.0, 0.0, 0.0, 0.235],
-      "namse_across_models": [0.0, 0.0, 0.971, 0.0, 0.058]
+      "total_timesteps": [126, 2268, 17808, 13537, 24507]
     },
     "magma": {
       "dataset_name": ["openx_bimanual", "openx_quadrupedal", "openx_mobile_manipulation", "openx_single_arm", "openx_wheeled_robot"],
@@ -58,8 +54,6 @@
       "total_invalid_preds": [0, 2264, 0, 0, 0],
       "invalid_predictions_percentage": [0.0, 100.0, 0.0, 0.0, 0.0],
       "total_batches": [13, 567, 1781, 1354, 2451],
-      "total_timesteps": [126, 2264, 17808, 13537, 24507],
-      "namae_across_models": [1.0, 1.0, 0.306, 0.478, 0.0],
-      "namse_across_models": [1.0, 1.0, 0.0, 0.385, 0.0]
+      "total_timesteps": [126, 2264, 17808, 13537, 24507]
     }
   }
