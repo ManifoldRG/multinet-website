@@ -2183,7 +2183,7 @@ function renderOvercookedPercentageInvalidsChart(data, canvas) {
               if (originalValue === null) {
                 return `${context.dataset.label}: N/A (no data available)`;
               } else {
-                return `${context.dataset.label}: ${(originalValue * 100).toFixed(1)}%`;
+                return `${context.dataset.label}: ${originalValue.toFixed(1)}%`;
               }
             }
           }

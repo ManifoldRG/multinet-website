@@ -10,14 +10,14 @@
         "percentage_invalids": [13.339134758826454]
     },
     "pi0": {
-        "exact_match_rate": [0.03956364992541024],
-        "micro_precision": [0.03956364992541024],
-        "micro_recall": [0.03956364992541024],
-        "micro_f1": [0.03956364992541024],
-        "macro_precision": [0.029075170093117147],
-        "macro_recall": [0.022849141703913615],
-        "macro_f1": [0.016592306604544492],
-        "percentage_invalids": [22.7312282446544]
+        "exact_match_rate": [0.05162232720039781],
+        "micro_precision": [0.05162232720039781],
+        "micro_recall": [0.05162232720039781],
+        "micro_f1": [0.05162232720039781],
+        "macro_precision": [0.028033222896770762],
+        "macro_recall": [0.025018958754641486],
+        "macro_f1": [0.016565698722971964],
+        "percentage_invalids": [7.26317752362009]
     },
     "magma": {
         "exact_match_rate": [0.0],
