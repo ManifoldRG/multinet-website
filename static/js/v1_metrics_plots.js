@@ -75,7 +75,6 @@ let openxActionSuccessRateChart = null;
 let openxInvalidPredictionsPercentageChart = null;
 let openxMeanAbsoluteErrorChart = null;
 let openxNormalizedMaeChart = null;
-let openxNormalizedQuantileFilteredMaeChart = null;
 let currentDataset = 'piqa';
 let currentEvalMetric = 'exact_match';
 
@@ -128,8 +127,7 @@ function updateEvalMetricButtons(dataset) {
       { key: 'action_success_rate', label: 'Action Success Rate' },
       { key: 'invalid_predictions_percentage', label: 'Invalid Predictions Percentage' },
       { key: 'total_dataset_amae', label: 'Mean Absolute Error' },
-      { key: 'normalized_amae', label: 'Normalized MAE' },
-      { key: 'normalized_quantile_filtered_amae', label: 'Normalized Quantile Filtered MAE' }
+      { key: 'normalized_amae', label: 'Normalized MAE' }
     ]
   };
   
@@ -178,6 +176,12 @@ function showChartForDatasetAndMetric(dataset, evalMetric) {
     chart.style.setProperty('opacity', '0', 'important');
     chart.style.setProperty('pointer-events', 'none', 'important');
   });
+  
+  // Hide the note for normalized MAE chart
+  const normalizedMaeNote = document.getElementById('openx-normalized-mae-note');
+  if (normalizedMaeNote) {
+    normalizedMaeNote.style.display = 'none';
+  }
   
   // Show the target chart
   const targetChart = document.querySelector(`.metric-chart[data-metric="${dataset}"][data-eval-metric="${evalMetric}"]`);
@@ -244,8 +248,13 @@ function showChartForDatasetAndMetric(dataset, evalMetric) {
     if (dataset === 'openx' && evalMetric === 'normalized_amae' && !openxNormalizedMaeChart) {
       initializeOpenXNormalizedMaeChart();
     }
-    if (dataset === 'openx' && evalMetric === 'normalized_quantile_filtered_amae' && !openxNormalizedQuantileFilteredMaeChart) {
-      initializeOpenXNormalizedQuantileFilteredMaeChart();
+    
+    // Show the note for normalized MAE chart
+    if (dataset === 'openx' && evalMetric === 'normalized_amae') {
+      const normalizedMaeNote = document.getElementById('openx-normalized-mae-note');
+      if (normalizedMaeNote) {
+        normalizedMaeNote.style.display = 'block';
+      }
     }
     if (dataset === 'odinw') {
       if (evalMetric === 'exact_match' && !odinwPart1Chart) {
@@ -325,9 +334,6 @@ function initializeDatasetSelector() {
     }
     if (selectedDataset === 'openx' && !openxNormalizedMaeChart) {
       initializeOpenXNormalizedMaeChart();
-    }
-    if (selectedDataset === 'openx' && !openxNormalizedQuantileFilteredMaeChart) {
-      initializeOpenXNormalizedQuantileFilteredMaeChart();
     }
     
     if (selectedDataset === 'odinw') {
@@ -4626,9 +4632,6 @@ window.addEventListener('resize', () => {
   if (openxNormalizedMaeChart) {
     openxNormalizedMaeChart.resize();
   }
-  if (openxNormalizedQuantileFilteredMaeChart) {
-    openxNormalizedQuantileFilteredMaeChart.resize();
-  }
 });
 
 // BFCLv3 Chart Functions
@@ -6026,7 +6029,7 @@ function initializeOpenXNormalizedMaeChart() {
 }
 
 function renderOpenXNormalizedMaeChart(data, canvas) {
-  console.log('Rendering OpenX Normalized MAE chart with data:', data);
+  console.log('Rendering OpenX Baseline Normalized AMAE chart with data:', data);
   
   const chartDiv = canvas.closest('.metric-chart');
   if (chartDiv) {
@@ -6049,25 +6052,29 @@ function renderOpenXNormalizedMaeChart(data, canvas) {
   const allOriginalValues = [];
   v1Models.forEach(model => {
     const modelData = data[model];
-    if (modelData && modelData.normalized_amae) {
-      allOriginalValues.push(...modelData.normalized_amae);
+    if (modelData && modelData.approximate_baseline_normalized_mae) {
+      allOriginalValues.push(...modelData.approximate_baseline_normalized_mae);
     }
   });
   
+  console.log('All original values:', allOriginalValues);
+
   // Filter out null values for calculating dataMax and minVisibleValue
   const validValues = allOriginalValues.filter(value => value !== null);
   const dataMax = validValues.length > 0 ? Math.max(...validValues) : 0;
   const minVisibleValue = Math.max(0.01, dataMax * 0.01);
   
+  console.log('dataMax:', dataMax, 'minVisibleValue:', minVisibleValue);
+
   const datasets = v1Models.map((model, index) => {
     const modelData = data[model];
-    if (!modelData || !modelData.normalized_amae) {
-      console.warn(`No normalized AMAE data found for model ${model}`);
+    if (!modelData || !modelData.approximate_baseline_normalized_mae) {
+      console.warn(`No approximate baseline normalized MAE data found for model ${model}`);
       return null;
     }
-    
+
     // Keep null values as null (no bar will be displayed)
-    const originalValues = modelData.normalized_amae;
+    const originalValues = modelData.approximate_baseline_normalized_mae;
     
     // Create display values that ensure small values are visible, but keep null as null
     const displayValues = originalValues.map(value => {
@@ -6106,8 +6113,12 @@ function renderOpenXNormalizedMaeChart(data, canvas) {
     };
   }).filter(d => d !== null);
   
-  // Calculate dynamic y-axis max using original values
-  const maxValue = getNiceMaxValue(dataMax, 1.0); // Cap at 1.0 for normalized values
+  console.log('Datasets:', datasets);
+  
+  // Calculate dynamic y-axis max using original values, rounded up to nearest whole number
+  const maxValue = Math.ceil(getNiceMaxValue(dataMax, dataMax * 1.15)); // Allow dynamic scaling for baseline normalized values
+  
+  console.log('maxValue:', maxValue);
   
   const chartData = {
     labels: datasetNames,
@@ -6123,7 +6134,7 @@ function renderOpenXNormalizedMaeChart(data, canvas) {
       plugins: {
         title: {
           display: true,
-          text: 'Normalized MAE',
+          text: 'Baseline Normalized MAE*',
           font: {
             size: 16,
             weight: 'bold'
@@ -6158,7 +6169,7 @@ function renderOpenXNormalizedMaeChart(data, canvas) {
           max: maxValue,
           title: {
             display: true,
-            text: 'Normalized MAE'
+            text: 'Baseline Normalized MAE'
           }
         }
       }
@@ -6173,179 +6184,6 @@ function renderOpenXNormalizedMaeChart(data, canvas) {
     console.log('OpenX Normalized MAE chart created successfully');
   } catch (error) {
     console.error('Error creating OpenX Normalized MAE chart:', error);
-  }
-}
-
-// OpenX Normalized Quantile Filtered MAE Chart Functions
-function initializeOpenXNormalizedQuantileFilteredMaeChart() {
-  const chartCanvas = document.getElementById('openx-normalized-quantile-filtered-mae-chart');
-  if (!chartCanvas) {
-    return;
-  }
-  
-  fetch('../data/v1_openx_metrics.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      renderOpenXNormalizedQuantileFilteredMaeChart(data, chartCanvas);
-    })
-    .catch(error => {
-      console.error('Error loading OpenX normalized quantile filtered MAE metrics:', error);
-    });
-}
-
-function renderOpenXNormalizedQuantileFilteredMaeChart(data, canvas) {
-  console.log('Rendering OpenX Normalized Quantile Filtered MAE chart with data:', data);
-  
-  const chartDiv = canvas.closest('.metric-chart');
-  if (chartDiv) {
-    chartDiv.style.setProperty('opacity', '1', 'important');
-    chartDiv.style.setProperty('pointer-events', 'auto', 'important');
-  }
-  
-  const ctx = canvas.getContext('2d');
-  
-  // Get dataset names from the first model that has them
-  let datasetNames = null;
-  for (const model of v1Models) {
-    if (data[model] && data[model].dataset_name) {
-      datasetNames = data[model].dataset_name;
-      break;
-    }
-  }
-  
-  // First, collect all original values to calculate a global minimum visible value
-  const allOriginalValues = [];
-  v1Models.forEach(model => {
-    const modelData = data[model];
-    if (modelData && modelData.normalized_quantile_filtered_amae) {
-      allOriginalValues.push(...modelData.normalized_quantile_filtered_amae);
-    }
-  });
-  
-  // Filter out null values for calculating dataMax and minVisibleValue
-  const validValues = allOriginalValues.filter(value => value !== null);
-  const dataMax = validValues.length > 0 ? Math.max(...validValues) : 0;
-  const minVisibleValue = Math.max(0.01, dataMax * 0.01);
-  
-  const datasets = v1Models.map((model, index) => {
-    const modelData = data[model];
-    if (!modelData || !modelData.normalized_quantile_filtered_amae) {
-      console.warn(`No normalized quantile filtered AMAE data found for model ${model}`);
-      return null;
-    }
-    
-    // Keep null values as null (no bar will be displayed)
-    const originalValues = modelData.normalized_quantile_filtered_amae;
-    
-    // Create display values that ensure small values are visible, but keep null as null
-    const displayValues = originalValues.map(value => {
-      if (value === null) {
-        return null; // Keep null values as null (no bar will be displayed)
-      } else if (value === 0) {
-        return minVisibleValue;
-      } else {
-        return Math.max(value, minVisibleValue);
-      }
-    });
-    
-    const colors = [
-      'rgba(54, 162, 235, 0.7)',
-      'rgba(255, 206, 86, 0.7)',
-      'rgba(255, 99, 132, 0.7)'
-    ];
-    
-    const borderColors = [
-      'rgba(54, 162, 235, 1)',
-      'rgba(255, 206, 86, 1)',
-      'rgba(255, 99, 132, 1)'
-    ];
-    
-    return {
-        label: v1ModelDisplayNames[model],
-        data: displayValues,
-        originalData: originalValues, // Store original values for tooltips
-        backgroundColor: colors[index],
-        borderColor: borderColors[index],
-        borderWidth: 2,
-        borderRadius: 4,
-        borderSkipped: false,
-        categoryPercentage: 0.4,
-        barPercentage: 0.7
-    };
-  }).filter(d => d !== null);
-  
-  // Calculate dynamic y-axis max using original values
-  const maxValue = getNiceMaxValue(dataMax, 1.0); // Cap at 1.0 for normalized values
-  
-  const chartData = {
-    labels: datasetNames,
-    datasets: datasets
-  };
-  
-  const chartConfig = {
-    type: 'bar',
-    data: chartData,
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Normalized Quantile Filtered MAE',
-          font: {
-            size: 16,
-            weight: 'bold'
-          }
-        },
-        legend: {
-          display: true,
-          position: 'top'
-        },
-        tooltip: {
-          callbacks: {
-            label: function(context) {
-              const originalValue = context.dataset.originalData[context.dataIndex];
-              if (originalValue === null) {
-                return `${context.dataset.label}: N/A (no data available)`;
-              } else {
-                return `${context.dataset.label}: ${originalValue.toFixed(3)}`;
-              }
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Dataset'
-          }
-        },
-        y: {
-          beginAtZero: true,
-          max: maxValue,
-          title: {
-            display: true,
-            text: 'Normalized Quantile Filtered MAE'
-          }
-        }
-      }
-    }
-  };
-  
-  try {
-    if (openxNormalizedQuantileFilteredMaeChart) {
-      openxNormalizedQuantileFilteredMaeChart.destroy();
-    }
-    openxNormalizedQuantileFilteredMaeChart = new Chart(ctx, chartConfig);
-    console.log('OpenX Normalized Quantile Filtered MAE chart created successfully');
-  } catch (error) {
-    console.error('Error creating OpenX Normalized Quantile Filtered MAE chart:', error);
   }
 }
 
