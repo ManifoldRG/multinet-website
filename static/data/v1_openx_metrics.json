@@ -16,7 +16,8 @@
       "total_invalid_preds": [0, 0, 0, 0, 0],
       "invalid_predictions_percentage": [0.0, 0.0, 0.0, 0.0, 0.0],
       "total_batches": [13, 227, 1781, 1354, 2451],
-      "total_timesteps": [126, 2268, 17808, 13537, 24507]
+      "total_timesteps": [126, 2268, 17808, 13537, 24507],
+      "approximate_baseline_normalized_mae": [1.524, 1.532, 2.461, 2.593, 4.020]
     },
     "gpt5": {
       "dataset_name": ["openx_bimanual", "openx_quadrupedal", "openx_mobile_manipulation", "openx_single_arm", "openx_wheeled_robot"],
@@ -35,7 +36,8 @@
       "total_invalid_preds": [0, 1, 0, 0, 0],
       "invalid_predictions_percentage": [0.0, 0.044, 0.0, 0.0, 0.0],
       "total_batches": [3, 46, 1781, 1354, 491],
-      "total_timesteps": [126, 2268, 17808, 13537, 24507]
+      "total_timesteps": [126, 2268, 17808, 13537, 24507],
+      "approximate_baseline_normalized_mae": [0.479, 1.254, 1.200, 1.685, 1.237]
     },
     "magma": {
       "dataset_name": ["openx_bimanual", "openx_quadrupedal", "openx_mobile_manipulation", "openx_single_arm", "openx_wheeled_robot"],
@@ -54,6 +56,7 @@
       "total_invalid_preds": [0, 2264, 0, 0, 0],
       "invalid_predictions_percentage": [0.0, 100.0, 0.0, 0.0, 0.0],
       "total_batches": [13, 567, 1781, 1354, 2451],
-      "total_timesteps": [126, 2264, 17808, 13537, 24507]
+      "total_timesteps": [126, 2264, 17808, 13537, 24507],
+      "approximate_baseline_normalized_mae": [2.289, 13.636, 1.589, 2.201, 1.157]
     }
   }

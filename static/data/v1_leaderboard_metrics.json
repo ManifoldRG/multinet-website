@@ -1,7 +1,8 @@
 {
+  "_comment": "OpenX values represent the mean of approximate_baseline_normalized_mae across all datasets per model",
   "results": {
     "magma": {
-      "OpenX": 1.507,
+      "OpenX": 4.1744,
       "Overcooked": 0.0,
       "SQA3D": 0.3446685878962536,
       "RobotVQA": 0.0825,
@@ -10,7 +11,7 @@
       "BFCL": 0.0
     },
     "pi0": {
-      "OpenX": 0.323,
+      "OpenX": 2.426,
       "Overcooked": 0.016565698722971964,
       "SQA3D": 0.0,
       "RobotVQA": 0.0,
@@ -19,7 +20,7 @@
       "BFCL": 0.0
     },
     "gpt5": {
-      "OpenX": 0.185,
+      "OpenX": 1.171,
       "Overcooked": 0.015191734824455926,
       "SQA3D": 0.4763688760806916,
       "RobotVQA": 0.28,
