@@ -2934,7 +2934,8 @@
                   <button class="metric-button active" data-eval-metric="exact_match">Exact Match Rate</button>
                 </div>
 
-                <!-- Charts Container -->
+                <!-- Charts Container with Note -->
+                <div style="flex: 1; display: flex; flex-direction: column;">
                 <div class="metrics-charts" style="position:relative; height: 500px;">
                   <!-- PIQA Exact Match -->
                   <div class="metric-chart active" data-metric="piqa" data-eval-metric="exact_match" style="position:relative; height: 100%;">
@@ -3090,11 +3091,8 @@
                   <div class="metric-chart" data-metric="openx" data-eval-metric="normalized_amae" style="position:relative; height: 100%;">
                     <canvas id="openx-normalized-mae-chart"></canvas>
                   </div>
-                  
-                  <!-- OpenX Normalized Quantile Filtered AMAE -->
-                  <div class="metric-chart" data-metric="openx" data-eval-metric="normalized_quantile_filtered_amae" style="position:relative; height: 100%;">
-                    <canvas id="openx-normalized-quantile-filtered-mae-chart"></canvas>
-                  </div>
+                </div>
+                <p id="openx-normalized-mae-note" style="width: 100%; margin-top: 10px; margin-bottom: 20px; font-size: 0.85rem; color: #666; text-align: center; display: none; box-sizing: border-box;">Note: * The values in this plot are an approximation of the MAE normalized relative to a naive mean prediction baseline</p>
                 </div>
               </div>
             </div>
