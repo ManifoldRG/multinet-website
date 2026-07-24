@@ -116,6 +116,42 @@
     var links = document.querySelector(".mn-nav__links");
     if (toggle && links) toggle.addEventListener("click", function () { links.classList.toggle("is-open"); });
 
+    // count-up on headline numbers (.mn-countup with data-to / data-suffix)
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll(".mn-countup").forEach(function (el) {
+      var to = parseFloat(el.getAttribute("data-to")) || 0, suffix = el.getAttribute("data-suffix") || "";
+      var dec = parseInt(el.getAttribute("data-decimals") || "0", 10);
+      if (reduce) { el.textContent = to.toFixed(dec) + suffix; return; }
+      var run = function () {
+        var start = null, dur = 1200;
+        function step(ts) { if (!start) start = ts; var p = Math.min((ts - start) / dur, 1);
+          el.textContent = (to * (1 - Math.pow(1 - p, 3))).toFixed(dec) + suffix;
+          if (p < 1) requestAnimationFrame(step); }
+        requestAnimationFrame(step);
+      };
+      if ("IntersectionObserver" in window) {
+        var cio = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { run(); cio.unobserve(e.target); } });
+        });
+        cio.observe(el);
+      } else run();
+    });
+
+    // analytics: CTA / artifact / maze click events (PostHog + GA)
+    function track(name, props) {
+      try { if (window.posthog && posthog.capture) posthog.capture(name, props); } catch (e) {}
+      try { if (window.gtag) gtag("event", name, props); } catch (e) {}
+    }
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest("a.mn-btn, .mn-artifacts a, a.mn-feature__block, .mn-nav__link, .mn-tab, .mn-logochip");
+      if (!a) return;
+      var label = (a.textContent || "").trim().replace(/\s+/g, " ").slice(0, 60);
+      var href = a.getAttribute("href") || "";
+      var isMaze = /play the maze/i.test(label) || /maze/i.test(href);
+      track(isMaze ? "play_maze_click" : "cta_click",
+        { label: label, href: href, page: document.body.getAttribute("data-mn-page") || "" });
+    });
+
     // scroll-reveal
     var reveals = document.querySelectorAll(".mn-reveal");
     if (reveals.length && "IntersectionObserver" in window) {

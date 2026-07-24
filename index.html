@@ -24,20 +24,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Social / OG -->
-  <meta name="description" content="MultiNet v2.0 is an open benchmark that renders the same task across a grid, natural language, and 3D — measuring whether models understand a task or just memorized one interface.">
-  <meta property="og:title" content="MultiNet v2.0 — The same task, three ways"/>
-  <meta property="og:description" content="An open benchmark for multimodal, long-horizon, cross-domain action. The same maze, rendered three ways — and frontier models fall apart."/>
+  <meta name="description" content="MultiNet v2.0 Release 1: frontier models solve just 4% of simple GridWorld mazes — puzzles that reward spatial reasoning, causal understanding, and long-horizon planning.">
+  <meta property="og:title" content="MultiNet v2.0 · Release 1 — a maze a child solves, frontier models can't"/>
+  <meta property="og:description" content="In Release 1, frontier models solve just 4% of simple GridWorld mazes a child breezes through — an open benchmark for long-horizon, causal, spatial reasoning."/>
   <meta property="og:url" content="https://multinet.ai/"/>
   <meta property="og:image" content="https://multinet.ai/static/images/og-multinet-v2.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
-  <meta name="twitter:title" content="MultiNet v2.0 — The same task, three ways">
-  <meta name="twitter:description" content="An open benchmark for multimodal, long-horizon, cross-domain action. The same maze, rendered three ways — and frontier models fall apart.">
+  <meta name="twitter:title" content="MultiNet v2.0 · Release 1 — a maze a child solves, frontier models can't">
+  <meta name="twitter:description" content="In Release 1, frontier models solve just 4% of simple GridWorld mazes a child breezes through — an open benchmark for long-horizon, causal, spatial reasoning.">
   <meta name="twitter:image" content="https://multinet.ai/static/images/og-multinet-v2.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="keywords" content="MultiNet, benchmark, multimodal, cross-domain, action models, VLA, VLM, evaluation, generalization, maze, causal reasoning">
 
-  <title>MultiNet v2.0 — The same task, three ways</title>
+  <title>MultiNet v2.0 — Release 1</title>
   <link rel="icon" type="image/png" href="/static/images/favicon-maze.png">
   <link rel="stylesheet" href="/static/css/mn-v2.css">
 </head>
@@ -48,14 +48,14 @@
   <!-- ============================ HERO ============================ -->
   <header class="mn-hero">
     <div class="mn-hero__inner">
-      <p class="mn-tag">MultiNet v2.0 · Release 1</p>
-      <h1 style="max-width:16ch;margin-top:.3em">The same task, three ways — and frontier models fall apart.</h1>
-      <p class="mn-prose" style="margin-top:.2em"><span style="color:var(--mn-text)">A maze a child solves in seconds.</span> MultiNet renders the identical task across a grid, natural language, and 3D — then measures whether a model actually understands the task, or just memorized one way of seeing it.</p>
+      <p class="mn-tag">MultiNet v2.0 · Release 1 — GridWorld</p>
+      <h1 style="max-width:15ch;margin-top:.3em">A maze a child solves in seconds. Frontier models can't.</h1>
+      <p class="mn-prose" style="margin-top:.2em">Release 1 drops frontier models into <span style="color:var(--mn-text)">GridWorld</span> — symbolic mazes with hidden causal rules that reward real spatial reasoning and long-horizon planning. Puzzles people breeze through, and the strongest models solve just 4 of 150.</p>
 
       <div class="mn-stat">
-        <p class="mn-eyebrow">Frontier models solve just</p>
-        <div class="mn-stat__num">24%</div>
-        <p class="mn-eyebrow">of these mazes &middot; illustrative placeholder — the real R1 figure lands on release</p>
+        <p class="mn-eyebrow">Frontier models score just</p>
+        <div class="mn-stat__num mn-countup" data-to="2.7" data-decimals="1" data-suffix="%">0.0%</div>
+        <p class="mn-eyebrow">on Release 1's GridWorld mazes</p>
       </div>
 
       <div style="display:flex;gap:12px;margin:26px 0 22px;flex-wrap:wrap">
@@ -70,6 +70,12 @@
         <a href="#">[ Play the Maze ]</a>
         <a href="#cite">[ Cite ]</a>
       </div>
+
+      <div class="mn-reel" style="margin-top:38px">
+        <div class="mn-reel__play"></div>
+        <p class="mn-tag is-red" style="margin:0">Failure replay reel</p>
+        <p style="max-width:46ch;margin:0;color:var(--mn-text-dim)">Frontier models failing R1 mazes in revealing ways — the reel lands with the release.</p>
+      </div>
     </div>
   </header>
 
@@ -77,30 +83,29 @@
   <section class="mn-section">
     <div class="mn-container mn-reveal">
       <div class="mn-sec-head">
-        <p class="mn-tag is-blue">Benchmark · v2.0</p>
-        <h2>One task. Three renderings. Nowhere to hide.</h2>
-        <p class="mn-lead">Every problem in MultiNet v2.0 is the same underlying maze — with hidden causal mechanisms a model must discover to solve it. We render that maze across three interfaces. A model that truly understands the task should solve all three; a model leaning on a memorized format solves one and collapses on the rest.</p>
+        <p class="mn-tag is-blue">Release 1 · GridWorld</p>
+        <h2>Simple mazes. Hidden rules.</h2>
+        <p class="mn-lead">Each R1 maze is a GridWorld puzzle governed by hidden causal mechanisms — switches that open walls, keys that gate doors, effects that fire at a distance. Solving one takes genuine spatial reasoning and long-horizon planning, not pattern-matching. A child manages it; frontier models mostly don't.</p>
       </div>
 
+      <p class="mn-prose" style="color:var(--mn-text-dim);margin-bottom:18px">Release 1 covers GridWorld. The full v2.0 will render the <em>same task</em> three ways — so a model that only memorized one interface has nowhere to hide:</p>
       <div class="mn-grid mn-grid--3">
         <div class="mn-card">
-          <p class="mn-tag is-blue">Domain 01</p>
-          <h3>GridWorld</h3>
-          <p>The maze as a symbolic grid of cells, walls, and switches. Pure spatial reasoning — no rendering, no language, just the structure of the problem.</p>
+          <p class="mn-tag is-blue">GridWorld · Release 1</p>
+          <h3>Symbolic grid</h3>
+          <p>The maze as a grid of cells, walls, and switches. Pure spatial reasoning — no rendering, no language, just the structure of the problem.</p>
         </div>
-        <div class="mn-card">
-          <p class="mn-tag is-green">Domain 02</p>
-          <h3>Natural Language</h3>
-          <p>The same maze described in text. The model must build and hold a spatial model of the world from a narrative it reads step by step.</p>
+        <div class="mn-card" style="opacity:.7">
+          <p class="mn-tag is-green">Natural Language · Coming</p>
+          <h3>Described in text</h3>
+          <p>The same maze in prose. The model must build and hold a spatial model of the world from a narrative it reads step by step.</p>
         </div>
-        <div class="mn-card">
-          <p class="mn-tag is-purple">Domain 03</p>
-          <h3>3D</h3>
-          <p>The maze as a first-person 3D environment. Perception, navigation, and the same causal mechanics — now grounded in pixels and movement.</p>
+        <div class="mn-card" style="opacity:.7">
+          <p class="mn-tag is-purple">3D · Coming</p>
+          <h3>First-person 3D</h3>
+          <p>The same maze as a 3D environment. Perception, navigation, and the same causal mechanics — grounded in pixels and movement.</p>
         </div>
       </div>
-
-      <p class="mn-prose" style="margin-top:26px;color:var(--mn-text-dim)"><strong style="color:var(--mn-text);font-weight:600">Release 1 focuses on GridWorld</strong> — the cleanest place to establish the methodology, difficulty axes, and evaluation protocol. Natural language and 3D follow, culminating in the full three-domain benchmark and generator.</p>
     </div>
   </section>
 
@@ -146,29 +151,31 @@
     </div>
   </section>
 
-  <!-- ==================== RELEASES TIMELINE ==================== -->
+  <!-- ==================== RELEASES LINEAGE ==================== -->
   <section class="mn-section" style="padding-top:0">
     <div class="mn-container mn-reveal">
       <div class="mn-sec-head">
-        <p class="mn-tag">Roadmap</p>
-        <h2>The v2.0 release plan</h2>
-        <p class="mn-lead">v2.0 ships in stages — methodology first, then the full cross-domain benchmark. Dates are provisional.</p>
+        <p class="mn-tag">Releases</p>
+        <h2>The MultiNet lineage</h2>
+        <p class="mn-lead">Four releases sharpening one question — how well do models generalize when the task leaves their comfort zone. v2.0 is the current benchmark.</p>
       </div>
-      <div class="mn-timeline">
-        <div class="mn-tl">
-          <div class="mn-tl__when">Aug 2026<br><span class="mn-chip mn-chip--now">Up next</span></div>
-          <div class="mn-tl__body">
-            <h3>Release 1 — GridWorld</h3>
-            <p>The symbolic-grid domain, difficulty axes, and evaluation protocol — the methodological foundation for everything that follows. Warm-up write-up, failure replay reel, and a human-playable maze.</p>
-          </div>
-        </div>
-        <div class="mn-tl">
-          <div class="mn-tl__when">Sep 2026<br><span class="mn-chip mn-chip--next">Planned</span></div>
-          <div class="mn-tl__body">
-            <h3>Release 3 — Full cross-domain benchmark</h3>
-            <p>All three domains (GridWorld, natural language, 3D), the task generator, and the cross-domain paper — the complete v2.0 benchmark.</p>
-          </div>
-        </div>
+      <div class="mn-lineage">
+        <a class="mn-lineage__node c-red" href="/static/pages/Multinetv01.html">
+          <span class="mn-lineage__v">v0.1</span><span class="mn-lineage__name">Robotics</span>
+          <span class="mn-lineage__tag">Real-world control</span>
+        </a>
+        <a class="mn-lineage__node c-amber" href="/static/pages/Multinetv02.html">
+          <span class="mn-lineage__v">v0.2</span><span class="mn-lineage__name">Gameplay</span>
+          <span class="mn-lineage__tag">OOD environments</span>
+        </a>
+        <a class="mn-lineage__node c-green" href="/static/pages/Multinetv1.html">
+          <span class="mn-lineage__v">v1.0</span><span class="mn-lineage__name">Generalist</span>
+          <span class="mn-lineage__tag">VLM · VLA · generalist</span>
+        </a>
+        <a class="mn-lineage__node c-blue is-current" href="/static/pages/Multinetv2.html">
+          <span class="mn-lineage__v">v2.0</span><span class="mn-lineage__name">Cross-domain Action</span>
+          <span class="mn-lineage__tag">Current · R1</span>
+        </a>
       </div>
     </div>
   </section>

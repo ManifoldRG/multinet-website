@@ -17,18 +17,18 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="MultiNet v2.0 renders one task — a maze with hidden causal mechanisms — across a symbolic grid, natural language, and 3D, testing whether models understand a task or just one interface. Release 1 covers GridWorld.">
-  <meta property="og:title" content="MultiNet v2.0 — The same task, three ways"/>
-  <meta property="og:description" content="One task with hidden causal structure, rendered across a grid, natural language, and 3D. A benchmark built to resist contamination and saturation."/>
+  <meta name="description" content="MultiNet v2.0 Release 1: GridWorld mazes with hidden causal mechanisms that demand spatial reasoning and long-horizon planning. Frontier models solve just 2.7%.">
+  <meta property="og:title" content="MultiNet v2.0 · Release 1 — GridWorld"/>
+  <meta property="og:description" content="Release 1 puts frontier models in GridWorld — simple mazes with hidden causal rules. They solve just 2.7%. A benchmark built to resist contamination and saturation."/>
   <meta property="og:url" content="https://multinet.ai/static/pages/Multinetv2.html"/>
   <meta property="og:image" content="https://multinet.ai/static/images/og-multinet-v2.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="MultiNet v2.0 — The same task, three ways">
+  <meta name="twitter:title" content="MultiNet v2.0 · Release 1 — GridWorld">
   <meta name="twitter:image" content="https://multinet.ai/static/images/og-multinet-v2.jpg">
 
-  <title>MultiNet v2.0 — The same task, three ways</title>
+  <title>MultiNet v2.0 — Release 1 (GridWorld)</title>
   <link rel="icon" type="image/png" href="/static/images/favicon-maze.png">
   <link rel="stylesheet" href="/static/css/mn-v2.css">
 </head>
@@ -40,9 +40,9 @@
   <!-- ============================ HERO ============================ -->
   <header class="mn-hero">
     <div class="mn-hero__inner">
-      <p class="mn-tag">v2.0 · Release 1</p>
-      <h1 style="max-width:15ch;margin-top:.3em">The same task, three ways.</h1>
-      <p class="mn-prose" style="margin-top:.2em">MultiNet v2.0 is built around a single idea: take one task with hidden causal structure — a maze — and render it across a symbolic grid, natural language, and 3D. A model that understands the task solves all three. A model leaning on a memorized interface solves one and collapses on the rest.</p>
+      <p class="mn-tag">v2.0 · Release 1 — GridWorld</p>
+      <h1 style="max-width:16ch;margin-top:.3em">Simple mazes that break frontier models.</h1>
+      <p class="mn-prose" style="margin-top:.2em">Release 1 puts frontier models in GridWorld: mazes with hidden causal structure that demand real spatial reasoning and long-horizon planning — the kind a child solves in seconds. The strongest models solve just <span style="color:var(--mn-text)">2.7%</span>. It's the first domain of MultiNet v2.0, whose full benchmark will render the same task several ways.</p>
       <div class="mn-artifacts" style="margin-top:24px">
         <a href="/static/pdfs/An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener">[ Paper ]</a>
         <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" rel="noopener">[ Code ]</a>
@@ -57,25 +57,26 @@
     <div class="mn-container mn-reveal">
       <div class="mn-sec-head">
         <p class="mn-tag is-blue">The idea</p>
-        <h2>One maze, hidden rules, three interfaces.</h2>
-        <p class="mn-lead">Every instance is the same underlying maze, governed by causal mechanisms a model must discover to solve it — switches that open walls, keys that gate doors, effects that fire at a distance. We then render that identical structure three ways. Because the task is held constant and only the interface changes, cross-domain performance isolates a single question: does the model understand the problem, or just a familiar way of seeing it?</p>
+        <h2>One maze. Hidden rules.</h2>
+        <p class="mn-lead">Every R1 instance is a GridWorld maze governed by causal mechanisms a model must discover to solve it — switches that open walls, keys that gate doors, effects that fire at a distance. Because the task holds real spatial and long-horizon structure, performance isolates a single question: does the model understand the problem, or just pattern-match its way through?</p>
       </div>
 
+      <p class="mn-prose" style="color:var(--mn-text-dim);margin-bottom:18px">R1 covers GridWorld. The full v2.0 will render the <em>same task</em> three ways — so a model that only memorized one interface has nowhere to hide:</p>
       <div class="mn-grid mn-grid--3">
         <div class="mn-card">
-          <p class="mn-tag is-blue">Domain 01</p>
-          <h3>GridWorld</h3>
-          <p>The maze as a symbolic grid of cells, walls, and switches. Pure spatial reasoning — no rendering, no language, just the structure of the problem.</p>
+          <p class="mn-tag is-blue">GridWorld · Release 1</p>
+          <h3>Symbolic grid</h3>
+          <p>The maze as a grid of cells, walls, and switches. Pure spatial reasoning — no rendering, no language, just the structure of the problem.</p>
         </div>
-        <div class="mn-card">
-          <p class="mn-tag is-green">Domain 02</p>
-          <h3>Natural Language</h3>
-          <p>The same maze described in text. The model must build and hold a spatial model of the world from a narrative it reads step by step.</p>
+        <div class="mn-card" style="opacity:.7">
+          <p class="mn-tag is-green">Natural Language · Coming</p>
+          <h3>Described in text</h3>
+          <p>The same maze in prose. The model must build and hold a spatial model of the world from a narrative it reads step by step.</p>
         </div>
-        <div class="mn-card">
-          <p class="mn-tag is-purple">Domain 03</p>
-          <h3>3D</h3>
-          <p>The maze as a first-person 3D environment. Perception, navigation, and the same causal mechanics — now grounded in pixels and movement.</p>
+        <div class="mn-card" style="opacity:.7">
+          <p class="mn-tag is-purple">3D · Coming</p>
+          <h3>First-person 3D</h3>
+          <p>The same maze as a 3D environment. Perception, navigation, and the same causal mechanics — grounded in pixels and movement.</p>
         </div>
       </div>
     </div>
@@ -103,7 +104,7 @@
         <div class="mn-card">
           <p class="mn-tag is-purple">Cross-domain by construction</p>
           <h3>Memorization has nowhere to hide</h3>
-          <p>The same task rendered three ways turns "did it generalize?" into a direct, measurable comparison rather than an inference.</p>
+          <p>Rendering the same task several ways will turn "did it generalize?" into a direct, measurable comparison rather than an inference.</p>
         </div>
         <div class="mn-card">
           <p class="mn-tag is-cyan">Human-anchored</p>
@@ -146,6 +147,22 @@
       <div class="mn-plot">
         <p class="mn-eyebrow">Figure &middot; Success rate per model · GridWorld R1</p>
         <p style="max-width:32ch;margin:0;color:var(--mn-text-dim)">Chart lands with the R1 release.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAILURE REEL ==================== -->
+  <section class="mn-section" style="padding-top:0">
+    <div class="mn-container mn-reveal">
+      <div class="mn-sec-head">
+        <p class="mn-tag is-red">Failure replay</p>
+        <h2>Watch them break.</h2>
+        <p class="mn-lead">Replays of frontier models failing R1 mazes in revealing ways — the kind of long-horizon, causal mistakes a person wouldn't make. The reel lands with the release.</p>
+      </div>
+      <div class="mn-reel">
+        <div class="mn-reel__play"></div>
+        <p class="mn-tag is-red" style="margin:0">Failure replay reel</p>
+        <p style="max-width:46ch;margin:0;color:var(--mn-text-dim)">Embedded reel lands with R1.</p>
       </div>
     </div>
   </section>
