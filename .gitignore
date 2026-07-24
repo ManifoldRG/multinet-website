@@ -1,0 +1,11 @@
+# OS junk
+.DS_Store
+**/.DS_Store
+
+# Jekyll build output (site is served as plain static via .nojekyll)
+_site/
+
+# Ruby/Jekyll local deps
+.jekyll-cache/
+.bundle/
+vendor/

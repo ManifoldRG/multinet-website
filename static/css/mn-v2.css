@@ -1,0 +1,294 @@
+/* ============================================================
+   MultiNet v2 — design system (ARC-AGI-modeled: dark, mono nav,
+   pixel logo, grid-color accents). Scoped to <body class="mnv2">.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  /* ---- Dark base (ARC approach) ---- */
+  --mn-bg:      #0C0E14;   /* page background (cool near-black) */
+  --mn-bg-2:    #13161F;   /* elevated surface / footer */
+  --mn-bg-3:    #1B1F2B;   /* cards / hover */
+  --mn-text:    #E8EAED;   /* cool off-white */
+  --mn-text-dim:#98A0AE;
+  --mn-line:    #262B36;
+
+  /* ---- Primary accent (swap this one token to re-tint) ---- */
+  --mn-primary: #4C9AFF;        /* blue */
+  --mn-primary-600: #2E6BFF;
+  --mn-on-primary: #0A1220;     /* dark text on the accent */
+
+  /* ---- Maze grid-color accent set (section tags / plots) ---- */
+  --mn-c-blue:  #4C9AFF;
+  --mn-c-green: #35D07F;
+  --mn-c-amber: #FFC93C;
+  --mn-c-red:   #FF5470;
+  --mn-c-cyan:  #3AD6D6;
+  --mn-c-purple:#B39DFF;
+
+  /* ---- Type ---- */
+  --mn-font:         "Source Serif 4", Georgia, "Times New Roman", serif;   /* body prose */
+  --mn-font-display: "Instrument Serif", Georgia, "Times New Roman", serif; /* headings + wordmark */
+  --mn-font-mono:    "Space Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --mn-maxw: 1160px;
+  --mn-radius: 10px;
+  --mn-radius-sm: 6px;
+}
+
+/* ============================================================
+   Base (only on .mnv2 pages)
+   ============================================================ */
+.mnv2, .mnv2 * { box-sizing: border-box; }
+.mnv2 {
+  margin: 0; background: var(--mn-bg); color: var(--mn-text);
+  font-family: var(--mn-font); font-size: 18px; line-height: 1.62;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+/* All headings: Instrument Serif (elegant, high-contrast, weight 400) */
+.mnv2 h1, .mnv2 h2, .mnv2 h3 {
+  font-family: var(--mn-font-display); font-weight: 400; line-height: 1.06;
+  letter-spacing: -0.01em; margin: 0 0 .5em; color: var(--mn-text);
+}
+.mnv2 h1 { font-size: clamp(2.9rem, 6vw, 5rem); line-height: 1.04; }
+.mnv2 h2 { font-size: clamp(1.9rem, 3.2vw, 2.7rem); }
+.mnv2 h3 { font-size: 1.4rem; }
+.mnv2 p  { margin: 0 0 1em; color: var(--mn-text-dim); }
+/* Base link color at zero specificity (:where) so component link
+   colors — nav, tabs, buttons — win without !important. */
+:where(.mnv2 a) { color: var(--mn-primary); text-decoration: none; }
+:where(.mnv2 a:hover) { color: var(--mn-primary-600); }
+
+/* Monospace numbers / labels */
+.mn-mono, .mnv2 .mn-num { font-family: var(--mn-font-mono); font-variant-numeric: tabular-nums; }
+
+/* Caption / footnote — elegant serif italic */
+.mn-eyebrow { font-family: var(--mn-font-display); font-style: italic; font-size: 1.05rem;
+  letter-spacing: 0; text-transform: none; color: var(--mn-text-dim); line-height: 1.4; }
+
+/* Section tag with a colored maze-cell square (ARC move) */
+.mn-tag { display: inline-flex; align-items: center; gap: .55em;
+  font-family: var(--mn-font-mono); font-size: .78rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--mn-text-dim); }
+.mn-tag::before { content: ""; width: 11px; height: 11px; background: var(--mn-c-green);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.08); }
+.mn-tag.is-blue::before   { background: var(--mn-c-blue); }
+.mn-tag.is-amber::before  { background: var(--mn-c-amber); }
+.mn-tag.is-red::before    { background: var(--mn-c-red); }
+.mn-tag.is-cyan::before   { background: var(--mn-c-cyan); }
+.mn-tag.is-purple::before { background: var(--mn-c-purple); }
+
+/* ============================================================
+   Layout
+   ============================================================ */
+.mn-container { max-width: var(--mn-maxw); margin: 0 auto; padding: 0 28px; }
+.mn-section   { padding: 96px 0; }
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.mn-btn { display: inline-flex; align-items: center; gap: .5em;
+  font-family: var(--mn-font-mono); font-size: .82rem; letter-spacing: .06em; text-transform: uppercase;
+  font-weight: 700; padding: .8em 1.25em; border-radius: var(--mn-radius-sm);
+  border: 1px solid transparent; cursor: pointer;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease, color .15s ease; }
+.mn-btn:hover { transform: translateY(-1px); }
+.mn-btn--primary { background: var(--mn-primary); color: var(--mn-on-primary); }
+.mn-btn--primary:hover { background: var(--mn-primary-600); color: var(--mn-on-primary); }
+.mn-btn--ghost { background: transparent; color: var(--mn-text); border-color: var(--mn-line); }
+.mn-btn--ghost:hover { border-color: var(--mn-text); }
+
+/* Bracketed artifact row */
+.mn-artifacts { display: flex; flex-wrap: wrap; gap: 10px; }
+.mn-artifacts a { font-family: var(--mn-font-mono); font-size: .8rem; letter-spacing: .04em; color: var(--mn-text);
+  padding: .5em .85em; border: 1px solid var(--mn-line); border-radius: 4px;
+  transition: border-color .15s ease, color .15s ease, background .15s ease; }
+.mn-artifacts a:hover { border-color: var(--mn-primary); color: var(--mn-primary); }
+
+/* ============================================================
+   Top nav (ARC-style) — dark, pixel logo left, mono caps right
+   ============================================================ */
+.mn-nav { position: sticky; top: 0; z-index: 100;
+  background: rgba(14,14,17,.8); backdrop-filter: saturate(160%) blur(10px);
+  border-bottom: 1px solid var(--mn-line); }
+.mn-nav__inner { display: flex; align-items: center; justify-content: space-between;
+  height: 64px; max-width: var(--mn-maxw); margin: 0 auto; padding: 0 28px; }
+.mnv2 .mn-logo, .mn-logo { display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mn-font-display); font-weight: 400; font-size: 1.35rem; letter-spacing: 0;
+  text-transform: none; color: var(--mn-text); }
+.mnv2 .mn-logo:hover, .mn-logo:hover { color: var(--mn-text); }
+.mn-logo svg { width: 26px; height: 26px; display: block; }
+.mn-nav__links { display: flex; align-items: center; gap: 6px; }
+.mn-nav__link { font-family: var(--mn-font-mono); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--mn-text-dim); padding: .5em .7em; transition: color .15s ease; }
+.mn-nav__link:hover { color: var(--mn-text); }
+.mn-nav__link.is-active { color: var(--mn-primary); }
+.mn-nav__toggle { display: none; background: none; border: 0; color: var(--mn-text); font-size: 1.3rem; cursor: pointer; }
+
+/* ============================================================
+   Research-hub tab bar — mono caps
+   ============================================================ */
+.mn-tabs { border-bottom: 1px solid var(--mn-line); background: var(--mn-bg); }
+.mn-tabs__inner { display: flex; gap: 2px; max-width: var(--mn-maxw); margin: 0 auto; padding: 0 28px; overflow-x: auto; }
+.mn-tab { white-space: nowrap; font-family: var(--mn-font-mono); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase;
+  padding: 16px 14px; color: var(--mn-text-dim); border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; }
+.mn-tab:hover { color: var(--mn-text); }
+.mn-tab.is-active { color: var(--mn-primary); border-bottom-color: var(--mn-primary); }
+
+/* ============================================================
+   Hero — dark, faint maze/grid pattern
+   ============================================================ */
+.mn-hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--mn-line); }
+.mn-hero::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(var(--mn-line) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--mn-line) 1px, transparent 1px);
+  background-size: 44px 44px; opacity: .35;
+  -webkit-mask-image: radial-gradient(ellipse at 30% 20%, #000 20%, transparent 72%);
+          mask-image: radial-gradient(ellipse at 30% 20%, #000 20%, transparent 72%); }
+.mn-hero__inner { position: relative; max-width: var(--mn-maxw); margin: 0 auto; padding: 104px 28px; }
+
+/* ============================================================
+   Footer — dark
+   ============================================================ */
+.mn-footer { background: var(--mn-bg-2); color: var(--mn-text-dim); font-size: .9rem; border-top: 1px solid var(--mn-line); }
+.mn-footer__inner { max-width: var(--mn-maxw); margin: 0 auto; padding: 60px 28px 40px;
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 32px; }
+.mn-footer h4 { font-family: var(--mn-font-mono); font-size: .72rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--mn-text-dim); margin: 0 0 12px; }
+.mn-footer a { display: block; color: var(--mn-text); padding: 4px 0; }
+.mn-footer a:hover { color: var(--mn-primary); }
+.mn-footer__brand { display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--mn-font-display); font-weight: 400; letter-spacing: 0; text-transform: none; font-size: 1.4rem; color: var(--mn-text); }
+.mn-footer__brand svg { width: 24px; height: 24px; display: block; }
+.mn-footer__bottom { max-width: var(--mn-maxw); margin: 0 auto; padding: 18px 28px; border-top: 1px solid var(--mn-line);
+  display: flex; justify-content: space-between; font-family: var(--mn-font-mono); font-size: .74rem; color: var(--mn-text-dim); }
+
+/* ============================================================
+   Homepage components
+   ============================================================ */
+/* Section header (eyebrow tag + heading + optional lead) */
+.mn-sec-head { max-width: 62ch; margin: 0 0 34px; }
+.mn-sec-head h2 { margin: .35em 0 .3em; }
+.mn-sec-head .mn-lead { font-size: 1.18rem; color: var(--mn-text-dim); margin: 0; }
+.mn-prose { max-width: 68ch; }
+.mn-prose p { font-size: 1.12rem; }
+
+/* Hero stat */
+.mn-stat { margin: 32px 0 26px; }
+.mn-stat__num { font-family: var(--mn-font-mono); font-weight: 700; line-height: 1;
+  font-size: clamp(3.4rem, 8vw, 5.4rem); color: var(--mn-text); }
+
+/* Card grid */
+.mn-grid { display: grid; gap: 18px; }
+.mn-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.mn-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.mn-card { background: var(--mn-bg-2); border: 1px solid var(--mn-line); border-radius: var(--mn-radius);
+  padding: 26px 24px; transition: border-color .15s ease, transform .15s ease; }
+.mn-card:hover { border-color: var(--mn-primary); transform: translateY(-2px); }
+.mn-card h3 { margin: .5em 0 .3em; font-size: 1.35rem; }
+.mn-card p { margin: 0; font-size: 1rem; }
+
+/* Plot / figure placeholder */
+.mn-plot { border: 1px dashed var(--mn-line); border-radius: var(--mn-radius); background:
+  linear-gradient(var(--mn-bg-2), var(--mn-bg-2)) padding-box;
+  min-height: 380px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 10px; padding: 40px; position: relative; overflow: hidden; }
+.mn-plot::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background-image: linear-gradient(var(--mn-line) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--mn-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 10%, transparent 70%);
+          mask-image: radial-gradient(ellipse at 50% 50%, #000 10%, transparent 70%); }
+.mn-plot > * { position: relative; }
+
+/* ARC-style large feature/portal blocks */
+.mn-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.mn-feature__block { display: flex; flex-direction: column; justify-content: space-between; gap: 40px;
+  min-height: 220px; padding: 30px; background: var(--mn-bg-2); border: 1px solid var(--mn-line);
+  border-radius: var(--mn-radius); position: relative; overflow: hidden;
+  transition: border-color .15s ease, transform .15s ease; }
+.mn-feature__block:hover { border-color: var(--mn-primary); transform: translateY(-2px); }
+.mn-feature__block h3 { margin: 0; font-size: 1.7rem; }
+.mn-feature__block p { margin: .4em 0 0; font-size: 1rem; }
+.mn-feature__go { font-family: var(--mn-font-mono); font-size: .8rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--mn-primary); }
+
+/* Timeline (vertical rail) */
+.mn-timeline { margin: 0; padding: 0; }
+.mn-tl { display: grid; grid-template-columns: 160px 1fr; gap: 28px; padding: 24px 0;
+  border-top: 1px solid var(--mn-line); }
+.mn-tl:last-child { border-bottom: 1px solid var(--mn-line); }
+.mn-tl__when { font-family: var(--mn-font-mono); font-size: .82rem; letter-spacing: .04em; color: var(--mn-text-dim); }
+.mn-tl__when .mn-chip { display: inline-block; margin-top: 8px; padding: 2px 8px; border-radius: 4px;
+  font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+.mn-chip--now { background: rgba(53,208,127,.14); color: var(--mn-c-green); }
+.mn-chip--next { background: rgba(76,154,255,.14); color: var(--mn-c-blue); }
+.mn-tl__body h3 { margin: 0 0 .25em; font-size: 1.4rem; }
+.mn-tl__body p { margin: 0; }
+
+/* News list */
+.mn-news { margin: 0; padding: 0; }
+.mn-news__item { display: grid; grid-template-columns: 130px 1fr; gap: 22px; padding: 18px 0;
+  border-top: 1px solid var(--mn-line); }
+.mn-news__item:last-child { border-bottom: 1px solid var(--mn-line); }
+.mn-news__date { font-family: var(--mn-font-mono); font-size: .78rem; letter-spacing: .04em; color: var(--mn-text-dim); }
+.mn-news__item p { margin: 0; }
+.mn-news__item strong { color: var(--mn-text); font-weight: 600; }
+
+/* Code / citation block */
+.mn-code { background: var(--mn-bg-2); border: 1px solid var(--mn-line); border-radius: var(--mn-radius);
+  padding: 20px 22px; overflow-x: auto; }
+.mn-code pre { margin: 0; font-family: var(--mn-font-mono); font-size: .82rem; line-height: 1.6; color: var(--mn-text-dim); white-space: pre; }
+
+/* Collaborator logos (grayscale -> color on hover) */
+.mn-logos { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin: 6px 0 34px; }
+.mn-logochip { display: inline-flex; align-items: center; justify-content: center; height: 66px; padding: 0 24px;
+  min-width: 130px; background: #f5f6f8; border: 1px solid var(--mn-line); border-radius: var(--mn-radius);
+  filter: grayscale(1); opacity: .72; transition: filter .18s ease, opacity .18s ease, transform .18s ease, border-color .18s ease; }
+.mn-logochip:hover { filter: none; opacity: 1; transform: translateY(-2px); border-color: var(--mn-primary); }
+.mn-logochip img { max-height: 34px; max-width: 128px; width: auto; display: block; }
+
+/* ============================================================
+   Legacy-page bridge (old Bulma version pages get the shared
+   dark shell on top; their light body content stays as-is).
+   The #ids below only exist on the old pages, so these rules
+   are inert on the new mnv2 pages.
+   ============================================================ */
+#side-nav, .side-navigation, .mobile-nav-toggle, #mobileNavToggle,
+.mobile-overlay, #navToggleBtn { display: none !important; }
+#main-page-content { padding-left: 0 !important; margin-left: 0 !important; }
+
+.mn-legacybar { background: var(--mn-bg-2); border-bottom: 1px solid var(--mn-line); }
+.mn-legacybar__inner { max-width: var(--mn-maxw); margin: 0 auto; padding: 10px 28px;
+  display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap;
+  font-family: var(--mn-font-mono); font-size: .76rem; letter-spacing: .04em; color: var(--mn-text-dim); }
+.mn-legacybar__inner a { color: var(--mn-primary); }
+.mn-legacybar__inner a:hover { color: var(--mn-primary-600); }
+
+/* ============================================================
+   Motion
+   ============================================================ */
+.mn-reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.mn-reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .mn-reveal { opacity: 1; transform: none; transition: none; } .mn-btn:hover { transform: none; }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 860px) {
+  .mn-footer__inner { grid-template-columns: 1fr 1fr; }
+  .mn-nav__links { display: none; }
+  .mn-nav__links.is-open { display: flex; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column;
+    background: var(--mn-bg); border-bottom: 1px solid var(--mn-line); padding: 8px 28px 16px; }
+  .mn-nav__toggle { display: inline-flex; }
+  .mn-grid--3, .mn-grid--2 { grid-template-columns: 1fr; }
+  .mn-feature { grid-template-columns: 1fr; }
+  .mn-tl { grid-template-columns: 1fr; gap: 8px; }
+  .mn-news__item { grid-template-columns: 1fr; gap: 4px; }
+  .mn-tag { align-items: flex-start; }
+  .mn-tag::before { margin-top: .25em; }
+}
+@media (max-width: 520px) { .mn-footer__inner { grid-template-columns: 1fr; } .mn-section { padding: 60px 0; } }

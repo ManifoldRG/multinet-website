@@ -25,7 +25,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Multinetv0.1</title>
   
-  <link rel="icon" type="image/x-icon" href="../images/multinet_logo_square.png">
+  <link rel="icon" type="image/png" href="/static/images/favicon-maze.png">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   
   <link rel="stylesheet" href="../css/bulma.min.css">
@@ -807,8 +807,15 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="/static/css/mn-v2.css">
 </head>
-<body>
+<body data-mn-page="research" data-mn-tab="v0.1">
+  <div id="mn-nav"></div>
+  <div id="mn-tabs"></div>
+  <div class="mn-legacybar"><div class="mn-legacybar__inner">
+    <span>You're viewing a previous release.</span>
+    <a href="/static/pages/Multinetv2.html">v2.0 is the current MultiNet benchmark →</a>
+  </div></div>
   <!-- Mobile Navigation Toggle -->
   <button class="mobile-nav-toggle" id="mobileNavToggle" style="display: none;" aria-label="Toggle mobile navigation">
     <i class="fas fa-bars"></i>
@@ -1779,6 +1786,7 @@
         }
     });
   </script>
+  <script src="/static/js/mn-shell.js" defer></script>
 </body>
 </html>
 

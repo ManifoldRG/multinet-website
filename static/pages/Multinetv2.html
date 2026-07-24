@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP82HPYSRH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PP82HPYSRH');
+  </script>
+  <!-- PostHog Analytics Tag -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init be ws Ss me ys capture Ne calculateEventProperties xs register register_once register_for_session unregister unregister_for_session Rs getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Is ks createPersonProfile Ps bs opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing $s debug Es getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_9rIWbSBBOFBaUcdMWUniUtiuukyTgzgY0EaxK6dmNvo', { api_host: 'https://us.i.posthog.com', defaults: '2025-05-24', person_profiles: 'identified_only' })
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MultiNet v2.0 renders one task — a maze with hidden causal mechanisms — across a symbolic grid, natural language, and 3D, testing whether models understand a task or just one interface. Release 1 covers GridWorld.">
+  <meta property="og:title" content="MultiNet v2.0 — The same task, three ways"/>
+  <meta property="og:description" content="One task with hidden causal structure, rendered across a grid, natural language, and 3D. A benchmark built to resist contamination and saturation."/>
+  <meta property="og:url" content="https://multinet.ai/static/pages/Multinetv2.html"/>
+  <meta property="og:image" content="https://multinet.ai/static/images/og-multinet-v2.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MultiNet v2.0 — The same task, three ways">
+  <meta name="twitter:image" content="https://multinet.ai/static/images/og-multinet-v2.jpg">
+
+  <title>MultiNet v2.0 — The same task, three ways</title>
+  <link rel="icon" type="image/png" href="/static/images/favicon-maze.png">
+  <link rel="stylesheet" href="/static/css/mn-v2.css">
+</head>
+
+<body class="mnv2" data-mn-page="benchmark" data-mn-tab="v2">
+  <div id="mn-nav"></div>
+  <div id="mn-tabs"></div>
+
+  <!-- ============================ HERO ============================ -->
+  <header class="mn-hero">
+    <div class="mn-hero__inner">
+      <p class="mn-tag">v2.0 · Release 1</p>
+      <h1 style="max-width:15ch;margin-top:.3em">The same task, three ways.</h1>
+      <p class="mn-prose" style="margin-top:.2em">MultiNet v2.0 is built around a single idea: take one task with hidden causal structure — a maze — and render it across a symbolic grid, natural language, and 3D. A model that understands the task solves all three. A model leaning on a memorized interface solves one and collapses on the rest.</p>
+      <div class="mn-artifacts" style="margin-top:24px">
+        <a href="/static/pdfs/An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener">[ Paper ]</a>
+        <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" rel="noopener">[ Code ]</a>
+        <a href="#">[ Play the Maze ]</a>
+        <a href="#cite">[ Cite ]</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== THE IDEA ==================== -->
+  <section class="mn-section">
+    <div class="mn-container mn-reveal">
+      <div class="mn-sec-head">
+        <p class="mn-tag is-blue">The idea</p>
+        <h2>One maze, hidden rules, three interfaces.</h2>
+        <p class="mn-lead">Every instance is the same underlying maze, governed by causal mechanisms a model must discover to solve it — switches that open walls, keys that gate doors, effects that fire at a distance. We then render that identical structure three ways. Because the task is held constant and only the interface changes, cross-domain performance isolates a single question: does the model understand the problem, or just a familiar way of seeing it?</p>
+      </div>
+
+      <div class="mn-grid mn-grid--3">
+        <div class="mn-card">
+          <p class="mn-tag is-blue">Domain 01</p>
+          <h3>GridWorld</h3>
+          <p>The maze as a symbolic grid of cells, walls, and switches. Pure spatial reasoning — no rendering, no language, just the structure of the problem.</p>
+        </div>
+        <div class="mn-card">
+          <p class="mn-tag is-green">Domain 02</p>
+          <h3>Natural Language</h3>
+          <p>The same maze described in text. The model must build and hold a spatial model of the world from a narrative it reads step by step.</p>
+        </div>
+        <div class="mn-card">
+          <p class="mn-tag is-purple">Domain 03</p>
+          <h3>3D</h3>
+          <p>The maze as a first-person 3D environment. Perception, navigation, and the same causal mechanics — now grounded in pixels and movement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== METHODOLOGY ==================== -->
+  <section class="mn-section" style="padding-top:0">
+    <div class="mn-container mn-reveal">
+      <div class="mn-sec-head">
+        <p class="mn-tag is-amber">Methodology</p>
+        <h2>Built to resist contamination and saturation.</h2>
+        <p class="mn-lead">Most benchmarks are a fixed set of problems. Once they leak into training data, or once models catch up, the number stops meaning anything. v2.0 is a generator, not a list.</p>
+      </div>
+      <div class="mn-grid mn-grid--2">
+        <div class="mn-card">
+          <p class="mn-tag is-blue">Procedurally generated</p>
+          <h3>No fixed test set to memorize</h3>
+          <p>Instances are sampled from a generator, so we can always produce fresh, never-before-seen mazes. There is no static answer key to contaminate.</p>
+        </div>
+        <div class="mn-card">
+          <p class="mn-tag is-green">Tunable difficulty</p>
+          <h3>No ceiling to saturate</h3>
+          <p>Difficulty scales along explicit axes — maze size, solution length, number of causal mechanisms, distractors — so the benchmark grows with the models it measures.</p>
+        </div>
+        <div class="mn-card">
+          <p class="mn-tag is-purple">Cross-domain by construction</p>
+          <h3>Memorization has nowhere to hide</h3>
+          <p>The same task rendered three ways turns "did it generalize?" into a direct, measurable comparison rather than an inference.</p>
+        </div>
+        <div class="mn-card">
+          <p class="mn-tag is-cyan">Human-anchored</p>
+          <h3>A floor we can trust</h3>
+          <p>These are mazes people solve easily. Human performance gives every score an honest reference point — and makes model failures legible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RELEASE 1 ==================== -->
+  <section class="mn-section" style="padding-top:0">
+    <div class="mn-container mn-reveal">
+      <div class="mn-sec-head">
+        <p class="mn-tag is-green">Release 1</p>
+        <h2>Start with GridWorld.</h2>
+        <p class="mn-lead">R1 is methodology-first. Before the full three-domain benchmark, we establish the foundation in the cleanest domain — the symbolic grid — where nothing sits between the model and the structure of the task.</p>
+      </div>
+      <div class="mn-prose">
+        <p style="color:var(--mn-text-dim)">Release 1 defines and validates:</p>
+        <ul style="color:var(--mn-text-dim);line-height:1.8">
+          <li><strong style="color:var(--mn-text);font-weight:600">The difficulty axes</strong> — how maze size, solution length, and causal complexity trade off, and how we calibrate them.</li>
+          <li><strong style="color:var(--mn-text);font-weight:600">The evaluation protocol</strong> — how models are prompted, scored, and compared, and how we control for prompt and format effects.</li>
+          <li><strong style="color:var(--mn-text);font-weight:600">Per-model failure analysis</strong> — not just whether models fail, but where and how they fall apart as difficulty climbs.</li>
+          <li><strong style="color:var(--mn-text);font-weight:600">The final GridWorld evaluation set</strong> — the calibrated instances the leaderboard is scored on.</li>
+        </ul>
+        <p style="color:var(--mn-text-dim)">Natural language and 3D build on this same scaffolding, culminating in the full cross-domain benchmark, task generator, and paper.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RESULTS PLACEHOLDER ==================== -->
+  <section class="mn-section" style="padding-top:0">
+    <div class="mn-container mn-reveal">
+      <div class="mn-sec-head">
+        <p class="mn-tag is-red">Results</p>
+        <h2>Where the models break</h2>
+        <p class="mn-lead">Success rate per model as mazes get longer and their causal mechanisms compound. Full R1 results, per-model breakdowns, and failure analysis arrive on release.</p>
+      </div>
+      <div class="mn-plot">
+        <p class="mn-eyebrow">Figure &middot; Success rate per model · GridWorld R1</p>
+        <p style="max-width:32ch;margin:0;color:var(--mn-text-dim)">Chart lands with the R1 release.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ROADMAP ==================== -->
+  <section class="mn-section" style="padding-top:0">
+    <div class="mn-container mn-reveal">
+      <div class="mn-sec-head">
+        <p class="mn-tag">Roadmap</p>
+        <h2>The v2.0 release plan</h2>
+        <p class="mn-lead">v2.0 ships in stages — methodology first, then the full cross-domain benchmark. Dates are provisional.</p>
+      </div>
+      <div class="mn-timeline">
+        <div class="mn-tl">
+          <div class="mn-tl__when">Aug 2026<br><span class="mn-chip mn-chip--now">Up next</span></div>
+          <div class="mn-tl__body">
+            <h3>Release 1 — GridWorld</h3>
+            <p>The symbolic-grid domain, difficulty axes, and evaluation protocol — the methodological foundation for everything that follows.</p>
+          </div>
+        </div>
+        <div class="mn-tl">
+          <div class="mn-tl__when">Sep 2026<br><span class="mn-chip mn-chip--next">Planned</span></div>
+          <div class="mn-tl__body">
+            <h3>Release 3 — Full cross-domain benchmark</h3>
+            <p>All three domains (GridWorld, natural language, 3D), the task generator, and the cross-domain paper — the complete v2.0 benchmark.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CITATION ==================== -->
+  <section class="mn-section" id="cite" style="padding-top:0">
+    <div class="mn-container mn-reveal">
+      <div class="mn-sec-head">
+        <p class="mn-tag is-purple">Cite</p>
+        <h2>Citation</h2>
+        <p class="mn-lead">The v2.0 paper lands with Release 3. Until then, please cite MultiNet v1.0.</p>
+      </div>
+      <div class="mn-code">
+<pre>@article{guruprasad2025multinet,
+  author  = {Pranav Guruprasad and Sudipta Chowdhury and Harshvardhan Sikka and Mridul Sharma and Helen Lu and Sean Rivera and Aryan Khurana and Yangyue Wang},
+  title   = {MultiNet v1.0: A Comprehensive Benchmark for Evaluating Multimodal Reasoning and Action Models Across Diverse Domains},
+  journal = {Manifold Research Publications},
+  year    = {2025},
+  note    = {https://multinet.ai/static/pages/Multinetv1.html},
+  doi     = {10.5281/zenodo.17404313}
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <div id="mn-footer"></div>
+  <script src="/static/js/mn-shell.js" defer></script>
+</body>
+</html>
