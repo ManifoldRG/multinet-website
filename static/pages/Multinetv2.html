@@ -18,7 +18,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="MultiNet v2.0 Release 1: GridWorld mazes with hidden causal mechanisms that demand spatial reasoning and long-horizon planning. Frontier models solve just 2.7%.">
-  <meta property="og:title" content="MultiNet v2.0 · Release 1 — GridWorld"/>
+  <meta property="og:title" content="MultiNet v2.0 · Release 1 - GridWorld"/>
   <meta property="og:description" content="Release 1 puts frontier models in GridWorld — simple mazes with hidden causal rules. They solve just 2.7%. A benchmark built to resist contamination and saturation."/>
   <meta property="og:url" content="https://multinet.ai/static/pages/Multinetv2.html"/>
   <meta property="og:image" content="https://multinet.ai/static/images/og-multinet-v2.jpg"/>
@@ -42,10 +42,10 @@
     <div class="mn-hero__inner">
       <p class="mn-tag">v2.0 · Release 1 — GridWorld</p>
       <h1 style="max-width:16ch;margin-top:.3em">Simple mazes that break frontier models.</h1>
-      <p class="mn-prose" style="margin-top:.2em">Release 1 puts frontier models in GridWorld: mazes with hidden causal structure that demand real spatial reasoning and long-horizon planning — the kind a child solves in seconds. The strongest models solve just <span style="color:var(--mn-text)">2.7%</span>. It's the first domain of MultiNet v2.0, whose full benchmark will render the same task several ways.</p>
+      <p class="mn-prose" style="margin-top:.2em">Release 1 (R1) of MultiNet v2.0 drops frontier models into Gridworld: symbolic mazes with hidden causal rules that reward spatial reasoning and long-horizon planning. Puzzles people can generally breeze through, but the strongest models solve just 4 of 150.</p>
       <div class="mn-artifacts" style="margin-top:24px">
         <a href="/static/pdfs/An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener">[ Paper ]</a>
-        <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" rel="noopener">[ Code ]</a>
+        <a href="https://github.com/ManifoldRG/MultiNet-v2.0" target="_blank" rel="noopener">[ Code ]</a>
         <a href="#">[ Play the Maze ]</a>
         <a href="#cite">[ Cite ]</a>
       </div>
@@ -57,26 +57,26 @@
     <div class="mn-container mn-reveal">
       <div class="mn-sec-head">
         <p class="mn-tag is-blue">The idea</p>
-        <h2>One maze. Hidden rules.</h2>
-        <p class="mn-lead">Every R1 instance is a GridWorld maze governed by causal mechanisms a model must discover to solve it — switches that open walls, keys that gate doors, effects that fire at a distance. Because the task holds real spatial and long-horizon structure, performance isolates a single question: does the model understand the problem, or just pattern-match its way through?</p>
+        <h2>Mazes as proxies for multimodal perception, reasoning, and long-horizon action</h2>
+        <p class="mn-lead">Every R1 instance is a GridWorld maze governed by causal mechanisms a model must understand to solve it — switches that open gates, keys that open doors, and distractors that are meant to mislead. We believe that this task design is a good proxy for real-world multimodal tasks that agents today are not able to perform well on.</p>
       </div>
 
-      <p class="mn-prose" style="color:var(--mn-text-dim);margin-bottom:18px">R1 covers GridWorld. The full v2.0 will render the <em>same task</em> three ways — so a model that only memorized one interface has nowhere to hide:</p>
+      <p class="mn-prose" style="color:var(--mn-text-dim);margin-bottom:18px">While R1 covers only a 2-dimensional GridWorld, the full version of MultiNet v2.0 will render the same maze task in three different domains - so a model requires to truly generalize across modalities in order to succeed.</p>
       <div class="mn-grid mn-grid--3">
         <div class="mn-card">
           <p class="mn-tag is-blue">GridWorld · Release 1</p>
-          <h3>Symbolic grid</h3>
-          <p>The maze as a grid of cells, walls, and switches. Pure spatial reasoning — no rendering, no language, just the structure of the problem.</p>
+          <h3>2D grid</h3>
+          <p>The maze as a grid of cells, walls, keys, and switches. Primarily 2D visual inputs with a discrete action space.</p>
         </div>
         <div class="mn-card" style="opacity:.7">
-          <p class="mn-tag is-green">Natural Language · Coming</p>
+          <p class="mn-tag is-green">Language · Coming</p>
           <h3>Described in text</h3>
           <p>The same maze in prose. The model must build and hold a spatial model of the world from a narrative it reads step by step.</p>
         </div>
         <div class="mn-card" style="opacity:.7">
           <p class="mn-tag is-purple">3D · Coming</p>
           <h3>First-person 3D</h3>
-          <p>The same maze as a 3D environment. Perception, navigation, and the same causal mechanics — grounded in pixels and movement.</p>
+          <p>The same maze as a 3D environment. Perception, navigation, and the same causal mechanics - but in an egocentric 3D simulated MuJoCo-based environment where the action space is continuous.</p>
         </div>
       </div>
     </div>
@@ -88,7 +88,7 @@
       <div class="mn-sec-head">
         <p class="mn-tag is-amber">Methodology</p>
         <h2>Built to resist contamination and saturation.</h2>
-        <p class="mn-lead">Most benchmarks are a fixed set of problems. Once they leak into training data, or once models catch up, the number stops meaning anything. v2.0 is a generator, not a list.</p>
+        <p class="mn-lead">Most benchmarks are a fixed set of problems. Once they leak into training data, or once models catch up, the number stops meaning anything. v2.0 is an engine that can generate fresh, never-before-seen environments that continue to challenge models.</p>
       </div>
       <div class="mn-grid mn-grid--2">
         <div class="mn-card">
@@ -99,17 +99,17 @@
         <div class="mn-card">
           <p class="mn-tag is-green">Tunable difficulty</p>
           <h3>No ceiling to saturate</h3>
-          <p>Difficulty scales along explicit axes — maze size, solution length, number of causal mechanisms, distractors — so the benchmark grows with the models it measures.</p>
+          <p>Difficulty scales along explicit axes - maze size, solution length, number of causal mechanisms, distractors, different domains - so the benchmark grows with the models it measures.</p>
         </div>
         <div class="mn-card">
           <p class="mn-tag is-purple">Cross-domain by construction</p>
-          <h3>Memorization has nowhere to hide</h3>
+          <h3>Measuring generalization</h3>
           <p>Rendering the same task several ways will turn "did it generalize?" into a direct, measurable comparison rather than an inference.</p>
         </div>
         <div class="mn-card">
           <p class="mn-tag is-cyan">Human-anchored</p>
-          <h3>A floor we can trust</h3>
-          <p>These are mazes people solve easily. Human performance gives every score an honest reference point — and makes model failures legible.</p>
+          <h3>Grounded reference performance</h3>
+          <p>These are mazes people solve easily. Human performance gives every score an honest reference point - and makes model failures legible.</p>
         </div>
       </div>
     </div>
@@ -121,17 +121,16 @@
       <div class="mn-sec-head">
         <p class="mn-tag is-green">Release 1</p>
         <h2>Start with GridWorld.</h2>
-        <p class="mn-lead">R1 is methodology-first. Before the full three-domain benchmark, we establish the foundation in the cleanest domain — the symbolic grid — where nothing sits between the model and the structure of the task.</p>
+        <p class="mn-lead">R1 is methodology-first. Before the full three-domain benchmark, we establish the foundation in the simplest domain - 2D visual inputs with a discrete action space.</p>
       </div>
       <div class="mn-prose">
         <p style="color:var(--mn-text-dim)">Release 1 defines and validates:</p>
         <ul style="color:var(--mn-text-dim);line-height:1.8">
-          <li><strong style="color:var(--mn-text);font-weight:600">The difficulty axes</strong> — how maze size, solution length, and causal complexity trade off, and how we calibrate them.</li>
-          <li><strong style="color:var(--mn-text);font-weight:600">The evaluation protocol</strong> — how models are prompted, scored, and compared, and how we control for prompt and format effects.</li>
-          <li><strong style="color:var(--mn-text);font-weight:600">Per-model failure analysis</strong> — not just whether models fail, but where and how they fall apart as difficulty climbs.</li>
-          <li><strong style="color:var(--mn-text);font-weight:600">The final GridWorld evaluation set</strong> — the calibrated instances the leaderboard is scored on.</li>
+          <li><strong style="color:var(--mn-text);font-weight:600">The difficulty axes</strong> - how maze size, solution length, and causal complexity trade off, and how we calibrate them.</li>
+          <li><strong style="color:var(--mn-text);font-weight:600">The evaluation protocol</strong> - how models perceive, reason, and take actions under different formats and settings, and how this informs the way we build the benchmark.</li>
+          <li><strong style="color:var(--mn-text);font-weight:600">Per-model failure analysis</strong> - not just whether models fail, but where and how they fall apart as difficulty climbs.</li>
         </ul>
-        <p style="color:var(--mn-text-dim)">Natural language and 3D build on this same scaffolding, culminating in the full cross-domain benchmark, task generator, and paper.</p>
+        <p style="color:var(--mn-text-dim)">Natural language and 3D build on this same scaffolding, culminating in the full cross-domain benchmark.</p>
       </div>
     </div>
   </section>
@@ -141,8 +140,8 @@
     <div class="mn-container mn-reveal">
       <div class="mn-sec-head">
         <p class="mn-tag is-red">Results</p>
-        <h2>Where the models break</h2>
-        <p class="mn-lead">Success rate per model as mazes get longer and their causal mechanisms compound. Full R1 results, per-model breakdowns, and failure analysis arrive on release.</p>
+        <h2>Where does each model break? How exactly do they fail?</h2>
+        <p class="mn-lead">Success rate and steps to failure for each frontier model we evaluated (Claude, Kimi K2.6, and Qwen 3.6 27B) on the different maze types - different structures, mechanisms, and distractors: </p>
       </div>
       <div class="mn-plot">
         <p class="mn-eyebrow">Figure &middot; Success rate per model · GridWorld R1</p>
@@ -157,7 +156,7 @@
       <div class="mn-sec-head">
         <p class="mn-tag is-red">Failure replay</p>
         <h2>Watch them break.</h2>
-        <p class="mn-lead">Replays of frontier models failing R1 mazes in revealing ways — the kind of long-horizon, causal mistakes a person wouldn't make. The reel lands with the release.</p>
+        <p class="mn-lead">Replays of frontier models failing R1 mazes in interesting ways.</p>
       </div>
       <div class="mn-reel">
         <div class="mn-reel__play"></div>
@@ -173,21 +172,21 @@
       <div class="mn-sec-head">
         <p class="mn-tag">Roadmap</p>
         <h2>The v2.0 release plan</h2>
-        <p class="mn-lead">v2.0 ships in stages — methodology first, then the full cross-domain benchmark. Dates are provisional.</p>
+        <p class="mn-lead">v2.0 ships in stages - methodology first, then the full cross-domain benchmark.</p>
       </div>
       <div class="mn-timeline">
         <div class="mn-tl">
-          <div class="mn-tl__when">Aug 2026<br><span class="mn-chip mn-chip--now">Up next</span></div>
+          <div class="mn-tl__when">Aug 2026<br><span class="mn-chip mn-chip--now">Current</span></div>
           <div class="mn-tl__body">
-            <h3>Release 1 — GridWorld</h3>
+            <h3>Release 1 - GridWorld</h3>
             <p>The symbolic-grid domain, difficulty axes, and evaluation protocol — the methodological foundation for everything that follows.</p>
           </div>
         </div>
         <div class="mn-tl">
-          <div class="mn-tl__when">Sep 2026<br><span class="mn-chip mn-chip--next">Planned</span></div>
+          <div class="mn-tl__when">Sep 2026<br><span class="mn-chip mn-chip--next">Up next</span></div>
           <div class="mn-tl__body">
-            <h3>Release 3 — Full cross-domain benchmark</h3>
-            <p>All three domains (GridWorld, natural language, 3D), the task generator, and the cross-domain paper — the complete v2.0 benchmark.</p>
+            <h3>Release 3 - Full cross-domain benchmark</h3>
+            <p>All three domains (GridWorld, natural language, 3D) - the complete v2.0 benchmark.</p>
           </div>
         </div>
       </div>
@@ -200,7 +199,7 @@
       <div class="mn-sec-head">
         <p class="mn-tag is-purple">Cite</p>
         <h2>Citation</h2>
-        <p class="mn-lead">The v2.0 paper lands with Release 3. Until then, please cite MultiNet v1.0.</p>
+        <p class="mn-lead">Change this for the v2.0 paper.</p>
       </div>
       <div class="mn-code">
 <pre>@article{guruprasad2025multinet,

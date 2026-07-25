@@ -14,7 +14,8 @@
 (function () {
   "use strict";
 
-  var GH = "https://github.com/ManifoldRG/MultiNet";
+  var GH_V2  = "https://github.com/ManifoldRG/MultiNet-v2.0"; // current benchmark (v2.0 / R1)
+  var GH_OLD = "https://github.com/ManifoldRG/MultiNet";      // previous releases (v1.0 / v0.2 / v0.1)
   var DISCORD = "https://discord.gg/Rk4gAq5aYr";
 
   // --- Top nav links (hrefs provisional until all pages exist) ---
@@ -22,7 +23,7 @@
     { id: "benchmark",   label: "Benchmark",   href: "/static/pages/Multinetv2.html" },
     { id: "leaderboard", label: "Leaderboard", href: "/static/pages/Multinetv1.html#leaderboard-container" },
     { id: "research",    label: "Research",    href: "/static/pages/Multinet.html" },
-    { id: "github",      label: "GitHub",      href: GH, external: true }
+    { id: "github",      label: "GitHub",      href: GH_V2, external: true }
   ];
 
   // --- Research-hub tabs ---
@@ -53,11 +54,12 @@
       rects + '</svg>';
   }
 
-  function buildNav(current) {
+  function buildNav(current, repo) {
     var links = NAV.map(function (n) {
       var active = n.id === current ? " is-active" : "";
       var attrs = n.external ? ' target="_blank" rel="noopener"' : "";
-      return '<a class="mn-nav__link' + active + '" href="' + n.href + '"' + attrs + '>' + n.label + "</a>";
+      var href = n.id === "github" ? repo : n.href;
+      return '<a class="mn-nav__link' + active + '" href="' + href + '"' + attrs + '>' + n.label + "</a>";
     }).join("");
     return el(
       '<nav class="mn-nav"><div class="mn-nav__inner">' +
@@ -68,16 +70,16 @@
     );
   }
 
-  function buildFooter() {
+  function buildFooter(repo) {
     return el(
       '<footer class="mn-footer">' +
         '<div class="mn-footer__inner">' +
           '<div><div class="mn-footer__brand">' + mazeLogo("ft") + 'MultiNet</div>' +
-            '<p style="margin-top:10px;max-width:34ch">An open benchmark for multimodal, long-horizon, cross-domain action — by Fig + Manifold Research.</p></div>' +
+            '<p style="margin-top:10px;max-width:34ch">An open benchmark for multimodal, long-horizon, cross-domain action - by <a href="https://metarch.ai/" target="_blank" rel="noopener">Fig</a> + <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener">Manifold Research</a>.</p></div>' +
           '<div><h4>Benchmark</h4>' +
             '<a href="/static/pages/Multinetv2.html">v2.0 (R1)</a>' +
             '<a href="/static/pages/Multinet.html">Research hub</a>' +
-            '<a href="/static/pages/Multinetv1.html#leaderboard">Leaderboard</a></div>' +
+            '<a href="/static/pages/Multinetv1.html#leaderboard">v1.0 Leaderboard</a></div>' +
           '<div><h4>Models &amp; Tools</h4>' +
             '<a href="https://github.com/eihli/mugato" target="_blank" rel="noopener">µGato</a>' +
             '<a href="https://github.com/ManifoldRG/NEKO" target="_blank" rel="noopener">NEKO</a>' +
@@ -85,7 +87,7 @@
           '<div><h4>Community</h4>' +
             '<a href="' + DISCORD + '" target="_blank" rel="noopener">Discord</a>' +
             '<a href="mailto:pranav@metarch.ai">Email</a>' +
-            '<a href="' + GH + '" target="_blank" rel="noopener">GitHub</a></div>' +
+            '<a href="' + repo + '" target="_blank" rel="noopener">GitHub</a></div>' +
         "</div>" +
         '<div class="mn-footer__bottom"><span>© 2026 MultiNet</span>' +
           '<a href="#BibTeX" style="display:inline">Cite</a></div>' +
@@ -107,9 +109,11 @@
     var footSlot = document.getElementById("mn-footer");
     var tabSlot = document.getElementById("mn-tabs");
 
-    if (navSlot) navSlot.replaceWith(buildNav(body.getAttribute("data-mn-page")));
-    if (tabSlot) tabSlot.replaceWith(buildTabs(body.getAttribute("data-mn-tab")));
-    if (footSlot) footSlot.replaceWith(buildFooter());
+    var mnTab = body.getAttribute("data-mn-tab");
+    var repo = (mnTab === "v1" || mnTab === "v0.2" || mnTab === "v0.1") ? GH_OLD : GH_V2;
+    if (navSlot) navSlot.replaceWith(buildNav(body.getAttribute("data-mn-page"), repo));
+    if (tabSlot) tabSlot.replaceWith(buildTabs(mnTab));
+    if (footSlot) footSlot.replaceWith(buildFooter(repo));
 
     // mobile nav toggle
     var toggle = document.querySelector(".mn-nav__toggle");

@@ -158,6 +158,8 @@
   text-transform: uppercase; color: var(--mn-text-dim); margin: 0 0 12px; }
 .mn-footer a { display: block; color: var(--mn-text); padding: 4px 0; }
 .mn-footer a:hover { color: var(--mn-primary); }
+.mn-footer p a { display: inline; padding: 0; color: var(--mn-primary); }
+.mn-footer p a:hover { color: var(--mn-primary-600); }
 .mn-footer__brand { display: inline-flex; align-items: center; gap: 9px;
   font-family: var(--mn-font-display); font-weight: 400; letter-spacing: 0; text-transform: none; font-size: 1.4rem; color: var(--mn-text); }
 .mn-footer__brand svg { width: 24px; height: 24px; display: block; }

@@ -42,12 +42,11 @@
     <div class="mn-hero__inner">
       <p class="mn-tag">Research</p>
       <h1 style="max-width:18ch;margin-top:.3em">A generalization benchmark for next-generation multimodal models.</h1>
-      <p class="mn-prose" style="margin-top:.2em">MultiNet is an open research program — by <a href="https://metarch.ai/" target="_blank" rel="noopener">Fig</a> and <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener">Manifold Research</a> — building benchmarks that measure whether multimodal models truly generalize across vision, language, and action, rather than excelling only on the narrow tasks they were trained for.</p>
+      <p class="mn-prose" style="margin-top:.2em">MultiNet is an open research program - by <a href="https://metarch.ai/" target="_blank" rel="noopener">Fig</a> and <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener">Manifold Research</a> - building benchmarks that measure whether multimodal models truly generalize across vision, language, and action, rather than excelling only on the narrow tasks they were trained for.</p>
       <div class="mn-artifacts" style="margin-top:24px">
         <a href="/static/pages/Multinetv2.html">[ v2.0 ]</a>
         <a href="/static/pdfs/An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener">[ Paper ]</a>
-        <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" rel="noopener">[ Code ]</a>
-        <a href="#cite">[ Cite ]</a>
+        <a href="https://github.com/ManifoldRG/MultiNet-v2.0" target="_blank" rel="noopener">[ Code ]</a>
       </div>
     </div>
   </header>
@@ -57,15 +56,15 @@
     <div class="mn-container mn-reveal">
       <div class="mn-sec-head">
         <p class="mn-tag is-blue">Why</p>
-        <h2>A systematic benchmark for the age of action-grounded AI.</h2>
+        <h2>A Systematic Benchmark for the Age of Action-Grounded, Multimodal AI Systems.</h2>
       </div>
       <div class="mn-prose">
-        <p>Recent advances have shown large-scale models generalizing across diverse tasks. Vision-Language-Action models like <a href="https://www.physicalintelligence.company/blog/pi0" target="_blank" rel="noopener">π0</a> take vision-language-grounded actions in robotics, yet are typically specialized to narrow control tasks — and their broader understanding stays underexplored. Vision-Language models like <a href="https://openai.com/index/introducing-gpt-5/" target="_blank" rel="noopener">GPT-5</a> reason impressively over language and images, yet their behavior on genuinely out-of-distribution tasks — low-level robotics control, discrete-action gameplay — is rarely quantified. To build generalist systems that complete long-horizon tasks and bring real value, we first need to understand and measure what these systems can actually do.</p>
+        <p>Recent advances have shown large-scale models generalizing across diverse tasks. Vision-Language-Action models like <a href="https://www.physicalintelligence.company/blog/pi0" target="_blank" rel="noopener">π0</a> take vision-language-grounded actions in robotics, yet are typically specialized to narrow control tasks - and their broader understanding stays underexplored. Vision-Language models like <a href="https://openai.com/index/introducing-gpt-5/" target="_blank" rel="noopener">GPT-5</a> reason impressively over language and images, yet their behavior on genuinely out-of-distribution tasks - low-level robotics control, discrete-action gameplay - is rarely quantified. To build generalist systems that complete long-horizon tasks and bring real value, we first need to understand and measure what these systems can actually do.</p>
         <p style="color:var(--mn-text-dim)">MultiNet addresses these gaps by:</p>
       </div>
       <div class="mn-grid mn-grid--2" style="margin-top:8px">
         <div class="mn-card"><h3>Advancing generalist models</h3><p>A comprehensive benchmark evaluating today's generalist models across multiple modalities, domains, and environments.</p></div>
-        <div class="mn-card"><h3>Enabling the next generation</h3><p>Precise insight into failure modes and capabilities on out-of-distribution tasks — informing models that can reach SoTA across all constituent tasks.</p></div>
+        <div class="mn-card"><h3>Enabling the next generation</h3><p>Precise insight into failure modes and capabilities on out-of-distribution tasks - informing models that can reach SoTA across all constituent tasks.</p></div>
         <div class="mn-card"><h3>Standardizing evaluation</h3><p>Unified assessment protocols for robotics foundation models beyond narrow control, and vision-language models beyond understanding.</p></div>
         <div class="mn-card"><h3>Democratizing access</h3><p>Open-source tooling that fixes outdated formats, poor maintenance, and accessibility issues across rich but neglected evaluation datasets.</p></div>
       </div>
@@ -77,24 +76,24 @@
     <div class="mn-container mn-reveal">
       <div class="mn-sec-head">
         <p class="mn-tag is-green">Releases</p>
-        <h2>Four releases, one throughline.</h2>
-        <p class="mn-lead">Each release sharpens the same question — how well do frontier models generalize when the task leaves their comfort zone? Use the tabs above to dive into any version.</p>
+        <h2>Four releases in pursuit of measuring multimodal generalization</h2>
+        <p class="mn-lead">Each release is an iteration towards answering the question: how well do frontier models generalize when the task is out-of-distribution? Use the tabs below to dive into any version and understand the progress we've made so far.</p>
       </div>
       <div class="mn-grid mn-grid--2">
         <a class="mn-card" href="/static/pages/Multinetv2.html">
           <p class="mn-tag is-blue">v2.0 · Cross-domain Action</p>
-          <h3>Simple mazes, hidden rules</h3>
-          <p>GridWorld mazes with hidden causal rules that demand spatial and long-horizon reasoning — frontier models solve just 2.7%. Release 1 is the first domain of v2.0. <span style="color:var(--mn-primary)">Read R1 →</span></p>
+          <h3>Mazes that require perception, planning, reasoning, and action</h3>
+          <p>GridWorld mazes with hidden causal rules that demand spatial reasoning and long-horizon action taking capability - frontier models solve just 2.7% of the total mazes in the evaluation set. Release 1 is the first domain of v2.0. <span style="color:var(--mn-primary)">Explore →</span></p>
         </a>
         <a class="mn-card" href="/static/pages/Multinetv1.html">
           <p class="mn-tag is-green">v1.0 · Generalist</p>
           <h3>The generalist benchmark</h3>
-          <p>SoTA VLMs, VLAs, and generalist models across a wide range of multimodal understanding and action datasets. Includes the full leaderboard. <span style="color:var(--mn-primary)">Explore →</span></p>
+          <p>SoTA VLMs, VLAs, and generalist models evaluated across a wide range of multimodal understanding and action datasets. Includes the full leaderboard. <span style="color:var(--mn-primary)">Explore →</span></p>
         </a>
         <a class="mn-card" href="/static/pages/Multinetv02.html">
           <p class="mn-tag is-amber">v0.2 · Gameplay</p>
           <h3>Out-of-distribution game environments</h3>
-          <p>Profiling how state-of-the-art VLAs and VLMs behave in procedurally generated, out-of-distribution gameplay. <span style="color:var(--mn-primary)">Explore →</span></p>
+          <p>Profiling how state-of-the-art VLAs and VLMs behave in procedurally generated, out-of-distribution gameplay environments. <span style="color:var(--mn-primary)">Explore →</span></p>
         </a>
         <a class="mn-card" href="/static/pages/Multinetv01.html">
           <p class="mn-tag is-red">v0.1 · Robotics</p>
@@ -115,29 +114,11 @@
       </div>
       <div class="mn-prose">
         <ul style="color:var(--mn-text-dim);line-height:1.8">
-          <li><strong style="color:var(--mn-text);font-weight:600">Causal world-model evaluation.</strong> Leverage world models as evaluators to test whether systems understand causal relationships rather than statistical correlations — enabling counterfactual analysis through systematic environmental perturbation. (The direct seed of v2.0.)</li>
+          <li><strong style="color:var(--mn-text);font-weight:600">Causal world-model evaluation.</strong> Leverage world models as evaluators to test whether systems understand causal relationships rather than statistical correlations - enabling counterfactual analysis through systematic environmental perturbation. (The direct seed of v2.0.)</li>
           <li><strong style="color:var(--mn-text);font-weight:600">Live, dynamic benchmarks.</strong> Continuously updating evaluations that adapt to model capability, preventing overfitting to static test sets while assessing deployed systems in real time.</li>
           <li><strong style="color:var(--mn-text);font-weight:600">Cross-modal failure analysis.</strong> Understand why models misalign input domains and output modalities, and design modifications that prevent cross-modal contamination in multi-task settings.</li>
-          <li><strong style="color:var(--mn-text);font-weight:600">Progressive multi-domain training.</strong> Learning paradigms that add domains without catastrophic forgetting — moving beyond zero-shot toward rapid, knowledge-preserving adaptation.</li>
+          <li><strong style="color:var(--mn-text);font-weight:600">Progressive multi-domain training.</strong> Learning paradigms that add domains without catastrophic forgetting - moving beyond current zero-shot limitations to enable meta-learning for rapid adaptation while preserving existing knowledge.</li>
         </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== CITATION ==================== -->
-  <section class="mn-section" id="cite" style="padding-top:0">
-    <div class="mn-container mn-reveal">
-      <div class="mn-sec-head">
-        <p class="mn-tag is-cyan">Cite</p>
-        <h2>Citation</h2>
-      </div>
-      <div class="mn-code">
-<pre>@misc{guruprasad2024benchmarking,
-  author = {Guruprasad, Pranav and Sikka, Harshvardhan and Song, Jaewoo and Wang, Yangyue and Liang, Paul},
-  title  = {Benchmarking Vision, Language, & Action Models on Robotic Learning Tasks},
-  doi    = {10.20944/preprints202411.0494.v1},
-  year   = {2024}
-}</pre>
       </div>
     </div>
   </section>

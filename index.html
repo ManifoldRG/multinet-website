@@ -48,9 +48,9 @@
   <!-- ============================ HERO ============================ -->
   <header class="mn-hero">
     <div class="mn-hero__inner">
-      <p class="mn-tag">MultiNet v2.0 · Release 1 — GridWorld</p>
-      <h1 style="max-width:15ch;margin-top:.3em">A maze a child solves in seconds. Frontier models can't.</h1>
-      <p class="mn-prose" style="margin-top:.2em">Release 1 drops frontier models into <span style="color:var(--mn-text)">GridWorld</span> — symbolic mazes with hidden causal rules that reward real spatial reasoning and long-horizon planning. Puzzles people breeze through, and the strongest models solve just 4 of 150.</p>
+      <h1 style="max-width:15ch">The Multimodal Action Benchmark</h1>
+      <p class="mn-tag" style="margin-top:.6em">MultiNet v2.0 · Release 1: GridWorld</p>
+      <p class="mn-prose" style="margin-top:.2em">MultiNet measures how well frontier models take long-horizon action across vision, language, and control. Release 1 of MultiNet v2.0 drops frontier models into Gridworld: symbolic mazes with hidden causal rules that reward spatial reasoning and long-horizon planning. Puzzles people can generally breeze through, but the strongest models solve just 4 of 150.</p>
 
       <div class="mn-stat">
         <p class="mn-eyebrow">Frontier models score just</p>
@@ -58,15 +58,10 @@
         <p class="mn-eyebrow">on Release 1's GridWorld mazes</p>
       </div>
 
-      <div style="display:flex;gap:12px;margin:26px 0 22px;flex-wrap:wrap">
-        <a class="mn-btn mn-btn--primary" href="#">Play the Maze</a>
-        <a class="mn-btn mn-btn--ghost" href="/static/pages/Multinetv2.html">Read the Research</a>
-      </div>
-
       <div class="mn-artifacts">
         <a href="/static/pages/Multinetv2.html">[ Research ]</a>
         <a href="/static/pdfs/An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener">[ Paper ]</a>
-        <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" rel="noopener">[ Code ]</a>
+        <a href="https://github.com/ManifoldRG/MultiNet-v2.0" target="_blank" rel="noopener">[ Code ]</a>
         <a href="#">[ Play the Maze ]</a>
         <a href="#cite">[ Cite ]</a>
       </div>
@@ -83,27 +78,27 @@
   <section class="mn-section">
     <div class="mn-container mn-reveal">
       <div class="mn-sec-head">
-        <p class="mn-tag is-blue">Release 1 · GridWorld</p>
-        <h2>Simple mazes. Hidden rules.</h2>
-        <p class="mn-lead">Each R1 maze is a GridWorld puzzle governed by hidden causal mechanisms — switches that open walls, keys that gate doors, effects that fire at a distance. Solving one takes genuine spatial reasoning and long-horizon planning, not pattern-matching. A child manages it; frontier models mostly don't.</p>
+        <p class="mn-tag is-blue">Release 1 (R1) · GridWorld</p>
+        <h2>Simple 2-dimensional mazes</h2>
+        <p class="mn-lead">Each R1 maze is a GridWorld puzzle governed by hidden causal mechanisms - switches that open gates, keys that open doors, and distractors that are meant to mislead. Solving one takes genuine spatial reasoning and long-horizon planning. Humans can solve them in seconds (try playing one yourself! - link to play the maze), but frontier models can barely solve any.</p>
       </div>
 
-      <p class="mn-prose" style="color:var(--mn-text-dim);margin-bottom:18px">Release 1 covers GridWorld. The full v2.0 will render the <em>same task</em> three ways — so a model that only memorized one interface has nowhere to hide:</p>
+      <p class="mn-prose" style="color:var(--mn-text-dim);margin-bottom:18px">While R1 covers only a 2-dimensional GridWorld, the full version of MultiNet v2.0 will render the same maze task in three different domains - so a model requires to truly generalize across modalities in order to succeed.</p>
       <div class="mn-grid mn-grid--3">
-        <div class="mn-card">
+        <a class="mn-card" href="/static/pages/Multinetv2.html">
           <p class="mn-tag is-blue">GridWorld · Release 1</p>
-          <h3>Symbolic grid</h3>
-          <p>The maze as a grid of cells, walls, and switches. Pure spatial reasoning — no rendering, no language, just the structure of the problem.</p>
-        </div>
+          <h3>2D grid</h3>
+          <p>The maze as a grid of cells, walls, keys, and switches. Primarily 2D visual inputs with a discrete action space.</p>
+        </a>
         <div class="mn-card" style="opacity:.7">
-          <p class="mn-tag is-green">Natural Language · Coming</p>
+          <p class="mn-tag is-green">Language · Coming</p>
           <h3>Described in text</h3>
           <p>The same maze in prose. The model must build and hold a spatial model of the world from a narrative it reads step by step.</p>
         </div>
         <div class="mn-card" style="opacity:.7">
           <p class="mn-tag is-purple">3D · Coming</p>
           <h3>First-person 3D</h3>
-          <p>The same maze as a 3D environment. Perception, navigation, and the same causal mechanics — grounded in pixels and movement.</p>
+          <p>The same maze as a 3D environment. Perception, navigation, and the same causal mechanics - but in an egocentric 3D simulated MuJoCo-based environment where the action space is continuous.</p>
         </div>
       </div>
     </div>
@@ -114,8 +109,8 @@
     <div class="mn-container mn-reveal">
       <div class="mn-sec-head">
         <p class="mn-tag is-red">Results</p>
-        <h2>Where the models break</h2>
-        <p class="mn-lead">Success rate per model as mazes get longer and their causal mechanisms compound. The full R1 results — with per-model breakdowns and failure analysis — arrive on release.</p>
+        <h2>Where does each model break? How exactly do they fail?</h2>
+        <p class="mn-lead">Success rate and steps to failure for each frontier model we evaluated (Claude, Kimi K2.6, and Qwen 3.6 27B) on the different maze types - different structures, mechanisms, and distractors: </p>
       </div>
       <div class="mn-plot">
         <p class="mn-eyebrow">Figure &middot; Success rate per model · GridWorld R1</p>
@@ -133,17 +128,17 @@
       <div class="mn-feature">
         <a class="mn-feature__block" href="/static/pages/Multinetv1.html">
           <div>
-            <p class="mn-tag is-blue">v1.0 · Generalist</p>
+            <p class="mn-tag is-blue">v1.0 · The Generalist Benchmark</p>
             <h3>The MultiNet v1.0 benchmark</h3>
-            <p>Our most comprehensive generalist release — SoTA VLMs, VLAs, and generalist models evaluated across a wide range of multimodal understanding and action datasets. Includes the full leaderboard.</p>
+            <p>Our most comprehensive generalist benchmark release till date - SoTA VLMs, VLAs, and generalist models evaluated across a wide range of multimodal understanding and action datasets. Includes the full leaderboard.</p>
           </div>
           <span class="mn-feature__go">Explore v1.0 →</span>
         </a>
         <a class="mn-feature__block" href="/static/pages/Multinet.html#talks">
           <div>
-            <p class="mn-tag is-amber">Talks &amp; Media</p>
-            <h3>Talks, demos &amp; media</h3>
-            <p>Recorded talks and demos on MultiNet's methodology and findings, plus press and community coverage of the benchmark.</p>
+            <p class="mn-tag is-amber">Dive deeper into MultiNet</p>
+            <h3>Talks &amp media</h3>
+            <p>Recorded talks on MultiNet's thesis, methodology, and findings over the last two years.</p>
           </div>
           <span class="mn-feature__go">Watch &amp; read →</span>
         </a>
@@ -157,7 +152,7 @@
       <div class="mn-sec-head">
         <p class="mn-tag">Releases</p>
         <h2>The MultiNet lineage</h2>
-        <p class="mn-lead">Four releases sharpening one question — how well do models generalize when the task leaves their comfort zone. v2.0 is the current benchmark.</p>
+        <p class="mn-lead">Four releases in pursuit of understanding how well foundation models generalize when the eval task leaves their training distribution. v2.0 is the current version of the benchmark.</p>
       </div>
       <div class="mn-lineage">
         <a class="mn-lineage__node c-red" href="/static/pages/Multinetv01.html">
@@ -166,11 +161,11 @@
         </a>
         <a class="mn-lineage__node c-amber" href="/static/pages/Multinetv02.html">
           <span class="mn-lineage__v">v0.2</span><span class="mn-lineage__name">Gameplay</span>
-          <span class="mn-lineage__tag">OOD environments</span>
+          <span class="mn-lineage__tag">Digital environments</span>
         </a>
         <a class="mn-lineage__node c-green" href="/static/pages/Multinetv1.html">
           <span class="mn-lineage__v">v1.0</span><span class="mn-lineage__name">Generalist</span>
-          <span class="mn-lineage__tag">VLM · VLA · generalist</span>
+          <span class="mn-lineage__tag">Multimodal understanding and action</span>
         </a>
         <a class="mn-lineage__node c-blue is-current" href="/static/pages/Multinetv2.html">
           <span class="mn-lineage__v">v2.0</span><span class="mn-lineage__name">Cross-domain Action</span>
@@ -189,12 +184,16 @@
       </div>
       <div class="mn-news">
         <div class="mn-news__item">
-          <div class="mn-news__date">Soon</div>
-          <p><strong>MultiNet v2.0 · R1 in preparation.</strong> A maze rendered across a grid, natural language, and 3D — starting with the GridWorld release. <span style="color:var(--mn-text-dim)">(placeholder — copy &amp; date to confirm at launch)</span></p>
+          <div class="mn-news__date">v2.0</div>
+          <p><strong>v2.0 R1</strong> [insert copy here] </span></p>
         </div>
         <div class="mn-news__item">
           <div class="mn-news__date">v1.0</div>
-          <p><strong>MultiNet v1.0 released!</strong> Our most comprehensive benchmark yet — evaluating a SoTA VLM, VLA, and generalist models on a wide variety of multimodal understanding and action datasets. Read more <a href="/static/pages/Multinetv1.html">here</a>.</p>
+          <p><strong>MultiNet v1.0 released!</strong> Our most comprehensive benchmark yet: evaluating a SoTA VLM, VLA, and generalist model on a wide variety of multimodal understanding and action datasets. Read more <a href="/static/pages/Multinetv1.html">here</a>.</p>
+        </div>
+        <div class="mn-news__item">
+          <div class="mn-news__date">CVPR '26</div>
+          <p><strong>Paper accepted at CVPR 2026!</strong> Our MultiNet v1.0 paper was accepted at the <a href="https://mmfm-workshop.github.io/" target="_blank" rel="noopener">MMFM Workshop</a> at CVPR 2026. Read the paper here [link preprint after it is up on Arxiv]</p>
         </div>
         <div class="mn-news__item">
           <div class="mn-news__date">v0.2</div>
@@ -241,10 +240,10 @@
           <img src="/static/images/tuftslogo.jpg" alt="Tufts University">
         </a>
       </div>
-      <p class="mn-lead" style="margin-bottom:18px">Interested in collaborating? Reach out — we'd love to hear from you.</p>
+      <p class="mn-lead" style="margin-bottom:18px">Interested in collaborating? Reach out - we'd love to hear from you.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <a class="mn-btn mn-btn--primary" href="mailto:pranav@metarch.ai">Email us</a>
-        <a class="mn-btn mn-btn--ghost" href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener">Join the Discord</a>
+        <a class="mn-btn mn-btn--primary" href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener">Join the Discord</a>
       </div>
     </div>
   </section>
