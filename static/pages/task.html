@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MultiNet Task</title>
+  <link rel="icon" type="image/x-icon" href="../images/multinet_logo_square.png">
+  <link rel="stylesheet" href="../css/play.css">
+  <link rel="stylesheet" href="../css/task.css">
+</head>
+<body class="task-page">
+  <header class="task-top">
+    <a class="task-brand" href="../../index.html">
+      <img src="../images/multinet_logo_square.png" alt="MultiNet" width="36" height="36">
+      <span>MultiNet</span>
+    </a>
+    <nav class="task-nav">
+      <a href="../../index.html">Home</a>
+      <a href="Multinetv1.html">v1.0</a>
+      <span class="current">Play</span>
+    </nav>
+  </header>
+
+  <main class="task-main">
+    <div class="task-heading">
+      <div class="task-heading-text">
+        <p class="eyebrow">R1 human play</p>
+        <h1 id="page-title">Loading…</h1>
+        <p id="page-desc"></p>
+      </div>
+      <div class="task-heading-nav">
+        <button type="button" id="page-prev">Previous</button>
+        <button type="button" id="page-next">Next</button>
+      </div>
+    </div>
+
+    <div id="error"></div>
+
+    <div id="splash">
+      <div>
+        <h1>MultiNet v2.0 Benchmark</h1>
+        <p>Can you solve what frontier models cannot?</p>
+        <button type="button" id="splash-play">Press Enter to play</button>
+      </div>
+    </div>
+
+    <div class="card" id="card">
+      <div class="topbar">
+        <div>
+          <div class="brand">MultiNet v2.0 Benchmark</div>
+          <div class="task-id" id="task-id"></div>
+        </div>
+        <div class="nav">
+          <button type="button" id="prev">&lt;</button>
+          <button type="button" id="next">&gt;</button>
+        </div>
+      </div>
+
+      <div class="board">
+        <aside class="rail">
+          <h2 class="section">Task</h2>
+          <p id="task-text"></p>
+          <ul class="progress" id="progress"></ul>
+        </aside>
+
+        <div class="stage">
+          <img id="grid" alt="MiniGrid">
+          <div id="end">
+            <div class="panel">
+              <h2 id="end-title"></h2>
+              <p id="end-desc"></p>
+              <p id="end-diff"></p>
+              <p id="end-steps"></p>
+              <p id="end-score"></p>
+              <p id="end-frame"></p>
+              <table class="compare">
+                <thead>
+                  <tr><th>Player</th><th>Result</th></tr>
+                </thead>
+                <tbody id="end-rows"></tbody>
+              </table>
+              <p id="end-hint">R reset · [ ] switch task · Q quit</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="rail right">
+          <h2 class="section muted">Status</h2>
+          <div class="stat facing" id="facing"></div>
+          <div class="stat carrying" id="carrying"></div>
+
+          <h2 class="section muted" style="margin-top: 18px">Controls</h2>
+          <div class="ctrl" id="controls"></div>
+        </aside>
+      </div>
+
+      <div class="hint">
+        <div class="hint-main">Solve the task using only the information visible in the maze.</div>
+        <div class="hint-meta">[ / ] switch task · Tab settings · M model view · Q quit</div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/play.js"></script>
+</body>
+</html>
