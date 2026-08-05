@@ -24,17 +24,6 @@
 
 * { box-sizing: border-box; }
 
-/* Standalone player page (task.html). Content hosts override via .play-host. */
-body.play-standalone {
-  margin: 0;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  background: var(--page-bg);
-  color: var(--text);
-  font-family: "Segoe UI", system-ui, sans-serif;
-}
-
 .play-host {
   position: relative;
   width: max-content;
@@ -345,19 +334,12 @@ body.play-standalone {
 
 #splash {
   display: none;
-  position: fixed;
-  inset: 0;
+  position: relative;
   background: rgba(8, 9, 13, 0.92);
   place-items: center;
   z-index: 5;
   text-align: center;
   padding: 24px;
-}
-
-/* On content pages, splash is in-flow so the embed keeps height before play. */
-body:not(.play-standalone) .play-host #splash {
-  position: relative;
-  inset: auto;
   border-radius: 20px;
   min-height: 420px;
   width: min(1100px, 96vw);
