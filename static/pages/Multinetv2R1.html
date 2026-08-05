@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP82HPYSRH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PP82HPYSRH');
+  </script>
+
+  <!-- PostHog Analytics Tag -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init be ws Ss me ys capture Ne calculateEventProperties xs register register_once register_for_session unregister unregister_for_session Rs getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Is ks createPersonProfile Ps bs opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing $s debug Es getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_9rIWbSBBOFBaUcdMWUniUtiuukyTgzgY0EaxK6dmNvo', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2025-05-24',
+        person_profiles: 'identified_only',
+    })
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MultiNet v2.0 Release 1 evaluates frontier models on procedurally generated mazes with hidden causal mechanisms. Three frontier models solved 6 of 149 episodes; 45 of 50 mazes were never solved by any model.">
+  <meta property="og:title" content="MultiNet v2.0 Release 1 - Benchmarking long-horizon action with causal reasoning"/>
+  <meta property="og:description" content="Mazes with hidden causal mechanisms. Nothing to know, an exact oracle, and difficulty you can turn up. Frontier models solved 6 of 149 episodes."/>
+  <meta property="og:url" content="https://multinet.ai/static/pages/Multinetv2R1.html"/>
+  <meta property="og:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg"/>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MultiNet v2.0 Release 1">
+  <meta name="twitter:description" content="Mazes with hidden causal mechanisms. Frontier models solved 6 of 149 episodes.">
+  <meta name="keywords" content="Agentic Benchmark, Long-Horizon Action, Causal Reasoning, GridWorld, MiniGrid, Living Benchmark, Contamination, Saturation, Frontier Models">
+
+  <title>MultiNet v2.0 Release 1: A Substrate for Benchmarking Long-Horizon Action with Causal Reasoning in Frontier Models</title>
+
+  <link rel="icon" type="image/x-icon" href="../images/multinet_logo_square.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/bulma.min.css">
+  <link rel="stylesheet" href="../css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="../css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../../static/css/mn-shared.css">
+
+  <script defer src="../js/fontawesome.all.min.js"></script>
+
+  <style>
+    /* ---------- Headline stat strip ---------- */
+    .r1-headline {
+      /* deep navy through the brand blue into teal, on the diagonal */
+      background:
+        radial-gradient(120% 140% at 12% 0%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 55%),
+        linear-gradient(118deg, #06233C 0%, #013F73 38%, #005A9C 66%, #0B7285 100%);
+      color: #fff;
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin: 2rem auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+      gap: 1rem;
+      box-shadow: 0 10px 30px rgba(3, 34, 60, 0.28);
+    }
+
+    .r1-stat {
+      position: relative;
+      text-align: center;
+      padding: 1.6rem 1rem 1.4rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .r1-stat:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.11);
+    }
+    .r1-stat .num {
+      font-size: 2.7rem;
+      font-weight: 700;
+      line-height: 1.02;
+      display: block;
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.01em;
+    }
+    .r1-stat .num .den {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.62);
+    }
+    .r1-stat .lab {
+      font-size: 1.18rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.94);
+      display: block;
+      margin-top: 0.45rem;
+      line-height: 1.25;
+    }
+
+    /* ---------- Metric definitions ---------- */
+    .r1-defs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .r1-def {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 1.25rem;
+      background: #fafbfc;
+    }
+    .r1-def h4 {
+      font-weight: 600; color: #005A9C;
+      font-size: 1.05rem; margin-bottom: 0.4rem;
+    }
+    .r1-def p { font-size: 0.9rem; line-height: 1.55; color: #4a4a4a; margin: 0 0 0.9rem; }
+
+    .r1-formula {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4em;
+      flex-wrap: wrap;
+    }
+    /* inline stacked fraction */
+    .r1-formula .frac {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 0.85em;
+      line-height: 1.25;
+    }
+    .r1-formula .frac .top { border-bottom: 1px solid #94a3b8; padding: 0 0.45em 2px; }
+    .r1-formula .frac .bot { padding: 2px 0.45em 0; }
+
+    /* ---------- Headline chart ---------- */
+    .r1-chart-controls {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .r1-metric-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .r1-metric-button {
+      border: 1px solid #dbdbdb; background: #fff; color: #363636;
+      border-radius: 6px; padding: 0.5rem 1rem; cursor: pointer;
+      font-family: inherit; font-size: 0.9rem; transition: all 0.2s;
+    }
+    .r1-metric-button:hover { border-color: #005A9C; color: #005A9C; }
+    .r1-metric-button.active { background: #005A9C; border-color: #005A9C; color: #fff; }
+    .r1-chart-stage {
+      position: relative; height: 380px;
+      border: 1px solid #e5e7eb; border-radius: 10px;
+      padding: 1rem; background: #fff;
+    }
+    .r1-chart-note {
+      font-size: 0.85rem; color: #666; text-align: center;
+      margin-top: 0.85rem; line-height: 1.55;
+    }
+
+    /* ---------- Four-property cards ---------- */
+    .r1-props { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; }
+    .r1-prop {
+      border: 1px solid #e0e0e0;
+      border-top: 4px solid #005A9C;
+      border-radius: 10px;
+      padding: 1.25rem;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .r1-prop:nth-child(2) { border-top-color: #1E8449; }
+    .r1-prop:nth-child(3) { border-top-color: #8E44AD; }
+    .r1-prop:nth-child(4) { border-top-color: #D35400; }
+    .r1-prop h4 { font-weight: 600; color: #005A9C; margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .r1-prop:nth-child(2) h4 { color: #1E8449; }
+    .r1-prop:nth-child(3) h4 { color: #8E44AD; }
+    .r1-prop:nth-child(4) h4 { color: #D35400; }
+    .r1-prop p { font-size: 0.9rem; line-height: 1.5; color: #4a4a4a; margin: 0; }
+
+    /* ---------- Failure reel ---------- */
+    .r1-reel-models {
+      display: flex; justify-content: center; gap: 0.6rem;
+      flex-wrap: wrap; margin-bottom: 0.85rem;
+    }
+    .r1-reel-model {
+      display: inline-flex; align-items: center; gap: 0.55em;
+      border: 1px solid #e0e0e0; background: #fff; color: #363636;
+      border-radius: 999px; padding: 0.45rem 1.1rem 0.45rem 0.5rem;
+      cursor: pointer; font-family: inherit; font-size: 0.95rem; font-weight: 500;
+      transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .r1-reel-model:hover { border-color: var(--brand); }
+    .r1-reel-model.active {
+      background: var(--brand); border-color: var(--brand); color: #fff;
+      box-shadow: 0 3px 10px color-mix(in srgb, var(--brand) 35%, transparent);
+    }
+    /* Brand mark. The SVG supplies the shape via mask, CSS supplies the colour,
+       so the glyph can flip to white when the button goes solid. */
+    .r1-reel-model .r1-logo {
+      width: 21px; height: 21px; flex: 0 0 auto;
+      background-color: var(--brand);
+      -webkit-mask: var(--logo) center / contain no-repeat;
+      mask: var(--logo) center / contain no-repeat;
+      transition: background-color 0.2s;
+    }
+    .r1-reel-model.active .r1-logo { background-color: #fff; }
+
+    /* which of that model's clips */
+    .r1-reel-clips {
+      display: flex; justify-content: center; gap: 0.45rem;
+      flex-wrap: wrap; margin-bottom: 1.25rem;
+    }
+    .r1-reel-clip {
+      border: 1px solid transparent; background: transparent; color: #6b7280;
+      border-radius: 6px; padding: 0.3rem 0.8rem; cursor: pointer;
+      font-family: inherit; font-size: 0.85rem; transition: all 0.2s;
+    }
+    .r1-reel-clip:hover { color: var(--brand); }
+    .r1-reel-clip.active {
+      color: var(--brand); border-color: color-mix(in srgb, var(--brand) 40%, transparent);
+      background: color-mix(in srgb, var(--brand) 8%, transparent);
+      font-weight: 600;
+    }
+
+    .r1-reel-stage { max-width: 720px; margin: 0 auto; }
+    .r1-reel-stage video {
+      width: 100%; aspect-ratio: 16 / 10; border-radius: 10px; background: #000;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15); display: block;
+    }
+    /* ---------- Results table ---------- */
+    .r1-table-wrap { overflow-x: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: #fff; }
+    .r1-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .r1-table th, .r1-table td { padding: 12px 10px; border: 1px solid #e5e7eb; text-align: center; }
+    .r1-table th {
+      background: #f8f9fa; font-weight: 600; color: #374151;
+      vertical-align: top; font-size: 13px;
+    }
+    .r1-table .r1-hint {
+      display: block; font-weight: 400; font-size: 10px;
+      color: #6b7280; margin-top: 3px; line-height: 1.3;
+    }
+    .r1-table .r1-model { text-align: left; font-weight: 700; color: #1e293b; font-size: 15px; }
+    .r1-table .r1-big { font-weight: 600; color: #374151; font-size: 15px; }
+    .r1-table .r1-sub { color: #6b7280; font-size: 12px; }
+    .r1-table .r1-ended { font-size: 12px; color: #4b5563; }
+    .r1-table tbody tr:hover { background: #f8f9fa; }
+    .r1-table-note { font-size: 0.85rem; color: #666; margin-top: 0.85rem; line-height: 1.55; }
+
+    /* ---------- Mechanism table ---------- */
+    .r1-mech { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    .r1-mech th, .r1-mech td { padding: 12px 14px; border-bottom: 1px solid #e5e7eb; text-align: left; vertical-align: top; }
+    .r1-mech th { background: #f8f9fa; font-weight: 600; }
+    .r1-mech td:first-child { font-weight: 600; color: #005A9C; white-space: nowrap; }
+
+    /* ---------- Protocol sweep table ---------- */
+    .r1-sweep { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .r1-sweep th, .r1-sweep td { padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+    .r1-sweep th { background: #f8f9fa; font-weight: 600; }
+    .r1-sweep td:last-child, .r1-sweep th:last-child { text-align: right; white-space: nowrap; }
+    .r1-sweep tr.is-baseline { background: #eef6ff; }
+    .r1-sweep tr.is-worst { background: #fff4f4; }
+    .r1-sweep code { background: #f1f5f9; padding: 1px 5px; border-radius: 3px; font-size: 0.85em; }
+
+    /* ---------- Callout ---------- */
+    .r1-note {
+      border-left: 4px solid #005A9C;
+      background: #f6f9fc;
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+    }
+    .r1-note p { margin: 0; font-size: 0.95rem; line-height: 1.6; }
+    .r1-note strong { color: #005A9C; }
+
+    /* ---------- Demo slot ---------- */
+    .r1-demo-slot {
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 3rem 1.5rem;
+      text-align: center;
+      background: #f8fafc;
+    }
+    .r1-demo-slot .icon { font-size: 3rem; color: #94a3b8; margin-bottom: 0.75rem; }
+
+    /* ---------- Figure ---------- */
+    .r1-figure { margin: 2rem 0; }
+    .r1-figure img {
+      width: 100%; border-radius: 8px; border: 1px solid #e5e7eb;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .r1-figure figcaption {
+      font-size: 0.85rem; color: #666; text-align: center;
+      margin-top: 0.75rem; line-height: 1.5; font-style: italic;
+    }
+
+    /* ---------- Findings ---------- */
+    .r1-finding { margin-bottom: 1.75rem; }
+    .r1-finding h4 {
+      font-weight: 600; color: #005A9C; font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      .r1-headline { gap: 1.5rem; padding: 1.5rem 1rem; }
+      .r1-stat .num { font-size: 2rem; }
+      .r1-mech, .r1-sweep, .r1-table { font-size: 0.8rem; }
+      .r1-mech th, .r1-mech td, .r1-sweep th, .r1-sweep td { padding: 8px 8px; }
+    }
+  </style>
+</head>
+
+<body data-mn-page="v2r1">
+<div id="mn-nav"></div>
+
+<div id="main-page-content">
+  <div id="mn-cta"></div>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              MultiNet v2.0 Release 1: A Substrate for Benchmarking Long-Horizon Action with Causal Reasoning in Frontier Models
+            </h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/pranav-guruprasad-82697514a/" target="_blank" rel="noopener noreferrer">Pranav Guruprasad</a><sup>*12</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/sean-au-rivera/" target="_blank" rel="noopener noreferrer">Sean Rivera</a><sup>*1</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/helen-lu-aa60a4b9/" target="_blank" rel="noopener noreferrer">Helen Lu</a><sup>14</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/jainarushi08/" target="_blank" rel="noopener noreferrer">Arushi Jain</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/hangliang-ren-b74bb2194/" target="_blank" rel="noopener noreferrer">Hangliang Ren</a><sup>15</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.harshsikka.com/" target="_blank" rel="noopener noreferrer">Harsh Sikka</a><sup>123</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <sup>1</sup> Manifold Research, <sup>2</sup> Fig, <sup>3</sup> Georgia Tech,
+              <sup>4</sup> Tufts University, <sup>5</sup> Northeastern University
+              <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.5rem;">
+                <!-- TODO(R1): point at the technical report on the Fig blog once it is live. -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Technical Report</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/ManifoldRG/MultiNet-v2.0" target="_blank" rel="noopener noreferrer" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#play-the-maze" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-gamepad"></i></span>
+                    <span>Play the maze</span>
+                  </a>
+                </span>
+                <!-- TODO(R1): point at the living-benchmarks blog post on the Fig site. -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-pen-nib"></i></span>
+                    <span>Why living benchmarks</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HEADLINE STATS ==================== -->
+  <div class="container is-max-desktop">
+    <div class="r1-headline">
+      <div class="r1-stat">
+        <span class="num">6<span class="den"> / 149</span></span>
+        <span class="lab">Episodes solved</span>
+      </div>
+      <div class="r1-stat">
+        <span class="num">45<span class="den"> / 50</span></span>
+        <span class="lab">Mazes never solved</span>
+      </div>
+      <div class="r1-stat">
+        <span class="num">0<span class="den"> / 105</span></span>
+        <span class="lab">Switch mazes solved</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FAILURE REEL ==================== -->
+  <section class="section" style="padding-top: 1rem;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <h2 class="title is-3 has-text-centered" style="margin-bottom: 1.75rem;">
+            Watch frontier VLMs fail on 2D grid mazes
+          </h2>
+
+          <div class="r1-reel-models" id="r1-reel-models"></div>
+          <div class="r1-reel-clips" id="r1-reel-clips"></div>
+          <div class="r1-reel-stage">
+            <video id="r1-reel-video" controls loop muted playsinline preload="metadata"></video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABSTRACT ==================== -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Abstract</h2>
+            <p>
+              An agentic benchmark returns one number per episode, and that number contains at least three
+              separable things: what the agent can do, how the world was presented to it, and the harness it
+              ran inside. In a fixed world, none of the three can be varied independently of the others. So
+              a model that never worked out what an object does, a model that had the right plan and drifted
+              mid-execution, and a model that took the distractor bait all arrive as the same failed episode
+              &mdash; even though they are different problems with different fixes.
+            </p>
+            <p>
+              <strong>MultiNet v2.0</strong> is built so those things stay separable. The task is an egocentric
+              agent in a 2D grid with walls, keys, doors, switches, gates and distractors, and a goal tile.
+              There are six actions and <strong>the mechanics are never explained</strong>. Nothing is explained
+              because prior domain knowledge is the confound the design removes: a failure here cannot be
+              attributed to an unfamiliar API, library or interface, because there is none.
+            </p>
+            <p>
+              <strong>Release 1</strong> is the first measurement on that substrate, in its most basic rendering.
+              We evaluate three frontier models &mdash; Claude Opus 4.8, Kimi k2.6 and Qwen3.6-27B &mdash; on 50
+              generated mazes, 150 episodes in total, under a single evaluation protocol chosen by a controlled
+              540-episode sweep rather than by intuition. Frontier performance is near zero: <strong>6 solves in
+              149 valid episodes</strong>, and 45 of the 50 mazes were never solved by any model. The stage that
+              breaks is discovery. Models operate the mechanisms they already understand &mdash; 27 successful
+              pickups, 15 doors opened, and 4 of the 6 solves on key-door mazes &mdash; and never work out the one
+              they would have to learn during the episode: 133 TOGGLE actions produced 2 switch flips, and agents
+              stood on a live switch in 38 episodes without pressing it.
+            </p>
+            <p>
+              R1 is a substrate and design thesis plus a first measurement. Because the representation is
+              projectable, it is also the first step toward A/B testing modality, complexity and other
+              downstream variables against the same underlying puzzle.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THE SUBSTRATE ==================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3 has-text-centered">Why mazes with mechanisms</h2>
+            <p class="has-text-justified">
+              Evaluating long-horizon agentic capability needs a substrate with four properties at once. Mazes
+              with causal mechanisms are the simplest structure we know of that has all four.
+            </p>
+          </div>
+
+          <div class="r1-props">
+            <div class="r1-prop">
+              <h4>Knowledge-free</h4>
+              <p>
+                No domain knowledge, no API or tool familiarity, no jargon, no goal interpretation. What it does
+                require is what agentic systems actually need: exploring and discovering the environment, causal
+                reasoning, planning an order that respects preconditions, acting, and recovering from mistakes.
+                It is also why a human baseline is meaningful &mdash; people need zero training to attempt it.
+              </p>
+            </div>
+            <div class="r1-prop">
+              <h4>Generative</h4>
+              <p>
+                The structure is parameterized, not fixed: dependency depth, horizon length, distractor density,
+                spatial complexity. Instances are sampled rather than authored, so there is no static answer key
+                to contaminate, and difficulty scales with the models instead of saturating.
+              </p>
+            </div>
+            <div class="r1-prop">
+              <h4>Projectable</h4>
+              <p>
+                Because the structure carries no domain knowledge, the identical task can be re-rendered in
+                language or in 3D. That is what makes it a measurement of the capability rather than of domain
+                familiarity &mdash; and it turns &ldquo;did it generalize?&rdquo; into a direct comparison.
+              </p>
+            </div>
+            <div class="r1-prop">
+              <h4>Verifiable</h4>
+              <p>
+                Breadth-first search gives the exact optimal path from any state. That yields an objective
+                difficulty scale, partial credit through a progress score, steps-to-failure, and the ability to
+                label a single move as strictly wrong.
+              </p>
+            </div>
+          </div>
+
+          <div class="r1-note">
+            <p>
+              <strong>Why this exposes failure meaningfully.</strong> The trajectory plus the oracle let us
+              separate never discovering a mechanism from having the right plan and drifting mid-execution from
+              taking the distractor bait. And because there is nothing to know, a failure here cannot be
+              explained away as an unfamiliar interface.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RESULTS OVERVIEW ==================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <h2 class="title is-3 has-text-centered">Maze Solve and Progress Statistics</h2>
+          <p class="has-text-centered" style="margin-bottom: 1.5rem;">
+            How did frontier Vision-Language Models do on 2D mazes?
+          </p>
+
+          <div class="r1-defs">
+            <div class="r1-def">
+              <h4>Solve rate</h4>
+              <p>
+                The share of episodes in which the agent actually reached the goal tile. Binary per episode,
+                with no credit for getting close.
+              </p>
+              <div class="r1-formula">
+                Solve rate = <span class="frac"><span class="top">episodes reaching the goal</span><span class="bot">total episodes</span></span> &times; 100
+              </div>
+            </div>
+
+            <div class="r1-def">
+              <h4>Progress score</h4>
+              <p>
+                How much of the distance to the goal was closed, measured at the agent's <em>closest ever</em>
+                approach. 1.0 is a solve; 0 means it never got nearer than where it started. Distances are
+                exact shortest paths from the BFS oracle, so this is not an estimate.
+              </p>
+              <div class="r1-formula">
+                Progress = 1 &minus; <span class="frac"><span class="top">d<sub>closest &rarr; goal</sub></span><span class="bot">d<sub>start &rarr; goal</sub></span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="r1-chart-controls">
+            <div class="field" style="margin: 0;">
+              <label class="label" style="font-size: 0.85rem;">Group mazes by</label>
+              <div class="control">
+                <div class="select">
+                  <select id="r1-chart-grouping">
+                    <option value="path" selected>Shortest path length</option>
+                    <option value="grid">Grid size</option>
+                    <option value="family">Maze family</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="r1-metric-buttons" id="r1-chart-metrics">
+              <button class="r1-metric-button active" data-metric="solveRate">Solve rate</button>
+              <button class="r1-metric-button" data-metric="progress">Mean progress</button>
+            </div>
+          </div>
+
+          <div class="r1-chart-stage">
+            <canvas id="r1-headline-chart"></canvas>
+          </div>
+          <p class="r1-chart-note" id="r1-chart-note"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THE ENVIRONMENT ==================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">The environment</h2>
+            <p>
+              An egocentric agent on a 2D grid, built on
+              <a href="https://github.com/Farama-Foundation/Minigrid" target="_blank" rel="noopener noreferrer">MiniGrid</a>.
+              Six actions: <code>TURN_LEFT</code>, <code>TURN_RIGHT</code>, <code>MOVE_FORWARD</code>,
+              <code>PICKUP</code>, <code>TOGGLE</code>, <code>DONE</code>. The goal is a target tile.
+            </p>
+            <p>
+              Each turn the agent receives a persistent start-pose line, a prose activity summary of every
+              mechanism event so far, and four rendered frames: the three most recent steps, each followed by
+              the inventory and the action the model itself chose there, then the current frame. It receives
+              <strong>no coordinates, no map, no progress signal, and no statement that a move failed</strong>.
+              Detecting a failed move requires noticing that the picture did not change.
+            </p>
+            <p>
+              Solving a maze takes five things in sequence: work out what the objects do, reason about which
+              one unlocks which, plan an order that respects those dependencies, carry the moves out, and
+              recover when something goes wrong. Each mechanism is in the environment because it isolates one
+              of those five, and because each can be added or removed without disturbing the others, a failure
+              can be traced to a stage instead of being averaged across all of them.
+            </p>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="r1-mech">
+              <thead>
+                <tr><th style="width: 22%;">Mechanism</th><th>What it isolates</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Keys &amp; doors</td>
+                  <td>Operating an object the model <em>already understands</em>. Every model has seen a key open a door long before it arrives here.</td>
+                </tr>
+                <tr>
+                  <td>Switches</td>
+                  <td>Working out an object it has <em>never been told about</em>. A switch toggles from the same cell, while doors and gates act on the cell ahead &mdash; and the prompt names <code>TOGGLE</code> as valid without explaining either convention.</td>
+                </tr>
+                <tr>
+                  <td>Dependency chains</td>
+                  <td>Ordering. A gate that opens only once a switch is toggled, behind a door that opens only once its key is carried.</td>
+                </tr>
+                <tr>
+                  <td>Distractors</td>
+                  <td>Recovery. Decoy keys, inactive switches and dead-end branches that cost moves without advancing the task.</td>
+                </tr>
+                <tr>
+                  <td>Walls</td>
+                  <td>Execution. Walking into one is an action the world rejects outright &mdash; the cheapest possible signal that a plan and the world have diverged.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="content has-text-justified" style="margin-top: 1.5rem;">
+            <p>
+              Validation is more than a solvability check. Every instance is confirmed reachable by exhaustive
+              search, and the optimal action count is computed with an executable-action planner rather than an
+              abstract one, so the figure charges what an agent actually pays: a locked door costs
+              <code>TOGGLE</code> plus <code>MOVE_FORWARD</code>. Three further checks run against each spec.
+              <strong>Mechanism necessity</strong> reports any mechanism whose removal still leaves the task
+              solvable. <strong>Chain ordering</strong> confirms each stage is unreachable until the prior stage
+              has fired. <strong>Distractor safety</strong> confirms no single distractor interaction can render
+              the task unsolvable.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PLAY ==================== -->
+  <section class="section" style="padding-top: 0;" id="play-the-maze">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Play one yourself</h2>
+            <p class="has-text-centered">
+              These are puzzles people solve without instruction. Try one, then look back at the table above.
+            </p>
+          </div>
+
+          <!-- TODO(R1): replace this slot with the embedded player once the demo API is hosted.
+               Client lives on the v2_demo_ui branch (static/pages/task.html + static/js/play.js);
+               it needs a single configurable API base URL served over HTTPS. -->
+          <div class="r1-demo-slot">
+            <div class="icon"><i class="fas fa-gamepad"></i></div>
+            <p style="font-weight: 600; margin-bottom: 0.35rem;">The playable maze lands with the release.</p>
+            <p style="color: #64748b; margin: 0;">Same environment, same rules, same absence of instructions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STUDY 1 ==================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">How much of a score belongs to the protocol</h2>
+            <p>
+              A benchmark score is partly a property of the harness. We measured how much <em>before</em>
+              running the benchmark rather than after. The design holds one standard cell fixed and varies
+              twelve conditions across seven axes, each changing exactly one field. The maze manifest is fixed
+              at 15 instances and is <strong>completely disjoint from the R1 fifty</strong>, so tuning the
+              protocol could not leak into the benchmark it later scored. 540 episodes in total.
+            </p>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="r1-sweep">
+              <thead>
+                <tr><th style="width: 26%;">Condition</th><th>What it changes</th><th>Solves / 45</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>baseline_thinking</code></td><td>Not one of the seven axes. Re-runs the standard cell with reasoning enabled on all three models.</td><td><strong>30</strong></td></tr>
+                <tr class="is-baseline"><td><code>cond_prompt·standard</code></td><td>The baseline itself: task, action list and mechanism positions, no full rules block.</td><td>27</td></tr>
+                <tr><td><code>cond_prompt·minimal</code></td><td>Prompt reduced to the task statement and the action list.</td><td>27</td></tr>
+                <tr><td><code>cond_prompt·verbose</code></td><td>Prompt extended with a full rules block.</td><td>25</td></tr>
+                <tr><td><code>icl_zero_shot</code></td><td>The worked example removed from the prompt.</td><td>25</td></tr>
+                <tr><td><code>qry_subgoal</code></td><td>The model commits a multi-step segment per call instead of a single action.</td><td>20</td></tr>
+                <tr><td><code>ctx_text_summary</code></td><td>History given as a text summary in place of the three recent frames.</td><td>17</td></tr>
+                <tr><td><code>hist_multiturn</code></td><td>Rolling chat history across turns instead of one self-contained message per query.</td><td>15</td></tr>
+                <tr><td><code>ctx_current</code></td><td>History removed entirely, leaving only the current frame.</td><td>14</td></tr>
+                <tr><td><code>act_cardinal</code></td><td>Egocentric turn-and-move replaced with absolute cardinal directions. Observation untouched.</td><td>12</td></tr>
+                <tr><td><code>qry_full_trajectory</code></td><td>The model commits a complete action sequence in one call.</td><td>11</td></tr>
+                <tr class="is-worst"><td><code>obs_image_only</code></td><td>The text description of the world removed, leaving the rendered image alone.</td><td><strong>5</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="r1-note">
+            <p>
+              <strong>The two choices that most determine an agent benchmark's difficulty are not prompt
+              wording.</strong> Removing the text description of the world costs 22 of 27 solves. Changing only
+              the action interface, with the observation untouched, costs 15 of 27. Prompt detail across three
+              levels barely moves the score at all.
+            </p>
+          </div>
+
+          <div class="content has-text-justified">
+            <p>
+              R1 took from this: thinking on; the <code>minimal</code> prompt, which scores identically to
+              standard while giving the model less to lean on; <code>image_only</code> adopted
+              <em>deliberately</em> because it is the hard setting; the stall watchdog at K=30; and equal 64k
+              output budgets across all three models.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RESULTS ==================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Results</h2>
+            <p>
+              Three models, 50 mazes, 150 episodes of which 149 are valid; one Kimi episode was terminated by a
+              provider network outage. The protocol cell is
+              <code>minimal / image_only / egocentric / zero_shot / text_summary_and_last3 / stateless /
+              stall-K 30 / 3&times; BFS cap</code>. Parity was verified: one distinct system prompt across all
+              150 episodes, first-user text byte-identical across models for every maze, identical task-spec
+              hashes, zero parse failures and zero refusals.
+            </p>
+          </div>
+
+          <div id="r1-results-container">Loading results&hellip;</div>
+
+          <div class="r1-note" style="margin-top: 1.75rem;">
+            <p>
+              <strong>Read all three columns together.</strong> Claude is first on solves and last on progress:
+              it dies early at a median of 35 steps by walking into walls, while Kimi and Qwen survive to around
+              58 and cover more ground without converting it. Which model &ldquo;wins&rdquo; depends entirely on
+              which metric you pick, which is why we publish success, progress and steps-to-termination side by
+              side rather than ranking.
+            </p>
+          </div>
+
+          <figure class="r1-figure">
+            <img src="../images/r1/progress_grid_actions.png" alt="Progress score for every maze and model, with solves marked">
+            <figcaption>
+              Every episode in the run. Each column is a maze, each row a model, colour is how much of the
+              distance to the goal was closed. Stars mark the six solves. The right-hand side of the grid &mdash;
+              the longer mazes &mdash; is almost uniformly pale.
+            </figcaption>
+          </figure>
+
+          <figure class="r1-figure">
+            <img src="../images/r1/failure_taxonomy_by_model.png" alt="Failure taxonomy by model">
+            <figcaption>
+              Identical failure rate, three different ways of failing. All three models end 46 of their 50
+              episodes on the stall watchdog, but Claude's terminal window is dominated by blocked forward
+              pushes while Kimi and Qwen churn and spin.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FINDINGS ==================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">What we find</h2>
+
+            <div class="r1-finding">
+              <h4>1. Frontier performance is near zero, and the split that separates every solve is sharp</h4>
+              <p>
+                6 solves in 149 valid episodes. 45 of the 50 mazes were never solved by any model, and one maze
+                was solved by two. Mazes with <strong>no switches and a shortest path of 45 moves or fewer</strong>
+                produced 6 solves in 24 episodes; all 125 remaining episodes failed. Nothing approaches the goal
+                either &mdash; the median episode's closest approach is 19 to 20 tiles, and the only episodes
+                reaching within 3 tiles are the solves themselves.
+              </p>
+            </div>
+
+            <div class="r1-finding">
+              <h4>2. Discovery fails outright, while prior-supported affordances are operated competently</h4>
+              <p>
+                No solve in 105 switch-maze episodes. It survives the difficulty control: hold the shortest path
+                at 45 moves or fewer and switch mazes still go 0 for 45 while switchless mazes go 6 for 24. Of
+                133 <code>TOGGLE</code> actions issued across the run, 2 flipped a switch, 15 opened a door and
+                116 did nothing &mdash; and 84 were issued somewhere a toggle could not possibly work. Agents
+                stood on a live switch in 38 of 105 episodes and pressed it in 2.
+              </p>
+              <p>
+                The contrast is what makes this specific rather than a complaint that switch mazes are hard.
+                Keys and doors get the same absence of instruction and are operated fine, because they require
+                no discovery: the model already knows a key is picked up and opens a door before the episode
+                starts. <strong>On mechanisms that draw on what a model already knows, all three are competent.
+                On the one that requires learning something during the episode, none of them begin.</strong>
+              </p>
+            </div>
+
+            <div class="r1-finding">
+              <h4>3. Shortest-path length is the one verified difficulty axis &mdash; but that is a limit of the measurement</h4>
+              <p>
+                Shortest path in executable actions holds at R&sup2; 0.31. Grid size reaches 0.30 but correlates
+                with path length at r = 0.93, so it is the same axis under another name. No other property clears
+                significance across all 149 episodes.
+              </p>
+              <p>
+                These are not null results. Restrict to the 69 episodes on mazes short enough to leave headroom
+                &mdash; a shortest path of 45 or fewer &mdash; and the ordering <em>inverts</em>: gates rise from
+                R&sup2; 0.06 to 0.16 (p = 0.007), switches from 0.05 to 0.15 (p = 0.010), while path length
+                collapses from 0.31 to 0.04 and stops being significant at all. On long mazes, path length
+                swamps everything, because an agent asked to sustain eighty correct moves fails on length alone
+                before any mechanism gets a chance to matter.
+              </p>
+            </div>
+
+            <div class="r1-finding">
+              <h4>4. Test-time compute buys survival, not solves</h4>
+              <p>
+                Kimi and Qwen spend 20 to 26 times more output tokens per newly discovered tile than Claude,
+                survive roughly 1.6&times; longer, see slightly more of the maze &mdash; and solve fewer of them.
+                Claude's median query is 289 output tokens, 0.5% of its 64k ceiling, with no truncation anywhere
+                in the run. Its thinking also <em>contracts</em> over an episode rather than escalating, and
+                contracts hardest exactly where it should expand: after a move that achieved nothing, median
+                thinking is 234 tokens against 579 after a move that worked.
+              </p>
+            </div>
+
+            <figure class="r1-figure">
+              <img src="../images/r1/tokens_per_new_tile.png" alt="Output tokens spent per newly discovered tile, by model">
+              <figcaption>Output tokens spent for every new tile reached. The extra spending buys episode length, not completion.</figcaption>
+            </figure>
+
+            <div class="r1-finding">
+              <h4>5. The evidence that an action failed is on screen every turn, and none of it changes what the model does next</h4>
+              <p>
+                Across all 8,128 queries in the run, not one prompt contains the word &ldquo;blocked&rdquo;,
+                &ldquo;failed&rdquo; or &ldquo;wall&rdquo;. The only evidence available is that the picture did
+                not change, so noticing a failure is itself a perceptual act. In all three models the share of
+                wasted actions <strong>rises</strong> over the episode rather than falling: Claude's blocked
+                forward moves go from 43.7% of its actions in the first quarter to 80&ndash;83% thereafter, while
+                moves that work fall from 38.8% to 6.7%. Its stalled episodes end at 0.80&times; the steps an
+                optimal solution needs &mdash; on average it has given up before a perfect solver would have
+                finished &mdash; and 28 of 46 touched four or fewer distinct tiles on grids of 64 to 196 cells.
+              </p>
+              <p>
+                Whether a plan was wrong because the maze was misread, or right and wrongly executed, is not
+                decidable from 149 episodes in a single rendering. That separation is what the language and 3D
+                renderings are for.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LIMITATIONS ==================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Limitations</h2>
+            <ul>
+              <li><strong>This run cannot rank the three models.</strong> Six solves across 149 episodes is far too few, and once maze difficulty is accounted for the remaining gap in progress is indistinguishable from noise. What predicts how far an agent gets is the maze, not the model.</li>
+              <li><strong>Discovery rests on a single mechanism type.</strong> The claim would be stronger with a second unfamiliar affordance.</li>
+              <li><strong>There is no human baseline yet</strong>, so the knowledge-free property is argued rather than measured.</li>
+              <li><strong>Every axis except path length should be read as untested rather than inert.</strong> With mean progress at 0.215 and 6 solves, secondary effects have little room to show.</li>
+              <li><strong>We did not ablate telling the model how many steps it has left</strong>, which might prompt more efficient and cautious movement.</li>
+              <li><strong>The stall watchdog is defeatable.</strong> Because its signature includes inventory and mechanism state, a single pickup or toggle re-arms the entire visited map. No model shows evidence of gaming it, but the rule lets an agent survive longer than intended.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LOOKING FORWARD ==================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <h2 class="title is-3 has-text-centered">Looking forward</h2>
+            <p>
+              R1 verifies that puzzle complexity in this modality is genuinely hard for current models. Because
+              the representation is projectable, it is the first step toward A/B testing modality, complexity
+              and other downstream variables against the same underlying puzzle.
+            </p>
+            <p><strong>The full v2.0 benchmark</strong> renders the identical maze in three domains:</p>
+            <ul>
+              <li><strong>GridWorld</strong> &mdash; 2D visual input, discrete action space. Shipped in R1.</li>
+              <li><strong>Natural language</strong> &mdash; the same maze in prose, where the model must build and hold a spatial model of a world it only reads.</li>
+              <li><strong>3D</strong> &mdash; the same maze as an egocentric simulated environment with a continuous action space.</li>
+            </ul>
+            <p>
+              A model that clears one domain still has to clear the other two, which is what turns
+              &ldquo;did it generalize?&rdquo; from an inference into a measurement. Alongside that: a calibrated
+              generator emitting fresh instances at a target difficulty, a failure-mode taxonomy per model and
+              per domain, a leaderboard with non-model baselines, and a submission pipeline.
+            </p>
+            <p>
+              The open questions R1 leaves are the ones we most want help with &mdash; whether an agent framework
+              that supplies its own memory closes the discovery gap; whether the failure survives a text
+              rendering of the identical task; whether a second unfamiliar mechanism reproduces the switch
+              result; and how to establish that two different mazes of the same shortest-path length are
+              actually equally hard.
+            </p>
+          </div>
+
+          <div class="r1-note" style="border-left-color: #1E8449; background: #f3fbf6;">
+            <p>
+              <strong style="color: #1E8449;">Want to run your model on MultiNet v2.0?</strong>
+              The submission flow for the full benchmark is being built now, and we would rather build it around
+              real requirements than guess. If you would like your model or agent on the v2.0 leaderboard, tell
+              us what your harness needs &mdash;
+              <a href="mailto:pranav@metarch.ai?subject=Running%20a%20model%20on%20MultiNet%20v2.0">get in touch with us</a>
+              or join the working group on
+              <a href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer">Discord</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CITATION ==================== -->
+  <section class="section" id="Citation" style="padding-top: 0;">
+    <div class="container is-max-desktop content">
+      <h2 class="title has-text-centered">Citation</h2>
+      <!-- TODO(R1): finalise once the technical report is live and has a DOI. -->
+      <pre><code>@techreport{guruprasad2026multinetv2r1,
+  author = {Pranav Guruprasad and Sean Rivera and Helen Lu and Arushi Jain and Hangliang Ren and Harshvardhan Sikka},
+  title  = {MultiNet v2.0 Release 1: A Substrate for Benchmarking Long-Horizon Action with Causal Reasoning in Frontier Models},
+  institution = {Manifold Research and Metarch AI},
+  year   = {2026},
+  note   = {https://multinet.ai/static/pages/Multinetv2R1.html}
+}</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer" style="background-color: #363636;">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content" style="color: #fff;">
+            <div class="buttons is-centered mb-4">
+              <a href="https://github.com/ManifoldRG/MultiNet-v2.0" class="button is-small is-dark" target="_blank" rel="noopener noreferrer">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+            </div>
+            <p>For questions or issues, please <a href="https://github.com/ManifoldRG/MultiNet-v2.0/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../../static/js/mn-shell.js"></script>
+<script src="../../static/js/v2_r1_results_table.js"></script>
+<script src="../../static/js/v2_r1_headline_chart.js"></script>
+<script>
+  // ---- Failure replay reel -------------------------------------------------
+  (function () {
+    // Brand marks live in static/images/logos/ (see the README there).
+    var MODELS = [
+      {
+        name: "Claude Opus 4.8",
+        brand: "#D97757",          // Anthropic clay
+        logo: "../images/logos/claude.svg",
+        clips: [
+          {
+            file: "r1_B1_8x8_corridor_swg_0__claude_FAIL.mp4"
+          },
+          {
+            file: "r1_M3_8x8_corridor_kr_sg_1__claude_FAIL.mp4"
+          }
+        ]
+      },
+      {
+        name: "Kimi k2.6",
+        brand: "#000000",          // Kimi black
+        logo: "../images/logos/kimi.svg",
+        clips: [
+          {
+            file: "r1_M3_8x8_corridor_kr_sg_1__kimi_FAIL.mp4"
+          },
+          {
+            file: "r1_D2_10x10_corridor_wrong_ky_kr_inactive_sb_sg_kb_0__kimi_FAIL.mp4"
+          }
+        ]
+      },
+      {
+        name: "Qwen3.6-27B",
+        brand: "#6950EF",          // Qwen purple
+        logo: "../images/logos/qwen.svg",
+        clips: [
+          {
+            file: "r1_M1_10x10_corridor_kr_1__qwen_FAIL.mp4"
+          },
+          {
+            file: "r1_M5_10x10_dense_kr_kb_1__qwen_FAIL.mp4"
+          }
+        ]
+      }
+    ];
+
+    var modelBar = document.getElementById("r1-reel-models");
+    var clipBar = document.getElementById("r1-reel-clips");
+    var video = document.getElementById("r1-reel-video");
+    if (!modelBar || !clipBar || !video) return;
+
+    var current = 0;
+
+    function play(mi, ci) {
+      current = mi;
+      var m = MODELS[mi];
+      var clip = m.clips[ci];
+
+      video.src = "../videos/r1_reels/" + clip.file;
+
+      Array.prototype.forEach.call(modelBar.children, function (b, j) {
+        b.classList.toggle("active", j === mi);
+      });
+
+      // rebuild the clip row for the selected model, in that model's colour
+      clipBar.innerHTML = "";
+      clipBar.style.setProperty("--brand", m.brand);
+      m.clips.forEach(function (c, j) {
+        var b = document.createElement("button");
+        b.className = "r1-reel-clip" + (j === ci ? " active" : "");
+        b.textContent = "Example " + (j + 1);
+        b.addEventListener("click", function () { play(mi, j); });
+        clipBar.appendChild(b);
+      });
+    }
+
+    MODELS.forEach(function (m, i) {
+      var b = document.createElement("button");
+      b.className = "r1-reel-model";
+      b.style.setProperty("--brand", m.brand);
+      b.style.setProperty("--logo", 'url("' + m.logo + '")');
+      b.innerHTML = '<span class="r1-logo" aria-hidden="true"></span><span>' + m.name + "</span>";
+      b.addEventListener("click", function () { play(i, 0); });
+      modelBar.appendChild(b);
+    });
+
+    play(0, 0);
+  })();
+</script>
+</body>
+</html>
