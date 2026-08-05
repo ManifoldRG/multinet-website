@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MultiNet v2.0 — Spatial Reasoning Benchmark</title>
+  <meta name="description" content="MultiNet v2.0 evaluates spatial reasoning on grid-based puzzle tasks. Play the interactive demo, then explore the research release.">
+  <link rel="icon" type="image/x-icon" href="../images/multinet_logo_square.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="../css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="../css/play.css">
+  <link rel="stylesheet" href="../css/v2.css">
+  <script defer src="../js/fontawesome.all.min.js"></script>
+</head>
+<body class="v2-page play-focus-keys">
+  <header class="v2-top">
+    <a class="v2-brand" href="../../index.html">
+      <img src="../images/multinet_logo_square.png" alt="MultiNet" width="36" height="36">
+      <span>MultiNet</span>
+    </a>
+    <nav class="v2-nav" aria-label="Primary">
+      <a href="../../index.html">Home</a>
+      <span class="current">v2.0</span>
+      <a href="Multinetv1.html">v1.0</a>
+      <a href="Multinetv02.html">v0.2</a>
+      <a href="Multinetv01.html">v0.1</a>
+      <a href="task.html">Player only</a>
+    </nav>
+  </header>
+
+  <main class="v2-main">
+    <section class="v2-hero">
+      <p class="eyebrow">Benchmark release · dummy page</p>
+      <h1>MultiNet v2.0: Spatial Reasoning on Grid Worlds</h1>
+      <p class="lede">
+        Play the interactive R1 mazes below — the same tasks used to score frontier models.
+        Scroll for overview, sample results, figures, and resources.
+      </p>
+      <div class="v2-links">
+        <a href="#play"><i class="fas fa-gamepad"></i><span>Play</span></a>
+        <a href="#abstract"><i class="fas fa-align-left"></i><span>Abstract</span></a>
+        <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i><span>Code</span></a>
+        <a href="../../index.html#BibTeX"><i class="fas fa-quote-right"></i><span>Cite</span></a>
+      </div>
+    </section>
+
+    <section class="v2-play-section" id="play">
+      <p class="section-label">Interactive demo</p>
+      <div class="v2-play-frame">
+        <div class="v2-play-meta">
+          <div>
+            <h2 id="page-title">Loading…</h2>
+            <p id="page-desc">Click the board, then use keyboard or on-screen controls.</p>
+          </div>
+          <div class="task-heading-nav">
+            <button type="button" id="page-prev">Previous</button>
+            <button type="button" id="page-next">Next</button>
+          </div>
+        </div>
+
+        <div id="error"></div>
+
+        <div class="play-host" id="play-host" tabindex="0" aria-label="MultiNet playable maze">
+          <div id="splash">
+            <div>
+              <h1>MultiNet v2.0 Benchmark</h1>
+              <p>Can you solve what frontier models cannot?</p>
+              <button type="button" id="splash-play">Press Enter to play</button>
+            </div>
+          </div>
+
+          <div class="card" id="card">
+            <div class="topbar">
+              <div>
+                <div class="brand">MultiNet v2.0 Benchmark</div>
+                <div class="task-id" id="task-id"></div>
+              </div>
+              <div class="nav">
+                <button type="button" id="prev">&lt;</button>
+                <button type="button" id="next">&gt;</button>
+              </div>
+            </div>
+
+            <div class="board">
+              <aside class="rail">
+                <h2 class="section">Task</h2>
+                <p id="task-text"></p>
+                <ul class="progress" id="progress"></ul>
+              </aside>
+
+              <div class="stage">
+                <img id="grid" alt="MiniGrid">
+                <div id="end">
+                  <div class="panel">
+                    <h2 id="end-title"></h2>
+                    <p id="end-desc"></p>
+                    <p id="end-diff"></p>
+                    <p id="end-steps"></p>
+                    <p id="end-score"></p>
+                    <p id="end-frame"></p>
+                    <table class="compare">
+                      <thead>
+                        <tr><th>Player</th><th>Result</th></tr>
+                      </thead>
+                      <tbody id="end-rows"></tbody>
+                    </table>
+                    <p id="end-hint">R reset · [ ] switch task</p>
+                  </div>
+                </div>
+              </div>
+
+              <aside class="rail right">
+                <h2 class="section muted">Status</h2>
+                <div class="stat facing" id="facing"></div>
+                <div class="stat carrying" id="carrying"></div>
+
+                <h2 class="section muted" style="margin-top: 18px">Controls</h2>
+                <div class="ctrl" id="controls"></div>
+              </aside>
+            </div>
+
+            <div class="hint">
+              <div class="hint-main">Solve the task using only the information visible in the maze.</div>
+              <div class="hint-meta">Click the board for keyboard control · [ / ] switch task · R reset</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="v2-play-hint">
+          Tip: click inside the game to capture keys. Click outside (or scroll away) to use normal page scrolling.
+        </p>
+      </div>
+    </section>
+
+    <section class="v2-section" id="abstract">
+      <h2>Abstract</h2>
+      <div class="body">
+        <p>
+          <strong>MultiNet v2.0</strong> evaluates spatial reasoning on grid-based puzzle tasks across
+          multiple topologies and observation modalities. Models receive egocentric observations and
+          must plan sequences of actions — turn, move, pickup, drop, toggle — under partial information.
+        </p>
+        <p>
+          This page is a <em>dummy research shell</em> for the playable embed: the interactive demo above
+          coexists with placeholder release content below (tables, figures, links).
+        </p>
+        <ul>
+          <li>Human-playable R1 mazes with the same rules used in model evaluation</li>
+          <li>Per-maze comparison against published R1 model outcomes</li>
+          <li>Research narrative, figures, and resources on one scrollable page</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="v2-section" id="results">
+      <h2>Sample results</h2>
+      <div class="body">
+        <p>
+          Placeholder leaderboard-style summary. Replace with real R1 aggregates when the release lands.
+        </p>
+      </div>
+      <div class="v2-table-wrap">
+        <table class="v2-table">
+          <thead>
+            <tr>
+              <th>Model / agent</th>
+              <th>Solved (R1)</th>
+              <th>Mean score</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Human (you)</td>
+              <td>—</td>
+              <td>—</td>
+              <td>Play above to compare per maze</td>
+            </tr>
+            <tr>
+              <td>Frontier VLM A</td>
+              <td>TBD</td>
+              <td>TBD</td>
+              <td>Placeholder row</td>
+            </tr>
+            <tr>
+              <td>Frontier VLM B</td>
+              <td>TBD</td>
+              <td>TBD</td>
+              <td>Placeholder row</td>
+            </tr>
+            <tr>
+              <td>Specialist baseline</td>
+              <td>TBD</td>
+              <td>TBD</td>
+              <td>Placeholder row</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="v2-section" id="figures">
+      <h2>Figures</h2>
+      <div class="body">
+        <p>
+          Placeholder figure slots for topology diagrams, failure cases, and score breakdowns.
+        </p>
+      </div>
+      <figure class="v2-figure">
+        <div class="placeholder">Figure 1 — Topology / observation overview (placeholder)</div>
+        <figcaption>Replace with a release figure or diagram from the v2.0 paper.</figcaption>
+      </figure>
+      <figure class="v2-figure">
+        <div class="placeholder">Figure 2 — Per-task model comparison (placeholder)</div>
+        <figcaption>Charts and images can live here without affecting the playable embed above.</figcaption>
+      </figure>
+    </section>
+
+    <section class="v2-section" id="resources">
+      <h2>Resources</h2>
+      <div class="body">
+        <p>Links and artifacts that normally sit on a MultiNet release page.</p>
+      </div>
+      <div class="v2-resource-grid">
+        <a class="v2-resource" href="https://github.com/ManifoldRG/MultiNet" target="_blank" rel="noopener noreferrer">
+          <strong>Code</strong>
+          <span>MultiNet repositories and evaluation harness.</span>
+        </a>
+        <a class="v2-resource" href="task.html">
+          <strong>Standalone player</strong>
+          <span>Minimal task page without the research chrome.</span>
+        </a>
+        <a class="v2-resource" href="Multinetv1.html">
+          <strong>v1.0 release</strong>
+          <span>Prior MultiNet generalist benchmark page.</span>
+        </a>
+        <a class="v2-resource" href="../../index.html">
+          <strong>MultiNet home</strong>
+          <span>Project overview, citations, and other releases.</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="v2-footer">
+      MultiNet v2.0 dummy content page · playable embed + scrollable research shell
+    </footer>
+  </main>
+
+  <script src="../js/play.js"></script>
+</body>
+</html>

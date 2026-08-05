@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../css/play.css">
   <link rel="stylesheet" href="../css/task.css">
 </head>
-<body class="task-page">
+<body class="play-standalone task-page">
   <header class="task-top">
     <a class="task-brand" href="../../index.html">
       <img src="../images/multinet_logo_square.png" alt="MultiNet" width="36" height="36">
@@ -16,6 +16,7 @@
     </a>
     <nav class="task-nav">
       <a href="../../index.html">Home</a>
+      <a href="Multinetv2.html">v2.0</a>
       <a href="Multinetv1.html">v1.0</a>
       <span class="current">Play</span>
     </nav>
@@ -36,67 +37,69 @@
 
     <div id="error"></div>
 
-    <div id="splash">
-      <div>
-        <h1>MultiNet v2.0 Benchmark</h1>
-        <p>Can you solve what frontier models cannot?</p>
-        <button type="button" id="splash-play">Press Enter to play</button>
-      </div>
-    </div>
-
-    <div class="card" id="card">
-      <div class="topbar">
+    <div class="play-host" id="play-host" tabindex="0">
+      <div id="splash">
         <div>
-          <div class="brand">MultiNet v2.0 Benchmark</div>
-          <div class="task-id" id="task-id"></div>
-        </div>
-        <div class="nav">
-          <button type="button" id="prev">&lt;</button>
-          <button type="button" id="next">&gt;</button>
+          <h1>MultiNet v2.0 Benchmark</h1>
+          <p>Can you solve what frontier models cannot?</p>
+          <button type="button" id="splash-play">Press Enter to play</button>
         </div>
       </div>
 
-      <div class="board">
-        <aside class="rail">
-          <h2 class="section">Task</h2>
-          <p id="task-text"></p>
-          <ul class="progress" id="progress"></ul>
-        </aside>
-
-        <div class="stage">
-          <img id="grid" alt="MiniGrid">
-          <div id="end">
-            <div class="panel">
-              <h2 id="end-title"></h2>
-              <p id="end-desc"></p>
-              <p id="end-diff"></p>
-              <p id="end-steps"></p>
-              <p id="end-score"></p>
-              <p id="end-frame"></p>
-              <table class="compare">
-                <thead>
-                  <tr><th>Player</th><th>Result</th></tr>
-                </thead>
-                <tbody id="end-rows"></tbody>
-              </table>
-              <p id="end-hint">R reset · [ ] switch task · Q quit</p>
-            </div>
+      <div class="card" id="card">
+        <div class="topbar">
+          <div>
+            <div class="brand">MultiNet v2.0 Benchmark</div>
+            <div class="task-id" id="task-id"></div>
+          </div>
+          <div class="nav">
+            <button type="button" id="prev">&lt;</button>
+            <button type="button" id="next">&gt;</button>
           </div>
         </div>
 
-        <aside class="rail right">
-          <h2 class="section muted">Status</h2>
-          <div class="stat facing" id="facing"></div>
-          <div class="stat carrying" id="carrying"></div>
+        <div class="board">
+          <aside class="rail">
+            <h2 class="section">Task</h2>
+            <p id="task-text"></p>
+            <ul class="progress" id="progress"></ul>
+          </aside>
 
-          <h2 class="section muted" style="margin-top: 18px">Controls</h2>
-          <div class="ctrl" id="controls"></div>
-        </aside>
-      </div>
+          <div class="stage">
+            <img id="grid" alt="MiniGrid">
+            <div id="end">
+              <div class="panel">
+                <h2 id="end-title"></h2>
+                <p id="end-desc"></p>
+                <p id="end-diff"></p>
+                <p id="end-steps"></p>
+                <p id="end-score"></p>
+                <p id="end-frame"></p>
+                <table class="compare">
+                  <thead>
+                    <tr><th>Player</th><th>Result</th></tr>
+                  </thead>
+                  <tbody id="end-rows"></tbody>
+                </table>
+                <p id="end-hint">R reset · [ ] switch task · Q quit</p>
+              </div>
+            </div>
+          </div>
 
-      <div class="hint">
-        <div class="hint-main">Solve the task using only the information visible in the maze.</div>
-        <div class="hint-meta">[ / ] switch task · Tab settings · M model view · Q quit</div>
+          <aside class="rail right">
+            <h2 class="section muted">Status</h2>
+            <div class="stat facing" id="facing"></div>
+            <div class="stat carrying" id="carrying"></div>
+
+            <h2 class="section muted" style="margin-top: 18px">Controls</h2>
+            <div class="ctrl" id="controls"></div>
+          </aside>
+        </div>
+
+        <div class="hint">
+          <div class="hint-main">Solve the task using only the information visible in the maze.</div>
+          <div class="hint-meta">[ / ] switch task · Tab settings · M model view · Q quit</div>
+        </div>
       </div>
     </div>
   </main>

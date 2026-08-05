@@ -60,11 +60,53 @@
     pageDesc: document.getElementById("page-desc"),
   };
 
+  const playHost = document.getElementById("play-host");
+  const focusKeyboard = document.body.classList.contains("play-focus-keys");
+
   let gameId = null;
   let task = null;
   let view = null;
   let playing = false;
   let busy = false;
+  let hostFocused = !focusKeyboard;
+  let hostVisible = true;
+
+  function keyboardActive() {
+    if (!focusKeyboard) return true;
+    return hostFocused && hostVisible;
+  }
+
+  function releaseGameKeys() {
+    hostFocused = false;
+    if (playHost && document.activeElement === playHost) playHost.blur();
+  }
+
+  if (playHost && focusKeyboard) {
+    playHost.addEventListener("pointerdown", () => {
+      hostFocused = true;
+      playHost.focus({ preventScroll: true });
+    });
+    playHost.addEventListener("focusin", () => {
+      hostFocused = true;
+    });
+    playHost.addEventListener("focusout", (ev) => {
+      if (!playHost.contains(ev.relatedTarget)) hostFocused = false;
+    });
+    document.addEventListener("pointerdown", (ev) => {
+      if (!playHost.contains(ev.target)) releaseGameKeys();
+    });
+    // Scrolling away keeps DOM focus on the board; release keys when mostly off-screen.
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          hostVisible = entry.isIntersecting && entry.intersectionRatio >= 0.35;
+          if (!hostVisible) releaseGameKeys();
+        },
+        { threshold: [0, 0.35, 0.7, 1] },
+      );
+      io.observe(playHost);
+    }
+  }
 
   function svgIcon(kind, color) {
     const c = color || "#c9ccd9";
@@ -315,6 +357,7 @@
     playing = true;
     els.splash.classList.remove("show");
     els.card.style.display = "block";
+    if (playHost) playHost.focus({ preventScroll: true });
   }
 
   document.getElementById("splash-play").onclick = beginPlay;
@@ -337,6 +380,7 @@
   if (pageNext) pageNext.onclick = () => document.getElementById("next").click();
 
   window.addEventListener("keydown", (ev) => {
+    // Splash: Enter/Space always start play (matches on-screen copy).
     if (!playing) {
       if (ev.key === "Enter" || ev.key === " ") {
         ev.preventDefault();
@@ -344,6 +388,8 @@
       }
       return;
     }
+    // After splash, content pages only take game keys while the board is focused.
+    if (!keyboardActive()) return;
     if (ev.key === "r" || ev.key === "R") {
       ev.preventDefault();
       doReset();
