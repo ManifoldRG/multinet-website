@@ -41,11 +41,22 @@
   var grouping = "path";
   var metric = "solveRate";
 
+  // The footnote reports the pooled figure for whichever metric is showing,
+  // so it stays in step with both the grouping and the metric toggle.
   function note(group) {
-    var parts = group.pooled.map(function (p) {
-      return p.bucket + ": " + p.solves + "/" + p.episodes;
-    });
-    return "Pooled across all three models - " + parts.join(" · ") +
+    var parts, lead;
+    if (metric === "progress") {
+      lead = "Pooled mean progress across all three models";
+      parts = group.pooled.map(function (p) {
+        return p.bucket + ": " + p.progress.toFixed(3);
+      });
+    } else {
+      lead = "Pooled solves across all three models";
+      parts = group.pooled.map(function (p) {
+        return p.bucket + ": " + p.solves + "/" + p.episodes;
+      });
+    }
+    return lead + " - " + parts.join(" · ") +
            ". Bars show each model separately; hover for the episode counts behind every bar.";
   }
 

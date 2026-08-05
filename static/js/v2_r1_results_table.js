@@ -1,8 +1,8 @@
 /* ============================================================
    MultiNet v2.0 R1 - results table
 
-   Deliberately NOT a leaderboard. R1 produced 6 solves across 149
-   valid episodes, which is far too few to rank three models, and
+   Deliberately NOT a leaderboard. R1 produced 6 solves across 150
+   episodes, which is far too few to rank three models, and
    the ordering flips depending on which metric you read: Claude
    leads on success and comes last on progress. The table therefore
    shows every reported metric side by side, in a fixed order, with
@@ -23,8 +23,7 @@
       var tokens = (m.tokensLowerBound ? "≥" : "") + m.tokensPerNewTile.toLocaleString();
       var ended = [
         m.stallKills + " stalled",
-        m.capKills ? m.capKills + " hit the step cap" : null,
-        m.infraTerminated ? m.infraTerminated + " infra" : null
+        m.capKills ? m.capKills + " hit the step cap" : null
       ].filter(Boolean).join(", ");
 
       return "" +
@@ -59,7 +58,7 @@
       "</div>" +
       '<p class="r1-table-note">' +
         run.mazes + " mazes × " + run.models + " models = " + run.episodes +
-        " episodes, " + run.validEpisodes + " valid. Every model ran under the same protocol " +
+        " episodes, nothing excluded. Every model ran under the same protocol " +
         "and the same " + run.tokenBudget + ". Kimi token counts are lower bounds: a provider " +
         "incident left usage fields missing on some turns." +
       "</p>";

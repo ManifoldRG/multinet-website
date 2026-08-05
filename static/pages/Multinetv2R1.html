@@ -23,14 +23,14 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="MultiNet v2.0 Release 1 evaluates frontier models on procedurally generated mazes with hidden causal mechanisms. Three frontier models solved 6 of 149 episodes; 45 of 50 mazes were never solved by any model.">
+  <meta name="description" content="MultiNet v2.0 Release 1 evaluates frontier models on procedurally generated mazes with hidden causal mechanisms. Three frontier models solved 6 of 150 episodes; 45 of 50 mazes were never solved by any model.">
   <meta property="og:title" content="MultiNet v2.0 Release 1 - Benchmarking long-horizon action with causal reasoning"/>
-  <meta property="og:description" content="Mazes with hidden causal mechanisms. Nothing to know, an exact oracle, and difficulty you can turn up. Frontier models solved 6 of 149 episodes."/>
+  <meta property="og:description" content="Mazes with hidden causal mechanisms. Nothing to know, an exact oracle, and difficulty you can turn up. Frontier models solved 6 of 150 episodes."/>
   <meta property="og:url" content="https://multinet.ai/static/pages/Multinetv2R1.html"/>
   <meta property="og:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg"/>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="MultiNet v2.0 Release 1">
-  <meta name="twitter:description" content="Mazes with hidden causal mechanisms. Frontier models solved 6 of 149 episodes.">
+  <meta name="twitter:description" content="Mazes with hidden causal mechanisms. Frontier models solved 6 of 150 episodes.">
   <meta name="keywords" content="Agentic Benchmark, Long-Horizon Action, Causal Reasoning, GridWorld, MiniGrid, Living Benchmark, Contamination, Saturation, Frontier Models">
 
   <title>MultiNet v2.0 Release 1: A Substrate for Benchmarking Long-Horizon Action with Causal Reasoning in Frontier Models</title>
@@ -109,22 +109,44 @@
       margin-bottom: 2rem;
     }
     .r1-def {
+      --c: #005A9C;
+      position: relative;
+      display: flex;
+      flex-direction: column;
       border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 1.25rem;
-      background: #fafbfc;
+      border-radius: 12px;
+      padding: 1.35rem 1.25rem 0;
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--c) 5%, transparent) 0%, transparent 120px),
+        #fff;
+      overflow: hidden;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .r1-def:nth-child(2) { --c: #0B7285; }
+    .r1-def:hover {
+      border-color: color-mix(in srgb, var(--c) 32%, transparent);
+      box-shadow: 0 8px 22px color-mix(in srgb, var(--c) 12%, transparent);
+    }
+
+    .r1-def__head { display: flex; align-items: center; gap: 0.6em; margin-bottom: 0.55rem; }
+    .r1-def__icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; flex: 0 0 auto;
+      border-radius: 9px;
+      background: color-mix(in srgb, var(--c) 13%, transparent);
+      color: var(--c); font-size: 0.85rem;
     }
     .r1-def h4 {
-      font-weight: 600; color: #005A9C;
-      font-size: 1.05rem; margin-bottom: 0.4rem;
+      font-weight: 700; color: var(--c);
+      font-size: 1.05rem; margin: 0;
     }
-    .r1-def p { font-size: 0.9rem; line-height: 1.55; color: #4a4a4a; margin: 0 0 0.9rem; }
+    .r1-def p { font-size: 0.9rem; line-height: 1.55; color: #4a4a4a; margin: 0 0 1rem; }
 
     .r1-formula {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 6px;
-      padding: 0.85rem 1rem;
+      background: color-mix(in srgb, var(--c) 5%, #fff);
+      border: 1px solid color-mix(in srgb, var(--c) 18%, transparent);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
       text-align: center;
       font-size: 0.95rem;
       color: #1e293b;
@@ -133,7 +155,55 @@
       justify-content: center;
       gap: 0.4em;
       flex-wrap: wrap;
+      margin-bottom: 1.15rem;
     }
+
+    /* what this metric actually came out to in the run */
+    .r1-def__stat {
+      margin-top: auto;
+      margin-left: -1.25rem; margin-right: -1.25rem;
+      padding: 0.7rem 1.25rem;
+      border-top: 1px solid color-mix(in srgb, var(--c) 14%, transparent);
+      background: color-mix(in srgb, var(--c) 4%, transparent);
+      display: flex; align-items: baseline; justify-content: center; gap: 0.5em;
+      flex-wrap: wrap;
+    }
+    .r1-def__stat .k {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em;
+      color: #6b7280; font-weight: 600;
+    }
+    .r1-def__stat .v {
+      font-size: 1.05rem; font-weight: 700; color: var(--c);
+      font-variant-numeric: tabular-nums;
+    }
+    .r1-def__stat .n { font-size: 0.8rem; color: #6b7280; }
+
+    /* Line the two cards' bands up with each other - heading, description,
+       formula, result - so the formulae sit at the same height and match in
+       size even though the descriptions differ in length. Declared after the
+       flex rules above so it wins; flex remains the fallback without subgrid. */
+    @supports (grid-template-rows: subgrid) {
+      .r1-defs { grid-template-rows: auto auto 1fr auto; }
+      .r1-def {
+        display: grid;
+        grid-row: span 4;
+        grid-template-rows: subgrid;
+        row-gap: 0;
+      }
+      .r1-def__head { margin-bottom: 0.55rem; }
+      .r1-def p { margin-bottom: 1rem; }
+      .r1-formula { margin-bottom: 1.15rem; align-self: stretch; }
+    }
+
+    /* the chart's metric toggles echo the two cards above them */
+    .r1-metric-button[data-metric="solveRate"].active {
+      background: #005A9C; border-color: #005A9C;
+    }
+    .r1-metric-button[data-metric="progress"].active {
+      background: #0B7285; border-color: #0B7285;
+    }
+    .r1-metric-button[data-metric="progress"]:hover { border-color: #0B7285; color: #0B7285; }
+    .r1-metric-button[data-metric="progress"].active:hover { color: #fff; }
     /* inline stacked fraction */
     .r1-formula .frac {
       display: inline-flex;
@@ -174,23 +244,82 @@
     }
 
     /* ---------- Four-property cards ---------- */
-    .r1-props { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; }
-    .r1-prop {
-      border: 1px solid #e0e0e0;
-      border-top: 4px solid #005A9C;
-      border-radius: 10px;
-      padding: 1.25rem;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    .r1-props {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);   /* four properties, one row */
+      gap: 1.1rem;
+      counter-reset: r1prop;
     }
-    .r1-prop:nth-child(2) { border-top-color: #1E8449; }
-    .r1-prop:nth-child(3) { border-top-color: #8E44AD; }
-    .r1-prop:nth-child(4) { border-top-color: #D35400; }
-    .r1-prop h4 { font-weight: 600; color: #005A9C; margin-bottom: 0.5rem; font-size: 1.1rem; }
-    .r1-prop:nth-child(2) h4 { color: #1E8449; }
-    .r1-prop:nth-child(3) h4 { color: #8E44AD; }
-    .r1-prop:nth-child(4) h4 { color: #D35400; }
-    .r1-prop p { font-size: 0.9rem; line-height: 1.5; color: #4a4a4a; margin: 0; }
+    @media screen and (max-width: 900px) { .r1-props { grid-template-columns: repeat(2, 1fr); } }
+    @media screen and (max-width: 520px) { .r1-props { grid-template-columns: 1fr; } }
+    .r1-prop {
+      --c: #005A9C;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      border: 1px solid #e8ebee;
+      border-radius: 14px;
+      padding: 1.5rem 1.25rem 1.35rem;
+      background: #fff;
+      transition: transform 0.28s cubic-bezier(.25,.8,.25,1),
+                  box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+    .r1-prop:nth-child(2) { --c: #1E8449; }
+    .r1-prop:nth-child(3) { --c: #8E44AD; }
+    .r1-prop:nth-child(4) { --c: #D35400; }
+
+    /* a wash of the card's colour that grows on hover */
+    .r1-prop::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(120% 90% at 100% 0%,
+                  color-mix(in srgb, var(--c) 13%, transparent) 0%,
+                  transparent 62%);
+      opacity: 0.85;
+      transition: opacity 0.28s ease, transform 0.4s ease;
+    }
+    /* the big ghosted numeral */
+    .r1-prop::after {
+      counter-increment: r1prop;
+      content: counter(r1prop);
+      position: absolute;
+      right: 0.7rem; bottom: 0.1rem;
+      font-size: 4.4rem; font-weight: 800; line-height: 1;
+      color: color-mix(in srgb, var(--c) 12%, transparent);
+      z-index: -1;
+      transition: color 0.28s ease, transform 0.35s ease;
+      pointer-events: none;
+    }
+    .r1-prop:hover {
+      transform: translateY(-4px);
+      border-color: color-mix(in srgb, var(--c) 35%, transparent);
+      box-shadow: 0 14px 28px color-mix(in srgb, var(--c) 16%, transparent);
+    }
+    .r1-prop:hover::before { opacity: 1; transform: scale(1.15); }
+    .r1-prop:hover::after {
+      color: color-mix(in srgb, var(--c) 20%, transparent);
+      transform: translateY(-2px);
+    }
+
+    .r1-prop__icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; margin-bottom: 0.85rem;
+      border-radius: 11px;
+      background: color-mix(in srgb, var(--c) 12%, transparent);
+      color: var(--c); font-size: 1.05rem;
+      transition: background 0.28s ease, transform 0.28s ease;
+    }
+    .r1-prop:hover .r1-prop__icon {
+      background: var(--c); color: #fff; transform: rotate(-6deg) scale(1.06);
+    }
+
+    .r1-prop h4 {
+      font-weight: 700; color: var(--c);
+      margin-bottom: 0.4rem; font-size: 1.12rem; letter-spacing: -0.01em;
+    }
+    .r1-prop p { font-size: 0.9rem; line-height: 1.55; color: #4a4a4a; margin: 0; }
 
     /* ---------- Failure reel ---------- */
     .r1-reel-models {
@@ -401,7 +530,7 @@
   <div class="container is-max-desktop">
     <div class="r1-headline">
       <div class="r1-stat">
-        <span class="num">6<span class="den"> / 149</span></span>
+        <span class="num">6<span class="den"> / 150</span></span>
         <span class="lab">Episodes solved</span>
       </div>
       <div class="r1-stat">
@@ -450,26 +579,26 @@
               &mdash; even though they are different problems with different fixes.
             </p>
             <p>
-              <strong>MultiNet v2.0</strong> is built so those things stay separable. The task is an egocentric
-              agent in a 2D grid with walls, keys, doors, switches, gates and distractors, and a goal tile.
+              <strong>MultiNet v2.0</strong> is built so those things stay separable. The task is an agent in a
+              2D grid with walls, keys, doors, switches, gates and distractors, and a goal tile.
               There are six actions and <strong>the mechanics are never explained</strong>. Nothing is explained
               because prior domain knowledge is the confound the design removes: a failure here cannot be
               attributed to an unfamiliar API, library or interface, because there is none.
             </p>
             <p>
-              <strong>Release 1</strong> is the first measurement on that substrate, in its most basic rendering.
-              We evaluate three frontier models &mdash; Claude Opus 4.8, Kimi k2.6 and Qwen3.6-27B &mdash; on 50
-              generated mazes, 150 episodes in total, under a single evaluation protocol chosen by a controlled
-              540-episode sweep rather than by intuition. Frontier performance is near zero: <strong>6 solves in
-              149 valid episodes</strong>, and 45 of the 50 mazes were never solved by any model. The stage that
-              breaks is discovery. Models operate the mechanisms they already understand &mdash; 27 successful
-              pickups, 15 doors opened, and 4 of the 6 solves on key-door mazes &mdash; and never work out the one
-              they would have to learn during the episode: 133 TOGGLE actions produced 2 switch flips, and agents
-              stood on a live switch in 38 episodes without pressing it.
+              <strong>This release</strong> is the first measurement on that substrate, in its most basic
+              rendering. We evaluate three frontier models &mdash; Claude Opus 4.8, Kimi k2.6 and Qwen3.6-27B
+              &mdash; on 50 generated mazes, 150 episodes in total, under a single evaluation protocol chosen by
+              a controlled 540-episode sweep rather than by intuition. Frontier performance is near zero:
+              <strong>6 solves in 150 episodes</strong>, and 45 of the 50 mazes were never solved by any
+              model. Models operate the mechanisms they already understand &mdash; 27 successful pickups, 15
+              doors opened, and 4 of the 6 solves on key-door mazes &mdash; and never work out the one they would
+              have to learn during the episode: 132 TOGGLE actions produced 2 switch flips, and agents stood on a
+              live switch in 38 episodes without pressing it.
             </p>
             <p>
-              R1 is a substrate and design thesis plus a first measurement. Because the representation is
-              projectable, it is also the first step toward A/B testing modality, complexity and other
+              This release is a substrate and design thesis plus a first measurement. Because the representation
+              is projectable, it is also the first step toward A/B testing modality, complexity and other
               downstream variables against the same underlying puzzle.
             </p>
           </div>
@@ -493,48 +622,27 @@
 
           <div class="r1-props">
             <div class="r1-prop">
+              <span class="r1-prop__icon"><i class="fas fa-lightbulb"></i></span>
               <h4>Knowledge-free</h4>
-              <p>
-                No domain knowledge, no API or tool familiarity, no jargon, no goal interpretation. What it does
-                require is what agentic systems actually need: exploring and discovering the environment, causal
-                reasoning, planning an order that respects preconditions, acting, and recovering from mistakes.
-                It is also why a human baseline is meaningful &mdash; people need zero training to attempt it.
-              </p>
+              <p>Nothing to know. No API, no jargon, no priors &mdash; so a human baseline means something, and failure can't be blamed on unfamiliarity.</p>
             </div>
             <div class="r1-prop">
+              <span class="r1-prop__icon"><i class="fas fa-dice"></i></span>
               <h4>Generative</h4>
-              <p>
-                The structure is parameterized, not fixed: dependency depth, horizon length, distractor density,
-                spatial complexity. Instances are sampled rather than authored, so there is no static answer key
-                to contaminate, and difficulty scales with the models instead of saturating.
-              </p>
+              <p>No fixed answer key to contaminate, and difficulty scales with the models instead of saturating.</p>
             </div>
             <div class="r1-prop">
+              <span class="r1-prop__icon"><i class="fas fa-layer-group"></i></span>
               <h4>Projectable</h4>
-              <p>
-                Because the structure carries no domain knowledge, the identical task can be re-rendered in
-                language or in 3D. That is what makes it a measurement of the capability rather than of domain
-                familiarity &mdash; and it turns &ldquo;did it generalize?&rdquo; into a direct comparison.
-              </p>
+              <p>The same maze can be re-rendered in language or 3D, turning &ldquo;did it generalize?&rdquo; from an inference into a direct comparison. Both domains land with the full benchmark.</p>
             </div>
             <div class="r1-prop">
+              <span class="r1-prop__icon"><i class="fas fa-ruler-combined"></i></span>
               <h4>Verifiable</h4>
-              <p>
-                Breadth-first search gives the exact optimal path from any state. That yields an objective
-                difficulty scale, partial credit through a progress score, steps-to-failure, and the ability to
-                label a single move as strictly wrong.
-              </p>
+              <p>BFS gives the exact optimal path from any state &mdash; an objective difficulty scale, partial credit, and the ability to call one move strictly wrong.</p>
             </div>
           </div>
 
-          <div class="r1-note">
-            <p>
-              <strong>Why this exposes failure meaningfully.</strong> The trajectory plus the oracle let us
-              separate never discovering a mechanism from having the right plan and drifting mid-execution from
-              taking the distractor bait. And because there is nothing to know, a failure here cannot be
-              explained away as an unfamiliar interface.
-            </p>
-          </div>
         </div>
       </div>
     </div>
@@ -552,7 +660,10 @@
 
           <div class="r1-defs">
             <div class="r1-def">
-              <h4>Solve rate</h4>
+              <div class="r1-def__head">
+                <span class="r1-def__icon"><i class="fas fa-flag-checkered"></i></span>
+                <h4>Solve rate</h4>
+              </div>
               <p>
                 The share of episodes in which the agent actually reached the goal tile. Binary per episode,
                 with no credit for getting close.
@@ -560,17 +671,29 @@
               <div class="r1-formula">
                 Solve rate = <span class="frac"><span class="top">episodes reaching the goal</span><span class="bot">total episodes</span></span> &times; 100
               </div>
+              <div class="r1-def__stat">
+                <span class="k">In this run</span>
+                <span class="v">4.0%</span>
+                <span class="n">&mdash; 6 of 150 episodes</span>
+              </div>
             </div>
 
             <div class="r1-def">
-              <h4>Progress score</h4>
+              <div class="r1-def__head">
+                <span class="r1-def__icon"><i class="fas fa-bullseye"></i></span>
+                <h4>Progress score</h4>
+              </div>
               <p>
                 How much of the distance to the goal was closed, measured at the agent's <em>closest ever</em>
-                approach. 1.0 is a solve; 0 means it never got nearer than where it started. Distances are
-                exact shortest paths from the BFS oracle, so this is not an estimate.
+                approach. 1.0 is a solve; 0 means it never got nearer than where it started.
               </p>
               <div class="r1-formula">
                 Progress = 1 &minus; <span class="frac"><span class="top">d<sub>closest &rarr; goal</sub></span><span class="bot">d<sub>start &rarr; goal</sub></span></span>
+              </div>
+              <div class="r1-def__stat">
+                <span class="k">In this run</span>
+                <span class="v">0.22</span>
+                <span class="n">&mdash; mean across 150 episodes</span>
               </div>
             </div>
           </div>
@@ -772,8 +895,7 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Results</h2>
             <p>
-              Three models, 50 mazes, 150 episodes of which 149 are valid; one Kimi episode was terminated by a
-              provider network outage. The protocol cell is
+              Three models, 50 mazes, 150 episodes, nothing excluded. The protocol cell is
               <code>minimal / image_only / egocentric / zero_shot / text_summary_and_last3 / stateless /
               stall-K 30 / 3&times; BFS cap</code>. Parity was verified: one distinct system prompt across all
               150 episodes, first-user text byte-identical across models for every maze, identical task-spec
@@ -826,9 +948,9 @@
             <div class="r1-finding">
               <h4>1. Frontier performance is near zero, and the split that separates every solve is sharp</h4>
               <p>
-                6 solves in 149 valid episodes. 45 of the 50 mazes were never solved by any model, and one maze
+                6 solves in 150 episodes. 45 of the 50 mazes were never solved by any model, and one maze
                 was solved by two. Mazes with <strong>no switches and a shortest path of 45 moves or fewer</strong>
-                produced 6 solves in 24 episodes; all 125 remaining episodes failed. Nothing approaches the goal
+                produced 6 solves in 24 episodes; all 126 remaining episodes failed. Nothing approaches the goal
                 either &mdash; the median episode's closest approach is 19 to 20 tiles, and the only episodes
                 reaching within 3 tiles are the solves themselves.
               </p>
@@ -839,8 +961,8 @@
               <p>
                 No solve in 105 switch-maze episodes. It survives the difficulty control: hold the shortest path
                 at 45 moves or fewer and switch mazes still go 0 for 45 while switchless mazes go 6 for 24. Of
-                133 <code>TOGGLE</code> actions issued across the run, 2 flipped a switch, 15 opened a door and
-                116 did nothing &mdash; and 84 were issued somewhere a toggle could not possibly work. Agents
+                132 <code>TOGGLE</code> actions issued across the run, 2 flipped a switch, 15 opened a door and
+                115 did nothing &mdash; and 83 were issued somewhere a toggle could not possibly work. Agents
                 stood on a live switch in 38 of 105 episodes and pressed it in 2.
               </p>
               <p>
@@ -857,7 +979,7 @@
               <p>
                 Shortest path in executable actions holds at R&sup2; 0.31. Grid size reaches 0.30 but correlates
                 with path length at r = 0.93, so it is the same axis under another name. No other property clears
-                significance across all 149 episodes.
+                significance across all 150 episodes.
               </p>
               <p>
                 These are not null results. Restrict to the 69 episodes on mazes short enough to leave headroom
@@ -889,7 +1011,7 @@
             <div class="r1-finding">
               <h4>5. The evidence that an action failed is on screen every turn, and none of it changes what the model does next</h4>
               <p>
-                Across all 8,128 queries in the run, not one prompt contains the word &ldquo;blocked&rdquo;,
+                Across all 8,158 queries in the run, not one prompt contains the word &ldquo;blocked&rdquo;,
                 &ldquo;failed&rdquo; or &ldquo;wall&rdquo;. The only evidence available is that the picture did
                 not change, so noticing a failure is itself a perceptual act. In all three models the share of
                 wasted actions <strong>rises</strong> over the episode rather than falling: Claude's blocked
@@ -900,7 +1022,7 @@
               </p>
               <p>
                 Whether a plan was wrong because the maze was misread, or right and wrongly executed, is not
-                decidable from 149 episodes in a single rendering. That separation is what the language and 3D
+                decidable from 150 episodes in a single rendering. That separation is what the language and 3D
                 renderings are for.
               </p>
             </div>
@@ -918,7 +1040,7 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Limitations</h2>
             <ul>
-              <li><strong>This run cannot rank the three models.</strong> Six solves across 149 episodes is far too few, and once maze difficulty is accounted for the remaining gap in progress is indistinguishable from noise. What predicts how far an agent gets is the maze, not the model.</li>
+              <li><strong>This run cannot rank the three models.</strong> Six solves across 150 episodes is far too few, and once maze difficulty is accounted for the remaining gap in progress is indistinguishable from noise. What predicts how far an agent gets is the maze, not the model.</li>
               <li><strong>Discovery rests on a single mechanism type.</strong> The claim would be stronger with a second unfamiliar affordance.</li>
               <li><strong>There is no human baseline yet</strong>, so the knowledge-free property is argued rather than measured.</li>
               <li><strong>Every axis except path length should be read as untested rather than inert.</strong> With mean progress at 0.215 and 6 solves, secondary effects have little room to show.</li>
