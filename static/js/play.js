@@ -880,7 +880,7 @@
     els.endScore.textContent = !success
       ? `The optimal solution takes ${opt} steps.`
       : over > 0
-        ? `You were ${over} over the optimal steps required to solve this maze.`
+        ? `You took ${over} ${over === 1 ? "step" : "steps"} more than the optimal steps required to solve this maze.`
         : "You matched the optimal steps required to solve this maze.";
 
     const models = v.comparison.models;

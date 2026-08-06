@@ -723,10 +723,13 @@
 #end-score .score.bad { color: var(--red); }
 
 .play-host .compare {
+  /* Two even columns, each centred over its own header, so the table reads
+     as a pair of aligned lists rather than one ragged left edge. */
   width: min(100%, 460px);
+  table-layout: fixed;
   border-collapse: collapse;
   margin: 14px auto 0;
-  text-align: left;
+  text-align: center;
 }
 
 .play-host .compare th {
@@ -743,10 +746,6 @@
   border-top: 1px solid var(--sep);
   color: var(--text);
   font-weight: 700;
-}
-
-.play-host .compare td:last-child {
-  padding-left: 16px;
 }
 
 .play-host .compare .you {
