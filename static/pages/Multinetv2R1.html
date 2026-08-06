@@ -44,8 +44,8 @@
   <link rel="stylesheet" href="../css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../../static/css/mn-shared.css">
-  <link rel="stylesheet" href="../css/r1-components.css">
+  <link rel="stylesheet" href="../../static/css/mn-shared.css?v=r1c">
+  <link rel="stylesheet" href="../css/r1-components.css?v=r1c">
   <link rel="stylesheet" href="../css/play.css?v=p1b5">
 
   <script defer src="../js/fontawesome.all.min.js"></script>
@@ -143,70 +143,6 @@
       font-size: 1.05rem; margin: 0;
     }
     .r1-def p { font-size: 0.9rem; line-height: 1.55; color: #4a4a4a; margin: 0 0 1rem; }
-
-    .r1-formula {
-      background: color-mix(in srgb, var(--c) 5%, #fff);
-      border: 1px solid color-mix(in srgb, var(--c) 18%, transparent);
-      border-radius: 8px;
-      padding: 0.9rem 1rem;
-      text-align: center;
-      font-size: 0.95rem;
-      color: #1e293b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4em;
-      flex-wrap: wrap;
-      margin-bottom: 1.15rem;
-    }
-
-    /* what this metric actually came out to in the run */
-    .r1-def__stat {
-      margin-top: auto;
-      margin-left: -1.25rem; margin-right: -1.25rem;
-      padding: 0.7rem 1.25rem;
-      border-top: 1px solid color-mix(in srgb, var(--c) 14%, transparent);
-      background: color-mix(in srgb, var(--c) 4%, transparent);
-      display: flex; align-items: baseline; justify-content: center; gap: 0.5em;
-      flex-wrap: wrap;
-    }
-    .r1-def__stat .k {
-      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em;
-      color: #6b7280; font-weight: 600;
-    }
-    .r1-def__stat .v {
-      font-size: 1.05rem; font-weight: 700; color: var(--c);
-      font-variant-numeric: tabular-nums;
-    }
-    .r1-def__stat .n { font-size: 0.8rem; color: #6b7280; }
-
-    /* Line the two cards' bands up with each other - heading, description,
-       formula, result - so the formulae sit at the same height and match in
-       size even though the descriptions differ in length. Declared after the
-       flex rules above so it wins; flex remains the fallback without subgrid. */
-    @supports (grid-template-rows: subgrid) {
-      .r1-defs { grid-template-rows: auto auto 1fr auto; }
-      .r1-def {
-        display: grid;
-        grid-row: span 4;
-        grid-template-rows: subgrid;
-        row-gap: 0;
-      }
-      .r1-def__head { margin-bottom: 0.55rem; }
-      .r1-def p { margin-bottom: 1rem; }
-      .r1-formula { margin-bottom: 1.15rem; align-self: stretch; }
-    }
-    /* inline stacked fraction */
-    .r1-formula .frac {
-      display: inline-flex;
-      flex-direction: column;
-      vertical-align: middle;
-      text-align: center;
-      font-size: 0.85em;
-      line-height: 1.25;
-    }
-    .r1-formula .frac .top { border-bottom: 1px solid #94a3b8; padding: 0 0.45em 2px; }
-    .r1-formula .frac .bot { padding: 2px 0.45em 0; }
 
     /* ---------- Headline chart ---------- */
     .r1-chart-controls {
@@ -1403,12 +1339,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../js/play.js?v=p1b7"></script>
-<script src="../../static/js/mn-shell.js"></script>
-<script src="../../static/js/v2_r1_results_table.js"></script>
-<script src="../../static/js/v2_r1_headline_chart.js"></script>
-<script src="../../static/js/v2_r1_finding_charts.js"></script>
+<script src="../../static/js/mn-shell.js?v=r1c"></script>
+<script src="../../static/js/v2_r1_results_table.js?v=r1c"></script>
+<script src="../../static/js/v2_r1_headline_chart.js?v=r1c"></script>
+<script src="../../static/js/v2_r1_finding_charts.js?v=r1c"></script>
 <script>
 </script>
-<script src="../js/v2_r1_reel.js"></script>
+<script src="../js/v2_r1_reel.js?v=r1c"></script>
 </body>
 </html>

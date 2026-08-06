@@ -22,17 +22,134 @@
     "Qwen3.6-27B":     { colour: "#6950EF", logo: "qwen.svg" }
   };
 
-  function bar(value, max, cls) {
-    var pct = Math.max(0, Math.min(100, (value / max) * 100));
-    return '<span class="r1-bar ' + (cls || "") + '"><span style="--w:' + pct + '%"></span></span>';
+  // A filled bar says "this fraction of a whole", so it is only honest for
+  // the two metrics that are genuinely shares of 1.
+  function bar(value) {
+    var pct = Math.max(0, Math.min(100, value * 100));
+    return '<span class="r1-bar"><span style="--w:' + pct + '%"></span></span>';
+  }
+
+  // Steps and tokens-per-tile have no ceiling - the step cap is 3x BFS optimal
+  // and so differs per maze, and a token ratio is unbounded. Filling a bar to
+  // the largest of three models made that model look maxed out against a scale
+  // that does not exist. Place a marker on the observed range instead, which
+  // can only be read as "relative to the other two".
+  function marker(value, lo, hi) {
+    var t = hi > lo ? (value - lo) / (hi - lo) : 0.5;
+    // inset the ends so the extreme models still show a dot, not a clipped edge
+    var pct = 6 + t * 88;
+    return '<span class="r1-range"><span class="r1-range__dot" style="--x:' + pct + '%"></span></span>';
+  }
+
+  // The label is the affordance: clicking it opens the shared definitions
+  // panel and lights the matching entry, so a formula is one click from the
+  // number it explains without putting four formulae on the landing page.
+  function metric(key, label, viz, value) {
+    return '<div class="r1-rc__metric">' +
+      '<dt><button type="button" class="r1-rc__what" data-metric="' + key + '">' +
+        label + '<span class="is-sr">- show the formula</span>' +
+      "</button></dt>" +
+      "<dd>" + viz + '<span class="v">' + value + "</span></dd>" +
+    "</div>";
+  }
+
+
+  // ---- Definitions -------------------------------------------------------
+  // Same four metrics, in card order, each with the formula that produced the
+  // number above it. Collapsed by default: a visitor who trusts the numbers
+  // never has to read a formula, and one who does not is one click away.
+  var DEFS = [
+    {
+      key: "progress",
+      title: "Average progress",
+      body: "How far along the optimal route the agent got before the episode ended, " +
+            "averaged over all 50 mazes. Distance is measured in tiles remaining to the goal, " +
+            "so partial credit is possible on a maze nobody solves.",
+      formula: 'Progress = 1 &minus; <span class="frac"><span class="top">tiles still to go at the end</span>' +
+               '<span class="bot">tiles to go at the start</span></span>',
+      scale: "A share of 1. The bar is that share."
+    },
+    {
+      key: "steps",
+      title: "Average steps before the episode ended",
+      body: "Actions taken before the episode was cut off, averaged over 50 mazes. Almost every " +
+            "episode ends on the stall watchdog, which fires after 30 consecutive actions that " +
+            "reach no new tile.",
+      formula: 'Steps = <span class="frac"><span class="top">actions taken across all episodes</span>' +
+               '<span class="bot">episodes</span></span>',
+      scale: "No fixed ceiling - the step cap is 3&times; the BFS optimum, so it differs per maze. " +
+             "The marker shows where a model sits between the lowest and highest of the three."
+    },
+    {
+      key: "tokens",
+      title: "Tokens per new tile reached",
+      body: "Output tokens spent for each previously unseen tile the agent reached - what one " +
+            "unit of exploration cost. It is the sharpest separator in the run: Kimi and Qwen " +
+            "spend 20 to 26 times what Claude does, and solve fewer mazes.",
+      formula: 'Cost = <span class="frac"><span class="top">output tokens generated</span>' +
+               '<span class="bot">new tiles reached</span></span>',
+      scale: "Not capped by the 64k budget - that is the per-episode allowance, while this is a " +
+             "ratio accumulated across the episode, so it can and does run far higher."
+    },
+    {
+      key: "noeffect",
+      title: "Actions that changed nothing",
+      body: "The share of actions that left the world exactly as it was: walking into a wall, " +
+            "picking up nothing, toggling nothing. Turning on the spot counts, which is why " +
+            "Claude&rsquo;s figure is the highest of the three.",
+      formula: 'No-effect rate = <span class="frac"><span class="top">actions leaving the state unchanged</span>' +
+               '<span class="bot">actions taken</span></span>',
+      scale: "A share of 1. The bar is that share."
+    }
+  ];
+
+  function defsPanel() {
+    var items = DEFS.map(function (d) {
+      return '<div class="r1-mdef" id="mdef-' + d.key + '">' +
+        "<h4>" + d.title + "</h4>" +
+        "<p>" + d.body + "</p>" +
+        '<div class="r1-formula">' + d.formula + "</div>" +
+        '<p class="r1-mdef__scale">' + d.scale + "</p>" +
+      "</div>";
+    }).join("");
+
+    return '<details class="r1-mdefs" id="r1-metric-defs">' +
+      '<summary><span class="r1-mdefs__btn">Show the formulas</span></summary>' +
+      '<div class="r1-mdefs__grid">' + items + "</div>" +
+    "</details>";
+  }
+
+  function wireLabels(container) {
+    container.addEventListener("click", function (e) {
+      var btn = e.target.closest(".r1-rc__what");
+      if (!btn) return;
+      var panel = document.getElementById("r1-metric-defs");
+      var target = document.getElementById("mdef-" + btn.dataset.metric);
+      if (!panel || !target) return;
+
+      panel.open = true;
+      target.scrollIntoView({ block: "nearest", behavior: "smooth" });
+
+      // a brief highlight, so it is obvious which of the four answered the click
+      container.querySelectorAll(".r1-mdef.is-lit").forEach(function (el) {
+        el.classList.remove("is-lit");
+      });
+      // restart the animation even when the same label is clicked twice
+      void target.offsetWidth;
+      target.classList.add("is-lit");
+    });
   }
 
   function render(data, container, assetBase) {
     var models = data.models;
 
-    // scale every bar against the strongest value in its own column
-    var maxSteps = Math.max.apply(null, models.map(function (m) { return m.stepsMean; }));
-    var maxTokens = Math.max.apply(null, models.map(function (m) { return m.tokensPerNewTile; }));
+    // observed range per unbounded metric, shared by all three cards
+    function span(get) {
+      var vs = models.map(get);
+      return { lo: Math.min.apply(null, vs), hi: Math.max.apply(null, vs) };
+    }
+    var stepSpan = span(function (m) { return m.stepsMean; });
+    var tokenSpan = span(function (m) { return m.tokensPerNewTile; });
 
     var cards = models.map(function (m) {
       var b = BRAND[m.name] || { colour: "#64748b", logo: null };
@@ -56,30 +173,22 @@
         "</div>" +
 
         '<dl class="r1-rc__metrics">' +
-          '<div class="r1-rc__metric">' +
-            "<dt>Average progress</dt>" +
-            "<dd>" + bar(m.progressMean, 1) + '<span class="v">' + fmt(m.progressMean, 2) + "</span></dd>" +
-          "</div>" +
-          '<div class="r1-rc__metric">' +
-            "<dt>Average steps before the episode ended</dt>" +
-            "<dd>" + bar(m.stepsMean, maxSteps) + '<span class="v">' + fmt(m.stepsMean, 1) + "</span></dd>" +
-          "</div>" +
-          '<div class="r1-rc__metric">' +
-            "<dt>Tokens per new tile reached</dt>" +
-            "<dd>" + bar(m.tokensPerNewTile, maxTokens) + '<span class="v">' + tokens + "</span></dd>" +
-          "</div>" +
-          '<div class="r1-rc__metric">' +
-            "<dt>Actions that changed nothing</dt>" +
-            "<dd>" + bar(m.noEffectRate, 1) + '<span class="v">' +
-              Math.round(m.noEffectRate * 100) + "%</span></dd>" +
-          "</div>" +
+          metric("progress", "Average progress",
+                 bar(m.progressMean), fmt(m.progressMean, 2)) +
+          metric("steps", "Average steps before the episode ended",
+                 marker(m.stepsMean, stepSpan.lo, stepSpan.hi), fmt(m.stepsMean, 1)) +
+          metric("tokens", "Tokens per new tile reached",
+                 marker(m.tokensPerNewTile, tokenSpan.lo, tokenSpan.hi), tokens) +
+          metric("noeffect", "Actions that changed nothing",
+                 bar(m.noEffectRate), Math.round(m.noEffectRate * 100) + "%") +
         "</dl>" +
 
         '<div class="r1-rc__foot">' + ended + "</div>" +
       "</div>";
     }).join("");
 
-    container.innerHTML = '<div class="r1-results">' + cards + "</div>";
+    container.innerHTML = '<div class="r1-results">' + cards + "</div>" + defsPanel();
+    wireLabels(container);
   }
 
   function init() {
