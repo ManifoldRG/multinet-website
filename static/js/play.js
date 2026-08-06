@@ -274,6 +274,7 @@
     ["X", "Drop Key", "DROP", "interact"],
     ["T", "Toggle Switch / Open Door", "TOGGLE", "interact"],
     ["R", "Restart", null, "meta"],
+    ["DL", "Download trajectory", "DOWNLOAD", "meta"],
   ];
 
   const MECH = {
@@ -319,8 +320,13 @@
     endScore: document.getElementById("end-score"),
     endFrame: document.getElementById("end-frame"),
     endRows: document.getElementById("end-rows"),
+    endDownload: document.getElementById("end-download"),
     pageTitle: document.getElementById("page-title"),
     pageDesc: document.getElementById("page-desc"),
+    overlay: document.getElementById("overlay"),
+    overlayTitle: document.getElementById("overlay-title"),
+    overlayBody: document.getElementById("overlay-body"),
+    overlayClose: document.getElementById("overlay-close"),
   };
 
   // ---------------------------------------------------------------------------
@@ -515,6 +521,8 @@
   let view = null;
   let playing = false;
   let busy = false;
+  let overlayMode = null; // "settings" | "model" | null
+  let cachedSettings = null;
   let hostFocused = !focusKeyboard;
   let hostVisible = true;
 
@@ -583,8 +591,9 @@
 
   function doReset() {
     withBusy(async () => {
-      const data = await api(`/api/game/${gameId}/reset`);
+      const data = await api(`/api/game/${gameId}/reset`, {});
       fx.clear();
+      closeOverlay();
       await sounds.play(data.sfx);
       render(null, data.view);
     });
@@ -597,23 +606,205 @@
     btn.innerHTML = `<span class="key">${key}</span><span class="desc">${label}</span>`;
     btn.onclick = () => {
       if (action === null) doReset();
+      else if (action === "DOWNLOAD") downloadTrajectory();
       else sendAction(action);
     };
     els.controls.appendChild(btn);
   });
 
-  async function api(path, body) {
-    const res = await fetch(API + path, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body ?? {}),
-    });
+  async function api(path, body, method) {
+    const opts = {
+      method: method || (arguments.length >= 2 ? "POST" : "GET"),
+      headers: {},
+    };
+    if (opts.method !== "GET") {
+      opts.headers["Content-Type"] = "application/json";
+      opts.body = JSON.stringify(body ?? {});
+    }
+    const res = await fetch(API + path, opts);
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
       throw new Error(err.detail || res.statusText);
     }
     return res.json();
   }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function closeOverlay() {
+    overlayMode = null;
+    if (!els.overlay) return;
+    els.overlay.hidden = true;
+    const card = els.overlay.querySelector(".play-overlay-card");
+    if (card) card.classList.remove("model");
+    if (els.overlayBody) els.overlayBody.innerHTML = "";
+  }
+
+  function renderSettingsBody(settings) {
+    cachedSettings = settings;
+    const editable = !!settings.editable;
+    const rows = (settings.axes || [])
+      .map((axis) => {
+        const rowClass = editable ? "settings-row is-editable" : "settings-row";
+        const title = editable ? ` title="Press ${escapeHtml(axis.key)} to cycle"` : "";
+        return (
+          `<div class="${rowClass}" data-setting-key="${escapeHtml(axis.key)}"${title}>` +
+          `<span class="settings-key">${escapeHtml(axis.key)}</span>` +
+          `<span class="settings-attr">${escapeHtml(axis.attr)} = <strong>${escapeHtml(
+            String(axis.value),
+          )}</strong></span>` +
+          `</div>`
+        );
+      })
+      .join("");
+    let manifest = "";
+    const row = settings.manifestRow;
+    if (row) {
+      const bits = [
+        `experiment: ${row.experiment ?? "?"}`,
+        `condition: ${row.condition ?? "?"}`,
+      ];
+      if (row.variant) bits.push(`variant: ${row.variant}`);
+      const mechs = row.expected_mechanisms || [];
+      manifest =
+        `<div class="manifest-block"><h4>Manifest row</h4>` +
+        `<p>${escapeHtml(bits.join(" · "))}</p>` +
+        (mechs.length
+          ? `<p>expected mechanisms: ${escapeHtml(mechs.join(", "))}</p>`
+          : "") +
+        (row.notes ? `<p>${escapeHtml(row.notes)}</p>` : "") +
+        `</div>`;
+    }
+    return (
+      `<p class="play-overlay-help">${escapeHtml(settings.help || "")}</p>` +
+      rows +
+      manifest
+    );
+  }
+
+  function cycleSetting(key) {
+    if (!gameId || !cachedSettings || !cachedSettings.editable) return;
+    withBusy(async () => {
+      const data = await api(`/api/game/${gameId}/setting`, { key: String(key) });
+      if (data.settings) {
+        els.overlayBody.innerHTML = renderSettingsBody(data.settings);
+      }
+      if (data.view) await render(null, data.view);
+    });
+  }
+
+  function renderModelViewBody(data) {
+    const sections = (data.sections || [])
+      .map(
+        (sec) =>
+          `<div class="overlay-section">` +
+          `<h4>${escapeHtml(sec.title)}</h4>` +
+          `<pre>${escapeHtml(sec.text || "")}</pre>` +
+          `</div>`,
+      )
+      .join("");
+    return (
+      `<p class="play-overlay-help">` +
+      `observation=${escapeHtml(data.observation)} · ` +
+      `context_window=${escapeHtml(data.contextWindow)}` +
+      `</p>` +
+      (sections || `<p class="play-overlay-help">No model-view sections yet.</p>`)
+    );
+  }
+
+  async function openSettings() {
+    if (!gameId || !els.overlay) return;
+    overlayMode = "settings";
+    els.overlay.hidden = false;
+    const card = els.overlay.querySelector(".play-overlay-card");
+    if (card) card.classList.remove("model");
+    els.overlayTitle.textContent = "Settings";
+    els.overlayBody.innerHTML = `<p class="play-overlay-help">Loading…</p>`;
+    try {
+      // Always refetch so editable/frozen and values stay in sync with the API.
+      const settings = await api(`/api/game/${gameId}/settings`);
+      els.overlayBody.innerHTML = renderSettingsBody(settings);
+    } catch (err) {
+      els.overlayBody.innerHTML = `<p class="play-overlay-help">${escapeHtml(
+        err.message || err,
+      )}</p>`;
+    }
+  }
+
+  async function openModelView() {
+    if (!gameId || !els.overlay) return;
+    overlayMode = "model";
+    els.overlay.hidden = false;
+    const card = els.overlay.querySelector(".play-overlay-card");
+    if (card) card.classList.add("model");
+    els.overlayTitle.textContent = "Model view";
+    els.overlayBody.innerHTML = `<p class="play-overlay-help">Loading…</p>`;
+    try {
+      const data = await api(`/api/game/${gameId}/model-view`);
+      els.overlayBody.innerHTML = renderModelViewBody(data);
+    } catch (err) {
+      els.overlayBody.innerHTML = `<p class="play-overlay-help">${escapeHtml(
+        err.message || err,
+      )}</p>`;
+    }
+  }
+
+  function toggleOverlay(mode) {
+    if (overlayMode === mode) {
+      closeOverlay();
+      return;
+    }
+    if (mode === "settings") openSettings();
+    else if (mode === "model") openModelView();
+  }
+
+  async function downloadTrajectory() {
+    if (!gameId) return;
+    withBusy(async () => {
+      const data = await api(`/api/game/${gameId}/trajectory`);
+      const taskId = (data.task_id || task?.taskId || "task").replace(
+        /[^\w.-]+/g,
+        "_",
+      );
+      const stamp = new Date()
+        .toISOString()
+        .replace(/[:.]/g, "")
+        .replace("T", "_")
+        .slice(0, 15);
+      const blob = new Blob([JSON.stringify(data, null, 2)], {
+        type: "application/json",
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `trajectory_${taskId}_${stamp}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+  }
+
+  if (els.overlayClose) els.overlayClose.onclick = () => closeOverlay();
+  if (els.overlay) {
+    els.overlay.addEventListener("click", (ev) => {
+      if (ev.target === els.overlay) closeOverlay();
+    });
+  }
+  if (els.overlayBody) {
+    els.overlayBody.addEventListener("click", (ev) => {
+      const row = ev.target.closest("[data-setting-key]");
+      if (!row || !cachedSettings || !cachedSettings.editable) return;
+      cycleSetting(row.getAttribute("data-setting-key"));
+    });
+  }
+  if (els.endDownload) els.endDownload.onclick = () => downloadTrajectory();
 
   function setStat(el, label, valueHtml) {
     el.innerHTML =
@@ -861,6 +1052,8 @@
     withBusy(async () => {
       const data = await api(`/api/game/${gameId}/navigate`, { delta: -1 });
       fx.clear();
+      closeOverlay();
+      cachedSettings = null;
       await sounds.play(data.sfx);
       render(data.task, data.view);
     });
@@ -869,6 +1062,8 @@
     withBusy(async () => {
       const data = await api(`/api/game/${gameId}/navigate`, { delta: 1 });
       fx.clear();
+      closeOverlay();
+      cachedSettings = null;
       await sounds.play(data.sfx);
       render(data.task, data.view);
     });
@@ -887,8 +1082,56 @@
       }
       return;
     }
+
+    // Overlays: Esc closes; Tab/M toggle; number keys cycle settings when editable.
+    if (overlayMode) {
+      if (ev.key === "Escape") {
+        ev.preventDefault();
+        closeOverlay();
+        return;
+      }
+      if (ev.key === "Tab") {
+        ev.preventDefault();
+        toggleOverlay("settings");
+        return;
+      }
+      if (ev.key === "m" || ev.key === "M") {
+        ev.preventDefault();
+        toggleOverlay("model");
+        return;
+      }
+      if (
+        overlayMode === "settings" &&
+        cachedSettings &&
+        cachedSettings.editable &&
+        /^[1-9]$/.test(ev.key)
+      ) {
+        const axis = (cachedSettings.axes || []).find((a) => String(a.key) === ev.key);
+        if (axis) {
+          ev.preventDefault();
+          cycleSetting(ev.key);
+        }
+        return;
+      }
+      return;
+    }
+
     // After splash, content pages only take game keys while the board is focused.
     if (!keyboardActive()) return;
+
+    if (ev.key === "Tab") {
+      ev.preventDefault();
+      toggleOverlay("settings");
+      return;
+    }
+    if (ev.key === "m" || ev.key === "M") {
+      ev.preventDefault();
+      toggleOverlay("model");
+      return;
+    }
+    if (ev.key === "Escape") {
+      return;
+    }
     if (ev.key === "r" || ev.key === "R") {
       ev.preventDefault();
       doReset();
@@ -921,6 +1164,7 @@
       }
       const data = await api("/api/game/start", { taskId });
       gameId = data.gameId;
+      cachedSettings = data.settings || null;
       render(data.task, data.view);
       els.splash.classList.add("show");
     } catch (err) {

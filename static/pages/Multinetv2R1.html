@@ -45,7 +45,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="../css/index.css">
   <link rel="stylesheet" href="../../static/css/mn-shared.css">
-  <link rel="stylesheet" href="../css/play.css?v=fx3">
+  <link rel="stylesheet" href="../css/play.css?v=p1b2">
 
   <script defer src="../js/fontawesome.all.min.js"></script>
 
@@ -1299,7 +1299,8 @@
                           </thead>
                           <tbody id="end-rows"></tbody>
                         </table>
-                        <p id="end-hint">R reset · [ ] switch task</p>
+                        <button type="button" class="play-download" id="end-download">Download trajectory</button>
+                        <p id="end-hint">R reset · [ ] switch task · Tab settings · M model view</p>
                       </div>
                     </div>
                   </div>
@@ -1316,7 +1317,17 @@
 
                 <div class="hint">
                   <div class="hint-main">Solve the task using only the information visible in the maze.</div>
-                  <div class="hint-meta">Click the board for keyboard control · [ / ] switch task · R reset</div>
+                  <div class="hint-meta">Click the board for keyboard · Tab settings · M model view · [ / ] task · R reset</div>
+                </div>
+              </div>
+
+              <div id="overlay" class="play-overlay" hidden>
+                <div class="play-overlay-card" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+                  <div class="play-overlay-head">
+                    <h3 id="overlay-title"></h3>
+                    <button type="button" id="overlay-close" aria-label="Close">Esc</button>
+                  </div>
+                  <div id="overlay-body" class="play-overlay-body"></div>
                 </div>
               </div>
             </div>
@@ -1744,7 +1755,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="../js/play.js?v=sfx8"></script>
+<script src="../js/play.js?v=p1b2"></script>
 <script src="../../static/js/mn-shell.js"></script>
 <script src="../../static/js/v2_r1_results_table.js"></script>
 <script src="../../static/js/v2_r1_headline_chart.js"></script>
