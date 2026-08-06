@@ -44,8 +44,8 @@
   <link rel="stylesheet" href="../css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../../static/css/mn-shared.css?v=r1g">
-  <link rel="stylesheet" href="../css/r1-components.css?v=r1g">
+  <link rel="stylesheet" href="../../static/css/mn-shared.css?v=r1h">
+  <link rel="stylesheet" href="../css/r1-components.css?v=r1h">
   <link rel="stylesheet" href="../css/play.css?v=p1b5">
 
   <script defer src="../js/fontawesome.all.min.js"></script>
@@ -1085,8 +1085,8 @@
               environment stays minimal, and anyone evaluating a model is free to add information through their
               own harness. We take <code>image_only</code> deliberately, because the sweep identifies it as the
               hardest setting and we would rather the benchmark have room to improve than saturate. Reasoning is
-              on for every model, at an equal 64k output budget, so no model is handed a bigger allowance than
-              another.
+              on for every model, at an equal 64k output cap per turn, so no model is handed a bigger
+              allowance than another.
             </p>
             <p>
               Episodes have to end somehow, so two limits close them. A <strong>stall watchdog</strong> ends an
@@ -1358,12 +1358,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../js/play.js?v=p1b7"></script>
-<script src="../../static/js/mn-shell.js?v=r1g"></script>
-<script src="../../static/js/v2_r1_results_table.js?v=r1g"></script>
-<script src="../../static/js/v2_r1_headline_chart.js?v=r1g"></script>
-<script src="../../static/js/v2_r1_finding_charts.js?v=r1g"></script>
+<script src="../../static/js/mn-shell.js?v=r1h"></script>
+<script src="../../static/js/v2_r1_results_table.js?v=r1h"></script>
+<script src="../../static/js/v2_r1_headline_chart.js?v=r1h"></script>
+<script src="../../static/js/v2_r1_finding_charts.js?v=r1h"></script>
 <script>
 </script>
-<script src="../js/v2_r1_reel.js?v=r1g"></script>
+<script src="../js/v2_r1_reel.js?v=r1h"></script>
 </body>
 </html>

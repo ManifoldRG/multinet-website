@@ -84,8 +84,8 @@
                '<span class="bot">new tiles reached</span></span>',
       denom: "162k (Kimi)",
       scale: "The only metric here with no real ceiling, so it fills against the heaviest of the " +
-             "three. Not capped by the 64k budget: that is the per-episode allowance, while this " +
-             "is a ratio accumulated across the episode."
+             "three. The 64k cap is per turn - the most a model may generate in one reply - while " +
+             "this totals every turn in the episode, so it runs far past it."
     },
     {
       key: "noeffect",
@@ -206,7 +206,7 @@
     var onHome = /\/(index\.html)?$/.test(window.location.pathname);
     // Versioned like the scripts are: the numbers change more often than the
     // code that draws them, and a cached copy of the old ones is invisible.
-    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r1f";
+    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r1h";
     var assetBase = onHome ? "static/" : "../";
 
     fetch(path)

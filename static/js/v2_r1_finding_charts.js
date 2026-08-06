@@ -337,7 +337,7 @@
     var onHome = /\/(index\.html)?$/.test(window.location.pathname);
     // Versioned like the scripts are: the numbers change more often than the
     // code that draws them, and a cached copy of the old ones is invisible.
-    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r1f";
+    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r1h";
 
     fetch(path)
       .then(function (r) { return r.json(); })

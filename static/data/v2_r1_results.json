@@ -5,7 +5,7 @@
   "models": 3,
   "episodes": 150,
   "protocol": "minimal / image_only / egocentric / zero_shot / text_summary_and_last3 / stateless / stall-K 30 / 3x BFS cap",
-  "tokenBudget": "64k, equal for all three models",
+  "tokenBudget": "64k output tokens per turn, equal for all three models",
   "totalSolved": 6,
   "mazesNeverSolved": 45,
   "progressMetric": "progress_score_actions"
