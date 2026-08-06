@@ -7,10 +7,8 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-PP82HPYSRH');
   </script>
-
 
   <!-- PostHog Analytics Tag -->
   <script>
@@ -18,1678 +16,598 @@
     posthog.init('phc_9rIWbSBBOFBaUcdMWUniUtiuukyTgzgY0EaxK6dmNvo', {
         api_host: 'https://us.i.posthog.com',
         defaults: '2025-05-24',
-        person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
+        person_profiles: 'identified_only',
     })
   </script>
 
   <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="MultiNet is a comprehensive benchmark for evaluating multimodal generalization in next generation models across vision, language, and action, revealing critical insights into model capabilities and failure modes at distribution boundaries.">
-  <meta property="og:title" content="MultiNet: Evaluating Multimodal Generalization in Next Generation Models"/>
-  <meta property="og:description" content="MultiNet is a comprehensive benchmark for evaluating multimodal generalization in next generation models across vision, language, and action, revealing critical insights into model capabilities and failure modes at distribution boundaries."/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MultiNet is a benchmark for long-horizon action with causal reasoning. Mazes with hidden causal mechanisms that people solve in under a minute. Three frontier models solved 6 of 150 episodes.">
+  <meta property="og:title" content="MultiNet - a benchmark frontier models cannot solve"/>
+  <meta property="og:description" content="Mazes with hidden causal mechanisms. Nothing to know, an exact oracle, difficulty you can turn up. Three frontier models solved 6 of 150 episodes."/>
   <meta property="og:url" content="https://multinet.ai/"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg" />
+  <meta property="og:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
-
-
-
-  <meta name="twitter:title" content="MultiNet: Evaluating Multimodal Generalization in Next Generation Models">
-  <meta name="twitter:description" content="MultiNet is a comprehensive benchmark for evaluating multimodal generalization in next generation models across vision, language, and action, revealing critical insights into model capabilities and failure modes at distribution boundaries.">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <meta name="twitter:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="Multimodal Generalization, Next Generation Models, Vision-Language-Action, Model Evaluation, Distribution Boundaries, Robotics, Reinforcement Learning, Machine Learning, Artificial Intelligence, Benchmarking">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:title" content="MultiNet - a benchmark frontier models cannot solve">
+  <meta name="twitter:description" content="Mazes with hidden causal mechanisms. Three frontier models solved 6 of 150 episodes.">
+  <meta name="twitter:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg">
+  <meta name="keywords" content="Agentic Benchmark, Long-Horizon Action, Causal Reasoning, GridWorld, Living Benchmark, Frontier Models, MultiNet">
 
+  <title>MultiNet - A benchmark for long-horizon action with causal reasoning</title>
 
-  <title>MultiNet: Evaluating Multimodal Generalization in Next Generation Models</title>
-  <link rel="icon" type="image/x-icon" href="static/images/multinet_logo_square.png"> 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-  rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="static/images/multinet_logo_square.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
   <link rel="stylesheet" href="static/css/mn-shared.css">
+  <link rel="stylesheet" href="static/css/r1-components.css">
+  <link rel="stylesheet" href="static/css/play.css?v=p1b2">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
 
   <style>
-    /* Side Navigation Bar Styles */
-    
+    /* ============================================================
+       Landing page.
 
-    
+       Everything here is sized for a visitor who scrolls once and
+       leaves. The claim, the evidence and a thing to touch come
+       first; the full argument lives on the R1 analysis page.
+       ============================================================ */
 
-    
+    .lp-wrap { max-width: 1060px; margin: 0 auto; padding: 0 1.5rem; }
+    .lp-section { padding: 3.5rem 0; }
+    .lp-section--tight { padding: 1.5rem 0 3rem; }
 
-    
-    
-    
-    
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-    
-
-    
-    /* For dropdown toggles specifically if they are <a> tags */
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    
-    
-
-    
-    
-
-    
-    
-    
-    
-    
-
-    
-    
-
-    /* New styles for non-collapsed flyout - Level 1 */
-    
-
-    /* Adjust padding for items directly within the non-collapsed flyout */
-    
-
-    
-    /* Specific style for toggles within dropdowns */
-    
-    
-    
-    /* Level 2 dropdown menu items */
-    
-    
-    
-    
-    
-    
-
-    /* Flyout menu for collapsed state - Level 1 */
-    
-    /* Ensure nav-text is visible in flyouts */
-    
-    
-
-    /* Flyout menu for collapsed state - Level 2 */
-    
-
-    
-
-    /* Style for main release links in dropdown menu */
-    
-
-    
-
-    
-
-    
-
-    /* Active state for main release links */
-    
-    
-
-    /* Rotate arrow on hover for dropdown items like "Releases" */
-    
-
-    section .column.has-text-centered p.is-size-5 a[href*="discord.gg"] .fab.fa-discord {
-      transition: transform 0.2s ease-in-out;
-      display: inline-block; /* Good for transform */
+    .lp-h2 {
+      font-size: 1.7rem; font-weight: 600; color: #12151c;
+      text-align: center; margin: 0 0 0.5rem; letter-spacing: -0.01em;
+    }
+    .lp-sub {
+      text-align: center; color: #6b7280; font-size: 1rem;
+      max-width: 64ch; margin: 0 auto 2rem; line-height: 1.6;
     }
 
-    section .column.has-text-centered p.is-size-5 a[href*="discord.gg"]:hover .fab.fa-discord {
-      transform: scale(1.2); /* Scale up the icon on hover */
-    }
-
-    /* Hover effect for contact icons in collaborators section */
-    section.collaborators-section p.is-size-5 > a {
-      transition: transform 0.3s ease-out;
-    }
-
-    section.collaborators-section p.is-size-5 > a:hover {
-      transform: translateY(-5px);
-    }
-
-    section.collaborators-section p.is-size-4 > a {
-      transition: transform 0.3s ease-out;
-    }
-
-    section.collaborators-section p.is-size-4 > a:hover {
-      transform: translateY(-5px);
-    }
-
-    /* Hover effect for Email and Discord links in the 'Interested in Collaborating' section */
-    .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="mailto:"],
-    .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="discord.gg"] {
-      /* The display: inline-flex is already on the elements via inline styles, which is good for transform. */
-      transition: transform 0.3s ease-out;
-    }
-
-    .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="mailto:"]:hover,
-    .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="discord.gg"]:hover {
-      transform: translateY(-5px);
-    }
-
-    /* Mobile Responsive Styles */
-    @media screen and (max-width: 768px) {
-      /* Prevent horizontal overflow and ensure full width usage */
-      
-      
-      
-      
-      /* Global text overflow prevention */
-      
-      
-      /* Prevent specific long words from breaking layout */
-      
-      
-      /* Hide sidebar by default on mobile, make it overlay when shown */
-      
-      
-      
-      
-      /* Adjust main content for mobile */
-      
-      
-      /* Mobile navigation toggle - make it visible and positioned */
-      
-      
-      /* Overlay for mobile sidebar */
-      
-      
-      
-      
-      
-      
-      /* Hero section adjustments */
-      
-      
-      
-      
-      
-      
-      /* Collaborator logos - stack vertically on mobile */
-      .collaborator-logos {
-        flex-direction: column;
-        gap: 2rem !important;
-      }
-      
-      .collaborator-logo {
-        max-height: 60px !important;
-        max-width: 120px !important;
-      }
-      
-      /* Flip cards - single column on mobile */
-      .columns {
-        width: 100%;
-        max-width: 100%;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-      }
-      
-      .columns.is-multiline .column.is-half-tablet.is-one-third-desktop {
-        flex: none;
-        width: 100%;
-        max-width: 100%;
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-        margin: 0 auto;
-      }
-      
-      .flip-card-anchor {
-        width: 100% !important;
-        max-width: 300px;
-        height: 260px !important;
-        margin: 0 auto 20px auto;
-      }
-      
-      .flip-card-front {
-        padding: 15px !important;
-      }
-      
-      .flip-card-front .title.is-4 {
-        font-size: 1.1rem !important;
-        line-height: 1.3 !important;
-        margin-bottom: 0.75rem !important;
-        word-wrap: break-word;
-        hyphens: auto;
-      }
-      
-      .flip-card-front p {
-        font-size: 0.8rem !important;
-        line-height: 1.4 !important;
-        word-wrap: break-word;
-        hyphens: auto;
-      }
-      
-      .flip-card-back {
-        padding: 15px !important;
-      }
-      
-      .flip-card-back .title.is-4 {
-        font-size: 1.1rem !important;
-        line-height: 1.3 !important;
-        word-wrap: break-word;
-        hyphens: auto;
-      }
-      
-      .flip-card-back ul {
-        font-size: 0.75rem !important;
-        line-height: 1.4 !important;
-      }
-      
-      .flip-card-back p.description-intro {
-        word-wrap: break-word;
-        hyphens: auto;
-      }
-      
-      /* CTA Banner adjustments */
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      /* Section spacing adjustments */
-      
-      
-      /* Container adjustments for mobile */
-      
-      
-      
-      
-      
-      
-      
-      
-      /* News section mobile optimization */
-      .news-section {
-        max-height: none;
-        overflow-y: visible;
-        padding: 1.5rem 0;
-      }
-      
-      .news-container {
-        padding: 12px;
-      }
-      
-      .news-item {
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-        padding: 12px;
-      }
-      
-      .news-icon {
-        margin-bottom: 8px;
-        margin-right: 0;
-      }
-      
-      /* Videos carousel mobile adjustments */
-      #videos-carousel .card {
-        margin: 0 5px;
-      }
-      
-      /* Citation section mobile */
-      .section#BibTeX pre {
-        font-size: 0.8rem;
-        overflow-x: auto;
-      }
-      
-      /* Contact links mobile optimization */
-      
-      
-      /* Button and link touch targets */
-      
-      
-      /* Ensure proper spacing for touch */
-      
-      
-      /* Mobile dropdown improvements */
-      
-      
-      /* Disable hover CSS effects on mobile for dropdowns */
-      
-      
-      /* Only show dropdown when explicitly opened via JS */
-      
-      
-      /* Make dropdown arrows more touch-friendly */
-      
-      
-      /* Improve touch targets */
-    }
-    
-    /* Extra small mobile devices */
-    @media screen and (max-width: 480px) {
-      
-      
-      .flip-card-anchor {
-        height: 240px !important;
-        max-width: 280px;
-      }
-      
-      
-      
-      
-      
-      .columns.is-multiline .column.is-half-tablet.is-one-third-desktop {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-      }
-      
-      /* Extra small CTA banner adjustments */
-    }
-
-    /* Leaderboard Table Styles */
-    .leaderboard-table-container {
-      overflow-x: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      background: white;
-    }
-
-    .leaderboard-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      font-size: 14px;
-    }
-
-    .leaderboard-table th,
-    .leaderboard-table td {
-      padding: 12px 8px;
-      text-align: center;
-      border: 1px solid #e5e7eb;
-    }
-
-    .leaderboard-table th {
-      background: #f8f9fa;
-      font-weight: 600;
-      color: #374151;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .rank-header,
-    .model-header {
-      background: #f1f5f9 !important;
-      font-weight: 700;
-      color: #1e293b;
-    }
-
-    .group-header {
-      font-weight: 700;
-      color: #1e293b;
-      border-left: 3px solid;
-      border-right: 3px solid;
-      text-align: center !important;
-    }
-
-    .group-header.border-purple-500 {
-      border-color: #8b5cf6;
-      background: #f3e8ff;
-    }
-
-    .group-header.border-blue-500 {
-      border-color: #3b82f6;
-      background: #eff6ff;
-    }
-
-    .group-header.border-cyan-500 {
-      border-color: #06b6d4;
-      background: #ecfeff;
-    }
-
-    .group-header.border-emerald-500 {
-      border-color: #10b981;
-      background: #ecfdf5;
-    }
-
-    .group-header.border-amber-500 {
-      border-color: #f59e0b;
-      background: #fffbeb;
-    }
-
-    .leaderboard-table .group-header {
-      text-align: center !important;
-    }
-
-    .task-header {
-      cursor: pointer;
-      transition: background-color 0.2s;
-      position: relative;
-    }
-
-    .task-header:hover {
-      background: #e5e7eb;
-    }
-
-    .task-header-content {
-      display: flex;
+    /* ---------- hero ---------- */
+    .lp-hero { padding: 2.75rem 0 1.5rem; }
+    .lp-hero__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: 2.5rem;
       align-items: center;
-      justify-content: center;
-      gap: 4px;
+    }
+    .lp-hero h1 {
+      font-size: clamp(2rem, 4.2vw, 2.85rem);
+      line-height: 1.12; font-weight: 700; color: #12151c;
+      margin: 0 0 1rem; letter-spacing: -0.025em;
+    }
+    .lp-hero__lead {
+      font-size: 1.08rem; line-height: 1.65; color: #4a5160; margin: 0 0 1.5rem;
+    }
+    .lp-hero__lead strong { color: #12151c; font-weight: 600; }
+
+    .lp-cta-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .lp-btn {
+      display: inline-flex; align-items: center; gap: 0.5em;
+      padding: 0.65rem 1.15rem; border-radius: 8px;
+      font-size: 0.93rem; font-weight: 600; text-decoration: none;
+      border: 1px solid transparent;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+    .lp-btn:hover { transform: translateY(-1px); }
+    .lp-btn--primary { background: #005A9C; color: #fff; }
+    .lp-btn--primary:hover { background: #00457a; color: #fff; }
+    .lp-btn--ghost { background: #fff; color: #12151c; border-color: #d9dee5; }
+    .lp-btn--ghost:hover { border-color: #005A9C; color: #005A9C; }
+
+    /* ---------- failure reel ---------- */
+    .lp-reel__frame {
+      border-radius: 14px; overflow: hidden; background: #0b0e13;
+      box-shadow: 0 18px 40px rgba(12, 18, 28, 0.18);
+      aspect-ratio: 16 / 10;
+    }
+    .lp-reel__frame video { width: 100%; height: 100%; display: block; object-fit: contain; }
+    .lp-reel__models {
+      display: flex; justify-content: center; gap: 0.5rem;
+      flex-wrap: wrap; margin-top: 0.85rem;
+    }
+    .lp-reel__pill {
+      display: inline-flex; align-items: center; gap: 0.45em;
+      border: 1px solid #e4e7ee; background: #fff; color: #4a5160;
+      border-radius: 999px; padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+      font: inherit; font-size: 0.85rem; cursor: pointer;
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    }
+    .lp-reel__pill:hover { border-color: var(--brand); }
+    .lp-reel__pill.is-active { background: var(--brand); border-color: var(--brand); color: #fff; }
+    .lp-reel__logo {
+      width: 17px; height: 17px; flex: 0 0 auto;
+      background-color: var(--brand);
+      -webkit-mask: var(--logo) center / contain no-repeat;
+      mask: var(--logo) center / contain no-repeat;
+    }
+    .lp-reel__pill.is-active .lp-reel__logo { background-color: #fff; }
+    .lp-reel__cap {
+      text-align: center; font-size: 0.85rem; color: #8a90a0; margin: 0.6rem 0 0;
     }
 
-    .task-name {
-      font-weight: 600;
-      color: #374151;
+    /* ---------- stat strip ---------- */
+    .lp-stats {
+      background:
+        radial-gradient(120% 140% at 12% 0%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 55%),
+        linear-gradient(118deg, #06233C 0%, #013F73 38%, #005A9C 66%, #0B7285 100%);
+      border-radius: 16px; padding: 1.5rem;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      box-shadow: 0 10px 30px rgba(3, 34, 60, 0.24);
+    }
+    .lp-stat {
+      text-align: center; padding: 1.25rem 1rem 1.1rem; border-radius: 12px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .lp-stat .n {
+      display: block; font-size: 2.35rem; font-weight: 700; line-height: 1;
+      color: #fff; font-variant-numeric: tabular-nums; letter-spacing: -0.015em;
+    }
+    .lp-stat .n .d { font-size: 1.3rem; font-weight: 500; color: rgba(255,255,255,0.58); }
+    .lp-stat .l {
+      display: block; margin-top: 0.45rem;
+      font-size: 1.02rem; font-weight: 600; color: rgba(255,255,255,0.94);
     }
 
-    .sort-icon {
-      font-size: 12px;
-      color: #9ca3af;
-      transition: color 0.2s;
+    /* ---------- four properties ---------- */
+    .lp-props { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .lp-prop {
+      --c: #005A9C;
+      border: 1px solid #e8ebee; border-radius: 12px;
+      padding: 1.2rem 1.1rem; background: #fff;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+    .lp-prop:nth-child(2) { --c: #1E8449; }
+    .lp-prop:nth-child(3) { --c: #8E44AD; }
+    .lp-prop:nth-child(4) { --c: #D35400; }
+    .lp-prop:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--c) 32%, transparent);
+      box-shadow: 0 10px 22px color-mix(in srgb, var(--c) 13%, transparent);
+    }
+    .lp-prop__icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 9px; margin-bottom: 0.7rem;
+      background: color-mix(in srgb, var(--c) 12%, transparent);
+      color: var(--c); font-size: 0.9rem;
+    }
+    .lp-prop h3 { font-size: 1rem; font-weight: 700; color: var(--c); margin: 0 0 0.3rem; }
+    .lp-prop p { font-size: 0.86rem; line-height: 1.5; color: #4a5160; margin: 0; }
+
+    /* ---------- findings tabs ---------- */
+    .r1-tabs {
+      display: flex; justify-content: center; gap: 0.4rem;
+      flex-wrap: wrap; margin-bottom: 1.25rem;
+    }
+    .r1-tab {
+      border: 1px solid #e4e7ee; background: #fff; color: #4a5160;
+      border-radius: 8px; padding: 0.5rem 1.05rem;
+      font: inherit; font-size: 0.92rem; cursor: pointer;
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    }
+    .r1-tab:hover { border-color: #005A9C; color: #005A9C; }
+    .r1-tab.is-active { background: #005A9C; border-color: #005A9C; color: #fff; font-weight: 600; }
+
+    .r1-tab-panel {
+      border: 1px solid #e8ebee; border-radius: 14px;
+      padding: 1.6rem; background: #fff;
+    }
+    .r1-tab__claim {
+      font-size: 1.02rem; line-height: 1.65; color: #333a47;
+      margin: 0 auto 1.4rem; max-width: 76ch; text-align: center;
+    }
+    .r1-tab__caption {
+      font-size: 0.85rem; color: #8a90a0; text-align: center;
+      margin: 0.9rem auto 0; max-width: 74ch; font-style: italic; line-height: 1.5;
+    }
+    /* Figures are built here by the chart script, then moved into the panel
+       one at a time. Off-screen rather than display:none so Chart.js can
+       measure them. */
+    #r1-tab-figures {
+      position: absolute; left: -9999px; top: 0;
+      width: 900px; visibility: hidden;
     }
 
-    .task-header.sortable:hover .sort-icon {
-      color: #6b7280;
+    /* ---------- news ---------- */
+    .lp-news { display: flex; flex-direction: column; gap: 0.55rem; }
+    .lp-news__item {
+      display: grid; grid-template-columns: 92px 1fr; gap: 1rem;
+      align-items: baseline; padding: 0.8rem 1.1rem;
+      border: 1px solid #eef1f4; border-radius: 10px; background: #fff;
+      transition: border-color 0.18s ease;
+    }
+    .lp-news__item:hover { border-color: #d9dee5; }
+    .lp-news__when {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; color: #005A9C;
+    }
+    .lp-news__item.is-paper .lp-news__when { color: #8E44AD; }
+    .lp-news__item p { margin: 0; font-size: 0.92rem; line-height: 1.55; color: #4a5160; }
+    .lp-news__item strong { color: #12151c; }
+
+    /* ---------- closing CTA ---------- */
+    .lp-final {
+      border: 1px solid #cfe6d8; border-radius: 16px;
+      background: linear-gradient(135deg, #f3fbf6 0%, #eef8f2 100%);
+      padding: 2.25rem 2rem; text-align: center;
+    }
+    .lp-final h2 { font-size: 1.45rem; font-weight: 700; color: #12151c; margin: 0 0 0.55rem; }
+    .lp-final p {
+      font-size: 1rem; color: #4a5160; margin: 0 auto 1.4rem;
+      max-width: 60ch; line-height: 1.6;
     }
 
-    .metric-name {
-      font-size: 10px;
-      color: #6b7280;
-      margin-top: 2px;
+    /* ---------- collaborators ---------- */
+    .lp-collab {
+      display: flex; justify-content: center; align-items: center;
+      gap: 2.5rem; flex-wrap: wrap;
     }
-
-    .wins-header {
-      background: #f1f5f9 !important;
-      font-weight: 700;
-      color: #1e293b;
-      border-left: 2px solid #6b7280;
-      cursor: pointer;
-      transition: background-color 0.2s;
+    .lp-collab img {
+      max-height: 42px; max-width: 118px; object-fit: contain;
+      opacity: 0.7; transition: opacity 0.2s ease;
     }
+    .lp-collab a:hover img { opacity: 1; }
 
-    .wins-header:hover {
-      background: #e5e7eb !important;
+    /* ---------- responsive ---------- */
+    @media screen and (max-width: 900px) {
+      .lp-hero__grid { grid-template-columns: 1fr; gap: 1.75rem; }
+      .lp-props { grid-template-columns: repeat(2, 1fr); }
     }
-
-    .wins-header-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .wins-title {
-      font-weight: 700;
-      color: #1e293b;
-    }
-
-    .wins-metric {
-      font-size: 10px;
-      color: #6b7280;
-    }
-
-    .model-row {
-      transition: background-color 0.2s;
-    }
-
-    .model-row:hover {
-      background: #f8f9fa;
-    }
-
-    .model-row.first-place {
-      background: linear-gradient(90deg, #fef3c7 0%, transparent 100%);
-    }
-
-    .model-row.second-place {
-      background: linear-gradient(90deg, #f3f4f6 0%, transparent 100%);
-    }
-
-    .model-row.third-place {
-      background: linear-gradient(90deg, #fed7aa 0%, transparent 100%);
-    }
-
-    .rank-cell {
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .rank-badge {
-      display: inline-block;
-    }
-
-    .model-cell {
-      text-align: left;
-      font-weight: 700;
-      color: #1e293b;
-    }
-
-    .model-name {
-      font-size: 16px;
-    }
-
-    .score-cell {
-      position: relative;
-    }
-
-    .score-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .score-value {
-      font-weight: 600;
-      color: #374151;
-      font-size: 15px;
-    }
-
-    .score-value.winner {
-      color: #059669;
-      font-weight: 700;
-    }
-
-    .trophy {
-      font-size: 12px;
-    }
-
-    .wins-cell {
-      font-weight: 700;
-      color: #059669;
-      font-size: 16px;
-    }
-
-    .wins-value {
-      color: #059669;
-    }
-
-    .first-in-group {
-      border-left: 2px solid #6b7280;
-    }
-
-    .last-in-group {
-      border-right: 2px solid #6b7280;
-    }
-
-    /* Legend Styles */
-    .leaderboard-legend {
-      font-size: 14px;
-    }
-
-    .legend-items {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .legend-color {
-      width: 16px;
-      height: 16px;
-      border-radius: 3px;
-      display: inline-block;
-    }
-
-    .legend-color.purple {
-      background: #8b5cf6;
-    }
-
-    .legend-color.blue {
-      background: #3b82f6;
-    }
-
-    .legend-color.cyan {
-      background: #06b6d4;
-    }
-
-    .legend-color.emerald {
-      background: #10b981;
-    }
-
-    .legend-color.amber {
-      background: #f59e0b;
-    }
-
-    .legend-metrics,
-    .legend-indicators,
-    .legend-notes {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    
-    .legend-notes a {
-      color: #2563eb;
-      text-decoration: underline;
-    }
-    
-    .legend-notes a:hover {
-      color: #1d4ed8;
-    }
-
-    /* Mobile Responsive */
-    @media screen and (max-width: 768px) {
-      .leaderboard-table {
-        font-size: 12px;
-      }
-
-      .leaderboard-table th,
-      .leaderboard-table td {
-        padding: 8px 4px;
-      }
-
-      .task-name {
-        font-size: 11px;
-      }
-
-      .metric-name {
-        font-size: 9px;
-      }
-
-      .model-name {
-        font-size: 14px;
-      }
-
-      .rank-cell {
-        font-size: 16px;
-      }
-
-      .score-value {
-        font-size: 13px;
-      }
+    @media screen and (max-width: 620px) {
+      .lp-stats { grid-template-columns: 1fr; }
+      .lp-props { grid-template-columns: 1fr; }
+      .lp-news__item { grid-template-columns: 1fr; gap: 0.3rem; }
+      .lp-section { padding: 2.5rem 0; }
+      .r1-tab-panel { padding: 1.1rem 0.9rem; }
+      .lp-collab { gap: 1.5rem; }
     }
   </style>
 </head>
-<body data-mn-page="home">
+
+<body class="play-focus-keys" data-mn-page="home">
 <div id="mn-nav"></div>
 
 <div id="main-page-content">
-  <!-- CTA Banner -->
   <div id="mn-cta"></div>
 
-  <!-- Old navbar removed, content starts here -->
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">MultiNet: Evaluating Multimodal Generalization in Next Generation Models</h1>
-            <div class="is-size-5 publication-authors">
-              <!-- Collaborators/Partners Section -->
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <p class="has-text-centered collaborators-description is-size-">Multinet is an open science initiative with contributions from leading research teams at institutions like:</p>
-          <div class="collaborator-logos">
-            <a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/fig_logo.png" alt="Fig AI Logo" class="collaborator-logo" style="max-height: 55px; max-width: 100px;">
-            </a>
-            <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/manifoldlogo.png" alt="Manifold Research Logo" class="collaborator-logo">
-            </a>
-            <a href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/mitlogo_alt.png" alt="MIT Logo" class="collaborator-logo">
-            </a>
-            <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/GeorgiaTech_RGB.png" alt="Georgia Tech Logo" class="collaborator-logo">
-            </a>
-            <a href="https://www.tufts.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/tuftslogo.jpg" alt="Tufts Logo" class="collaborator-logo">
-            </a>
-            
-          </div>
-          <br>
-          <p class="is-size-5">
-            Interested in Collaborating? Reach out to us </strong><a href="mailto:pranav@metarch.ai" style="display: inline-flex; align-items: center; text-decoration: none; vertical-align: middle;"><img src="static/images/apple mail icon.png" alt="Email" style="height: 1.8em; margin-right: 0.2em;"></a>or join the working group on
-            <a href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; text-decoration: none; color: #5865F2; font-weight: bold; vertical-align: middle;">
-              <i class="fab fa-discord" style="font-size: 1.5em; margin-right: 0.3em; color: #5865F2;"></i><span style="color: #5865F2;">Discord</span></a>
+  <!-- ==================== HERO ==================== -->
+  <section class="lp-hero">
+    <div class="lp-wrap">
+      <div class="lp-hero__grid">
+        <div>
+          <h1>Frontier models cannot solve these mazes.</h1>
+          <p class="lp-hero__lead">
+            MultiNet v2.0 drops models into a grid world with keys, doors and switches, and never explains
+            how any of it works. People solve these in under a minute.
+            <strong>Three frontier models solved 6 of 150 episodes.</strong>
           </p>
+          <div class="lp-cta-row">
+            <a class="lp-btn lp-btn--primary" href="#play-the-maze">
+              <i class="fas fa-gamepad"></i> Play a maze
+            </a>
+            <a class="lp-btn lp-btn--ghost" href="static/pages/Multinetv2R1.html">
+              Read the analysis
+            </a>
+            <!-- TODO(R1): add a third button linking the technical report on the
+                 Fig blog once it is live. Left out rather than pointed at the
+                 analysis page, which would give two buttons one destination. -->
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-<br>
-<br>
-            
 
-<section class="section">
-  <div class="container is-max-desktop">
-      <div class="columns is-centered">
-          <div class="column">
-              <div class="content has-text-justified">
-                <h2 class="title is-3 has-text-centered">Research and Software for evaluating Next Generation Model Generalization on Diverse Multimodal Tasks </h2>
-                      <p><a href="static/pages/Multinet.html">Multinet</a> is a comprehensive benchmarking initiative for evaluating multimodal models across vision, language, and action tasks. It provides:</p>
-                      <ul style="margin-left: 2em; margin-top: 0.75em; list-style-type: disc;">
-                          <li><strong>Well-reasoned and curated set of evaluation datasets</strong> to assess multimodal understanding and action taking capabilities of SoTA multimodal models</li>
-                          <li><strong>Varied evaluation tasks</strong> including Common Sense Reasoning, Object Detection in the wild, Spatial Reasoning, Visual Question Answering, Robotics, and complex Multi-Agent game-playing</li>
-                          <li><strong>Open-source toolkit</strong> to standardize the process of obtaining and utilizing data from various sources and of different formats</li>
-                          <li><strong>Open-source adaptations of diverse models</strong> to various out-of-distribution task domains</li>
-                          <li><strong>Comprehensive evaluation protocols</strong> for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets</li>
-                      </ul>
-                  </p>
-              </div>
+        <div class="lp-reel">
+          <div class="lp-reel__frame">
+            <video id="lp-reel-video" autoplay loop muted playsinline preload="metadata"></video>
           </div>
-      </div>
-  </div>
-</section>
-
-  <!-- Leaderboard Table Section -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="content has-text-justified">
-            <h3 class="title is-4 has-text-centered">Multinet v1.0 Leaderboard</h3>
-            <p class="has-text-centered" style="margin-bottom: 2rem;">
-              Evaluation across 7 diverse tasks across robotics, digital control, and multimodal reasoning.
-            </p>
-            
-            <div id="leaderboard-container">
-              Loading leaderboard data...
-            </div>
-            
-            <!-- Collapsible Legend -->
-            <div class="leaderboard-legend" style="margin-top: 2rem;">
-              <div class="collapsible-trigger" style="cursor: pointer; user-select: none; padding: 1rem 1.5rem; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef; display: flex; align-items: center; justify-content: space-between;">
-                <h4 class="title is-6" style="margin: 0;">Leaderboard Legend and Notes</h4>
-                <span class="collapsible-icon" style="transition: transform 0.3s ease;">▼</span>
-              </div>
-              <div class="collapsible-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
-                <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 0 0 8px 8px; border: 1px solid #e9ecef; border-top: none;">
-                  <p style="margin-bottom: 1.5rem;">
-                    To learn more about our preliminary analysis and methodology, check out our 
-                    <a href="static/pages/Multinetv1.html">V1 analysis page</a>.
-                  </p>
-                  <div class="columns">
-                    <div class="column">
-                      <h4 class="title is-6">Task Groups:</h4>
-                      <div class="legend-items">
-                        <div class="legend-item">
-                          <span class="legend-color purple"></span>
-                          <span>Robotics Control</span>
-                        </div>
-                        <div class="legend-item">
-                          <span class="legend-color blue"></span>
-                          <span>Digital Control</span>
-                        </div>
-                        <div class="legend-item">
-                          <span class="legend-color cyan"></span>
-                          <span>Spatial Reasoning</span>
-                        </div>
-                        <div class="legend-item">
-                          <span class="legend-color emerald"></span>
-                          <span>Image Classification</span>
-                        </div>
-                        <div class="legend-item">
-                          <span class="legend-color amber"></span>
-                          <span>Tool Use</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="column">
-                      <h4 class="title is-6">Metrics:</h4>
-                      <div class="legend-metrics">
-                        <div><strong>EM:</strong> Exact Match Rate (%)</div>
-                        <div><strong>F1:</strong> Macro F1 Score (%)</div>
-                        <div><strong>MAE:</strong> Mean Absolute Error</div>
-                      </div>
-                    </div>
-                    <div class="column">
-                      <h4 class="title is-6">Visual Indicators:</h4>
-                      <div class="legend-indicators">
-                        <div class="legend-item">
-                          <span class="trophy">🏆</span>
-                          <span>Best score per task</span>
-                        </div>
-                        <div><strong>Wins:</strong> Number of tasks where model scored highest</div>
-                      </div>
-                    </div>
-                    <div class="column">
-                      <h4 class="title is-6">Notes:</h4>
-                      <div class="legend-notes">
-                        <div><strong>*</strong> We did not profile GPT5 on BFCLv3 with this release. See <a href="https://gorilla.cs.berkeley.edu/leaderboard.html" target="_blank" rel="noopener noreferrer">Gorilla leaderboard</a> for BFCLv4 results.</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="lp-reel__models" id="lp-reel-models"></div>
+          <p class="lp-reel__cap">A frontier model attempting one of the mazes. Pick a model to watch.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Flip Cards Section -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column">
-          <h2 class="title is-3 has-text-centered">Explore our Research</h2>
-          
-          <div class="columns is-multiline is-centered">
-            <!-- Card 1: MultiNet v1 -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <a href="static/pages/Multinetv1.html" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">MultiNet v1.0</h3>
-                      <p>Comprehensive benchmark to evaluate the next generation of multimodal models</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-rocket"></i></span>
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">MultiNet v1.0</h3>
-                          <p class="description-intro">Our latest benchmark release featuring:</p>
-                          <ul>
-                            <li>A comprehensive set of evaluation datasets spanning vision, language, and action</li>
-                            <li>Standardized evaluation protocols for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets</li>
-                            <li>Model adaptations of SoTA VLM, VLA, and generalist models to benchmark datasets</li>
-                            <li>Comprehensive performance comparisons</li>
-                            <li>Thorough analysis to understand model capabilities, and specific failure modes that can inform the development of the next generation of multimodal models</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <!-- Card 2: Previous Benchmark Releases (Consolidated v0.1 and v0.2) -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <div class="flip-card-anchor" style="cursor: pointer;">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">Previous Benchmark Releases</h3>
-                      <p>Comprehensive benchmarks for evaluating multimodal models across various modalities and tasks</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-chart-line"></i></span>
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Benchmark Releases</h3>
-                          <p class="description-intro">Our benchmarking efforts:</p>
-                          <ul style="list-style-type: none; padding-left: 0;">
-                            <li style="margin-bottom: 15px;">
-                              <a href="static/pages/Multinetv02.html" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>v0.2 - Gameplay:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Benchmarking models in procedurally generated game environments</span>
-                            </li>
-                            <li style="margin-bottom: 15px;">
-                              <a href="static/pages/Multinetv01.html" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>v0.1 - Robotics:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Evaluating models on real-world robotics tasks</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 3: Model Releases (Consolidated μGato and NEKO) -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <div class="flip-card-anchor" style="cursor: pointer;">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">Model Releases</h3>
-                      <p>Open-source generalist multimodal action models for research and development</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-brain"></i></span>
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Model Releases</h3>
-                          <p class="description-intro">Our model implementations:</p>
-                          <ul style="list-style-type: none; padding-left: 0;">
-                            <li style="margin-bottom: 15px;">
-                              <a href="https://github.com/eihli/mugato" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>μGato:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Simple, open-source implementation of DeepMind's Gato</span>
-                            </li>
-                            <li style="margin-bottom: 15px;">
-                              <a href="https://github.com/ManifoldRG/NEKO" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>NEKO:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">GATO-style model for image, text, RL, and robotics tasks</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 4: Software Releases (Consolidated) -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <div class="flip-card-anchor" style="cursor: pointer;">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">Software Releases</h3>
-                      <p>Open-source tools and frameworks for building and evaluating multimodal models of the future</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-tools"></i></span>
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Software Releases</h3>
-                          <p class="description-intro">Our software contributions:</p>
-                          <ul style="list-style-type: none; padding-left: 0;">
-                            <li style="margin-bottom: 15px;">
-                              <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>Model Adaptations:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Model adaptations of SoTA VLAs to Multinet datasets, such as OpenVLA, Pi0 and Magma</span>
-                            </li>
-                            <li style="margin-bottom: 15px;">
-                              <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>Toolkit:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Data curation SDK for evaluation datasets</span>
-                            </li>
-                            <li style="margin-bottom: 15px;">
-                              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>GenESIS:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Framework for mapping language models to actions</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          
-          
-            <!-- Card 5: About Multinet -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <a href="static/pages/Multinet.html" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">About Multinet</h3>
-                      <p>A comprehensive benchmark for evaluating Multimodal Action Models</p>
-                      <img src="static/images/multinet_logo_square copy.png" alt="Multinet Icon">
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">About Multinet</h3>
-                          <p class="description-intro">Key contributions include:</p>
-                          <ul>
-                            <li>Comprehensive set of evaluation datasets for evaluating multimodal models</li>
-                            <li>Tools for standardizing robotics and RL data</li>
-                            <li>Framework for mapping language models to actions</li>
-                            <li>Evaluation suite for multimodal models</li>
-                            <li>Open-source adaptations of diverse models to various out-of-distribution task domains</li>
-                            <li>Comprehensive evaluation protocols for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <!-- Card 6: Submission guide -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">Submit Your Model</h3>
-                      <p>Step-by-step instructions for submitting your model to the MultiNet leaderboard</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-paper-plane"></i></span>
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div>
-                          <h3 class="title is-4">Submit Your Model</h3>
-                          <p class="description-intro">This guide covers the complete submission process, including:</p>
-                          <ul>
-                            <li>How to implement the required dataset adapters for your model</li>
-                            <li>Preparing your environment and code using our Docker template</li>
-                            <li>Testing your model locally on sample data</li>
-                            <li>Example adapter implementations for reference</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-  
-          </div>
+  <!-- ==================== HEADLINE STATS ==================== -->
+  <section class="lp-section--tight">
+    <div class="lp-wrap">
+      <div class="lp-stats">
+        <div class="lp-stat">
+          <span class="n">6<span class="d"> / 150</span></span>
+          <span class="l">Episodes solved</span>
+        </div>
+        <div class="lp-stat">
+          <span class="n">45<span class="d"> / 50</span></span>
+          <span class="l">Mazes never solved</span>
+        </div>
+        <div class="lp-stat">
+          <span class="n">0<span class="d"> / 105</span></span>
+          <span class="l">Switch mazes solved</span>
         </div>
       </div>
     </div>
   </section>
 
-  <style>
-    /* Flip card styles */
-    .section .title.is-3.has-text-centered {
-      color: #363636; 
-      margin-bottom: 3rem; 
-      font-weight: 600; 
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-    }
-
-    .flip-card-anchor {
-      display: block;
-      width: 280px; /* Card width */
-      height: 280px; /* Card height */
-      margin: 0 auto 25px auto; /* Center horizontally, add bottom margin */
-      text-decoration: none;
-      color: inherit;
-    }
-    .flip-card-anchor:hover {
-      text-decoration: none;
-    }
-
-    .flip-card {
-      background-color: transparent;
-      width: 100%; /* Takes width from anchor */
-      height: 100%; /* Takes height from anchor */
-      perspective: 1000px;
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-    }
-
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.15); 
-      border-radius: 15px; 
-    }
-
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .flip-card-front, .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      border-radius: 15px; 
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px; /* Adjusted padding for smaller card size */
-    } 
-
-    .flip-card-front {
-      background-color: #ffffff; 
-      color: #4a4a4a; 
-      border: 1px solid #e0e0e0; 
-    }
-
-    .flip-card-front .title.is-4 {
-      color: #005A9C; 
-      margin-bottom: 0.75rem;
-      font-weight: 600;
-    }
-
-    .flip-card-front p {
-      font-size: 0.85rem; /* Slightly smaller for better fit */
-      color: #555555; 
-      line-height: 1.4;
-    }
-
-    .flip-card-front img {
-      max-width: 65px; /* Adjusted for smaller card */
-      max-height: 65px; /* Adjusted for smaller card */
-      margin-top: 10px; /* Adjusted margin */
-      margin-bottom: 5px;
-    }
-
-    .flip-card-back {
-      background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%); 
-      color: white;
-      transform: rotateY(180deg);
-      overflow: hidden; 
-    }
-    
-    .flip-card-back .scrollable-content {
-      width: 100%;
-      height: 100%;
-      overflow-y: auto;
-      padding-right: 10px; 
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start; /* Content starts from top */
-      align-items: center;
-    }
-    
-    .flip-card-back .scrollable-content > div { 
-        width: 100%;
-    }
-
-    .flip-card-back .title.is-4 {
-      color: #ffffff; 
-      margin-bottom: 10px; /* Adjusted margin */
-      font-weight: 600;
-      text-align: center; 
-      font-size: 1.25rem; /* Adjusted for smaller card */
-    }
-
-    .flip-card-back p.description-intro,
-    .flip-card-back p.single-description {
-      font-size: 0.85rem; /* Adjusted for smaller card */
-      color: #e0e0e0; 
-      line-height: 1.4; /* Adjusted line height */
-      margin-bottom: 8px;
-      font-weight: 400;
-    }
-    
-    .flip-card-back p.single-description {
-        text-align: center; 
-        margin-bottom: 10px; 
-    }
-    
-    .flip-card-back p.description-intro {
-        text-align: left; 
-        font-weight: 500; 
-    }
-
-    .flip-card-back ul {
-      font-size: 0.8rem; /* Adjusted for smaller card */
-      color: #e0e0e0;
-      line-height: 1.5; /* Adjusted line height */
-      list-style-type: disc; 
-      padding-left: 20px; 
-      margin-top: 0;
-      margin-bottom: 10px; /* Adjusted margin */
-      text-align: left;
-    }
-
-    .flip-card-back ul li {
-      margin-bottom: 4px; /* Adjusted margin */
-    }
-
-    /* Customize scrollbar for webkit browsers */
-    .scrollable-content::-webkit-scrollbar {
-      width: 6px; 
-    }
-
-    .scrollable-content::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.1); 
-      border-radius: 3px;
-    }
-
-    .scrollable-content::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.5); 
-      border-radius: 3px;
-    }
-
-    .scrollable-content::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.8); 
-    }
-
-    /* Card-specific styles */
-
-    /* Card 1 (Benchmark Releases - Blue Theme) */
-    .columns > .column:nth-child(1) .flip-card-front .title.is-4 {
-      color: #005A9C; 
-    }
-    .columns > .column:nth-child(1) .flip-card-back {
-      background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%);
-    }
-
-    /* Card 2 (Model Releases - Purple Theme) */
-    .columns > .column:nth-child(2) .flip-card-front .title.is-4 {
-      color: #8E44AD; 
-    }
-    .columns > .column:nth-child(2) .flip-card-back {
-      background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); 
-    }
-
-    /* Card 3 (Software Releases - Slate Blue Theme) */
-    .columns > .column:nth-child(3) .flip-card-front .title.is-4 {
-      color: #34495E; 
-    }
-    .columns > .column:nth-child(3) .flip-card-back {
-      background: linear-gradient(135deg, #34495E 0%, #2C3E50 100%); 
-    }
-
-    /* Card 4 (Dataset Specification - Red Theme) */
-    .columns > .column:nth-child(4) .flip-card-front .title.is-4 {
-      color: #C0392B; 
-    }
-    .columns > .column:nth-child(4) .flip-card-back {
-      background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); 
-    }
-
-    /* Card 5 (About Multinet - Orange Theme) */
-    .columns > .column:nth-child(5) .flip-card-front .title.is-4 {
-      color: #D35400; 
-    }
-    .columns > .column:nth-child(5) .flip-card-back {
-      background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); 
-    }
-  </style>
-
-
-  <section class="news-section" style="padding: 10px 0;">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered" style="margin-top: 0; margin-bottom: 0;">
-        <div class="column" style="padding-top: 0; padding-bottom: 0;">
-          <div class="content has-text-justified" style="margin-bottom: 0;">
-            <h2 class="title is-3 has-text-centered" style="margin-bottom: 1rem;">News</h2>
-            <div class="news-container" style="padding: 15px;">
-              <div class="news-item">
-                <div class="news-icon">🌟</div>
-                <div class="news-content">
-                  <p><strong>Multinet v1.0 released!</strong> We release our most comprehensive benchmark yet - evaluating a SoTA VLM, VLA, and generalist models on a wide variety of multimodal understanding and action datasets. Read more <a href="static/pages/Multinetv1.html">here</a>.</p>
-                </div>
-              </div>
-              <div class="news-item">
-                <div class="news-icon">🏆</div>
-                <div class="news-content">
-                  <p><strong>Multinet v0.2 released!</strong> We systematically profile state-of-the-art VLAs and VLMs perform in procedurally generated OOD game environments. Read more about our recent release <a href="static/pages/Multinetv02.html">here</a>.</p>
-                </div>
-              </div>
-              <div class="news-item">
-                <div class="news-icon">🏅</div>
-                <div class="news-content">
-                  <p><strong>Paper accepted at ICML 2025!</strong> Our paper detailing the Open-Source contributions of Multinet that benefit the AI community has been accepted at the <a href="https://codeml-workshop.github.io/codeml2025/" target="_blank">CodeML Workshop</a> at ICML 2025! Read our paper <a href="static/pdfs/An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank">here</a>.</p>
-                </div>
-              </div>
-              <div class="news-item">
-                <div class="news-icon">🎉</div>
-                <div class="news-content">
-                  <p><strong>Multinet v0.1 released!</strong> How well do state-of-the-art VLMs and VLAs perform on real-world robotics tasks? Read more on our <a href="static/pages/Multinetv01.html">release Page</a>.</p>
-                </div>
-              </div>
-              <div class="news-item">
-                <div class="news-icon">🚀</div>
-                <div class="news-content">
-                  <p><strong>Introducing Multinet!</strong> A comprehensive benchmark for evaluating multimodal generalization in next generation models. <a href="static/pages/Multinet.html">Learn more here</a>.</p>
-                </div>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <style>
-    .video-container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 0 15px;
-    }
-
-    .responsive-video {
-      width: 100%;
-      max-width: 720px;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 4px;
-    }
-
-    .news-section {
-      padding: 10px 0;
-      max-height: 350px;
-      overflow-y: auto;
-    }
-
-    .news-title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    .news-container {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      background-color: #f5f5f5;
-      padding: 15px;
-      border-radius: 5px;
-    }
-
-    .news-item {
-      display: flex;
-      align-items: center;
-      padding: 8px;
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .news-icon {
-      font-size: 24px;
-      margin-right: 10px;
-    }
-
-    .news-content {
-      flex-grow: 1;
-    }
-
-    .news-content a {
-      color: blue;
-      text-decoration: none;
-    }
-
-    .news-content a:hover {
-      text-decoration: underline;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-    }
-
-    th, td {
-      padding: 12px 16px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-
-    th {
-      background-color: #f2f2f2;
-      font-weight: bold;
-    }
-
-    tr:hover {
-      background-color: #f5f5f5;
-    }
-
-    caption {
-      font-style: italic;
-      margin-top: 8px;
-    }
-  </style>
-
-  <style>
-    .videos-section .title.is-2 { /* Main section title "Videos" */
-      margin-bottom: 1rem; 
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-      font-weight: 600;
-    }
-    .videos-section .is-size-5 { /* Paragraph below title */
-      margin-bottom: 2.5rem !important; /* More space before carousel */
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-    }
-    #videos-carousel .card {
-      margin: 0 10px; /* Spacing between cards in the carousel */
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1); 
-      border-radius: 10px; 
-      background-color: #fff;
-    }
-    #videos-carousel .card-image figure.image { /* Ensure figure itself is rounded for overflow hidden */
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-      overflow: hidden; 
-    }
-    #videos-carousel .card-image iframe {
-      display: block; /* remove extra space below iframe */
-    }
-    #videos-carousel .card-content {
-      padding: 1.25rem; 
-    }
-    #videos-carousel .card-content .title.is-5 {
-      margin-bottom: 0; 
-      font-weight: 600;
-      color: #363636;
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-    }
-    /* Styling for Bulma Carousel arrows - making them more visible */
-    #videos-carousel .carousel-nav-left,
-    #videos-carousel .carousel-nav-right {
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.6);
-        color: white;
-        top: calc(50% - 20px - 30px); /* Adjust for card content height, (half of arrow height) - (half of approx card-content height if iframe is dominant)  */
-    }
-    #videos-carousel .carousel-nav-left {
-        left: 10px; /* Position arrow 10px from the left edge */
-    }
-    #videos-carousel .carousel-nav-right {
-        right: 10px; /* Position arrow 10px from the right edge */
-    }
-    #videos-carousel .carousel-nav-left:hover,
-    #videos-carousel .carousel-nav-right:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-    }
-    #videos-carousel .carousel-nav-left .icon,
-    #videos-carousel .carousel-nav-right .icon {
-        font-size: 1.2rem;
-    }
-     /* Hide default dots, if any specific styling for them is needed, it can be added here */
-    #videos-carousel .carousel-dots {
-      margin-top: 1rem; /* Add some space if dots are visible */
-      /* display: none; */ /* Uncomment to hide dots */
-    }
-    #videos-carousel .carousel-dots .carousel-dot {
-        background-color: rgba(0,0,0,0.2); /* Lighter dots */
-    }
-    #videos-carousel .carousel-dots .carousel-dot.is-active {
-        background-color: rgba(0,0,0,0.6); /* Darker active dot */
-    }
-
-  </style>
-
-
-  <style>
-    .collaborators-section {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-      /* background-color: #f8f9fa; */ /* Light, almost off-white background for subtle distinction - REMOVED */
-      /* border-top: 1px solid #e9ecef; */ /* Subtle top border - REMOVED */
-      /* border-bottom: 1px solid #e9ecef; */ /* Subtle bottom border - REMOVED */
-    }
-
-    .collaborators-description { /* Renamed from collaborators-tagline and applied to the new paragraph */
-      margin-bottom: 3.5rem; /* Space below description, before logos */
-      color: #4a4a4a; /* Bulma's default text color, or a custom one like #495057 */
-      line-height: 1.5;
-    }
-
-    .collaborator-logos {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem; /* Reduced gap to fit all logos on one line */
-      overflow-x: auto; /* Allow horizontal scrolling if needed on very small screens */
-    }
-
-    .collaborator-link {
-      display: inline-block; /* To allow transform and contain the image properly */
-      transition: transform 0.3s ease-out; /* Smooth transition for hover on the link */
-    }
-
-    .collaborator-link:hover {
-      transform: translateY(-5px); /* Slight lift effect on hover */
-    }
-
-    .collaborator-logo {
-      max-height: 75px;
-      max-width: 140px; /* Reduced width to ensure all logos fit on one line */
-      object-fit: contain;
-      opacity: 0.8; /* Start slightly transparent */
-      transition: opacity 0.3s ease-out; /* Smooth transition for opacity */
-      flex-shrink: 0; /* Prevent logos from shrinking too much */
-    }
-
-    .collaborator-link:hover .collaborator-logo {
-      opacity: 1; /* Full opacity on hover */
-    }
-
-    /* Responsive adjustments for tablets and smaller */
-    @media screen and (max-width: 768px) {
-      .collaborators-description {
-        margin-bottom: 2.5rem;
-      }
-      .collaborator-logos {
-        gap: 1.5rem; /* Reduced gap for smaller screens */
-      }
-      .collaborator-logo {
-        max-height: 65px; /* Slightly smaller logos on tablets */
-        max-width: 120px;
-      }
-    }
-    
-    /* Responsive adjustments for mobile phones */
-    @media screen and (max-width: 480px) {
-      .collaborator-logos {
-        gap: 1rem; /* Further reduced gap for very small screens */
-      }
-      .collaborator-logo {
-        max-height: 55px;
-        max-width: 100px;
-      }
-    }
-  </style>
-
-  <!-- Videos Section -->
-  <section class="section videos-section">
-    <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Research Talks & Demos</h2>
-      <p class="has-text-centered is-size-5" style="margin-bottom: 2rem;">
-        Explore our collection of presentations showcasing Multinet's vision, progress, and development journey!
+  <!-- ==================== PLAY ==================== -->
+  <section class="lp-section" id="play-the-maze">
+    <div class="lp-wrap">
+      <h2 class="lp-h2">Play the maze</h2>
+      <p class="lp-sub">
+        The same mazes the models were given, with the same rules and the same absence of instructions.
       </p>
-      <div id="videos-carousel" class="carousel">
-        <div class="item-1">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9">
-                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/wWuAdrMP1cg?t=1540" title="YouTube video player for latest presentation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              </figure>
+
+      <div class="r1-demo-slot">
+        <div class="r1-demo-meta">
+          <div>
+            <h3 id="page-title">Loading&hellip;</h3>
+            <p id="page-desc">Click the board, then use the keyboard or the on-screen controls.</p>
+          </div>
+          <div class="task-heading-nav">
+            <button type="button" id="page-prev">Previous</button>
+            <button type="button" id="page-next">Next</button>
+          </div>
+        </div>
+
+        <div id="error"></div>
+
+        <div class="play-host" id="play-host" tabindex="0" aria-label="MultiNet playable maze">
+          <div id="splash">
+            <div>
+              <h1>MultiNet v2.0 Benchmark</h1>
+              <p>Can you solve what frontier models cannot?</p>
+              <button type="button" id="splash-play">Press Enter to play</button>
+            </div>
+          </div>
+
+          <div class="card" id="card">
+            <div class="topbar">
+              <div>
+                <div class="brand">MultiNet v2.0 Benchmark</div>
+                <div class="task-id" id="task-id"></div>
+              </div>
+              <div class="nav">
+                <button type="button" id="prev">&lt;</button>
+                <button type="button" id="next">&gt;</button>
+              </div>
+            </div>
+
+            <div class="board">
+              <aside class="rail">
+                <h2 class="section">Task</h2>
+                <p id="task-text"></p>
+                <ul class="play-progress" id="progress"></ul>
+              </aside>
+
+              <div class="stage">
+                <img id="grid" alt="MiniGrid">
+                <div id="end">
+                  <div class="panel">
+                    <h2 id="end-title"></h2>
+                    <p id="end-desc"></p>
+                    <p id="end-diff"></p>
+                    <p id="end-steps"></p>
+                    <p id="end-score"></p>
+                    <p id="end-frame"></p>
+                    <table class="compare">
+                      <thead>
+                        <tr><th>Player</th><th>Result</th></tr>
+                      </thead>
+                      <tbody id="end-rows"></tbody>
+                    </table>
+                    <button type="button" class="play-download" id="end-download">Download trajectory</button>
+                    <p id="end-hint">R reset · [ ] switch task · Tab settings · M model view</p>
+                  </div>
+                </div>
+              </div>
+
+              <aside class="rail right">
+                <h2 class="section muted">Status</h2>
+                <div class="stat facing" id="facing"></div>
+                <div class="stat carrying" id="carrying"></div>
+
+                <h2 class="section muted" style="margin-top: 18px">Controls</h2>
+                <div class="ctrl" id="controls"></div>
+              </aside>
+            </div>
+
+            <div class="hint">
+              <div class="hint-main">Solve the task using only the information visible in the maze.</div>
+              <div class="hint-meta">Click the board for keyboard · Tab settings · M model view · [ / ] task · R reset</div>
+            </div>
+          </div>
+
+          <div id="overlay" class="play-overlay" hidden>
+            <div class="play-overlay-card" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+              <div class="play-overlay-head">
+                <h3 id="overlay-title"></h3>
+                <button type="button" id="overlay-close" aria-label="Close">Esc</button>
+              </div>
+              <div id="overlay-body" class="play-overlay-body"></div>
             </div>
           </div>
         </div>
-        <div class="item-2">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9">
-                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/A6a2FIutCqY" title="YouTube video player for SPC talk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              </figure>
-            </div>
-          </div>
+
+        <p class="r1-demo-hint">
+          Tip: click inside the game to capture keys. Click outside (or scroll away) to use normal page scrolling.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WHY MAZES ==================== -->
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <h2 class="lp-h2">Why mazes with mechanisms</h2>
+      <p class="lp-sub">
+        Measuring long-horizon action needs a task with four properties at once. This is the simplest
+        structure we know of that has all four.
+      </p>
+      <div class="lp-props">
+        <div class="lp-prop">
+          <span class="lp-prop__icon"><i class="fas fa-lightbulb"></i></span>
+          <h3>Knowledge-free</h3>
+          <p>Nothing to know. No API, no jargon, no priors &mdash; so failure cannot be blamed on unfamiliarity.</p>
         </div>
-        <div class="item-3">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9">
-                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/TnIHF2EbGbA" title="YouTube video player for Manifold CRC 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              </figure>
-            </div>
-          </div>
+        <div class="lp-prop">
+          <span class="lp-prop__icon"><i class="fas fa-dice"></i></span>
+          <h3>Generative</h3>
+          <p>No fixed answer key to leak into training data, and difficulty that scales instead of saturating.</p>
         </div>
-        <div class="item-4">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9">
-                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/DzkaDwB71ZM" title="YouTube video player for Manifold CRC 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              </figure>
-            </div>
-          </div>
+        <div class="lp-prop">
+          <span class="lp-prop__icon"><i class="fas fa-layer-group"></i></span>
+          <h3>Projectable</h3>
+          <p>The same maze re-renders in language or 3D, turning generalization into a direct comparison.</p>
         </div>
-        <div class="item-5">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9">
-                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/nzaux0RE6Ck?si=NzGTa0JWG0XeZ5T4" title="YouTube video player for Manifold CRC 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              </figure>
-            </div>
-          </div>
+        <div class="lp-prop">
+          <span class="lp-prop__icon"><i class="fas fa-ruler-combined"></i></span>
+          <h3>Verifiable</h3>
+          <p>Breadth-first search gives the exact optimal path from any state, so a single move can be called wrong.</p>
         </div>
       </div>
     </div>
-    
   </section>
 
-  
+  <!-- ==================== RESULTS ==================== -->
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <h2 class="lp-h2">How the models did</h2>
+      <p class="lp-sub">
+        Three frontier models, 50 mazes, three attempts each. Solves alone cannot separate them, so
+        progress toward the goal and episode length are reported alongside.
+      </p>
+      <div id="r1-results-container">Loading results&hellip;</div>
 
-  <!-- BibTeX Section -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title has-text-centered">Citation</h2>
-      <pre><code>@article{guruprasad2025multinet,
-  author = {Pranav Guruprasad and Sudipta Chowdhury and Harshvardhan Sikka and Mridul Sharma and Helen Lu and Sean Rivera and Aryan Khurana and Yangyue Wang},
-  title = {MultiNet v1.0: A Comprehensive Benchmark for Evaluating Multimodal Reasoning and Action Models Across Diverse Domains},
-  journal = {Manifold Research Publications},
-  year = {2025},
-  note = {https://multinet.ai/static/pages/Multinetv1.html},
-  doi = {10.5281/zenodo.17404313}
-}</code></pre>
+      <div style="margin-top: 2.5rem;">
+        <div id="r1-episode-grid"></div>
+        <p class="r1-tab__caption">
+          Every episode in the run. Each column is a maze and each row a model; colour is how far toward the
+          goal the agent got. Stars mark the six solves &mdash; all of them at the short end.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FINDINGS ==================== -->
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <h2 class="lp-h2">What we found</h2>
+      <p class="lp-sub">Four findings from the run. Pick one.</p>
+
+      <div class="r1-tabs" id="r1-tabs"></div>
+      <div class="r1-tab-panel" id="r1-tab-panel">
+        <p class="r1-tab__claim"></p>
+        <div class="r1-tab__figure"></div>
+        <p class="r1-tab__caption"></p>
+      </div>
+
+      <p style="text-align: center; margin-top: 1.75rem;">
+        <a class="lp-btn lp-btn--ghost" href="static/pages/Multinetv2R1.html">
+          Read the full analysis &rarr;
+        </a>
+      </p>
+
+      <!-- Figures live here until a tab claims them. Keeping every chart in
+           one hidden store means the tab script never has to know how any
+           individual figure is built. -->
+      <div id="r1-tab-figures" aria-hidden="true">
+        <div data-figure="r1-switch-funnel">
+          <div id="r1-switch-funnel"></div>
+        </div>
+        <div data-figure="r1-inversion-chart">
+          <div class="r1-chart-stage" style="height: 300px;"><canvas id="r1-inversion-chart"></canvas></div>
+        </div>
+        <div data-figure="r1-quarter-chart">
+          <div class="r1-metric-buttons" id="r1-quarter-metrics" style="justify-content: center; margin-bottom: 1rem;"></div>
+          <div class="r1-chart-stage" style="height: 320px;"><canvas id="r1-quarter-chart"></canvas></div>
+          <!-- the chart script writes a per-view hint here, so this doubles
+               as the caption for the Failure styles tab -->
+          <p id="r1-quarter-note" class="r1-tab__caption"></p>
+        </div>
+        <div data-figure="r1-thinking-chart">
+          <div class="r1-chart-stage" style="height: 300px;"><canvas id="r1-thinking-chart"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEWS ==================== -->
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <h2 class="lp-h2">News</h2>
+      <p class="lp-sub">Four benchmark releases and two accepted papers.</p>
+      <div class="lp-news">
+        <div class="lp-news__item">
+          <div class="lp-news__when">v2.0 R1</div>
+          <p><strong>MultiNet v2.0 Release 1.</strong> Frontier models on procedurally generated mazes with hidden causal mechanisms. <a href="static/pages/Multinetv2R1.html">Read the analysis</a>.</p>
+        </div>
+        <!-- TODO(R1): link the arXiv preprint once it is up. -->
+        <div class="lp-news__item is-paper">
+          <div class="lp-news__when">CVPR '26</div>
+          <p><strong>Paper accepted at CVPR 2026.</strong> Our v1.0 work was accepted at the <a href="https://mmfm-workshop.github.io/" target="_blank" rel="noopener noreferrer">MMFM workshop</a>.</p>
+        </div>
+        <div class="lp-news__item">
+          <div class="lp-news__when">v1.0</div>
+          <p><strong>MultiNet v1.0 released.</strong> A state-of-the-art VLM, VLA and generalist model evaluated across 11 datasets in six capability areas. <a href="static/pages/Multinetv1.html">Read more</a>.</p>
+        </div>
+        <div class="lp-news__item is-paper">
+          <div class="lp-news__when">ICML '25</div>
+          <p><strong>Paper accepted at ICML 2025.</strong> MultiNet's open-source contributions, at the <a href="https://codeml-workshop.github.io/codeml2025/" target="_blank" rel="noopener noreferrer">CodeML workshop</a>. <a href="static/pdfs/An Open-Source Software Toolkit &amp; Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener noreferrer">Read the paper</a>.</p>
+        </div>
+        <div class="lp-news__item">
+          <div class="lp-news__when">v0.2</div>
+          <p><strong>MultiNet v0.2 released.</strong> VLAs and VLMs in procedurally generated, out-of-distribution game environments. <a href="static/pages/Multinetv02.html">Read more</a>.</p>
+        </div>
+        <div class="lp-news__item">
+          <div class="lp-news__when">v0.1</div>
+          <p><strong>MultiNet v0.1 released.</strong> How well do state-of-the-art VLMs and VLAs perform on real-world robotics tasks? <a href="static/pages/Multinetv01.html">Read more</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <div class="lp-final">
+        <h2>Evaluate your model on MultiNet v2.0</h2>
+        <p>
+          The submission flow for the full cross-domain benchmark is being built now. To get your model or
+          agent onto the v2.0 leaderboard, get in touch.
+        </p>
+        <div class="lp-cta-row" style="justify-content: center;">
+          <a class="lp-btn lp-btn--primary" href="mailto:pranav@metarch.ai?subject=Evaluating%20a%20model%20on%20MultiNet%20v2.0">
+            <i class="fas fa-envelope"></i> Get in touch
+          </a>
+          <a class="lp-btn lp-btn--ghost" href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-discord"></i> Join the Discord
+          </a>
+          <a class="lp-btn lp-btn--ghost" href="https://github.com/ManifoldRG/MultiNet-v2.0" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i> Code
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== COLLABORATORS ==================== -->
+  <section class="lp-section--tight">
+    <div class="lp-wrap">
+      <p class="lp-sub" style="margin-bottom: 1.5rem;">
+        An open science initiative with contributions from research teams at:
+      </p>
+      <div class="lp-collab">
+        <a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer"><img src="static/images/fig_logo.png" alt="Fig"></a>
+        <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer"><img src="static/images/manifoldlogo.png" alt="Manifold Research"></a>
+        <a href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/mitlogo_alt.png" alt="MIT"></a>
+        <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/GeorgiaTech_RGB.png" alt="Georgia Tech"></a>
+        <a href="https://www.tufts.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/tuftslogo.jpg" alt="Tufts University"></a>
+      </div>
     </div>
   </section>
 
@@ -1698,61 +616,72 @@
       <div class="columns is-centered">
         <div class="column is-8">
           <div class="content" style="color: #fff;">
-            <div class="buttons is-centered mb-4">
-              <a href="https://github.com/ManifoldRG/MultiNet" class="button is-small is-dark" target="_blank">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <span>Code</span>
-              </a>
-            </div>
-  
-            <p>For questions or issues, please <a href="https://github.com/ManifoldRG/MultiNet/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
-  
-            <p>
-              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-              You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-              Commons Attribution-ShareAlike 4.0 International License</a>.
+            <p class="has-text-centered">
+              <a href="static/pages/Multinetv2R1.html" style="color: #90caf9;">v2.0 R1 analysis</a>
+              &nbsp;&middot;&nbsp;
+              <a href="static/pages/archive.html" style="color: #90caf9;">Previous research</a>
+              &nbsp;&middot;&nbsp;
+              <a href="https://github.com/ManifoldRG/MultiNet-v2.0" style="color: #90caf9;">Code</a>
             </p>
-            
+            <p class="has-text-centered">
+              For questions or issues, please
+              <a href="https://github.com/ManifoldRG/MultiNet-v2.0/issues" style="color: #90caf9;">open a GitHub issue</a>
+              or contact <a href="mailto:pranav@metarch.ai" style="color: #90caf9;">pranav [at] metarch [dot] ai</a>
+            </p>
           </div>
         </div>
       </div>
     </div>
   </footer>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="static/js/play.js?v=p1b3"></script>
+<script src="static/js/mn-shell.js"></script>
+<script src="static/js/v2_r1_results_table.js"></script>
+<script src="static/js/v2_r1_finding_charts.js"></script>
+<script src="static/js/v2_r1_finding_tabs.js"></script>
+<script>
+  /* ---- Hero failure reel -------------------------------------------------
+     Three episodes, one per model, all failures. Clicking a pill swaps the
+     source; the brand colour and logo come from the same config so a fourth
+     model is a one-line addition. */
+  (function () {
+    var MODELS = [
+      { name: "Claude Opus 4.8", brand: "#D97757", logo: "static/images/logos/claude.svg",
+        file: "r1_B1_8x8_corridor_swg_0__claude_FAIL.mp4" },
+      { name: "Kimi k2.6", brand: "#1F1F1F", logo: "static/images/logos/kimi.svg",
+        file: "r1_M3_8x8_corridor_kr_sg_1__kimi_FAIL.mp4" },
+      { name: "Qwen3.6-27B", brand: "#6950EF", logo: "static/images/logos/qwen.svg",
+        file: "r1_M5_10x10_dense_kr_kb_1__qwen_FAIL.mp4" }
+    ];
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+    var bar = document.getElementById("lp-reel-models");
+    var video = document.getElementById("lp-reel-video");
+    if (!bar || !video) return;
 
-    <!-- End of Statcounter Code -->
+    function play(i) {
+      video.src = "static/videos/r1_reels/" + MODELS[i].file;
+      video.play().catch(function () { /* autoplay may be blocked; the reel still loads */ });
+      Array.prototype.forEach.call(bar.children, function (b, j) {
+        b.classList.toggle("is-active", i === j);
+      });
+    }
 
-  </div>
-  <script src="static/js/v1_leaderboard_table.js"></script>
-  <script>
-    // Handle collapsible legend functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const collapsibleTrigger = document.querySelector('.collapsible-trigger');
-      const collapsibleContent = document.querySelector('.collapsible-content');
-      const collapsibleIcon = document.querySelector('.collapsible-icon');
-      
-      if (collapsibleTrigger && collapsibleContent && collapsibleIcon) {
-        collapsibleTrigger.addEventListener('click', function() {
-          if (collapsibleContent.style.maxHeight === '0px' || !collapsibleContent.style.maxHeight) {
-            // Expand
-            collapsibleContent.style.maxHeight = collapsibleContent.scrollHeight + 'px';
-            collapsibleIcon.style.transform = 'rotate(180deg)';
-          } else {
-            // Collapse
-            collapsibleContent.style.maxHeight = '0px';
-            collapsibleIcon.style.transform = 'rotate(0deg)';
-          }
-        });
-      }
+    MODELS.forEach(function (m, i) {
+      var b = document.createElement("button");
+      b.className = "lp-reel__pill";
+      b.type = "button";
+      b.style.setProperty("--brand", m.brand);
+      b.style.setProperty("--logo", 'url("' + m.logo + '")');
+      b.innerHTML = '<span class="lp-reel__logo" aria-hidden="true"></span><span></span>';
+      b.lastChild.textContent = m.name;
+      b.addEventListener("click", function () { play(i); });
+      bar.appendChild(b);
     });
-  </script>
-  <script src="static/js/mn-shell.js"></script>
+
+    play(0);
+  })();
+</script>
 </body>
 </html>
-

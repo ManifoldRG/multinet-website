@@ -1,5 +1,11 @@
 (() => {
-  const API = new URLSearchParams(location.search).get("api") || "http://127.0.0.1:8000";
+  // Where the maze backend lives. `?api=` overrides it, which is how you point
+  // the deployed page at a local server during development:
+  //   .../Multinetv2R1.html?api=http://127.0.0.1:8000
+  // TODO(R1): set API_DEFAULT to the hosted HTTPS endpoint before launch. It must
+  // be https - an http endpoint is blocked as mixed content from multinet.ai.
+  const API_DEFAULT = "http://127.0.0.1:8000";
+  const API = new URLSearchParams(location.search).get("api") || API_DEFAULT;
   const FACING = ["East", "South", "West", "North"];
   const FACING_ARROW = ["→", "↓", "←", "↑"];
 
@@ -1066,7 +1072,12 @@
   if (pageNext) pageNext.onclick = () => document.getElementById("next").click();
 
   window.addEventListener("keydown", (ev) => {
-    // Splash: Enter/Space always start play (matches on-screen copy).
+    // The board is embedded in a long page, so every key it claims is a key the
+    // page loses. Nothing is claimed unless the board is focused and on screen -
+    // otherwise Space/Enter would stop scrolling the page before play begins.
+    if (!keyboardActive()) return;
+
+    // Splash: Enter/Space start play (matches on-screen copy).
     if (!playing) {
       if (ev.key === "Enter" || ev.key === " ") {
         ev.preventDefault();
@@ -1107,9 +1118,6 @@
       }
       return;
     }
-
-    // After splash, content pages only take game keys while the board is focused.
-    if (!keyboardActive()) return;
 
     if (ev.key === "Tab") {
       ev.preventDefault();
@@ -1160,13 +1168,17 @@
       render(data.task, data.view);
       els.splash.classList.add("show");
     } catch (err) {
+      // Visitor-facing. The operator detail goes to the console, not the page -
+      // this text is what someone sees if the backend is down on launch day.
       els.error.style.display = "block";
       els.error.textContent =
-        "Could not reach API at " +
-        API +
-        "\n" +
-        (err.message || err) +
-        "\n\nStart it with:\nuvicorn demo.api.app:app --reload --app-dir .";
+        "The playable maze is unavailable right now. The failure replays above " +
+        "show the same mazes being attempted by frontier models.";
+      console.error(
+        "[MultiNet demo] Could not reach the maze API at " + API + " - " + (err.message || err) +
+        "\nRun one locally with: uvicorn demo.api.app:app --reload --app-dir ." +
+        "\nThen load this page with ?api=http://127.0.0.1:8000",
+      );
     }
   })();
 })();
