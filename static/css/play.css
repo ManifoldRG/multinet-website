@@ -131,6 +131,8 @@
 .play-host .board {
   display: grid;
   grid-template-columns: var(--rail) var(--grid) var(--rail);
+  /* Row height is the maze — rails must not grow the card. */
+  grid-template-rows: var(--grid);
   align-items: stretch;
 }
 
@@ -140,6 +142,12 @@
   font-size: 0.9rem;
   min-width: 0;
   width: var(--rail);
+  height: 100%;
+  max-height: var(--grid);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .play-host .rail.right {
@@ -222,13 +230,36 @@
   padding: 14px 0 0;
   margin: 14px 0 0;
   border-top: 1px solid var(--sep);
-  height: auto;
-  max-height: 280px;
-  overflow: auto;
+  /* Fill leftover left-rail height; scroll inside the card only. */
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  overflow-x: hidden;
+  overflow-y: auto;
   width: auto;
   display: block;
   appearance: none;
   -webkit-appearance: none;
+  scrollbar-width: thin;
+  scrollbar-color: #3a3f52 transparent;
+}
+
+.play-host .play-progress::-webkit-scrollbar {
+  width: 6px;
+}
+
+.play-host .play-progress::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 4px 0;
+}
+
+.play-host .play-progress::-webkit-scrollbar-thumb {
+  background: #3a3f52;
+  border-radius: 999px;
+}
+
+.play-host .play-progress::-webkit-scrollbar-thumb:hover {
+  background: #52586e;
 }
 
 .play-host .play-progress li {
@@ -269,9 +300,12 @@
   width: var(--grid);
   height: var(--grid);
   background: #0b0c11;
+  overflow: hidden;
 }
 
 #grid {
+  position: relative;
+  z-index: 1;
   width: var(--grid);
   height: var(--grid);
   max-width: none;
@@ -280,6 +314,59 @@
   image-rendering: pixelated;
   box-sizing: border-box;
   object-fit: fill;
+  will-change: transform;
+}
+
+.play-host .fx-layer {
+  position: absolute;
+  inset: 4px; /* sit inside the grid border */
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.play-host .fx-pulse {
+  position: absolute;
+  border-radius: 2px;
+  background: rgba(90, 220, 140, 0);
+  mix-blend-mode: screen;
+  will-change: background-color;
+}
+
+.play-host .fx-cell {
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.play-host .fx-cell img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  object-fit: fill;
+}
+
+.play-host .fx-flash-white {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.play-host .fx-cell.press {
+  background: #12131a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-host .fx-cell.press img {
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
 }
 
 .play-host .stat strong {
@@ -518,12 +605,19 @@
 @media (max-width: 720px) {
 .play-host .board {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
 
 .play-host .rail {
     width: auto;
+    height: auto;
+    max-height: none;
     border: 0;
     border-bottom: 1px solid var(--sep);
+  }
+
+  .play-host .rail:not(.right) {
+    max-height: min(280px, 50vh);
   }
 
 .play-host .rail.right {
