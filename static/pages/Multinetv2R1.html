@@ -1535,38 +1535,44 @@
           <div class="content has-text-justified">
             <h2 class="title is-3 has-text-centered">Looking forward</h2>
             <p>
-              R1 verifies that puzzle complexity in this modality is genuinely hard for current models. Because
-              the representation is projectable, it is the first step toward A/B testing modality, complexity
-              and other downstream variables against the same underlying puzzle.
+              This release establishes that the puzzle is genuinely hard for current models in one modality,
+              and that the environment can attribute a failure to a stage rather than averaging it into a
+              single score. That is the groundwork. The point of building the task this way is that the
+              structure carries no domain knowledge, so the identical maze can be re-rendered without becoming
+              a different problem &mdash; and that is what the full benchmark will do.
             </p>
-            <p><strong>The full v2.0 benchmark</strong> renders the identical maze in three domains:</p>
+            <p><strong>The full v2.0 benchmark will render the identical maze in three domains:</strong></p>
             <ul>
-              <li><strong>GridWorld</strong> &mdash; 2D visual input, discrete action space. Shipped in R1.</li>
-              <li><strong>Natural language</strong> &mdash; the same maze in prose, where the model must build and hold a spatial model of a world it only reads.</li>
-              <li><strong>3D</strong> &mdash; the same maze as an egocentric simulated environment with a continuous action space.</li>
+              <li><strong>GridWorld</strong> &mdash; a 2D visual grid with a discrete action space. This is the domain evaluated here.</li>
+              <li><strong>Natural language</strong> &mdash; the same maze described in prose, where a model will have to build and hold a spatial model of a world it only ever reads.</li>
+              <li><strong>3D</strong> &mdash; the same maze as a simulated first-person environment, where perception and navigation come with a continuous action space.</li>
             </ul>
             <p>
-              A model that clears one domain still has to clear the other two, which is what turns
-              &ldquo;did it generalize?&rdquo; from an inference into a measurement. Alongside that: a calibrated
-              generator emitting fresh instances at a target difficulty, a failure-mode taxonomy per model and
-              per domain, a leaderboard with non-model baselines, and a submission pipeline.
+              Because the underlying puzzle will be identical across all three, a model that clears one domain
+              will still have to clear the other two &mdash; and that is what turns &ldquo;did it
+              generalize?&rdquo; from an inference into a measurement. It will also let us settle what this
+              release cannot: whether a failure comes from misreading the maze or from acting badly in it,
+              which becomes separable the moment the same task is presented a different way.
             </p>
             <p>
-              The open questions R1 leaves are the ones we most want help with &mdash; whether an agent framework
-              that supplies its own memory closes the discovery gap; whether the failure survives a text
-              rendering of the identical task; whether a second unfamiliar mechanism reproduces the switch
-              result; and how to establish that two different mazes of the same shortest-path length are
-              actually equally hard.
+              This release leaves us with a few open questions that we are going to explore immediately after,
+              on the path to the full cross-domain version of the benchmark:
             </p>
+            <ul>
+              <li>Whether an agent framework that supplies its own memory closes the discovery gap.</li>
+              <li>Whether the switch result reproduces with a second unfamiliar mechanism.</li>
+              <li>How to establish that two different mazes of the same shortest-path length are genuinely
+                  equally hard &mdash; which is what it will take to compare scores across different draws of
+                  the benchmark over time.</li>
+            </ul>
           </div>
 
           <div class="r1-note" style="border-left-color: #1E8449; background: #f3fbf6;">
             <p>
-              <strong style="color: #1E8449;">Want to run your model on MultiNet v2.0?</strong>
-              The submission flow for the full benchmark is being built now, and we would rather build it around
-              real requirements than guess. If you would like your model or agent on the v2.0 leaderboard, tell
-              us what your harness needs &mdash;
-              <a href="mailto:pranav@metarch.ai?subject=Running%20a%20model%20on%20MultiNet%20v2.0">get in touch with us</a>
+              <strong style="color: #1E8449;">Want to evaluate your model on MultiNet v2.0?</strong>
+              The submission flow for the full benchmark is being built now. To get your model or agent onto the
+              v2.0 leaderboard,
+              <a href="mailto:pranav@metarch.ai?subject=Evaluating%20a%20model%20on%20MultiNet%20v2.0">get in touch with us</a>
               or join the working group on
               <a href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer">Discord</a>.
             </p>
@@ -1602,7 +1608,7 @@
                 <span>Code</span>
               </a>
             </div>
-            <p>For questions or issues, please <a href="https://github.com/ManifoldRG/MultiNet-v2.0/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
+            <p class="has-text-centered">For questions or issues, please <a href="https://github.com/ManifoldRG/MultiNet-v2.0/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
           </div>
         </div>
       </div>
