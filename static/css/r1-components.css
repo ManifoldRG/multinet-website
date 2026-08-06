@@ -509,7 +509,7 @@
     .r1-def__stat .n { font-size: 0.8rem; color: #6b7280; }
 
     /* Line the two cards' bands up with each other - heading, description,
-       formula, result - so the formulae sit at the same height and match in
+       formula, result - so the formulas sit at the same height and match in
        size even though the descriptions differ in length. Declared after the
        flex rules above so it wins; flex remains the fallback without subgrid. */
     @supports (grid-template-rows: subgrid) {

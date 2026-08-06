@@ -43,7 +43,7 @@
 
   // The label is the affordance: clicking it opens the shared definitions
   // panel and lights the matching entry, so a formula is one click from the
-  // number it explains without putting four formulae on the landing page.
+  // number it explains without putting four formulas on the landing page.
   function metric(key, label, viz, value) {
     return '<div class="r1-rc__metric">' +
       '<dt><button type="button" class="r1-rc__what" data-metric="' + key + '">' +
