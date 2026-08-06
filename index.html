@@ -476,31 +476,35 @@
   <!-- ==================== WHY MAZES ==================== -->
   <section class="lp-section">
     <div class="lp-wrap">
-      <h2 class="lp-h2">Why mazes with mechanisms</h2>
+      <h2 class="lp-h2">Why mazes with mechanisms?</h2>
       <p class="lp-sub">
-        Measuring long-horizon action needs a task with four properties at once. This is the simplest
-        structure we know of that has all four.
+        We think evaluating long-horizon agentic capability needs a substrate with four properties at
+        once. Mazes with causal mechanisms are simple representations we know of that have all four.
       </p>
       <div class="lp-props">
         <div class="lp-prop">
           <span class="lp-prop__icon"><i class="fas fa-lightbulb"></i></span>
           <h3>Knowledge-free</h3>
-          <p>Nothing to know. No API, no jargon, no priors &mdash; so failure cannot be blamed on unfamiliarity.</p>
+          <p>No prior knowledge required &mdash; no API familiarity, no jargon, and no domain-specific rules.
+             Failures here cannot be blamed on unfamiliarity of interface.</p>
         </div>
         <div class="lp-prop">
           <span class="lp-prop__icon"><i class="fas fa-dice"></i></span>
           <h3>Generative</h3>
-          <p>No fixed answer key to leak into training data, and difficulty that scales instead of saturating.</p>
+          <p>No fixed answer key to contaminate, and difficulty scales with the models instead of saturating.</p>
         </div>
         <div class="lp-prop">
           <span class="lp-prop__icon"><i class="fas fa-layer-group"></i></span>
           <h3>Projectable</h3>
-          <p>The same maze re-renders in language or 3D, turning generalization into a direct comparison.</p>
+          <p>The same maze can be re-rendered in language or 3D or many other domains, quantifying cross-domain
+             generalization. For the full version of the benchmark, we will be expanding to multiple other
+             domains.</p>
         </div>
         <div class="lp-prop">
           <span class="lp-prop__icon"><i class="fas fa-ruler-combined"></i></span>
           <h3>Verifiable</h3>
-          <p>Breadth-first search gives the exact optimal path from any state, so a single move can be called wrong.</p>
+          <p>BFS gives the exact optimal path from any state &mdash; an objective difficulty scale, partial credit,
+             and the ability to call one move strictly wrong.</p>
         </div>
       </div>
     </div>
