@@ -44,8 +44,8 @@
   <link rel="stylesheet" href="../css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../../static/css/mn-shared.css?v=r1e">
-  <link rel="stylesheet" href="../css/r1-components.css?v=r1e">
+  <link rel="stylesheet" href="../../static/css/mn-shared.css?v=r1g">
+  <link rel="stylesheet" href="../css/r1-components.css?v=r1g">
   <link rel="stylesheet" href="../css/play.css?v=p1b5">
 
   <script defer src="../js/fontawesome.all.min.js"></script>
@@ -143,6 +143,17 @@
       font-size: 1.05rem; margin: 0;
     }
     .r1-def p { font-size: 0.9rem; line-height: 1.55; color: #4a4a4a; margin: 0 0 1rem; }
+
+    /* A caveat that belongs with a finding but should not read as one of its
+       claims - smaller, quieter, set off by a rule. */
+    .r1-note-inline {
+      margin-top: 1rem !important;
+      padding-top: 0.85rem;
+      border-top: 1px solid #eceff3;
+      font-size: 0.86rem !important;
+      line-height: 1.6 !important;
+      color: #6b7280 !important;
+    }
 
     /* ---------- Headline chart ---------- */
     .r1-chart-controls {
@@ -675,15 +686,17 @@
                 <h4>Progress score</h4>
               </div>
               <p>
-                How much of the distance to the goal was closed, measured at the agent's <em>closest ever</em>
-                approach. 1.0 is a solve; 0 means it never got nearer than where it started.
+                How much of the work to the goal was completed, at the agent's <em>closest ever</em>
+                approach. Counted in actions still needed to solve, state-conditioned on keys held and
+                doors opened, so a tile metric cannot pay for standing near a goal behind a shut door.
+                1.0 is a solve; 0 means it never got nearer than where it started.
               </p>
               <div class="r1-formula">
-                Progress = 1 &minus; <span class="frac"><span class="top">d<sub>closest &rarr; goal</sub></span><span class="bot">d<sub>start &rarr; goal</sub></span></span>
+                Progress = 1 &minus; <span class="frac"><span class="top">a<sub>closest &rarr; goal</sub></span><span class="bot">a<sub>start &rarr; goal</sub></span></span>
               </div>
               <div class="r1-def__stat">
                 <span class="k">In this run</span>
-                <span class="v">0.22</span>
+                <span class="v">0.17</span>
                 <span class="n">- mean across 150 episodes</span>
               </div>
             </div>
@@ -1160,21 +1173,27 @@
             </figure>
 
             <div class="r1-finding">
-              <h4>2. Path length dominates so heavily that this run cannot resolve the other difficulty axes</h4>
+              <h4>2. Distance and mechanisms both drive difficulty, and on short mazes the mechanisms dominate</h4>
               <p>
-                Shortest path is the one property that clearly predicts how far an agent gets. Everything else
-                fails to clear significance across all 150 episodes - but that is a statement about the
-                measurement, not about the mechanisms. An agent asked to sustain eighty correct moves fails on
-                length alone, long before a switch or a distractor gets a chance to matter.
+                Across all 150 episodes shortest path explains the most variation in progress (R&sup2; 0.17), but
+                gates and switches are close behind and clearly significant (0.12 and 0.10, both p &lt; 0.001).
+                An agent asked to sustain eighty correct moves fails on length alone; that much was already
+                clear. What the mechanism-aware metric adds is that the barriers are exacting a measurable
+                price at the same time.
               </p>
               <p>
                 Restrict the analysis to the 69 episodes on mazes short enough to leave headroom and the ordering
-                <em>inverts</em>. Gates and switches roughly triple in explanatory power while path length
-                collapses and stops being significant at all. Switch mazes also record zero solves in 105
-                episodes while the progress regression on switches returns only p = 0.08 - the outcome
-                measure cannot see an effect the solve counts make obvious.
-                <strong>Path length is verified as a difficulty axis; the rest are untested at this difficulty
-                rather than shown to be inert.</strong>
+                <em>inverts</em>. Gates and switches each explain around a quarter of the variation (0.26 and
+                0.25, both p &lt; 0.001) while path length collapses to 0.01 and stops being significant at all.
+                <strong>Difficulty here is not one axis but two, and which one binds depends on whether the maze
+                is long enough for length to run out the clock first.</strong>
+              </p>
+              <p class="r1-note-inline">
+                These numbers come from the action-based progress metric, which counts distance in moves still
+                needed to solve rather than in tiles. The tile metric treats doors and gates as passable, so it
+                credits an agent for drifting close to a goal it never unlocked - credit concentrated in exactly
+                the switch and decoy mazes. Under it, gates and switches both fell short of significance, which
+                is what earlier drafts of this section reported.
               </p>
             </div>
 
@@ -1182,8 +1201,8 @@
               <div class="r1-chart-stage" style="height: 300px;"><canvas id="r1-inversion-chart"></canvas></div>
               <figcaption>
                 How much of the variation in progress each maze property explains on its own. Across the whole
-                set, shortest path swamps everything. Among the short mazes, where finishing is actually
-                possible, it explains almost nothing and the mechanisms take over.
+                set, shortest path leads with the mechanisms close behind. Among the short mazes, where
+                finishing is actually possible, it explains almost nothing and the mechanisms take over.
               </figcaption>
             </figure>
 
@@ -1339,12 +1358,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../js/play.js?v=p1b7"></script>
-<script src="../../static/js/mn-shell.js?v=r1e"></script>
-<script src="../../static/js/v2_r1_results_table.js?v=r1e"></script>
-<script src="../../static/js/v2_r1_headline_chart.js?v=r1e"></script>
-<script src="../../static/js/v2_r1_finding_charts.js?v=r1e"></script>
+<script src="../../static/js/mn-shell.js?v=r1g"></script>
+<script src="../../static/js/v2_r1_results_table.js?v=r1g"></script>
+<script src="../../static/js/v2_r1_headline_chart.js?v=r1g"></script>
+<script src="../../static/js/v2_r1_finding_charts.js?v=r1g"></script>
 <script>
 </script>
-<script src="../js/v2_r1_reel.js?v=r1e"></script>
+<script src="../js/v2_r1_reel.js?v=r1g"></script>
 </body>
 </html>

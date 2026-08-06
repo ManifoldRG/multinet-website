@@ -52,13 +52,14 @@
     {
       key: "progress",
       title: "Average progress",
-      body: "How far along the optimal route the agent got before the episode ended, " +
-            "averaged over all 50 mazes. Distance is measured in tiles remaining to the goal, " +
-            "so partial credit is possible on a maze nobody solves.",
-      formula: 'Progress = 1 &minus; <span class="frac"><span class="top">tiles still to go at the end</span>' +
-               '<span class="bot">tiles to go at the start</span></span>',
+      body: "How much of the work the agent got through before the episode ended, averaged over " +
+            "all 50 mazes. Distance is counted in actions still needed to solve, and it tracks the " +
+            "mechanism state: picking up the right key or opening a door lowers the remaining cost " +
+            "even if the agent has not moved.",
+      formula: 'Progress = 1 &minus; <span class="frac"><span class="top">actions still needed at the end</span>' +
+               '<span class="bot">actions needed at the start</span></span>',
       denom: "1",
-      scale: "The whole route, so the bar is the share of it covered."
+      scale: "The whole solution, so the bar is the share of it completed. Measured in actions rather than tiles: a tile metric pays an agent for standing near a goal behind a door it never opened."
     },
     {
       key: "steps",
@@ -203,7 +204,9 @@
     if (!container) return;
 
     var onHome = /\/(index\.html)?$/.test(window.location.pathname);
-    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json";
+    // Versioned like the scripts are: the numbers change more often than the
+    // code that draws them, and a cached copy of the old ones is invisible.
+    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r1f";
     var assetBase = onHome ? "static/" : "../";
 
     fetch(path)
