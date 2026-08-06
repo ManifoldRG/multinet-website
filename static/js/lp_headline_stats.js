@@ -2,9 +2,14 @@
    MultiNet - landing page headline stats
 
    Counts each numerator up and fills its ratio rule, once, the
-   first time the strip is on screen. The numbers are already in
-   the markup, so with this script absent or JS off the strip is
-   simply static and correct.
+   first time the strip is on screen.
+
+   The markup already carries the final number and the final fill
+   (--p), so the correct strip is what you get with this script
+   absent, with JS off, or if the reveal never fires. This script
+   only ever takes a correct strip, winds it back to zero, and
+   plays it forward - it never supplies a value the page did not
+   already have.
 
    Reads data-value / data-total off each .lp-stat.
    Styles: the .lp-stat block in index.html
@@ -23,31 +28,43 @@
     var total = parseInt(stat.dataset.total, 10);
     var out = stat.querySelector(".v");
     var rule = stat.querySelector(".r");
-    if (!out || isNaN(target)) return;
 
     if (rule && total) rule.style.setProperty("--p", target / total);
+    if (!out || isNaN(target)) return;
 
-    // Nothing to count, and animating a zero to a zero just looks broken.
-    if (still || target === 0) { out.textContent = target; return; }
+    function settle() { out.textContent = target; }
 
+    // Animating a zero to a zero just looks broken.
+    if (target === 0) { settle(); return; }
+
+    var done = false;
     var t0 = null;
     function step(now) {
+      if (done) return;
       if (t0 === null) t0 = now;
       var p = Math.min(1, (now - t0) / DURATION);
       out.textContent = Math.round(easeOut(p) * target);
       if (p < 1) requestAnimationFrame(step);
+      else done = true;
     }
     requestAnimationFrame(step);
+
+    // Whatever happens to the frame budget - a throttled tab, a loaded
+    // machine - the real number is on screen by the time the animation
+    // should have ended. A counter parked mid-count shows a wrong number,
+    // which is worse than showing no animation at all.
+    setTimeout(function () { if (!done) { done = true; settle(); } }, DURATION + 400);
   }
 
-  function init() {
-    var stats = [].slice.call(document.querySelectorAll(".lp-stat[data-value]"));
-    if (!stats.length) return;
-
-    if (!("IntersectionObserver" in window)) {
-      stats.forEach(reveal);
-      return;
-    }
+  function arm(stats) {
+    // Wind back to zero only now, so the window between arming and
+    // revealing is never long enough to be seen.
+    stats.forEach(function (s) {
+      var out = s.querySelector(".v");
+      var rule = s.querySelector(".r");
+      if (out) out.textContent = "0";
+      if (rule) rule.style.setProperty("--p", 0);
+    });
 
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -58,6 +75,26 @@
     }, { threshold: 0.5 });
 
     stats.forEach(function (s) { io.observe(s); });
+  }
+
+  function init() {
+    var stats = [].slice.call(document.querySelectorAll(".lp-stat[data-value]"));
+
+    // Nothing to do: the markup is already the finished state.
+    if (!stats.length || still || !("IntersectionObserver" in window)) return;
+
+    // A hidden tab neither paints nor reports intersections, so arming one
+    // would leave it sitting at zero until someone looked at it. Wait.
+    if (document.hidden) {
+      document.addEventListener("visibilitychange", function once() {
+        if (document.hidden) return;
+        document.removeEventListener("visibilitychange", once);
+        arm(stats);
+      });
+      return;
+    }
+
+    arm(stats);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
