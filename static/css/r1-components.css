@@ -377,12 +377,11 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.15); display: block;
     }
 
-    /* ---------- Metric labels, ranges and definitions ----------
-       A filled .r1-bar means "this share of 1". A .r1-range means "where this
-       model sits between the lowest and highest of the three" - deliberately a
-       different mark, because steps and tokens-per-tile have no ceiling to
-       fill against. */
-    /* The metric name stays a plain label at rest - twelve visible affordances
+    /* ---------- Metric labels and definitions ----------
+       All four metrics use the same .r1-bar. Each fills against a denominator
+       named in the definitions panel, so one mark carries one meaning.
+
+       The metric name stays a plain label at rest - twelve visible affordances
        across three cards is noise. It still jumps to its own formula, and the
        button below the cards is the discoverable route. */
     .r1-rc__what {
@@ -395,20 +394,6 @@
     .is-sr {
       position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
       overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-    }
-
-    .r1-range {
-      flex: 1 1 auto; position: relative; height: 7px;
-      display: flex; align-items: center;
-    }
-    .r1-range::before {
-      content: ""; position: absolute; left: 0; right: 0; height: 2px;
-      border-radius: 999px; background: #e4e9ef;
-    }
-    .r1-range__dot {
-      position: absolute; left: var(--x); transform: translateX(-50%);
-      width: 9px; height: 9px; border-radius: 50%;
-      background: var(--c); box-shadow: 0 0 0 2px #fff;
     }
 
     .r1-mdefs { margin-top: 1.5rem; }
@@ -509,7 +494,7 @@
     .r1-def__stat .n { font-size: 0.8rem; color: #6b7280; }
 
     /* Line the two cards' bands up with each other - heading, description,
-       formula, result - so the formulas sit at the same height and match in
+       formula, result - so the formulae sit at the same height and match in
        size even though the descriptions differ in length. Declared after the
        flex rules above so it wins; flex remains the fallback without subgrid. */
     @supports (grid-template-rows: subgrid) {

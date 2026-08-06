@@ -22,28 +22,18 @@
     "Qwen3.6-27B":     { colour: "#6950EF", logo: "qwen.svg" }
   };
 
-  // A filled bar says "this fraction of a whole", so it is only honest for
-  // the two metrics that are genuinely shares of 1.
-  function bar(value) {
-    var pct = Math.max(0, Math.min(100, value * 100));
+  // Every bar is a share of a denominator, and every denominator is named in
+  // the definitions panel. Unlabelled bars were the original problem: two of
+  // them filled against the largest of three models, which read as a ceiling
+  // that does not exist.
+  function bar(value, max) {
+    var pct = Math.max(0, Math.min(100, (value / max) * 100));
     return '<span class="r1-bar"><span style="--w:' + pct + '%"></span></span>';
-  }
-
-  // Steps and tokens-per-tile have no ceiling - the step cap is 3x BFS optimal
-  // and so differs per maze, and a token ratio is unbounded. Filling a bar to
-  // the largest of three models made that model look maxed out against a scale
-  // that does not exist. Place a marker on the observed range instead, which
-  // can only be read as "relative to the other two".
-  function marker(value, lo, hi) {
-    var t = hi > lo ? (value - lo) / (hi - lo) : 0.5;
-    // inset the ends so the extreme models still show a dot, not a clipped edge
-    var pct = 6 + t * 88;
-    return '<span class="r1-range"><span class="r1-range__dot" style="--x:' + pct + '%"></span></span>';
   }
 
   // The label is the affordance: clicking it opens the shared definitions
   // panel and lights the matching entry, so a formula is one click from the
-  // number it explains without putting four formulas on the landing page.
+  // number it explains without putting four formulae on the landing page.
   function metric(key, label, viz, value) {
     return '<div class="r1-rc__metric">' +
       '<dt><button type="button" class="r1-rc__what" data-metric="' + key + '">' +
@@ -67,7 +57,7 @@
             "so partial credit is possible on a maze nobody solves.",
       formula: 'Progress = 1 &minus; <span class="frac"><span class="top">tiles still to go at the end</span>' +
                '<span class="bot">tiles to go at the start</span></span>',
-      scale: "A share of 1. The bar is that share."
+      scale: "The bar fills against 1 &mdash; the whole route."
     },
     {
       key: "steps",
@@ -77,8 +67,9 @@
             "reach no new tile.",
       formula: 'Steps = <span class="frac"><span class="top">actions taken across all episodes</span>' +
                '<span class="bot">episodes</span></span>',
-      scale: "No fixed ceiling - the step cap is 3&times; the BFS optimum, so it differs per maze. " +
-             "The marker shows where a model sits between the lowest and highest of the three."
+      scale: "The bar fills against 173.5 &mdash; the average step budget, since the cap is " +
+             "3&times; the BFS optimum and that optimum averages 57.8 tiles over the 50 mazes. " +
+             "No model spends even 40% of it: the watchdog ends the episode first."
     },
     {
       key: "tokens",
@@ -88,8 +79,9 @@
             "spend 20 to 26 times what Claude does, and solve fewer mazes.",
       formula: 'Cost = <span class="frac"><span class="top">output tokens generated</span>' +
                '<span class="bot">new tiles reached</span></span>',
-      scale: "Not capped by the 64k budget - that is the per-episode allowance, while this is a " +
-             "ratio accumulated across the episode, so it can and does run far higher."
+      scale: "The only bar here without a real ceiling, so it fills against the heaviest of the " +
+             "three &mdash; Kimi, at 162k. Note this is not capped by the 64k budget: that is the " +
+             "per-episode allowance, while this is a ratio accumulated across the episode."
     },
     {
       key: "noeffect",
@@ -99,7 +91,7 @@
             "Claude&rsquo;s figure is the highest of the three.",
       formula: 'No-effect rate = <span class="frac"><span class="top">actions leaving the state unchanged</span>' +
                '<span class="bot">actions taken</span></span>',
-      scale: "A share of 1. The bar is that share."
+      scale: "The bar fills against 1 &mdash; every action taken."
     }
   ];
 
@@ -114,7 +106,7 @@
     }).join("");
 
     return '<details class="r1-mdefs" id="r1-metric-defs">' +
-      '<summary><span class="r1-mdefs__btn">Show the formulas</span></summary>' +
+      '<summary><span class="r1-mdefs__btn">Show the formulae</span></summary>' +
       '<div class="r1-mdefs__grid">' + items + "</div>" +
     "</details>";
   }
@@ -143,13 +135,17 @@
   function render(data, container, assetBase) {
     var models = data.models;
 
-    // observed range per unbounded metric, shared by all three cards
-    function span(get) {
-      var vs = models.map(get);
-      return { lo: Math.min.apply(null, vs), hi: Math.max.apply(null, vs) };
-    }
-    var stepSpan = span(function (m) { return m.stepsMean; });
-    var tokenSpan = span(function (m) { return m.tokensPerNewTile; });
+    // Steps run against the actual budget an episode is given: the cap is 3x
+    // the BFS optimum, and the optimum averages 57.8 tiles over the 50 mazes.
+    // Every model stops well short of it, because the stall watchdog fires
+    // first - which is the point the bar should make.
+    var STEP_BUDGET = 173.5;
+
+    // A token ratio has no such ceiling, so this one is explicitly relative to
+    // the heaviest of the three and says so in the panel.
+    var maxTokens = Math.max.apply(null, models.map(function (m) {
+      return m.tokensPerNewTile;
+    }));
 
     var cards = models.map(function (m) {
       var b = BRAND[m.name] || { colour: "#64748b", logo: null };
@@ -174,13 +170,13 @@
 
         '<dl class="r1-rc__metrics">' +
           metric("progress", "Average progress",
-                 bar(m.progressMean), fmt(m.progressMean, 2)) +
+                 bar(m.progressMean, 1), fmt(m.progressMean, 2)) +
           metric("steps", "Average steps before the episode ended",
-                 marker(m.stepsMean, stepSpan.lo, stepSpan.hi), fmt(m.stepsMean, 1)) +
+                 bar(m.stepsMean, STEP_BUDGET), fmt(m.stepsMean, 1)) +
           metric("tokens", "Tokens per new tile reached",
-                 marker(m.tokensPerNewTile, tokenSpan.lo, tokenSpan.hi), tokens) +
+                 bar(m.tokensPerNewTile, maxTokens), tokens) +
           metric("noeffect", "Actions that changed nothing",
-                 bar(m.noEffectRate), Math.round(m.noEffectRate * 100) + "%") +
+                 bar(m.noEffectRate, 1), Math.round(m.noEffectRate * 100) + "%") +
         "</dl>" +
 
         '<div class="r1-rc__foot">' + ended + "</div>" +
