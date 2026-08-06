@@ -89,19 +89,34 @@
     }
     .lp-hero__lead strong { color: #12151c; font-weight: 600; }
 
-    .lp-cta-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    /* Buttons sit on a solid edge rather than a blur, so pressing one can
+       travel the height of that edge and land flush - the depth is the
+       affordance, not a decoration. --edge is the shadowed side of the key. */
+    .lp-cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: flex-start; }
     .lp-btn {
+      --face: #005A9C;
+      --edge: #003D6B;
+      --lift: 4px;
       display: inline-flex; align-items: center; gap: 0.5em;
-      padding: 0.65rem 1.15rem; border-radius: 8px;
+      padding: 0.65rem 1.2rem; border-radius: 9px;
       font-size: 0.93rem; font-weight: 600; text-decoration: none;
-      border: 1px solid transparent;
-      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+      border: 0; cursor: pointer;
+      background: var(--face); color: #fff;
+      box-shadow: 0 var(--lift) 0 var(--edge), 0 6px 14px rgba(3, 34, 60, 0.22);
+      transform: translateY(0);
+      transition: transform 0.09s ease, box-shadow 0.09s ease, background 0.16s ease;
     }
-    .lp-btn:hover { transform: translateY(-1px); }
-    .lp-btn--primary { background: #005A9C; color: #fff; }
-    .lp-btn--primary:hover { background: #00457a; color: #fff; }
-    .lp-btn--ghost { background: #fff; color: #12151c; border-color: #d9dee5; }
-    .lp-btn--ghost:hover { border-color: #005A9C; color: #005A9C; }
+    .lp-btn:hover { color: #fff; background: #0069b5; }
+    .lp-btn:active {
+      transform: translateY(var(--lift));
+      box-shadow: 0 0 0 var(--edge), 0 1px 3px rgba(3, 34, 60, 0.25);
+    }
+    .lp-btn:focus-visible {
+      outline: 2px solid #0B7285; outline-offset: 3px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .lp-btn { transition: background 0.16s ease; }
+    }
 
     /* ---------- failure reel ----------
        The pills, the clip row and their brand-colour behaviour are shared
@@ -280,10 +295,10 @@
             are not explained to the models. <strong>3 frontier models solve 6 out of 150 episodes.</strong>
           </p>
           <div class="lp-cta-row">
-            <a class="lp-btn lp-btn--primary" href="#play-the-maze">
+            <a class="lp-btn" href="#play-the-maze">
               <i class="fas fa-gamepad"></i> Play a maze
             </a>
-            <a class="lp-btn lp-btn--ghost" href="static/pages/Multinetv2R1.html">
+            <a class="lp-btn" href="static/pages/Multinetv2R1.html">
               Read the analysis
             </a>
             <!-- TODO(R1): add a third button linking the technical report on the
@@ -497,7 +512,7 @@
       </div>
 
       <p style="text-align: center; margin-top: 1.75rem;">
-        <a class="lp-btn lp-btn--ghost" href="static/pages/Multinetv2R1.html">
+        <a class="lp-btn" href="static/pages/Multinetv2R1.html">
           Read the full analysis &rarr;
         </a>
       </p>
@@ -571,13 +586,13 @@
           agent onto the v2.0 leaderboard, get in touch.
         </p>
         <div class="lp-cta-row" style="justify-content: center;">
-          <a class="lp-btn lp-btn--primary" href="mailto:pranav@metarch.ai?subject=Evaluating%20a%20model%20on%20MultiNet%20v2.0">
+          <a class="lp-btn" href="mailto:pranav@metarch.ai?subject=Evaluating%20a%20model%20on%20MultiNet%20v2.0">
             <i class="fas fa-envelope"></i> Get in touch
           </a>
-          <a class="lp-btn lp-btn--ghost" href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer">
+          <a class="lp-btn" href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-discord"></i> Join the Discord
           </a>
-          <a class="lp-btn lp-btn--ghost" href="https://github.com/ManifoldRG/MultiNet-v2.0" target="_blank" rel="noopener noreferrer">
+          <a class="lp-btn" href="https://github.com/ManifoldRG/MultiNet-v2.0" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-github"></i> Code
           </a>
         </div>
