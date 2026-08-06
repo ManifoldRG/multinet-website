@@ -23,14 +23,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="MultiNet is a benchmark for long-horizon action with causal reasoning. Mazes with hidden causal mechanisms that people solve in under a minute. Three frontier models solved 6 of 150 episodes.">
-  <meta property="og:title" content="MultiNet - a benchmark frontier models cannot solve"/>
+  <meta property="og:title" content="MultiNet - frontier models struggle on 2D mazes"/>
   <meta property="og:description" content="Mazes with hidden causal mechanisms. Nothing to know, an exact oracle, difficulty you can turn up. Three frontier models solved 6 of 150 episodes."/>
   <meta property="og:url" content="https://multinet.ai/"/>
   <meta property="og:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="MultiNet - a benchmark frontier models cannot solve">
+  <meta name="twitter:title" content="MultiNet - frontier models struggle on 2D mazes">
   <meta name="twitter:description" content="Mazes with hidden causal mechanisms. Three frontier models solved 6 of 150 episodes.">
   <meta name="twitter:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg">
   <meta name="keywords" content="Agentic Benchmark, Long-Horizon Action, Causal Reasoning, GridWorld, Living Benchmark, Frontier Models, MultiNet">
@@ -103,36 +103,25 @@
     .lp-btn--ghost { background: #fff; color: #12151c; border-color: #d9dee5; }
     .lp-btn--ghost:hover { border-color: #005A9C; color: #005A9C; }
 
-    /* ---------- failure reel ---------- */
+    /* ---------- failure reel ----------
+       The pills, the clip row and their brand-colour behaviour are shared
+       with the analysis page (r1-components.css). Only the framing of the
+       video differs here, because the hero crops it into a fixed box. */
     .lp-reel__frame {
       border-radius: 14px; overflow: hidden; background: #0b0e13;
       box-shadow: 0 18px 40px rgba(12, 18, 28, 0.18);
       aspect-ratio: 16 / 10;
     }
     .lp-reel__frame video { width: 100%; height: 100%; display: block; object-fit: contain; }
-    .lp-reel__models {
-      display: flex; justify-content: center; gap: 0.5rem;
-      flex-wrap: wrap; margin-top: 0.85rem;
-    }
-    .lp-reel__pill {
-      display: inline-flex; align-items: center; gap: 0.45em;
-      border: 1px solid #e4e7ee; background: #fff; color: #4a5160;
-      border-radius: 999px; padding: 0.35rem 0.85rem 0.35rem 0.6rem;
-      font: inherit; font-size: 0.85rem; cursor: pointer;
-      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
-    }
-    .lp-reel__pill:hover { border-color: var(--brand); }
-    .lp-reel__pill.is-active { background: var(--brand); border-color: var(--brand); color: #fff; }
-    .lp-reel__logo {
-      width: 17px; height: 17px; flex: 0 0 auto;
-      background-color: var(--brand);
-      -webkit-mask: var(--logo) center / contain no-repeat;
-      mask: var(--logo) center / contain no-repeat;
-    }
-    .lp-reel__pill.is-active .lp-reel__logo { background-color: #fff; }
     .lp-reel__cap {
       text-align: center; font-size: 0.85rem; color: #8a90a0; margin: 0.6rem 0 0;
     }
+    /* tighter than the analysis page - this row sits in the hero */
+    .r1-reel-models { gap: 0.45rem; margin: 0.85rem 0 0.5rem; }
+    .r1-reel-model { font-size: 0.85rem; padding: 0.35rem 0.85rem 0.35rem 0.45rem; }
+    .r1-reel-model .r1-logo { width: 17px; height: 17px; }
+    .r1-reel-clips { margin-bottom: 0; }
+    .r1-reel-clip { font-size: 0.8rem; padding: 0.25rem 0.7rem; }
 
     /* ---------- stat strip ---------- */
     .lp-stats {
@@ -284,11 +273,11 @@
     <div class="lp-wrap">
       <div class="lp-hero__grid">
         <div>
-          <h1>Frontier models cannot solve these mazes.</h1>
+          <h1>Frontier models struggle on 2D mazes.</h1>
           <p class="lp-hero__lead">
-            MultiNet v2.0 drops models into a grid world with keys, doors and switches, and never explains
-            how any of it works. People solve these in under a minute.
-            <strong>Three frontier models solved 6 of 150 episodes.</strong>
+            The first release of MultiNet v2.0 drops models into a 2D maze with walls, keys, doors,
+            switches, gates, distractors, and a goal tile. There are six valid actions and the mechanisms
+            are not explained to the models. <strong>3 frontier models solve 6 out of 150 episodes.</strong>
           </p>
           <div class="lp-cta-row">
             <a class="lp-btn lp-btn--primary" href="#play-the-maze">
@@ -305,10 +294,11 @@
 
         <div class="lp-reel">
           <div class="lp-reel__frame">
-            <video id="lp-reel-video" autoplay loop muted playsinline preload="metadata"></video>
+            <video id="r1-reel-video" autoplay loop muted playsinline preload="metadata"></video>
           </div>
-          <div class="lp-reel__models" id="lp-reel-models"></div>
-          <p class="lp-reel__cap">A frontier model attempting one of the mazes. Pick a model to watch.</p>
+          <div class="r1-reel-models" id="r1-reel-models"></div>
+          <div class="r1-reel-clips" id="r1-reel-clips"></div>
+          <p class="lp-reel__cap">A few examples of models failing the mazes</p>
         </div>
       </div>
     </div>
@@ -641,47 +631,6 @@
 <script src="static/js/v2_r1_results_table.js"></script>
 <script src="static/js/v2_r1_finding_charts.js"></script>
 <script src="static/js/v2_r1_finding_tabs.js"></script>
-<script>
-  /* ---- Hero failure reel -------------------------------------------------
-     Three episodes, one per model, all failures. Clicking a pill swaps the
-     source; the brand colour and logo come from the same config so a fourth
-     model is a one-line addition. */
-  (function () {
-    var MODELS = [
-      { name: "Claude Opus 4.8", brand: "#D97757", logo: "static/images/logos/claude.svg",
-        file: "r1_B1_8x8_corridor_swg_0__claude_FAIL.mp4" },
-      { name: "Kimi k2.6", brand: "#1F1F1F", logo: "static/images/logos/kimi.svg",
-        file: "r1_M3_8x8_corridor_kr_sg_1__kimi_FAIL.mp4" },
-      { name: "Qwen3.6-27B", brand: "#6950EF", logo: "static/images/logos/qwen.svg",
-        file: "r1_M5_10x10_dense_kr_kb_1__qwen_FAIL.mp4" }
-    ];
-
-    var bar = document.getElementById("lp-reel-models");
-    var video = document.getElementById("lp-reel-video");
-    if (!bar || !video) return;
-
-    function play(i) {
-      video.src = "static/videos/r1_reels/" + MODELS[i].file;
-      video.play().catch(function () { /* autoplay may be blocked; the reel still loads */ });
-      Array.prototype.forEach.call(bar.children, function (b, j) {
-        b.classList.toggle("is-active", i === j);
-      });
-    }
-
-    MODELS.forEach(function (m, i) {
-      var b = document.createElement("button");
-      b.className = "lp-reel__pill";
-      b.type = "button";
-      b.style.setProperty("--brand", m.brand);
-      b.style.setProperty("--logo", 'url("' + m.logo + '")');
-      b.innerHTML = '<span class="lp-reel__logo" aria-hidden="true"></span><span></span>';
-      b.lastChild.textContent = m.name;
-      b.addEventListener("click", function () { play(i); });
-      bar.appendChild(b);
-    });
-
-    play(0);
-  })();
-</script>
+<script src="static/js/v2_r1_reel.js"></script>
 </body>
 </html>

@@ -325,3 +325,54 @@
       font-variant-numeric: tabular-nums;
     }
     .r1-fn__aside p { font-size: 0.8rem; color: #64748b; margin: 0; line-height: 1.5; }
+
+    /* ---------- Failure reel ---------- */
+    .r1-reel-models {
+      display: flex; justify-content: center; gap: 0.6rem;
+      flex-wrap: wrap; margin-bottom: 0.85rem;
+    }
+    .r1-reel-model {
+      display: inline-flex; align-items: center; gap: 0.55em;
+      border: 1px solid #e0e0e0; background: #fff; color: #363636;
+      border-radius: 999px; padding: 0.45rem 1.1rem 0.45rem 0.5rem;
+      cursor: pointer; font-family: inherit; font-size: 0.95rem; font-weight: 500;
+      transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .r1-reel-model:hover { border-color: var(--brand); }
+    .r1-reel-model.active {
+      background: var(--brand); border-color: var(--brand); color: #fff;
+      box-shadow: 0 3px 10px color-mix(in srgb, var(--brand) 35%, transparent);
+    }
+    /* Brand mark. The SVG supplies the shape via mask, CSS supplies the colour,
+       so the glyph can flip to white when the button goes solid. */
+    .r1-reel-model .r1-logo {
+      width: 21px; height: 21px; flex: 0 0 auto;
+      background-color: var(--brand);
+      -webkit-mask: var(--logo) center / contain no-repeat;
+      mask: var(--logo) center / contain no-repeat;
+      transition: background-color 0.2s;
+    }
+    .r1-reel-model.active .r1-logo { background-color: #fff; }
+
+    /* which of that model's clips */
+    .r1-reel-clips {
+      display: flex; justify-content: center; gap: 0.45rem;
+      flex-wrap: wrap; margin-bottom: 1.25rem;
+    }
+    .r1-reel-clip {
+      border: 1px solid transparent; background: transparent; color: #6b7280;
+      border-radius: 6px; padding: 0.3rem 0.8rem; cursor: pointer;
+      font-family: inherit; font-size: 0.85rem; transition: all 0.2s;
+    }
+    .r1-reel-clip:hover { color: var(--brand); }
+    .r1-reel-clip.active {
+      color: var(--brand); border-color: color-mix(in srgb, var(--brand) 40%, transparent);
+      background: color-mix(in srgb, var(--brand) 8%, transparent);
+      font-weight: 600;
+    }
+
+    .r1-reel-stage { max-width: 720px; margin: 0 auto; }
+    .r1-reel-stage video {
+      width: 100%; aspect-ratio: 16 / 10; border-radius: 10px; background: #000;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15); display: block;
+    }
