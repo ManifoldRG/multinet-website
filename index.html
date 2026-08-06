@@ -43,8 +43,8 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/mn-shared.css?v=r1h">
-  <link rel="stylesheet" href="static/css/r1-components.css?v=r1h">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r1i">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r1i">
   <link rel="stylesheet" href="static/css/play.css?v=p1b5">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
@@ -73,6 +73,23 @@
     .lp-sub {
       text-align: center; color: #6b7280; font-size: 1rem;
       max-width: 64ch; margin: 0 auto 2rem; line-height: 1.6;
+    }
+
+    /* A second view of the same material inside one section. The hairline
+       does the separating so the heading can stay quiet - a second h2-sized
+       title would read as a new section and break the "Results" grouping. */
+    .lp-subsection {
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid #eef1f5;
+    }
+    .lp-h3 {
+      font-size: 1.15rem; font-weight: 600; color: #12151c;
+      text-align: center; margin: 0 0 0.4rem; letter-spacing: -0.01em;
+    }
+    .lp-lead {
+      text-align: center; color: #6b7280; font-size: 0.93rem;
+      max-width: 62ch; margin: 0 auto 1.9rem; line-height: 1.6;
     }
 
     /* ---------- hero ---------- */
@@ -547,12 +564,16 @@
       <h2 class="lp-h2" style="margin-bottom: 2rem;">Results - how do the frontier models perform?</h2>
       <div id="r1-results-container">Loading results&hellip;</div>
 
-      <div style="margin-top: 2.5rem;">
-        <div id="r1-episode-grid"></div>
-        <p class="r1-tab__caption">
-          Every episode in the run. Each column is a maze and each row a model; colour is how far toward the
-          goal the agent got. Stars mark the six solves - all of them at the short end.
+      <!-- The cards above answer "how did each model do"; this answers "what
+           happened in each of the 150 episodes". Different question, so it gets
+           its own heading rather than trailing the cards as an afterthought. -->
+      <div class="lp-subsection">
+        <h3 class="lp-h3">Every episode, one cell each</h3>
+        <p class="lp-lead">
+          Each column is a maze and each row a model. Colour is how far toward the goal the agent got,
+          and the stars mark the six solves - all of them at the short end.
         </p>
+        <div id="r1-episode-grid"></div>
       </div>
     </div>
   </section>
@@ -701,11 +722,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="static/js/play.js?v=p1b7"></script>
-<script src="static/js/mn-shell.js?v=r1h"></script>
-<script src="static/js/v2_r1_results_table.js?v=r1h"></script>
-<script src="static/js/v2_r1_finding_charts.js?v=r1h"></script>
-<script src="static/js/v2_r1_finding_tabs.js?v=r1h"></script>
-<script src="static/js/v2_r1_reel.js?v=r1h"></script>
-<script src="static/js/lp_headline_stats.js?v=r1h"></script>
+<script src="static/js/mn-shell.js?v=r1i"></script>
+<script src="static/js/v2_r1_results_table.js?v=r1i"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r1i"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r1i"></script>
+<script src="static/js/v2_r1_reel.js?v=r1i"></script>
+<script src="static/js/lp_headline_stats.js?v=r1i"></script>
 </body>
 </html>
