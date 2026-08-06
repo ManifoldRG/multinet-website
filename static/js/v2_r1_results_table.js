@@ -57,7 +57,8 @@
             "so partial credit is possible on a maze nobody solves.",
       formula: 'Progress = 1 &minus; <span class="frac"><span class="top">tiles still to go at the end</span>' +
                '<span class="bot">tiles to go at the start</span></span>',
-      scale: "The bar fills against 1 &mdash; the whole route."
+      denom: "1",
+      scale: "The whole route, so the bar is the share of it covered."
     },
     {
       key: "steps",
@@ -67,9 +68,10 @@
             "reach no new tile.",
       formula: 'Steps = <span class="frac"><span class="top">actions taken across all episodes</span>' +
                '<span class="bot">episodes</span></span>',
-      scale: "The bar fills against 173.5 &mdash; the average step budget, since the cap is " +
-             "3&times; the BFS optimum and that optimum averages 57.8 tiles over the 50 mazes. " +
-             "No model spends even 40% of it: the watchdog ends the episode first."
+      denom: "173.5 steps",
+      scale: "The average step budget: the cap is 3&times; the BFS optimum, and that optimum " +
+             "averages 57.8 tiles over the 50 mazes. No model spends even 40% of it, because the " +
+             "watchdog ends the episode first."
     },
     {
       key: "tokens",
@@ -79,9 +81,10 @@
             "spend 20 to 26 times what Claude does, and solve fewer mazes.",
       formula: 'Cost = <span class="frac"><span class="top">output tokens generated</span>' +
                '<span class="bot">new tiles reached</span></span>',
-      scale: "The only bar here without a real ceiling, so it fills against the heaviest of the " +
-             "three &mdash; Kimi, at 162k. Note this is not capped by the 64k budget: that is the " +
-             "per-episode allowance, while this is a ratio accumulated across the episode."
+      denom: "162k (Kimi)",
+      scale: "The only metric here with no real ceiling, so it fills against the heaviest of the " +
+             "three. Not capped by the 64k budget: that is the per-episode allowance, while this " +
+             "is a ratio accumulated across the episode."
     },
     {
       key: "noeffect",
@@ -91,17 +94,25 @@
             "Claude&rsquo;s figure is the highest of the three.",
       formula: 'No-effect rate = <span class="frac"><span class="top">actions leaving the state unchanged</span>' +
                '<span class="bot">actions taken</span></span>',
-      scale: "The bar fills against 1 &mdash; every action taken."
+      denom: "1",
+      scale: "Every action taken, so the bar is the share that did nothing."
     }
   ];
 
   function defsPanel() {
+    // Each entry reads top to bottom in one order: what it is, the formula,
+    // then what the bar fills against. The bar is the thing people ask about,
+    // so it gets a labelled row of its own rather than a trailing sentence.
     var items = DEFS.map(function (d) {
       return '<div class="r1-mdef" id="mdef-' + d.key + '">' +
-        "<h4>" + d.title + "</h4>" +
-        "<p>" + d.body + "</p>" +
+        '<h4 class="r1-mdef__title">' + d.title + "</h4>" +
+        '<p class="r1-mdef__body">' + d.body + "</p>" +
         '<div class="r1-formula">' + d.formula + "</div>" +
-        '<p class="r1-mdef__scale">' + d.scale + "</p>" +
+        '<div class="r1-mdef__scale">' +
+          '<span class="r1-mdef__scale-k">Bar fills against</span>' +
+          '<span class="r1-mdef__scale-v">' + d.denom + "</span>" +
+          '<p class="r1-mdef__scale-n">' + d.scale + "</p>" +
+        "</div>" +
       "</div>";
     }).join("");
 

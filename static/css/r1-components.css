@@ -437,15 +437,64 @@
       padding: 1.35rem 1.15rem;
       border: 1px solid #e8ebee; border-radius: 12px; background: #fff;
     }
-    .r1-mdef { border-radius: 9px; padding: 0.7rem; transition: background 0.3s ease; }
-    .r1-mdef.is-lit { animation: r1-lit 1.8s ease; }
-    @keyframes r1-lit {
-      0%, 45% { background: color-mix(in srgb, #005A9C 11%, transparent); }
-      100% { background: transparent; }
+    /* Each definition reads as three bands: what it is, the formula, and the
+       denominator the bar fills against. The formula gets the most contrast
+       because it is the thing the panel exists to show. */
+    .r1-mdef {
+      display: flex; flex-direction: column;
+      border: 1px solid #eef1f5; border-radius: 11px;
+      padding: 1.05rem 1.05rem 0.9rem;
+      background: #fff;
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
-    .r1-mdef h4 { margin: 0 0 0.35rem; font-size: 0.95rem; font-weight: 700; color: #1e293b; }
-    .r1-mdef p { margin: 0 0 0.7rem; font-size: 0.85rem; line-height: 1.55; color: #4a5160; }
-    .r1-mdef__scale { font-size: 0.8rem !important; color: #6b7280 !important; margin: 0.6rem 0 0 !important; }
+    .r1-mdef.is-lit {
+      animation: r1-lit 1.8s ease;
+      border-color: color-mix(in srgb, #005A9C 35%, transparent);
+    }
+    @keyframes r1-lit {
+      0%, 45% { background: color-mix(in srgb, #005A9C 9%, transparent); }
+      100% { background: #fff; }
+    }
+    .r1-mdef__title {
+      margin: 0 0 0.45rem;
+      font-size: 0.95rem; font-weight: 700; color: #12151c;
+      letter-spacing: -0.01em;
+    }
+    .r1-mdef__body {
+      margin: 0 0 1rem;
+      font-size: 0.855rem; line-height: 1.6; color: #4a5160;
+    }
+
+    /* the formula sits on its own ground, centred, with room to breathe */
+    .r1-mdef .r1-formula {
+      margin: 0 0 1rem;
+      padding: 0.95rem 0.8rem;
+      border-radius: 9px;
+      background: #f6f8fb;
+      border: 1px solid #eaeef4;
+      text-align: center;
+      font-size: 0.9rem; color: #1e293b;
+    }
+
+    .r1-mdef__scale {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid #f1f5f9;
+    }
+    .r1-mdef__scale-k {
+      display: inline-block; margin-right: 0.5em;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.09em;
+      text-transform: uppercase; color: #94a3b8;
+    }
+    .r1-mdef__scale-v {
+      font-size: 0.85rem; font-weight: 700; color: #005A9C;
+      font-variant-numeric: tabular-nums;
+    }
+    .r1-mdef__scale-n {
+      margin: 0.4rem 0 0;
+      font-size: 0.79rem; line-height: 1.5; color: #6b7280;
+    }
+
     @media screen and (max-width: 760px) {
       .r1-mdefs__grid { grid-template-columns: 1fr; }
     }

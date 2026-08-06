@@ -33,7 +33,7 @@
       label: "Difficulty",
       claim: "Shortest path is the only property that clearly predicts how far an agent gets. On the " +
              "mazes short enough to leave headroom the ordering inverts, and the mechanisms take over " +
-             "— so the other axes are untested at this difficulty, not inert.",
+             "- so the other axes are untested at this difficulty, not inert.",
       mount: "r1-inversion-chart",
       caption: "How much of the variation in progress each maze property explains on its own."
     },

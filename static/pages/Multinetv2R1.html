@@ -44,8 +44,8 @@
   <link rel="stylesheet" href="../css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../../static/css/mn-shared.css?v=r1d">
-  <link rel="stylesheet" href="../css/r1-components.css?v=r1d">
+  <link rel="stylesheet" href="../../static/css/mn-shared.css?v=r1e">
+  <link rel="stylesheet" href="../css/r1-components.css?v=r1e">
   <link rel="stylesheet" href="../css/play.css?v=p1b5">
 
   <script defer src="../js/fontawesome.all.min.js"></script>
@@ -567,7 +567,7 @@
               ran inside. In a fixed world, none of the three can be varied independently of the others. So
               a model that never worked out what an object does, a model that had the right plan and drifted
               mid-execution, and a model that took the distractor bait all arrive as the same failed episode
-              &mdash; even though they are different problems with different fixes.
+              - even though they are different problems with different fixes.
             </p>
             <p>
               <strong>MultiNet v2.0</strong> is built so those things stay separable. The task is an agent in a
@@ -578,12 +578,12 @@
             </p>
             <p>
               <strong>This release</strong> is the first measurement on that substrate, in its most basic
-              rendering. We evaluate three frontier models &mdash; Claude Opus 4.8, Kimi k2.6 and Qwen3.6-27B
-              &mdash; on 50 generated mazes, 150 episodes in total, under a single evaluation protocol chosen by
+              rendering. We evaluate three frontier models - Claude Opus 4.8, Kimi k2.6 and Qwen3.6-27B
+              - on 50 generated mazes, 150 episodes in total, under a single evaluation protocol chosen by
               a controlled 540-episode sweep rather than by intuition. Frontier performance is near zero:
               <strong>6 solves in 150 episodes</strong>, and 45 of the 50 mazes were never solved by any
-              model. Models operate the mechanisms they already understand &mdash; 27 successful pickups, 15
-              doors opened, and 4 of the 6 solves on key-door mazes &mdash; and never work out the one they would
+              model. Models operate the mechanisms they already understand - 27 successful pickups, 15
+              doors opened, and 4 of the 6 solves on key-door mazes - and never work out the one they would
               have to learn during the episode: 132 TOGGLE actions produced 2 switch flips, and agents stood on a
               live switch in 38 episodes without pressing it.
             </p>
@@ -615,7 +615,7 @@
             <div class="r1-prop">
               <span class="r1-prop__icon"><i class="fas fa-lightbulb"></i></span>
               <h4>Knowledge-free</h4>
-              <p>Nothing to know. No API, no jargon, no priors &mdash; so a human baseline means something, and failure can't be blamed on unfamiliarity.</p>
+              <p>Nothing to know. No API, no jargon, no priors - so a human baseline means something, and failure can't be blamed on unfamiliarity.</p>
             </div>
             <div class="r1-prop">
               <span class="r1-prop__icon"><i class="fas fa-dice"></i></span>
@@ -630,7 +630,7 @@
             <div class="r1-prop">
               <span class="r1-prop__icon"><i class="fas fa-ruler-combined"></i></span>
               <h4>Verifiable</h4>
-              <p>BFS gives the exact optimal path from any state &mdash; an objective difficulty scale, partial credit, and the ability to call one move strictly wrong.</p>
+              <p>BFS gives the exact optimal path from any state - an objective difficulty scale, partial credit, and the ability to call one move strictly wrong.</p>
             </div>
           </div>
 
@@ -665,7 +665,7 @@
               <div class="r1-def__stat">
                 <span class="k">In this run</span>
                 <span class="v">4.0%</span>
-                <span class="n">&mdash; 6 of 150 episodes</span>
+                <span class="n">- 6 of 150 episodes</span>
               </div>
             </div>
 
@@ -684,7 +684,7 @@
               <div class="r1-def__stat">
                 <span class="k">In this run</span>
                 <span class="v">0.22</span>
-                <span class="n">&mdash; mean across 150 episodes</span>
+                <span class="n">- mean across 150 episodes</span>
               </div>
             </div>
           </div>
@@ -718,7 +718,7 @@
             <figcaption>
               Every episode in the run. Each column is a maze, each row a model, and colour is how much of the
               way to the goal the agent got. Within each family the mazes run shortest to longest, so the fade
-              from left to right is difficulty. Stars mark the six solves &mdash; all of them at the short end.
+              from left to right is difficulty. Stars mark the six solves - all of them at the short end.
             </figcaption>
           </figure>
         </div>
@@ -769,7 +769,7 @@
               <div class="r1-mech-item__body">
                 <span class="r1-mech-item__tag">Discovery</span>
                 <h4>Switches</h4>
-                <p>Working out an object it has never been told about. A switch toggles from the same cell, while doors and gates act on the cell ahead &mdash; and the prompt names <code>TOGGLE</code> as valid without explaining either convention.</p>
+                <p>Working out an object it has never been told about. A switch toggles from the same cell, while doors and gates act on the cell ahead - and the prompt names <code>TOGGLE</code> as valid without explaining either convention.</p>
               </div>
             </li>
             <li class="r1-mech-item" style="--c: #8E44AD;">
@@ -793,7 +793,7 @@
               <div class="r1-mech-item__body">
                 <span class="r1-mech-item__tag">Execution</span>
                 <h4>Walls</h4>
-                <p>Walking into one is an action the world rejects outright &mdash; the cheapest possible signal that a plan and the world have diverged.</p>
+                <p>Walking into one is an action the world rejects outright - the cheapest possible signal that a plan and the world have diverged.</p>
               </div>
             </li>
           </ol>
@@ -973,7 +973,7 @@
             <div class="r1-sweep__row">
               <span class="r1-sweep__axis">Prompt</span>
               <div class="r1-sweep__what">
-                <p>Only the task and the list of valid actions &mdash; nothing about the mechanisms.</p>
+                <p>Only the task and the list of valid actions - nothing about the mechanisms.</p>
                 <code>cond_prompt · minimal</code>
               </div>
               <div class="r1-sweep__score"><span class="bar" style="--w: 60%"></span><span class="n">27</span></div>
@@ -991,7 +991,7 @@
             <div class="r1-sweep__row">
               <span class="r1-sweep__axis">Worked example</span>
               <div class="r1-sweep__what">
-                <p>No example solution to learn from &mdash; the model meets its first maze cold.</p>
+                <p>No example solution to learn from - the model meets its first maze cold.</p>
                 <code>icl_zero_shot</code>
               </div>
               <div class="r1-sweep__score"><span class="bar" style="--w: 55.6%"></span><span class="n">25</span></div>
@@ -1062,13 +1062,13 @@
           </div>
           <p class="r1-sweep__legend">
             Each row changes one setting away from the baseline and leaves everything else untouched.
-            Bars are solves out of 45 &mdash; 15 mazes attempted by each of the three models.
+            Bars are solves out of 45 - 15 mazes attempted by each of the three models.
           </p>
 
           <div class="content has-text-justified">
             <p>
               The above results set the benchmark's configuration. We take the <code>minimal</code> prompt,
-              because it scores identically to the fuller one while giving the model less to lean on &mdash; the
+              because it scores identically to the fuller one while giving the model less to lean on - the
               environment stays minimal, and anyone evaluating a model is free to add information through their
               own harness. We take <code>image_only</code> deliberately, because the sweep identifies it as the
               hardest setting and we would rather the benchmark have room to improve than saturate. Reasoning is
@@ -1078,7 +1078,7 @@
             <p>
               Episodes have to end somehow, so two limits close them. A <strong>stall watchdog</strong> ends an
               episode once the agent goes 30 consecutive steps without reaching a state it has not already been
-              in &mdash; a new tile, a key picked up, a door opened &mdash; which catches an agent that is still
+              in - a new tile, a key picked up, a door opened - which catches an agent that is still
               issuing actions but no longer getting anywhere. A <strong>step cap</strong> ends it at three times
               the number of moves a perfect solver would need, which keeps the budget relative to the difficulty
               of the maze rather than a flat action count.
@@ -1111,7 +1111,7 @@
           <div class="r1-note" style="margin-top: 1.75rem;">
             <p>
               Claude is first on solves and last on progress. It ends early, after 37.5 steps on average, by
-              walking into walls &mdash; 77% of its actions change nothing at all. Kimi and Qwen last around 61
+              walking into walls - 77% of its actions change nothing at all. Kimi and Qwen last around 61
               steps and cover more ground, at 0.23 progress against Claude's 0.19, without converting any of it
               into solves. Which model &ldquo;wins&rdquo; depends entirely on which metric you pick, which is
               why we publish solves, progress and steps side by side rather than ranking.
@@ -1137,7 +1137,7 @@
                 The usual escape hatch for a poor benchmark score is that the model was unfamiliar with the
                 interface. That reading is not available here, and the environment contains its own control to
                 prove it. Keys and doors are objects every model already understands; a switch is one it has to
-                work out during the episode. Both are given exactly the same treatment by the prompt &mdash;
+                work out during the episode. Both are given exactly the same treatment by the prompt -
                 which is to say, no explanation at all.
               </p>
               <p>
@@ -1154,7 +1154,7 @@
               <figcaption>
                 Reaching the switch was never the bottleneck. Agents walked onto a live switch in 38 of the 105
                 switch-maze episodes and pressed it twice. None of the 83 misplaced presses were even the
-                wrong-convention attempt a MiniGrid-trained prior would produce &mdash; the object is treated as
+                wrong-convention attempt a MiniGrid-trained prior would produce - the object is treated as
                 scenery rather than as something that might do anything.
               </figcaption>
             </figure>
@@ -1163,7 +1163,7 @@
               <h4>2. Path length dominates so heavily that this run cannot resolve the other difficulty axes</h4>
               <p>
                 Shortest path is the one property that clearly predicts how far an agent gets. Everything else
-                fails to clear significance across all 150 episodes &mdash; but that is a statement about the
+                fails to clear significance across all 150 episodes - but that is a statement about the
                 measurement, not about the mechanisms. An agent asked to sustain eighty correct moves fails on
                 length alone, long before a switch or a distractor gets a chance to matter.
               </p>
@@ -1171,7 +1171,7 @@
                 Restrict the analysis to the 69 episodes on mazes short enough to leave headroom and the ordering
                 <em>inverts</em>. Gates and switches roughly triple in explanatory power while path length
                 collapses and stops being significant at all. Switch mazes also record zero solves in 105
-                episodes while the progress regression on switches returns only p = 0.08 &mdash; the outcome
+                episodes while the progress regression on switches returns only p = 0.08 - the outcome
                 measure cannot see an effect the solve counts make obvious.
                 <strong>Path length is verified as a difficulty axis; the rest are untested at this difficulty
                 rather than shown to be inert.</strong>
@@ -1205,7 +1205,7 @@
               </p>
               <p>
                 Because the ranking inverts depending on whether you read solves or progress, this run cannot
-                say which of the three is better at the task &mdash; which is why the results above are reported
+                say which of the three is better at the task - which is why the results above are reported
                 side by side rather than ranked.
               </p>
             </div>
@@ -1220,14 +1220,14 @@
               <h4>4. Test-time compute buys survival, not solves</h4>
               <p>
                 Kimi and Qwen spend 20 to 26 times more output tokens per newly discovered tile than Claude,
-                last around 1.6&times; longer, and see slightly more of the maze &mdash; and solve fewer of them.
+                last around 1.6&times; longer, and see slightly more of the maze - and solve fewer of them.
                 Spending is not the constraint either: Claude's median query is 289 output tokens, half a
                 percent of the 64k it was given, with no truncation anywhere in the run.
               </p>
               <p>
                 Where the extra thinking goes is more telling than how much of it there is. Claude's thinking
                 <em>contracts</em> as an episode runs rather than escalating, and contracts hardest exactly
-                where it should expand &mdash; after a move that achieved nothing, its median thinking is 234
+                where it should expand - after a move that achieved nothing, its median thinking is 234
                 tokens against 579 after a move that worked. <strong>Reasoning depth is not what is missing.
                 The agent is thinking hard about a state it has misread, and thinking less precisely when the
                 world tells it so.</strong>
@@ -1260,17 +1260,17 @@
               and that the environment can attribute a failure to a stage rather than averaging it into a
               single score. That is the groundwork. The point of building the task this way is that the
               structure carries no domain knowledge, so the identical maze can be re-rendered without becoming
-              a different problem &mdash; and that is what the full benchmark will do.
+              a different problem - and that is what the full benchmark will do.
             </p>
             <p><strong>The full v2.0 benchmark will render the identical maze in three domains:</strong></p>
             <ul>
-              <li><strong>GridWorld</strong> &mdash; a 2D visual grid with a discrete action space. This is the domain evaluated here.</li>
-              <li><strong>Natural language</strong> &mdash; the same maze described in prose, where a model will have to build and hold a spatial model of a world it only ever reads.</li>
-              <li><strong>3D</strong> &mdash; the same maze as a simulated first-person environment, where perception and navigation come with a continuous action space.</li>
+              <li><strong>GridWorld</strong> - a 2D visual grid with a discrete action space. This is the domain evaluated here.</li>
+              <li><strong>Natural language</strong> - the same maze described in prose, where a model will have to build and hold a spatial model of a world it only ever reads.</li>
+              <li><strong>3D</strong> - the same maze as a simulated first-person environment, where perception and navigation come with a continuous action space.</li>
             </ul>
             <p>
               Because the underlying puzzle will be identical across all three, a model that clears one domain
-              will still have to clear the other two &mdash; and that is what turns &ldquo;did it
+              will still have to clear the other two - and that is what turns &ldquo;did it
               generalize?&rdquo; from an inference into a measurement. It will also let us settle what this
               release cannot: whether a failure comes from misreading the maze or from acting badly in it,
               which becomes separable the moment the same task is presented a different way.
@@ -1283,7 +1283,7 @@
               <li>Whether an agent framework that supplies its own memory closes the discovery gap.</li>
               <li>Whether the switch result reproduces with a second unfamiliar mechanism.</li>
               <li>How to establish that two different mazes of the same shortest-path length are genuinely
-                  equally hard &mdash; which is what it will take to compare scores across different draws of
+                  equally hard - which is what it will take to compare scores across different draws of
                   the benchmark over time.</li>
             </ul>
           </div>
@@ -1339,12 +1339,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../js/play.js?v=p1b7"></script>
-<script src="../../static/js/mn-shell.js?v=r1d"></script>
-<script src="../../static/js/v2_r1_results_table.js?v=r1d"></script>
-<script src="../../static/js/v2_r1_headline_chart.js?v=r1d"></script>
-<script src="../../static/js/v2_r1_finding_charts.js?v=r1d"></script>
+<script src="../../static/js/mn-shell.js?v=r1e"></script>
+<script src="../../static/js/v2_r1_results_table.js?v=r1e"></script>
+<script src="../../static/js/v2_r1_headline_chart.js?v=r1e"></script>
+<script src="../../static/js/v2_r1_finding_charts.js?v=r1e"></script>
 <script>
 </script>
-<script src="../js/v2_r1_reel.js?v=r1d"></script>
+<script src="../js/v2_r1_reel.js?v=r1e"></script>
 </body>
 </html>
