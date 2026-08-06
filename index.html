@@ -63,6 +63,8 @@
        gets a wider wrap - at the reading width the right-hand Controls rail
        falls outside the card, which clips it. */
     .lp-wrap--wide { max-width: 1200px; }
+    /* space-between with a single child parks it left; the nav belongs right */
+    .r1-demo-meta--bare { justify-content: flex-end; margin-bottom: 8px; }
     .lp-section { padding: 3.5rem 0; }
     .lp-section--tight { padding: 1.5rem 0 3rem; }
 
@@ -382,17 +384,15 @@
   <!-- ==================== PLAY ==================== -->
   <section class="lp-section" id="play-the-maze">
     <div class="lp-wrap lp-wrap--wide">
-      <h2 class="lp-h2">Play some of the mazes</h2>
+      <h2 class="lp-h2">Play the mazes</h2>
       <p class="lp-sub">
-        Try out some of the mazes the models were evaluated on.
+        Try out some of the mazes the models were evaluated on!
       </p>
 
       <div class="r1-demo-slot">
-        <div class="r1-demo-meta">
-          <div>
-            <h3 id="page-title">Loading&hellip;</h3>
-            <p id="page-desc">Click the board, then use the keyboard or the on-screen controls.</p>
-          </div>
+        <!-- No maze description or task id here: the board is meant to be
+             read, not annotated. play.js null-guards both elements. -->
+        <div class="r1-demo-meta r1-demo-meta--bare">
           <div class="task-heading-nav">
             <button type="button" id="page-prev">Previous</button>
             <button type="button" id="page-next">Next</button>
