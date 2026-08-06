@@ -69,8 +69,7 @@
         { label: "Model Adaptations", icon: "fas fa-microchip", href: GH_V1, external: true }
       ]
     },
-    // Points at the demo section of the R1 page until the standalone
-    // player (static/pages/play.html) is wired to a hosted API.
+    // Embedded player lives in the R1 page Play the Maze section.
     { id: "play", label: "Play the Maze", icon: "fas fa-gamepad", href: url("static/pages/Multinetv2R1.html#play-the-maze") },
     { id: "submit", label: "Submit Your Model", icon: "fas fa-paper-plane", href: EVAL_HARNESS, external: true },
     { id: "about", label: "About Multinet", icon: "fas fa-info-circle", href: url("static/pages/Multinet.html") },
