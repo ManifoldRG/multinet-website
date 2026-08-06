@@ -219,7 +219,6 @@
     ctx: null,
     master: null,
     buffers: null,
-    waves: null,
     enabled: true,
     ready: null,
     async unlock() {
@@ -234,8 +233,7 @@
         this.master = this.ctx.createGain();
         this.master.gain.value = 1;
         this.master.connect(this.ctx.destination);
-        this.waves = buildWaveLibrary();
-        this.buffers = buffersFromWaves(this.ctx, this.waves);
+        this.buffers = buffersFromWaves(this.ctx, buildWaveLibrary());
       }
       if (this.ctx.state === "suspended") {
         try {
@@ -263,9 +261,6 @@
     },
   };
 
-  // Expose for debugging in DevTools: window.__mnSounds
-  window.__mnSounds = sounds;
-
   const CONTROLS = [
     ["↑", "Move Forward", "MOVE_FORWARD", "move"],
     ["←", "Turn Left", "TURN_LEFT", "move"],
@@ -274,7 +269,6 @@
     ["X", "Drop Key", "DROP", "interact"],
     ["T", "Toggle Switch / Open Door", "TOGGLE", "interact"],
     ["R", "Restart", null, "meta"],
-    ["DL", "Download trajectory", "DOWNLOAD", "meta"],
   ];
 
   const MECH = {
@@ -606,7 +600,6 @@
     btn.innerHTML = `<span class="key">${key}</span><span class="desc">${label}</span>`;
     btn.onclick = () => {
       if (action === null) doReset();
-      else if (action === "DOWNLOAD") downloadTrajectory();
       else sendAction(action);
     };
     els.controls.appendChild(btn);
@@ -907,8 +900,7 @@
     const youDetail = success
       ? `${v.stepCount} steps  -  solved`
       : `${v.stepCount} steps  -  failed`;
-    const youColor = success ? "you" : "you";
-    const rows = [[ "You", youDetail, youColor, success ? "ok-result" : "fail-result" ]].concat(
+    const rows = [[ "You", youDetail, "you", success ? "ok-result" : "fail-result" ]].concat(
       models.map((m) => {
         let detail = m.summaryLine;
         let resultClass = "fail-result";
