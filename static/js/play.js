@@ -855,19 +855,25 @@
     const success = v.success;
     els.end.className = success ? "success show" : "fail show";
     els.endTitle.textContent = success
-      ? "YOU SOLVED IT"
+      ? "You solved it!"
       : v.endReason === "stalled"
-        ? "STALLED"
-        : "OUT OF STEPS";
-    els.endDesc.textContent = task.description || "";
+        ? "Stalled"
+        : "Out of steps";
+
+    // The end screen is kept minimal: the maze description, the difficulty
+    // tier and the trajectory download are all optional markup now, so guard
+    // rather than assume. See the panel in index.html.
+    if (els.endDesc) els.endDesc.textContent = task.description || "";
 
     const tier = task.difficultyTier || 0;
-    if (tier) {
-      els.endDiff.style.display = "";
-      els.endDiff.innerHTML =
-        `Maze difficulty: <span style="color:${difficultyColor(tier)}">${tier} / 6</span>`;
-    } else {
-      els.endDiff.style.display = "none";
+    if (els.endDiff) {
+      if (tier) {
+        els.endDiff.style.display = "";
+        els.endDiff.innerHTML =
+          `Maze difficulty: <span style="color:${difficultyColor(tier)}">${tier} / 6</span>`;
+      } else {
+        els.endDiff.style.display = "none";
+      }
     }
 
     els.endSteps.textContent = success
