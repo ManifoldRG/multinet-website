@@ -838,13 +838,6 @@
     });
   }
 
-  function scoreClass(pct) {
-    if (pct >= 100) return "hi";
-    if (pct >= 80) return "mid";
-    if (pct >= 50) return "low";
-    return "bad";
-  }
-
   function difficultyColor(tier) {
     if (tier >= 5) return "#ff4856";
     if (tier >= 3) return "#ffc430";
@@ -880,14 +873,15 @@
       ? `Completed in ${v.stepCount} steps`
       : `Used ${v.stepCount} / ${v.maxSteps} steps`;
 
+    // How the run compares to the oracle, as a sentence. No score: a
+    // percentage invites optimising the number rather than reading the maze.
     const opt = v.comparison.optimalSteps;
-    const score = Math.round(v.displayReward * 100);
-    let optDetail = `Optimal (BFS): ${opt} steps`;
-    if (success && v.stepCount <= opt) optDetail += "  -  you matched it";
-    else if (success) optDetail += `  -  you were ${v.stepCount - opt} over`;
-    els.endScore.innerHTML = success
-      ? `${optDetail}<span class="score ${scoreClass(score)}">  -  Score: ${score}%</span>`
-      : optDetail;
+    const over = v.stepCount - opt;
+    els.endScore.textContent = !success
+      ? `The optimal solution takes ${opt} steps.`
+      : over > 0
+        ? `You were ${over} over the optimal steps required to solve this maze.`
+        : "You matched the optimal steps required to solve this maze.";
 
     const models = v.comparison.models;
     const beatAll =
@@ -914,17 +908,13 @@
       : `${v.stepCount} steps  -  failed`;
     const rows = [[ "You", youDetail, "you", success ? "ok-result" : "fail-result" ]].concat(
       models.map((m) => {
-        let detail = m.summaryLine;
+        let detail = `${m.steps} steps`;
         let resultClass = "fail-result";
         if (m.success) {
           resultClass = "ok-result";
-          if (success && v.stepCount < m.steps) {
-            detail = `${m.steps} steps  -  you were faster`;
-          } else if (success && v.stepCount === m.steps) {
-            detail = `${m.steps} steps  -  tied`;
-          } else {
-            detail = `${m.steps} steps  -  solved`;
-          }
+          if (success && v.stepCount < m.steps) detail += "  -  you were faster";
+          else if (success && v.stepCount === m.steps) detail += "  -  tied";
+          else detail += "  -  solved";
         }
         return [m.displayName, detail, "", resultClass];
       }),
