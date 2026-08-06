@@ -197,45 +197,45 @@
     }
 
     /* ---------- four properties ----------
-       Each card is tinted with its own accent rather than being white with a
-       coloured word in it: a spine across the top, a wash that fades out
-       before the text, and a shadow in the accent rather than in grey. The
-       cards are not clickable, so the depth is ambient - it deepens on hover
-       but never presses, which is what the buttons do. */
+       Same physical key as the buttons: each card is a face resting on a
+       solid edge in its own accent, and pressing it travels the height of
+       that edge and lands flush. --lift is the edge, so the travel and the
+       edge can never disagree. */
+    /* stretch, not start: four keys of different heights sitting on their own
+       edges read as four unrelated things rather than one row */
     .lp-props { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
     .lp-prop {
       --c: #005A9C;
       --c2: #0B7285;
-      position: relative;
-      border: 1px solid color-mix(in srgb, var(--c) 16%, #e8ebee);
+      --lift: 6px;
+      border: 1px solid color-mix(in srgb, var(--c) 18%, #e8ebee);
       border-radius: 13px;
       padding: 1.35rem 1.15rem 1.25rem;
       background:
         linear-gradient(170deg,
-          color-mix(in srgb, var(--c) 8%, #fff) 0%,
-          color-mix(in srgb, var(--c) 2%, #fff) 42%,
-          #fff 78%);
+          color-mix(in srgb, var(--c) 7%, #fff) 0%,
+          color-mix(in srgb, var(--c) 2%, #fff) 45%,
+          #fff 80%);
       box-shadow:
-        0 1px 2px color-mix(in srgb, var(--c) 10%, transparent),
-        0 6px 16px color-mix(in srgb, var(--c) 9%, transparent);
-      overflow: hidden;
-      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
-    }
-    /* the spine - two-stop so it reads as a gradient, not a rule */
-    .lp-prop::before {
-      content: "";
-      position: absolute; inset: 0 0 auto 0; height: 3px;
-      background: linear-gradient(90deg, var(--c), var(--c2));
+        0 var(--lift) 0 color-mix(in srgb, var(--c) 88%, #000),
+        0 calc(var(--lift) + 6px) 18px color-mix(in srgb, var(--c) 22%, transparent);
+      transform: translateY(0);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.2s ease;
     }
     .lp-prop:nth-child(2) { --c: #1E8449; --c2: #52B788; }
     .lp-prop:nth-child(3) { --c: #8E44AD; --c2: #C77DFF; }
     .lp-prop:nth-child(4) { --c: #D35400; --c2: #F0932B; }
     .lp-prop:hover {
-      transform: translateY(-4px);
-      border-color: color-mix(in srgb, var(--c) 34%, transparent);
+      border-color: color-mix(in srgb, var(--c) 38%, transparent);
       box-shadow:
-        0 2px 4px color-mix(in srgb, var(--c) 12%, transparent),
-        0 16px 30px color-mix(in srgb, var(--c) 18%, transparent);
+        0 var(--lift) 0 color-mix(in srgb, var(--c) 88%, #000),
+        0 calc(var(--lift) + 10px) 26px color-mix(in srgb, var(--c) 30%, transparent);
+    }
+    .lp-prop:active {
+      transform: translateY(var(--lift));
+      box-shadow:
+        0 0 0 color-mix(in srgb, var(--c) 88%, #000),
+        0 1px 3px color-mix(in srgb, var(--c) 26%, transparent);
     }
 
     .lp-prop__icon {
@@ -253,8 +253,7 @@
     }
     .lp-prop p { font-size: 0.86rem; line-height: 1.55; color: #4a5160; margin: 0; }
     @media (prefers-reduced-motion: reduce) {
-      .lp-prop { transition: box-shadow 0.24s ease, border-color 0.24s ease; }
-      .lp-prop:hover { transform: none; }
+      .lp-prop { transition: box-shadow 0.2s ease, border-color 0.2s ease; }
     }
 
     /* ---------- findings tabs ---------- */
