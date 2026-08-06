@@ -63,8 +63,6 @@
        gets a wider wrap - at the reading width the right-hand Controls rail
        falls outside the card, which clips it. */
     .lp-wrap--wide { max-width: 1200px; }
-    /* space-between with a single child parks it left; the nav belongs right */
-    .r1-demo-meta--bare { justify-content: flex-end; margin-bottom: 8px; }
     .lp-section { padding: 3.5rem 0; }
     .lp-section--tight { padding: 1.5rem 0 3rem; }
 
@@ -390,15 +388,9 @@
       </p>
 
       <div class="r1-demo-slot">
-        <!-- No maze description or task id here: the board is meant to be
-             read, not annotated. play.js null-guards both elements. -->
-        <div class="r1-demo-meta r1-demo-meta--bare">
-          <div class="task-heading-nav">
-            <button type="button" id="page-prev">Previous</button>
-            <button type="button" id="page-next">Next</button>
-          </div>
-        </div>
-
+        <!-- No description, task id or outer nav: the board is meant to be
+             read, not annotated, and it carries its own < > nav. play.js
+             null-guards every element removed here. -->
         <div id="error"></div>
 
         <div class="play-host" id="play-host" tabindex="0" aria-label="MultiNet playable maze">
@@ -463,7 +455,7 @@
 
             <div class="hint">
               <div class="hint-main">Solve the task using only the information visible in the maze.</div>
-              <div class="hint-meta">Click the board for keyboard · Tab settings · M model view · [ / ] task · R reset</div>
+              <div class="hint-meta">R to reset</div>
             </div>
           </div>
 
@@ -477,10 +469,6 @@
             </div>
           </div>
         </div>
-
-        <p class="r1-demo-hint">
-          Tip: click inside the game to capture keys. Click outside (or scroll away) to use normal page scrolling.
-        </p>
       </div>
     </div>
   </section>
