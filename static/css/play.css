@@ -772,7 +772,8 @@
   font-weight: 600 !important;
 }
 
-@media (max-width: 1100px) {
+/* Scale down before the board can outgrow a 1200px-wide container. */
+@media (max-width: 1200px) {
 :root {
     --rail: 180px;
     --grid: 520px;

@@ -45,7 +45,7 @@
   <link rel="stylesheet" href="static/css/index.css">
   <link rel="stylesheet" href="static/css/mn-shared.css">
   <link rel="stylesheet" href="static/css/r1-components.css">
-  <link rel="stylesheet" href="static/css/play.css?v=p1b2">
+  <link rel="stylesheet" href="static/css/play.css?v=p1b4">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
 
@@ -59,6 +59,10 @@
        ============================================================ */
 
     .lp-wrap { max-width: 1060px; margin: 0 auto; padding: 0 1.5rem; }
+    /* The playable maze is a fixed 1100px board (see play.css), so its section
+       gets a wider wrap - at the reading width the right-hand Controls rail
+       falls outside the card, which clips it. */
+    .lp-wrap--wide { max-width: 1200px; }
     .lp-section { padding: 3.5rem 0; }
     .lp-section--tight { padding: 1.5rem 0 3rem; }
 
@@ -377,10 +381,10 @@
 
   <!-- ==================== PLAY ==================== -->
   <section class="lp-section" id="play-the-maze">
-    <div class="lp-wrap">
-      <h2 class="lp-h2">Play the maze</h2>
+    <div class="lp-wrap lp-wrap--wide">
+      <h2 class="lp-h2">Play some of the mazes</h2>
       <p class="lp-sub">
-        The same mazes the models were given, with the same rules and the same absence of instructions.
+        Try out some of the mazes the models were evaluated on.
       </p>
 
       <div class="r1-demo-slot">
