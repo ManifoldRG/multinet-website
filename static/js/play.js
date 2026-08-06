@@ -111,27 +111,27 @@
   function svgIcon(kind, color) {
     const c = color || "#c9ccd9";
     if (kind === "key") {
-      return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="4" fill="none" stroke="${c}" stroke-width="2"/><path d="M12 12h9M17 12v4M20 12v3" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round"/></svg>`;
+      return `<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="4" fill="none" stroke="${c}" stroke-width="2"/><path d="M12 12h9M17 12v4M20 12v3" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round"/></svg>`;
     }
     if (kind === "bag") {
-      return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="9" width="12" height="10" rx="2" fill="none" stroke="${c}" stroke-width="2"/><path d="M9 9V7a3 3 0 0 1 6 0v2" fill="none" stroke="${c}" stroke-width="2"/></svg>`;
+      return `<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="9" width="12" height="10" rx="2" fill="none" stroke="${c}" stroke-width="2"/><path d="M9 9V7a3 3 0 0 1 6 0v2" fill="none" stroke="${c}" stroke-width="2"/></svg>`;
     }
     if (kind === "door") {
-      return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="1" fill="none" stroke="${c}" stroke-width="2"/><circle cx="14" cy="12" r="1.2" fill="${c}"/></svg>`;
+      return `<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="1" fill="none" stroke="${c}" stroke-width="2"/><circle cx="14" cy="12" r="1.2" fill="${c}"/></svg>`;
     }
     if (kind === "switch") {
-      return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="9" width="16" height="6" rx="3" fill="none" stroke="${c}" stroke-width="2"/><circle cx="15" cy="12" r="2.5" fill="${c}"/></svg>`;
+      return `<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="9" width="16" height="6" rx="3" fill="none" stroke="${c}" stroke-width="2"/><circle cx="15" cy="12" r="2.5" fill="${c}"/></svg>`;
     }
     if (kind === "gate") {
-      return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V6l7-3 7 3v14" fill="none" stroke="${c}" stroke-width="2"/><path d="M9 20v-8h6v8" fill="none" stroke="${c}" stroke-width="2"/></svg>`;
+      return `<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V6l7-3 7 3v14" fill="none" stroke="${c}" stroke-width="2"/><path d="M9 20v-8h6v8" fill="none" stroke="${c}" stroke-width="2"/></svg>`;
     }
     if (kind === "goal") {
-      return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="4" width="10" height="8" rx="2" fill="none" stroke="${c}" stroke-width="2"/><path d="M12 12v5M9 20h6" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round"/></svg>`;
+      return `<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="4" width="10" height="8" rx="2" fill="none" stroke="${c}" stroke-width="2"/><path d="M12 12v5M9 20h6" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round"/></svg>`;
     }
     if (kind === "block") {
-      return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2" fill="none" stroke="${c}" stroke-width="2"/></svg>`;
+      return `<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2" fill="none" stroke="${c}" stroke-width="2"/></svg>`;
     }
-    return `<span class="icon bullet" style="background:${c}"></span>`;
+    return `<span class="play-icon bullet" style="background:${c}"></span>`;
   }
 
   function doReset() {
