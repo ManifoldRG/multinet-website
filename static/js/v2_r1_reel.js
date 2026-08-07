@@ -35,9 +35,11 @@
       name: "Claude Opus 4.8",
       brand: "#D97757",          // Anthropic clay
       logo: "static/images/logos/claude.svg",
+      // The key-door-switch run leads: clip order is landing order, and the
+      // first thing anyone sees on the page is Claude's Example 1.
       clips: [
-        "r1_B1_8x8_corridor_swg_0__claude_FAIL.mp4",
-        "r1_M3_8x8_corridor_kr_sg_1__claude_FAIL.mp4"
+        "r1_M3_8x8_corridor_kr_sg_1__claude_FAIL.mp4",
+        "r1_B1_8x8_corridor_swg_0__claude_FAIL.mp4"
       ]
     },
     {
