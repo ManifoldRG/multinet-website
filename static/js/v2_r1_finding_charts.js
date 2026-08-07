@@ -1,18 +1,20 @@
 /* ============================================================
    MultiNet v2.0 R1 - charts that carry the findings
 
-   Three visuals, each attached to the claim it evidences:
+   Each visual is attached to the claim it evidences:
 
-   1. #r1-switch-funnel  - the discovery wall. Agents reach the
+   1. #r1-episode-grid   - all 150 episodes, one cell each.
+   2. #r1-switch-funnel  - the discovery wall. Agents reach the
       switch and walk over it. Rendered as HTML rather than a
       chart because it is a drop-off, not a distribution.
-   2. #r1-scatter-chart  - every episode against shortest path,
-      with solves marked. Shows the one verified difficulty axis.
-   3. #r1-quarter-chart  - how the composition of an agent's
-      actions shifts across an episode. Carries both "it gets
-      worse, not better" and the three failure styles.
+   3. #r1-inversion-chart - what each maze property explains,
+      across the whole set and on the short mazes alone.
+   4. #r1-quarter-chart  - how the composition of an agent's
+      actions shifts across an episode. Carries the three
+      failure styles.
+   5. #r1-thinking-chart - thinking spent per turn, log scale.
 
-   All three use the model brand colours so a reader can follow a
+   They use the model brand colours so a reader can follow a
    model across the page.
 
    Data: static/data/v2_r1_results.json
@@ -131,66 +133,6 @@
   }
 
   // ---- 2. progress vs shortest path --------------------------------------
-  function renderScatter(data, canvas) {
-    if (!data.scatter || typeof Chart === "undefined") return;
-
-    var datasets = [];
-    data.scatter.series.forEach(function (s) {
-      var c = COLOUR[s.model] || "#666";
-      datasets.push({
-        label: s.model,
-        data: s.points.filter(function (p) { return !p.solved; }),
-        backgroundColor: c + "99",
-        borderColor: "transparent",
-        pointRadius: 4,
-        pointHoverRadius: 6
-      });
-      datasets.push({
-        label: s.model + " - solved",
-        data: s.points.filter(function (p) { return p.solved; }),
-        // Chart.js draws "star" as a stroked asterisk, so the visible colour
-        // comes from borderColor - a white border here renders invisibly.
-        backgroundColor: c,
-        borderColor: c,
-        borderWidth: 3,
-        pointStyle: "star",
-        pointRadius: 10,
-        pointHoverRadius: 13
-      });
-    });
-
-    new Chart(canvas.getContext("2d"), {
-      type: "scatter",
-      data: { datasets: datasets },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            labels: {
-              usePointStyle: true, boxWidth: 8,
-              // one entry per model; the solve series share the name
-              filter: function (item) { return item.text.indexOf(" - solved") === -1; }
-            }
-          },
-          tooltip: {
-            callbacks: {
-              label: function (ctx) {
-                return ctx.dataset.label.replace(" - solved", "") +
-                  " · " + ctx.parsed.x + " moves · progress " + ctx.parsed.y.toFixed(2);
-              }
-            }
-          }
-        },
-        scales: {
-          x: { title: { display: true, text: data.scatter.xLabel }, grid: { color: "rgba(0,0,0,0.05)" } },
-          y: { title: { display: true, text: data.scatter.yLabel }, min: 0, max: 1.08,
-               grid: { color: "rgba(0,0,0,0.05)" } }
-        }
-      }
-    });
-  }
-
   // ---- 3. how actions change across an episode ---------------------------
   function renderQuarters(data, canvas, buttonBar, noteEl) {
     if (!data.quarters || typeof Chart === "undefined") return;
@@ -348,21 +290,19 @@
     var invEl = document.getElementById("r1-inversion-chart");
     var thinkEl = document.getElementById("r1-thinking-chart");
     var funnelEl = document.getElementById("r1-switch-funnel");
-    var scatterEl = document.getElementById("r1-scatter-chart");
     var quarterEl = document.getElementById("r1-quarter-chart");
-    if (!gridEl && !funnelEl && !scatterEl && !quarterEl && !invEl && !thinkEl) return;
+    if (!gridEl && !funnelEl && !quarterEl && !invEl && !thinkEl) return;
 
     var onHome = /\/(index\.html)?$/.test(window.location.pathname);
     // Versioned like the scripts are: the numbers change more often than the
     // code that draws them, and a cached copy of the old ones is invisible.
-    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r1h";
+    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r2h";
 
     fetch(path)
       .then(function (r) { return r.json(); })
       .then(function (data) {
         if (gridEl) renderGrid(data, gridEl);
         if (funnelEl) renderFunnel(data, funnelEl);
-        if (scatterEl) renderScatter(data, scatterEl);
         if (quarterEl) {
           renderQuarters(data, quarterEl,
             document.getElementById("r1-quarter-metrics"),

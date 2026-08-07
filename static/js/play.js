@@ -1,7 +1,7 @@
 (() => {
   // Where the maze backend lives. `?api=` overrides it, which is how you point
   // the deployed page at a local server during development:
-  //   .../Multinetv2R1.html?api=http://127.0.0.1:8000
+  //   .../index.html?api=http://127.0.0.1:8000
   // TODO(R1): set API_DEFAULT to the hosted HTTPS endpoint before launch. It must
   // be https - an http endpoint is blocked as mixed content from multinet.ai.
   const API_DEFAULT = "http://127.0.0.1:8000";

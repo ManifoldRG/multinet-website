@@ -46,7 +46,7 @@
     {
       label: "Benchmark Releases", icon: "fas fa-microscope",
       children: [
-        { id: "v2r1", label: "v2.0 R1 - GridWorld", icon: "fas fa-project-diagram", href: url("static/pages/Multinetv2R1.html") },
+        { id: "v2r1", label: "v2.0 R1 - GridWorld", icon: "fas fa-project-diagram", href: url("index.html") },
         { id: "v1", label: "v1.0 - Generalist", icon: "fas fa-rocket", href: url("static/pages/Multinetv1.html") },
         { id: "v02", label: "v0.2 - Gameplay", icon: "fas fa-gamepad", href: url("static/pages/Multinetv02.html") },
         { id: "v01", label: "v0.1 - Robotics", icon: "fas fa-robot", href: url("static/pages/Multinetv01.html") }
@@ -69,8 +69,8 @@
         { label: "Model Adaptations", icon: "fas fa-microchip", href: GH_V1, external: true }
       ]
     },
-    // Embedded player lives in the R1 page Play the Maze section.
-    { id: "play", label: "Play the Maze", icon: "fas fa-gamepad", href: url("static/pages/Multinetv2R1.html#play-the-maze") },
+    // Embedded player lives in the homepage's Play the Mazes section.
+    { id: "play", label: "Play the Maze", icon: "fas fa-gamepad", href: url("index.html#play-the-maze") },
     { id: "submit", label: "Submit Your Model", icon: "fas fa-paper-plane", href: EVAL_HARNESS, external: true },
     { id: "about", label: "About Multinet", icon: "fas fa-info-circle", href: url("static/pages/Multinet.html") },
     { id: "cite", label: "Citation", icon: "fas fa-quote-right", href: url("index.html#BibTeX") }
