@@ -31,9 +31,10 @@
     {
       id: "difficulty",
       label: "Environment factors",
-      claim: "Distance and mechanisms both predict how far an agent gets, and on the mazes short " +
-             "enough to leave headroom the mechanisms take over entirely: gates and switches each " +
-             "explain around a quarter of the variation, while shortest path explains almost none.",
+      claim: "Distance and mechanisms both predict how much progress an agent makes. On the longer " +
+             "mazes, length alone is enough to end an episode and it dominates everything else. The " +
+             "shorter ones leave headroom, and there the mechanisms account for nearly all of the " +
+             "variation while path length accounts for almost none.",
       mount: "r1-inversion-chart",
       caption: "How much of the variation in progress each maze property explains on its own."
     },
