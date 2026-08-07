@@ -123,7 +123,7 @@
           steps +
         "</div>" +
         '<div class="r1-fn__aside">' +
-          '<p class="r1-fn__title">Key-door mechanisms</p>' +
+          '<p class="r1-fn__title">Key-door mechanism</p>' +
           "<ul>" + contrast + "</ul>" +
           "<p>Keys and doors were explained exactly as much as switches were: not at all.</p>" +
         "</div>" +
