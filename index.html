@@ -43,8 +43,8 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/mn-shared.css?v=r1s">
-  <link rel="stylesheet" href="static/css/r1-components.css?v=r1s">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r1u">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r1u">
   <link rel="stylesheet" href="static/css/play.css?v=p1b5">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
@@ -326,22 +326,92 @@
       width: 900px; visibility: hidden;
     }
 
-    /* ---------- news ---------- */
-    .lp-news { display: flex; flex-direction: column; gap: 0.55rem; }
-    .lp-news__item {
-      display: grid; grid-template-columns: 92px 1fr; gap: 1rem;
-      align-items: baseline; padding: 0.8rem 1.1rem;
-      border: 1px solid #eef1f4; border-radius: 10px; background: #fff;
-      transition: border-color 0.18s ease;
+    /* ---------- news, as a lineage ----------
+       One rail down the left, a marker per release, a card beside it. The rail
+       is drawn on the list rather than per item so it is continuous, and it
+       stops at the last marker rather than running past it. */
+    .lp-tl {
+      list-style: none;
+      margin: 0 auto; padding: 0;
+      max-width: 760px;
+      position: relative;
     }
-    .lp-news__item:hover { border-color: #d9dee5; }
-    .lp-news__when {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.07em;
+    .lp-tl__item {
+      position: relative;
+      padding-left: 62px;
+      margin-bottom: 1rem;
+    }
+    .lp-tl__item:last-child { margin-bottom: 0; }
+
+    /* The rail is drawn per item rather than once down the list, so it starts
+       under the first marker and stops at the last one instead of dangling
+       past it. Each segment runs into the marker below and is hidden by that
+       marker's fill, which keeps the line continuous. */
+    .lp-tl__item:not(:last-child)::before {
+      content: "";
+      position: absolute; left: 19px; top: 54px; bottom: -30px;
+      width: 2px; border-radius: 2px;
+      background: #dde4ec;
+    }
+    .lp-tl__item.is-current::before { background: #bcd0e2; }
+
+    .lp-tl__mark {
+      position: absolute; left: 0; top: 14px;
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.05rem; line-height: 1;
+      background: #fff;
+      border: 2px solid #e2e8f0;
+      box-shadow: 0 2px 6px rgba(12, 18, 28, 0.07);
+      z-index: 1;
+      transition: border-color 0.22s ease, transform 0.22s ease;
+    }
+    .lp-tl__item.is-current .lp-tl__mark {
+      border-color: #005A9C;
+      box-shadow: 0 0 0 4px rgba(0, 90, 156, 0.12), 0 2px 6px rgba(12, 18, 28, 0.1);
+    }
+    .lp-tl__item.is-paper .lp-tl__mark { border-color: #d8c9e8; }
+
+    .lp-tl__card {
+      border: 1px solid #eef1f5; border-radius: 12px;
+      padding: 1rem 1.15rem 1.05rem;
+      background: #fff;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+    }
+    .lp-tl__item:hover .lp-tl__card {
+      transform: translateX(3px);
+      border-color: #d9e2ec;
+      box-shadow: 0 8px 20px rgba(12, 18, 28, 0.07);
+    }
+    .lp-tl__item:hover .lp-tl__mark { transform: scale(1.06); }
+
+    .lp-tl__when {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.09em;
       text-transform: uppercase; color: #005A9C;
+      margin-bottom: 0.3rem;
     }
-    .lp-news__item.is-paper .lp-news__when { color: #8E44AD; }
-    .lp-news__item p { margin: 0; font-size: 0.92rem; line-height: 1.55; color: #4a5160; }
-    .lp-news__item strong { color: #12151c; }
+    .lp-tl__item.is-paper .lp-tl__when { color: #8E44AD; }
+    .lp-tl__title {
+      margin: 0 0 0.35rem;
+      font-size: 1rem; font-weight: 700; color: #12151c;
+      letter-spacing: -0.01em;
+    }
+    .lp-tl__card p {
+      margin: 0; font-size: 0.89rem; line-height: 1.6; color: #4a5160;
+    }
+    .lp-tl__link {
+      display: inline-block; margin-top: 0.6rem;
+      font-size: 0.84rem; font-weight: 600; color: #005A9C;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+    .lp-tl__link:hover { border-bottom-color: currentColor; }
+    .lp-tl__link::after { content: " \2192"; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lp-tl__item:hover .lp-tl__card,
+      .lp-tl__item:hover .lp-tl__mark { transform: none; }
+    }
 
     /* ---------- closing CTA ---------- */
     .lp-final {
@@ -374,7 +444,9 @@
     @media screen and (max-width: 620px) {
       .lp-stats { grid-template-columns: 1fr; }
       .lp-props { grid-template-columns: 1fr; }
-      .lp-news__item { grid-template-columns: 1fr; gap: 0.3rem; }
+      .lp-tl__item { padding-left: 52px; }
+      .lp-tl__mark { width: 34px; height: 34px; font-size: 0.95rem; }
+      .lp-tl::before { left: 16px; }
       .lp-section { padding: 2.5rem 0; }
       .r1-tab-panel { padding: 1.1rem 0.9rem; }
       .lp-collab { gap: 1.5rem; }
@@ -644,34 +716,77 @@
   <section class="lp-section">
     <div class="lp-wrap">
       <h2 class="lp-h2">News</h2>
-      <p class="lp-sub">Four benchmark releases and two accepted papers.</p>
-      <div class="lp-news">
-        <div class="lp-news__item">
-          <div class="lp-news__when">v2.0 R1</div>
-          <p><strong>MultiNet v2.0 Release 1.</strong> Frontier models on procedurally generated mazes with hidden causal mechanisms. <a href="static/pages/Multinetv2R1.html">Read the analysis</a>.</p>
-        </div>
+      <p class="lp-sub">MultiNet milestones over the past 2 years.</p>
+
+      <!-- A lineage rather than a list: one rail, newest at the top, each
+           release sitting on it. The rail is what makes it read as one line of
+           work rather than six announcements. -->
+      <ol class="lp-tl">
+        <li class="lp-tl__item is-current">
+          <span class="lp-tl__mark" aria-hidden="true">🧩</span>
+          <div class="lp-tl__card">
+            <div class="lp-tl__when">v2.0 Release 1</div>
+            <h3 class="lp-tl__title">Mazes with hidden causal mechanisms</h3>
+            <p>Frontier models on procedurally generated mazes that explain nothing.
+               Three models solved 6 of 150 episodes.</p>
+            <a class="lp-tl__link" href="static/pages/Multinetv2R1.html">Read the analysis</a>
+          </div>
+        </li>
+
         <!-- TODO(R1): link the arXiv preprint once it is up. -->
-        <div class="lp-news__item is-paper">
-          <div class="lp-news__when">CVPR '26</div>
-          <p><strong>Paper accepted at CVPR 2026.</strong> Our v1.0 work was accepted at the <a href="https://mmfm-workshop.github.io/" target="_blank" rel="noopener noreferrer">MMFM workshop</a>.</p>
-        </div>
-        <div class="lp-news__item">
-          <div class="lp-news__when">v1.0</div>
-          <p><strong>MultiNet v1.0 released.</strong> A state-of-the-art VLM, VLA and generalist model evaluated across 11 datasets in six capability areas. <a href="static/pages/Multinetv1.html">Read more</a>.</p>
-        </div>
-        <div class="lp-news__item is-paper">
-          <div class="lp-news__when">ICML '25</div>
-          <p><strong>Paper accepted at ICML 2025.</strong> MultiNet's open-source contributions, at the <a href="https://codeml-workshop.github.io/codeml2025/" target="_blank" rel="noopener noreferrer">CodeML workshop</a>. <a href="static/pdfs/An Open-Source Software Toolkit &amp; Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener noreferrer">Read the paper</a>.</p>
-        </div>
-        <div class="lp-news__item">
-          <div class="lp-news__when">v0.2</div>
-          <p><strong>MultiNet v0.2 released.</strong> VLAs and VLMs in procedurally generated, out-of-distribution game environments. <a href="static/pages/Multinetv02.html">Read more</a>.</p>
-        </div>
-        <div class="lp-news__item">
-          <div class="lp-news__when">v0.1</div>
-          <p><strong>MultiNet v0.1 released.</strong> How well do state-of-the-art VLMs and VLAs perform on real-world robotics tasks? <a href="static/pages/Multinetv01.html">Read more</a>.</p>
-        </div>
-      </div>
+        <li class="lp-tl__item is-paper">
+          <span class="lp-tl__mark" aria-hidden="true">🏆</span>
+          <div class="lp-tl__card">
+            <div class="lp-tl__when">CVPR 2026</div>
+            <h3 class="lp-tl__title">Paper accepted at CVPR</h3>
+            <p>Our v1.0 work was accepted at the MMFM workshop.</p>
+            <a class="lp-tl__link" href="https://mmfm-workshop.github.io/" target="_blank" rel="noopener noreferrer">The workshop</a>
+          </div>
+        </li>
+
+        <li class="lp-tl__item">
+          <span class="lp-tl__mark" aria-hidden="true">🌟</span>
+          <div class="lp-tl__card">
+            <div class="lp-tl__when">v1.0</div>
+            <h3 class="lp-tl__title">Eleven datasets, six capability areas</h3>
+            <p>A state-of-the-art VLM, VLA and generalist model evaluated across the
+               broadest set we had built to that point.</p>
+            <a class="lp-tl__link" href="static/pages/Multinetv1.html">Read more</a>
+          </div>
+        </li>
+
+        <li class="lp-tl__item is-paper">
+          <span class="lp-tl__mark" aria-hidden="true">🏅</span>
+          <div class="lp-tl__card">
+            <div class="lp-tl__when">ICML 2025</div>
+            <h3 class="lp-tl__title">Paper accepted at ICML</h3>
+            <p>MultiNet's open-source toolkit and benchmark suite, at the CodeML workshop.</p>
+            <a class="lp-tl__link" href="static/pdfs/An Open-Source Software Toolkit &amp; Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener noreferrer">Read the paper</a>
+          </div>
+        </li>
+
+        <li class="lp-tl__item">
+          <span class="lp-tl__mark" aria-hidden="true">🎮</span>
+          <div class="lp-tl__card">
+            <div class="lp-tl__when">v0.2</div>
+            <h3 class="lp-tl__title">Out-of-distribution game environments</h3>
+            <p>VLAs and VLMs in procedurally generated games, the first time we
+               generated the evaluation rather than collecting it.</p>
+            <a class="lp-tl__link" href="static/pages/Multinetv02.html">Read more</a>
+          </div>
+        </li>
+
+        <li class="lp-tl__item">
+          <span class="lp-tl__mark" aria-hidden="true">🤖</span>
+          <div class="lp-tl__card">
+            <div class="lp-tl__when">v0.1</div>
+            <h3 class="lp-tl__title">Real-world robotics tasks</h3>
+            <p>The first release: how well do state-of-the-art VLMs and VLAs perform
+               on real robot data?</p>
+            <a class="lp-tl__link" href="static/pages/Multinetv01.html">Read more</a>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
@@ -741,11 +856,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="static/js/play.js?v=p1b7"></script>
-<script src="static/js/mn-shell.js?v=r1s"></script>
-<script src="static/js/v2_r1_results_table.js?v=r1s"></script>
-<script src="static/js/v2_r1_finding_charts.js?v=r1s"></script>
-<script src="static/js/v2_r1_finding_tabs.js?v=r1s"></script>
-<script src="static/js/v2_r1_reel.js?v=r1s"></script>
-<script src="static/js/lp_headline_stats.js?v=r1s"></script>
+<script src="static/js/mn-shell.js?v=r1u"></script>
+<script src="static/js/v2_r1_results_table.js?v=r1u"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r1u"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r1u"></script>
+<script src="static/js/v2_r1_reel.js?v=r1u"></script>
+<script src="static/js/lp_headline_stats.js?v=r1u"></script>
 </body>
 </html>
