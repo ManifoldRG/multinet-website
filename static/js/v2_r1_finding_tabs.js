@@ -51,12 +51,12 @@
       id: "compute",
       label: "Test time compute",
       claim: "Kimi and Qwen spend 20 to 26 times more output tokens per newly discovered tile than " +
-             "Claude, last around 1.6x steps longer, and solve fewer mazes. Where that thinking goes " +
-             "is more telling than how much of it there is: Claude's roughly halves over the course of " +
-             "an episode, while Kimi's and Qwen's keep climbing.",
+             "Claude, last around 1.6x steps longer, and solve fewer mazes. Claude's thinking roughly " +
+             "halves over the course of an episode, while Kimi's and Qwen's keep climbing.",
       mount: "r1-thinking-chart",
-      caption: "Thinking spent on each turn, by turn number, on a log scale. This is per turn - not " +
-               "the per-tile ratio in the cards above."
+      caption: "Thinking spent on each turn, by turn number. The scale is logarithmic - each gridline " +
+               "multiplies the one below it rather than adding to it - because Claude runs two orders " +
+               "of magnitude under the other two. Per turn, not the per-tile ratio in the cards above."
     }
   ];
 
