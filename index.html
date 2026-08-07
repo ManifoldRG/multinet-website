@@ -43,8 +43,8 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/mn-shared.css?v=r1u">
-  <link rel="stylesheet" href="static/css/r1-components.css?v=r1u">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r1v">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r1v">
   <link rel="stylesheet" href="static/css/play.css?v=p1b5">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
@@ -391,22 +391,17 @@
       margin-bottom: 0.3rem;
     }
     .lp-tl__item.is-paper .lp-tl__when { color: #8E44AD; }
-    .lp-tl__title {
-      margin: 0 0 0.35rem;
-      font-size: 1rem; font-weight: 700; color: #12151c;
-      letter-spacing: -0.01em;
-    }
+    /* The lead of each entry carries the headline, as it did on the old site,
+       so there is no separate title element to drift out of sync with it. */
     .lp-tl__card p {
-      margin: 0; font-size: 0.89rem; line-height: 1.6; color: #4a5160;
+      margin: 0; font-size: 0.9rem; line-height: 1.65; color: #4a5160;
     }
-    .lp-tl__link {
-      display: inline-block; margin-top: 0.6rem;
-      font-size: 0.84rem; font-weight: 600; color: #005A9C;
-      text-decoration: none;
+    .lp-tl__card p strong { color: #12151c; font-weight: 700; }
+    .lp-tl__card a {
+      color: #005A9C; font-weight: 600; text-decoration: none;
       border-bottom: 1px solid transparent;
     }
-    .lp-tl__link:hover { border-bottom-color: currentColor; }
-    .lp-tl__link::after { content: " \2192"; }
+    .lp-tl__card a:hover { border-bottom-color: currentColor; }
 
     @media (prefers-reduced-motion: reduce) {
       .lp-tl__item:hover .lp-tl__card,
@@ -726,32 +721,43 @@
           <span class="lp-tl__mark" aria-hidden="true">🧩</span>
           <div class="lp-tl__card">
             <div class="lp-tl__when">v2.0 Release 1</div>
-            <h3 class="lp-tl__title">Mazes with hidden causal mechanisms</h3>
-            <p>Frontier models on procedurally generated mazes that explain nothing.
-               Three models solved 6 of 150 episodes.</p>
-            <a class="lp-tl__link" href="static/pages/Multinetv2R1.html">Read the analysis</a>
+            <p><strong>MultiNet v2.0 Release 1!</strong> Frontier models on procedurally generated
+               mazes with hidden causal mechanisms. Three models solved 6 of 150 episodes. Read the
+               analysis <a href="static/pages/Multinetv2R1.html">here</a>.</p>
           </div>
         </li>
 
-        <!-- TODO(R1): link the arXiv preprint once it is up. -->
         <li class="lp-tl__item is-paper">
-          <span class="lp-tl__mark" aria-hidden="true">🏆</span>
+          <span class="lp-tl__mark" aria-hidden="true">🎓</span>
           <div class="lp-tl__card">
             <div class="lp-tl__when">CVPR 2026</div>
-            <h3 class="lp-tl__title">Paper accepted at CVPR</h3>
-            <p>Our v1.0 work was accepted at the MMFM workshop.</p>
-            <a class="lp-tl__link" href="https://mmfm-workshop.github.io/" target="_blank" rel="noopener noreferrer">The workshop</a>
+            <!-- TODO(R1-ARXIV): dummy destination until the preprint is posted. -->
+            <p><strong>Paper accepted at CVPR 2026!</strong> Our work has been accepted at the
+               <a href="https://mmfm-workshop.github.io/" target="_blank" rel="noopener noreferrer">MMFM
+               Workshop</a> at CVPR 2026! Read our preprint <a href="#">here</a>.</p>
           </div>
         </li>
 
+        <!-- The five entries below are the original news items, text and emoji
+             unchanged; only the link paths are rewritten for this location. -->
         <li class="lp-tl__item">
           <span class="lp-tl__mark" aria-hidden="true">🌟</span>
           <div class="lp-tl__card">
             <div class="lp-tl__when">v1.0</div>
-            <h3 class="lp-tl__title">Eleven datasets, six capability areas</h3>
-            <p>A state-of-the-art VLM, VLA and generalist model evaluated across the
-               broadest set we had built to that point.</p>
-            <a class="lp-tl__link" href="static/pages/Multinetv1.html">Read more</a>
+            <p><strong>Multinet v1.0 released!</strong> We release our most comprehensive benchmark yet -
+               evaluating a SoTA VLM, VLA, and generalist models on a wide variety of multimodal
+               understanding and action datasets. Read more
+               <a href="static/pages/Multinetv1.html">here</a>.</p>
+          </div>
+        </li>
+
+        <li class="lp-tl__item">
+          <span class="lp-tl__mark" aria-hidden="true">🏆</span>
+          <div class="lp-tl__card">
+            <div class="lp-tl__when">v0.2</div>
+            <p><strong>Multinet v0.2 released!</strong> We systematically profile state-of-the-art VLAs
+               and VLMs perform in procedurally generated OOD game environments. Read more about our
+               recent release <a href="static/pages/Multinetv02.html">here</a>.</p>
           </div>
         </li>
 
@@ -759,31 +765,31 @@
           <span class="lp-tl__mark" aria-hidden="true">🏅</span>
           <div class="lp-tl__card">
             <div class="lp-tl__when">ICML 2025</div>
-            <h3 class="lp-tl__title">Paper accepted at ICML</h3>
-            <p>MultiNet's open-source toolkit and benchmark suite, at the CodeML workshop.</p>
-            <a class="lp-tl__link" href="static/pdfs/An Open-Source Software Toolkit &amp; Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener noreferrer">Read the paper</a>
+            <p><strong>Paper accepted at ICML 2025!</strong> Our paper detailing the Open-Source
+               contributions of Multinet that benefit the AI community has been accepted at the
+               <a href="https://codeml-workshop.github.io/codeml2025/" target="_blank" rel="noopener noreferrer">CodeML
+               Workshop</a> at ICML 2025! Read our paper
+               <a href="static/pdfs/An Open-Source Software Toolkit &amp; Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener noreferrer">here</a>.</p>
           </div>
         </li>
 
         <li class="lp-tl__item">
-          <span class="lp-tl__mark" aria-hidden="true">🎮</span>
-          <div class="lp-tl__card">
-            <div class="lp-tl__when">v0.2</div>
-            <h3 class="lp-tl__title">Out-of-distribution game environments</h3>
-            <p>VLAs and VLMs in procedurally generated games, the first time we
-               generated the evaluation rather than collecting it.</p>
-            <a class="lp-tl__link" href="static/pages/Multinetv02.html">Read more</a>
-          </div>
-        </li>
-
-        <li class="lp-tl__item">
-          <span class="lp-tl__mark" aria-hidden="true">🤖</span>
+          <span class="lp-tl__mark" aria-hidden="true">🎉</span>
           <div class="lp-tl__card">
             <div class="lp-tl__when">v0.1</div>
-            <h3 class="lp-tl__title">Real-world robotics tasks</h3>
-            <p>The first release: how well do state-of-the-art VLMs and VLAs perform
-               on real robot data?</p>
-            <a class="lp-tl__link" href="static/pages/Multinetv01.html">Read more</a>
+            <p><strong>Multinet v0.1 released!</strong> How well do state-of-the-art VLMs and VLAs
+               perform on real-world robotics tasks? Read more on our
+               <a href="static/pages/Multinetv01.html">release Page</a>.</p>
+          </div>
+        </li>
+
+        <li class="lp-tl__item">
+          <span class="lp-tl__mark" aria-hidden="true">🚀</span>
+          <div class="lp-tl__card">
+            <div class="lp-tl__when">Introducing</div>
+            <p><strong>Introducing Multinet!</strong> A comprehensive benchmark for evaluating
+               multimodal generalization in next generation models.
+               <a href="static/pages/Multinet.html">Learn more here</a>.</p>
           </div>
         </li>
       </ol>
@@ -856,11 +862,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="static/js/play.js?v=p1b7"></script>
-<script src="static/js/mn-shell.js?v=r1u"></script>
-<script src="static/js/v2_r1_results_table.js?v=r1u"></script>
-<script src="static/js/v2_r1_finding_charts.js?v=r1u"></script>
-<script src="static/js/v2_r1_finding_tabs.js?v=r1u"></script>
-<script src="static/js/v2_r1_reel.js?v=r1u"></script>
-<script src="static/js/lp_headline_stats.js?v=r1u"></script>
+<script src="static/js/mn-shell.js?v=r1v"></script>
+<script src="static/js/v2_r1_results_table.js?v=r1v"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r1v"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r1v"></script>
+<script src="static/js/v2_r1_reel.js?v=r1v"></script>
+<script src="static/js/lp_headline_stats.js?v=r1v"></script>
 </body>
 </html>
