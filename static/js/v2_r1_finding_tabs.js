@@ -21,7 +21,7 @@
   var TABS = [
     {
       id: "discovery",
-      label: "Discovery",
+      label: "Exploration failure",
       claim: "Models operate the mechanisms they already understand and never work out the one they " +
              "have to learn. Keys and doors get no explanation and are used fine. Switches get exactly " +
              "the same silence: 132 toggle actions across the whole run produced 2 flips.",
@@ -30,7 +30,7 @@
     },
     {
       id: "difficulty",
-      label: "Difficulty",
+      label: "Environment factors",
       claim: "Distance and mechanisms both predict how far an agent gets, and on the mazes short " +
              "enough to leave headroom the mechanisms take over entirely: gates and switches each " +
              "explain around a quarter of the variation, while shortest path explains almost none.",
@@ -49,7 +49,7 @@
     },
     {
       id: "compute",
-      label: "Compute",
+      label: "Test time compute",
       claim: "Kimi and Qwen spend 20 to 26 times more output tokens per newly discovered tile than " +
              "Claude, last around 1.6× longer, and solve fewer mazes. Claude's thinking contracts as an " +
              "episode runs, and contracts hardest right after a move that achieved nothing.",
