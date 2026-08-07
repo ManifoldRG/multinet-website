@@ -17,23 +17,40 @@
    ============================================================ */
 
 
-    /* the chart's metric toggles echo the two cards above them */
-    .r1-metric-button[data-metric="solveRate"].active {
-      background: #005A9C; border-color: #005A9C;
-    }
-    .r1-metric-button[data-metric="progress"].active {
-      background: #0B7285; border-color: #0B7285;
-    }
-    .r1-metric-button[data-metric="progress"]:hover { border-color: #0B7285; color: #0B7285; }
-    .r1-metric-button[data-metric="progress"].active:hover { color: #fff; }
-    .r1-metric-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    /* Chart metric toggles: the same physical key as every other control on
+       the site. The selected one stays pressed rather than merely filled, so
+       the current view is marked by depth as well as by colour. */
+    .r1-metric-buttons { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: flex-start; }
     .r1-metric-button {
-      border: 1px solid #dbdbdb; background: #fff; color: #363636;
-      border-radius: 6px; padding: 0.5rem 1rem; cursor: pointer;
-      font-family: inherit; font-size: 0.9rem; transition: all 0.2s;
+      --face: #005A9C;
+      --edge: #003D6B;
+      --lift: 4px;
+      border: 0; border-radius: 9px;
+      padding: 0.5rem 1.1rem; cursor: pointer;
+      font-family: inherit; font-size: 0.9rem; font-weight: 600;
+      background: var(--face); color: #fff;
+      box-shadow: 0 var(--lift) 0 var(--edge), 0 6px 14px rgba(3, 34, 60, 0.22);
+      transform: translateY(0);
+      transition: transform 0.09s ease, box-shadow 0.09s ease, background 0.16s ease;
     }
-    .r1-metric-button:hover { border-color: #005A9C; color: #005A9C; }
-    .r1-metric-button.active { background: #005A9C; border-color: #005A9C; color: #fff; }
+    .r1-metric-button:hover { background: #0069b5; }
+    .r1-metric-button:active,
+    .r1-metric-button.active {
+      transform: translateY(var(--lift));
+      box-shadow: 0 0 0 var(--edge), 0 1px 3px rgba(3, 34, 60, 0.25);
+    }
+    .r1-metric-button.active { background: #00457a; }
+    .r1-metric-button:focus-visible { outline: 2px solid #0B7285; outline-offset: 3px; }
+
+    /* The headline chart's progress toggle keeps its teal, matching the
+       progress card it sits under. */
+    .r1-metric-button[data-metric="progress"] { --face: #0B7285; --edge: #075A68; }
+    .r1-metric-button[data-metric="progress"]:hover { background: #0d8299; }
+    .r1-metric-button[data-metric="progress"].active { background: #084F5C; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .r1-metric-button { transition: background 0.16s ease; }
+    }
     .r1-chart-stage {
       position: relative; height: 380px;
       border: 1px solid #e5e7eb; border-radius: 10px;

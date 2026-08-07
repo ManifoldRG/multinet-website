@@ -42,8 +42,7 @@
       id: "styles",
       label: "Failure styles",
       claim: "All three models end essentially every episode on the stall watchdog, by different routes. " +
-             "Claude walks into walls, Kimi retreads ground it has covered, Qwen turns on the spot. " +
-             "Whatever each does too much of, it does more of as the episode runs.",
+             "Claude walks into walls, Kimi retreads ground it has covered, Qwen turns on the spot.",
       mount: "r1-quarter-chart",
       // this figure writes its own caption, per selected view
       caption: ""
