@@ -30,8 +30,9 @@ body {
    transparent gutters above and beside it, and the page scrolled through
    them unfrosted - which read as the bar sliding rather than staying put. */
 .mn-hdr {
-  position: sticky;
-  top: 0;
+  /* Deliberately not sticky. The bar belongs at the top of the page, not
+     travelling down it - once you are reading, it is in the way. */
+  position: relative;
   z-index: 1000;
 
   background: rgba(255, 255, 255, 0.66);
