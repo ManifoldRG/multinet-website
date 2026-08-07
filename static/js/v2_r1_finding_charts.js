@@ -119,11 +119,11 @@
     el.innerHTML =
       '<div class="r1-fn">' +
         '<div class="r1-fn__main">' +
-          '<p class="r1-fn__title">The mechanism they had to discover</p>' +
+          '<p class="r1-fn__title">Switch-gate mechanism</p>' +
           steps +
         "</div>" +
         '<div class="r1-fn__aside">' +
-          '<p class="r1-fn__title">The mechanisms they already knew</p>' +
+          '<p class="r1-fn__title">Key-door mechanisms</p>' +
           "<ul>" + contrast + "</ul>" +
           "<p>Keys and doors were explained exactly as much as switches were: not at all.</p>" +
         "</div>" +
