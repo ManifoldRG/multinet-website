@@ -43,8 +43,8 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/mn-shared.css?v=r1j">
-  <link rel="stylesheet" href="static/css/r1-components.css?v=r1j">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r1k">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r1k">
   <link rel="stylesheet" href="static/css/play.css?v=p1b5">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
@@ -273,19 +273,38 @@
       .lp-prop { transition: box-shadow 0.2s ease, border-color 0.2s ease; }
     }
 
-    /* ---------- findings tabs ---------- */
+    /* ---------- findings tabs ----------
+       The same physical key as every other button on the page. The selected
+       tab stays pressed - flush against its edge - so the current finding is
+       marked by the one thing a key can say that a colour cannot. */
     .r1-tabs {
-      display: flex; justify-content: center; gap: 0.4rem;
-      flex-wrap: wrap; margin-bottom: 1.25rem;
+      display: flex; justify-content: center; gap: 0.6rem;
+      flex-wrap: wrap; margin-bottom: 1.6rem;
+      align-items: flex-start;
     }
     .r1-tab {
-      border: 1px solid #e4e7ee; background: #fff; color: #4a5160;
-      border-radius: 8px; padding: 0.5rem 1.05rem;
-      font: inherit; font-size: 0.92rem; cursor: pointer;
-      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+      --face: #005A9C;
+      --edge: #003D6B;
+      --lift: 4px;
+      border: 0; border-radius: 9px;
+      padding: 0.55rem 1.15rem;
+      font: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer;
+      background: var(--face); color: #fff;
+      box-shadow: 0 var(--lift) 0 var(--edge), 0 6px 14px rgba(3, 34, 60, 0.22);
+      transform: translateY(0);
+      transition: transform 0.09s ease, box-shadow 0.09s ease, background 0.16s ease;
     }
-    .r1-tab:hover { border-color: #005A9C; color: #005A9C; }
-    .r1-tab.is-active { background: #005A9C; border-color: #005A9C; color: #fff; font-weight: 600; }
+    .r1-tab:hover { background: #0069b5; }
+    .r1-tab:active,
+    .r1-tab.is-active {
+      transform: translateY(var(--lift));
+      box-shadow: 0 0 0 var(--edge), 0 1px 3px rgba(3, 34, 60, 0.25);
+    }
+    .r1-tab.is-active { background: #00457a; }
+    .r1-tab:focus-visible { outline: 2px solid #0B7285; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      .r1-tab { transition: background 0.16s ease; }
+    }
 
     .r1-tab-panel {
       border: 1px solid #e8ebee; border-radius: 14px;
@@ -581,8 +600,7 @@
   <!-- ==================== FINDINGS ==================== -->
   <section class="lp-section">
     <div class="lp-wrap">
-      <h2 class="lp-h2">What we found</h2>
-      <p class="lp-sub">Four findings from the run. Pick one.</p>
+      <h2 class="lp-h2" style="margin-bottom: 2rem;">Findings and Analysis</h2>
 
       <div class="r1-tabs" id="r1-tabs"></div>
       <div class="r1-tab-panel" id="r1-tab-panel">
@@ -722,11 +740,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="static/js/play.js?v=p1b7"></script>
-<script src="static/js/mn-shell.js?v=r1j"></script>
-<script src="static/js/v2_r1_results_table.js?v=r1j"></script>
-<script src="static/js/v2_r1_finding_charts.js?v=r1j"></script>
-<script src="static/js/v2_r1_finding_tabs.js?v=r1j"></script>
-<script src="static/js/v2_r1_reel.js?v=r1j"></script>
-<script src="static/js/lp_headline_stats.js?v=r1j"></script>
+<script src="static/js/mn-shell.js?v=r1k"></script>
+<script src="static/js/v2_r1_results_table.js?v=r1k"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r1k"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r1k"></script>
+<script src="static/js/v2_r1_reel.js?v=r1k"></script>
+<script src="static/js/lp_headline_stats.js?v=r1k"></script>
 </body>
 </html>
