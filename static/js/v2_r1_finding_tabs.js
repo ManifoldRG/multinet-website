@@ -22,9 +22,9 @@
     {
       id: "discovery",
       label: "Exploration failure",
-      claim: "Models operate the mechanisms they already understand and never work out the one they " +
-             "have to learn. Keys and doors get no explanation and are used fine. Switches get exactly " +
-             "the same silence: 132 toggle actions across the whole run produced 2 flips.",
+      claim: "Models operate the familiar mechanism competently and never acquire the unfamiliar one. " +
+             "The gap is not knowledge of an interface, it is the ability to acquire an affordance by " +
+             "interacting with the world.",
       mount: "r1-switch-funnel",
       caption: "Agents walked onto a live switch in 38 of the 105 switch-maze episodes and pressed it twice."
     },
