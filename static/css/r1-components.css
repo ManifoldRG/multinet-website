@@ -217,12 +217,48 @@
     }
     .r1-eg__fam {
       grid-column: span var(--span);
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em;
-      text-transform: uppercase; color: #64748b;
       border-bottom: 2px solid #e2e8f0;
       padding-bottom: 3px; margin-bottom: 2px;
-      overflow: hidden; white-space: nowrap;
+      /* visible, so the tooltip can leave the header cell; the label inside
+         does the clipping instead */
+      position: relative; overflow: visible;
     }
+    .r1-eg__famlab {
+      display: block; max-width: 100%;
+      padding: 0; border: 0; background: none;
+      font: inherit; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; color: #64748b; text-align: left;
+      overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+    }
+    .r1-eg__fam[data-tip] .r1-eg__famlab {
+      cursor: help;
+      text-decoration: underline dotted #cbd5e1;
+      text-underline-offset: 3px;
+    }
+    .r1-eg__fam[data-tip]:hover .r1-eg__famlab,
+    .r1-eg__fam[data-tip]:focus-within .r1-eg__famlab { color: #005A9C; }
+
+    /* The description itself. Shown on hover and on focus, so it is reachable
+       by keyboard and by tap as well as by pointer. */
+    .r1-eg__fam[data-tip]::after {
+      content: attr(data-tip);
+      position: absolute; top: calc(100% + 8px); left: 0;
+      z-index: 40;
+      width: max-content; max-width: 260px;
+      padding: 0.6rem 0.7rem;
+      border-radius: 8px;
+      background: #12151c; color: #f1f5f9;
+      font-size: 0.74rem; font-weight: 400; line-height: 1.5;
+      letter-spacing: 0; text-transform: none;
+      box-shadow: 0 8px 20px rgba(12, 18, 28, 0.28);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.14s ease;
+      pointer-events: none;
+    }
+    .r1-eg__fam.is-last[data-tip]::after { left: auto; right: 0; }
+    .r1-eg__fam[data-tip]:hover::after,
+    .r1-eg__fam[data-tip]:focus-within::after { opacity: 1; visibility: visible; }
+
     .r1-eg__fam span { font-weight: 400; color: #94a3b8; }
 
     .r1-eg__cell {

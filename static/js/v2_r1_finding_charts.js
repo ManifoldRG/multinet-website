@@ -30,6 +30,18 @@
   // 50 mazes x 3 models. Colour is how much of the way to the goal the agent
   // got; a star marks a solve. Grouped by maze family, and within a family
   // ordered by shortest path, so the left-to-right fade is the difficulty axis.
+  // What each maze family varies, for the hover on the grid's group headers.
+  // Read off the run itself: S mazes carry no mechanisms at all, D mazes carry
+  // the M mechanisms plus decoys, and B (switch-gate with no key) folds into M.
+  var FAMILY_TIP = {
+    Scale: "Plain navigation. No keys, doors, switches or gates - only the size and " +
+           "density of the maze change.",
+    Mechanism: "Barriers that have to be operated in the right order: keys open doors, " +
+               "switches open gates. None of it is ever explained.",
+    Distractor: "Mechanism mazes plus decoys - keys that fit no door, switches wired to " +
+                "nothing, and corridors that lead nowhere."
+  };
+
   function renderGrid(data, el) {
     var g = data.episodeGrid;
     if (!g) return;
@@ -41,9 +53,15 @@
       else last.count++;
     });
 
-    var head = families.map(function (f) {
-      return '<div class="r1-eg__fam" style="--span:' + f.count + '">' + f.name +
-             ' <span>' + f.count + "</span></div>";
+    var head = families.map(function (f, i) {
+      var tip = FAMILY_TIP[f.name] || "";
+      // The last group sits at the right edge, so its tooltip has to open
+      // leftwards or it runs off the grid.
+      var side = i === families.length - 1 ? " is-last" : "";
+      return '<div class="r1-eg__fam' + side + '" style="--span:' + f.count + '"' +
+             (tip ? ' data-tip="' + tip + '"' : "") + ">" +
+             '<button type="button" class="r1-eg__famlab">' + f.name +
+             ' <span>' + f.count + "</span></button></div>";
     }).join("");
 
     var rows = g.models.map(function (model, mi) {
