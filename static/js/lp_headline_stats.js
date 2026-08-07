@@ -57,14 +57,21 @@
   }
 
   function arm(stats) {
-    // Wind back to zero only now, so the window between arming and
-    // revealing is never long enough to be seen.
+    // Anything already on screen is revealed where it stands. Winding it back
+    // would park a wrong number in front of someone who has not scrolled -
+    // the observer's threshold is half the card, so a strip peeking above the
+    // fold would sit at 0 until they did.
+    var pending = [];
     stats.forEach(function (s) {
+      if (s.getBoundingClientRect().top < window.innerHeight) { reveal(s); return; }
       var out = s.querySelector(".v");
       var rule = s.querySelector(".r");
       if (out) out.textContent = "0";
       if (rule) rule.style.setProperty("--p", 0);
+      pending.push(s);
     });
+    if (!pending.length) return;
+    stats = pending;
 
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {

@@ -43,8 +43,8 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/mn-shared.css?v=r2a">
-  <link rel="stylesheet" href="static/css/r1-components.css?v=r2a">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r2f">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r2f">
   <link rel="stylesheet" href="static/css/play.css?v=p1b5">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
@@ -99,6 +99,14 @@
       grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
       gap: 2.5rem;
       align-items: center;
+    }
+    /* Says what this is before the headline says what happened. Small, spaced
+       and quiet - it labels the page rather than competing with the claim. */
+    .lp-eyebrow {
+      margin: 0 0 0.7rem;
+      font-size: 0.76rem; font-weight: 700;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: #005A9C;
     }
     .lp-hero h1 {
       font-size: clamp(2rem, 4.2vw, 2.85rem);
@@ -460,6 +468,7 @@
     <div class="lp-wrap">
       <div class="lp-hero__grid">
         <div>
+          <p class="lp-eyebrow">The Multimodal Action Benchmark</p>
           <h1>Frontier models struggle on 2D mazes.</h1>
           <p class="lp-hero__lead">
             The first release of MultiNet v2.0 drops models into a 2D maze with walls, keys, doors,
@@ -846,7 +855,8 @@
         <div class="column is-8">
           <div class="content" style="color: #fff;">
             <p class="has-text-centered">
-              <a href="static/pages/Multinetv2R1.html" style="color: #90caf9;">v2.0 R1 analysis</a>
+              <!-- TODO(R1-TR): dummy destination, see the hero button. -->
+              <a href="#" style="color: #90caf9;">Technical Report</a>
               &nbsp;&middot;&nbsp;
               <a href="static/pages/archive.html" style="color: #90caf9;">Previous research</a>
               &nbsp;&middot;&nbsp;
@@ -866,11 +876,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="static/js/play.js?v=p1b7"></script>
-<script src="static/js/mn-shell.js?v=r2a"></script>
-<script src="static/js/v2_r1_results_table.js?v=r2a"></script>
-<script src="static/js/v2_r1_finding_charts.js?v=r2a"></script>
-<script src="static/js/v2_r1_finding_tabs.js?v=r2a"></script>
-<script src="static/js/v2_r1_reel.js?v=r2a"></script>
-<script src="static/js/lp_headline_stats.js?v=r2a"></script>
+<script src="static/js/mn-shell.js?v=r2f"></script>
+<script src="static/js/v2_r1_results_table.js?v=r2f"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r2f"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r2f"></script>
+<script src="static/js/v2_r1_reel.js?v=r2f"></script>
+<script src="static/js/lp_headline_stats.js?v=r2f"></script>
 </body>
 </html>
