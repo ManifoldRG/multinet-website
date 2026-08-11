@@ -86,21 +86,10 @@
     { id: "archive", label: "Previous Research", icon: "fas fa-archive", href: url("static/pages/archive.html") },
     { id: "submit", label: "Submit Your Model", icon: "fas fa-paper-plane", href: EVAL_HARNESS, external: true },
     { id: "about", label: "About MultiNet", icon: "fas fa-info-circle", href: url("static/pages/Multinet.html") },
-    { id: "cite", label: "Citation", icon: "fas fa-quote-right", href: url("index.html#BibTeX") }
+    // TODO(R1-CITE): no citation block on the homepage yet - #BibTeX was an
+    // anchor on the old site and went nowhere. Points at the report for now.
+    { id: "cite", label: "Citation", icon: "fas fa-quote-right", href: REPORT }
   ];
-
-  // ---- The bar ------------------------------------------------------------
-  // A short list of shortcuts. Everything else is one click away in the
-  // drawer; these are the ones worth spending bar width on.
-  var BAR = [
-    { id: "play",    label: "Play the maze",     href: url("index.html#play-the-maze") },
-    { id: "report",  label: "Technical report",  href: REPORT },
-    { id: "code",    label: "Code",              href: GH_V2, external: true },
-    { id: "archive", label: "Previous research", href: url("static/pages/archive.html") }
-  ];
-
-  // Pre-v2.0 pages light up the archive entry as well as their own.
-  var ARCHIVED = { v1: 1, "v0.2": 1, v02: 1, v01: 1, about: 1, archive: 1 };
 
   // ---- CTA banner ---------------------------------------------------------
   // One place to change the sitewide call to action.
@@ -179,30 +168,20 @@
   }
 
   // ---- Bar ----------------------------------------------------------------
-  function buildHeader(current) {
-    var isArchived = !!ARCHIVED[current];
-    var links = BAR.map(function (n) {
-      var active = (n.id === current || (n.id === "archive" && isArchived)) ? " is-current" : "";
-      return '<a class="mn-hdr__link' + active + '" href="' + n.href + '"' + extAttrs(n) + '>' +
-        n.label + "</a>";
-    }).join("");
-
+  // Brand and menu button, nothing else. Every link it used to carry is in
+  // the drawer, so the duplicates only cost width - and it is being narrow
+  // that lets the bar stay pinned without sitting on top of the page.
+  function buildHeader() {
     return '<header class="mn-hdr">' +
       '<div class="mn-hdr__inner">' +
-        '<div class="mn-hdr__left">' +
-          '<button type="button" class="mn-hdr__menu" id="mnMenuBtn" aria-label="Open menu" ' +
-            'aria-expanded="false" aria-controls="mnDrawer">' +
-            '<span class="mn-hdr__bars" aria-hidden="true"><i></i><i></i><i></i></span>' +
-          "</button>" +
-          '<a class="mn-hdr__brand" href="' + url("index.html") + '">' +
-            '<img src="' + url("static/images/multinet_no_text.png") + '" alt="">' +
-            "<span>MultiNet</span>" +
-          "</a>" +
-        "</div>" +
-        '<nav class="mn-hdr__links" id="mnHdrLinks" aria-label="Shortcuts">' +
-          '<span class="mn-hdr__pill" id="mnHdrPill" aria-hidden="true"></span>' +
-          links +
-        "</nav>" +
+        '<button type="button" class="mn-hdr__menu" id="mnMenuBtn" aria-label="Open menu" ' +
+          'aria-expanded="false" aria-controls="mnDrawer">' +
+          '<span class="mn-hdr__bars" aria-hidden="true"><i></i><i></i><i></i></span>' +
+        "</button>" +
+        '<a class="mn-hdr__brand" href="' + url("index.html") + '">' +
+          '<img src="' + url("static/images/multinet_no_text.png") + '" alt="">' +
+          "<span>MultiNet</span>" +
+        "</a>" +
       "</div>" +
     "</header>";
   }
@@ -291,45 +270,6 @@
     });
   }
 
-  // The bar carries one lit pill that slides between links rather than each
-  // link lighting up on its own. Position and width are handed to CSS as
-  // custom properties so the movement is a transition, not a repaint loop.
-  function wirePill() {
-    var nav = document.getElementById("mnHdrLinks");
-    var pill = document.getElementById("mnHdrPill");
-    if (!nav || !pill) return;
-
-    var current = nav.querySelector(".mn-hdr__link.is-current");
-
-    function moveTo(el) {
-      if (!el) { pill.style.opacity = "0"; return; }
-      pill.style.opacity = "1";
-      pill.style.setProperty("--x", el.offsetLeft + "px");
-      pill.style.setProperty("--w", el.offsetWidth + "px");
-    }
-    function settle() { moveTo(current); }
-
-    nav.addEventListener("mouseover", function (e) {
-      var a = e.target.closest(".mn-hdr__link");
-      if (a) moveTo(a);
-    });
-    nav.addEventListener("mouseleave", settle);
-    nav.addEventListener("focusin", function (e) {
-      var a = e.target.closest(".mn-hdr__link");
-      if (a) moveTo(a);
-    });
-    nav.addEventListener("focusout", settle);
-
-    // Fonts land after first paint and change link widths, so measure again
-    // once they have; and again whenever the bar is resized.
-    settle();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(settle);
-    window.addEventListener("resize", settle);
-    // No transition on the very first placement - it would slide in from 0.
-    void pill.offsetWidth;
-    pill.classList.add("is-ready");
-  }
-
   function wireCta() {
     var banner = document.getElementById("cta-banner");
     var close = document.getElementById("cta-close-btn");
@@ -346,7 +286,7 @@
 
     var navSlot = document.getElementById("mn-nav");
     if (navSlot) {
-      navSlot.replaceWith(el(buildHeader(current)));
+      navSlot.replaceWith(el(buildHeader()));
       // The drawer is a sibling of everything, appended last, so no page's
       // stacking context can trap it underneath.
       document.body.appendChild(el(buildDrawer(current)));
@@ -356,7 +296,6 @@
     if (ctaSlot) ctaSlot.replaceWith(el(buildCta()));
 
     wireDrawer();
-    wirePill();
     wireCta();
   }
 

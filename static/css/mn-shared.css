@@ -15,62 +15,51 @@ body {
 }
 
 /* ============================================================
-   Header - a floating glass bar
+   Header - a compact pinned cluster
 
-   The bar is a capsule that hovers over the page rather than a
-   band welded to the top of it: translucent, blurred, with a
-   light edge above and a soft shadow below. Page content passing
-   underneath is meant to be seen through it.
+   Brand and menu button, nothing else. Every link this used to
+   carry lives in the drawer, so duplicating them here only cost
+   width - and being narrow is what lets the bar stay pinned
+   without sitting on top of the page the way a full-width bar
+   riding down it did.
 
-   Navigation is marked by one lit pill that slides between links,
-   in the same blue as the buttons, so the header speaks the page's
-   language rather than its own.
+   Markup: mn-shell.js
    ============================================================ */
-/* The glass is the whole bar, edge to edge. As a floating capsule it left
-   transparent gutters above and beside it, and the page scrolled through
-   them unfrosted - which read as the bar sliding rather than staying put. */
 .mn-hdr {
-  /* Deliberately not sticky. The bar belongs at the top of the page, not
-     travelling down it - once you are reading, it is in the way. */
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 1000;
 
-  background: rgba(255, 255, 255, 0.66);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: saturate(190%) blur(20px);
   -webkit-backdrop-filter: saturate(190%) blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.55);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
     inset 0 -1px 0 rgba(12, 18, 28, 0.05),
-    0 6px 20px rgba(12, 18, 28, 0.07);
+    0 4px 16px rgba(12, 18, 28, 0.06);
+}
+
+/* Where the browser cannot blur, a near-opaque bar beats a see-through
+   one with page text behind it. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .mn-hdr { background: rgba(255, 255, 255, 0.97); }
 }
 
 .mn-hdr__inner {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 0.5rem 1.25rem;
-  min-height: 56px;
+  padding: 0.4rem 1rem;
+  min-height: 52px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-/* Where the browser cannot blur, a near-opaque bar is better than a
-   see-through one with page text behind it. */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .mn-hdr { background: rgba(255, 255, 255, 0.97); }
-}
-
-.mn-hdr__left {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex: 0 0 auto;
+  justify-content: flex-start;   /* two items: keep them together, left */
+  gap: 0.5rem;
 }
 
 /* Three bars that become an X while the drawer is open. Drawn rather than
-   set in a font, so it lines up with the brand at any size. */
+   set in a font, so it stays aligned with the brand at any size and cannot
+   render as tofu if the icon font fails. */
 .mn-hdr__menu {
   display: inline-flex; align-items: center; justify-content: center;
   width: 38px; height: 38px;
@@ -80,9 +69,11 @@ body {
 }
 .mn-hdr__menu:hover { background: rgba(12, 18, 28, 0.06); }
 .mn-hdr__menu:focus-visible { outline: 2px solid #005A9C; outline-offset: 2px; }
+
 .mn-hdr__bars {
   position: relative;
   display: block; width: 18px; height: 12px;
+  flex: 0 0 auto;
 }
 .mn-hdr__bars i {
   position: absolute; left: 0;
@@ -111,69 +102,8 @@ body {
 .mn-hdr__brand:hover { color: #12151c; opacity: 0.72; }
 .mn-hdr__brand img { height: 26px; width: 26px; border-radius: 6px; }
 
-.mn-hdr__links {
-  position: relative;                 /* the pill is positioned against this */
-  display: flex;
-  align-items: center;
-  gap: 0.15rem;
-}
-
-.mn-hdr__link {
-  position: relative;
-  z-index: 1;                         /* above the pill */
-  padding: 0.45rem 0.9rem;
-  border-radius: 999px;
-  font-size: 0.92rem;
-  color: #4a5160;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: color 0.22s ease;
-}
-.mn-hdr__link:hover { color: #12151c; }
-.mn-hdr__link.is-current { color: #fff; font-weight: 600; }
-
-/* One pill for the whole bar. It sits under the links and is moved by
-   mn-shell.js, which writes --x and --w. */
-.mn-hdr__pill {
-  position: absolute;
-  left: 0; top: 50%;
-  width: var(--w, 0);
-  height: 34px;
-  margin-top: -17px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #0069b5, #005A9C);
-  box-shadow: 0 2px 8px rgba(0, 90, 156, 0.35);
-  transform: translateX(var(--x, 0));
-  opacity: 0;
-  pointer-events: none;
-}
-/* Transition is added after the first placement, so it does not slide in
-   from the left edge on load. */
-.mn-hdr__pill.is-ready {
-  transition: transform 0.32s cubic-bezier(0.22, 0.85, 0.3, 1),
-              width 0.32s cubic-bezier(0.22, 0.85, 0.3, 1),
-              opacity 0.2s ease;
-}
-
-/* A hovered link is dark on glass, not white, unless the pill is under it -
-   which it is, since the pill follows the pointer. */
-.mn-hdr__links:hover .mn-hdr__link.is-current:not(:hover) { color: #4a5160; }
-.mn-hdr__links:hover .mn-hdr__link:hover { color: #fff; }
-
-.mn-hdr__toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: #12151c;
-  font-size: 1.05rem;
-  padding: 0.5rem 0.7rem;
-  cursor: pointer;
-  border-radius: 999px;
-}
-.mn-hdr__toggle:hover { background: rgba(12, 18, 28, 0.06); }
-
 @media (prefers-reduced-motion: reduce) {
-  .mn-hdr__pill.is-ready { transition: opacity 0.2s ease; }
+  .mn-hdr__bars i { transition: none; }
 }
 
 /* ============================================================
@@ -369,38 +299,12 @@ body.mn-noscroll { overflow: hidden; }
 /* ============================================================
    Mobile
    ============================================================ */
+/* The bar is already two items wide, so it needs no mobile variant beyond
+   a little less padding. Everything else is in the drawer, which is where
+   a narrow screen wanted it anyway. */
 @media screen and (max-width: 860px) {
-  .mn-hdr__toggle { display: block; order: 3; }
-
-  .mn-hdr__links {
-    order: 4;
-    flex-basis: 100%;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding-bottom: 0.4rem;
-  }
-  .mn-hdr__links.is-open { display: flex; }
-
-  .mn-hdr__inner {
-    min-height: 0;
-    flex-wrap: wrap;
-    padding: 0.55rem 1rem;
-  }
-
-  /* Stacked vertically there is nothing for a sliding pill to slide along,
-     so the current link is filled directly instead. */
-  .mn-hdr__pill { display: none; }
-  .mn-hdr__link {
-    padding: 0.65rem 0.75rem;
-    border-radius: 10px;
-  }
-  .mn-hdr__link.is-current {
-    background: linear-gradient(180deg, #0069b5, #005A9C);
-  }
-  .mn-hdr__links:hover .mn-hdr__link.is-current:not(:hover) { color: #fff; }
-  .mn-hdr__links:hover .mn-hdr__link:hover { color: #12151c; }
+  .mn-hdr__inner { min-height: 48px; padding: 0.35rem 0.75rem; }
+  .mn-hdr__brand { font-size: 1.02rem; }
 }
 
 @media screen and (max-width: 768px) {
