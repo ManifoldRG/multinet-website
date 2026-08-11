@@ -1,18 +1,29 @@
 /* ============================================================
    MultiNet - shared site chrome
 
-   Renders the top header and the CTA banner into every page.
+   Renders the same navigation on every page of the site:
+
+     - a glass bar across the top, holding the brand, a menu
+       button, and shortcuts to the few destinations most people
+       want
+     - a drawer holding the whole site tree, opened by the menu
+       button and closed by anything reasonable
+
+   The drawer overlays the page rather than pushing it. The rail
+   this replaces cost 70px of permanent inset on every page, which
+   the homepage cannot afford - the maze board is a fixed 1100px
+   and the hero runs full width. Overlaying is what lets one
+   navigation behave identically everywhere instead of one per
+   layout.
 
    Usage - in each page:
-     <body data-mn-page="home">
+     <body data-mn-page="v1">
        <div id="mn-nav"></div>
        <div id="main-page-content">
          <div id="mn-cta"></div>
          ... page content ...
 
-   `data-mn-page` selects which header link is marked current.
-   Legacy release pages report their own id (v1, v02, v01, about);
-   those all map to "Previous research".
+   `data-mn-page` marks which entry is current.
 
    Paths resolve relative to this script's own location, so the
    same file works from / and from /static/pages/.
@@ -33,20 +44,62 @@
 
   function url(p) { return ROOT + p; }
 
+  var GH_V1 = "https://github.com/ManifoldRG/MultiNet";
   var GH_V2 = "https://github.com/ManifoldRG/MultiNet-v2.0";
+  var GENESIS = GH_V1 + "/tree/main/src/modules";
+  var EVAL_HARNESS = GH_V1 + "/tree/main/src/eval_harness";
+  // TODO(R1-TR): dummy destination until the report is on the Fig site.
+  var REPORT = "#";
 
-  // ---- Header -------------------------------------------------------------
-  // Deliberately flat and short. Anyone landing here has about two minutes;
-  // a browsable tree of releases spends that budget on navigation.
+  // ---- The whole site, in one tree ----------------------------------------
+  // This is the drawer. Everything the site has is reachable from here.
   var NAV = [
-    { id: "play",     label: "Play the maze",    href: url("index.html#play-the-maze") },
-    // TODO(R1-TR): dummy destination until the report is on the Fig site.
-    { id: "v2r1",     label: "Technical report", href: "#" },
-    { id: "code",     label: "Code",             href: GH_V2, external: true },
-    { id: "archive",  label: "Previous research", href: url("static/pages/archive.html") }
+    { id: "home", label: "Home", icon: "fas fa-home", href: url("index.html") },
+    {
+      label: "Benchmark Releases", icon: "fas fa-microscope",
+      children: [
+        { id: "v2r1", label: "v2.0 R1 - GridWorld", icon: "fas fa-project-diagram", href: url("index.html") },
+        { id: "v1", label: "v1.0 - Generalist", icon: "fas fa-rocket", href: url("static/pages/Multinetv1.html") },
+        { id: "v02", label: "v0.2 - Gameplay", icon: "fas fa-gamepad", href: url("static/pages/Multinetv02.html") },
+        { id: "v01", label: "v0.1 - Robotics", icon: "fas fa-robot", href: url("static/pages/Multinetv01.html") }
+      ]
+    },
+    {
+      label: "Model Releases", icon: "fas fa-rocket",
+      children: [
+        { label: "μGato", icon: "fas fa-microchip", href: "https://github.com/eihli/mugato", external: true },
+        { label: "NEKO", icon: "fas fa-cat", href: "https://github.com/ManifoldRG/NEKO", external: true }
+      ]
+    },
+    {
+      label: "Software Releases", icon: "fas fa-code-branch",
+      children: [
+        { label: "GridWorld maze generator", icon: "fas fa-th", href: GH_V2, external: true },
+        { label: "R1 evaluation pipeline", icon: "fas fa-flask", href: GH_V2, external: true },
+        { label: "GenESIS framework", icon: "fas fa-code", href: GENESIS, external: true },
+        { label: "Data Curation Toolkit", icon: "fab fa-github", href: GH_V1, external: true },
+        { label: "Model Adaptations", icon: "fas fa-microchip", href: GH_V1, external: true }
+      ]
+    },
+    { id: "report", label: "Technical Report", icon: "fas fa-file-pdf", href: REPORT },
+    { id: "play", label: "Play the Maze", icon: "fas fa-gamepad", href: url("index.html#play-the-maze") },
+    { id: "archive", label: "Previous Research", icon: "fas fa-archive", href: url("static/pages/archive.html") },
+    { id: "submit", label: "Submit Your Model", icon: "fas fa-paper-plane", href: EVAL_HARNESS, external: true },
+    { id: "about", label: "About MultiNet", icon: "fas fa-info-circle", href: url("static/pages/Multinet.html") },
+    { id: "cite", label: "Citation", icon: "fas fa-quote-right", href: url("index.html#BibTeX") }
   ];
 
-  // Pages that predate v2.0 all light up the same header link.
+  // ---- The bar ------------------------------------------------------------
+  // A short list of shortcuts. Everything else is one click away in the
+  // drawer; these are the ones worth spending bar width on.
+  var BAR = [
+    { id: "play",    label: "Play the maze",     href: url("index.html#play-the-maze") },
+    { id: "report",  label: "Technical report",  href: REPORT },
+    { id: "code",    label: "Code",              href: GH_V2, external: true },
+    { id: "archive", label: "Previous research", href: url("static/pages/archive.html") }
+  ];
+
+  // Pre-v2.0 pages light up the archive entry as well as their own.
   var ARCHIVED = { v1: 1, "v0.2": 1, v02: 1, v01: 1, about: 1, archive: 1 };
 
   // ---- CTA banner ---------------------------------------------------------
@@ -64,24 +117,89 @@
     return t.content.firstChild;
   }
 
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function extAttrs(item) {
+    return item.external ? ' target="_blank" rel="noopener noreferrer"' : "";
+  }
+
+  // ---- Drawer -------------------------------------------------------------
+  function leafHtml(item, current, cls) {
+    var active = item.id && item.id === current ? " is-current" : "";
+    return '<a class="' + cls + active + '" href="' + item.href + '"' + extAttrs(item) + '>' +
+      '<span class="mn-dw__icon"><i class="' + item.icon + '"></i></span>' +
+      '<span class="mn-dw__label">' + esc(item.label) + "</span>" +
+      (item.external ? '<span class="mn-dw__ext" aria-hidden="true">↗</span>' : "") +
+    "</a>";
+  }
+
+  function groupHtml(item, current) {
+    // A group opens if the page you are on lives inside it, so you never have
+    // to go looking for where you already are.
+    var holdsCurrent = item.children.some(function (c) { return c.id && c.id === current; });
+    var open = holdsCurrent ? " is-open" : "";
+    var kids = item.children.map(function (c) {
+      return leafHtml(c, current, "mn-dw__link mn-dw__link--child");
+    }).join("");
+
+    return '<div class="mn-dw__group' + open + '">' +
+      '<button type="button" class="mn-dw__link mn-dw__toggle" aria-expanded="' +
+        (holdsCurrent ? "true" : "false") + '">' +
+        '<span class="mn-dw__icon"><i class="' + item.icon + '"></i></span>' +
+        '<span class="mn-dw__label">' + esc(item.label) + "</span>" +
+        '<span class="mn-dw__caret" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>' +
+      "</button>" +
+      // Children push their siblings down rather than floating over them,
+      // which is what the old rail did - it clipped the entries beneath.
+      '<div class="mn-dw__children">' + kids + "</div>" +
+    "</div>";
+  }
+
+  function buildDrawer(current) {
+    var items = NAV.map(function (item) {
+      return item.children ? groupHtml(item, current) : leafHtml(item, current, "mn-dw__link");
+    }).join("");
+
+    return '<div class="mn-dw" id="mnDrawer" hidden>' +
+      '<div class="mn-dw__scrim" id="mnScrim"></div>' +
+      '<nav class="mn-dw__panel" id="mnDrawerPanel" aria-label="Site navigation">' +
+        '<div class="mn-dw__head">' +
+          '<a class="mn-dw__brand" href="' + url("index.html") + '">' +
+            '<img src="' + url("static/images/multinet_no_text.png") + '" alt="">' +
+            "<span>MultiNet</span>" +
+          "</a>" +
+          '<button type="button" class="mn-dw__close" id="mnDrawerClose" aria-label="Close menu">' +
+            '<i class="fas fa-times"></i></button>' +
+        "</div>" +
+        '<div class="mn-dw__items">' + items + "</div>" +
+      "</nav>" +
+    "</div>";
+  }
+
+  // ---- Bar ----------------------------------------------------------------
   function buildHeader(current) {
     var isArchived = !!ARCHIVED[current];
-    var links = NAV.map(function (n) {
+    var links = BAR.map(function (n) {
       var active = (n.id === current || (n.id === "archive" && isArchived)) ? " is-current" : "";
-      var attrs = n.external ? ' target="_blank" rel="noopener noreferrer"' : "";
-      return '<a class="mn-hdr__link' + active + '" href="' + n.href + '"' + attrs + '>' +
+      return '<a class="mn-hdr__link' + active + '" href="' + n.href + '"' + extAttrs(n) + '>' +
         n.label + "</a>";
     }).join("");
 
     return '<header class="mn-hdr">' +
       '<div class="mn-hdr__inner">' +
-        '<a class="mn-hdr__brand" href="' + url("index.html") + '">' +
-          '<img src="' + url("static/images/multinet_no_text.png") + '" alt="">' +
-          "<span>MultiNet</span>" +
-        "</a>" +
-        '<button class="mn-hdr__toggle" id="mnHdrToggle" aria-label="Menu" aria-expanded="false">' +
-          '<i class="fas fa-bars"></i></button>' +
-        '<nav class="mn-hdr__links" id="mnHdrLinks">' +
+        '<div class="mn-hdr__left">' +
+          '<button type="button" class="mn-hdr__menu" id="mnMenuBtn" aria-label="Open menu" ' +
+            'aria-expanded="false" aria-controls="mnDrawer">' +
+            '<span class="mn-hdr__bars" aria-hidden="true"><i></i><i></i><i></i></span>' +
+          "</button>" +
+          '<a class="mn-hdr__brand" href="' + url("index.html") + '">' +
+            '<img src="' + url("static/images/multinet_no_text.png") + '" alt="">' +
+            "<span>MultiNet</span>" +
+          "</a>" +
+        "</div>" +
+        '<nav class="mn-hdr__links" id="mnHdrLinks" aria-label="Shortcuts">' +
           '<span class="mn-hdr__pill" id="mnHdrPill" aria-hidden="true"></span>' +
           links +
         "</nav>" +
@@ -96,8 +214,85 @@
     "</div>";
   }
 
-  // The glass bar carries one lit pill that slides between links rather than
-  // each link lighting up on its own. Position and width are handed to CSS as
+  // ---- Behaviour ----------------------------------------------------------
+  function wireDrawer() {
+    var drawer = document.getElementById("mnDrawer");
+    var panel = document.getElementById("mnDrawerPanel");
+    var btn = document.getElementById("mnMenuBtn");
+    if (!drawer || !panel || !btn) return;
+
+    var lastFocus = null;
+
+    function open() {
+      lastFocus = document.activeElement;
+      drawer.hidden = false;
+      // The browser has to see the closed state before the open one or there is
+      // nothing to transition between. Reading a layout property forces that
+      // synchronously - requestAnimationFrame would do it too, but it does not
+      // fire in a tab that is not being painted, which leaves the panel stuck
+      // half open.
+      void drawer.offsetWidth;
+      drawer.classList.add("is-open");
+      btn.setAttribute("aria-expanded", "true");
+      document.body.classList.add("mn-noscroll");
+      var first = panel.querySelector(".mn-dw__link, .mn-dw__close");
+      if (first) first.focus();
+    }
+
+    function close() {
+      drawer.classList.remove("is-open");
+      btn.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("mn-noscroll");
+      // wait out the slide before taking it out of the tree
+      setTimeout(function () {
+        if (!drawer.classList.contains("is-open")) drawer.hidden = true;
+      }, 280);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    btn.addEventListener("click", function () {
+      if (drawer.classList.contains("is-open")) close(); else open();
+    });
+    document.getElementById("mnScrim").addEventListener("click", close);
+    document.getElementById("mnDrawerClose").addEventListener("click", close);
+
+    // Following a link closes the drawer. On a same-page anchor nothing else
+    // would, and the drawer would sit over the section it just jumped to.
+    panel.addEventListener("click", function (e) {
+      if (e.target.closest("a")) close();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && drawer.classList.contains("is-open")) { close(); return; }
+      if (e.key !== "Tab" || !drawer.classList.contains("is-open")) return;
+      // Keep tabbing inside the drawer while it is open.
+      var f = panel.querySelectorAll("a[href], button:not([disabled])");
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    // Groups expand in place. Height is measured rather than guessed, so the
+    // transition works whatever the child count.
+    panel.addEventListener("click", function (e) {
+      var toggle = e.target.closest(".mn-dw__toggle");
+      if (!toggle) return;
+      var group = toggle.parentElement;
+      var kids = group.querySelector(".mn-dw__children");
+      var isOpen = group.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      kids.style.maxHeight = isOpen ? kids.scrollHeight + "px" : "";
+    });
+
+    // Whatever is open at load needs its height set too.
+    panel.querySelectorAll(".mn-dw__group.is-open .mn-dw__children").forEach(function (k) {
+      k.style.maxHeight = k.scrollHeight + "px";
+    });
+  }
+
+  // The bar carries one lit pill that slides between links rather than each
+  // link lighting up on its own. Position and width are handed to CSS as
   // custom properties so the movement is a transition, not a repaint loop.
   function wirePill() {
     var nav = document.getElementById("mnHdrLinks");
@@ -112,7 +307,6 @@
       pill.style.setProperty("--x", el.offsetLeft + "px");
       pill.style.setProperty("--w", el.offsetWidth + "px");
     }
-
     function settle() { moveTo(current); }
 
     nav.addEventListener("mouseover", function (e) {
@@ -132,26 +326,8 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(settle);
     window.addEventListener("resize", settle);
     // No transition on the very first placement - it would slide in from 0.
-    requestAnimationFrame(function () { pill.classList.add("is-ready"); });
-  }
-
-  function wireHeader() {
-    var toggle = document.getElementById("mnHdrToggle");
-    var links = document.getElementById("mnHdrLinks");
-    if (!toggle || !links) return;
-
-    toggle.addEventListener("click", function () {
-      var open = links.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(open));
-    });
-
-    // Tapping a link closes the mobile menu.
-    links.addEventListener("click", function (e) {
-      if (e.target.closest("a")) {
-        links.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-      }
-    });
+    void pill.offsetWidth;
+    pill.classList.add("is-ready");
   }
 
   function wireCta() {
@@ -169,12 +345,17 @@
     var current = document.body.getAttribute("data-mn-page") || "";
 
     var navSlot = document.getElementById("mn-nav");
-    if (navSlot) navSlot.replaceWith(el(buildHeader(current)));
+    if (navSlot) {
+      navSlot.replaceWith(el(buildHeader(current)));
+      // The drawer is a sibling of everything, appended last, so no page's
+      // stacking context can trap it underneath.
+      document.body.appendChild(el(buildDrawer(current)));
+    }
 
     var ctaSlot = document.getElementById("mn-cta");
     if (ctaSlot) ctaSlot.replaceWith(el(buildCta()));
 
-    wireHeader();
+    wireDrawer();
     wirePill();
     wireCta();
   }
