@@ -1021,7 +1021,7 @@
     "name": "Shortest path",
     "all": 0.171,
     "short": 0.012,
-    "shortP": "0.517",
+    "shortP": "0.642",
     "allP": "<0.001"
    },
    {
@@ -1029,21 +1029,21 @@
     "all": 0.122,
     "short": 0.255,
     "shortP": "<0.001",
-    "allP": "<0.001"
+    "allP": "0.014"
    },
    {
     "name": "Switches",
     "all": 0.104,
     "short": 0.247,
     "shortP": "<0.001",
-    "allP": "<0.001"
+    "allP": "0.011"
    },
    {
     "name": "Distractors",
     "all": 0.03,
     "short": 0.037,
-    "shortP": "0.145",
-    "allP": "0.064"
+    "shortP": "<0.001",
+    "allP": "0.021"
    }
   ],
   "series": [
@@ -1053,7 +1053,7 @@
    },
    {
     "key": "short",
-    "label": "Only the 69 short mazes"
+    "label": "Only the 69 short-maze episodes"
    }
   ]
  },

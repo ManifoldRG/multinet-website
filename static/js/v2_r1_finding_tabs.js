@@ -22,27 +22,37 @@
     {
       id: "discovery",
       label: "Exploration failure",
-      claim: "Models operate the familiar mechanism competently and never acquire the unfamiliar one. " +
-             "The gap is not knowledge of an interface, it is the ability to acquire an affordance by " +
-             "interacting with the world.",
+      // Prose rather than a one-line claim: this tab has to say what the two
+      // mechanisms are before its figure means anything.
+      claimHtml:
+        "<p>The key-door mechanism is familiar to frontier models as they have surely seen it " +
+        "during training. However, a switch in this environment is represented as a colored circle " +
+        "on a cell in the maze, while the gate is represented as a blocked cell. The model has to " +
+        "learn from experience which switch opens which gate, and that operating it means standing " +
+        "on that exact cell and toggling. Across the 105 switch-maze episodes a switch was pressed " +
+        "twice, both times by the same model, and no maze with a switch was solved by anyone - " +
+        "while key-door mazes account for four of the six solves.</p>",
       mount: "r1-switch-funnel",
-      caption: "Agents walked onto a live switch in 38 of the 105 switch-maze episodes and pressed it twice."
+      caption: "Models walked onto a live switch in 38 of the 105 switch-maze episodes, and pressed one " +
+               "in 2 of them."
     },
     {
       id: "difficulty",
-      label: "Environment factors",
-      claim: "Distance and mechanisms both predict how much progress an agent makes. On the longer " +
-             "mazes, length alone is enough to end an episode and it dominates everything else. The " +
-             "shorter ones leave headroom, and there the mechanisms account for nearly all of the " +
-             "variation while path length accounts for almost none.",
+      label: "Difficulty axes",
+      claim: "Optimal path length to solve the maze is a dominant factor in deciding how much " +
+             "progress a model makes in a given maze. However, when restricted to the 69 episodes " +
+             "where the optimal path length is 45 moves or fewer, the influence of gates and " +
+             "switches rises as the influence of the path length falls.",
       mount: "r1-inversion-chart",
-      caption: "How much of the variation in progress each maze property explains on its own."
+      caption: "How much of the variation in progress each maze property explains on its own, with " +
+               "the model held constant."
     },
     {
       id: "styles",
       label: "Failure styles",
-      claim: "All three models end essentially every episode on the stall watchdog, by different routes. " +
-             "Claude walks into walls, Kimi retreads ground it has covered, Qwen turns on the spot.",
+      claim: "The stall watchdog ends 139 of the 144 failed episodes, but each model behaves " +
+             "differently in the environment and fails in its own way. Claude walks into walls, " +
+             "Kimi retreads ground it has covered, Qwen turns on the spot.",
       mount: "r1-quarter-chart",
       // this figure writes its own caption, per selected view
       caption: ""
@@ -50,13 +60,15 @@
     {
       id: "compute",
       label: "Test time compute",
-      claim: "Kimi and Qwen spend 20 to 26 times more output tokens per newly discovered tile than " +
-             "Claude, last around 1.6x steps longer, and solve fewer mazes. Claude's thinking roughly " +
-             "halves over the course of an episode, while Kimi's and Qwen's keep climbing.",
+      claim: "Kimi and Qwen spend roughly 20 and 26 times more output tokens per newly discovered tile " +
+             "than Claude, last around 1.6x as many steps, and solve fewer mazes. Claude's thinking " +
+             "roughly halves over the course of an episode, Kimi's roughly doubles, and Qwen's stays " +
+             "flat at around 16,000 tokens a turn.",
       mount: "r1-thinking-chart",
-      caption: "Thinking spent on each turn, by turn number. The scale is logarithmic - each gridline " +
-               "multiplies the one below it rather than adding to it - because Claude runs two orders " +
-               "of magnitude under the other two. Per turn, not the per-tile ratio in the cards above."
+      caption: "Estimated thinking spent on each turn, by turn number. The scale is logarithmic - each " +
+               "gridline multiplies the one below it rather than adding to it - because Claude runs " +
+               "close to two orders of magnitude under the other two. Per turn, not the per-tile ratio " +
+               "in the cards above."
     }
   ];
 
@@ -84,7 +96,14 @@
 
       var fig = store && store.querySelector('[data-figure="' + tab.mount + '"]');
       var slot = panel.querySelector(".r1-tab__figure");
-      panel.querySelector(".r1-tab__claim").textContent = tab.claim;
+
+      // A one-line claim sits centred over its figure; a tab that has to
+      // explain itself first gets prose, which only reads left-aligned.
+      var claim = panel.querySelector(".r1-tab__claim");
+      claim.classList.toggle("is-prose", !!tab.claimHtml);
+      if (tab.claimHtml) claim.innerHTML = tab.claimHtml;
+      else claim.textContent = tab.claim;
+
       panel.querySelector(".r1-tab__caption").textContent = tab.caption;
       if (fig && slot) slot.appendChild(fig);
 

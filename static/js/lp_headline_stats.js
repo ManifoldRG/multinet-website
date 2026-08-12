@@ -23,16 +23,37 @@
   // decelerating, so the number settles rather than stopping dead
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
+  // One dot per unit of the denominator, built once. Doing this in script
+  // rather than markup keeps 305 spans out of the document source; the
+  // numbers and labels are in the HTML, so the strip is still correct and
+  // readable without it.
+  function buildUnits(stat) {
+    var grid = stat.querySelector(".u");
+    var total = parseInt(stat.dataset.total, 10);
+    if (!grid || !total || grid.childElementCount) return grid;
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < total; i++) frag.appendChild(document.createElement("i"));
+    grid.appendChild(frag);
+    return grid;
+  }
+
+  function light(grid, n) {
+    if (!grid) return;
+    var dots = grid.children;
+    for (var i = 0; i < dots.length; i++) {
+      dots[i].classList.toggle("on", i < n);
+    }
+  }
+
   function reveal(stat) {
     var target = parseInt(stat.dataset.value, 10);
     var total = parseInt(stat.dataset.total, 10);
     var out = stat.querySelector(".v");
-    var rule = stat.querySelector(".r");
+    var grid = buildUnits(stat);
 
-    if (rule && total) rule.style.setProperty("--p", target / total);
-    if (!out || isNaN(target)) return;
+    if (!out || isNaN(target)) { light(grid, target || 0); return; }
 
-    function settle() { out.textContent = target; }
+    function settle() { out.textContent = target; light(grid, target); }
 
     // Animating a zero to a zero just looks broken.
     if (target === 0) { settle(); return; }
@@ -43,7 +64,9 @@
       if (done) return;
       if (t0 === null) t0 = now;
       var p = Math.min(1, (now - t0) / DURATION);
-      out.textContent = Math.round(easeOut(p) * target);
+      var v = Math.round(easeOut(p) * target);
+      out.textContent = v;
+      light(grid, v);
       if (p < 1) requestAnimationFrame(step);
       else done = true;
     }
@@ -65,9 +88,8 @@
     stats.forEach(function (s) {
       if (s.getBoundingClientRect().top < window.innerHeight) { reveal(s); return; }
       var out = s.querySelector(".v");
-      var rule = s.querySelector(".r");
       if (out) out.textContent = "0";
-      if (rule) rule.style.setProperty("--p", 0);
+      light(buildUnits(s), 0);
       pending.push(s);
     });
     if (!pending.length) return;
@@ -87,11 +109,20 @@
   function init() {
     var stats = [].slice.call(document.querySelectorAll(".lp-stat[data-value]"));
 
-    // Nothing to do: the markup is already the finished state.
-    if (!stats.length || still || !("IntersectionObserver" in window)) return;
+    if (!stats.length) return;
 
-    // A hidden tab neither paints nor reports intersections, so arming one
-    // would leave it sitting at zero until someone looked at it. Wait.
+    // Build every grid at its finished state first, whatever happens next.
+    // The structure is not an animation and should never wait on one - if it
+    // did, an unpainted tab would show three empty boxes.
+    stats.forEach(function (s) {
+      light(buildUnits(s), parseInt(s.dataset.value, 10) || 0);
+    });
+
+    if (still || !("IntersectionObserver" in window)) return;
+
+    // Only the count-up waits. A hidden tab neither paints nor reports
+    // intersections, so arming one would wind the numbers back to zero and
+    // leave them there until someone looked.
     if (document.hidden) {
       document.addEventListener("visibilitychange", function once() {
         if (document.hidden) return;

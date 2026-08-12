@@ -44,21 +44,43 @@
 
   function url(p) { return ROOT + p; }
 
+  // The homepage is linked as the directory, never as "index.html". They are
+  // the same document but two URLs, so a browser keeps two cache entries and
+  // does a full navigation between them - which is how one of them ends up
+  // stale while the other looks fine.
+  function home(hash) { return ROOT + (hash || ""); }
+
+  // A link to this very page should not reload it. "/" and "/index.html" are
+  // the same document but different URLs, so the browser treats them as
+  // separate cache entries and does a full navigation between them - which
+  // reloads the maze, refetches everything, and can serve a stale copy of one
+  // while the other is current. Collapse any self-link to its hash so it just
+  // scrolls.
+  function selfAware(href) {
+    var here = location.pathname.replace(/\/index\.html$/, "/");
+    var a = document.createElement("a");
+    a.href = href;
+    var there = a.pathname.replace(/\/index\.html$/, "/");
+    if (a.host !== location.host || there !== here) return href;
+    return a.hash || "#";
+  }
+
   var GH_V1 = "https://github.com/ManifoldRG/MultiNet";
   var GH_V2 = "https://github.com/ManifoldRG/MultiNet-v2.0";
   var GENESIS = GH_V1 + "/tree/main/src/modules";
-  var EVAL_HARNESS = GH_V1 + "/tree/main/src/eval_harness";
+  var SUBMIT_MAIL = "mailto:pranav@metarch.ai" +
+    "?subject=Evaluating%20a%20model%20on%20MultiNet%20v2.0";
   // TODO(R1-TR): dummy destination until the report is on the Fig site.
   var REPORT = "#";
 
   // ---- The whole site, in one tree ----------------------------------------
   // This is the drawer. Everything the site has is reachable from here.
   var NAV = [
-    { id: "home", label: "Home", icon: "fas fa-home", href: url("index.html") },
+    { id: "home", label: "Home", icon: "fas fa-home", href: home() },
     {
       label: "Benchmark Releases", icon: "fas fa-microscope",
       children: [
-        { id: "v2r1", label: "v2.0 R1 - GridWorld", icon: "fas fa-project-diagram", href: url("index.html") },
+        { id: "v2r1", label: "v2.0 R1 - GridWorld", icon: "fas fa-project-diagram", href: home() },
         { id: "v1", label: "v1.0 - Generalist", icon: "fas fa-rocket", href: url("static/pages/Multinetv1.html") },
         { id: "v02", label: "v0.2 - Gameplay", icon: "fas fa-gamepad", href: url("static/pages/Multinetv02.html") },
         { id: "v01", label: "v0.1 - Robotics", icon: "fas fa-robot", href: url("static/pages/Multinetv01.html") }
@@ -82,10 +104,11 @@
       ]
     },
     { id: "report", label: "Technical Report", icon: "fas fa-file-pdf", href: REPORT },
-    { id: "play", label: "Play the Maze", icon: "fas fa-gamepad", href: url("index.html#play-the-maze") },
-    { id: "archive", label: "Previous Research", icon: "fas fa-archive", href: url("static/pages/archive.html") },
-    { id: "submit", label: "Submit Your Model", icon: "fas fa-paper-plane", href: EVAL_HARNESS, external: true },
-    { id: "about", label: "About MultiNet", icon: "fas fa-info-circle", href: url("static/pages/Multinet.html") },
+    { id: "play", label: "Play the Maze", icon: "fas fa-gamepad", href: home("#play-the-maze") },
+    { id: "archive", label: "MultiNet Archive", icon: "fas fa-archive", href: url("static/pages/archive.html") },
+    // No submission flow for v2.0 yet, so this opens a conversation rather
+    // than pointing at the v1 harness, which would evaluate the wrong thing.
+    { id: "submit", label: "Submit Your Model", icon: "fas fa-paper-plane", href: SUBMIT_MAIL },
     // TODO(R1-CITE): no citation block on the homepage yet - #BibTeX was an
     // anchor on the old site and went nowhere. Points at the report for now.
     { id: "cite", label: "Citation", icon: "fas fa-quote-right", href: REPORT }
@@ -117,7 +140,7 @@
   // ---- Drawer -------------------------------------------------------------
   function leafHtml(item, current, cls) {
     var active = item.id && item.id === current ? " is-current" : "";
-    return '<a class="' + cls + active + '" href="' + item.href + '"' + extAttrs(item) + '>' +
+    return '<a class="' + cls + active + '" href="' + selfAware(item.href) + '"' + extAttrs(item) + '>' +
       '<span class="mn-dw__icon"><i class="' + item.icon + '"></i></span>' +
       '<span class="mn-dw__label">' + esc(item.label) + "</span>" +
       (item.external ? '<span class="mn-dw__ext" aria-hidden="true">↗</span>' : "") +
@@ -155,7 +178,7 @@
       '<div class="mn-dw__scrim" id="mnScrim"></div>' +
       '<nav class="mn-dw__panel" id="mnDrawerPanel" aria-label="Site navigation">' +
         '<div class="mn-dw__head">' +
-          '<a class="mn-dw__brand" href="' + url("index.html") + '">' +
+          '<a class="mn-dw__brand" href="' + selfAware(home()) + '">' +
             '<img src="' + url("static/images/multinet_no_text.png") + '" alt="">' +
             "<span>MultiNet</span>" +
           "</a>" +
@@ -178,7 +201,7 @@
           'aria-expanded="false" aria-controls="mnDrawer">' +
           '<span class="mn-hdr__bars" aria-hidden="true"><i></i><i></i><i></i></span>' +
         "</button>" +
-        '<a class="mn-hdr__brand" href="' + url("index.html") + '">' +
+        '<a class="mn-hdr__brand" href="' + selfAware(home()) + '">' +
           '<img src="' + url("static/images/multinet_no_text.png") + '" alt="">' +
           "<span>MultiNet</span>" +
         "</a>" +
@@ -282,6 +305,16 @@
   }
 
   function mount() {
+    // Which build is actually on screen. A stale HTML cache serves old asset
+    // versions without touching the network, which looks like a broken page
+    // rather than an old one - this makes the difference visible.
+    var sheet = [].slice.call(document.styleSheets).map(function (s) { return s.href; })
+      .filter(function (h) { return h && h.indexOf("mn-shared") > -1; })[0];
+    if (window.console) {
+      console.log("[MultiNet] shell " + (thisScript.src.split("?v=")[1] || "unversioned") +
+                  " / styles " + (sheet ? sheet.split("?v=")[1] || "unversioned" : "missing"));
+    }
+
     var current = document.body.getAttribute("data-mn-page") || "";
 
     var navSlot = document.getElementById("mn-nav");

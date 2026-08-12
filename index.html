@@ -43,8 +43,8 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/mn-shared.css?v=r2l">
-  <link rel="stylesheet" href="static/css/r1-components.css?v=r2l">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r4k">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r4k">
   <link rel="stylesheet" href="static/css/play.css?v=p1b5">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
@@ -78,14 +78,21 @@
     /* A second view of the same material inside one section. The hairline
        does the separating so the heading can stay quiet - a second h2-sized
        title would read as a new section and break the "Results" grouping. */
+    /* No rule between the three views. Inside one section they are the same
+       answer at three zoom levels, and a divider made them read as three
+       separate things; the space alone is enough. */
     .lp-subsection {
-      margin-top: 3.5rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid #eef1f5;
+      margin-top: 3.25rem;
     }
     .lp-h3 {
       font-size: 1.15rem; font-weight: 600; color: #12151c;
       text-align: center; margin: 0 0 0.4rem; letter-spacing: -0.01em;
+    }
+    /* Per model and Progress over episodes are peers, so they are sized the
+       same - the h2 above still outranks both. */
+    .lp-h3--lead {
+      font-size: 1.45rem;
+      margin-bottom: 1.5rem;
     }
     .lp-lead {
       text-align: center; color: #6b7280; font-size: 0.93rem;
@@ -94,10 +101,12 @@
 
     /* ---------- hero ---------- */
     .lp-hero { padding: 2.75rem 0 1.5rem; }
+    /* The headline is a full sentence, so the text column takes the width and
+       the reel sits further right. */
     .lp-hero__grid {
       display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-      gap: 2.5rem;
+      grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+      gap: 2rem;
       align-items: center;
     }
     /* Says what this is before the headline says what happened. Small, spaced
@@ -109,9 +118,10 @@
       color: #005A9C;
     }
     .lp-hero h1 {
-      font-size: clamp(2rem, 4.2vw, 2.85rem);
-      line-height: 1.12; font-weight: 700; color: #12151c;
-      margin: 0 0 1rem; letter-spacing: -0.025em;
+      /* Two lines, breaking after "2D". */
+      font-size: clamp(1.75rem, 3.3vw, 2.375rem);
+      line-height: 1.14; font-weight: 700; color: #12151c;
+      margin: 0 0 1rem; letter-spacing: -0.022em;
     }
     .lp-hero__lead {
       font-size: 1.08rem; line-height: 1.65; color: #4a5160; margin: 0 0 1.5rem;
@@ -160,66 +170,97 @@
     .lp-reel__cap {
       text-align: center; font-size: 0.85rem; color: #8a90a0; margin: 0.6rem 0 0;
     }
-    /* tighter than the analysis page - this row sits in the hero */
-    .r1-reel-models { gap: 0.45rem; margin: 0.85rem 0 0.5rem; }
+    /* Tighter than the analysis page - this row sits in the hero, and now
+       above the video rather than under it. */
+    .r1-reel-models { gap: 0.45rem; margin: 0 0 0.4rem; }
     .r1-reel-model { font-size: 0.85rem; padding: 0.35rem 0.85rem 0.35rem 0.45rem; }
     .r1-reel-model .r1-logo { width: 17px; height: 17px; }
-    .r1-reel-clips { margin-bottom: 0; }
+    .r1-reel-clips { margin-bottom: 0.8rem; }
     .r1-reel-clip { font-size: 0.8rem; padding: 0.25rem 0.7rem; }
 
-    /* ---------- stat strip ---------- */
+    /* ---------- stat strip ----------
+       Three facts that were three identical blue blocks. Each now carries its
+       own accent and a unit grid - one dot per episode, lit if solved - so the
+       denominator is visible rather than something to reason about.
+
+       Styled as siblings of the property cards further down: white face,
+       accent-tinted wash, accent border. The dark slab this replaced read as
+       a component borrowed from another site. */
     .lp-stats {
-      background:
-        radial-gradient(120% 140% at 12% 0%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 55%),
-        linear-gradient(118deg, #06233C 0%, #013F73 38%, #005A9C 66%, #0B7285 100%);
-      border-radius: 16px; padding: 1.5rem;
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
-      box-shadow: 0 10px 30px rgba(3, 34, 60, 0.24);
     }
     .lp-stat {
-      text-align: center; padding: 1.35rem 1.15rem 1.15rem; border-radius: 12px;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+      display: flex; flex-direction: column;
+      padding: 1.05rem 1.15rem 1rem;
+      border-radius: 13px;
+      border: 1px solid color-mix(in srgb, var(--c) 20%, #e8ebee);
+      background:
+        linear-gradient(170deg,
+          color-mix(in srgb, var(--c) 8%, #fff) 0%,
+          color-mix(in srgb, var(--c) 3%, #fff) 45%,
+          #fff 82%);
+      box-shadow:
+        0 1px 2px color-mix(in srgb, var(--c) 10%, transparent),
+        0 6px 16px color-mix(in srgb, var(--c) 9%, transparent);
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
     }
     .lp-stat:hover {
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.26);
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--c) 38%, transparent);
+      box-shadow:
+        0 2px 4px color-mix(in srgb, var(--c) 12%, transparent),
+        0 14px 28px color-mix(in srgb, var(--c) 17%, transparent);
     }
-    .lp-stat .n {
-      display: block; font-size: 2.5rem; font-weight: 700; line-height: 1;
-      color: #fff; font-variant-numeric: tabular-nums; letter-spacing: -0.015em;
-    }
-    .lp-stat .n .d { font-size: 1.3rem; font-weight: 500; color: rgba(255,255,255,0.55); }
 
-    /* A ratio is easier to feel than to read. The rule fills to the fraction
-       the number states. All three stats are phrased as solve rates so the
-       bars point the same way: a sliver, a sliver, and nothing at all. */
-    .lp-stat .r {
-      display: block; height: 3px; border-radius: 999px; margin: 0.85rem 0 0.8rem;
-      background: rgba(255, 255, 255, 0.16);
-      position: relative; overflow: hidden;
+    .lp-stat .n {
+      display: block; font-size: 1.85rem; font-weight: 700; line-height: 1;
+      color: var(--c); font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
     }
-    .lp-stat .r::after {
-      content: ""; position: absolute; inset: 0 auto 0 0;
-      width: calc(var(--p, 0) * 100%);
-      border-radius: 999px;
-      background: linear-gradient(90deg, #7FE3C8, #4FC3E8);
-      transition: width 1.1s cubic-bezier(0.22, 0.85, 0.3, 1);
+    .lp-stat .n .d {
+      font-size: 0.98rem; font-weight: 500; color: #94a3b8;
     }
-    /* An empty track reads as unrendered, so mark the zero explicitly. */
-    .lp-stat[data-zero] .r::before {
-      content: ""; position: absolute; left: 0; top: -2px; bottom: -2px;
-      width: 2px; border-radius: 2px; background: rgba(255, 255, 255, 0.75);
+
+    /* One dot per unit of the denominator. Columns are fixed so the three
+       grids share a rhythm; the row count differs because the denominators
+       do, which is the honest thing for it to show. */
+    .lp-stat .u {
+      display: grid;
+      grid-template-columns: repeat(25, 1fr);
+      gap: 2px;
+      margin: 0.75rem 0 0.75rem;
+      min-height: 34px;
+      align-content: end;
     }
+    .lp-stat .u i {
+      display: block;
+      aspect-ratio: 1;
+      border-radius: 2px;
+      background: #e6ebf1;
+      transition: background 0.3s ease;
+    }
+    .lp-stat .u i.on { background: var(--c); }
+
     .lp-stat .l {
       display: block;
-      font-size: 1.02rem; font-weight: 600; color: rgba(255,255,255,0.94);
+      font-size: 0.88rem; font-weight: 600; color: #333a47;
     }
+
     @media (prefers-reduced-motion: reduce) {
-      .lp-stat, .lp-stat .r::after { transition: none; }
+      .lp-stat, .lp-stat .u i { transition: none; }
+      .lp-stat:hover { transform: none; }
     }
+
+    /* Body prose inside a section. Full container width and flush left, so it
+       shares both edges with the card row below rather than sitting as a
+       narrow column floating in the middle of the section. */
+    .lp-prose {
+      margin: 0 0 2.25rem;
+    }
+    .lp-prose p {
+      margin: 0 0 0.9rem;
+      font-size: 1rem; line-height: 1.7; color: #4a5160;
+    }
+    .lp-prose p:last-child { margin-bottom: 0; }
 
     /* ---------- four properties ----------
        Same physical key as the buttons: each card is a face resting on a
@@ -322,6 +363,11 @@
       font-size: 1.02rem; line-height: 1.65; color: #333a47;
       margin: 0 auto 1.4rem; max-width: 76ch; text-align: center;
     }
+    /* The prose variant states what the figure is measuring before the
+       figure appears, so it is set as body text rather than as a caption. */
+    .r1-tab__claim.is-prose { text-align: left; max-width: 88ch; }
+    .r1-tab__claim.is-prose p { margin: 0 0 0.7rem; }
+    .r1-tab__claim.is-prose p:last-child { margin-bottom: 0; }
     .r1-tab__caption {
       font-size: 0.85rem; color: #8a90a0; text-align: center;
       margin: 0.9rem auto 0; max-width: 74ch; font-style: italic; line-height: 1.5;
@@ -469,59 +515,89 @@
       <div class="lp-hero__grid">
         <div>
           <p class="lp-eyebrow">The Multimodal Action Benchmark</p>
-          <h1>Frontier models struggle on 2D mazes.</h1>
+          <h1>Frontier models fail at basic 2D spatial navigation and reasoning.</h1>
+          <!-- Findings rather than an introduction, and the mazes come first so
+               there is no doubt what the models failed at. Drawn from the
+               report's conclusion. -->
           <p class="lp-hero__lead">
-            The first release of MultiNet v2.0 drops models into a 2D maze with walls, keys, doors,
-            switches, gates, distractors, and a goal tile. There are six valid actions and the mechanisms
-            are not explained to the models. <strong>3 frontier models solve 6 out of 150 episodes.</strong>
+            In this early preview of the MultiNet v2.0 Benchmark, we put 3 frontier models in 50
+            2-dimensional mazes with obstacles each. The 3 models solved 6 out of 150 total maze runs,
+            and 45 out of the 50 mazes were not solved by any model. Each of these models failed
+            in their own way: Claude drove into walls, Kimi retraced ground it had already covered,
+            and Qwen wandered around the maze without actually solving it. None of them were able to
+            work out an obstacle they had not seen before, and spending a large number of reasoning
+            tokens did not help them solve the mazes either.
           </p>
           <div class="lp-cta-row">
             <a class="lp-btn" href="#play-the-maze">
               <i class="fas fa-gamepad"></i> Play a maze
             </a>
-            <!-- TODO(R1-TR): dummy destination. Both "Read the complete research"
+            <!-- TODO(R1-TR): dummy destination. Both "Read the technical report"
                  buttons point at the technical report on the Fig site and must be
                  updated together - grep TODO(R1-TR) to find the other one. -->
             <a class="lp-btn" href="#">
-              Read the complete research
+              Read the technical report
             </a>
           </div>
         </div>
 
+        <!-- Controls above the video, caption below: you choose what to watch
+             before it plays rather than discovering afterwards that you could. -->
         <div class="lp-reel">
+          <div class="r1-reel-models" id="r1-reel-models"></div>
+          <div class="r1-reel-clips" id="r1-reel-clips"></div>
           <div class="lp-reel__frame">
             <video id="r1-reel-video" autoplay loop muted playsinline preload="metadata"></video>
           </div>
-          <div class="r1-reel-models" id="r1-reel-models"></div>
-          <div class="r1-reel-clips" id="r1-reel-clips"></div>
           <p class="lp-reel__cap">A few examples of models failing the mazes</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== HEADLINE STATS ==================== -->
-  <section class="lp-section--tight">
+  <!-- ==================== RESULTS ====================
+       Three zoom levels of one answer: the run in three numbers, then per
+       model, then per episode. They were split across the page before, which
+       made the strip read as decoration rather than as the headline of this
+       section. -->
+  <section class="lp-section">
     <div class="lp-wrap">
-      <!-- The final number and the final fill both live here, so this is a
-           correct strip on its own. lp_headline_stats.js only winds it back
-           to zero and plays it forward. -->
+      <h2 class="lp-h2" style="margin-bottom: 1.75rem;">Results - how do the frontier models perform?</h2>
+
+      <!-- One dot per episode, lit if it was solved. A percentage bar asks you
+           to work the ratio out; a grid of 150 with 6 lit is the ratio. The
+           numbers and labels are here in full, so the strip is correct before
+           lp_headline_stats.js touches it. -->
       <div class="lp-stats">
-        <div class="lp-stat" data-value="6" data-total="150">
+        <div class="lp-stat" data-value="6" data-total="150" style="--c: #005A9C">
           <span class="n"><span class="v">6</span><span class="d"> / 150</span></span>
-          <span class="r" style="--p: 0.04"></span>
+          <span class="u" aria-hidden="true"></span>
           <span class="l">Episodes solved</span>
         </div>
-        <div class="lp-stat" data-value="5" data-total="50">
+        <div class="lp-stat" data-value="5" data-total="50" style="--c: #0B7285">
           <span class="n"><span class="v">5</span><span class="d"> / 50</span></span>
-          <span class="r" style="--p: 0.1"></span>
+          <span class="u" aria-hidden="true"></span>
           <span class="l">Mazes solved</span>
         </div>
-        <div class="lp-stat" data-value="0" data-total="105" data-zero>
+        <div class="lp-stat" data-value="0" data-total="105" data-zero style="--c: #D35400">
           <span class="n"><span class="v">0</span><span class="d"> / 105</span></span>
-          <span class="r" style="--p: 0"></span>
-          <span class="l">Mazes with switch-gate solved</span>
+          <span class="u" aria-hidden="true"></span>
+          <span class="l">Switch-gate mazes solved</span>
         </div>
+      </div>
+
+      <div class="lp-subsection">
+        <h3 class="lp-h3 lp-h3--lead">Individual model results</h3>
+        <div id="r1-results-container">Loading results&hellip;</div>
+      </div>
+
+      <div class="lp-subsection">
+        <h3 class="lp-h3 lp-h3--lead" style="margin-bottom: 0.4rem;">Progress made by the models in all the mazes</h3>
+        <p class="lp-lead">
+          Each column is a maze and each row a model. Colour is how far toward the goal the agent got,
+          and the stars mark the six solves - all of them at the short end.
+        </p>
+        <div id="r1-episode-grid"></div>
       </div>
     </div>
   </section>
@@ -529,9 +605,9 @@
   <!-- ==================== PLAY ==================== -->
   <section class="lp-section" id="play-the-maze">
     <div class="lp-wrap lp-wrap--wide">
-      <h2 class="lp-h2">Play the mazes</h2>
+      <h2 class="lp-h2">Do you think you can beat frontier models on 2D mazes?</h2>
       <p class="lp-sub">
-        Try out some of the mazes the models were evaluated on!
+        Try out some of the mazes the models were evaluated on, and see how you fare!
       </p>
 
       <div class="r1-demo-slot">
@@ -619,11 +695,34 @@
   <!-- ==================== WHY MAZES ==================== -->
   <section class="lp-section">
     <div class="lp-wrap">
-      <h2 class="lp-h2">Why mazes with mechanisms?</h2>
-      <p class="lp-sub">
-        We think evaluating long-horizon agentic capability needs a substrate with four properties at
-        once. Mazes with causal mechanisms are simple representations we know of that have all four.
-      </p>
+      <h2 class="lp-h2">Why mazes with mechanisms, and how we set up the environment</h2>
+
+      <!-- The design first, the justification second. The four cards below used
+           to arrive before a reader knew what was being justified. -->
+      <div class="lp-prose">
+        <p>
+          Each task is a 2D Minigrid maze in which a model has six actions available to it: turn
+          left, turn right, move forward, pick up, toggle, and done. With those alone it has to work
+          its way through corridors, past decoys, and through obstacles that only give way when they
+          are operated in the right order, until it reaches the goal tile. The rules of the
+          environment are not explained to the model, because of which the model has to figure them
+          out by exploring and acting in the environment, and observing what changes as a result.
+        </p>
+        <p>
+          At each turn the model is told where it started, given a written summary of the events so
+          far, and shown up to four rendered frames: its last three steps, each labelled
+          with the action it took and what it was carrying at the time, followed by the current view
+          and a request for its next action.
+        </p>
+        <p>
+          Agentic benchmarks tend to report a single number for a model's failure. However, the
+          model might never have worked out what an object did, or worked it out and operated
+          things in the wrong order,
+          or simply lost its way and been unable to recover, and each of those needs a different
+          fix. In order to separate different failure modes such as these, we believe a task
+          requires four properties at once, which a maze environment with obstacles possesses:
+        </p>
+      </div>
       <div class="lp-props">
         <div class="lp-prop">
           <span class="lp-prop__icon"><i class="fas fa-lightbulb"></i></span>
@@ -653,26 +752,6 @@
     </div>
   </section>
 
-  <!-- ==================== RESULTS ==================== -->
-  <section class="lp-section">
-    <div class="lp-wrap">
-      <h2 class="lp-h2" style="margin-bottom: 2rem;">Results - how do the frontier models perform?</h2>
-      <div id="r1-results-container">Loading results&hellip;</div>
-
-      <!-- The cards above answer "how did each model do"; this answers "what
-           happened in each of the 150 episodes". Different question, so it gets
-           its own heading rather than trailing the cards as an afterthought. -->
-      <div class="lp-subsection">
-        <h3 class="lp-h3">Progress over episodes</h3>
-        <p class="lp-lead">
-          Each column is a maze and each row a model. Colour is how far toward the goal the agent got,
-          and the stars mark the six solves - all of them at the short end.
-        </p>
-        <div id="r1-episode-grid"></div>
-      </div>
-    </div>
-  </section>
-
   <!-- ==================== FINDINGS ==================== -->
   <section class="lp-section">
     <div class="lp-wrap">
@@ -680,7 +759,9 @@
 
       <div class="r1-tabs" id="r1-tabs"></div>
       <div class="r1-tab-panel" id="r1-tab-panel">
-        <p class="r1-tab__claim"></p>
+        <!-- a div, not a p: the Exploration failure tab fills this with
+             paragraphs, which a p cannot legally contain -->
+        <div class="r1-tab__claim"></div>
         <div class="r1-tab__figure"></div>
         <p class="r1-tab__caption"></p>
       </div>
@@ -688,7 +769,7 @@
       <p style="text-align: center; margin-top: 1.75rem;">
         <!-- TODO(R1-TR): dummy destination, see the hero button. -->
         <a class="lp-btn" href="#">
-          Read the complete research &rarr;
+          Read the technical report &rarr;
         </a>
       </p>
 
@@ -729,9 +810,9 @@
         <li class="lp-tl__item is-current">
           <span class="lp-tl__mark" aria-hidden="true">🧩</span>
           <div class="lp-tl__card">
-            <div class="lp-tl__when">v2.0 Release 1</div>
+            <div class="lp-tl__when">Early preview to v2.0</div>
             <!-- TODO(R1-TR): dummy destination, see the hero button. -->
-            <p><strong>MultiNet v2.0 Release 1!</strong> We put frontier models in 2D mazes to measure
+            <p><strong>A new era for MultiNet!</strong> We put frontier models in 2D mazes to measure
                long-horizon action taking with causal reasoning - sustaining a plan over many steps
                while working out how the world responds. Read our research
                <a href="#">here</a>.</p>
@@ -858,7 +939,7 @@
               <!-- TODO(R1-TR): dummy destination, see the hero button. -->
               <a href="#" style="color: #90caf9;">Technical Report</a>
               &nbsp;&middot;&nbsp;
-              <a href="static/pages/archive.html" style="color: #90caf9;">Previous research</a>
+              <a href="static/pages/archive.html" style="color: #90caf9;">MultiNet Archive</a>
               &nbsp;&middot;&nbsp;
               <a href="https://github.com/ManifoldRG/MultiNet-v2.0" style="color: #90caf9;">Code</a>
             </p>
@@ -876,11 +957,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="static/js/play.js?v=p1b7"></script>
-<script src="static/js/mn-shell.js?v=r2l"></script>
-<script src="static/js/v2_r1_results_table.js?v=r2l"></script>
-<script src="static/js/v2_r1_finding_charts.js?v=r2l"></script>
-<script src="static/js/v2_r1_finding_tabs.js?v=r2l"></script>
-<script src="static/js/v2_r1_reel.js?v=r2l"></script>
-<script src="static/js/lp_headline_stats.js?v=r2l"></script>
+<script src="static/js/mn-shell.js?v=r4k"></script>
+<script src="static/js/v2_r1_results_table.js?v=r4k"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r4k"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r4k"></script>
+<script src="static/js/v2_r1_reel.js?v=r4k"></script>
+<script src="static/js/lp_headline_stats.js?v=r4k"></script>
 </body>
 </html>
