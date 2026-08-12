@@ -66,7 +66,6 @@
   }
 
   var GH_V1 = "https://github.com/ManifoldRG/MultiNet";
-  var GH_V2 = "https://github.com/ManifoldRG/MultiNet-v2.0";
   var GENESIS = GH_V1 + "/tree/main/src/modules";
   var SUBMIT_MAIL = "mailto:pranav@metarch.ai" +
     "?subject=Evaluating%20a%20model%20on%20MultiNet%20v2.0";
@@ -80,7 +79,7 @@
     {
       label: "Benchmark Releases", icon: "fas fa-microscope",
       children: [
-        { id: "v2r1", label: "v2.0 R1 - GridWorld", icon: "fas fa-project-diagram", href: home() },
+        { id: "v2r1", label: "v2.0 Preview", icon: "fas fa-project-diagram", href: home() },
         { id: "v1", label: "v1.0 - Generalist", icon: "fas fa-rocket", href: url("static/pages/Multinetv1.html") },
         { id: "v02", label: "v0.2 - Gameplay", icon: "fas fa-gamepad", href: url("static/pages/Multinetv02.html") },
         { id: "v01", label: "v0.1 - Robotics", icon: "fas fa-robot", href: url("static/pages/Multinetv01.html") }
@@ -96,8 +95,6 @@
     {
       label: "Software Releases", icon: "fas fa-code-branch",
       children: [
-        { label: "GridWorld maze generator", icon: "fas fa-th", href: GH_V2, external: true },
-        { label: "R1 evaluation pipeline", icon: "fas fa-flask", href: GH_V2, external: true },
         { label: "GenESIS framework", icon: "fas fa-code", href: GENESIS, external: true },
         { label: "Data Curation Toolkit", icon: "fab fa-github", href: GH_V1, external: true },
         { label: "Model Adaptations", icon: "fas fa-microchip", href: GH_V1, external: true }

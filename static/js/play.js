@@ -1,10 +1,14 @@
 (() => {
-  // Where the maze backend lives. `?api=` overrides it, which is how you point
-  // the deployed page at a local server during development:
+  // Where the maze backend lives: Cloud Run, one always-on container in
+  // us-central1 (MultiNet-v2.0/deploy/CLOUDRUN.md). It must stay https - an
+  // http endpoint is blocked as mixed content from multinet.ai.
+  //
+  // `?api=` overrides it, which is how you point this page at a local server
+  // during development:
   //   .../index.html?api=http://127.0.0.1:8000
-  // TODO(R1): set API_DEFAULT to the hosted HTTPS endpoint before launch. It must
-  // be https - an http endpoint is blocked as mixed content from multinet.ai.
-  const API_DEFAULT = "http://127.0.0.1:8000";
+  // That origin has to be in the backend's MULTINET_CORS_ORIGINS or the
+  // browser blocks the call before it leaves the machine.
+  const API_DEFAULT = "https://multinet-maze-629742132540.us-central1.run.app";
   const API = new URLSearchParams(location.search).get("api") || API_DEFAULT;
   const FACING = ["East", "South", "West", "North"];
   const FACING_ARROW = ["→", "↓", "←", "↑"];
