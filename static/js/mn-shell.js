@@ -106,18 +106,30 @@
     // No submission flow for v2.0 yet, so this opens a conversation rather
     // than pointing at the v1 harness, which would evaluate the wrong thing.
     { id: "submit", label: "Submit Your Model", icon: "fas fa-paper-plane", href: SUBMIT_MAIL },
-    // TODO(R1-CITE): no citation block on the homepage yet - #BibTeX was an
-    // anchor on the old site and went nowhere. Points at the report for now.
-    { id: "cite", label: "Citation", icon: "fas fa-quote-right", href: REPORT }
+    { id: "cite", label: "Citation", icon: "fas fa-quote-right", href: home("#citation") }
   ];
 
   // ---- CTA banner ---------------------------------------------------------
   // One place to change the sitewide call to action.
   var CTA = {
-    html: 'Want to evaluate your model on MultiNet v2.0? ' +
-          '<a href="mailto:pranav@metarch.ai?subject=Evaluating%20a%20model%20on%20MultiNet%20v2.0" ' +
+    // The two org names link out too, but styled quieter than the actions -
+    // four equally-green links on one line reads as a link farm and nothing
+    // gets clicked.
+    html: 'MultiNet is built at ' +
+          '<a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer" ' +
+          'style="color: inherit; text-decoration: underline; ' +
+          'text-decoration-color: rgba(255,255,255,0.45);">Fig</a> and ' +
+          '<a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer" ' +
+          'style="color: inherit; text-decoration: underline; ' +
+          'text-decoration-color: rgba(255,255,255,0.45);">Manifold Research</a>' +
+          ', where we work on long-horizon agents and how to measure them. ' +
+          '<a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer" ' +
           'style="color: #90EE90; text-decoration: underline;">' +
-          '<i class="fas fa-envelope" style="margin-right: 0.3em;"></i>Get in touch with us</a>'
+          '<i class="fas fa-flask" style="margin-right: 0.3em;"></i>See our research</a>' +
+          '<span style="opacity: 0.5; margin: 0 0.6em;">|</span>' +
+          '<a href="mailto:pranav@metarch.ai?subject=Collaborating%20on%20MultiNet%20v2.0" ' +
+          'style="color: #90EE90; text-decoration: underline;">' +
+          '<i class="fas fa-envelope" style="margin-right: 0.3em;"></i>Work with us</a>'
   };
 
   function el(html) {

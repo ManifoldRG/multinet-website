@@ -43,8 +43,8 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/mn-shared.css?v=r4l">
-  <link rel="stylesheet" href="static/css/r1-components.css?v=r4l">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r4q">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r4q">
   <link rel="stylesheet" href="static/css/play.css?v=p1b5">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
@@ -474,6 +474,51 @@
       max-width: 60ch; line-height: 1.6;
     }
 
+    /* ---------- citation ----------
+       A code block is the one thing on this page that is meant to be taken
+       away rather than read, so it gets a copy button rather than asking
+       anyone to select nine lines of BibTeX by hand. */
+    .lp-cite {
+      position: relative;
+      border: 1px solid #e3e7ec; border-radius: 14px;
+      background: #fbfcfd;
+      max-width: 78ch; margin: 0 auto;
+    }
+    .lp-cite pre {
+      margin: 0; padding: 1.35rem 1.5rem;
+      overflow-x: auto; background: none;
+    }
+    .lp-cite code {
+      font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+      font-size: 0.83rem; line-height: 1.65; color: #33405a;
+      white-space: pre; background: none; padding: 0;
+    }
+    /* Same physical key as every other button here, one size down - it sits
+       inside a card rather than acting as a section's call to action. */
+    .lp-cite__copy {
+      --face: #ffffff;
+      --edge: #d3dae2;
+      --lift: 3px;
+      position: absolute; top: 0.85rem; right: 0.85rem; z-index: 1;
+      display: inline-flex; align-items: center; gap: 0.4em;
+      padding: 0.4rem 0.7rem; border-radius: 8px;
+      font: inherit; font-size: 0.78rem; font-weight: 600;
+      color: #4a5568; background: var(--face);
+      border: 1px solid #e3e7ec; cursor: pointer;
+      box-shadow: 0 var(--lift) 0 var(--edge);
+      transform: translateY(0);
+      transition: transform 0.09s ease, box-shadow 0.09s ease, color 0.16s ease;
+    }
+    .lp-cite__copy:hover { color: #005A9C; }
+    .lp-cite__copy:active {
+      transform: translateY(var(--lift));
+      box-shadow: 0 0 0 var(--edge);
+    }
+    .lp-cite__copy.is-done { color: #0B7285; }
+    @media (prefers-reduced-motion: reduce) {
+      .lp-cite__copy { transition: color 0.16s ease; }
+    }
+
     /* ---------- collaborators ---------- */
     .lp-collab {
       display: flex; justify-content: center; align-items: center;
@@ -892,22 +937,27 @@
   <section class="lp-section">
     <div class="lp-wrap">
       <div class="lp-final">
-        <h2>Evaluate your model on MultiNet v2.0</h2>
+        <h2>Can your model or agent generalize across modalities?</h2>
         <p>
-          We are building the complete, cross-domain version of MultiNet v2.0. The same mazes you see
-          rendered in 2D here will also exist in a 3D simulated environment and as a language-only
-          environment, so a model can be tested on one task across multiple modalities. To get your
-          model or agent evaluated on the full benchmark, and onto the leaderboard, get in touch.
+          This release is an early preview of the MultiNet v2.0 benchmark, the full version of which
+          will contain the same underlying task of a maze projected in multiple domains such as 3D
+          simulation and pure language. Are models capable of taking actions in any environment? Or
+          do they just overfit to a specific interface? With v2.0 we aim to quantify this.
+        </p>
+        <p>
+          If you work on building models and agents, or benchmarking and evaluation, we would love
+          to hear from you, whether that means getting your model on the benchmark, contributing to
+          the environments, or working with us on what comes after.
         </p>
         <div class="lp-cta-row" style="justify-content: center;">
-          <a class="lp-btn" href="mailto:pranav@metarch.ai?subject=Evaluating%20a%20model%20on%20MultiNet%20v2.0">
-            <i class="fas fa-envelope"></i> Get in touch
+          <a class="lp-btn" href="https://metarch.ai/" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-flask"></i> See our research at Fig
+          </a>
+          <a class="lp-btn" href="mailto:pranav@metarch.ai?subject=Collaborating%20on%20MultiNet%20v2.0">
+            <i class="fas fa-envelope"></i> Work with us
           </a>
           <a class="lp-btn" href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-discord"></i> Join the Discord
-          </a>
-          <a class="lp-btn" href="https://github.com/ManifoldRG/MultiNet-v2.0" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github"></i> Code
           </a>
         </div>
       </div>
@@ -926,6 +976,31 @@
         <a href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/mitlogo_alt.png" alt="MIT"></a>
         <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/GeorgiaTech_RGB.png" alt="Georgia Tech"></a>
         <a href="https://www.tufts.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/tuftslogo.jpg" alt="Tufts University"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CITATION ==================== -->
+  <!-- Last section before the footer, which is where anyone looking for a
+       BibTeX block goes first. The nav's Citation entry points at #citation. -->
+  <section class="lp-section lp-section--tight" id="citation">
+    <div class="lp-wrap">
+      <h2 class="lp-h2">Citation</h2>
+      <p class="lp-sub">If you use our work, please cite us.</p>
+
+      <div class="lp-cite">
+        <button type="button" class="lp-cite__copy" data-copy-target="lp-bibtex">
+          <i class="far fa-copy" aria-hidden="true"></i> <span>Copy</span>
+        </button>
+        <pre id="lp-bibtex"><code>@article{guruprasad2026multinet,
+  author  = {Pranav Guruprasad and Sean Rivera and Helen Lu and Arushi Jain and
+             Hangliang Ren and Harshvardhan Sikka},
+  title   = {Frontier Vision-Language Models Fail Simple 2D Mazes: Benchmarking
+             Long-Horizon Action Taking and Causal Reasoning Capabilities},
+  journal = {Manifold Research Publications},
+  year    = {2026},
+  note    = {https://multinet.ai/}
+}</code></pre>
       </div>
     </div>
   </section>
@@ -957,11 +1032,46 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="static/js/play.js?v=p1b8"></script>
-<script src="static/js/mn-shell.js?v=r4l"></script>
-<script src="static/js/v2_r1_results_table.js?v=r4l"></script>
-<script src="static/js/v2_r1_finding_charts.js?v=r4l"></script>
-<script src="static/js/v2_r1_finding_tabs.js?v=r4l"></script>
-<script src="static/js/v2_r1_reel.js?v=r4l"></script>
-<script src="static/js/lp_headline_stats.js?v=r4l"></script>
+<script src="static/js/mn-shell.js?v=r4q"></script>
+<script src="static/js/v2_r1_results_table.js?v=r4q"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r4q"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r4q"></script>
+<script src="static/js/v2_r1_reel.js?v=r4q"></script>
+<script src="static/js/lp_headline_stats.js?v=r4q"></script>
+
+<script>
+  // Copy the BibTeX. Small enough to live here rather than earn a file.
+  // navigator.clipboard needs a secure context - it is undefined on plain
+  // http from anything but localhost - so fall back rather than throw.
+  document.querySelectorAll("[data-copy-target]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var src = document.getElementById(btn.dataset.copyTarget);
+      if (!src) return;
+      var text = src.innerText;
+      var label = btn.querySelector("span");
+
+      function done() {
+        btn.classList.add("is-done");
+        label.textContent = "Copied";
+        setTimeout(function () {
+          btn.classList.remove("is-done");
+          label.textContent = "Copy";
+        }, 1600);
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done, function () {});
+        return;
+      }
+      // Fallback: select the block so ctrl/cmd-C still works.
+      var sel = window.getSelection();
+      var range = document.createRange();
+      range.selectNodeContents(src);
+      sel.removeAllRanges();
+      sel.addRange(range);
+      try { if (document.execCommand("copy")) done(); } catch (e) {}
+    });
+  });
+</script>
 </body>
 </html>
