@@ -29,11 +29,11 @@
         "during training. However, a switch in this environment is represented as a colored circle " +
         "on a cell in the maze, while the gate is represented as a blocked cell. The model has to " +
         "learn from experience which switch opens which gate, and that operating it means standing " +
-        "on that exact cell and toggling. Across the 105 switch-maze episodes a switch was pressed " +
+        "on that exact cell and toggling. Across the 105 switch-gate episodes a switch was pressed " +
         "twice, both times by the same model, and no maze with a switch was solved by anyone - " +
         "while key-door mazes account for four of the six solves.</p>",
       mount: "r1-switch-funnel",
-      caption: "Models walked onto a live switch in 38 of the 105 switch-maze episodes, and pressed one " +
+      caption: "Models walked onto a live switch in 38 of the 105 switch-gate episodes, and pressed one " +
                "in 2 of them."
     },
     {
