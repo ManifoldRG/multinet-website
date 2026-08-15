@@ -65,8 +65,10 @@
       key: "steps",
       title: "Average steps before the episode ended",
       body: "Actions taken before the episode was cut off, averaged over 50 mazes. Almost every " +
-            "episode ends on the stall watchdog, which fires after 30 consecutive actions that " +
-            "reach no new tile.",
+            "episode ends on the stall watchdog, which fires after 30 consecutive steps with no " +
+            "change in position, inventory or mechanism state. It is not tiles alone: picking up a " +
+            "key or opening a door re-arms the counter, so an agent can revisit old ground and " +
+            "still survive.",
       formula: 'Steps = <span class="frac"><span class="top">actions taken across all episodes</span>' +
                '<span class="bot">episodes</span></span>',
       denom: "173.5 steps",

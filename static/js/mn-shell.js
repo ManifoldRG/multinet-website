@@ -79,7 +79,7 @@
     {
       label: "Benchmark Releases", icon: "fas fa-microscope",
       children: [
-        { id: "v2r1", label: "v2.0 Preview", icon: "fas fa-project-diagram", href: home() },
+        { id: "v2r1", label: "v2.0 - Gridworld", icon: "fas fa-project-diagram", href: home() },
         { id: "v1", label: "v1.0 - Generalist", icon: "fas fa-rocket", href: url("static/pages/Multinetv1.html") },
         { id: "v02", label: "v0.2 - Gameplay", icon: "fas fa-gamepad", href: url("static/pages/Multinetv02.html") },
         { id: "v01", label: "v0.1 - Robotics", icon: "fas fa-robot", href: url("static/pages/Multinetv01.html") }
@@ -112,24 +112,21 @@
   // ---- CTA banner ---------------------------------------------------------
   // One place to change the sitewide call to action.
   var CTA = {
-    // The two org names link out too, but styled quieter than the actions -
-    // four equally-green links on one line reads as a link farm and nothing
-    // gets clicked.
-    html: 'MultiNet is built at ' +
-          '<a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer" ' +
-          'style="color: inherit; text-decoration: underline; ' +
-          'text-decoration-color: rgba(255,255,255,0.45);">Fig</a> and ' +
-          '<a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer" ' +
-          'style="color: inherit; text-decoration: underline; ' +
-          'text-decoration-color: rgba(255,255,255,0.45);">Manifold Research</a>' +
-          ', where we work on long-horizon agents and how to measure them. ' +
-          '<a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer" ' +
-          'style="color: #90EE90; text-decoration: underline;">' +
-          '<i class="fas fa-flask" style="margin-right: 0.3em;"></i>See our research</a>' +
-          '<span style="opacity: 0.5; margin: 0 0.6em;">|</span>' +
-          '<a href="mailto:pranav@metarch.ai?subject=Collaborating%20on%20MultiNet%20v2.0" ' +
-          'style="color: #90EE90; text-decoration: underline;">' +
-          '<i class="fas fa-envelope" style="margin-right: 0.3em;"></i>Work with us</a>'
+    // Two deliberate lines rather than one that wraps at an arbitrary width:
+    // the claim, then the actions centred beneath it. The org names link out
+    // too, styled quieter than the actions - four equally-green links on one
+    // line reads as a link farm and nothing gets clicked.
+    html: "We're building interactive, controllable environments to benchmark long-horizon action " +
+          'and causal reasoning across domains, at ' +
+          '<a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer">Fig</a> and ' +
+          '<a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer">Manifold Research</a>.' +
+          '<span class="cta-banner__actions">' +
+            '<a href="https://www.fig.inc/research/" target="_blank" rel="noopener noreferrer">' +
+              '<i class="fas fa-flask"></i><span>See our research</span></a>' +
+            '<span class="cta-banner__sep" aria-hidden="true">|</span>' +
+            '<a href="mailto:pranav@metarch.ai?subject=Collaborating%20on%20MultiNet%20v2.0">' +
+              '<i class="fas fa-envelope"></i><span>Work with us</span></a>' +
+          "</span>"
   };
 
   function el(html) {
@@ -200,10 +197,38 @@
   }
 
   // ---- Bar ----------------------------------------------------------------
-  // Brand and menu button, nothing else. Every link it used to carry is in
-  // the drawer, so the duplicates only cost width - and it is being narrow
-  // that lets the bar stay pinned without sitting on top of the page.
-  function buildHeader() {
+  // Brand, menu button, and the three destinations most people actually want.
+  // The whole site lives in the drawer; these are here because a link nobody
+  // can see is a link nobody clicks - and the playable maze in particular was
+  // the thing visitors lost when the old vertical rail went away.
+  //
+  // A horizontal bar costs no page width, which is why the shortcuts can come
+  // back at all: the rail cost 70px of permanent inset on every page and the
+  // homepage cannot spare it (the maze board is a fixed 1100px).
+  // Ordered by what we want people to do, not alphabetically. All three wear
+  // the page's physical key; the maze is filled because it is the primary
+  // action, the other two are the same key in a lighter face so the row reads
+  // as one control group with an obvious lead.
+  var SHORTCUTS = [
+    { label: "Play the maze", href: home("#play-the-maze"), icon: "fas fa-gamepad", primary: true },
+    { label: "Technical report", href: REPORT, icon: "fas fa-file-pdf", short: "Report" },
+    { label: "MultiNet Archive", href: url("static/pages/archive.html"), icon: "fas fa-archive", short: "Archive" }
+  ];
+
+  function shortcutsHtml(current) {
+    return SHORTCUTS.map(function (s) {
+      var cls = "mn-hdr__btn" + (s.primary ? " mn-hdr__btn--primary" : "");
+      return '<a class="' + cls + '" href="' + selfAware(s.href) + '">' +
+        (s.icon ? '<i class="' + s.icon + '" aria-hidden="true"></i> ' : "") +
+        // The short label only exists so the bar can shed width before it
+        // has to drop the button entirely.
+        '<span class="mn-hdr__full">' + esc(s.label) + "</span>" +
+        (s.short ? '<span class="mn-hdr__abbr">' + esc(s.short) + "</span>" : "") +
+      "</a>";
+    }).join("");
+  }
+
+  function buildHeader(current) {
     return '<header class="mn-hdr">' +
       '<div class="mn-hdr__inner">' +
         '<button type="button" class="mn-hdr__menu" id="mnMenuBtn" aria-label="Open menu" ' +
@@ -214,6 +239,7 @@
           '<img src="' + url("static/images/multinet_no_text.png") + '" alt="">' +
           "<span>MultiNet</span>" +
         "</a>" +
+        '<nav class="mn-hdr__nav">' + shortcutsHtml(current) + "</nav>" +
       "</div>" +
     "</header>";
   }
@@ -222,6 +248,25 @@
     return '<div id="cta-banner" class="cta-banner">' +
       '<button id="cta-close-btn" title="Close banner" aria-label="Close banner">&times;</button>' +
       "<p>" + CTA.html + "</p>" +
+    "</div>";
+  }
+
+  // ---- Superseded-version notice ------------------------------------------
+  // The archive pages still rank and still get linked from old posts, so a
+  // reader can land on v0.1 results with no way of knowing three releases
+  // have happened since. Every page that is not the current release carries
+  // this, including archive.html - despite its title, its content is the old
+  // MultiNet landing page rather than an index.
+  var SUPERSEDED = ["v01", "v02", "v1", "about", "archive"];
+
+  function buildStale(current) {
+    if (SUPERSEDED.indexOf(current) === -1) return "";
+    // Not dismissible: unlike the CTA, this is context for reading the page
+    // rather than an ask, and it stays relevant for the whole visit.
+    return '<div class="mn-stale">' +
+      '<span class="mn-stale__icon" aria-hidden="true"><i class="fas fa-history"></i></span>' +
+      "<p>You are currently reading an older version of the MultiNet benchmark. " +
+      'See our latest research <a href="' + home() + '">here</a>.</p>' +
     "</div>";
   }
 
@@ -328,14 +373,21 @@
 
     var navSlot = document.getElementById("mn-nav");
     if (navSlot) {
-      navSlot.replaceWith(el(buildHeader()));
+      navSlot.replaceWith(el(buildHeader(current)));
       // The drawer is a sibling of everything, appended last, so no page's
       // stacking context can trap it underneath.
       document.body.appendChild(el(buildDrawer(current)));
     }
 
     var ctaSlot = document.getElementById("mn-cta");
-    if (ctaSlot) ctaSlot.replaceWith(el(buildCta()));
+    if (ctaSlot) {
+      // On a superseded page the notice takes the slot: stacking it above the
+      // green CTA gives two full-width banners before any content, and "this
+      // is out of date" is the more useful of the two to a reader who has
+      // just landed here from a two-year-old link.
+      var stale = buildStale(current);
+      ctaSlot.replaceWith(el(stale || buildCta()));
+    }
 
     wireDrawer();
     wireCta();

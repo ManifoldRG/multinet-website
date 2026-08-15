@@ -50,9 +50,11 @@
     {
       id: "styles",
       label: "Failure styles",
-      claim: "The stall watchdog ends 139 of the 144 failed episodes, but each model behaves " +
-             "differently in the environment and fails in its own way. Claude walks into walls, " +
-             "Kimi retreads ground it has covered, Qwen turns on the spot.",
+      claim: "The stall watchdog - which ends an episode after 30 consecutive steps with no change " +
+             "in position, inventory or mechanism state - accounts for 139 of the 144 failed " +
+             "episodes. But each model behaves differently in the environment and fails in its own " +
+             "way. Claude walks into walls, Kimi retreads ground it has covered, Qwen turns on the " +
+             "spot.",
       mount: "r1-quarter-chart",
       // this figure writes its own caption, per selected view
       caption: ""

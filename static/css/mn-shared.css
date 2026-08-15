@@ -53,8 +53,69 @@ body {
   min-height: 52px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;   /* two items: keep them together, left */
   gap: 0.5rem;
+}
+
+/* Shortcuts sit hard right, so the brand and the actions occupy opposite
+   ends and the eye is not asked to scan a single undifferentiated row. */
+.mn-hdr__nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* All three are the same physical key as the buttons on the page - one
+   control group, one colour. The maze keeps a slightly heavier shadow so it
+   still leads the row without changing colour to do it. */
+.mn-hdr__btn {
+  --face: #005A9C;
+  --edge: #003D6B;
+  --lift: 3px;
+  display: inline-flex; align-items: center; gap: 0.4em;
+  padding: 0.4rem 0.8rem; border-radius: 8px;
+  font-size: 0.85rem; font-weight: 600;
+  color: #fff; text-decoration: none; white-space: nowrap;
+  background: var(--face);
+  border: 0;
+  box-shadow: 0 var(--lift) 0 var(--edge), 0 3px 8px rgba(3, 34, 60, 0.14);
+  transform: translateY(0);
+  transition: transform 0.09s ease, box-shadow 0.09s ease, background 0.16s ease;
+}
+.mn-hdr__btn:hover { color: #fff; background: #0069b5; }
+.mn-hdr__btn:active {
+  transform: translateY(var(--lift));
+  box-shadow: 0 0 0 var(--edge), 0 1px 3px rgba(3, 34, 60, 0.25);
+}
+.mn-hdr__btn:focus-visible { outline: 2px solid #0B7285; outline-offset: 3px; }
+.mn-hdr__btn i { font-size: 0.9em; }
+
+.mn-hdr__btn--primary {
+  box-shadow: 0 var(--lift) 0 var(--edge), 0 5px 12px rgba(3, 34, 60, 0.22);
+}
+.mn-hdr__btn--primary:active {
+  box-shadow: 0 0 0 var(--edge), 0 1px 3px rgba(3, 34, 60, 0.25);
+}
+@media (prefers-reduced-motion: reduce) {
+  .mn-hdr__btn { transition: background 0.16s ease; }
+}
+
+/* Abbreviated labels only appear once the bar is tight. */
+.mn-hdr__abbr { display: none; }
+
+/* Shed the bar in stages rather than all at once: long labels first, then
+   the secondary links, then everything but the maze. The drawer holds all
+   of it regardless, so nothing is ever unreachable. */
+@media (max-width: 900px) {
+  .mn-hdr__full { display: none; }
+  .mn-hdr__abbr { display: inline; }
+}
+/* Shed the secondary buttons before the maze, which is the last to go. */
+@media (max-width: 700px) {
+  .mn-hdr__btn:not(.mn-hdr__btn--primary) { display: none; }
+}
+@media (max-width: 380px) {
+  .mn-hdr__btn { display: none; }
 }
 
 /* Three bars that become an X while the drawer is open. Drawn rather than
@@ -256,36 +317,77 @@ body.mn-noscroll { overflow: hidden; }
 /* ============================================================
    CTA banner
    ============================================================ */
+/* Deliberately quiet. The bar above already carries three saturated blue
+   buttons; a second full-width block of the same blue made the whole top of
+   the page compete with itself. This is a tinted band that reads as context,
+   letting the buttons be the only strong colour up there. */
 .cta-banner {
   position: relative;
-  background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%);
-  color: #fff;
-  padding: 10px 50px;
+  background: #f4f8fb;
+  border-bottom: 1px solid #e2eaf1;
+  color: #4a5568;
+  padding: 9px 50px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 .cta-banner p {
   margin: 0;
-  font-size: 1.05rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 400;
 }
+/* The org names: same colour as the sentence, marked only by a faint rule, so
+   they are discoverable without pulling rank on the actions. */
+.cta-banner p > a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(74, 85, 104, 0.35);
+  text-underline-offset: 2px;
+}
+.cta-banner p > a:hover { color: #005A9C; text-decoration-color: currentColor; }
+
+/* The actions get their own centred line, so the banner is two deliberate
+   rows instead of one that wraps wherever the viewport happens to break it. */
+.cta-banner__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0.2rem;
+  font-size: 0.93rem;
+  font-weight: 600;
+}
+/* The underline sits on the label, not the anchor, so it does not run under
+   the icon - an underlined glyph reads as a rendering fault. */
+.cta-banner__actions a {
+  color: #005A9C;
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+.cta-banner__actions a span {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cta-banner__actions a:hover { color: #0069b5; }
+.cta-banner__actions i { font-size: 0.92em; opacity: 0.8; }
+.cta-banner__sep { opacity: 0.3; margin: 0 0.7em; }
 #cta-close-btn {
   position: absolute;
   top: 50%; right: 15px;
   transform: translateY(-50%);
-  width: 30px; height: 30px;
+  width: 26px; height: 26px;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  color: #fff;
-  font-size: 18px;
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+  color: #94a3b8;
+  font-size: 17px;
   line-height: 1;
   cursor: pointer;
-  opacity: 0.9;
-  transition: opacity 0.2s ease, background 0.2s ease;
+  transition: color 0.2s ease, background 0.2s ease;
 }
-#cta-close-btn:hover { opacity: 1; background: rgba(255, 255, 255, 0.2); }
+#cta-close-btn:hover { color: #4a5568; background: rgba(12, 18, 28, 0.06); }
 
 /* ============================================================
    Page shell
@@ -399,4 +501,38 @@ body.mn-noscroll { overflow: hidden; }
   .publication-title { font-size: 1.6rem !important; }
   .title.is-2 { font-size: 1.5rem !important; }
   .title.is-3 { font-size: 1.25rem !important; }
+}
+
+/* ---- Superseded-version notice -------------------------------------------
+   Sits where the CTA banner sits on current pages. Amber rather than the
+   site blue: it is a caution about what you are reading, not an action, and
+   it should not be mistaken for another call to action. Not dismissible -
+   it is context that stays true for the whole visit. */
+.mn-stale {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1.25rem;
+  background: linear-gradient(135deg, #fff8e6 0%, #fef3d7 100%);
+  border-bottom: 1px solid #f0dfae;
+  color: #6b4e12;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  text-align: center;
+}
+.mn-stale p { margin: 0; }
+.mn-stale strong { font-weight: 650; color: #4d3708; }
+.mn-stale__icon { display: inline-flex; opacity: 0.7; font-size: 0.95rem; }
+.mn-stale a {
+  color: #0069b5;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.mn-stale a:hover { color: #005A9C; }
+
+@media (max-width: 640px) {
+  .mn-stale { font-size: 0.85rem; padding: 0.6rem 0.9rem; align-items: flex-start; }
+  .mn-stale__icon { padding-top: 0.15rem; }
 }
