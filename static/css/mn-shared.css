@@ -33,7 +33,17 @@ body {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: saturate(190%) blur(20px);
   -webkit-backdrop-filter: saturate(190%) blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  /* No bottom border or drop shadow by default. Against the pale banner
+     directly beneath it, a white hairline reads as a gap and the drop shadow
+     tints the banner's top edge - together they look like the two surfaces
+     have failed to meet. The bar only needs to lift off the page once it is
+     actually floating over content, which is what .is-stuck is for. */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: box-shadow 0.2s ease;
+}
+
+/* Scrolled away from the top: now it overlaps content and needs an edge. */
+.mn-hdr.is-stuck {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
     inset 0 -1px 0 rgba(12, 18, 28, 0.05),
@@ -47,9 +57,14 @@ body {
 }
 
 .mn-hdr__inner {
-  max-width: 1180px;
+  /* Matches .lp-wrap (1060px + 1.5rem padding) so the brand starts on the
+     same line as the page's text and the nav ends on the same line as its
+     right edge. Aligning to the content beats aligning to the viewport:
+     symmetric-but-wider still reads as misaligned because nothing in the bar
+     lines up with anything below it. */
+  max-width: 1060px;
   margin: 0 auto;
-  padding: 0.4rem 1rem;
+  padding: 0.4rem 1.5rem;
   min-height: 52px;
   display: flex;
   align-items: center;
@@ -57,47 +72,59 @@ body {
 }
 
 /* Shortcuts sit hard right, so the brand and the actions occupy opposite
-   ends and the eye is not asked to scan a single undifferentiated row. */
+   ends and the eye is not asked to scan a single undifferentiated row.
+   A segmented control, not three buttons: one quiet track, and a pill that
+   slides to whatever is being pointed at. */
 .mn-hdr__nav {
+  position: relative;
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 10px;
+  background: rgba(12, 18, 28, 0.055);
 }
 
-/* All three are the same physical key as the buttons on the page - one
-   control group, one colour. The maze keeps a slightly heavier shadow so it
-   still leads the row without changing colour to do it. */
-.mn-hdr__btn {
-  --face: #005A9C;
-  --edge: #003D6B;
-  --lift: 3px;
+/* The sliding window. Sits behind the entries and animates between them;
+   hidden until there is somewhere to rest, so it never flashes at 0 width. */
+.mn-hdr__pill {
+  position: absolute;
+  top: 3px; left: 0;
+  height: calc(100% - 6px);
+  border-radius: 7px;
+  background: #005A9C;
+  box-shadow: 0 1px 2px rgba(0, 61, 107, 0.22), 0 2px 8px rgba(0, 90, 156, 0.20);
+  opacity: 0;
+  transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1),
+              width 0.28s cubic-bezier(0.32, 0.72, 0, 1),
+              opacity 0.18s ease;
+  pointer-events: none;
+}
+.mn-hdr__nav.has-pill .mn-hdr__pill { opacity: 1; }
+
+.mn-hdr__seg {
+  position: relative;
+  z-index: 1;
   display: inline-flex; align-items: center; gap: 0.4em;
-  padding: 0.4rem 0.8rem; border-radius: 8px;
-  font-size: 0.85rem; font-weight: 600;
-  color: #fff; text-decoration: none; white-space: nowrap;
-  background: var(--face);
-  border: 0;
-  box-shadow: 0 var(--lift) 0 var(--edge), 0 3px 8px rgba(3, 34, 60, 0.14);
-  transform: translateY(0);
-  transition: transform 0.09s ease, box-shadow 0.09s ease, background 0.16s ease;
+  padding: 0.38rem 0.75rem; border-radius: 7px;
+  font-size: 0.85rem; font-weight: 500;
+  color: #55637a; text-decoration: none; white-space: nowrap;
+  transition: color 0.18s ease;
 }
-.mn-hdr__btn:hover { color: #fff; background: #0069b5; }
-.mn-hdr__btn:active {
-  transform: translateY(var(--lift));
-  box-shadow: 0 0 0 var(--edge), 0 1px 3px rgba(3, 34, 60, 0.25);
-}
-.mn-hdr__btn:focus-visible { outline: 2px solid #0B7285; outline-offset: 3px; }
-.mn-hdr__btn i { font-size: 0.9em; }
+.mn-hdr__seg:hover,
+.mn-hdr__seg.is-current { color: #fff; font-weight: 600; }
+.mn-hdr__seg:focus-visible { outline: 2px solid #005A9C; outline-offset: 2px; }
+.mn-hdr__seg i { font-size: 0.9em; opacity: 0.6; }
+.mn-hdr__seg:hover i,
+.mn-hdr__seg.is-current i { opacity: 1; }
 
-.mn-hdr__btn--primary {
-  box-shadow: 0 var(--lift) 0 var(--edge), 0 5px 12px rgba(3, 34, 60, 0.22);
-}
-.mn-hdr__btn--primary:active {
-  box-shadow: 0 0 0 var(--edge), 0 1px 3px rgba(3, 34, 60, 0.25);
-}
+/* The pill takes ~0.28s to arrive; fading the label to white over the same
+   window stops it turning white before the blue is under it. */
+.mn-hdr__seg { transition: color 0.22s ease 0.04s; }
+
 @media (prefers-reduced-motion: reduce) {
-  .mn-hdr__btn { transition: background 0.16s ease; }
+  .mn-hdr__pill { transition: opacity 0.18s ease; }
 }
 
 /* Abbreviated labels only appear once the bar is tight. */
@@ -110,12 +137,12 @@ body {
   .mn-hdr__full { display: none; }
   .mn-hdr__abbr { display: inline; }
 }
-/* Shed the secondary buttons before the maze, which is the last to go. */
+/* Shed the secondary entries before the maze, which is the last to go. */
 @media (max-width: 700px) {
-  .mn-hdr__btn:not(.mn-hdr__btn--primary) { display: none; }
+  .mn-hdr__seg:not(:first-child) { display: none; }
 }
 @media (max-width: 380px) {
-  .mn-hdr__btn { display: none; }
+  .mn-hdr__nav { display: none; }
 }
 
 /* Three bars that become an X while the drawer is open. Drawn rather than
@@ -343,6 +370,15 @@ body.mn-noscroll { overflow: hidden; }
   text-underline-offset: 2px;
 }
 .cta-banner p > a:hover { color: #005A9C; text-decoration-color: currentColor; }
+
+/* The one thing the banner is asking for, so it carries the site blue while
+   the sentence around it stays grey. */
+.cta-banner__signup {
+  color: #005A9C !important;
+  font-weight: 600;
+  text-decoration-color: currentColor !important;
+}
+.cta-banner__signup:hover { color: #0069b5 !important; }
 
 /* The actions get their own centred line, so the banner is two deliberate
    rows instead of one that wraps wherever the viewport happens to break it. */

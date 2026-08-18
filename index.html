@@ -43,9 +43,9 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/mn-shared.css?v=r6o">
-  <link rel="stylesheet" href="static/css/r1-components.css?v=r6o">
-  <link rel="stylesheet" href="static/css/play.css?v=p1b5">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r8t">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r8t">
+  <link rel="stylesheet" href="static/css/play.css?v=p1b9">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
 
@@ -81,8 +81,10 @@
     /* No rule between the three views. Inside one section they are the same
        answer at three zoom levels, and a divider made them read as three
        separate things; the space alone is enough. */
+    /* The stats strip has no card chrome any more, so this gap is the only
+       thing separating it from the card row - tightened, not closed. */
     .lp-subsection {
-      margin-top: 3.25rem;
+      margin-top: 2.1rem;
     }
     .lp-h3 {
       font-size: 1.15rem; font-weight: 600; color: #12151c;
@@ -194,19 +196,29 @@
     .lp-stats {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 2.75rem;
-      padding: 0.25rem 0 0.5rem;
+      padding: 0.25rem 0 0;
     }
     .lp-stat {
       display: flex; flex-direction: column;
       padding: 0.35rem 0 0;
     }
 
+    /* Number and label share a row, sitting on a common baseline, with the
+       grid beneath them. The label reads as a caption to the figure rather
+       than a footnote under the whole block. min-height keeps the three
+       columns' grids on one line even when a label wraps to two. */
+    .lp-stat .hd {
+      display: flex; align-items: baseline; gap: 0.65rem;
+      min-height: 3.1rem;
+    }
     .lp-stat .n {
-      display: block; font-size: 2.5rem; font-weight: 700; line-height: 1;
+      flex: none;
+      font-size: 2.5rem; font-weight: 700; line-height: 1;
       color: var(--c); font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
     }
     .lp-stat .n .d {
-      font-size: 1.05rem; font-weight: 500; color: #94a3b8;
+      font-size: 1.05rem; font-weight: 500;
+      color: color-mix(in srgb, var(--c) 32%, #94a3b8);
     }
 
     /* One dot per unit of the denominator. Columns are fixed so the three
@@ -216,7 +228,7 @@
       display: grid;
       grid-template-columns: repeat(25, 1fr);
       gap: 2px;
-      margin: 0.75rem 0 0.75rem;
+      margin: 0.15rem 0 0;
       min-height: 34px;
       align-content: start;
     }
@@ -234,10 +246,12 @@
        column puts all three labels on one line instead of stepping down the
        row. */
     .lp-stat .l {
-      display: block;
-      margin-top: auto;
-      text-align: center;
-      font-size: 0.88rem; font-weight: 600; color: #333a47;
+      flex: 1;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      line-height: 1.4;
+      color: color-mix(in srgb, var(--c) 62%, #55637a);
+      text-wrap: balance;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -354,15 +368,15 @@
       border: 1px solid #e8ebee; border-radius: 14px;
       padding: 1.6rem; background: #fff;
     }
+    /* Left-aligned across every tab. All four claims run to three or more
+       lines, and centred text that long makes the eye hunt for the start of
+       each line - the block stays centred, the text inside it does not. */
     .r1-tab__claim {
       font-size: 1.02rem; line-height: 1.65; color: #333a47;
-      margin: 0 auto 1.4rem; max-width: 76ch; text-align: center;
+      margin: 0 auto 1.4rem; max-width: 88ch; text-align: left;
     }
-    /* The prose variant states what the figure is measuring before the
-       figure appears, so it is set as body text rather than as a caption. */
-    .r1-tab__claim.is-prose { text-align: left; max-width: 88ch; }
-    .r1-tab__claim.is-prose p { margin: 0 0 0.7rem; }
-    .r1-tab__claim.is-prose p:last-child { margin-bottom: 0; }
+    .r1-tab__claim p { margin: 0 0 0.7rem; }
+    .r1-tab__claim p:last-child { margin-bottom: 0; }
     .r1-tab__caption {
       font-size: 0.85rem; color: #8a90a0; text-align: center;
       margin: 0.9rem auto 0; max-width: 74ch; font-style: italic; line-height: 1.5;
@@ -564,9 +578,9 @@
           <!-- The headline names the release; the result goes here, mazes
                first so there is no doubt what the models were measured on. -->
           <p class="lp-hero__lead">
-            We put 3 frontier models - Claude Opus 4.8, Kimi K2.6, and Qwen 3.6-27B - in 50
-            simple 2-dimensional mazes each. The 3 models solved only <strong>6 out of 150</strong>
-            maze runs, and <strong>45 out of the 50</strong> mazes were not solved by any model!
+            We put 3 frontier models in 50 simple 2-dimensional mazes each. Claude Opus 4.8,
+            Kimi K2.6, and Qwen 3.6-27B together solved just 6 out of 150 maze runs, and 45 out of
+            the 50 mazes were not solved by any model!
           </p>
           <div class="lp-cta-row">
             <a class="lp-btn" href="#play-the-maze">
@@ -610,19 +624,16 @@
            lp_headline_stats.js touches it. -->
       <div class="lp-stats">
         <div class="lp-stat" data-value="6" data-total="150" style="--c: #005A9C">
-          <span class="n"><span class="v">6</span><span class="d"> / 150</span></span>
+          <span class="hd"><span class="n"><span class="v">6</span><span class="d"> / 150</span></span><span class="l">Episodes solved</span></span>
           <span class="u" aria-hidden="true"></span>
-          <span class="l">Episodes solved</span>
         </div>
         <div class="lp-stat" data-value="5" data-total="50" style="--c: #0B7285">
-          <span class="n"><span class="v">5</span><span class="d"> / 50</span></span>
+          <span class="hd"><span class="n"><span class="v">5</span><span class="d"> / 50</span></span><span class="l">Mazes solved</span></span>
           <span class="u" aria-hidden="true"></span>
-          <span class="l">Mazes solved</span>
         </div>
         <div class="lp-stat" data-value="0" data-total="105" data-zero style="--c: #D35400">
-          <span class="n"><span class="v">0</span><span class="d"> / 105</span></span>
+          <span class="hd"><span class="n"><span class="v">0</span><span class="d"> / 105</span></span><span class="l">Switch-gate episodes solved</span></span>
           <span class="u" aria-hidden="true"></span>
-          <span class="l">Episodes with switch-gate mechanisms solved</span>
         </div>
       </div>
 
@@ -658,7 +669,7 @@
         <div class="play-host" id="play-host" tabindex="0" aria-label="MultiNet playable maze">
           <div id="splash">
             <div>
-              <h1>MultiNet v2.0 Benchmark</h1>
+              <h1>MultiNet v2.0-Gridworld</h1>
               <p>Can you solve what frontier models cannot?</p>
               <button type="button" id="splash-play">Press Enter to play</button>
             </div>
@@ -667,7 +678,7 @@
           <div class="card" id="card">
             <div class="topbar">
               <div>
-                <div class="brand">MultiNet v2.0 Benchmark</div>
+                <div class="brand">MultiNet v2.0-Gridworld</div>
                 <div class="task-id" id="task-id"></div>
               </div>
               <div class="nav">
@@ -740,38 +751,24 @@
            to arrive before a reader knew what was being justified. -->
       <div class="lp-prose">
         <p>
-          Each task is a 2D Minigrid maze in which a model has six actions available to it: turn
-          left, turn right, move forward, pick up, toggle, and done. With those alone it has to work
-          its way through corridors, past decoys, and through obstacles that only give way when they
-          are operated in the right order, until it reaches the goal tile. The rules of the
-          environment are not explained to the model, because of which the model has to figure them
-          out by exploring and acting in the environment, and observing what changes as a result.
-        </p>
-        <p>
-          At each turn the model is told where it started, given a written summary of the events so
-          far, and shown up to four rendered frames: its last three steps, each labelled
-          with the action it took and what it was carrying at the time, followed by the current view
-          and a request for its next action.
-        </p>
-        <p>
           With MultiNet v2.0 we aim to build interactive environments that represent real-world
-          scenarios. However, at the same time we are keen to keep the setup controllable, which
-          will allow us to deterministically vary parameters in our environment in order to make it
-          easier or more difficult for models to succeed in.
+          scenarios. At the same time we are keen to keep the setup controllable, which will allow
+          us to deterministically vary parameters in our environment in order to make it easier or
+          more difficult for models to succeed in.
         </p>
         <p>
           The capabilities we aim to benchmark are long-horizon action taking and causal reasoning,
           which involves various sub-capabilities such as planning, action execution, error
-          recovery, visual object association, and so much more. A simple underlying substrate that
-          brings all these aspects together for an environment and benchmarking task is a maze with
-          mechanisms.
+          recovery, visual object association, and so much more.
         </p>
         <p>
-          Moreover, this setup helps us identify and separate different failure modes in agents,
-          such as not working out how to operate a mechanism, messing up the order of operation of
-          mechanisms, or losing its way and not recovering - each of which requires a very
-          different fix. Four properties that mazes as an underlying representation possess, which
-          are highly valuable to us as we build towards this vision:
+          A simple underlying substrate that brings all these aspects together for an environment
+          and benchmarking task is a maze with mechanisms. Moreover, this setup helps us identify
+          and separate different failure modes in agents, such as not working out how to operate a
+          mechanism, messing up the order of operation of mechanisms, or losing its way and not
+          recovering - each of which requires a very different fix. Four properties that mazes as an
+          underlying representation possess, which are highly valuable to us as we build towards
+          this vision:
         </p>
       </div>
       <div class="lp-props">
@@ -943,21 +940,18 @@
   <section class="lp-section">
     <div class="lp-wrap">
       <div class="lp-final">
-        <h2>Can your model successfully complete long-horizon tasks in a variety of domains?</h2>
-        <p>
-          MultiNet v2.0 projects the same maze into 3D simulation and into pure language, so a model
-          meets entirely new modes of perception and action spaces while the task underneath stays
-          identical. This evaluates how well models understand a task and carry it out successfully
-          across domains, making the benchmark representative of real-world workflows.
-        </p>
+        <h2>How does your agent do on cross-domain, multimodal, long-horizon tasks?</h2>
         <p>
           If you build models or agents, or work on benchmarking and evaluation, we would love to
-          hear from you - whether that means getting your model on the benchmark, contributing to
-          the environments, or working with us on what comes after.
+          hear from you - whether that means getting your model on our MultiNet v2.0 benchmark,
+          contributing to the environments we are building, or working with us on what comes after!
         </p>
         <div class="lp-cta-row" style="justify-content: center;">
-          <a class="lp-btn" href="https://metarch.ai/" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-flask"></i> See our research at Fig
+          <!-- Same Notion form as the CTA banner and the nav's "Evaluate Your Model"
+               entry (SIGNUP in mn-shell.js) - update all three together. -->
+          <a class="lp-btn" href="https://sparkly-broccoli-3c7.notion.site/3bf4b1d3c487800596bbe4a150962cc0"
+             target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-paper-plane"></i> Evaluate your model
           </a>
           <a class="lp-btn" href="mailto:pranav@metarch.ai?subject=Collaborating%20on%20MultiNet%20v2.0">
             <i class="fas fa-envelope"></i> Work with us
@@ -1038,12 +1032,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="static/js/play.js?v=p1b8"></script>
-<script src="static/js/mn-shell.js?v=r6o"></script>
-<script src="static/js/v2_r1_results_table.js?v=r6o"></script>
-<script src="static/js/v2_r1_finding_charts.js?v=r6o"></script>
-<script src="static/js/v2_r1_finding_tabs.js?v=r6o"></script>
-<script src="static/js/v2_r1_reel.js?v=r6o"></script>
-<script src="static/js/lp_headline_stats.js?v=r6o"></script>
+<script src="static/js/mn-shell.js?v=r8t"></script>
+<script src="static/js/v2_r1_results_table.js?v=r8t"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r8t"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r8t"></script>
+<script src="static/js/v2_r1_reel.js?v=r8t"></script>
+<script src="static/js/lp_headline_stats.js?v=r8t"></script>
 
 <script>
   // Copy the BibTeX. Small enough to live here rather than earn a file.

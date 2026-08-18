@@ -29,12 +29,12 @@
         "during training. However, a switch in this environment is represented as a colored circle " +
         "on a cell in the maze, while the gate is represented as a blocked cell. The model has to " +
         "learn from experience which switch opens which gate, and that operating it means standing " +
-        "on that exact cell and toggling. Across the 105 switch-gate episodes a switch was pressed " +
-        "twice, both times by the same model, and no maze with a switch was solved by anyone - " +
+        "on that exact cell and toggling. Across the 105 switch-gate episodes a switch was toggled " +
+        "twice, both times by the same model, and no maze with a switch was solved by any model - " +
         "while key-door mazes account for four of the six solves.</p>",
       mount: "r1-switch-funnel",
-      caption: "Models walked onto a live switch in 38 of the 105 switch-gate episodes, and pressed one " +
-               "in 2 of them."
+      caption: "Models walked onto a live switch in 38 of the 105 switch-gate episodes, but toggled " +
+               "one successfully only in 2 of them."
     },
     {
       id: "difficulty",
@@ -50,8 +50,8 @@
     {
       id: "styles",
       label: "Failure styles",
-      claim: "The stall watchdog - which ends an episode after 30 consecutive steps with no change " +
-             "in position, inventory or mechanism state - accounts for 139 of the 144 failed " +
+      claim: "The stall watchdog, which ends an episode after 30 consecutive steps with no change " +
+             "in position, inventory or mechanism state, accounts for 139 of the 144 failed " +
              "episodes. But each model behaves differently in the environment and fails in its own " +
              "way. Claude walks into walls, Kimi retreads ground it has covered, Qwen turns on the " +
              "spot.",
@@ -67,10 +67,8 @@
              "roughly halves over the course of an episode, Kimi's roughly doubles, and Qwen's stays " +
              "flat at around 16,000 tokens a turn.",
       mount: "r1-thinking-chart",
-      caption: "Estimated thinking spent on each turn, by turn number. The scale is logarithmic - each " +
-               "gridline multiplies the one below it rather than adding to it - because Claude runs " +
-               "close to two orders of magnitude under the other two. Per turn, not the per-tile ratio " +
-               "in the cards above."
+      caption: "Estimated thinking spent on each turn, by turn number. The scale is logarithmic " +
+               "because Claude runs close to two orders of magnitude under the other two."
     }
   ];
 
@@ -99,10 +97,7 @@
       var fig = store && store.querySelector('[data-figure="' + tab.mount + '"]');
       var slot = panel.querySelector(".r1-tab__figure");
 
-      // A one-line claim sits centred over its figure; a tab that has to
-      // explain itself first gets prose, which only reads left-aligned.
       var claim = panel.querySelector(".r1-tab__claim");
-      claim.classList.toggle("is-prose", !!tab.claimHtml);
       if (tab.claimHtml) claim.innerHTML = tab.claimHtml;
       else claim.textContent = tab.claim;
 

@@ -96,40 +96,39 @@
       "</div>";
   }
 
-  // ---- 1. switch discovery funnel ----------------------------------------
+  // ---- 1. mechanism discovery funnels -------------------------------------
+  // Two funnels rather than a funnel and a list. The claim is a comparison -
+  // the same models discover one mechanism and never discover the other - so
+  // both sides need identical geometry and a shared scale, or the eye cannot
+  // compare them. They also count the same unit: episodes, not events.
   function renderFunnel(data, el) {
     var f = data.switchFunnel;
-    if (!f) return;
-    var top = f.steps[0].value;
+    if (!f || !f.funnels) return;
+    var max = f.scaleMax || Math.max.apply(null, f.funnels.map(function (c) {
+      return c.steps[0].value;
+    }));
 
-    var steps = f.steps.map(function (s, i) {
-      var pct = (s.value / top) * 100;
-      return "" +
-        '<div class="r1-fn__step' + (s.value === 0 ? " is-zero" : "") + '">' +
-          '<div class="r1-fn__label">' + s.label + "</div>" +
-          '<div class="r1-fn__track">' +
-            '<span class="r1-fn__fill" style="--w:' + pct + '%"></span>' +
-            '<span class="r1-fn__value">' + s.value + "</span>" +
-          "</div>" +
-        "</div>";
-    }).join('<div class="r1-fn__arrow">&darr;</div>');
+    var cols = f.funnels.map(function (col) {
+      var steps = col.steps.map(function (s, i) {
+        var pct = (s.value / max) * 100;
+        return "" +
+          '<div class="r1-fn__step' + (s.value === 0 ? " is-zero" : "") + '">' +
+            '<div class="r1-fn__label">' + s.label + "</div>" +
+            '<div class="r1-fn__track">' +
+              // A floor width so a value of 2 is still a visible mark rather
+              // than a hairline that reads as a rendering fault.
+              '<span class="r1-fn__fill" style="--w:' + Math.max(pct, 0.9) + '%"></span>' +
+              '<span class="r1-fn__value">' + s.value + "</span>" +
+            "</div>" +
+          "</div>";
+      }).join('<div class="r1-fn__arrow" aria-hidden="true">&darr;</div>');
 
-    var contrast = f.contrast.map(function (c) {
-      return '<li><span class="n">' + c.value + "</span>" + c.label + "</li>";
+      return '<div class="r1-fn__col" style="--a: ' + col.accent + '">' +
+        '<p class="r1-fn__title">' + col.name + "</p>" + steps +
+      "</div>";
     }).join("");
 
-    el.innerHTML =
-      '<div class="r1-fn">' +
-        '<div class="r1-fn__main">' +
-          '<p class="r1-fn__title">Switch-gate mechanism</p>' +
-          steps +
-        "</div>" +
-        '<div class="r1-fn__aside">' +
-          '<p class="r1-fn__title">Key-door mechanism</p>' +
-          "<ul>" + contrast + "</ul>" +
-          "<p>Keys and doors were explained exactly as much as switches were: not at all.</p>" +
-        "</div>" +
-      "</div>";
+    el.innerHTML = '<div class="r1-fn">' + cols + "</div>";
   }
 
   // ---- 2. progress vs shortest path --------------------------------------
@@ -296,7 +295,7 @@
     var onHome = /\/(index\.html)?$/.test(window.location.pathname);
     // Versioned like the scripts are: the numbers change more often than the
     // code that draws them, and a cached copy of the old ones is invisible.
-    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r2i";
+    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r2l";
 
     fetch(path)
       .then(function (r) { return r.json(); })

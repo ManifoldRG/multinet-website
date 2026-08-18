@@ -71,19 +71,19 @@
   "metrics": {
    "new": {
     "label": "Reached new ground",
-    "hint": "Share of actions that took the agent to a tile it had never stood on."
+    "hint": "Share of actions that took the model to a tile it had never stood on."
    },
    "blocked": {
     "label": "Blocked by a wall",
-    "hint": "Share of actions that tried to move into a wall and were rejected."
+    "hint": "Share of actions that made the model move into a wall and were rejected."
    },
    "revisit": {
     "label": "Retreading old ground",
-    "hint": "Share of actions that landed on a tile it had already visited."
+    "hint": "Share of actions that made the model land on a tile it had already visited."
    },
    "turning": {
     "label": "Turning on the spot",
-    "hint": "Share of actions that changed facing without moving."
+    "hint": "Share of actions that made the model change the direction it was facing without moving."
    }
   },
   "series": [
@@ -171,36 +171,52 @@
   ]
  },
  "switchFunnel": {
-  "steps": [
+  "note": "Both funnels count EPISODES, not events, so the two sides are directly comparable. Recomputed from metrics/long_table.csv (row_class=primary).",
+  "scaleMax": 105,
+  "funnels": [
    {
-    "label": "Episodes on a maze with a switch",
-    "value": 105
+    "name": "Switch-gate mechanism",
+    "accent": "#D35400",
+    "steps": [
+     {
+      "label": "Episodes on a maze with a switch",
+      "value": 105
+     },
+     {
+      "label": "Stood on a live switch",
+      "value": 38
+     },
+     {
+      "label": "Toggled a switch",
+      "value": 2
+     },
+     {
+      "label": "Solved the maze",
+      "value": 0
+     }
+    ]
    },
    {
-    "label": "Agent stood on a live switch",
-    "value": 38
-   },
-   {
-    "label": "Ever pressed one",
-    "value": 2
-   },
-   {
-    "label": "Solved the maze",
-    "value": 0
-   }
-  ],
-  "contrast": [
-   {
-    "label": "Successful key pickups",
-    "value": 27
-   },
-   {
-    "label": "Doors opened",
-    "value": 15
-   },
-   {
-    "label": "Of the 6 solves, on key-door mazes",
-    "value": 4
+    "name": "Key-door mechanism",
+    "accent": "#0B7285",
+    "steps": [
+     {
+      "label": "Episodes on a maze with a key",
+      "value": 93
+     },
+     {
+      "label": "Picked up a key",
+      "value": 25
+     },
+     {
+      "label": "Opened a door",
+      "value": 13
+     },
+     {
+      "label": "Solved the maze",
+      "value": 4
+     }
+    ]
    }
   ]
  },

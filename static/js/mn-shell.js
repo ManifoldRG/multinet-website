@@ -67,8 +67,10 @@
 
   var GH_V1 = "https://github.com/ManifoldRG/MultiNet";
   var GENESIS = GH_V1 + "/tree/main/src/modules";
-  var SUBMIT_MAIL = "mailto:pranav@metarch.ai" +
-    "?subject=Evaluating%20a%20model%20on%20MultiNet%20v2.0";
+  // Notion form; responses land in the Figipedia database of the same name.
+  // Declared here rather than beside the banner because the nav tree below is
+  // built at load time and would otherwise read it as undefined.
+  var SIGNUP = "https://sparkly-broccoli-3c7.notion.site/3bf4b1d3c487800596bbe4a150962cc0";
   // TODO(R1-TR): dummy destination until the report is on the Fig site.
   var REPORT = "#";
 
@@ -103,30 +105,22 @@
     { id: "report", label: "Technical Report", icon: "fas fa-file-pdf", href: REPORT },
     { id: "play", label: "Play the Maze", icon: "fas fa-gamepad", href: home("#play-the-maze") },
     { id: "archive", label: "MultiNet Archive", icon: "fas fa-archive", href: url("static/pages/archive.html") },
-    // No submission flow for v2.0 yet, so this opens a conversation rather
-    // than pointing at the v1 harness, which would evaluate the wrong thing.
-    { id: "submit", label: "Submit Your Model", icon: "fas fa-paper-plane", href: SUBMIT_MAIL },
+    // Same destination as the banner's call to action - one form, one place
+    // for anyone who wants their model run.
+    { id: "submit", label: "Evaluate Your Model", icon: "fas fa-paper-plane",
+      href: SIGNUP, external: true },
     { id: "cite", label: "Citation", icon: "fas fa-quote-right", href: home("#citation") }
   ];
 
   // ---- CTA banner ---------------------------------------------------------
   // One place to change the sitewide call to action.
   var CTA = {
-    // Two deliberate lines rather than one that wraps at an arbitrary width:
-    // the claim, then the actions centred beneath it. The org names link out
-    // too, styled quieter than the actions - four equally-green links on one
-    // line reads as a link farm and nothing gets clicked.
-    html: "We're building interactive, controllable environments to benchmark long-horizon action " +
-          'and causal reasoning across domains, at ' +
-          '<a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer">Fig</a> and ' +
-          '<a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer">Manifold Research</a>.' +
-          '<span class="cta-banner__actions">' +
-            '<a href="https://www.fig.inc/research/" target="_blank" rel="noopener noreferrer">' +
-              '<i class="fas fa-flask"></i><span>See our research</span></a>' +
-            '<span class="cta-banner__sep" aria-hidden="true">|</span>' +
-            '<a href="mailto:pranav@metarch.ai?subject=Collaborating%20on%20MultiNet%20v2.0">' +
-              '<i class="fas fa-envelope"></i><span>Work with us</span></a>' +
-          "</span>"
+    // One line, one ask. The research index and the mailto used to sit on a
+    // second row, but both were routes to the same place as the form - three
+    // ways to do one thing is how a banner ends up ignored.
+    html: 'How does your agent do on cross-domain, multimodal, long-horizon tasks? ' +
+          '<a class="cta-banner__signup" href="' + SIGNUP + '" ' +
+          'target="_blank" rel="noopener noreferrer">Work with us to find out!</a>'
   };
 
   function el(html) {
@@ -205,27 +199,86 @@
   // A horizontal bar costs no page width, which is why the shortcuts can come
   // back at all: the rail cost 70px of permanent inset on every page and the
   // homepage cannot spare it (the maze board is a fixed 1100px).
-  // Ordered by what we want people to do, not alphabetically. All three wear
-  // the page's physical key; the maze is filled because it is the primary
-  // action, the other two are the same key in a lighter face so the row reads
-  // as one control group with an obvious lead.
+  //
+  // Rendered as a segmented control rather than three buttons: three filled
+  // keys in the corner shouted louder than the page they sit above. One quiet
+  // track with a pill that slides to whatever you are pointing at says the
+  // same thing without competing with the content.
   var SHORTCUTS = [
-    { label: "Play the maze", href: home("#play-the-maze"), icon: "fas fa-gamepad", primary: true },
-    { label: "Technical report", href: REPORT, icon: "fas fa-file-pdf", short: "Report" },
-    { label: "MultiNet Archive", href: url("static/pages/archive.html"), icon: "fas fa-archive", short: "Archive" }
+    { id: "play", label: "Play the maze", href: home("#play-the-maze"), icon: "fas fa-gamepad" },
+    { id: "report", label: "Technical report", href: REPORT, icon: "fas fa-file-pdf", short: "Report" },
+    { id: "archive", label: "MultiNet Archive", href: url("static/pages/archive.html"),
+      icon: "fas fa-archive", short: "Archive" }
   ];
 
   function shortcutsHtml(current) {
-    return SHORTCUTS.map(function (s) {
-      var cls = "mn-hdr__btn" + (s.primary ? " mn-hdr__btn--primary" : "");
-      return '<a class="' + cls + '" href="' + selfAware(s.href) + '">' +
-        (s.icon ? '<i class="' + s.icon + '" aria-hidden="true"></i> ' : "") +
-        // The short label only exists so the bar can shed width before it
-        // has to drop the button entirely.
+    // The pill rests on the entry matching the page you are on, so the bar
+    // shows where you are as well as where you can go.
+    var items = SHORTCUTS.map(function (s) {
+      var here = s.id === current ? " is-current" : "";
+      return '<a class="mn-hdr__seg' + here + '" href="' + selfAware(s.href) + '">' +
+        (s.icon ? '<i class="' + s.icon + '" aria-hidden="true"></i>' : "") +
+        // The short label only exists so the track can shed width before it
+        // has to drop the entry entirely.
         '<span class="mn-hdr__full">' + esc(s.label) + "</span>" +
         (s.short ? '<span class="mn-hdr__abbr">' + esc(s.short) + "</span>" : "") +
       "</a>";
     }).join("");
+    return '<span class="mn-hdr__pill" aria-hidden="true"></span>' + items;
+  }
+
+  // Move the pill under a given entry. Measured rather than computed from
+  // padding, so it stays correct when labels abbreviate at narrow widths.
+  function wireSegments(nav) {
+    if (!nav) return;
+    var pill = nav.querySelector(".mn-hdr__pill");
+    var segs = nav.querySelectorAll(".mn-hdr__seg");
+    if (!pill || !segs.length) return;
+
+    // `instant` places the pill without animating. It matters on the very
+    // first placement: the element has just been inserted and has never been
+    // laid out, so a transition started in that same tick begins from an
+    // unresolved base and stalls - the pill stays at translateX(0) with a
+    // CSSTransition stuck in `running` forever. Suppressing the transition
+    // and forcing a reflow gives it a resolved starting point.
+    function moveTo(el, instant) {
+      if (!el) { nav.classList.remove("has-pill"); return; }
+      if (instant) pill.style.transition = "none";
+      pill.style.transform = "translateX(" + el.offsetLeft + "px)";
+      pill.style.width = el.offsetWidth + "px";
+      nav.classList.add("has-pill");
+      if (instant) {
+        void pill.offsetWidth;          // reflow, so the next change animates
+        pill.style.transition = "";
+      }
+    }
+    function resting() { return nav.querySelector(".mn-hdr__seg.is-current"); }
+
+    segs.forEach(function (el) {
+      el.addEventListener("mouseenter", function () { moveTo(el); });
+      el.addEventListener("focus", function () { moveTo(el); });
+    });
+    nav.addEventListener("mouseleave", function () { moveTo(resting()); });
+    nav.addEventListener("focusout", function () {
+      if (!nav.contains(document.activeElement)) moveTo(resting());
+    });
+
+    // The pill is positioned from measured geometry, so it has to be
+    // re-measured whenever that geometry moves. It moves more than you would
+    // expect: the web font swaps in after first paint and changes every label
+    // width, and `fonts.ready` resolves before the new metrics are applied.
+    // Watching the track for size changes covers all of it, including the
+    // label abbreviating at narrow widths.
+    var settle = function () { moveTo(resting(), true); };
+    settle();
+    if (window.ResizeObserver) {
+      new ResizeObserver(settle).observe(nav);
+    } else {
+      // Fallback for browsers without ResizeObserver.
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(settle);
+      window.addEventListener("load", settle);
+      window.addEventListener("resize", settle);
+    }
   }
 
   function buildHeader(current) {
@@ -373,7 +426,18 @@
 
     var navSlot = document.getElementById("mn-nav");
     if (navSlot) {
-      navSlot.replaceWith(el(buildHeader(current)));
+      var hdr = el(buildHeader(current));
+      navSlot.replaceWith(hdr);
+      wireSegments(hdr.querySelector(".mn-hdr__nav"));
+
+      // The bar carries no edge while it is at the top of the page, so it
+      // meets whatever is beneath it cleanly. It grows one once it is
+      // genuinely floating over content.
+      var onScroll = function () {
+        hdr.classList.toggle("is-stuck", window.scrollY > 2);
+      };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
       // The drawer is a sibling of everything, appended last, so no page's
       // stacking context can trap it underneath.
       document.body.appendChild(el(buildDrawer(current)));

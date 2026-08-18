@@ -52,23 +52,24 @@
     {
       key: "progress",
       title: "Average progress",
-      body: "How much of the work the agent got through before the episode ended, averaged over " +
-            "all 50 mazes. Distance is counted in actions still needed to solve, and it tracks the " +
-            "mechanism state: picking up the right key or opening a door lowers the remaining cost " +
-            "even if the agent has not moved.",
+      body: "How much of the maze the model got through before the episode ended, averaged over " +
+            "all 50 mazes. The distance here is calculated in terms of the actions remaining to " +
+            "solve the maze, and so it tracks the mechanism states as well. For example - picking " +
+            "up the right key or opening a door increases the progress made by a model in the maze " +
+            "even if it hasn't moved.",
       formula: 'Progress = 1 &minus; <span class="frac"><span class="top">actions still needed at the end</span>' +
                '<span class="bot">actions needed at the start</span></span>',
       denom: "1",
-      scale: "The whole solution, so the bar is the share of it completed. Measured in actions rather than tiles: a tile metric pays an agent for standing near a goal behind a door it never opened."
+      scale: "The bar is the share of the maze completed. Measured in actions instead of pure tile-based distance."
     },
     {
       key: "steps",
       title: "Average steps before the episode ended",
-      body: "Actions taken before the episode was cut off, averaged over 50 mazes. Almost every " +
+      body: "Actions taken before the episode ended, averaged over 50 mazes. Almost every " +
             "episode ends on the stall watchdog, which fires after 30 consecutive steps with no " +
-            "change in position, inventory or mechanism state. It is not tiles alone: picking up a " +
-            "key or opening a door re-arms the counter, so an agent can revisit old ground and " +
-            "still survive.",
+            "change in position, inventory or mechanism state. Changes in mechanism states refresh " +
+            "the counter that the stall watchdog tracks, so an agent can revisit old ground as a " +
+            "part of its plan in an episode.",
       formula: 'Steps = <span class="frac"><span class="top">actions taken across all episodes</span>' +
                '<span class="bot">episodes</span></span>',
       denom: "173.5 steps",
@@ -80,25 +81,22 @@
       key: "tokens",
       title: "Tokens per new tile reached",
       body: "Output tokens spent for each previously unseen tile the agent reached - what one " +
-            "unit of exploration cost. It is the sharpest separator in the run: Kimi and Qwen " +
-            "spend 20 to 26 times what Claude does, and solve fewer mazes.",
+            "unit of exploration cost. Kimi and Qwen spend 20 to 26 times what Claude does, and " +
+            "solve fewer mazes.",
       formula: 'Cost = <span class="frac"><span class="top">output tokens generated</span>' +
                '<span class="bot">new tiles reached</span></span>',
       denom: "162k (Kimi)",
-      scale: "The only metric here with no real ceiling, so it fills against the heaviest of the " +
-             "three. The 64k cap is per turn - the most a model may generate in one reply - while " +
-             "this totals every turn in the episode, so it runs far past it."
+      scale: "The only metric here with no real ceiling, so it fills against the highest of the three."
     },
     {
       key: "noeffect",
       title: "Actions that changed nothing",
-      body: "The share of actions that left the world exactly as it was: walking into a wall, " +
-            "picking up nothing, toggling nothing. Turning on the spot counts, which is why " +
-            "Claude&rsquo;s figure is the highest of the three.",
+      body: "The share of actions that didn&rsquo;t change the environment state: walking into a " +
+            "wall, picking up nothing, toggling nothing.",
       formula: 'No-effect rate = <span class="frac"><span class="top">actions leaving the state unchanged</span>' +
                '<span class="bot">actions taken</span></span>',
       denom: "1",
-      scale: "Every action taken, so the bar is the share that did nothing."
+      scale: "The bar is the share of actions taken that did not change the environment state."
     }
   ];
 
@@ -208,7 +206,7 @@
     var onHome = /\/(index\.html)?$/.test(window.location.pathname);
     // Versioned like the scripts are: the numbers change more often than the
     // code that draws them, and a cached copy of the old ones is invisible.
-    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r2i";
+    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r2l";
     var assetBase = onHome ? "static/" : "../";
 
     fetch(path)
