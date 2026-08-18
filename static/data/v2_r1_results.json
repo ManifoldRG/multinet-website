@@ -221,21 +221,37 @@
   ]
  },
  "episodeGrid": {
+  "note": "Every maze ranked by BFS-min actions across all 50, ascending - the same ordering as figures/progress_grid_actions.png. Family and grid size are separate strips because grouping by family breaks the difficulty axis.",
   "models": [
    "Claude Opus 4.8",
    "Kimi k2.6",
    "Qwen3.6-27B"
   ],
-  "note": "Per-episode progress, action variant: 1 - (remaining executable actions / actions needed from the start). Credits opened doors and picked-up keys, and gives no credit for closing on a goal still sealed behind a barrier.",
   "mazes": [
    {
+    "id": "r1_D3_10x10_dense_deadend_ky_dy_1",
+    "family": "D",
+    "grid": 10,
+    "optimal": 23,
+    "v": [
+     0.1739,
+     0.0,
+     0.2609
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
     "id": "r1_S4_10x10_dense_1",
-    "family": "Scale",
+    "family": "S",
     "grid": 10,
     "optimal": 23,
     "v": [
      1.0,
-     0.391,
+     0.3913,
      1.0
     ],
     "solved": [
@@ -245,46 +261,14 @@
     ]
    },
    {
-    "id": "r1_S5_14x14_corridor_0",
-    "family": "Scale",
-    "grid": 14,
-    "optimal": 77,
-    "v": [
-     0.0,
-     0.182,
-     0.247
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_S5_14x14_corridor_1",
-    "family": "Scale",
-    "grid": 14,
-    "optimal": 89,
-    "v": [
-     0.101,
-     0.09,
-     0.112
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
     "id": "r1_B1_8x8_corridor_swg_0",
-    "family": "Mechanism",
+    "family": "M",
     "grid": 8,
     "optimal": 26,
     "v": [
-     0.077,
-     0.077,
-     0.077
+     0.0769,
+     0.0769,
+     0.0769
     ],
     "solved": [
      false,
@@ -294,13 +278,13 @@
    },
    {
     "id": "r1_M2_8x8_corridor_sg_0",
-    "family": "Mechanism",
+    "family": "M",
     "grid": 8,
     "optimal": 26,
     "v": [
-     0.077,
-     0.077,
-     0.077
+     0.0769,
+     0.0769,
+     0.0769
     ],
     "solved": [
      false,
@@ -310,13 +294,13 @@
    },
    {
     "id": "r1_B1_8x8_corridor_swg_1",
-    "family": "Mechanism",
+    "family": "M",
     "grid": 8,
     "optimal": 27,
     "v": [
-     0.111,
-     0.111,
-     0.111
+     0.1111,
+     0.1111,
+     0.1111
     ],
     "solved": [
      false,
@@ -326,13 +310,13 @@
    },
    {
     "id": "r1_M1_8x8_corridor_kr_0",
-    "family": "Mechanism",
+    "family": "M",
     "grid": 8,
     "optimal": 27,
     "v": [
      1.0,
-     0.407,
-     0.37
+     0.4074,
+     0.3704
     ],
     "solved": [
      true,
@@ -342,13 +326,13 @@
    },
    {
     "id": "r1_M2_8x8_corridor_sg_1",
-    "family": "Mechanism",
+    "family": "M",
     "grid": 8,
     "optimal": 27,
     "v": [
-     0.111,
-     0.111,
-     0.111
+     0.1111,
+     0.1111,
+     0.1111
     ],
     "solved": [
      false,
@@ -358,535 +342,23 @@
    },
    {
     "id": "r1_M1_8x8_corridor_kr_1",
-    "family": "Mechanism",
+    "family": "M",
     "grid": 8,
     "optimal": 28,
     "v": [
      1.0,
-     0.571,
-     0.107
+     0.5714,
+     0.1071
     ],
     "solved": [
      true,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M3_8x8_corridor_kr_sg_1",
-    "family": "Mechanism",
-    "grid": 8,
-    "optimal": 29,
-    "v": [
-     0.379,
-     0.483,
-     0.483
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M4_8x8_corridor_sg_kr_1",
-    "family": "Mechanism",
-    "grid": 8,
-    "optimal": 29,
-    "v": [
-     0.103,
-     0.103,
-     0.103
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M5_8x8_corridor_kr_kb_1",
-    "family": "Mechanism",
-    "grid": 8,
-    "optimal": 30,
-    "v": [
-     0.1,
-     1.0,
-     0.267
-    ],
-    "solved": [
-     false,
-     true,
-     false
-    ]
-   },
-   {
-    "id": "r1_M6_8x8_corridor_kr_sg_kb_0",
-    "family": "Mechanism",
-    "grid": 8,
-    "optimal": 30,
-    "v": [
-     0.3,
-     0.133,
-     0.133
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_B1_10x10_dense_swg_1",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 36,
-    "v": [
-     0.111,
-     0.278,
-     0.167
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M3_10x10_dense_kr_sg_1",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 42,
-    "v": [
-     0.095,
-     0.381,
-     0.167
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M4_10x10_dense_sg_kr_1",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 42,
-    "v": [
-     0.095,
-     0.333,
-     0.167
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_B1_10x10_corridor_swg_0",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 43,
-    "v": [
-     0.046,
-     0.046,
-     0.046
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M2_10x10_dense_sg_0",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 43,
-    "v": [
-     0.07,
-     0.256,
-     0.186
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M5_10x10_dense_kr_kb_1",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 43,
-    "v": [
-     0.093,
-     0.186,
-     0.861
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_B1_10x10_corridor_swg_1",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 44,
-    "v": [
-     0.068,
-     0.068,
-     0.409
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M1_10x10_dense_kr_0",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 44,
-    "v": [
-     0.068,
-     0.182,
-     0.25
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M2_10x10_corridor_sg_1",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 44,
-    "v": [
-     0.068,
-     0.068,
-     0.727
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M1_10x10_corridor_kr_1",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 45,
-    "v": [
-     1.0,
-     0.2,
-     0.511
-    ],
-    "solved": [
-     true,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M3_10x10_dense_kr_sg_0",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 53,
-    "v": [
-     0.057,
-     0.094,
-     0.075
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M4_10x10_dense_sg_kr_0",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 53,
-    "v": [
-     0.057,
-     0.207,
-     0.226
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M5_10x10_dense_kr_kb_0",
-    "family": "Mechanism",
-    "grid": 10,
-    "optimal": 54,
-    "v": [
-     0.056,
-     0.093,
-     0.13
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_B1_14x14_dense_swg_1",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 68,
-    "v": [
-     0.015,
-     0.147,
-     0.029
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M2_14x14_dense_sg_1",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 68,
-    "v": [
-     0.015,
-     0.088,
-     0.162
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M1_14x14_dense_kr_1",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 69,
-    "v": [
-     0.015,
-     0.072,
-     0.116
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_B1_14x14_dense_swg_0",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 79,
-    "v": [
-     0.025,
-     0.089,
-     0.0
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M2_14x14_dense_sg_0",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 79,
-    "v": [
-     0.025,
-     0.101,
-     0.038
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M1_14x14_dense_kr_0",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 80,
-    "v": [
-     0.025,
-     0.013,
-     0.113
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_B1_14x14_corridor_swg_0",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 84,
-    "v": [
-     0.024,
-     0.048,
-     0.024
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M2_14x14_corridor_sg_0",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 84,
-    "v": [
-     0.024,
-     0.048,
-     0.048
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M1_14x14_corridor_kr_0",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 85,
-    "v": [
-     0.024,
-     0.059,
-     0.024
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M3_14x14_dense_kr_sg_0",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 87,
-    "v": [
-     0.023,
-     0.126,
-     0.138
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M2_14x14_corridor_sg_1",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 90,
-    "v": [
-     0.0,
-     0.144,
-     0.044
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M1_14x14_corridor_kr_1",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 91,
-    "v": [
-     0.0,
-     0.154,
-     0.044
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M6_14x14_dense_kr_sg_kb_0",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 95,
-    "v": [
-     0.021,
-     0.095,
-     0.032
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_M6_14x14_dense_kr_sg_kb_1",
-    "family": "Mechanism",
-    "grid": 14,
-    "optimal": 106,
-    "v": [
-     0.009,
-     0.396,
-     0.057
-    ],
-    "solved": [
-     false,
-     false,
-     false
-    ]
-   },
-   {
-    "id": "r1_D3_10x10_dense_deadend_ky_dy_1",
-    "family": "Distractor",
-    "grid": 10,
-    "optimal": 23,
-    "v": [
-     0.174,
-     0.0,
-     0.261
-    ],
-    "solved": [
-     false,
      false,
      false
     ]
    },
    {
     "id": "r1_D2_8x8_corridor_wrong_ky_inactive_sb_sg_kr_1",
-    "family": "Distractor",
+    "family": "D",
     "grid": 8,
     "optimal": 29,
     "v": [
@@ -901,14 +373,286 @@
     ]
    },
    {
+    "id": "r1_M3_8x8_corridor_kr_sg_1",
+    "family": "M",
+    "grid": 8,
+    "optimal": 29,
+    "v": [
+     0.3793,
+     0.4828,
+     0.4828
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M4_8x8_corridor_sg_kr_1",
+    "family": "M",
+    "grid": 8,
+    "optimal": 29,
+    "v": [
+     0.1034,
+     0.1034,
+     0.1034
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M5_8x8_corridor_kr_kb_1",
+    "family": "M",
+    "grid": 8,
+    "optimal": 30,
+    "v": [
+     0.1,
+     1.0,
+     0.2667
+    ],
+    "solved": [
+     false,
+     true,
+     false
+    ]
+   },
+   {
+    "id": "r1_M6_8x8_corridor_kr_sg_kb_0",
+    "family": "M",
+    "grid": 8,
+    "optimal": 30,
+    "v": [
+     0.3,
+     0.1333,
+     0.1333
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_B1_10x10_dense_swg_1",
+    "family": "M",
+    "grid": 10,
+    "optimal": 36,
+    "v": [
+     0.1111,
+     0.2778,
+     0.1667
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M3_10x10_dense_kr_sg_1",
+    "family": "M",
+    "grid": 10,
+    "optimal": 42,
+    "v": [
+     0.0952,
+     0.381,
+     0.1667
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M4_10x10_dense_sg_kr_1",
+    "family": "M",
+    "grid": 10,
+    "optimal": 42,
+    "v": [
+     0.0952,
+     0.3333,
+     0.1667
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_B1_10x10_corridor_swg_0",
+    "family": "M",
+    "grid": 10,
+    "optimal": 43,
+    "v": [
+     0.0465,
+     0.0465,
+     0.0465
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M2_10x10_dense_sg_0",
+    "family": "M",
+    "grid": 10,
+    "optimal": 43,
+    "v": [
+     0.0698,
+     0.2558,
+     0.186
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M5_10x10_dense_kr_kb_1",
+    "family": "M",
+    "grid": 10,
+    "optimal": 43,
+    "v": [
+     0.093,
+     0.186,
+     0.8605
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_B1_10x10_corridor_swg_1",
+    "family": "M",
+    "grid": 10,
+    "optimal": 44,
+    "v": [
+     0.0682,
+     0.0682,
+     0.4091
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M1_10x10_dense_kr_0",
+    "family": "M",
+    "grid": 10,
+    "optimal": 44,
+    "v": [
+     0.0682,
+     0.1818,
+     0.25
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M2_10x10_corridor_sg_1",
+    "family": "M",
+    "grid": 10,
+    "optimal": 44,
+    "v": [
+     0.0682,
+     0.0682,
+     0.7273
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M1_10x10_corridor_kr_1",
+    "family": "M",
+    "grid": 10,
+    "optimal": 45,
+    "v": [
+     1.0,
+     0.2,
+     0.5111
+    ],
+    "solved": [
+     true,
+     false,
+     false
+    ]
+   },
+   {
     "id": "r1_D2_10x10_corridor_wrong_ky_kr_inactive_sb_sg_kb_0",
-    "family": "Distractor",
+    "family": "D",
     "grid": 10,
     "optimal": 47,
     "v": [
-     0.17,
-     0.489,
-     0.128
+     0.1702,
+     0.4894,
+     0.1277
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M3_10x10_dense_kr_sg_0",
+    "family": "M",
+    "grid": 10,
+    "optimal": 53,
+    "v": [
+     0.0566,
+     0.0943,
+     0.0755
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M4_10x10_dense_sg_kr_0",
+    "family": "M",
+    "grid": 10,
+    "optimal": 53,
+    "v": [
+     0.0566,
+     0.2075,
+     0.2264
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M5_10x10_dense_kr_kb_0",
+    "family": "M",
+    "grid": 10,
+    "optimal": 54,
+    "v": [
+     0.0556,
+     0.0926,
+     0.1296
     ],
     "solved": [
      false,
@@ -918,13 +662,13 @@
    },
    {
     "id": "r1_D1_10x10_dense_wrong_ky_kr_sg_kb_1",
-    "family": "Distractor",
+    "family": "D",
     "grid": 10,
     "optimal": 58,
     "v": [
      0.069,
-     0.172,
-     0.086
+     0.1724,
+     0.0862
     ],
     "solved": [
      false,
@@ -934,13 +678,13 @@
    },
    {
     "id": "r1_D1_10x10_dense_wrong_ky_kr_sg_kb_0",
-    "family": "Distractor",
+    "family": "D",
     "grid": 10,
     "optimal": 61,
     "v": [
-     0.049,
+     0.0492,
      0.082,
-     0.049
+     0.0492
     ],
     "solved": [
      false,
@@ -950,13 +694,237 @@
    },
    {
     "id": "r1_D2_10x10_dense_wrong_ky_kr_inactive_sb_sg_kb_0",
-    "family": "Distractor",
+    "family": "D",
     "grid": 10,
     "optimal": 61,
     "v": [
-     0.049,
+     0.0492,
      0.082,
-     0.18
+     0.1803
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_B1_14x14_dense_swg_1",
+    "family": "M",
+    "grid": 14,
+    "optimal": 68,
+    "v": [
+     0.0147,
+     0.1471,
+     0.0294
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M2_14x14_dense_sg_1",
+    "family": "M",
+    "grid": 14,
+    "optimal": 68,
+    "v": [
+     0.0147,
+     0.0882,
+     0.1618
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M1_14x14_dense_kr_1",
+    "family": "M",
+    "grid": 14,
+    "optimal": 69,
+    "v": [
+     0.0145,
+     0.0725,
+     0.1159
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_S5_14x14_corridor_0",
+    "family": "S",
+    "grid": 14,
+    "optimal": 77,
+    "v": [
+     0.0,
+     0.1818,
+     0.2468
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_B1_14x14_dense_swg_0",
+    "family": "M",
+    "grid": 14,
+    "optimal": 79,
+    "v": [
+     0.0253,
+     0.0886,
+     0.0
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M2_14x14_dense_sg_0",
+    "family": "M",
+    "grid": 14,
+    "optimal": 79,
+    "v": [
+     0.0253,
+     0.1013,
+     0.038
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M1_14x14_dense_kr_0",
+    "family": "M",
+    "grid": 14,
+    "optimal": 80,
+    "v": [
+     0.025,
+     0.0125,
+     0.1125
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_B1_14x14_corridor_swg_0",
+    "family": "M",
+    "grid": 14,
+    "optimal": 84,
+    "v": [
+     0.0238,
+     0.0476,
+     0.0238
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M2_14x14_corridor_sg_0",
+    "family": "M",
+    "grid": 14,
+    "optimal": 84,
+    "v": [
+     0.0238,
+     0.0476,
+     0.0476
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M1_14x14_corridor_kr_0",
+    "family": "M",
+    "grid": 14,
+    "optimal": 85,
+    "v": [
+     0.0235,
+     0.0588,
+     0.0235
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M3_14x14_dense_kr_sg_0",
+    "family": "M",
+    "grid": 14,
+    "optimal": 87,
+    "v": [
+     0.023,
+     0.1264,
+     0.1379
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_S5_14x14_corridor_1",
+    "family": "S",
+    "grid": 14,
+    "optimal": 89,
+    "v": [
+     0.1011,
+     0.0899,
+     0.1124
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M2_14x14_corridor_sg_1",
+    "family": "M",
+    "grid": 14,
+    "optimal": 90,
+    "v": [
+     0.0,
+     0.1444,
+     0.0444
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M1_14x14_corridor_kr_1",
+    "family": "M",
+    "grid": 14,
+    "optimal": 91,
+    "v": [
+     0.0,
+     0.1538,
+     0.044
     ],
     "solved": [
      false,
@@ -966,13 +934,29 @@
    },
    {
     "id": "r1_D2_14x14_dense_wrong_ky_kr_inactive_sb_sg_kb_0",
-    "family": "Distractor",
+    "family": "D",
     "grid": 14,
     "optimal": 95,
     "v": [
-     0.021,
-     0.116,
-     0.095
+     0.0211,
+     0.1158,
+     0.0947
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M6_14x14_dense_kr_sg_kb_0",
+    "family": "M",
+    "grid": 14,
+    "optimal": 95,
+    "v": [
+     0.0211,
+     0.0947,
+     0.0316
     ],
     "solved": [
      false,
@@ -982,13 +966,13 @@
    },
    {
     "id": "r1_D2_14x14_dense_wrong_ky_inactive_sb_sg_kr_1",
-    "family": "Distractor",
+    "family": "D",
     "grid": 14,
     "optimal": 96,
     "v": [
-     0.01,
-     0.104,
-     0.083
+     0.0104,
+     0.1042,
+     0.0833
     ],
     "solved": [
      false,
@@ -998,13 +982,13 @@
    },
    {
     "id": "r1_D2_14x14_dense_wrong_ky_kr_inactive_sb_sg_1",
-    "family": "Distractor",
+    "family": "D",
     "grid": 14,
     "optimal": 96,
     "v": [
-     0.01,
-     0.094,
-     0.062
+     0.0104,
+     0.0938,
+     0.0625
     ],
     "solved": [
      false,
@@ -1014,13 +998,29 @@
    },
    {
     "id": "r1_D2_14x14_dense_wrong_ky_kr_inactive_sb_sg_kb_1",
-    "family": "Distractor",
+    "family": "D",
     "grid": 14,
     "optimal": 106,
     "v": [
-     0.009,
-     0.047,
-     0.075
+     0.0094,
+     0.0472,
+     0.0755
+    ],
+    "solved": [
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "id": "r1_M6_14x14_dense_kr_sg_kb_1",
+    "family": "M",
+    "grid": 14,
+    "optimal": 106,
+    "v": [
+     0.0094,
+     0.3962,
+     0.0566
     ],
     "solved": [
      false,

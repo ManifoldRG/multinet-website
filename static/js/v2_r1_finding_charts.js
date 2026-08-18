@@ -29,70 +29,102 @@
   };
 
   // ---- 0. every episode, as a grid ---------------------------------------
-  // 50 mazes x 3 models. Colour is how much of the way to the goal the agent
-  // got; a star marks a solve. Grouped by maze family, and within a family
-  // ordered by shortest path, so the left-to-right fade is the difficulty axis.
-  // What each maze family varies, for the hover on the grid's group headers.
-  // Read off the run itself: S mazes carry no mechanisms at all, D mazes carry
-  // the M mechanisms plus decoys, and B (switch-gate with no key) folds into M.
-  var FAMILY_TIP = {
-    Scale: "Plain navigation. No keys, doors, switches or gates - only the size and " +
-           "density of the maze change.",
-    Mechanism: "Barriers that have to be operated in the right order: keys open doors, " +
-               "switches open gates. None of it is ever explained.",
-    Distractor: "Mechanism mazes plus decoys - keys that fit no door, switches wired to " +
-                "nothing, and corridors that lead nowhere."
+  // 50 mazes x 3 models, every maze ranked by BFS-min actions across the whole
+  // set - the same ordering as the report's progress_grid_actions figure.
+  //
+  // It used to group by family and sort within each group, which put a 23-move
+  // maze next to a 77-move one and made the "shorter -> longer" axis beneath
+  // it false. Family and grid size are strips under the rows instead, so the
+  // horizontal axis means exactly one thing: difficulty.
+  var PROGRESS_BINS = [
+    { max: 0.05, label: "<5%",    fill: "#e8f0fb" },
+    { max: 0.10, label: "5-10%",  fill: "#bbd6f2" },
+    { max: 0.20, label: "10-20%", fill: "#6ba3e0" },
+    { max: 0.40, label: "20-40%", fill: "#2e6fbf" },
+    { max: 1.01, label: "40%+",   fill: "#17427a" }
+  ];
+  var FAMILY = {
+    S: { name: "S (scale)",      fill: "#7c4dff" },
+    M: { name: "M (mechanism)",  fill: "#e8a33d" },
+    D: { name: "D (distractor)", fill: "#d6457f" }
   };
+  var SIZE = {
+    8:  { name: "8\u00d78",   fill: "#e2e4e8" },
+    10: { name: "10\u00d710", fill: "#9aa1ab" },
+    14: { name: "14\u00d714", fill: "#4a5058" }
+  };
+
+  function binFor(v) {
+    for (var i = 0; i < PROGRESS_BINS.length; i++) {
+      if (v < PROGRESS_BINS[i].max) return PROGRESS_BINS[i];
+    }
+    return PROGRESS_BINS[PROGRESS_BINS.length - 1];
+  }
 
   function renderGrid(data, el) {
     var g = data.episodeGrid;
-    if (!g) return;
-
-    var families = [];
-    g.mazes.forEach(function (m) {
-      var last = families[families.length - 1];
-      if (!last || last.name !== m.family) families.push({ name: m.family, count: 1 });
-      else last.count++;
-    });
-
-    var head = families.map(function (f, i) {
-      var tip = FAMILY_TIP[f.name] || "";
-      // The last group sits at the right edge, so its tooltip has to open
-      // leftwards or it runs off the grid.
-      var side = i === families.length - 1 ? " is-last" : "";
-      return '<div class="r1-eg__fam' + side + '" style="--span:' + f.count + '"' +
-             (tip ? ' data-tip="' + tip + '"' : "") + ">" +
-             '<button type="button" class="r1-eg__famlab">' + f.name +
-             ' <span>' + f.count + "</span></button></div>";
-    }).join("");
+    if (!g || !g.mazes) return;
+    var n = g.mazes.length;
 
     var rows = g.models.map(function (model, mi) {
-      var cells = g.mazes.map(function (m) {
+      var cells = g.mazes.map(function (m, i) {
         var v = m.v[mi];
         var solved = m.solved[mi];
-        var title = m.id + " · " + m.family + " · " + m.grid + "x" + m.grid +
-                    " · " + m.optimal + " moves · progress " + v.toFixed(2) +
-                    (solved ? " · SOLVED" : "");
+        var bin = binFor(v);
+        var title = "#" + (i + 1) + "  " + m.id + " \u00b7 " + m.grid + "\u00d7" + m.grid +
+                    " \u00b7 " + m.optimal + " optimal actions \u00b7 progress " + v.toFixed(2) +
+                    (solved ? " \u00b7 SOLVED" : "");
         return '<span class="r1-eg__cell' + (solved ? " is-solved" : "") +
-               '" style="--v:' + v + '" title="' + title + '">' +
+               '" style="--f:' + bin.fill + '" title="' + title + '">' +
                (solved ? "&#9733;" : "") + "</span>";
       }).join("");
       return '<div class="r1-eg__label">' + model + "</div>" +
              '<div class="r1-eg__row">' + cells + "</div>";
     }).join("");
 
+    function strip(kind, key, map) {
+      var cells = g.mazes.map(function (m) {
+        var d = map[m[key]] || { name: "?", fill: "#ddd" };
+        return '<span class="r1-eg__seg" style="--f:' + d.fill + '" title="' + d.name + '"></span>';
+      }).join("");
+      return '<div class="r1-eg__label r1-eg__label--strip">' + kind + "</div>" +
+             '<div class="r1-eg__strip">' + cells + "</div>";
+    }
+
+    // Ticks at the ranks the report labels, each carrying its BFS-min value so
+    // the axis is readable without a second lookup.
+    var ticks = [1, 10, 20, 30, 40, n].map(function (r) {
+      var m = g.mazes[r - 1];
+      return '<span class="r1-eg__tick" style="--at:' + ((r - 0.5) / n * 100) + '%">' +
+        "<b>" + r + "</b><i>(" + m.optimal + ")</i></span>";
+    }).join("");
+
+    function key(map, order) {
+      return order.map(function (k) {
+        return '<span class="r1-eg__k"><i style="background:' + map[k].fill + '"></i>' +
+               map[k].name + "</span>";
+      }).join("");
+    }
+
     el.innerHTML =
       '<div class="r1-eg">' +
-        '<div class="r1-eg__label"></div><div class="r1-eg__fams">' + head + "</div>" +
         rows +
+        strip("family", "family", FAMILY) +
+        strip("size", "grid", SIZE) +
         '<div class="r1-eg__label"></div>' +
-        '<div class="r1-eg__axis"><span>shorter mazes</span><span>longer mazes &rarr;</span></div>' +
+        '<div class="r1-eg__axis">' + ticks +
+          '<span class="r1-eg__axistitle">maze rank (BFS-min actions at tick)</span>' +
+        "</div>" +
       "</div>" +
       '<div class="r1-eg__key">' +
-        "<span>less progress</span>" +
-        '<span class="r1-eg__ramp"></span>' +
-        "<span>more</span>" +
-        '<span class="r1-eg__keystar">&#9733; solved</span>' +
+        '<span class="r1-eg__kgroup">progress ' +
+          PROGRESS_BINS.map(function (b) {
+            return '<span class="r1-eg__k"><i style="background:' + b.fill + '"></i>' + b.label + "</span>";
+          }).join("") +
+          '<span class="r1-eg__k"><i class="r1-eg__kstar">&#9733;</i>solve</span>' +
+        "</span>" +
+        '<span class="r1-eg__kgroup">' + key(FAMILY, ["S", "M", "D"]) + "</span>" +
+        '<span class="r1-eg__kgroup">' + key(SIZE, [8, 10, 14]) + "</span>" +
       "</div>";
   }
 
@@ -295,7 +327,7 @@
     var onHome = /\/(index\.html)?$/.test(window.location.pathname);
     // Versioned like the scripts are: the numbers change more often than the
     // code that draws them, and a cached copy of the old ones is invisible.
-    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r2l";
+    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r2m";
 
     fetch(path)
       .then(function (r) { return r.json(); })
