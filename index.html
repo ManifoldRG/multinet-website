@@ -43,8 +43,8 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/mn-shared.css?v=r8x">
-  <link rel="stylesheet" href="static/css/r1-components.css?v=r8x">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r9f">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r9f">
   <link rel="stylesheet" href="static/css/play.css?v=p1b9">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
@@ -532,6 +532,61 @@
     @media (prefers-reduced-motion: reduce) {
       .lp-cite__copy { transition: color 0.16s ease; }
     }
+    /* The prose citation is one long sentence rather than nine short lines, so
+       it wraps instead of scrolling sideways, and keeps clear of the button. */
+    .lp-cite--text code { white-space: pre-wrap; }
+    .lp-cite--text pre { padding-right: 5.6rem; }
+    .lp-cite__or {
+      max-width: 78ch; margin: 1.1rem auto 0.9rem;
+      color: #5b6676; font-size: 0.95rem;
+    }
+
+    /* A figure that carries its own argument: full section width, hairline
+       frame so it reads as evidence rather than as page furniture, and a
+       caption that says what it is proving. */
+    .lp-fig {
+      margin: 2.5rem 0 0;
+    }
+    /* A figure that opens a section sits closer to its heading than to the
+       prose it introduces, so the two read as one unit. */
+    .lp-fig--lead { margin: 1.4rem 0 2.25rem; }
+    .lp-fig img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid #e8ebee; border-radius: 14px;
+      background: #fff;
+    }
+    .lp-fig figcaption {
+      margin: 0.9rem auto 0; max-width: 76ch;
+      font-size: 0.87rem; line-height: 1.6; color: #6b7280;
+      text-align: center;
+    }
+
+    /* The v1 hero effect without v1's cost. v1 rests its image at 60% width
+       and grows it to 100%, which buys the growth with permanent whitespace.
+       Here the image keeps its full column width at rest and hovering scales
+       it past the column instead - a transform, so it lifts over the prose
+       rather than reserving room or reflowing it.
+       The catch is that a transform widens the document and can raise a
+       horizontal scrollbar, so --pop is capped to what the viewport can take
+       (set in script below, since CSS cannot divide a length by a length). */
+    .lp-fig--pop { position: relative; z-index: 1; }
+    .lp-fig--pop:hover { z-index: 20; }
+    .lp-fig--pop img {
+      cursor: zoom-in; transform-origin: center center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .lp-fig--pop:hover img {
+      transform: scale(var(--pop, 1));
+      box-shadow: 0 18px 45px rgba(16, 24, 40, 0.22);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .lp-fig--pop img { transition: box-shadow 0.3s ease; }
+    }
+    /* Nothing to hover with: leave the figure exactly as it was. */
+    @media (hover: none), (pointer: coarse) {
+      .lp-fig--pop img { cursor: auto; transition: none; }
+      .lp-fig--pop:hover img { transform: none; box-shadow: none; }
+    }
 
     /* ---------- collaborators ---------- */
     .lp-collab {
@@ -543,6 +598,78 @@
       opacity: 0.7; transition: opacity 0.2s ease;
     }
     .lp-collab a:hover img { opacity: 1; }
+    /* Between the hero and the results rather than above the footer, so the
+       generous closing-credit padding underneath it is gone - the strip sits
+       close to the section it introduces. */
+    .lp-collab-section { padding: 1rem 0 1.5rem; }
+
+    /* The header is sticky, so an anchor that scrolls a section flush to the
+       top leaves its heading pinned right under the bar. Stop short of it. */
+    #results, #play-the-maze { scroll-margin-top: 1.25rem; }
+
+
+    /* ---------- news, as a horizontal rail ----------
+       Seven releases and two accepted papers over two years is a credibility
+       claim, which is why it now sits with the collaborator logos instead of
+       above the footer: who builds this, then how long they have been at it.
+       Horizontal because the vertical timeline stood 1113px tall - far too
+       much to put in front of the results. Oldest to newest, so it reads as a
+       trajectory that arrives at this release. */
+    .lp-news-rail { padding: 0 0 1.25rem; }
+    /* overflow-x:auto clips vertically too, and the current node's halo
+       extends above the list's top edge - so the scroller needs room for
+       it or the ring gets sliced off. */
+    .lp-rail-scroll { overflow-x: auto; padding-top: 6px; }
+    .lp-rail {
+      position: relative; list-style: none; margin: 0; padding: 0;
+      display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+      min-width: 100%;
+    }
+    /* The line stops at the first and last mark rather than running to the
+       edges - half a column in from each side. */
+    .lp-rail::before {
+      content: ""; position: absolute; top: 15px; height: 2px;
+      left: calc(100% / 14); right: calc(100% / 14);
+      background: linear-gradient(90deg, #e6eaf0, #c8d6e6);
+    }
+    .lp-rail__link {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      padding: 0 0.4rem; text-align: center; text-decoration: none;
+      color: inherit;
+    }
+    .lp-rail__mark {
+      position: relative; z-index: 1;
+      width: 32px; height: 32px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: #fff; border: 2px solid #e2e8f0;
+      font-size: 0.9rem; line-height: 1;
+      transition: border-color 0.18s ease, transform 0.18s ease;
+    }
+    .lp-rail__when {
+      font-size: 0.78rem; font-weight: 700; color: #12151c;
+      letter-spacing: -0.01em;
+    }
+    .lp-rail__what { font-size: 0.72rem; line-height: 1.35; color: #8a94a6; }
+    .lp-rail__item.is-paper .lp-rail__mark { border-color: #d8c9e8; }
+    .lp-rail__item.is-paper .lp-rail__when { color: #8E44AD; }
+    /* The release this page is about, marked as the end of the line. */
+    .lp-rail__item.is-current .lp-rail__mark {
+      border-color: #005A9C; box-shadow: 0 0 0 4px rgba(0, 90, 156, 0.12);
+    }
+    .lp-rail__item.is-current .lp-rail__when { color: #005A9C; }
+    /* Scale, not translate: the mark has to stay centred on the rail line,
+       and lifting it left the line running under the circle instead of
+       through it. */
+    .lp-rail__link:hover .lp-rail__mark {
+      border-color: #005A9C; transform: scale(1.1);
+    }
+    .lp-rail__link:hover .lp-rail__when { color: #005A9C; }
+    /* Too narrow for seven columns: fix the column width and let the rail
+       scroll sideways. width:max-content keeps ::before spanning the whole
+       list rather than only the visible slice. */
+    @media screen and (max-width: 860px) {
+      .lp-rail { grid-auto-columns: 132px; width: max-content; }
+    }
 
     /* ---------- responsive ---------- */
     @media screen and (max-width: 900px) {
@@ -573,23 +700,24 @@
     <div class="lp-wrap">
       <div class="lp-hero__grid">
         <div>
-          <p class="lp-eyebrow">The Multimodal Action Benchmark</p>
-          <h1>MultiNet v2.0-Gridworld: Frontier VLMs fail simple 2D mazes.</h1>
-          <!-- The headline names the release; the result goes here, mazes
-               first so there is no doubt what the models were measured on. -->
+          <p class="lp-eyebrow">MultiNet v2.0-Gridworld</p>
+          <h1>Agentic Behavior in 2D Mazes: Previewing a Multi-Domain Benchmark</h1>
+          <!-- The eyebrow names the release; the headline says what it is about;
+               the result goes below, mazes first so there is no doubt what the
+               models were measured on. -->
           <p class="lp-hero__lead">
-            We put 3 frontier models in 50 simple 2-dimensional mazes each. Claude Opus 4.8,
+            We put 3 highly capable models in 50 simple 2-dimensional mazes each. Claude Opus 4.8,
             Kimi K2.6, and Qwen 3.6-27B together solved just 6 out of 150 maze runs, and 45 out of
-            the 50 mazes were not solved by any model!
+            the 50 mazes were not solved by any model.
           </p>
           <div class="lp-cta-row">
+            <a class="lp-btn" href="#results">
+              <i class="fas fa-chart-bar"></i> Results
+            </a>
             <a class="lp-btn" href="#play-the-maze">
               <i class="fas fa-gamepad"></i> Play a maze
             </a>
-            <!-- TODO(R1-TR): dummy destination. Both "Read the technical report"
-                 buttons point at the technical report on the Fig site and must be
-                 updated together - grep TODO(R1-TR) to find the other one. -->
-            <a class="lp-btn" href="#">
+            <a class="lp-btn" href="https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/" target="_blank" rel="noopener noreferrer">
               Read the technical report
             </a>
           </div>
@@ -609,12 +737,94 @@
     </div>
   </section>
 
+  <!-- ==================== COLLABORATORS ====================
+       Above the results rather than by the footer: who built this is context
+       a reader wants before the numbers, not after them. Sized down to a
+       credibility band - smaller logos, a label rather than a sentence - so
+       it backs the hero up instead of competing with it. -->
+  <section class="lp-collab-section">
+    <div class="lp-wrap">
+      <p class="lp-sub" style="margin-bottom: 1.5rem;">
+        An open science initiative with contributions from research teams at:
+      </p>
+      <div class="lp-collab">
+        <a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer"><img src="static/images/fig_logo.png" alt="Fig"></a>
+        <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer"><img src="static/images/manifoldlogo.png" alt="Manifold Research"></a>
+        <a href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/mitlogo_alt.png" alt="MIT"></a>
+        <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/GeorgiaTech_RGB.png" alt="Georgia Tech"></a>
+        <a href="https://www.tufts.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/tuftslogo.jpg" alt="Tufts University"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEWS ==================== -->
+  <!-- Oldest to newest, so it reads as a trajectory arriving at this
+       release. Each node links straight to that milestone. -->
+  <section class="lp-news-rail">
+    <div class="lp-wrap">
+      <p class="lp-sub" style="margin-bottom: 1.5rem;">MultiNet milestones over the past 2 years:</p>
+      <div class="lp-rail-scroll">
+        <ol class="lp-rail">
+            <li class="lp-rail__item">
+              <a class="lp-rail__link" href="static/pages/Multinet.html">
+                <span class="lp-rail__mark" aria-hidden="true">🚀</span>
+                <span class="lp-rail__when">Introduction</span>
+                <span class="lp-rail__what">MultiNet announced</span>
+              </a>
+            </li>
+            <li class="lp-rail__item">
+              <a class="lp-rail__link" href="static/pages/Multinetv01.html">
+                <span class="lp-rail__mark" aria-hidden="true">🤖</span>
+                <span class="lp-rail__when">v0.1</span>
+                <span class="lp-rail__what">Real-world robotics</span>
+              </a>
+            </li>
+            <li class="lp-rail__item">
+              <a class="lp-rail__link" href="static/pages/Multinetv02.html">
+                <span class="lp-rail__mark" aria-hidden="true">🎮</span>
+                <span class="lp-rail__when">v0.2</span>
+                <span class="lp-rail__what">Procedural game worlds</span>
+              </a>
+            </li>
+            <li class="lp-rail__item is-paper">
+              <a class="lp-rail__link" href="static/pdfs/An Open-Source Software Toolkit &amp; Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener noreferrer">
+                <span class="lp-rail__mark" aria-hidden="true">🏅</span>
+                <span class="lp-rail__when">ICML 2025</span>
+                <span class="lp-rail__what">CodeML workshop</span>
+              </a>
+            </li>
+            <li class="lp-rail__item">
+              <a class="lp-rail__link" href="static/pages/Multinetv1.html">
+                <span class="lp-rail__mark" aria-hidden="true">📊</span>
+                <span class="lp-rail__when">v1.0</span>
+                <span class="lp-rail__what">Comprehensive suite</span>
+              </a>
+            </li>
+            <li class="lp-rail__item is-paper">
+              <a class="lp-rail__link" href="https://arxiv.org/abs/2512.11315" target="_blank" rel="noopener noreferrer">
+                <span class="lp-rail__mark" aria-hidden="true">🎓</span>
+                <span class="lp-rail__when">CVPR 2026</span>
+                <span class="lp-rail__what">MMFM workshop</span>
+              </a>
+            </li>
+            <li class="lp-rail__item is-current">
+              <a class="lp-rail__link" href="https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/" target="_blank" rel="noopener noreferrer">
+                <span class="lp-rail__mark" aria-hidden="true">🧩</span>
+                <span class="lp-rail__when">v2.0-Gridworld</span>
+                <span class="lp-rail__what">Agentic maze tasks</span>
+              </a>
+            </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
   <!-- ==================== RESULTS ====================
        Three zoom levels of one answer: the run in three numbers, then per
        model, then per episode. They were split across the page before, which
        made the strip read as decoration rather than as the headline of this
        section. -->
-  <section class="lp-section">
+  <section class="lp-section" id="results">
     <div class="lp-wrap">
       <h2 class="lp-h2" style="margin-bottom: 1.75rem;">Frontier Model Performance</h2>
 
@@ -641,15 +851,22 @@
         <div id="r1-results-container">Loading results&hellip;</div>
       </div>
 
-      <div class="lp-subsection">
-        <h3 class="lp-h3 lp-h3--lead" style="margin-bottom: 0.4rem;">How far did the models get in each of the mazes?</h3>
-        <p class="lp-lead">
-          Each column is a maze and each row a model, with the mazes ranked left to right by how
-          many actions the shortest solution takes. Colour is how far toward the goal the model got,
-          and the stars mark the six solves - all of them among the shortest mazes.
-        </p>
-        <div id="r1-episode-grid"></div>
-      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PER-MAZE GRID ====================
+       Its own section rather than a subsection of Results: the two answer
+       different questions - how well did each model do, versus which mazes
+       were hard - and the grid is wide enough to need the room. -->
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <h2 class="lp-h2">How far did the models get in each of the mazes?</h2>
+      <p class="lp-sub">
+        Each column is a maze and each row a model, with the mazes ranked left to right by how
+        many actions the shortest solution takes. Colour is how far toward the goal the model got,
+        and the stars mark the six solves - all of them among the shortest mazes.
+      </p>
+      <div id="r1-episode-grid"></div>
     </div>
   </section>
 
@@ -748,6 +965,16 @@
     <div class="lp-wrap">
       <h2 class="lp-h2">The Evaluation Environment: Why Mazes?</h2>
 
+      <!-- Directly under the heading: the section argues for a substrate, so it
+           shows what that substrate is before the argument starts. The figure
+           carries its own title and description, so it takes no figcaption -
+           one would only repeat what is already inside it. -->
+      <figure class="lp-fig lp-fig--lead lp-fig--pop">
+        <img src="static/images/maze_figure.png?v=r9f"
+             alt="Four variations of one 8x8 maze showing mechanisms added in stages: bare topology, then a key and door, then a switch and gate, then distractors, with the BFS-optimal route drawn as a dotted line. Below, the dependency chain: red key, red door, switch, gate, blue key, blue door, goal."
+             width="3200" height="1551" loading="lazy" decoding="async">
+      </figure>
+
       <!-- The design first, the justification second. The four cards below used
            to arrive before a reader knew what was being justified. -->
       <div class="lp-prose">
@@ -816,8 +1043,7 @@
       </div>
 
       <p style="text-align: center; margin-top: 1.75rem;">
-        <!-- TODO(R1-TR): dummy destination, see the hero button. -->
-        <a class="lp-btn" href="#">
+        <a class="lp-btn" href="https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/" target="_blank" rel="noopener noreferrer">
           Read the technical report &rarr;
         </a>
       </p>
@@ -846,97 +1072,6 @@
     </div>
   </section>
 
-  <!-- ==================== NEWS ==================== -->
-  <section class="lp-section">
-    <div class="lp-wrap">
-      <h2 class="lp-h2">News</h2>
-      <p class="lp-sub">MultiNet milestones over the past 2 years.</p>
-
-      <!-- A lineage rather than a list: one rail, newest at the top, each
-           release sitting on it. The rail is what makes it read as one line of
-           work rather than six announcements. -->
-      <ol class="lp-tl">
-        <li class="lp-tl__item is-current">
-          <span class="lp-tl__mark" aria-hidden="true">🧩</span>
-          <div class="lp-tl__card">
-            <div class="lp-tl__when">MultiNet v2.0-Gridworld</div>
-            <!-- TODO(R1-TR): dummy destination, see the hero button. -->
-            <p><strong>A new era for MultiNet!</strong> We put frontier models in 2D mazes to measure
-               long-horizon action taking with causal reasoning - sustaining a plan over many steps
-               while working out how the environment responds. Read our research
-               <a href="#">here</a>.</p>
-          </div>
-        </li>
-
-        <li class="lp-tl__item is-paper">
-          <span class="lp-tl__mark" aria-hidden="true">🎓</span>
-          <div class="lp-tl__card">
-            <div class="lp-tl__when">CVPR 2026</div>
-            <p><strong>Paper accepted at CVPR 2026!</strong> Our work has been accepted at the
-               <a href="https://mmfm-workshop.github.io/" target="_blank" rel="noopener noreferrer">MMFM
-               Workshop</a> at CVPR 2026! Read our preprint
-               <a href="https://arxiv.org/abs/2512.11315" target="_blank" rel="noopener noreferrer">here</a>.</p>
-          </div>
-        </li>
-
-        <!-- The five entries below are the original news items, text and emoji
-             unchanged; only the link paths are rewritten for this location. -->
-        <li class="lp-tl__item">
-          <span class="lp-tl__mark" aria-hidden="true">🌟</span>
-          <div class="lp-tl__card">
-            <div class="lp-tl__when">v1.0</div>
-            <p><strong>Multinet v1.0 released!</strong> We release our most comprehensive benchmark yet -
-               evaluating a SoTA VLM, VLA, and generalist models on a wide variety of multimodal
-               understanding and action datasets. Read more
-               <a href="static/pages/Multinetv1.html">here</a>.</p>
-          </div>
-        </li>
-
-        <li class="lp-tl__item">
-          <span class="lp-tl__mark" aria-hidden="true">🏆</span>
-          <div class="lp-tl__card">
-            <div class="lp-tl__when">v0.2</div>
-            <p><strong>Multinet v0.2 released!</strong> We systematically profile state-of-the-art VLAs
-               and VLMs perform in procedurally generated OOD game environments. Read more about our
-               recent release <a href="static/pages/Multinetv02.html">here</a>.</p>
-          </div>
-        </li>
-
-        <li class="lp-tl__item is-paper">
-          <span class="lp-tl__mark" aria-hidden="true">🏅</span>
-          <div class="lp-tl__card">
-            <div class="lp-tl__when">ICML 2025</div>
-            <p><strong>Paper accepted at ICML 2025!</strong> Our paper detailing the Open-Source
-               contributions of Multinet that benefit the AI community has been accepted at the
-               <a href="https://codeml-workshop.github.io/codeml2025/" target="_blank" rel="noopener noreferrer">CodeML
-               Workshop</a> at ICML 2025! Read our paper
-               <a href="static/pdfs/An Open-Source Software Toolkit &amp; Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener noreferrer">here</a>.</p>
-          </div>
-        </li>
-
-        <li class="lp-tl__item">
-          <span class="lp-tl__mark" aria-hidden="true">🎉</span>
-          <div class="lp-tl__card">
-            <div class="lp-tl__when">v0.1</div>
-            <p><strong>Multinet v0.1 released!</strong> How well do state-of-the-art VLMs and VLAs
-               perform on real-world robotics tasks? Read more on our
-               <a href="static/pages/Multinetv01.html">release Page</a>.</p>
-          </div>
-        </li>
-
-        <li class="lp-tl__item">
-          <span class="lp-tl__mark" aria-hidden="true">🚀</span>
-          <div class="lp-tl__card">
-            <div class="lp-tl__when">Introducing</div>
-            <p><strong>Introducing Multinet!</strong> A comprehensive benchmark for evaluating
-               multimodal generalization in next generation models.
-               <a href="static/pages/Multinet.html">Learn more here</a>.</p>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
   <!-- ==================== CTA ==================== -->
   <section class="lp-section">
     <div class="lp-wrap">
@@ -954,7 +1089,7 @@
              target="_blank" rel="noopener noreferrer">
             <i class="fas fa-paper-plane"></i> Evaluate your model
           </a>
-          <a class="lp-btn" href="mailto:pranav@metarch.ai?subject=Collaborating%20on%20MultiNet%20v2.0">
+          <a class="lp-btn" href="mailto:pranav@fig.inc?subject=Collaborating%20on%20MultiNet%20v2.0">
             <i class="fas fa-envelope"></i> Work with us
           </a>
           <a class="lp-btn" href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer">
@@ -965,41 +1100,33 @@
     </div>
   </section>
 
-  <!-- ==================== COLLABORATORS ==================== -->
-  <section class="lp-section--tight">
-    <div class="lp-wrap">
-      <p class="lp-sub" style="margin-bottom: 1.5rem;">
-        An open science initiative with contributions from research teams at:
-      </p>
-      <div class="lp-collab">
-        <a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer"><img src="static/images/fig_logo.png" alt="Fig"></a>
-        <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer"><img src="static/images/manifoldlogo.png" alt="Manifold Research"></a>
-        <a href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/mitlogo_alt.png" alt="MIT"></a>
-        <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/GeorgiaTech_RGB.png" alt="Georgia Tech"></a>
-        <a href="https://www.tufts.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/tuftslogo.jpg" alt="Tufts University"></a>
-      </div>
-    </div>
-  </section>
-
   <!-- ==================== CITATION ==================== -->
   <!-- Last section before the footer, which is where anyone looking for a
        BibTeX block goes first. The nav's Citation entry points at #citation. -->
   <section class="lp-section lp-section--tight" id="citation">
     <div class="lp-wrap">
       <h2 class="lp-h2">Citation</h2>
-      <p class="lp-sub">If you use our work, please cite us.</p>
+      <p class="lp-sub">Please cite this work as:</p>
+
+      <div class="lp-cite lp-cite--text">
+        <button type="button" class="lp-cite__copy" data-copy-target="lp-cite-plain">
+          <i class="far fa-copy" aria-hidden="true"></i> <span>Copy</span>
+        </button>
+        <pre id="lp-cite-plain"><code>Fig, "Agentic behavior in 2D mazes: previewing a multi-domain benchmark", Fig Research Blog, August 2026.</code></pre>
+      </div>
+
+      <p class="lp-cite__or">Or use the BibTeX citation</p>
 
       <div class="lp-cite">
         <button type="button" class="lp-cite__copy" data-copy-target="lp-bibtex">
           <i class="far fa-copy" aria-hidden="true"></i> <span>Copy</span>
         </button>
         <pre id="lp-bibtex"><code>@online{multinet_v2_gridworld_technical_report_2026,
-  title   = {MultiNet v2.0-GridWorld: An interactive, controllable, 2-dimensional
-             environment to benchmark long-horizon action taking and causal reasoning},
+  title   = {Agentic behavior in 2D mazes: previewing a multi-domain benchmark},
   author  = {Pranav Guruprasad and Sean Rivera and Helen Lu and Arushi Jain and
              Hangliang Ren and Harshvardhan Sikka},
   year    = {2026},
-  url     = {www.fig.inc/blog/multinet-v2-gridworld/},
+  url     = {www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark},
   note    = {MultiNet v2.0, GridWorld domain}
 }</code></pre>
       </div>
@@ -1012,17 +1139,16 @@
         <div class="column is-8">
           <div class="content" style="color: #fff;">
             <p class="has-text-centered">
-              <!-- TODO(R1-TR): dummy destination, see the hero button. -->
-              <a href="#" style="color: #90caf9;">Technical Report</a>
+              <a href="https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/" target="_blank" rel="noopener noreferrer" style="color: #90caf9;">Technical Report</a>
               &nbsp;&middot;&nbsp;
-              <a href="static/pages/archive.html" style="color: #90caf9;">MultiNet Archive</a>
+              <a href="static/pages/archive.html" style="color: #90caf9;">MultiNet v1.0</a>
               &nbsp;&middot;&nbsp;
               <a href="https://github.com/ManifoldRG/MultiNet-v2.0" style="color: #90caf9;">Code</a>
             </p>
             <p class="has-text-centered">
               For questions or issues, please
               <a href="https://github.com/ManifoldRG/MultiNet-v2.0/issues" style="color: #90caf9;">open a GitHub issue</a>
-              or contact <a href="mailto:pranav@metarch.ai" style="color: #90caf9;">pranav [at] metarch [dot] ai</a>
+              or contact <a href="mailto:pranav@fig.inc" style="color: #90caf9;">pranav [at] fig [dot] inc</a>
             </p>
           </div>
         </div>
@@ -1033,14 +1159,33 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="static/js/play.js?v=p1b8"></script>
-<script src="static/js/mn-shell.js?v=r8x"></script>
-<script src="static/js/v2_r1_results_table.js?v=r8x"></script>
-<script src="static/js/v2_r1_finding_charts.js?v=r8x"></script>
-<script src="static/js/v2_r1_finding_tabs.js?v=r8x"></script>
-<script src="static/js/v2_r1_reel.js?v=r8x"></script>
-<script src="static/js/lp_headline_stats.js?v=r8x"></script>
+<script src="static/js/mn-shell.js?v=r9f"></script>
+<script src="static/js/v2_r1_results_table.js?v=r9f"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r9f"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r9f"></script>
+<script src="static/js/v2_r1_reel.js?v=r9f"></script>
+<script src="static/js/lp_headline_stats.js?v=r9f"></script>
 
 <script>
+  // How far a .lp-fig--pop figure may grow on hover. Scaling past the
+  // viewport would add a horizontal scrollbar, so the ceiling is whatever
+  // fits, and 1.34 above that - beyond it the figure starts crowding the
+  // window edges. offsetWidth rather than a rect, because a rect reports the
+  // already-scaled width if this reruns mid-hover.
+  (function () {
+    function sizePop() {
+      document.querySelectorAll(".lp-fig--pop").forEach(function (fig) {
+        var img = fig.querySelector("img");
+        if (!img || !img.offsetWidth) return;
+        var room = (document.documentElement.clientWidth - 24) / img.offsetWidth;
+        fig.style.setProperty("--pop", Math.max(1, Math.min(1.34, room)).toFixed(3));
+      });
+    }
+    sizePop();
+    addEventListener("resize", sizePop);
+    addEventListener("load", sizePop);
+  })();
+
   // Copy the BibTeX. Small enough to live here rather than earn a file.
   // navigator.clipboard needs a secure context - it is undefined on plain
   // http from anything but localhost - so fall back rather than throw.

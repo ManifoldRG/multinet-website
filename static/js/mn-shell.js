@@ -71,8 +71,7 @@
   // Declared here rather than beside the banner because the nav tree below is
   // built at load time and would otherwise read it as undefined.
   var SIGNUP = "https://sparkly-broccoli-3c7.notion.site/3bf4b1d3c487800596bbe4a150962cc0";
-  // TODO(R1-TR): dummy destination until the report is on the Fig site.
-  var REPORT = "#";
+  var REPORT = "https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/";
 
   // ---- The whole site, in one tree ----------------------------------------
   // This is the drawer. Everything the site has is reachable from here.
@@ -102,9 +101,9 @@
         { label: "Model Adaptations", icon: "fas fa-microchip", href: GH_V1, external: true }
       ]
     },
-    { id: "report", label: "Technical Report", icon: "fas fa-file-pdf", href: REPORT },
+    { id: "report", label: "Technical Report", icon: "fas fa-book-open", href: REPORT },
     { id: "play", label: "Play the Maze", icon: "fas fa-gamepad", href: home("#play-the-maze") },
-    { id: "archive", label: "MultiNet Archive", icon: "fas fa-archive", href: url("static/pages/archive.html") },
+    { id: "archive", label: "MultiNet v1.0", icon: "fas fa-archive", href: url("static/pages/archive.html") },
     // Same destination as the banner's call to action - one form, one place
     // for anyone who wants their model run.
     { id: "submit", label: "Evaluate Your Model", icon: "fas fa-paper-plane",
@@ -206,9 +205,9 @@
   // same thing without competing with the content.
   var SHORTCUTS = [
     { id: "play", label: "Play the maze", href: home("#play-the-maze"), icon: "fas fa-gamepad" },
-    { id: "report", label: "Technical report", href: REPORT, icon: "fas fa-file-pdf", short: "Report" },
-    { id: "archive", label: "MultiNet Archive", href: url("static/pages/archive.html"),
-      icon: "fas fa-archive", short: "Archive" }
+    { id: "report", label: "Technical report", href: REPORT, icon: "fas fa-book-open", short: "Report" },
+    { id: "archive", label: "MultiNet v1.0", href: url("static/pages/archive.html"),
+      icon: "fas fa-archive", short: "v1.0" }
   ];
 
   function shortcutsHtml(current) {
