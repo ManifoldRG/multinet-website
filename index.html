@@ -43,8 +43,8 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/mn-shared.css?v=r9f">
-  <link rel="stylesheet" href="static/css/r1-components.css?v=r9f">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r9i">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r9i">
   <link rel="stylesheet" href="static/css/play.css?v=p1b9">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
@@ -687,6 +687,14 @@
       .lp-collab { gap: 1.5rem; }
     }
   </style>
+
+  <!-- Mobile-only overrides. The media attribute means desktop never
+       applies these rules at all - see the header of the file. This
+       has to sit AFTER the inline style block above, not with the
+       other stylesheet links: same-specificity rules are settled by
+       document order, and the inline block was winning the ties. -->
+  <link rel="stylesheet" href="static/css/mn-mobile.css?v=m4"
+        media="screen and (max-width: 1023px)">
 </head>
 
 <body class="play-focus-keys" data-mn-page="home">
@@ -970,7 +978,7 @@
            carries its own title and description, so it takes no figcaption -
            one would only repeat what is already inside it. -->
       <figure class="lp-fig lp-fig--lead lp-fig--pop">
-        <img src="static/images/maze_figure.png?v=r9f"
+        <img src="static/images/maze_figure.png?v=r9i"
              alt="Four variations of one 8x8 maze showing mechanisms added in stages: bare topology, then a key and door, then a switch and gate, then distractors, with the BFS-optimal route drawn as a dotted line. Below, the dependency chain: red key, red door, switch, gate, blue key, blue door, goal."
              width="3200" height="1551" loading="lazy" decoding="async">
       </figure>
@@ -1112,7 +1120,7 @@
         <button type="button" class="lp-cite__copy" data-copy-target="lp-cite-plain">
           <i class="far fa-copy" aria-hidden="true"></i> <span>Copy</span>
         </button>
-        <pre id="lp-cite-plain"><code>Fig, "Agentic behavior in 2D mazes: previewing a multi-domain benchmark", Fig Research Blog, August 2026.</code></pre>
+        <pre id="lp-cite-plain"><code>Guruprasad, P., Rivera, S., Lu, H., Jain, A., Ren, H. and Sikka, H. (2026) Agentic behavior in 2D mazes: previewing a multi-domain benchmark. Available at: https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark</code></pre>
       </div>
 
       <p class="lp-cite__or">Or use the BibTeX citation</p>
@@ -1159,12 +1167,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="static/js/play.js?v=p1b8"></script>
-<script src="static/js/mn-shell.js?v=r9f"></script>
-<script src="static/js/v2_r1_results_table.js?v=r9f"></script>
-<script src="static/js/v2_r1_finding_charts.js?v=r9f"></script>
-<script src="static/js/v2_r1_finding_tabs.js?v=r9f"></script>
-<script src="static/js/v2_r1_reel.js?v=r9f"></script>
-<script src="static/js/lp_headline_stats.js?v=r9f"></script>
+<script src="static/js/mn-shell.js?v=r9i"></script>
+<script src="static/js/v2_r1_results_table.js?v=r9i"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r9i"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r9i"></script>
+<script src="static/js/v2_r1_reel.js?v=r9i"></script>
+<script src="static/js/lp_headline_stats.js?v=r9i"></script>
 
 <script>
   // How far a .lp-fig--pop figure may grow on hover. Scaling past the
