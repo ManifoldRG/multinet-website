@@ -1,0 +1,20 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>MultiNet mobile preview</title>
+<!-- Chrome will not size a window below ~600px, so real phone widths have to
+     be previewed in an iframe. Same origin, so the console can measure inside.
+     Add ?page=/static/pages/archive.html to preview another page. -->
+<style>
+  body{margin:0;background:#2b2b2b;display:flex;gap:16px;justify-content:center;
+       align-items:flex-start;padding:8px;font:12px system-ui;color:#fff}
+  figure{margin:0;text-align:center} figcaption{padding:3px 0}
+  iframe{border:0;background:#fff;display:block}
+</style></head><body>
+  <figure><figcaption id="c1">iPhone 390</figcaption>
+    <iframe id="f1" width="390" height="760"></iframe></figure>
+  <figure><figcaption>Tablet 768</figcaption>
+    <iframe id="f3" width="768" height="760"></iframe></figure>
+<script>
+  const page = new URLSearchParams(location.search).get('page') || '/';
+  document.getElementById('c1').textContent = 'iPhone 390 - ' + page;
+  f1.src = page; f3.src = page;
+</script>
+</body></html>

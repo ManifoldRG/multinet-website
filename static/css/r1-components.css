@@ -1,0 +1,666 @@
+/* ============================================================
+   MultiNet v2.0 R1 - shared result components
+
+   Styles for the pieces that appear on both the landing page and
+   the full analysis page: the per-model result cards, the
+   every-episode grid, the switch-discovery funnel, the chart
+   metric toggles and the embedded playable demo.
+
+   These were extracted from the R1 analysis page when the landing
+   page started reusing the same components, so there is one
+   definition per component rather than two that drift apart.
+
+   Markup is emitted by:
+     static/js/v2_r1_results_table.js
+     static/js/v2_r1_finding_charts.js
+     static/js/play.js
+   ============================================================ */
+
+
+    /* Chart metric toggles: the same physical key as every other control on
+       the site. The selected one stays pressed rather than merely filled, so
+       the current view is marked by depth as well as by colour. */
+    .r1-metric-buttons { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: flex-start; }
+    .r1-metric-button {
+      --face: #005A9C;
+      --edge: #003D6B;
+      --lift: 4px;
+      border: 0; border-radius: 9px;
+      padding: 0.5rem 1.1rem; cursor: pointer;
+      font-family: inherit; font-size: 0.9rem; font-weight: 600;
+      background: var(--face); color: #fff;
+      box-shadow: 0 var(--lift) 0 var(--edge), 0 6px 14px rgba(3, 34, 60, 0.22);
+      transform: translateY(0);
+      transition: transform 0.09s ease, box-shadow 0.09s ease, background 0.16s ease;
+    }
+    .r1-metric-button:hover { background: #0069b5; }
+    .r1-metric-button:active,
+    .r1-metric-button.active {
+      transform: translateY(var(--lift));
+      box-shadow: 0 0 0 var(--edge), 0 1px 3px rgba(3, 34, 60, 0.25);
+    }
+    .r1-metric-button.active { background: #00457a; }
+    .r1-metric-button:focus-visible { outline: 2px solid #0B7285; outline-offset: 3px; }
+
+    /* The headline chart's progress toggle keeps its teal, matching the
+       progress card it sits under. */
+    .r1-metric-button[data-metric="progress"] { --face: #0B7285; --edge: #075A68; }
+    .r1-metric-button[data-metric="progress"]:hover { background: #0d8299; }
+    .r1-metric-button[data-metric="progress"].active { background: #084F5C; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .r1-metric-button { transition: background 0.16s ease; }
+    }
+    .r1-chart-stage {
+      position: relative; height: 380px;
+      border: 1px solid #e5e7eb; border-radius: 10px;
+      padding: 1rem; background: #fff;
+    }
+    /* ---------- Results: one card per model ---------- */
+    .r1-results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+    }
+    @media screen and (max-width: 860px) { .r1-results { grid-template-columns: 1fr; }
+}
+
+    .r1-rc {
+      display: flex; flex-direction: column;
+      border: 1px solid #e8ebee;
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .r1-rc:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--c) 32%, transparent);
+      box-shadow: 0 12px 26px color-mix(in srgb, var(--c) 14%, transparent);
+    }
+
+    .r1-rc__head {
+      display: flex; align-items: center; gap: 0.55em;
+      padding: 0.9rem 1.15rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .r1-rc__logo {
+      width: 20px; height: 20px; flex: 0 0 auto;
+      background-color: var(--c);
+      -webkit-mask: var(--logo) center / contain no-repeat;
+      mask: var(--logo) center / contain no-repeat;
+    }
+    .r1-rc__head h4 {
+      margin: 0; font-size: 0.98rem; font-weight: 700; color: #1e293b;
+    }
+
+    /* the headline number for this model */
+    .r1-rc__hero {
+      padding: 1.3rem 1.15rem 1.1rem;
+      text-align: center;
+      background: linear-gradient(180deg, color-mix(in srgb, var(--c) 7%, transparent), transparent);
+    }
+    .r1-rc__hero-num {
+      display: block;
+      font-size: 2.5rem; font-weight: 700; line-height: 1;
+      color: var(--c); font-variant-numeric: tabular-nums;
+    }
+    .r1-rc__hero-num .den {
+      font-size: 1.15rem; font-weight: 500; color: #94a3b8;
+    }
+    .r1-rc__hero-lab {
+      display: block; margin-top: 0.3rem;
+      font-size: 0.85rem; color: #64748b;
+    }
+
+    .r1-rc__metrics { margin: 0; padding: 0 1.15rem 0.4rem; }
+    .r1-rc__metric { padding: 0.6rem 0; border-top: 1px solid #f1f5f9; }
+    .r1-rc__metric dt {
+      font-size: 0.78rem; font-weight: 600; color: #475569;
+      margin-bottom: 0.35rem; line-height: 1.35;
+    }
+    .r1-rc__metric dd {
+      margin: 0; display: flex; align-items: center; gap: 0.6rem;
+    }
+    .r1-rc__metric dd .v {
+      flex: 0 0 auto; min-width: 3.1em; text-align: right;
+      font-size: 0.9rem; font-weight: 700; color: #1e293b;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .r1-bar {
+      flex: 1 1 auto; height: 7px; border-radius: 999px;
+      background: #eef2f6; position: relative; overflow: hidden;
+    }
+    .r1-bar > span {
+      position: absolute; inset: 0 auto 0 0;
+      width: var(--w); border-radius: 999px;
+      background: color-mix(in srgb, var(--c) 78%, #fff);
+    }
+
+    .r1-rc__foot {
+      margin-top: auto;
+      padding: 0.7rem 1.15rem;
+      border-top: 1px solid #f1f5f9;
+      background: #fafbfc;
+      font-size: 0.78rem; color: #64748b; text-align: center;
+    }
+
+    /* Keep the same metric on the same line across all three cards, even when
+       one description runs to an extra line. Two levels of subgrid: the card
+       shares the grid's rows, and the metric list shares four of them. */
+    @supports (grid-template-rows: subgrid) {
+      .r1-results { grid-template-rows: auto auto repeat(4, auto) auto; }
+      .r1-rc {
+        display: grid;
+        grid-row: span 7;
+        grid-template-rows: subgrid;
+        row-gap: 0;
+      }
+      .r1-rc__metrics {
+        display: grid;
+        grid-row: span 4;
+        grid-template-rows: subgrid;
+        row-gap: 0;
+      }
+      .r1-rc__metric { display: flex; flex-direction: column; justify-content: flex-end; }
+}
+
+    /* ---------- Embedded playable demo ---------- */
+    .r1-demo-slot {
+      border: 1px solid #e4e7ee;
+      border-radius: 16px;
+      padding: 1.1rem 0.85rem 1.25rem;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(18, 21, 28, 0.06);
+      overflow-x: auto;
+    }
+    .r1-demo-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 0 6px;
+    }
+    .r1-demo-meta h3 {
+      margin: 0 0 4px;
+      font-size: 1.05rem;
+      color: #12151c;
+    }
+    .r1-demo-meta p {
+      margin: 0;
+      color: #4a5160;
+      font-size: 0.92rem;
+    }
+    .r1-demo-meta .task-heading-nav {
+      display: flex;
+      gap: 8px;
+    }
+    .r1-demo-meta .task-heading-nav button {
+      font: inherit;
+      padding: 8px 12px;
+      border: 1px solid #d5dae3;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+    }
+    .r1-demo-meta .task-heading-nav button:hover {
+      border-color: #9aa3b5;
+    }
+    .r1-demo-hint {
+      margin: 12px 6px 0;
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.88rem;
+    }
+
+    /* ---------- Every-episode grid ---------- */
+    /* 50 mazes x 3 models, ranked left to right by BFS-min actions. Two label
+       columns of fixed width so the rows, the strips and the axis all share
+       one horizontal scale. */
+    .r1-eg {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 3px 10px;
+      align-items: center;
+    }
+    .r1-eg__label {
+      font-size: 0.78rem; color: #55637a; text-align: right;
+      white-space: nowrap;
+    }
+    .r1-eg__label--strip { font-size: 0.72rem; color: #94a3b8; }
+
+    .r1-eg__row, .r1-eg__strip {
+      display: grid;
+      grid-template-columns: repeat(50, 1fr);
+      gap: 1px;
+    }
+    .r1-eg__row { height: 46px; }
+    .r1-eg__strip { height: 11px; margin-top: 2px; }
+
+    /* Every cell and strip segment carries a title, so both have to feel
+       pointable - a cell that reacts to the cursor is what tells you there is
+       something to read there. */
+    .r1-eg__cell, .r1-eg__seg {
+      display: block; height: 100%;
+      background: var(--f);
+      outline: 1px solid transparent;
+      transition: transform 0.12s ease, outline-color 0.12s ease;
+    }
+    .r1-eg__cell {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; color: #fff; line-height: 1;
+    }
+    .r1-eg__cell:hover {
+      transform: scaleY(1.06);
+      outline-color: #1e293b;
+      position: relative; z-index: 2;
+    }
+    .r1-eg__seg:hover {
+      transform: scaleY(1.5);
+      outline-color: #1e293b;
+      position: relative; z-index: 2;
+    }
+    /* Hovering a model row dims the other two, so one model can be read across
+       all 50 mazes without the eye slipping a row. */
+    .r1-eg__row:hover ~ .r1-eg__row .r1-eg__cell,
+    .r1-eg:has(.r1-eg__row:hover) .r1-eg__row:not(:hover) .r1-eg__cell {
+      opacity: 0.45;
+    }
+    .r1-eg__row .r1-eg__cell { transition: transform 0.12s ease, outline-color 0.12s ease, opacity 0.16s ease; }
+
+    .r1-eg__cell.is-solved { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .r1-eg__cell, .r1-eg__seg { transition: outline-color 0.12s ease; }
+      .r1-eg__cell:hover, .r1-eg__seg:hover { transform: none; }
+    }
+    .r1-eg__seg:first-child { border-radius: 3px 0 0 3px; }
+    .r1-eg__seg:last-child { border-radius: 0 3px 3px 0; }
+
+    /* Ticks are positioned by rank, so they sit over the column they name. */
+    .r1-eg__axis {
+      position: relative; height: 42px; margin-top: 6px;
+    }
+    .r1-eg__tick {
+      position: absolute; left: var(--at); top: 0;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center;
+      font-size: 0.68rem; color: #94a3b8; line-height: 1.3;
+    }
+    .r1-eg__tick b { font-weight: 600; color: #55637a; }
+    .r1-eg__tick i { font-style: normal; }
+    .r1-eg__axistitle {
+      position: absolute; left: 50%; bottom: 0;
+      transform: translateX(-50%);
+      font-size: 0.7rem; color: #94a3b8; white-space: nowrap;
+    }
+
+    .r1-eg__key {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 0.5rem 1.6rem; margin-top: 1.4rem;
+      font-size: 0.72rem; color: #64748b;
+    }
+    .r1-eg__kgroup { display: inline-flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
+    .r1-eg__k { display: inline-flex; align-items: center; gap: 0.32rem; }
+    .r1-eg__k i {
+      width: 11px; height: 11px; border-radius: 2px; display: inline-block;
+    }
+    .r1-eg__kstar {
+      width: auto; height: auto; color: #17427a; font-size: 0.85rem; line-height: 1;
+    }
+
+    @media screen and (max-width: 760px) {
+      .r1-eg { grid-template-columns: 62px minmax(0, 1fr); gap: 2px 6px; }
+      .r1-eg__label { font-size: 0.68rem; }
+      .r1-eg__row { height: 34px; }
+    }
+
+    /* Fifty columns cannot shrink indefinitely - the star glyph in a solved
+       cell sets a floor on how narrow a column can get, and past that the
+       row silently overflows and the right-hand mazes are clipped. Let the
+       whole grid scroll sideways instead, so every episode stays reachable. */
+    @media screen and (max-width: 760px) {
+      #r1-episode-grid { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .r1-eg { min-width: 620px; }
+    }
+
+    @media screen and (max-width: 700px) {
+      .r1-eg { grid-template-columns: 74px 1fr; gap: 3px 6px; }
+      .r1-eg__label { font-size: 0.68rem; }
+      .r1-eg__cell { aspect-ratio: 1 / 4.5; }
+}
+
+    /* ---------- Switch discovery funnel ---------- */
+    /* Two funnels, identical geometry, shared scale. Each column carries its
+       own accent through --a, so the bars, the title rule and the values all
+       recolour together and the two sides stay structurally identical. */
+    .r1-fn {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      align-items: start;
+    }
+    @media screen and (max-width: 760px) { .r1-fn { grid-template-columns: 1fr; } }
+
+    .r1-fn__col {
+      border: 1px solid color-mix(in srgb, var(--a) 22%, #e8ebee);
+      border-radius: 14px;
+      background:
+        linear-gradient(180deg,
+          color-mix(in srgb, var(--a) 5%, #fff) 0%,
+          #fff 42%);
+      padding: 1.1rem 1.25rem 1.25rem;
+    }
+    .r1-fn__title {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      color: color-mix(in srgb, var(--a) 68%, #55637a);
+      margin: 0 0 0.9rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid color-mix(in srgb, var(--a) 16%, #e8ebee);
+    }
+
+    .r1-fn__step { margin: 0; }
+    .r1-fn__label {
+      font-size: 0.85rem; color: #334155; margin-bottom: 0.32rem;
+    }
+    .r1-fn__track {
+      display: flex; align-items: center; gap: 0.6rem;
+      height: 26px;
+    }
+    .r1-fn__fill {
+      display: block; height: 100%;
+      width: var(--w);
+      border-radius: 5px;
+      background: linear-gradient(90deg,
+        color-mix(in srgb, var(--a) 45%, #fff) 0%,
+        var(--a) 100%);
+    }
+    .r1-fn__value {
+      font-size: 1.05rem; font-weight: 700; color: #22313f;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Zero is the point of the left funnel, so it is marked rather than shown
+       as an invisible bar. */
+    .r1-fn__step.is-zero .r1-fn__fill {
+      background: #f1d9d3;
+    }
+    .r1-fn__step.is-zero .r1-fn__value { color: #C0392B; }
+
+    .r1-fn__arrow {
+      text-align: left; color: #cbd5e1; font-size: 0.85rem;
+      line-height: 1; margin: 0.34rem 0 0.34rem 0.15rem;
+    }
+
+    /* ---------- Failure reel ---------- */
+    .r1-reel-models {
+      display: flex; justify-content: center; gap: 0.6rem;
+      flex-wrap: wrap; margin-bottom: 0.85rem;
+    }
+    /* Same physical key as the rest of the site, in each model's own colour:
+       a face on a solid edge, pressing flush when selected. Everything else -
+       the pill shape, the brand mark, the sizing - is unchanged. */
+    .r1-reel-model {
+      --lift: 3px;
+      display: inline-flex; align-items: center; gap: 0.55em;
+      border: 1px solid #e0e0e0; background: #fff; color: #363636;
+      border-radius: 999px; padding: 0.45rem 1.1rem 0.45rem 0.5rem;
+      cursor: pointer; font-family: inherit; font-size: 0.95rem; font-weight: 500;
+      box-shadow: 0 var(--lift) 0 #dfe3e9, 0 5px 10px rgba(12, 18, 28, 0.08);
+      transform: translateY(0);
+      transition: transform 0.09s ease, box-shadow 0.09s ease,
+                  background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .r1-reel-model:hover { border-color: var(--brand); }
+    .r1-reel-model:active {
+      transform: translateY(var(--lift));
+      box-shadow: 0 0 0 #dfe3e9, 0 1px 2px rgba(12, 18, 28, 0.16);
+    }
+    .r1-reel-model.active {
+      background: var(--brand); border-color: var(--brand); color: #fff;
+      transform: translateY(var(--lift));
+      box-shadow: 0 0 0 color-mix(in srgb, var(--brand) 72%, #000),
+                  0 1px 3px color-mix(in srgb, var(--brand) 34%, transparent);
+    }
+    /* Brand mark. The SVG supplies the shape via mask, CSS supplies the colour,
+       so the glyph can flip to white when the button goes solid. */
+    .r1-reel-model .r1-logo {
+      width: 21px; height: 21px; flex: 0 0 auto;
+      background-color: var(--brand);
+      -webkit-mask: var(--logo) center / contain no-repeat;
+      mask: var(--logo) center / contain no-repeat;
+      transition: background-color 0.2s;
+    }
+    .r1-reel-model.active .r1-logo { background-color: #fff; }
+
+    /* which of that model's clips */
+    .r1-reel-clips {
+      display: flex; justify-content: center; gap: 0.45rem;
+      flex-wrap: wrap; margin-bottom: 1.25rem;
+    }
+    /* Smaller key, same behaviour. These were ghost buttons with nothing to
+       press, which is why they read as labels rather than controls. */
+    .r1-reel-clip {
+      --lift: 2px;
+      border: 1px solid #e7eaee; background: #fff; color: #6b7280;
+      border-radius: 7px; padding: 0.3rem 0.8rem; cursor: pointer;
+      font-family: inherit; font-size: 0.85rem;
+      box-shadow: 0 var(--lift) 0 #e4e8ed;
+      transform: translateY(0);
+      transition: transform 0.09s ease, box-shadow 0.09s ease,
+                  color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .r1-reel-clip:hover { color: var(--brand); border-color: color-mix(in srgb, var(--brand) 35%, transparent); }
+    .r1-reel-clip:active { transform: translateY(var(--lift)); box-shadow: 0 0 0 #e4e8ed; }
+    .r1-reel-clip.active {
+      color: var(--brand); border-color: color-mix(in srgb, var(--brand) 40%, transparent);
+      background: color-mix(in srgb, var(--brand) 8%, transparent);
+      font-weight: 600;
+      transform: translateY(var(--lift));
+      box-shadow: 0 0 0 color-mix(in srgb, var(--brand) 22%, transparent);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .r1-reel-model, .r1-reel-clip { transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    }
+
+    .r1-reel-stage { max-width: 720px; margin: 0 auto; }
+    .r1-reel-stage video {
+      width: 100%; aspect-ratio: 16 / 10; border-radius: 10px; background: #000;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15); display: block;
+    }
+
+    /* ---------- Metric labels and definitions ----------
+       All four metrics use the same .r1-bar. Each fills against a denominator
+       named in the definitions panel, so one mark carries one meaning.
+
+       The metric name stays a plain label at rest - twelve visible affordances
+       across three cards is noise. It still jumps to its own formula, and the
+       button below the cards is the discoverable route. */
+    .r1-rc__what {
+      display: inline; padding: 0; border: 0; background: none;
+      font: inherit; color: inherit; text-align: left; cursor: pointer;
+      border-bottom: 1px solid transparent;
+    }
+    .r1-rc__what:hover { color: var(--c); border-bottom-color: currentColor; }
+    .r1-rc__what:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
+    .is-sr {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+
+    .r1-mdefs { margin-top: 1.5rem; }
+    .r1-mdefs > summary {
+      cursor: pointer; list-style: none;
+      display: flex; justify-content: center;
+      padding: 0;
+    }
+    .r1-mdefs > summary::-webkit-details-marker { display: none; }
+
+    /* Same physical key as the page buttons: a face on a solid edge that
+       travels the height of that edge when pressed. */
+    .r1-mdefs__btn {
+      --face: #005A9C;
+      --edge: #003D6B;
+      --lift: 4px;
+      display: inline-flex; align-items: center; gap: 0.5em;
+      padding: 0.55rem 1.15rem; border-radius: 9px;
+      font-size: 0.88rem; font-weight: 600;
+      background: var(--face); color: #fff;
+      box-shadow: 0 var(--lift) 0 var(--edge), 0 6px 14px rgba(3, 34, 60, 0.22);
+      transition: transform 0.09s ease, box-shadow 0.09s ease, background 0.16s ease;
+    }
+    /* No icon: the Font Awesome bundle here is loaded as a script, so a glyph
+       set through content: on a pseudo-element renders as tofu. The label
+       carries it. */
+    .r1-mdefs > summary:hover .r1-mdefs__btn { background: #0069b5; }
+    .r1-mdefs > summary:active .r1-mdefs__btn {
+      transform: translateY(var(--lift));
+      box-shadow: 0 0 0 var(--edge), 0 1px 3px rgba(3, 34, 60, 0.25);
+    }
+    .r1-mdefs > summary:focus-visible .r1-mdefs__btn {
+      outline: 2px solid #0B7285; outline-offset: 3px;
+    }
+    .r1-mdefs[open] > summary .r1-mdefs__btn { background: #0069b5; }
+
+    .r1-mdefs__grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.1rem;
+      margin-top: 1.25rem;
+      padding: 1.35rem 1.15rem;
+      border: 1px solid #e8ebee; border-radius: 12px; background: #fff;
+    }
+    /* Each definition reads as three bands: what it is, the formula, and the
+       denominator the bar fills against. The formula gets the most contrast
+       because it is the thing the panel exists to show. */
+    .r1-mdef {
+      display: flex; flex-direction: column;
+      border: 1px solid #eef1f5; border-radius: 11px;
+      padding: 1.05rem 1.05rem 0.9rem;
+      background: #fff;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .r1-mdef.is-lit {
+      animation: r1-lit 1.8s ease;
+      border-color: color-mix(in srgb, #005A9C 35%, transparent);
+    }
+    @keyframes r1-lit {
+      0%, 45% { background: color-mix(in srgb, #005A9C 9%, transparent); }
+      100% { background: #fff; }
+    }
+    .r1-mdef__title {
+      margin: 0 0 0.45rem;
+      font-size: 0.95rem; font-weight: 700; color: #12151c;
+      letter-spacing: -0.01em;
+    }
+    .r1-mdef__body {
+      margin: 0 0 1rem;
+      font-size: 0.855rem; line-height: 1.6; color: #4a5160;
+    }
+
+    /* the formula sits on its own ground, centred, with room to breathe */
+    .r1-mdef .r1-formula {
+      margin: 0 0 1rem;
+      padding: 0.95rem 0.8rem;
+      border-radius: 9px;
+      background: #f6f8fb;
+      border: 1px solid #eaeef4;
+      text-align: center;
+      font-size: 0.9rem; color: #1e293b;
+    }
+
+    .r1-mdef__scale {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid #f1f5f9;
+    }
+    .r1-mdef__scale-k {
+      display: inline-block; margin-right: 0.5em;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.09em;
+      text-transform: uppercase; color: #94a3b8;
+    }
+    .r1-mdef__scale-v {
+      font-size: 0.85rem; font-weight: 700; color: #005A9C;
+      font-variant-numeric: tabular-nums;
+    }
+    .r1-mdef__scale-n {
+      margin: 0.4rem 0 0;
+      font-size: 0.79rem; line-height: 1.5; color: #6b7280;
+    }
+
+    @media screen and (max-width: 760px) {
+      .r1-mdefs__grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .r1-mdef.is-lit { animation: none; background: color-mix(in srgb, #005A9C 11%, transparent); }
+      .r1-mdefs__btn { transition: background 0.16s ease; }
+    }
+
+    /* ---------- Formulae ----------
+       Used by the analysis page definitions and by the landing page
+       metric panel, so they live here rather than in either one. */
+    .r1-formula {
+      background: color-mix(in srgb, var(--c) 5%, #fff);
+      border: 1px solid color-mix(in srgb, var(--c) 18%, transparent);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4em;
+      flex-wrap: wrap;
+      margin-bottom: 1.15rem;
+    }
+
+    /* what this metric actually came out to in the run */
+    .r1-def__stat {
+      margin-top: auto;
+      margin-left: -1.25rem; margin-right: -1.25rem;
+      padding: 0.7rem 1.25rem;
+      border-top: 1px solid color-mix(in srgb, var(--c) 14%, transparent);
+      background: color-mix(in srgb, var(--c) 4%, transparent);
+      display: flex; align-items: baseline; justify-content: center; gap: 0.5em;
+      flex-wrap: wrap;
+    }
+    .r1-def__stat .k {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em;
+      color: #6b7280; font-weight: 600;
+    }
+    .r1-def__stat .v {
+      font-size: 1.05rem; font-weight: 700; color: var(--c);
+      font-variant-numeric: tabular-nums;
+    }
+    .r1-def__stat .n { font-size: 0.8rem; color: #6b7280; }
+
+    /* Line the two cards' bands up with each other - heading, description,
+       formula, result - so the formulae sit at the same height and match in
+       size even though the descriptions differ in length. Declared after the
+       flex rules above so it wins; flex remains the fallback without subgrid. */
+    @supports (grid-template-rows: subgrid) {
+      .r1-defs { grid-template-rows: auto auto 1fr auto; }
+      .r1-def {
+        display: grid;
+        grid-row: span 4;
+        grid-template-rows: subgrid;
+        row-gap: 0;
+      }
+      .r1-def__head { margin-bottom: 0.55rem; }
+      .r1-def p { margin-bottom: 1rem; }
+      .r1-formula { margin-bottom: 1.15rem; align-self: stretch; }
+    }
+    /* inline stacked fraction */
+    .r1-formula .frac {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 0.85em;
+      line-height: 1.25;
+    }
+    .r1-formula .frac .top { border-bottom: 1px solid #94a3b8; padding: 0 0.45em 2px; }
+    .r1-formula .frac .bot { padding: 2px 0.45em 0; }

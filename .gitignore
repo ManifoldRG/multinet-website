@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Local Jekyll/preview build output
+_site/
+
+# Python bytecode from the demo backend
+__pycache__/
+*.pyc
