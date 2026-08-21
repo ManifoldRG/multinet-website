@@ -931,11 +931,15 @@
       .join("");
   }
 
+  // Deep-link the maze someone deliberately navigated to, so they can share it.
+  // Deliberately NOT called from render(): the demo lives on the landing page,
+  // and rendering the first maze on load would rewrite the site's own URL for
+  // every visitor who never touched it. The page title is left alone for the
+  // same reason - it belongs to the page, not to the board.
   function syncUrl() {
     const url = new URL(location.href);
     url.searchParams.set("task", task.taskId);
     history.replaceState(null, "", url);
-    document.title = `MultiNet · ${task.taskId}`;
   }
 
   function waitForGrid() {
@@ -991,7 +995,6 @@
     }
 
     renderProgress(view.progress);
-    syncUrl();
 
     if (!view.done) {
       els.end.className = "";
@@ -1054,6 +1057,7 @@
       cachedSettings = null;
       await sounds.play(data.sfx);
       render(data.task, data.view);
+      syncUrl();
     });
 
   document.getElementById("next").onclick = () =>
@@ -1064,6 +1068,7 @@
       cachedSettings = null;
       await sounds.play(data.sfx);
       render(data.task, data.view);
+      syncUrl();
     });
 
   const pagePrev = document.getElementById("page-prev");
