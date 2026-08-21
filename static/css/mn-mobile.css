@@ -1,0 +1,89 @@
+/* ============================================================
+   Mobile-only overrides.
+
+   Loaded with media="screen and (max-width: 1023px)" on the <link>,
+   so above that width the browser never applies a single rule in
+   this file. That is the point: desktop cannot regress from
+   anything written here, by construction rather than by care.
+
+   1023px is not a new breakpoint - it is Bulma's own `touch`
+   boundary (desktop starts at 1024px), and Bulma is already loaded.
+
+   RULES FOR THIS FILE
+     - Only add rules here. Never edit a shared declaration in
+       another stylesheet to fix a mobile problem: that is how the
+       splash overlay got shrunk on desktop.
+     - Every rule should say which width it breaks at and why.
+     - Verify with tools/desktop-geometry-probe.js before and after.
+   ============================================================ */
+
+/* ---------- the maze demo ----------
+   #splash is an overlay sized to cover the 1100px board, so it is
+   meant to be wider than .play-host - that is not a bug. But it is
+   sized with 96vw, which measures the viewport rather than the card
+   it sits in, so once the page has margins it hangs off its own
+   card: by 62px at 390px wide, 46px at 768px. Only below the
+   breakpoint does the board stop being the wider thing. */
+@media screen and (max-width: 1023px) {
+  #splash {
+    width: 100%;
+  }
+}
+
+/* ---------- episode grid axis ----------
+   Ticks are absolutely positioned by rank; the last sits at
+   left: 99%, so it shrink-to-fits into the 1% of width left before
+   the container edge. Inside the grid's horizontal scroller that
+   works out to ~7px and "50 (106)" wraps to one character per line.
+   Desktop measures 25px and is unaffected either way. */
+@media screen and (max-width: 1023px) {
+  .r1-eg__tick {
+    white-space: nowrap;
+  }
+}
+
+/* ---------- switch-gate funnel ----------
+   Three digits stop fitting beside the bar once the funnel narrows,
+   and 105 broke into "10" and "5" on two lines. Seen at 768px as
+   well as at phone widths. */
+@media screen and (max-width: 1023px) {
+  .r1-fn__value {
+    white-space: nowrap;
+  }
+}
+
+/* ---------- citation blocks ----------
+   The copy button floats over the top-right of the code. Below
+   ~620px the first line is long enough to run underneath it, so the
+   block starts below the button instead, and the prose citation no
+   longer needs the side gap that kept it clear. */
+@media screen and (max-width: 620px) {
+  .lp-cite pre {
+    padding-top: 3.1rem;
+  }
+  .lp-cite--text pre {
+    padding-right: 1.5rem;
+  }
+}
+
+/* ---------- the maze figure ----------
+   3200px of source drawn at 342px on a phone is a 9.4x reduction - the panel
+   labels are illegible, and the hover magnifier cannot help because touch
+   devices have no hover. Give it a readable intrinsic size and let the figure
+   pan instead. The clipped edge is what signals there is more to see. */
+@media screen and (max-width: 1023px) {
+  .lp-fig--pop {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .lp-fig--pop img {
+    width: 1000px;
+    max-width: none;
+  }
+  /* Deterministic: a scale transform inside a scroll container just gets
+     clipped, and on touch there is no hover to trigger it anyway. */
+  .lp-fig--pop:hover img {
+    transform: none;
+    box-shadow: none;
+  }
+}

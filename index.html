@@ -7,2253 +7,1137 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-PP82HPYSRH');
   </script>
 
-
   <!-- PostHog Analytics Tag -->
   <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init be ws Ss me ys capture Ne calculateEventProperties xs register register_once register_for_session unregister unregister_for_session Rs getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Is ks createPersonProfile Ps bs opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing $s debug Es getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="an ln init xn Cn Br kn In capture Fn nn calculateEventProperties On register register_once register_for_session unregister unregister_for_session Ln getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Dn identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty An Rn createPersonProfile setInternalOrTestUser $n yn jn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Tn debug Ur Rt getPageViewId captureTraceFeedback captureTraceMetric pn".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_9rIWbSBBOFBaUcdMWUniUtiuukyTgzgY0EaxK6dmNvo', {
         api_host: 'https://us.i.posthog.com',
-        defaults: '2025-05-24',
+        defaults: '2026-05-30',
         person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
     })
   </script>
 
   <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="MultiNet is a comprehensive benchmark for evaluating multimodal generalization in next generation models across vision, language, and action, revealing critical insights into model capabilities and failure modes at distribution boundaries.">
-  <meta property="og:title" content="MultiNet: Evaluating Multimodal Generalization in Next Generation Models"/>
-  <meta property="og:description" content="MultiNet is a comprehensive benchmark for evaluating multimodal generalization in next generation models across vision, language, and action, revealing critical insights into model capabilities and failure modes at distribution boundaries."/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MultiNet is a benchmark for long-horizon action with causal reasoning. Mazes with hidden causal mechanisms that people solve in under a minute. Three frontier models solved 6 of 150 episodes.">
+  <meta property="og:title" content="MultiNet - frontier models struggle on 2D mazes"/>
+  <meta property="og:description" content="Mazes with hidden causal mechanisms. Nothing to know, an exact oracle, difficulty you can turn up. Three frontier models solved 6 of 150 episodes."/>
   <meta property="og:url" content="https://multinet.ai/"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg" />
+  <meta property="og:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
-
-
-
-  <meta name="twitter:title" content="MultiNet: Evaluating Multimodal Generalization in Next Generation Models">
-  <meta name="twitter:description" content="MultiNet is a comprehensive benchmark for evaluating multimodal generalization in next generation models across vision, language, and action, revealing critical insights into model capabilities and failure modes at distribution boundaries.">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <meta name="twitter:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="Multimodal Generalization, Next Generation Models, Vision-Language-Action, Model Evaluation, Distribution Boundaries, Robotics, Reinforcement Learning, Machine Learning, Artificial Intelligence, Benchmarking">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:title" content="MultiNet - frontier models struggle on 2D mazes">
+  <meta name="twitter:description" content="Mazes with hidden causal mechanisms. Three frontier models solved 6 of 150 episodes.">
+  <meta name="twitter:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg">
+  <meta name="keywords" content="Agentic Benchmark, Long-Horizon Action, Causal Reasoning, GridWorld, Living Benchmark, Frontier Models, MultiNet">
 
+  <title>MultiNet - A benchmark for long-horizon action with causal reasoning</title>
 
-  <title>MultiNet: Evaluating Multimodal Generalization in Next Generation Models</title>
-  <link rel="icon" type="image/x-icon" href="static/images/multinet_logo_square.png"> 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-  rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="static/images/multinet_logo_square.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r9i">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r9i">
+  <link rel="stylesheet" href="static/css/play.css?v=p1b9">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
 
   <style>
-    /* Side Navigation Bar Styles */
-    body {
-      margin: 0;
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif; /* Match existing fonts */
+    /* ============================================================
+       Landing page.
+
+       Everything here is sized for a visitor who scrolls once and
+       leaves. The claim, the evidence and a thing to touch come
+       first; the full argument lives on the R1 analysis page.
+       ============================================================ */
+
+    .lp-wrap { max-width: 1060px; margin: 0 auto; padding: 0 1.5rem; }
+    /* The playable maze is a fixed 1100px board (see play.css), so its section
+       gets a wider wrap - at the reading width the right-hand Controls rail
+       falls outside the card, which clips it. */
+    .lp-wrap--wide { max-width: 1200px; }
+    .lp-section { padding: 3.5rem 0; }
+    .lp-section--tight { padding: 1.5rem 0 3rem; }
+
+    .lp-h2 {
+      font-size: 1.7rem; font-weight: 600; color: #12151c;
+      text-align: center; margin: 0 0 0.5rem; letter-spacing: -0.01em;
+    }
+    .lp-sub {
+      text-align: center; color: #6b7280; font-size: 1rem;
+      max-width: 64ch; margin: 0 auto 2rem; line-height: 1.6;
     }
 
-    .side-navigation {
-      height: 100%;
-      width: 280px; /* Expanded width */
-      position: fixed;
-      z-index: 1000; /* Ensure it's on top */
-      top: 0;
-      left: 0;
-      background-color: #f8f9fa; /* Light grey background */
-      overflow-x: hidden;
-      transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
-      padding-top: 0; /* Adjusted for logo container */
-      box-shadow: 3px 0 6px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
+    /* A second view of the same material inside one section. The hairline
+       does the separating so the heading can stay quiet - a second h2-sized
+       title would read as a new section and break the "Results" grouping. */
+    /* No rule between the three views. Inside one section they are the same
+       answer at three zoom levels, and a divider made them read as three
+       separate things; the space alone is enough. */
+    /* The stats strip has no card chrome any more, so this gap is the only
+       thing separating it from the card row - tightened, not closed. */
+    .lp-subsection {
+      margin-top: 2.1rem;
+    }
+    .lp-h3 {
+      font-size: 1.15rem; font-weight: 600; color: #12151c;
+      text-align: center; margin: 0 0 0.4rem; letter-spacing: -0.01em;
+    }
+    /* Per model and Progress over episodes are peers, so they are sized the
+       same - the h2 above still outranks both. */
+    .lp-h3--lead {
+      font-size: 1.45rem;
+      margin-bottom: 1.5rem;
+    }
+    .lp-lead {
+      text-align: center; color: #6b7280; font-size: 0.93rem;
+      max-width: 62ch; margin: 0 auto 1.9rem; line-height: 1.6;
     }
 
-    .side-navigation.collapsed {
-      width: 70px; /* Collapsed width - showing icons */
-      overflow-y: visible; /* Allow flyouts to show */
-    }
-
-    .side-navigation.collapsed .nav-text,
-    .side-navigation.collapsed .dropdown-arrow {
-      display: none;
-      opacity: 0;
-    }
-    
-    .side-navigation .logo-container {
-      display: flex;
+    /* ---------- hero ---------- */
+    .lp-hero { padding: 2.75rem 0 1.5rem; }
+    /* The headline is a full sentence, so the text column takes the width and
+       the reel sits further right. */
+    .lp-hero__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+      gap: 2rem;
       align-items: center;
-      justify-content: space-between; /* Pushes toggle to the right */
-      padding: 15px 20px;
-      background-color: #e9ecef; /* Slightly different bg for header */
-      min-height: 60px; /* Consistent height */
-      box-sizing: border-box;
     }
-    
-    .side-navigation.collapsed .logo-container {
-        padding: 15px;
-        justify-content: center; /* Center icon when collapsed */
-    }
-
-    .side-navigation .site-title-logo {
-        font-size: 1.4rem;
-        font-weight: 600;
-        color: #005A9C; /* Theme color */
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        transition: transform 0.3s ease-out; /* Added transition for hover effect */
-    }
-
-    .side-navigation .site-title-logo:hover {
-      transform: translateY(-3px); /* Float up effect on hover */
-    }
-    
-    .side-navigation.collapsed .site-title-logo {
-        display: none;
-    }
-
-    .nav-toggle-btn {
-      font-size: 22px;
-      color: #363636;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 5px;
-    }
-
-    .nav-toggle-btn:hover {
-      color: #005A9C; /* Theme color */
-    }
-
-    .side-navigation-menu {
-        flex-grow: 1;
-        overflow-y: auto; /* Allow scrolling for menu items if they exceed height */
-        padding-top: 10px;
-    }
-    .side-navigation.collapsed .side-navigation-menu {
-        overflow-y: visible; /* Needed for flyouts in collapsed mode */
-    }
-
-
-    .side-navigation .nav-item,
-    .side-navigation .nav-link {
-      padding: 12px 20px; /* Slightly reduced padding for more items */
-      text-decoration: none;
-      font-size: 0.95rem; /* Slightly reduced font size */
-      color: #363636;
-      display: flex;
-      align-items: center;
-      transition: background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s ease-out;
-      white-space: nowrap;
-      position: relative; 
-    }
-    /* For dropdown toggles specifically if they are <a> tags */
-    .side-navigation .dropdown-toggle {
-        padding: 12px 20px;
-        text-decoration: none;
-        font-size: 0.95rem;
-        color: #363636;
-        display: flex;
-        align-items: center;
-        width: 100%;
-        box-sizing: border-box;
-        transition: background-color 0.3s, color 0.3s;
-        white-space: nowrap;
-        justify-content: space-between; /* Ensure arrow is on the right */
-    }
-
-
-    .side-navigation .nav-item:hover,
-    .side-navigation .nav-link:hover,
-    .side-navigation .dropdown-toggle:hover {
-      background-color: #e9ecef;
-      color: #005A9C;
-      /* transform: translateX(4px); */ /* Removing nudge for dropdown items for now */
-    }
-    .side-navigation .nav-item > .nav-link:hover { /* Apply nudge only to direct nav-links */
-        transform: translateX(4px);
-    }
-
-    
-    .side-navigation .nav-item:hover .icon i,
-    .side-navigation .nav-link:hover .icon i,
-    .side-navigation .dropdown-toggle:hover .icon i {
-        transform: scale(1.1); 
-    }
-
-    .side-navigation .nav-item.active,
-    .side-navigation .nav-link.active,
-    .side-navigation .nav-item.has-dropdown.open > .dropdown-toggle { /* Style for open dropdown toggle */
-      background-color: #005A9C;
-      color: white;
-    }
-    .side-navigation .nav-item.active .icon,
-    .side-navigation .nav-link.active .icon,
-    .side-navigation .nav-item.has-dropdown.open > .dropdown-toggle .icon,
-    .side-navigation .nav-item.has-dropdown.open > .dropdown-toggle .dropdown-arrow {
-      color: white;
-    }
-
-
-    .side-navigation .nav-item .icon,
-    .side-navigation .nav-link .icon,
-    .side-navigation .dropdown-toggle .icon {
-      margin-right: 16px;
-      min-width: 24px;
-      text-align: center;
-      font-size: 1rem; /* Unified icon size */
-      transition: margin-right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s ease-out; 
-    }
-
-    .side-navigation.collapsed .nav-item .icon,
-    .side-navigation.collapsed .nav-link .icon,
-    .side-navigation.collapsed .dropdown-toggle .icon {
-      margin-right: 0;
-    }
-    
-    .side-navigation .nav-item .icon i, 
-    .side-navigation .nav-link .icon i,
-    .side-navigation .dropdown-toggle .icon i {
-        display: inline-block; 
-        transition: transform 0.2s ease-out;
-    }
-
-    .side-navigation.collapsed .nav-text {
-        opacity: 0;
-        transform: translateX(-10px); 
-    }
-    .side-navigation .nav-text {
-      transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s;
-      opacity: 1;
-      transform: translateX(0);
-      flex-grow: 1; /* Allow text to take remaining space */
-    }
-
-    .dropdown-arrow {
-        margin-left: auto; /* Pushes arrow to the far right if text doesn't fill */
-        padding-left: 10px; /* Space between text and arrow */
-        font-size: 0.8rem;
-        transition: transform 0.3s ease;
-    }
-    .side-navigation.collapsed .dropdown-arrow {
-      display: none;
-    }
-    
-    .nav-item.has-dropdown.open > .dropdown-toggle .dropdown-arrow .fas.fa-chevron-down,
-    .nav-item.has-dropdown.open > .dropdown-toggle .dropdown-arrow .fas.fa-chevron-right {
-      transform: rotate(180deg);
-    }
-    .nav-item.has-dropdown .dropdown-toggle .dropdown-arrow .fas.fa-chevron-right.rotated {
-        transform: rotate(90deg); /* For level 2 when open */
-    }
-
-
-    .dropdown-menu-items {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease-out, padding 0.35s ease-out, background-color 0.3s;
-      background-color: #f0f2f5; 
-      list-style-type: none;
-      padding-left: 0; 
-      margin-left: 0;
-    }
-    .nav-item.has-dropdown.open > .dropdown-menu-items {
-        /* max-height will be set by JS for accordion, but overridden for flyout */
-        padding-top: 5px;
-        padding-bottom: 5px;
-        /* For non-flyout (accordion style), overflow should be conditionally hidden or managed by JS */
-    }
-
-    /* New styles for non-collapsed flyout - Level 1 */
-    .side-navigation:not(.collapsed) .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 {
-      position: absolute;
-      left: 0; /* Align with parent's left edge */
-      top: 100%; /* Position below the parent item */
-      width: max-content; /* Allow content to define width */
-      min-width: 100%; /* Ensure it's at least as wide as the parent button */
-      background-color: #f8f9fa; /* Match collapsed flyout background */
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1); /* Add shadow for better visibility */
-      border-radius: 0 0 4px 4px; /* Optional: round bottom corners */
-      max-height: none !important; /* Override JS-set max-height */
-      overflow: visible !important; /* Ensure content is not clipped */
-      z-index: 1000; /* Ensure it's above other elements */
-      margin-left: 0; /* Override any inherited margin */
-      padding-left: 0; /* Reset padding for the main flyout container */
-    }
-
-    /* Adjust padding for items directly within the non-collapsed flyout */
-    .side-navigation:not(.collapsed) .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 > .dropdown-item,
-    .side-navigation:not(.collapsed) .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 > .nav-item > .dropdown-toggle {
-        padding-left: 15px; /* Consistent padding for items inside flyout */
-        padding-right: 15px;
-    }
-
-    .dropdown-menu-items .nav-item, /* For nested .has-dropdown */
-    .dropdown-menu-items .sub-item { /* For direct links */
-      padding-left: 30px; /* Indent level 1 sub-items */
-      font-size: 0.9rem;
-      color: #4a4a4a;
-    }
-    /* Specific style for toggles within dropdowns */
-    .dropdown-menu-items .nav-item.has-dropdown > .dropdown-toggle {
-        padding-left: 30px;
-        font-size: 0.9rem;
-        color: #4a4a4a;
-    }
-    .dropdown-menu-items .nav-item.has-dropdown > .dropdown-toggle:hover,
-    .dropdown-menu-items .sub-item:hover {
-      background-color: #dfe4e8;
+    /* Says what this is before the headline says what happened. Small, spaced
+       and quiet - it labels the page rather than competing with the claim. */
+    .lp-eyebrow {
+      margin: 0 0 0.7rem;
+      font-size: 0.76rem; font-weight: 700;
+      letter-spacing: 0.13em; text-transform: uppercase;
       color: #005A9C;
     }
-    
-    /* Level 2 dropdown menu items */
-    .dropdown-menu-items.level-2 {
-        background-color: #e9ecef; /* Slightly different for level 2 */
+    .lp-hero h1 {
+      /* Two lines, breaking after "2D". */
+      font-size: clamp(1.75rem, 3.3vw, 2.375rem);
+      line-height: 1.14; font-weight: 700; color: #12151c;
+      margin: 0 0 1rem; letter-spacing: -0.022em;
     }
-    .dropdown-menu-items.level-2 .sub-item {
-      padding-left: 45px; /* Further indent level 2 sub-items */
-      font-size: 0.85rem;
+    .lp-hero__lead {
+      font-size: 1.08rem; line-height: 1.65; color: #4a5160; margin: 0 0 1.5rem;
     }
-    .dropdown-menu-items.level-2 .sub-item:hover {
-      background-color: #d8dde1;
+    .lp-hero__lead strong { color: #12151c; font-weight: 600; }
+
+    /* Buttons sit on a solid edge rather than a blur, so pressing one can
+       travel the height of that edge and land flush - the depth is the
+       affordance, not a decoration. --edge is the shadowed side of the key. */
+    .lp-cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: flex-start; }
+    .lp-btn {
+      --face: #005A9C;
+      --edge: #003D6B;
+      --lift: 4px;
+      display: inline-flex; align-items: center; gap: 0.5em;
+      padding: 0.65rem 1.2rem; border-radius: 9px;
+      font-size: 0.93rem; font-weight: 600; text-decoration: none;
+      border: 0; cursor: pointer;
+      background: var(--face); color: #fff;
+      box-shadow: 0 var(--lift) 0 var(--edge), 0 6px 14px rgba(3, 34, 60, 0.22);
+      transform: translateY(0);
+      transition: transform 0.09s ease, box-shadow 0.09s ease, background 0.16s ease;
     }
-    
-    .dropdown-menu-items .nav-item.active,
-    .dropdown-menu-items .sub-item.active {
-      background-color: #005A9C;
-      color: white;
+    .lp-btn:hover { color: #fff; background: #0069b5; }
+    .lp-btn:active {
+      transform: translateY(var(--lift));
+      box-shadow: 0 0 0 var(--edge), 0 1px 3px rgba(3, 34, 60, 0.25);
     }
-    .dropdown-menu-items .nav-item.active .icon,
-    .dropdown-menu-items .sub-item.active .icon {
-       color: white;
+    .lp-btn:focus-visible {
+      outline: 2px solid #0B7285; outline-offset: 3px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .lp-btn { transition: background 0.16s ease; }
     }
 
+    /* ---------- failure reel ----------
+       The pills, the clip row and their brand-colour behaviour are shared
+       with the analysis page (r1-components.css). Only the framing of the
+       video differs here, because the hero crops it into a fixed box. */
+    .lp-reel__frame {
+      border-radius: 14px; overflow: hidden; background: #0b0e13;
+      box-shadow: 0 18px 40px rgba(12, 18, 28, 0.18);
+      aspect-ratio: 16 / 10;
+    }
+    .lp-reel__frame video { width: 100%; height: 100%; display: block; object-fit: contain; }
+    .lp-reel__cap {
+      text-align: center; font-size: 0.85rem; color: #8a90a0; margin: 0.6rem 0 0;
+    }
+    /* Tighter than the analysis page - this row sits in the hero, and now
+       above the video rather than under it. */
+    .r1-reel-models { gap: 0.45rem; margin: 0 0 0.4rem; }
+    .r1-reel-model { font-size: 0.85rem; padding: 0.35rem 0.85rem 0.35rem 0.45rem; }
+    .r1-reel-model .r1-logo { width: 17px; height: 17px; }
+    .r1-reel-clips { margin-bottom: 0.8rem; }
+    .r1-reel-clip { font-size: 0.8rem; padding: 0.25rem 0.7rem; }
 
-    /* Flyout menu for collapsed state - Level 1 */
-    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items.level-1 {
+    /* ---------- stat strip ----------
+       Three facts that were three identical blue blocks. Each now carries its
+       own accent and a unit grid - one dot per episode, lit if solved - so the
+       denominator is visible rather than something to reason about.
+
+       Styled as siblings of the property cards further down: white face,
+       accent-tinted wash, accent border. The dark slab this replaced read as
+       a component borrowed from another site. */
+    /* The headline of the section, not a third row of cards. Everything that
+       made these read as cards - border, gradient, shadow, hover-lift - is
+       gone, and so are the dividers: the gap between columns separates them
+       perfectly well, and the numbers carry the weight instead of any
+       container. */
+    .lp-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2.75rem;
+      padding: 0.25rem 0 0;
+    }
+    .lp-stat {
+      display: flex; flex-direction: column;
+      padding: 0.35rem 0 0;
+    }
+
+    /* Number and label share a row, sitting on a common baseline, with the
+       grid beneath them. The label reads as a caption to the figure rather
+       than a footnote under the whole block. min-height keeps the three
+       columns' grids on one line even when a label wraps to two. */
+    .lp-stat .hd {
+      display: flex; align-items: baseline; gap: 0.65rem;
+      min-height: 3.1rem;
+    }
+    .lp-stat .n {
+      flex: none;
+      font-size: 2.5rem; font-weight: 700; line-height: 1;
+      color: var(--c); font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
+    }
+    .lp-stat .n .d {
+      font-size: 1.05rem; font-weight: 500;
+      color: color-mix(in srgb, var(--c) 32%, #94a3b8);
+    }
+
+    /* One dot per unit of the denominator. Columns are fixed so the three
+       grids share a rhythm; the row count differs because the denominators
+       do, which is the honest thing for it to show. */
+    .lp-stat .u {
+      display: grid;
+      grid-template-columns: repeat(25, 1fr);
+      gap: 2px;
+      margin: 0.15rem 0 0;
+      min-height: 34px;
+      align-content: start;
+    }
+    .lp-stat .u i {
       display: block;
-      position: absolute;
-      left: 70px; 
-      top: 0; /* Align with parent item's top */
-      width: max-content; /* Changed from min-width to allow content to define width */
-      background-color: #f8f9fa;
-      box-shadow: 3px 0 6px rgba(0,0,0,0.15);
-      border-radius: 0 5px 5px 0;
-      max-height: none; 
-      z-index: 1001;
-      padding-top: 5px;
-      padding-bottom: 5px;
-      overflow: visible; /* Allow content to overflow */
+      aspect-ratio: 1;
+      border-radius: 2px;
+      background: #e6ebf1;
+      transition: background 0.3s ease;
     }
-    /* Ensure nav-text is visible in flyouts */
-    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items .nav-text,
-    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items .dropdown-arrow {
-        display: inline-block;
-        opacity: 1;
-        transform: translateX(0);
-    }
-    .side-navigation.collapsed .nav-item.has-dropdown:hover > .dropdown-menu-items .icon {
-        margin-right: 16px; /* Restore icon margin */
+    .lp-stat .u i.on { background: var(--c); }
+
+    /* The three denominators need different numbers of rows, so the grids are
+       different heights. Pushing the label to the bottom of the (equal-height)
+       column puts all three labels on one line instead of stepping down the
+       row. */
+    .lp-stat .l {
+      flex: 1;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      line-height: 1.4;
+      color: color-mix(in srgb, var(--c) 62%, #55637a);
+      text-wrap: balance;
     }
 
-
-    /* Flyout menu for collapsed state - Level 2 */
-    .side-navigation.collapsed .dropdown-menu-items.level-1 .nav-item.has-dropdown:hover > .dropdown-menu-items.level-2 {
-      display: block;
-      position: absolute;
-      left: 100%; /* Position next to its parent flyout item */
-      top: 0; /* Align with parent item's top */
-      width: max-content; /* Changed from min-width to allow content to define width */
-      background-color: #e9ecef; /* Slightly different for level 2 flyout */
-      box-shadow: 3px 3px 6px rgba(0,0,0,0.15);
-      border-radius: 0 5px 5px 0;
-      max-height: none;
-      z-index: 1002; /* Above level 1 flyout */
-      padding-top: 5px;
-      padding-bottom: 5px;
-      overflow: visible; /* Allow content to overflow */
+    @media (prefers-reduced-motion: reduce) {
+      .lp-stat, .lp-stat .u i { transition: none; }
+      .lp-stat:hover { transform: none; }
     }
 
-
-    #main-page-content {
-      padding-left: 70px; /* Fixed padding, equivalent to collapsed sidebar width */
-      padding-top: 0;
-      /* transition: padding-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); */ /* Removed as padding-left no longer changes */
-      background-color: #ffffff;
-      width: 100%;
-      box-sizing: border-box;
+    /* Body prose inside a section. Full container width and flush left, so it
+       shares both edges with the card row below rather than sitting as a
+       narrow column floating in the middle of the section. */
+    .lp-prose {
+      margin: 0 0 2.25rem;
     }
-
-    /* Style for main release links in dropdown menu */
-    .side-navigation .dropdown-menu-items a.main-release-link {
-        display: flex !important; /* Ensure flex layout for icon and text */
-        align-items: center !important; /* Vertically align icon and text */
-        padding: 8px 15px;         /* Consistent padding, adjust as needed */
-        font-size: 0.9rem;         /* Consistent font size with other sub-items */
-        color: #4a4a4a;            /* Consistent text color */
-        text-decoration: none;
+    .lp-prose p {
+      margin: 0 0 0.9rem;
+      font-size: 1rem; line-height: 1.7; color: #4a5160;
     }
+    .lp-prose p:last-child { margin-bottom: 0; }
 
-    .side-navigation .dropdown-menu-items a.main-release-link:hover {
-        background-color: #dfe4e8; /* Consistent hover background */
-        color: #005A9C;            /* Consistent hover text color */
+    /* ---------- four properties ----------
+       Same physical key as the buttons: each card is a face resting on a
+       solid edge in its own accent, and pressing it travels the height of
+       that edge and lands flush. --lift is the edge, so the travel and the
+       edge can never disagree. */
+    /* stretch, not start: four keys of different heights sitting on their own
+       edges read as four unrelated things rather than one row */
+    .lp-props { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .lp-prop {
+      --c: #005A9C;
+      --c2: #0B7285;
+      --lift: 6px;
+      border: 1px solid color-mix(in srgb, var(--c) 18%, #e8ebee);
+      border-radius: 13px;
+      padding: 1.35rem 1.15rem 1.25rem;
+      background:
+        linear-gradient(170deg,
+          color-mix(in srgb, var(--c) 7%, #fff) 0%,
+          color-mix(in srgb, var(--c) 2%, #fff) 45%,
+          #fff 80%);
+      box-shadow:
+        0 var(--lift) 0 color-mix(in srgb, var(--c) 88%, #000),
+        0 calc(var(--lift) + 6px) 18px color-mix(in srgb, var(--c) 22%, transparent);
+      transform: translateY(0);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.2s ease;
     }
-
-    .side-navigation .dropdown-menu-items a.main-release-link > .icon {
-        margin-right: 10px;       /* Space between icon and text */
-        min-width: 20px;          /* Ensure icon has some space */
-        font-size: 0.9rem;        /* Match text size */
+    .lp-prop:nth-child(2) { --c: #1E8449; --c2: #52B788; }
+    .lp-prop:nth-child(3) { --c: #8E44AD; --c2: #C77DFF; }
+    .lp-prop:nth-child(4) { --c: #D35400; --c2: #F0932B; }
+    .lp-prop:hover {
+      border-color: color-mix(in srgb, var(--c) 38%, transparent);
+      box-shadow:
+        0 var(--lift) 0 color-mix(in srgb, var(--c) 88%, #000),
+        0 calc(var(--lift) + 10px) 26px color-mix(in srgb, var(--c) 30%, transparent);
     }
-
-    .side-navigation .dropdown-menu-items a.main-release-link > .nav-text {
-        flex-grow: 1;             /* Allow text to take remaining space */
-        opacity: 1 !important;    /* Ensure text is fully visible */
-        /* white-space: nowrap; is already on the span element via inline style */
-        display: block !important; /* Ensure block behavior and override more specific conflicting rules */
-    }
-
-    /* Active state for main release links */
-    .side-navigation .dropdown-menu-items a.main-release-link.active {
-        background-color: #005A9C;
-        color: white;
-    }
-    .side-navigation .dropdown-menu-items a.main-release-link.active > .icon {
-        color: white;
-    }
-
-    /* Rotate arrow on hover for dropdown items like "Releases" */
-    .side-navigation .nav-item.has-dropdown:hover > .dropdown-toggle .dropdown-arrow > i.fa-chevron-right {
-      transform: rotate(90deg);
-      transition: transform 0.3s ease;
-    }
-
-    section .column.has-text-centered p.is-size-5 a[href*="discord.gg"] .fab.fa-discord {
-      transition: transform 0.2s ease-in-out;
-      display: inline-block; /* Good for transform */
+    .lp-prop:active {
+      transform: translateY(var(--lift));
+      box-shadow:
+        0 0 0 color-mix(in srgb, var(--c) 88%, #000),
+        0 1px 3px color-mix(in srgb, var(--c) 26%, transparent);
     }
 
-    section .column.has-text-centered p.is-size-5 a[href*="discord.gg"]:hover .fab.fa-discord {
-      transform: scale(1.2); /* Scale up the icon on hover */
+    .lp-prop__icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 11px; margin-bottom: 0.8rem;
+      background: linear-gradient(145deg, var(--c), var(--c2));
+      color: #fff; font-size: 0.95rem;
+      box-shadow:
+        0 3px 8px color-mix(in srgb, var(--c) 34%, transparent),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    }
+    .lp-prop h3 {
+      font-size: 1.02rem; font-weight: 700; color: var(--c);
+      margin: 0 0 0.35rem; letter-spacing: -0.01em;
+    }
+    .lp-prop p { font-size: 0.86rem; line-height: 1.55; color: #4a5160; margin: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      .lp-prop { transition: box-shadow 0.2s ease, border-color 0.2s ease; }
     }
 
-    /* Hover effect for contact icons in collaborators section */
-    section.collaborators-section p.is-size-5 > a {
-      transition: transform 0.3s ease-out;
+    /* ---------- findings tabs ----------
+       The same physical key as every other button on the page. The selected
+       tab stays pressed - flush against its edge - so the current finding is
+       marked by the one thing a key can say that a colour cannot. */
+    .r1-tabs {
+      display: flex; justify-content: center; gap: 0.6rem;
+      flex-wrap: wrap; margin-bottom: 1.6rem;
+      align-items: flex-start;
+    }
+    .r1-tab {
+      --face: #005A9C;
+      --edge: #003D6B;
+      --lift: 4px;
+      border: 0; border-radius: 9px;
+      padding: 0.55rem 1.15rem;
+      font: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer;
+      background: var(--face); color: #fff;
+      box-shadow: 0 var(--lift) 0 var(--edge), 0 6px 14px rgba(3, 34, 60, 0.22);
+      transform: translateY(0);
+      transition: transform 0.09s ease, box-shadow 0.09s ease, background 0.16s ease;
+    }
+    .r1-tab:hover { background: #0069b5; }
+    .r1-tab:active,
+    .r1-tab.is-active {
+      transform: translateY(var(--lift));
+      box-shadow: 0 0 0 var(--edge), 0 1px 3px rgba(3, 34, 60, 0.25);
+    }
+    .r1-tab.is-active { background: #00457a; }
+    .r1-tab:focus-visible { outline: 2px solid #0B7285; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      .r1-tab { transition: background 0.16s ease; }
     }
 
-    section.collaborators-section p.is-size-5 > a:hover {
-      transform: translateY(-5px);
+    .r1-tab-panel {
+      border: 1px solid #e8ebee; border-radius: 14px;
+      padding: 1.6rem; background: #fff;
+    }
+    /* Left-aligned across every tab. All four claims run to three or more
+       lines, and centred text that long makes the eye hunt for the start of
+       each line - the block stays centred, the text inside it does not. */
+    .r1-tab__claim {
+      font-size: 1.02rem; line-height: 1.65; color: #333a47;
+      margin: 0 auto 1.4rem; max-width: 88ch; text-align: left;
+    }
+    .r1-tab__claim p { margin: 0 0 0.7rem; }
+    .r1-tab__claim p:last-child { margin-bottom: 0; }
+    .r1-tab__caption {
+      font-size: 0.85rem; color: #8a90a0; text-align: center;
+      margin: 0.9rem auto 0; max-width: 74ch; font-style: italic; line-height: 1.5;
+    }
+    /* Figures are built here by the chart script, then moved into the panel
+       one at a time. Off-screen rather than display:none so Chart.js can
+       measure them. */
+    #r1-tab-figures {
+      position: absolute; left: -9999px; top: 0;
+      width: 900px; visibility: hidden;
     }
 
-    section.collaborators-section p.is-size-4 > a {
-      transition: transform 0.3s ease-out;
+    /* ---------- news, as a lineage ----------
+       One rail down the left, a marker per release, a card beside it. The rail
+       is drawn on the list rather than per item so it is continuous, and it
+       stops at the last marker rather than running past it. */
+    .lp-tl {
+      list-style: none;
+      margin: 0 auto; padding: 0;
+      max-width: 760px;
+      position: relative;
+    }
+    .lp-tl__item {
+      position: relative;
+      padding-left: 62px;
+      margin-bottom: 1rem;
+    }
+    .lp-tl__item:last-child { margin-bottom: 0; }
+
+    /* The rail is drawn per item rather than once down the list, so it starts
+       under the first marker and stops at the last one instead of dangling
+       past it. Each segment runs into the marker below and is hidden by that
+       marker's fill, which keeps the line continuous. */
+    .lp-tl__item:not(:last-child)::before {
+      content: "";
+      position: absolute; left: 19px; top: 54px; bottom: -30px;
+      width: 2px; border-radius: 2px;
+      background: #dde4ec;
+    }
+    .lp-tl__item.is-current::before { background: #bcd0e2; }
+
+    .lp-tl__mark {
+      position: absolute; left: 0; top: 14px;
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.05rem; line-height: 1;
+      background: #fff;
+      border: 2px solid #e2e8f0;
+      box-shadow: 0 2px 6px rgba(12, 18, 28, 0.07);
+      z-index: 1;
+      transition: border-color 0.22s ease, transform 0.22s ease;
+    }
+    .lp-tl__item.is-current .lp-tl__mark {
+      border-color: #005A9C;
+      box-shadow: 0 0 0 4px rgba(0, 90, 156, 0.12), 0 2px 6px rgba(12, 18, 28, 0.1);
+    }
+    .lp-tl__item.is-paper .lp-tl__mark { border-color: #d8c9e8; }
+
+    .lp-tl__card {
+      border: 1px solid #eef1f5; border-radius: 12px;
+      padding: 1rem 1.15rem 1.05rem;
+      background: #fff;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+    }
+    .lp-tl__item:hover .lp-tl__card {
+      transform: translateX(3px);
+      border-color: #d9e2ec;
+      box-shadow: 0 8px 20px rgba(12, 18, 28, 0.07);
+    }
+    .lp-tl__item:hover .lp-tl__mark { transform: scale(1.06); }
+
+    .lp-tl__when {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.09em;
+      text-transform: uppercase; color: #005A9C;
+      margin-bottom: 0.3rem;
+    }
+    .lp-tl__item.is-paper .lp-tl__when { color: #8E44AD; }
+    /* The lead of each entry carries the headline, as it did on the old site,
+       so there is no separate title element to drift out of sync with it. */
+    .lp-tl__card p {
+      margin: 0; font-size: 0.9rem; line-height: 1.65; color: #4a5160;
+    }
+    .lp-tl__card p strong { color: #12151c; font-weight: 700; }
+    .lp-tl__card a {
+      color: #005A9C; font-weight: 600; text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+    .lp-tl__card a:hover { border-bottom-color: currentColor; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lp-tl__item:hover .lp-tl__card,
+      .lp-tl__item:hover .lp-tl__mark { transform: none; }
     }
 
-    section.collaborators-section p.is-size-4 > a:hover {
-      transform: translateY(-5px);
+    /* ---------- closing CTA ---------- */
+    .lp-final {
+      border: 1px solid #cfe6d8; border-radius: 16px;
+      background: linear-gradient(135deg, #f3fbf6 0%, #eef8f2 100%);
+      padding: 2.25rem 2rem; text-align: center;
+    }
+    .lp-final h2 { font-size: 1.45rem; font-weight: 700; color: #12151c; margin: 0 0 1rem; }
+    /* Body reads left-aligned like any other paragraph. Centred prose is hard
+       work past about four lines - every line starts at a different x - and
+       this block runs to eight. The heading and the buttons stay centred, so
+       the block still reads as a closing panel rather than a section. */
+    .lp-final p {
+      font-size: 1rem; color: #4a5160; margin: 0 auto 1.1rem;
+      max-width: 68ch; line-height: 1.68; text-align: left;
+    }
+    .lp-final p:last-of-type { margin-bottom: 1.6rem; }
+
+    /* ---------- citation ----------
+       A code block is the one thing on this page that is meant to be taken
+       away rather than read, so it gets a copy button rather than asking
+       anyone to select nine lines of BibTeX by hand. */
+    .lp-cite {
+      position: relative;
+      border: 1px solid #e3e7ec; border-radius: 14px;
+      background: #fbfcfd;
+      max-width: 78ch; margin: 0 auto;
+    }
+    .lp-cite pre {
+      margin: 0; padding: 1.35rem 1.5rem;
+      overflow-x: auto; background: none;
+    }
+    .lp-cite code {
+      font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+      font-size: 0.83rem; line-height: 1.65; color: #33405a;
+      white-space: pre; background: none; padding: 0;
+    }
+    /* Same physical key as every other button here, one size down - it sits
+       inside a card rather than acting as a section's call to action. */
+    .lp-cite__copy {
+      --face: #ffffff;
+      --edge: #d3dae2;
+      --lift: 3px;
+      position: absolute; top: 0.85rem; right: 0.85rem; z-index: 1;
+      display: inline-flex; align-items: center; gap: 0.4em;
+      padding: 0.4rem 0.7rem; border-radius: 8px;
+      font: inherit; font-size: 0.78rem; font-weight: 600;
+      color: #4a5568; background: var(--face);
+      border: 1px solid #e3e7ec; cursor: pointer;
+      box-shadow: 0 var(--lift) 0 var(--edge);
+      transform: translateY(0);
+      transition: transform 0.09s ease, box-shadow 0.09s ease, color 0.16s ease;
+    }
+    .lp-cite__copy:hover { color: #005A9C; }
+    .lp-cite__copy:active {
+      transform: translateY(var(--lift));
+      box-shadow: 0 0 0 var(--edge);
+    }
+    .lp-cite__copy.is-done { color: #0B7285; }
+    @media (prefers-reduced-motion: reduce) {
+      .lp-cite__copy { transition: color 0.16s ease; }
+    }
+    /* The prose citation is one long sentence rather than nine short lines, so
+       it wraps instead of scrolling sideways, and keeps clear of the button. */
+    .lp-cite--text code { white-space: pre-wrap; }
+    .lp-cite--text pre { padding-right: 5.6rem; }
+    .lp-cite__or {
+      max-width: 78ch; margin: 1.1rem auto 0.9rem;
+      color: #5b6676; font-size: 0.95rem;
     }
 
-    /* Hover effect for Email and Discord links in the 'Interested in Collaborating' section */
-    .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="mailto:"],
-    .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="discord.gg"] {
-      /* The display: inline-flex is already on the elements via inline styles, which is good for transform. */
-      transition: transform 0.3s ease-out;
+    /* A figure that carries its own argument: full section width, hairline
+       frame so it reads as evidence rather than as page furniture, and a
+       caption that says what it is proving. */
+    .lp-fig {
+      margin: 2.5rem 0 0;
     }
-
-    .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="mailto:"]:hover,
-    .publication-authors .container.is-max-desktop .column.has-text-centered p.is-size-5 > a[href*="discord.gg"]:hover {
-      transform: translateY(-5px);
+    /* A figure that opens a section sits closer to its heading than to the
+       prose it introduces, so the two read as one unit. */
+    .lp-fig--lead { margin: 1.4rem 0 2.25rem; }
+    .lp-fig img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid #e8ebee; border-radius: 14px;
+      background: #fff;
     }
-
-    /* Mobile Responsive Styles */
-    @media screen and (max-width: 768px) {
-      /* Prevent horizontal overflow and ensure full width usage */
-      html, body {
-        overflow-x: hidden;
-        width: 100%;
-        max-width: 100%;
-      }
-      
-      * {
-        box-sizing: border-box;
-      }
-      
-      /* Global text overflow prevention */
-      h1, h2, h3, h4, h5, h6, p, span, div, a {
-        word-wrap: break-word;
-        word-break: break-word;
-        hyphens: auto;
-        overflow-wrap: break-word;
-      }
-      
-      /* Prevent specific long words from breaking layout */
-      .publication-title {
-        font-size: 1.8rem !important;
-        line-height: 1.2 !important;
-      }
-      
-      /* Hide sidebar by default on mobile, make it overlay when shown */
-      .side-navigation {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        z-index: 1050;
-      }
-      
-      .side-navigation:not(.collapsed) {
-        transform: translateX(0);
-      }
-      
-      /* Adjust main content for mobile */
-      #main-page-content {
-        padding-left: 0;
-        padding-right: 0;
-        width: 100%;
-        max-width: 100vw;
-        overflow-x: hidden;
-      }
-      
-      /* Mobile navigation toggle - make it visible and positioned */
-      .mobile-nav-toggle {
-        display: block !important;
-        position: fixed;
-        top: 15px;
-        left: 15px;
-        z-index: 1060;
-        background: rgba(0, 90, 156, 0.9);
-        color: white;
-        border: none;
-        padding: 12px;
-        border-radius: 8px;
-        font-size: 18px;
-        cursor: pointer;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      }
-      
-      /* Overlay for mobile sidebar */
-      .mobile-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        z-index: 1040;
-      }
-      
-      .mobile-overlay.active {
-        display: block;
-      }
-      
-      body.mobile-nav-open .mobile-nav-toggle {
-        display: none !important;
-      }
-      
-      /* Hero section adjustments */
-      .hero {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-      }
-      
-      .hero .hero-body {
-        padding: 1.5rem 1rem;
-      }
-      
-      .hero .title.is-1 {
-        font-size: 2rem !important;
-        line-height: 1.2;
-        margin-bottom: 1rem;
-        word-wrap: break-word;
-        hyphens: auto;
-      }
-      
-      /* Collaborator logos - stack vertically on mobile */
-      .collaborator-logos {
-        flex-direction: column;
-        gap: 2rem !important;
-      }
-      
-      .collaborator-logo {
-        max-height: 60px !important;
-        max-width: 120px !important;
-      }
-      
-      /* Flip cards - single column on mobile */
-      .columns {
-        width: 100%;
-        max-width: 100%;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-      }
-      
-      .columns.is-multiline .column.is-half-tablet.is-one-third-desktop {
-        flex: none;
-        width: 100%;
-        max-width: 100%;
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-        margin: 0 auto;
-      }
-      
-      .flip-card-anchor {
-        width: 100% !important;
-        max-width: 300px;
-        height: 260px !important;
-        margin: 0 auto 20px auto;
-      }
-      
-      .flip-card-front {
-        padding: 15px !important;
-      }
-      
-      .flip-card-front .title.is-4 {
-        font-size: 1.1rem !important;
-        line-height: 1.3 !important;
-        margin-bottom: 0.75rem !important;
-        word-wrap: break-word;
-        hyphens: auto;
-      }
-      
-      .flip-card-front p {
-        font-size: 0.8rem !important;
-        line-height: 1.4 !important;
-        word-wrap: break-word;
-        hyphens: auto;
-      }
-      
-      .flip-card-back {
-        padding: 15px !important;
-      }
-      
-      .flip-card-back .title.is-4 {
-        font-size: 1.1rem !important;
-        line-height: 1.3 !important;
-        word-wrap: break-word;
-        hyphens: auto;
-      }
-      
-      .flip-card-back ul {
-        font-size: 0.75rem !important;
-        line-height: 1.4 !important;
-      }
-      
-      .flip-card-back p.description-intro {
-        word-wrap: break-word;
-        hyphens: auto;
-      }
-      
-      /* CTA Banner adjustments */
-      .cta-banner {
-        padding: 15px 45px 15px 15px !important; /* Extra right padding for close button */
-        text-align: left !important;
-        width: 100%;
-        max-width: 100%;
-        overflow: hidden;
-        box-sizing: border-box;
-      }
-      
-      .cta-banner .container {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        max-width: 100% !important;
-      }
-      
-      .cta-banner p {
-        font-size: 0.9rem !important;
-        line-height: 1.4 !important;
-        margin: 0 !important;
-        word-wrap: break-word;
-        hyphens: auto;
-        padding-right: 0;
-      }
-      
-      .cta-banner a {
-        display: inline-block !important;
-        margin-top: 8px !important;
-        margin-left: 0 !important;
-        word-wrap: break-word;
-      }
-      
-      #cta-close-btn {
-        top: 10px !important;
-        right: 10px !important;
-        width: 32px !important;
-        height: 32px !important;
-        font-size: 18px !important;
-        flex-shrink: 0;
-      }
-      
-      /* Section spacing adjustments */
-      .section {
-        padding: 2rem 1rem;
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-      }
-      
-      /* Container adjustments for mobile */
-      .container {
-        width: 100%;
-        max-width: 100%;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        margin-left: 0;
-        margin-right: 0;
-      }
-      
-      .container.is-max-desktop {
-        width: 100%;
-        max-width: 100%;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      
-      .title.is-2 {
-        font-size: 1.75rem !important;
-      }
-      
-      .title.is-3 {
-        font-size: 1.5rem !important;
-      }
-      
-      /* News section mobile optimization */
-      .news-section {
-        max-height: none;
-        overflow-y: visible;
-        padding: 1.5rem 0;
-      }
-      
-      .news-container {
-        padding: 12px;
-      }
-      
-      .news-item {
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-        padding: 12px;
-      }
-      
-      .news-icon {
-        margin-bottom: 8px;
-        margin-right: 0;
-      }
-      
-      /* Videos carousel mobile adjustments */
-      #videos-carousel .card {
-        margin: 0 5px;
-      }
-      
-      /* Citation section mobile */
-      .section#BibTeX pre {
-        font-size: 0.8rem;
-        overflow-x: auto;
-      }
-      
-      /* Contact links mobile optimization */
-      .publication-authors p.is-size-5 {
-        font-size: 0.9rem !important;
-      }
-      
-      /* Button and link touch targets */
-      .nav-toggle-btn,
-      .mobile-nav-toggle,
-      #cta-close-btn {
-        min-height: 44px;
-        min-width: 44px;
-      }
-      
-      /* Ensure proper spacing for touch */
-      .side-navigation .nav-item,
-      .side-navigation .dropdown-toggle {
-        padding: 15px 20px;
-        min-height: 48px;
-      }
-      
-      /* Mobile dropdown improvements */
-      .side-navigation .nav-item.has-dropdown > .dropdown-toggle {
-        cursor: pointer;
-        user-select: none;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-      }
-      
-      /* Disable hover CSS effects on mobile for dropdowns */
-      .side-navigation .nav-item.has-dropdown:hover > .dropdown-menu-items.level-1 {
-        display: none !important;
-      }
-      
-      /* Only show dropdown when explicitly opened via JS */
-      .side-navigation .nav-item.has-dropdown.open > .dropdown-menu-items.level-1 {
-        display: block !important;
-      }
-      
-      /* Make dropdown arrows more touch-friendly */
-      .side-navigation .dropdown-arrow {
-        padding: 8px;
-        margin-left: 5px;
-        border-radius: 4px;
-      }
-      
-      /* Improve touch targets */
-      .side-navigation .nav-item.has-dropdown {
-        position: relative;
-      }
-    }
-    
-    /* Extra small mobile devices */
-    @media screen and (max-width: 480px) {
-      .hero .title.is-1 {
-        font-size: 1.75rem !important;
-      }
-      
-      .flip-card-anchor {
-        height: 240px !important;
-        max-width: 280px;
-      }
-      
-      .section {
-        padding: 1.5rem 0.75rem;
-      }
-      
-      .container,
-      .container.is-max-desktop {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-        width: 100%;
-        max-width: 100%;
-      }
-      
-      .columns.is-multiline .column.is-half-tablet.is-one-third-desktop {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-      }
-      
-      /* Extra small CTA banner adjustments */
-      .cta-banner {
-        padding: 12px 40px 12px 12px !important;
-      }
-      
-      .cta-banner p {
-        font-size: 0.85rem !important;
-        line-height: 1.3 !important;
-      }
-      
-      #cta-close-btn {
-        width: 28px !important;
-        height: 28px !important;
-        font-size: 16px !important;
-        top: 8px !important;
-        right: 8px !important;
-      }
-      
-      .publication-title {
-        font-size: 1.6rem !important;
-      }
-    }
-
-    /* Leaderboard Table Styles */
-    .leaderboard-table-container {
-      overflow-x: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      background: white;
-    }
-
-    .leaderboard-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      font-size: 14px;
-    }
-
-    .leaderboard-table th,
-    .leaderboard-table td {
-      padding: 12px 8px;
+    .lp-fig figcaption {
+      margin: 0.9rem auto 0; max-width: 76ch;
+      font-size: 0.87rem; line-height: 1.6; color: #6b7280;
       text-align: center;
-      border: 1px solid #e5e7eb;
     }
 
-    .leaderboard-table th {
-      background: #f8f9fa;
-      font-weight: 600;
-      color: #374151;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+    /* The v1 hero effect without v1's cost. v1 rests its image at 60% width
+       and grows it to 100%, which buys the growth with permanent whitespace.
+       Here the image keeps its full column width at rest and hovering scales
+       it past the column instead - a transform, so it lifts over the prose
+       rather than reserving room or reflowing it.
+       The catch is that a transform widens the document and can raise a
+       horizontal scrollbar, so --pop is capped to what the viewport can take
+       (set in script below, since CSS cannot divide a length by a length). */
+    .lp-fig--pop { position: relative; z-index: 1; }
+    .lp-fig--pop:hover { z-index: 20; }
+    .lp-fig--pop img {
+      cursor: zoom-in; transform-origin: center center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .lp-fig--pop:hover img {
+      transform: scale(var(--pop, 1));
+      box-shadow: 0 18px 45px rgba(16, 24, 40, 0.22);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .lp-fig--pop img { transition: box-shadow 0.3s ease; }
+    }
+    /* Nothing to hover with: leave the figure exactly as it was. */
+    @media (hover: none), (pointer: coarse) {
+      .lp-fig--pop img { cursor: auto; transition: none; }
+      .lp-fig--pop:hover img { transform: none; box-shadow: none; }
     }
 
-    .rank-header,
-    .model-header {
-      background: #f1f5f9 !important;
-      font-weight: 700;
-      color: #1e293b;
+    /* ---------- collaborators ---------- */
+    .lp-collab {
+      display: flex; justify-content: center; align-items: center;
+      gap: 2.5rem; flex-wrap: wrap;
     }
-
-    .group-header {
-      font-weight: 700;
-      color: #1e293b;
-      border-left: 3px solid;
-      border-right: 3px solid;
-      text-align: center !important;
+    .lp-collab img {
+      max-height: 42px; max-width: 118px; object-fit: contain;
+      opacity: 0.7; transition: opacity 0.2s ease;
     }
+    .lp-collab a:hover img { opacity: 1; }
+    /* Between the hero and the results rather than above the footer, so the
+       generous closing-credit padding underneath it is gone - the strip sits
+       close to the section it introduces. */
+    .lp-collab-section { padding: 1rem 0 1.5rem; }
 
-    .group-header.border-purple-500 {
-      border-color: #8b5cf6;
-      background: #f3e8ff;
+    /* The header is sticky, so an anchor that scrolls a section flush to the
+       top leaves its heading pinned right under the bar. Stop short of it. */
+    #results, #play-the-maze { scroll-margin-top: 1.25rem; }
+
+
+    /* ---------- news, as a horizontal rail ----------
+       Seven releases and two accepted papers over two years is a credibility
+       claim, which is why it now sits with the collaborator logos instead of
+       above the footer: who builds this, then how long they have been at it.
+       Horizontal because the vertical timeline stood 1113px tall - far too
+       much to put in front of the results. Oldest to newest, so it reads as a
+       trajectory that arrives at this release. */
+    .lp-news-rail { padding: 0 0 1.25rem; }
+    /* overflow-x:auto clips vertically too, and the current node's halo
+       extends above the list's top edge - so the scroller needs room for
+       it or the ring gets sliced off. */
+    .lp-rail-scroll { overflow-x: auto; padding-top: 6px; }
+    .lp-rail {
+      position: relative; list-style: none; margin: 0; padding: 0;
+      display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+      min-width: 100%;
     }
-
-    .group-header.border-blue-500 {
-      border-color: #3b82f6;
-      background: #eff6ff;
+    /* The line stops at the first and last mark rather than running to the
+       edges - half a column in from each side. */
+    .lp-rail::before {
+      content: ""; position: absolute; top: 15px; height: 2px;
+      left: calc(100% / 14); right: calc(100% / 14);
+      background: linear-gradient(90deg, #e6eaf0, #c8d6e6);
     }
-
-    .group-header.border-cyan-500 {
-      border-color: #06b6d4;
-      background: #ecfeff;
-    }
-
-    .group-header.border-emerald-500 {
-      border-color: #10b981;
-      background: #ecfdf5;
-    }
-
-    .group-header.border-amber-500 {
-      border-color: #f59e0b;
-      background: #fffbeb;
-    }
-
-    .leaderboard-table .group-header {
-      text-align: center !important;
-    }
-
-    .task-header {
-      cursor: pointer;
-      transition: background-color 0.2s;
-      position: relative;
-    }
-
-    .task-header:hover {
-      background: #e5e7eb;
-    }
-
-    .task-header-content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-    }
-
-    .task-name {
-      font-weight: 600;
-      color: #374151;
-    }
-
-    .sort-icon {
-      font-size: 12px;
-      color: #9ca3af;
-      transition: color 0.2s;
-    }
-
-    .task-header.sortable:hover .sort-icon {
-      color: #6b7280;
-    }
-
-    .metric-name {
-      font-size: 10px;
-      color: #6b7280;
-      margin-top: 2px;
-    }
-
-    .wins-header {
-      background: #f1f5f9 !important;
-      font-weight: 700;
-      color: #1e293b;
-      border-left: 2px solid #6b7280;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-
-    .wins-header:hover {
-      background: #e5e7eb !important;
-    }
-
-    .wins-header-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .wins-title {
-      font-weight: 700;
-      color: #1e293b;
-    }
-
-    .wins-metric {
-      font-size: 10px;
-      color: #6b7280;
-    }
-
-    .model-row {
-      transition: background-color 0.2s;
-    }
-
-    .model-row:hover {
-      background: #f8f9fa;
-    }
-
-    .model-row.first-place {
-      background: linear-gradient(90deg, #fef3c7 0%, transparent 100%);
-    }
-
-    .model-row.second-place {
-      background: linear-gradient(90deg, #f3f4f6 0%, transparent 100%);
-    }
-
-    .model-row.third-place {
-      background: linear-gradient(90deg, #fed7aa 0%, transparent 100%);
-    }
-
-    .rank-cell {
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .rank-badge {
-      display: inline-block;
-    }
-
-    .model-cell {
-      text-align: left;
-      font-weight: 700;
-      color: #1e293b;
-    }
-
-    .model-name {
-      font-size: 16px;
-    }
-
-    .score-cell {
-      position: relative;
-    }
-
-    .score-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .score-value {
-      font-weight: 600;
-      color: #374151;
-      font-size: 15px;
-    }
-
-    .score-value.winner {
-      color: #059669;
-      font-weight: 700;
-    }
-
-    .trophy {
-      font-size: 12px;
-    }
-
-    .wins-cell {
-      font-weight: 700;
-      color: #059669;
-      font-size: 16px;
-    }
-
-    .wins-value {
-      color: #059669;
-    }
-
-    .first-in-group {
-      border-left: 2px solid #6b7280;
-    }
-
-    .last-in-group {
-      border-right: 2px solid #6b7280;
-    }
-
-    /* Legend Styles */
-    .leaderboard-legend {
-      font-size: 14px;
-    }
-
-    .legend-items {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .legend-color {
-      width: 16px;
-      height: 16px;
-      border-radius: 3px;
-      display: inline-block;
-    }
-
-    .legend-color.purple {
-      background: #8b5cf6;
-    }
-
-    .legend-color.blue {
-      background: #3b82f6;
-    }
-
-    .legend-color.cyan {
-      background: #06b6d4;
-    }
-
-    .legend-color.emerald {
-      background: #10b981;
-    }
-
-    .legend-color.amber {
-      background: #f59e0b;
-    }
-
-    .legend-metrics,
-    .legend-indicators,
-    .legend-notes {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    
-    .legend-notes a {
-      color: #2563eb;
-      text-decoration: underline;
-    }
-    
-    .legend-notes a:hover {
-      color: #1d4ed8;
-    }
-
-    /* Mobile Responsive */
-    @media screen and (max-width: 768px) {
-      .leaderboard-table {
-        font-size: 12px;
-      }
-
-      .leaderboard-table th,
-      .leaderboard-table td {
-        padding: 8px 4px;
-      }
-
-      .task-name {
-        font-size: 11px;
-      }
-
-      .metric-name {
-        font-size: 9px;
-      }
-
-      .model-name {
-        font-size: 14px;
-      }
-
-      .rank-cell {
-        font-size: 16px;
-      }
-
-      .score-value {
-        font-size: 13px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <!-- Mobile Navigation Toggle -->
-  <button class="mobile-nav-toggle" id="mobileNavToggle" style="display: none;" aria-label="Toggle mobile navigation">
-    <i class="fas fa-bars"></i>
-  </button>
-  
-  <!-- Mobile Overlay -->
-  <div class="mobile-overlay" id="mobileOverlay"></div>
-  
-<div id="side-nav" class="side-navigation collapsed">
-  <div class="logo-container">
-    <a href="index.html" class="site-title-logo">
-      <img src="static/images/multinet_no_text.png" alt="MultiNet Logo" style="height: 40px; margin-right: 8px; vertical-align: middle; border-radius: 8px;">MultiNet
-    </a>
-    <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation">
-      <i class="fas fa-bars"></i>
-    </button>
-  </div>
-  <div class="side-navigation-menu">
-    <a href="index.html" class="nav-item active">
-      <span class="icon"><i class="fas fa-home"></i></span>
-      <span class="nav-text">Home</span>
-    </a>
-
-    <!-- Releases Dropdown -->
-    <div class="nav-item has-dropdown" style="padding: 0;" 
-         onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }"
-         onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
-            <span class="icon"><i class="fas fa-microscope"></i></span> <!-- Changed icon -->
-            <span class="nav-text">Benchmark Releases</span>
-            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span> <!-- Initial arrow state -->
-        </a>
-        <div class="dropdown-menu-items level-1">
-            <!-- Multinet v1 Section -->
-            <a href="static/pages/Multinetv1.html" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-rocket"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">v1.0 - Generalist</span>
-            </a>
-            <!-- Multinet v0.2 Section -->
-            <a href="static/pages/Multinetv02.html" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-gamepad"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">v0.2 - Gameplay</span>
-            </a>
-            <!-- Multinet v0.1 Section -->
-            <a href="static/pages/Multinetv01.html" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-robot"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">v0.1 - Robotics</span>
-            </a>
-        </div>
-    </div>
-    <!-- Model Releases Dropdown -->
-    <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }"
-         onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
-            <span class="icon"><i class="fas fa-rocket"></i></span> <!-- Icon for Model Releases -->
-            <span class="nav-text">Model Releases</span>
-            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
-        </a>
-        <div class="dropdown-menu-items level-1">
-            <a href="https://github.com/eihli/mugato" target="_blank" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-microchip"></i></span>
-                <span class="nav-text" style="white-space: nowrap;">μGato</span>
-            </a>
-            <a href="https://github.com/ManifoldRG/NEKO" target="_blank" class="dropdown-item main-release-link">
-                <span class="icon"><i class="fas fa-cat"></i></span> <!-- Icon for NEKO -->
-                <span class="nav-text" style="white-space: nowrap;">NEKO</span>
-            </a>
-        </div>
-    </div>
-    <!-- Software Releases Dropdown -->
-    <div class="nav-item has-dropdown" style="padding: 0;"
-         onmouseover="if(window.innerWidth > 768) { this.classList.add('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true'); }"
-         onmouseout="if(window.innerWidth > 768) { this.classList.remove('open'); this.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false'); }">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault();">
-            <span class="icon"><i class="fas fa-code-branch"></i></span> <!-- Icon for Software Releases -->
-            <span class="nav-text">Software Releases</span>
-            <span class="dropdown-arrow"><i class="fas fa-chevron-right"></i></span>
-        </a>
-        <div class="dropdown-menu-items level-1">
-            <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" class="dropdown-item main-release-link">
-              <span class="icon"><i class="fas fa-code"></i></span>
-              <span class="nav-text" style="white-space: nowrap;">GenESIS framework</span>
-            </a>
-            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
-              <span class="icon"><i class="fab fa-github"></i></span>
-              <span class="nav-text" style="white-space: nowrap;">Data Curation Toolkit</span>
-            </a>
-            <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" class="dropdown-item main-release-link">
-              <span class="icon"><i class="fas fa-microchip"></i></span>
-              <span class="nav-text" style="white-space: nowrap;">Model Adaptations</span>
-            </a>
-        </div>
-    </div>
-    <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" class="nav-item">
-      <span class="icon"><i class="fas fa-paper-plane"></i></span>
-      <span class="nav-text">Submit Your Model</span>
-    </a>
-    <a href="static/pages/Multinet.html" class="nav-item">
-      <span class="icon"><i class="fas fa-info-circle"></i></span> <!-- Changed icon for About Multinet -->
-      <span class="nav-text">About Multinet</span> <!-- Changed text -->
-    </a>
-    <a href="#BibTeX" class="nav-item">
-      <span class="icon"><i class="fas fa-quote-right"></i></span>
-      <span class="nav-text">Citation</span>
-    </a>
-  </div>
-</div>
-
-<div id="main-page-content">
-  <!-- CTA Banner -->
-  <div id="cta-banner" class="cta-banner" style="background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%); color: white; padding: 10px 50px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: relative;">
-    <button id="cta-close-btn" style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 18px; cursor: pointer; padding: 8px; line-height: 1; opacity: 0.9; transition: all 0.3s ease; z-index: 10; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px;" title="Close banner" onclick="document.getElementById('cta-banner').style.display='none';">
-      ×
-    </button>
-    <p style="margin: 0; font-size: 1.1rem; font-weight: 500; white-space: nowrap; overflow-x: auto;">
-      Interested in evaluating your model? Follow the submission instructions <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" rel="noopener noreferrer" style="color: #90EE90; text-decoration: underline;"><i class="fab fa-github" style="margin-right: 0.3em;"></i>here</a>!
-    </p>
-  </div>
-
-  <!-- Old navbar removed, content starts here -->
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">MultiNet: Evaluating Multimodal Generalization in Next Generation Models</h1>
-            <div class="is-size-5 publication-authors">
-              <!-- Collaborators/Partners Section -->
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <p class="has-text-centered collaborators-description is-size-">Multinet is an open science initiative with contributions from leading research teams at institutions like:</p>
-          <div class="collaborator-logos">
-            <a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/fig_logo.png" alt="Fig AI Logo" class="collaborator-logo" style="max-height: 55px; max-width: 100px;">
-            </a>
-            <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/manifoldlogo.png" alt="Manifold Research Logo" class="collaborator-logo">
-            </a>
-            <a href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/mitlogo_alt.png" alt="MIT Logo" class="collaborator-logo">
-            </a>
-            <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/GeorgiaTech_RGB.png" alt="Georgia Tech Logo" class="collaborator-logo">
-            </a>
-            <a href="https://www.tufts.edu/" target="_blank" rel="noopener noreferrer" class="collaborator-link">
-              <img src="static/images/tuftslogo.jpg" alt="Tufts Logo" class="collaborator-logo">
-            </a>
-            
-          </div>
-          <br>
-          <p class="is-size-5">
-            Interested in Collaborating? Reach out to us </strong><a href="mailto:pranav@metarch.ai" style="display: inline-flex; align-items: center; text-decoration: none; vertical-align: middle;"><img src="static/images/apple mail icon.png" alt="Email" style="height: 1.8em; margin-right: 0.2em;"></a>or join the working group on
-            <a href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; text-decoration: none; color: #5865F2; font-weight: bold; vertical-align: middle;">
-              <i class="fab fa-discord" style="font-size: 1.5em; margin-right: 0.3em; color: #5865F2;"></i><span style="color: #5865F2;">Discord</span></a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-<br>
-<br>
-            
-
-<section class="section">
-  <div class="container is-max-desktop">
-      <div class="columns is-centered">
-          <div class="column">
-              <div class="content has-text-justified">
-                <h2 class="title is-3 has-text-centered">Research and Software for evaluating Next Generation Model Generalization on Diverse Multimodal Tasks </h2>
-                      <p><a href="static/pages/Multinet.html">Multinet</a> is a comprehensive benchmarking initiative for evaluating multimodal models across vision, language, and action tasks. It provides:</p>
-                      <ul style="margin-left: 2em; margin-top: 0.75em; list-style-type: disc;">
-                          <li><strong>Well-reasoned and curated set of evaluation datasets</strong> to assess multimodal understanding and action taking capabilities of SoTA multimodal models</li>
-                          <li><strong>Varied evaluation tasks</strong> including Common Sense Reasoning, Object Detection in the wild, Spatial Reasoning, Visual Question Answering, Robotics, and complex Multi-Agent game-playing</li>
-                          <li><strong>Open-source toolkit</strong> to standardize the process of obtaining and utilizing data from various sources and of different formats</li>
-                          <li><strong>Open-source adaptations of diverse models</strong> to various out-of-distribution task domains</li>
-                          <li><strong>Comprehensive evaluation protocols</strong> for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets</li>
-                      </ul>
-                  </p>
-              </div>
-          </div>
-      </div>
-  </div>
-</section>
-
-  <!-- Leaderboard Table Section -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="content has-text-justified">
-            <h3 class="title is-4 has-text-centered">Multinet v1.0 Leaderboard</h3>
-            <p class="has-text-centered" style="margin-bottom: 2rem;">
-              Evaluation across 7 diverse tasks across robotics, digital control, and multimodal reasoning.
-            </p>
-            
-            <div id="leaderboard-container">
-              Loading leaderboard data...
-            </div>
-            
-            <!-- Collapsible Legend -->
-            <div class="leaderboard-legend" style="margin-top: 2rem;">
-              <div class="collapsible-trigger" style="cursor: pointer; user-select: none; padding: 1rem 1.5rem; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef; display: flex; align-items: center; justify-content: space-between;">
-                <h4 class="title is-6" style="margin: 0;">Leaderboard Legend and Notes</h4>
-                <span class="collapsible-icon" style="transition: transform 0.3s ease;">▼</span>
-              </div>
-              <div class="collapsible-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
-                <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 0 0 8px 8px; border: 1px solid #e9ecef; border-top: none;">
-                  <p style="margin-bottom: 1.5rem;">
-                    To learn more about our preliminary analysis and methodology, check out our 
-                    <a href="static/pages/Multinetv1.html">V1 analysis page</a>.
-                  </p>
-                  <div class="columns">
-                    <div class="column">
-                      <h4 class="title is-6">Task Groups:</h4>
-                      <div class="legend-items">
-                        <div class="legend-item">
-                          <span class="legend-color purple"></span>
-                          <span>Robotics Control</span>
-                        </div>
-                        <div class="legend-item">
-                          <span class="legend-color blue"></span>
-                          <span>Digital Control</span>
-                        </div>
-                        <div class="legend-item">
-                          <span class="legend-color cyan"></span>
-                          <span>Spatial Reasoning</span>
-                        </div>
-                        <div class="legend-item">
-                          <span class="legend-color emerald"></span>
-                          <span>Image Classification</span>
-                        </div>
-                        <div class="legend-item">
-                          <span class="legend-color amber"></span>
-                          <span>Tool Use</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="column">
-                      <h4 class="title is-6">Metrics:</h4>
-                      <div class="legend-metrics">
-                        <div><strong>EM:</strong> Exact Match Rate (%)</div>
-                        <div><strong>F1:</strong> Macro F1 Score (%)</div>
-                        <div><strong>MAE:</strong> Mean Absolute Error</div>
-                      </div>
-                    </div>
-                    <div class="column">
-                      <h4 class="title is-6">Visual Indicators:</h4>
-                      <div class="legend-indicators">
-                        <div class="legend-item">
-                          <span class="trophy">🏆</span>
-                          <span>Best score per task</span>
-                        </div>
-                        <div><strong>Wins:</strong> Number of tasks where model scored highest</div>
-                      </div>
-                    </div>
-                    <div class="column">
-                      <h4 class="title is-6">Notes:</h4>
-                      <div class="legend-notes">
-                        <div><strong>*</strong> We did not profile GPT5 on BFCLv3 with this release. See <a href="https://gorilla.cs.berkeley.edu/leaderboard.html" target="_blank" rel="noopener noreferrer">Gorilla leaderboard</a> for BFCLv4 results.</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Flip Cards Section -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column">
-          <h2 class="title is-3 has-text-centered">Explore our Research</h2>
-          
-          <div class="columns is-multiline is-centered">
-            <!-- Card 1: MultiNet v1 -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <a href="static/pages/Multinetv1.html" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">MultiNet v1.0</h3>
-                      <p>Comprehensive benchmark to evaluate the next generation of multimodal models</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-rocket"></i></span>
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">MultiNet v1.0</h3>
-                          <p class="description-intro">Our latest benchmark release featuring:</p>
-                          <ul>
-                            <li>A comprehensive set of evaluation datasets spanning vision, language, and action</li>
-                            <li>Standardized evaluation protocols for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets</li>
-                            <li>Model adaptations of SoTA VLM, VLA, and generalist models to benchmark datasets</li>
-                            <li>Comprehensive performance comparisons</li>
-                            <li>Thorough analysis to understand model capabilities, and specific failure modes that can inform the development of the next generation of multimodal models</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <!-- Card 2: Previous Benchmark Releases (Consolidated v0.1 and v0.2) -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <div class="flip-card-anchor" style="cursor: pointer;">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">Previous Benchmark Releases</h3>
-                      <p>Comprehensive benchmarks for evaluating multimodal models across various modalities and tasks</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-chart-line"></i></span>
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Benchmark Releases</h3>
-                          <p class="description-intro">Our benchmarking efforts:</p>
-                          <ul style="list-style-type: none; padding-left: 0;">
-                            <li style="margin-bottom: 15px;">
-                              <a href="static/pages/Multinetv02.html" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>v0.2 - Gameplay:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Benchmarking models in procedurally generated game environments</span>
-                            </li>
-                            <li style="margin-bottom: 15px;">
-                              <a href="static/pages/Multinetv01.html" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>v0.1 - Robotics:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Evaluating models on real-world robotics tasks</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 3: Model Releases (Consolidated μGato and NEKO) -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <div class="flip-card-anchor" style="cursor: pointer;">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">Model Releases</h3>
-                      <p>Open-source generalist multimodal action models for research and development</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-brain"></i></span>
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Model Releases</h3>
-                          <p class="description-intro">Our model implementations:</p>
-                          <ul style="list-style-type: none; padding-left: 0;">
-                            <li style="margin-bottom: 15px;">
-                              <a href="https://github.com/eihli/mugato" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>μGato:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Simple, open-source implementation of DeepMind's Gato</span>
-                            </li>
-                            <li style="margin-bottom: 15px;">
-                              <a href="https://github.com/ManifoldRG/NEKO" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>NEKO:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">GATO-style model for image, text, RL, and robotics tasks</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 4: Software Releases (Consolidated) -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <div class="flip-card-anchor" style="cursor: pointer;">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">Software Releases</h3>
-                      <p>Open-source tools and frameworks for building and evaluating multimodal models of the future</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-tools"></i></span>
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">Software Releases</h3>
-                          <p class="description-intro">Our software contributions:</p>
-                          <ul style="list-style-type: none; padding-left: 0;">
-                            <li style="margin-bottom: 15px;">
-                              <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>Model Adaptations:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Model adaptations of SoTA VLAs to Multinet datasets, such as OpenVLA, Pi0 and Magma</span>
-                            </li>
-                            <li style="margin-bottom: 15px;">
-                              <a href="https://github.com/ManifoldRG/MultiNet" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>Toolkit:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Data curation SDK for evaluation datasets</span>
-                            </li>
-                            <li style="margin-bottom: 15px;">
-                              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/modules" target="_blank" style="color: #90EE90; text-decoration: none; font-weight: 600;">
-                                <strong>GenESIS:</strong>
-                              </a>
-                              <span style="display: block; margin-top: 5px; color: #e0e0e0;">Framework for mapping language models to actions</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          
-          
-            <!-- Card 5: About Multinet -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <a href="static/pages/Multinet.html" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">About Multinet</h3>
-                      <p>A comprehensive benchmark for evaluating Multimodal Action Models</p>
-                      <img src="static/images/multinet_logo_square copy.png" alt="Multinet Icon">
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div> <!-- Content wrapper -->
-                          <h3 class="title is-4">About Multinet</h3>
-                          <p class="description-intro">Key contributions include:</p>
-                          <ul>
-                            <li>Comprehensive set of evaluation datasets for evaluating multimodal models</li>
-                            <li>Tools for standardizing robotics and RL data</li>
-                            <li>Framework for mapping language models to actions</li>
-                            <li>Evaluation suite for multimodal models</li>
-                            <li>Open-source adaptations of diverse models to various out-of-distribution task domains</li>
-                            <li>Comprehensive evaluation protocols for profiling SoTA VLMs, VLAs, and generalist models on benchmark datasets</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <!-- Card 6: Submission guide -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <a href="https://github.com/ManifoldRG/MultiNet/tree/main/src/eval_harness" target="_blank" class="flip-card-anchor">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <h3 class="title is-4">Submit Your Model</h3>
-                      <p>Step-by-step instructions for submitting your model to the MultiNet leaderboard</p>
-                      <span class="icon is-large" style="font-size: 65px; margin-top: 10px; margin-bottom: 5px;"><i class="fas fa-paper-plane"></i></span>
-                    </div>
-                    <div class="flip-card-back">
-                      <div class="scrollable-content">
-                        <div>
-                          <h3 class="title is-4">Submit Your Model</h3>
-                          <p class="description-intro">This guide covers the complete submission process, including:</p>
-                          <ul>
-                            <li>How to implement the required dataset adapters for your model</li>
-                            <li>Preparing your environment and code using our Docker template</li>
-                            <li>Testing your model locally on sample data</li>
-                            <li>Example adapter implementations for reference</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-  
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <style>
-    /* Flip card styles */
-    .section .title.is-3.has-text-centered {
-      color: #363636; 
-      margin-bottom: 3rem; 
-      font-weight: 600; 
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-    }
-
-    .flip-card-anchor {
-      display: block;
-      width: 280px; /* Card width */
-      height: 280px; /* Card height */
-      margin: 0 auto 25px auto; /* Center horizontally, add bottom margin */
-      text-decoration: none;
+    .lp-rail__link {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      padding: 0 0.4rem; text-align: center; text-decoration: none;
       color: inherit;
     }
-    .flip-card-anchor:hover {
-      text-decoration: none;
+    .lp-rail__mark {
+      position: relative; z-index: 1;
+      width: 32px; height: 32px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: #fff; border: 2px solid #e2e8f0;
+      font-size: 0.9rem; line-height: 1;
+      transition: border-color 0.18s ease, transform 0.18s ease;
+    }
+    .lp-rail__when {
+      font-size: 0.78rem; font-weight: 700; color: #12151c;
+      letter-spacing: -0.01em;
+    }
+    .lp-rail__what { font-size: 0.72rem; line-height: 1.35; color: #8a94a6; }
+    .lp-rail__item.is-paper .lp-rail__mark { border-color: #d8c9e8; }
+    .lp-rail__item.is-paper .lp-rail__when { color: #8E44AD; }
+    /* The release this page is about, marked as the end of the line. */
+    .lp-rail__item.is-current .lp-rail__mark {
+      border-color: #005A9C; box-shadow: 0 0 0 4px rgba(0, 90, 156, 0.12);
+    }
+    .lp-rail__item.is-current .lp-rail__when { color: #005A9C; }
+    /* Scale, not translate: the mark has to stay centred on the rail line,
+       and lifting it left the line running under the circle instead of
+       through it. */
+    .lp-rail__link:hover .lp-rail__mark {
+      border-color: #005A9C; transform: scale(1.1);
+    }
+    .lp-rail__link:hover .lp-rail__when { color: #005A9C; }
+    /* Too narrow for seven columns: fix the column width and let the rail
+       scroll sideways. width:max-content keeps ::before spanning the whole
+       list rather than only the visible slice. */
+    @media screen and (max-width: 860px) {
+      .lp-rail { grid-auto-columns: 132px; width: max-content; }
     }
 
-    .flip-card {
-      background-color: transparent;
-      width: 100%; /* Takes width from anchor */
-      height: 100%; /* Takes height from anchor */
-      perspective: 1000px;
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
+    /* ---------- responsive ---------- */
+    @media screen and (max-width: 900px) {
+      .lp-hero__grid { grid-template-columns: 1fr; gap: 1.75rem; }
+      .lp-props { grid-template-columns: repeat(2, 1fr); }
     }
-
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.15); 
-      border-radius: 15px; 
-    }
-
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .flip-card-front, .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      border-radius: 15px; 
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px; /* Adjusted padding for smaller card size */
-    } 
-
-    .flip-card-front {
-      background-color: #ffffff; 
-      color: #4a4a4a; 
-      border: 1px solid #e0e0e0; 
-    }
-
-    .flip-card-front .title.is-4 {
-      color: #005A9C; 
-      margin-bottom: 0.75rem;
-      font-weight: 600;
-    }
-
-    .flip-card-front p {
-      font-size: 0.85rem; /* Slightly smaller for better fit */
-      color: #555555; 
-      line-height: 1.4;
-    }
-
-    .flip-card-front img {
-      max-width: 65px; /* Adjusted for smaller card */
-      max-height: 65px; /* Adjusted for smaller card */
-      margin-top: 10px; /* Adjusted margin */
-      margin-bottom: 5px;
-    }
-
-    .flip-card-back {
-      background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%); 
-      color: white;
-      transform: rotateY(180deg);
-      overflow: hidden; 
-    }
-    
-    .flip-card-back .scrollable-content {
-      width: 100%;
-      height: 100%;
-      overflow-y: auto;
-      padding-right: 10px; 
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start; /* Content starts from top */
-      align-items: center;
-    }
-    
-    .flip-card-back .scrollable-content > div { 
-        width: 100%;
-    }
-
-    .flip-card-back .title.is-4 {
-      color: #ffffff; 
-      margin-bottom: 10px; /* Adjusted margin */
-      font-weight: 600;
-      text-align: center; 
-      font-size: 1.25rem; /* Adjusted for smaller card */
-    }
-
-    .flip-card-back p.description-intro,
-    .flip-card-back p.single-description {
-      font-size: 0.85rem; /* Adjusted for smaller card */
-      color: #e0e0e0; 
-      line-height: 1.4; /* Adjusted line height */
-      margin-bottom: 8px;
-      font-weight: 400;
-    }
-    
-    .flip-card-back p.single-description {
-        text-align: center; 
-        margin-bottom: 10px; 
-    }
-    
-    .flip-card-back p.description-intro {
-        text-align: left; 
-        font-weight: 500; 
-    }
-
-    .flip-card-back ul {
-      font-size: 0.8rem; /* Adjusted for smaller card */
-      color: #e0e0e0;
-      line-height: 1.5; /* Adjusted line height */
-      list-style-type: disc; 
-      padding-left: 20px; 
-      margin-top: 0;
-      margin-bottom: 10px; /* Adjusted margin */
-      text-align: left;
-    }
-
-    .flip-card-back ul li {
-      margin-bottom: 4px; /* Adjusted margin */
-    }
-
-    /* Customize scrollbar for webkit browsers */
-    .scrollable-content::-webkit-scrollbar {
-      width: 6px; 
-    }
-
-    .scrollable-content::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.1); 
-      border-radius: 3px;
-    }
-
-    .scrollable-content::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.5); 
-      border-radius: 3px;
-    }
-
-    .scrollable-content::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.8); 
-    }
-
-    /* Card-specific styles */
-
-    /* Card 1 (Benchmark Releases - Blue Theme) */
-    .columns > .column:nth-child(1) .flip-card-front .title.is-4 {
-      color: #005A9C; 
-    }
-    .columns > .column:nth-child(1) .flip-card-back {
-      background: linear-gradient(135deg, #005A9C 0%, #003D6B 100%);
-    }
-
-    /* Card 2 (Model Releases - Purple Theme) */
-    .columns > .column:nth-child(2) .flip-card-front .title.is-4 {
-      color: #8E44AD; 
-    }
-    .columns > .column:nth-child(2) .flip-card-back {
-      background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); 
-    }
-
-    /* Card 3 (Software Releases - Slate Blue Theme) */
-    .columns > .column:nth-child(3) .flip-card-front .title.is-4 {
-      color: #34495E; 
-    }
-    .columns > .column:nth-child(3) .flip-card-back {
-      background: linear-gradient(135deg, #34495E 0%, #2C3E50 100%); 
-    }
-
-    /* Card 4 (Dataset Specification - Red Theme) */
-    .columns > .column:nth-child(4) .flip-card-front .title.is-4 {
-      color: #C0392B; 
-    }
-    .columns > .column:nth-child(4) .flip-card-back {
-      background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); 
-    }
-
-    /* Card 5 (About Multinet - Orange Theme) */
-    .columns > .column:nth-child(5) .flip-card-front .title.is-4 {
-      color: #D35400; 
-    }
-    .columns > .column:nth-child(5) .flip-card-back {
-      background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); 
+    @media screen and (max-width: 620px) {
+      .lp-stats { grid-template-columns: 1fr; gap: 1.75rem; }
+      .lp-props { grid-template-columns: 1fr; }
+      .lp-tl__item { padding-left: 52px; }
+      .lp-tl__mark { width: 34px; height: 34px; font-size: 0.95rem; }
+      .lp-tl::before { left: 16px; }
+      .lp-section { padding: 2.5rem 0; }
+      .r1-tab-panel { padding: 1.1rem 0.9rem; }
+      .lp-collab { gap: 1.5rem; }
     }
   </style>
 
+  <!-- Mobile-only overrides. The media attribute means desktop never
+       applies these rules at all - see the header of the file. This
+       has to sit AFTER the inline style block above, not with the
+       other stylesheet links: same-specificity rules are settled by
+       document order, and the inline block was winning the ties. -->
+  <link rel="stylesheet" href="static/css/mn-mobile.css?v=m4"
+        media="screen and (max-width: 1023px)">
+</head>
 
-  <section class="news-section" style="padding: 10px 0;">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered" style="margin-top: 0; margin-bottom: 0;">
-        <div class="column" style="padding-top: 0; padding-bottom: 0;">
-          <div class="content has-text-justified" style="margin-bottom: 0;">
-            <h2 class="title is-3 has-text-centered" style="margin-bottom: 1rem;">News</h2>
-            <div class="news-container" style="padding: 15px;">
-              <div class="news-item">
-                <div class="news-icon">🌟</div>
-                <div class="news-content">
-                  <p><strong>Multinet v1.0 released!</strong> We release our most comprehensive benchmark yet - evaluating a SoTA VLM, VLA, and generalist models on a wide variety of multimodal understanding and action datasets. Read more <a href="static/pages/Multinetv1.html">here</a>.</p>
-                </div>
-              </div>
-              <div class="news-item">
-                <div class="news-icon">🏆</div>
-                <div class="news-content">
-                  <p><strong>Multinet v0.2 released!</strong> We systematically profile state-of-the-art VLAs and VLMs perform in procedurally generated OOD game environments. Read more about our recent release <a href="static/pages/Multinetv02.html">here</a>.</p>
-                </div>
-              </div>
-              <div class="news-item">
-                <div class="news-icon">🏅</div>
-                <div class="news-content">
-                  <p><strong>Paper accepted at ICML 2025!</strong> Our paper detailing the Open-Source contributions of Multinet that benefit the AI community has been accepted at the <a href="https://codeml-workshop.github.io/codeml2025/" target="_blank">CodeML Workshop</a> at ICML 2025! Read our paper <a href="static/pdfs/An Open-Source Software Toolkit & Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank">here</a>.</p>
-                </div>
-              </div>
-              <div class="news-item">
-                <div class="news-icon">🎉</div>
-                <div class="news-content">
-                  <p><strong>Multinet v0.1 released!</strong> How well do state-of-the-art VLMs and VLAs perform on real-world robotics tasks? Read more on our <a href="static/pages/Multinetv01.html">release Page</a>.</p>
-                </div>
-              </div>
-              <div class="news-item">
-                <div class="news-icon">🚀</div>
-                <div class="news-content">
-                  <p><strong>Introducing Multinet!</strong> A comprehensive benchmark for evaluating multimodal generalization in next generation models. <a href="static/pages/Multinet.html">Learn more here</a>.</p>
-                </div>
-              </div>
-              </div>
-            </div>
+<body class="play-focus-keys" data-mn-page="home">
+<div id="mn-nav"></div>
+
+<div id="main-page-content">
+  <div id="mn-cta"></div>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="lp-hero">
+    <div class="lp-wrap">
+      <div class="lp-hero__grid">
+        <div>
+          <p class="lp-eyebrow">MultiNet v2.0-Gridworld</p>
+          <h1>Agentic Behavior in 2D Mazes: Previewing a Multi-Domain Benchmark</h1>
+          <!-- The eyebrow names the release; the headline says what it is about;
+               the result goes below, mazes first so there is no doubt what the
+               models were measured on. -->
+          <p class="lp-hero__lead">
+            We put 3 highly capable models in 50 simple 2-dimensional mazes each. Claude Opus 4.8,
+            Kimi K2.6, and Qwen 3.6-27B together solved just 6 out of 150 maze runs, and 45 out of
+            the 50 mazes were not solved by any model.
+          </p>
+          <div class="lp-cta-row">
+            <a class="lp-btn" href="#results">
+              <i class="fas fa-chart-bar"></i> Results
+            </a>
+            <a class="lp-btn" href="#play-the-maze">
+              <i class="fas fa-gamepad"></i> Play a maze
+            </a>
+            <a class="lp-btn" href="https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/" target="_blank" rel="noopener noreferrer">
+              Read the technical report
+            </a>
           </div>
+        </div>
+
+        <!-- Controls above the video, caption below: you choose what to watch
+             before it plays rather than discovering afterwards that you could. -->
+        <div class="lp-reel">
+          <div class="r1-reel-models" id="r1-reel-models"></div>
+          <div class="r1-reel-clips" id="r1-reel-clips"></div>
+          <div class="lp-reel__frame">
+            <video id="r1-reel-video" autoplay loop muted playsinline preload="metadata"></video>
+          </div>
+          <p class="lp-reel__cap">A few examples of models failing the mazes</p>
         </div>
       </div>
     </div>
   </section>
 
-  <style>
-    .video-container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 0 15px;
-    }
-
-    .responsive-video {
-      width: 100%;
-      max-width: 720px;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 4px;
-    }
-
-    .news-section {
-      padding: 10px 0;
-      max-height: 350px;
-      overflow-y: auto;
-    }
-
-    .news-title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    .news-container {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      background-color: #f5f5f5;
-      padding: 15px;
-      border-radius: 5px;
-    }
-
-    .news-item {
-      display: flex;
-      align-items: center;
-      padding: 8px;
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .news-icon {
-      font-size: 24px;
-      margin-right: 10px;
-    }
-
-    .news-content {
-      flex-grow: 1;
-    }
-
-    .news-content a {
-      color: blue;
-      text-decoration: none;
-    }
-
-    .news-content a:hover {
-      text-decoration: underline;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-    }
-
-    th, td {
-      padding: 12px 16px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-
-    th {
-      background-color: #f2f2f2;
-      font-weight: bold;
-    }
-
-    tr:hover {
-      background-color: #f5f5f5;
-    }
-
-    caption {
-      font-style: italic;
-      margin-top: 8px;
-    }
-  </style>
-
-  <style>
-    .videos-section .title.is-2 { /* Main section title "Videos" */
-      margin-bottom: 1rem; 
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-      font-weight: 600;
-    }
-    .videos-section .is-size-5 { /* Paragraph below title */
-      margin-bottom: 2.5rem !important; /* More space before carousel */
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-    }
-    #videos-carousel .card {
-      margin: 0 10px; /* Spacing between cards in the carousel */
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1); 
-      border-radius: 10px; 
-      background-color: #fff;
-    }
-    #videos-carousel .card-image figure.image { /* Ensure figure itself is rounded for overflow hidden */
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-      overflow: hidden; 
-    }
-    #videos-carousel .card-image iframe {
-      display: block; /* remove extra space below iframe */
-    }
-    #videos-carousel .card-content {
-      padding: 1.25rem; 
-    }
-    #videos-carousel .card-content .title.is-5 {
-      margin-bottom: 0; 
-      font-weight: 600;
-      color: #363636;
-      font-family: "Google Sans", "Noto Sans", "Castoro", sans-serif;
-    }
-    /* Styling for Bulma Carousel arrows - making them more visible */
-    #videos-carousel .carousel-nav-left,
-    #videos-carousel .carousel-nav-right {
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.6);
-        color: white;
-        top: calc(50% - 20px - 30px); /* Adjust for card content height, (half of arrow height) - (half of approx card-content height if iframe is dominant)  */
-    }
-    #videos-carousel .carousel-nav-left {
-        left: 10px; /* Position arrow 10px from the left edge */
-    }
-    #videos-carousel .carousel-nav-right {
-        right: 10px; /* Position arrow 10px from the right edge */
-    }
-    #videos-carousel .carousel-nav-left:hover,
-    #videos-carousel .carousel-nav-right:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-    }
-    #videos-carousel .carousel-nav-left .icon,
-    #videos-carousel .carousel-nav-right .icon {
-        font-size: 1.2rem;
-    }
-     /* Hide default dots, if any specific styling for them is needed, it can be added here */
-    #videos-carousel .carousel-dots {
-      margin-top: 1rem; /* Add some space if dots are visible */
-      /* display: none; */ /* Uncomment to hide dots */
-    }
-    #videos-carousel .carousel-dots .carousel-dot {
-        background-color: rgba(0,0,0,0.2); /* Lighter dots */
-    }
-    #videos-carousel .carousel-dots .carousel-dot.is-active {
-        background-color: rgba(0,0,0,0.6); /* Darker active dot */
-    }
-
-  </style>
-
-
-  <style>
-    .collaborators-section {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-      /* background-color: #f8f9fa; */ /* Light, almost off-white background for subtle distinction - REMOVED */
-      /* border-top: 1px solid #e9ecef; */ /* Subtle top border - REMOVED */
-      /* border-bottom: 1px solid #e9ecef; */ /* Subtle bottom border - REMOVED */
-    }
-
-    .collaborators-description { /* Renamed from collaborators-tagline and applied to the new paragraph */
-      margin-bottom: 3.5rem; /* Space below description, before logos */
-      color: #4a4a4a; /* Bulma's default text color, or a custom one like #495057 */
-      line-height: 1.5;
-    }
-
-    .collaborator-logos {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem; /* Reduced gap to fit all logos on one line */
-      overflow-x: auto; /* Allow horizontal scrolling if needed on very small screens */
-    }
-
-    .collaborator-link {
-      display: inline-block; /* To allow transform and contain the image properly */
-      transition: transform 0.3s ease-out; /* Smooth transition for hover on the link */
-    }
-
-    .collaborator-link:hover {
-      transform: translateY(-5px); /* Slight lift effect on hover */
-    }
-
-    .collaborator-logo {
-      max-height: 75px;
-      max-width: 140px; /* Reduced width to ensure all logos fit on one line */
-      object-fit: contain;
-      opacity: 0.8; /* Start slightly transparent */
-      transition: opacity 0.3s ease-out; /* Smooth transition for opacity */
-      flex-shrink: 0; /* Prevent logos from shrinking too much */
-    }
-
-    .collaborator-link:hover .collaborator-logo {
-      opacity: 1; /* Full opacity on hover */
-    }
-
-    /* Responsive adjustments for tablets and smaller */
-    @media screen and (max-width: 768px) {
-      .collaborators-description {
-        margin-bottom: 2.5rem;
-      }
-      .collaborator-logos {
-        gap: 1.5rem; /* Reduced gap for smaller screens */
-      }
-      .collaborator-logo {
-        max-height: 65px; /* Slightly smaller logos on tablets */
-        max-width: 120px;
-      }
-    }
-    
-    /* Responsive adjustments for mobile phones */
-    @media screen and (max-width: 480px) {
-      .collaborator-logos {
-        gap: 1rem; /* Further reduced gap for very small screens */
-      }
-      .collaborator-logo {
-        max-height: 55px;
-        max-width: 100px;
-      }
-    }
-  </style>
-
-  <!-- Videos Section -->
-  <section class="section videos-section">
-    <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Research Talks & Demos</h2>
-      <p class="has-text-centered is-size-5" style="margin-bottom: 2rem;">
-        Explore our collection of presentations showcasing Multinet's vision, progress, and development journey!
+  <!-- ==================== COLLABORATORS ====================
+       Above the results rather than by the footer: who built this is context
+       a reader wants before the numbers, not after them. Sized down to a
+       credibility band - smaller logos, a label rather than a sentence - so
+       it backs the hero up instead of competing with it. -->
+  <section class="lp-collab-section">
+    <div class="lp-wrap">
+      <p class="lp-sub" style="margin-bottom: 1.5rem;">
+        An open science initiative with contributions from research teams at:
       </p>
-      <div id="videos-carousel" class="carousel">
-        <div class="item-1">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9">
-                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/wWuAdrMP1cg?t=1540" title="YouTube video player for latest presentation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              </figure>
+      <div class="lp-collab">
+        <a href="https://metarch.ai/" target="_blank" rel="noopener noreferrer"><img src="static/images/fig_logo.png" alt="Fig"></a>
+        <a href="https://www.manifoldrg.com/" target="_blank" rel="noopener noreferrer"><img src="static/images/manifoldlogo.png" alt="Manifold Research"></a>
+        <a href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/mitlogo_alt.png" alt="MIT"></a>
+        <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/GeorgiaTech_RGB.png" alt="Georgia Tech"></a>
+        <a href="https://www.tufts.edu/" target="_blank" rel="noopener noreferrer"><img src="static/images/tuftslogo.jpg" alt="Tufts University"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEWS ==================== -->
+  <!-- Oldest to newest, so it reads as a trajectory arriving at this
+       release. Each node links straight to that milestone. -->
+  <section class="lp-news-rail">
+    <div class="lp-wrap">
+      <p class="lp-sub" style="margin-bottom: 1.5rem;">MultiNet milestones over the past 2 years:</p>
+      <div class="lp-rail-scroll">
+        <ol class="lp-rail">
+            <li class="lp-rail__item">
+              <a class="lp-rail__link" href="static/pages/Multinet.html">
+                <span class="lp-rail__mark" aria-hidden="true">🚀</span>
+                <span class="lp-rail__when">Introduction</span>
+                <span class="lp-rail__what">MultiNet announced</span>
+              </a>
+            </li>
+            <li class="lp-rail__item">
+              <a class="lp-rail__link" href="static/pages/Multinetv01.html">
+                <span class="lp-rail__mark" aria-hidden="true">🤖</span>
+                <span class="lp-rail__when">v0.1</span>
+                <span class="lp-rail__what">Real-world robotics</span>
+              </a>
+            </li>
+            <li class="lp-rail__item">
+              <a class="lp-rail__link" href="static/pages/Multinetv02.html">
+                <span class="lp-rail__mark" aria-hidden="true">🎮</span>
+                <span class="lp-rail__when">v0.2</span>
+                <span class="lp-rail__what">Procedural game worlds</span>
+              </a>
+            </li>
+            <li class="lp-rail__item is-paper">
+              <a class="lp-rail__link" href="static/pdfs/An Open-Source Software Toolkit &amp; Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener noreferrer">
+                <span class="lp-rail__mark" aria-hidden="true">🏅</span>
+                <span class="lp-rail__when">ICML 2025</span>
+                <span class="lp-rail__what">CodeML workshop</span>
+              </a>
+            </li>
+            <li class="lp-rail__item">
+              <a class="lp-rail__link" href="static/pages/Multinetv1.html">
+                <span class="lp-rail__mark" aria-hidden="true">📊</span>
+                <span class="lp-rail__when">v1.0</span>
+                <span class="lp-rail__what">Comprehensive suite</span>
+              </a>
+            </li>
+            <li class="lp-rail__item is-paper">
+              <a class="lp-rail__link" href="https://arxiv.org/abs/2512.11315" target="_blank" rel="noopener noreferrer">
+                <span class="lp-rail__mark" aria-hidden="true">🎓</span>
+                <span class="lp-rail__when">CVPR 2026</span>
+                <span class="lp-rail__what">MMFM workshop</span>
+              </a>
+            </li>
+            <li class="lp-rail__item is-current">
+              <a class="lp-rail__link" href="https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/" target="_blank" rel="noopener noreferrer">
+                <span class="lp-rail__mark" aria-hidden="true">🧩</span>
+                <span class="lp-rail__when">v2.0-Gridworld</span>
+                <span class="lp-rail__what">Agentic maze tasks</span>
+              </a>
+            </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RESULTS ====================
+       Three zoom levels of one answer: the run in three numbers, then per
+       model, then per episode. They were split across the page before, which
+       made the strip read as decoration rather than as the headline of this
+       section. -->
+  <section class="lp-section" id="results">
+    <div class="lp-wrap">
+      <h2 class="lp-h2" style="margin-bottom: 1.75rem;">Frontier Model Performance</h2>
+
+      <!-- One dot per episode, lit if it was solved. A percentage bar asks you
+           to work the ratio out; a grid of 150 with 6 lit is the ratio. The
+           numbers and labels are here in full, so the strip is correct before
+           lp_headline_stats.js touches it. -->
+      <div class="lp-stats">
+        <div class="lp-stat" data-value="6" data-total="150" style="--c: #005A9C">
+          <span class="hd"><span class="n"><span class="v">6</span><span class="d"> / 150</span></span><span class="l">Episodes solved</span></span>
+          <span class="u" aria-hidden="true"></span>
+        </div>
+        <div class="lp-stat" data-value="5" data-total="50" style="--c: #0B7285">
+          <span class="hd"><span class="n"><span class="v">5</span><span class="d"> / 50</span></span><span class="l">Mazes solved</span></span>
+          <span class="u" aria-hidden="true"></span>
+        </div>
+        <div class="lp-stat" data-value="0" data-total="105" data-zero style="--c: #D35400">
+          <span class="hd"><span class="n"><span class="v">0</span><span class="d"> / 105</span></span><span class="l">Switch-gate episodes solved</span></span>
+          <span class="u" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div class="lp-subsection">
+        <div id="r1-results-container">Loading results&hellip;</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== PER-MAZE GRID ====================
+       Its own section rather than a subsection of Results: the two answer
+       different questions - how well did each model do, versus which mazes
+       were hard - and the grid is wide enough to need the room. -->
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <h2 class="lp-h2">How far did the models get in each of the mazes?</h2>
+      <p class="lp-sub">
+        Each column is a maze and each row a model, with the mazes ranked left to right by how
+        many actions the shortest solution takes. Colour is how far toward the goal the model got,
+        and the stars mark the six solves - all of them among the shortest mazes.
+      </p>
+      <div id="r1-episode-grid"></div>
+    </div>
+  </section>
+
+  <!-- ==================== PLAY ==================== -->
+  <section class="lp-section" id="play-the-maze">
+    <div class="lp-wrap lp-wrap--wide">
+      <h2 class="lp-h2">Do you think you can beat frontier models on 2D mazes?</h2>
+      <p class="lp-sub">
+        Try out some of the mazes the models were evaluated on, and see how you fare!
+      </p>
+
+      <div class="r1-demo-slot">
+        <!-- No description, task id or outer nav: the board is meant to be
+             read, not annotated, and it carries its own < > nav. play.js
+             null-guards every element removed here. -->
+        <div id="error"></div>
+
+        <div class="play-host" id="play-host" tabindex="0" aria-label="MultiNet playable maze">
+          <div id="splash">
+            <div>
+              <h1>MultiNet v2.0-Gridworld</h1>
+              <p>Can you solve what frontier models cannot?</p>
+              <button type="button" id="splash-play">Press Enter to play</button>
             </div>
           </div>
-        </div>
-        <div class="item-2">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9">
-                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/A6a2FIutCqY" title="YouTube video player for SPC talk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              </figure>
+
+          <div class="card" id="card">
+            <div class="topbar">
+              <div>
+                <div class="brand">MultiNet v2.0-Gridworld</div>
+                <div class="task-id" id="task-id"></div>
+              </div>
+              <div class="nav">
+                <button type="button" id="prev">&lt;</button>
+                <button type="button" id="next">&gt;</button>
+              </div>
+            </div>
+
+            <div class="board">
+              <aside class="rail">
+                <h2 class="section">Task</h2>
+                <p id="task-text"></p>
+                <ul class="play-progress" id="progress"></ul>
+              </aside>
+
+              <div class="stage">
+                <img id="grid" alt="MiniGrid">
+                <div id="end">
+                  <div class="panel">
+                    <h2 id="end-title"></h2>
+                    <p id="end-steps"></p>
+                    <p id="end-score"></p>
+                    <p id="end-frame"></p>
+                    <table class="compare">
+                      <thead>
+                        <tr><th>Player</th><th>Result</th></tr>
+                      </thead>
+                      <tbody id="end-rows"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <aside class="rail right">
+                <h2 class="section muted">Status</h2>
+                <div class="stat facing" id="facing"></div>
+                <div class="stat carrying" id="carrying"></div>
+
+                <h2 class="section muted" style="margin-top: 18px">Controls</h2>
+                <div class="ctrl" id="controls"></div>
+              </aside>
+            </div>
+
+            <div class="hint">
+              <div class="hint-main">Solve the task using only the information visible in the maze.</div>
+              <div class="hint-meta">R to reset</div>
             </div>
           </div>
-        </div>
-        <div class="item-3">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9">
-                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/TnIHF2EbGbA" title="YouTube video player for Manifold CRC 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              </figure>
-            </div>
-          </div>
-        </div>
-        <div class="item-4">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9">
-                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/DzkaDwB71ZM" title="YouTube video player for Manifold CRC 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              </figure>
-            </div>
-          </div>
-        </div>
-        <div class="item-5">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9">
-                <iframe class="has-ratio" width="560" height="315" src="https://www.youtube.com/embed/nzaux0RE6Ck?si=NzGTa0JWG0XeZ5T4" title="YouTube video player for Manifold CRC 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              </figure>
+
+          <div id="overlay" class="play-overlay" hidden>
+            <div class="play-overlay-card" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+              <div class="play-overlay-head">
+                <h3 id="overlay-title"></h3>
+                <button type="button" id="overlay-close" aria-label="Close">Esc</button>
+              </div>
+              <div id="overlay-body" class="play-overlay-body"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
   </section>
 
-  
+  <!-- ==================== WHY MAZES ==================== -->
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <h2 class="lp-h2">The Evaluation Environment: Why Mazes?</h2>
 
-  <!-- BibTeX Section -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title has-text-centered">Citation</h2>
-      <pre><code>@article{guruprasad2025multinet,
-  author = {Pranav Guruprasad and Sudipta Chowdhury and Harshvardhan Sikka and Mridul Sharma and Helen Lu and Sean Rivera and Aryan Khurana and Yangyue Wang},
-  title = {MultiNet v1.0: A Comprehensive Benchmark for Evaluating Multimodal Reasoning and Action Models Across Diverse Domains},
-  journal = {Manifold Research Publications},
-  year = {2025},
-  note = {https://multinet.ai/static/pages/Multinetv1.html},
-  doi = {10.5281/zenodo.17404313}
+      <!-- Directly under the heading: the section argues for a substrate, so it
+           shows what that substrate is before the argument starts. The figure
+           carries its own title and description, so it takes no figcaption -
+           one would only repeat what is already inside it. -->
+      <figure class="lp-fig lp-fig--lead lp-fig--pop">
+        <img src="static/images/maze_figure.png?v=r9i"
+             alt="Four variations of one 8x8 maze showing mechanisms added in stages: bare topology, then a key and door, then a switch and gate, then distractors, with the BFS-optimal route drawn as a dotted line. Below, the dependency chain: red key, red door, switch, gate, blue key, blue door, goal."
+             width="3200" height="1551" loading="lazy" decoding="async">
+      </figure>
+
+      <!-- The design first, the justification second. The four cards below used
+           to arrive before a reader knew what was being justified. -->
+      <div class="lp-prose">
+        <p>
+          With MultiNet v2.0 we aim to build interactive environments that represent real-world
+          scenarios. At the same time we are keen to keep the setup controllable, which will allow
+          us to deterministically vary parameters in our environment in order to make it easier or
+          more difficult for models to succeed in.
+        </p>
+        <p>
+          The capabilities we aim to benchmark are long-horizon action taking and causal reasoning,
+          which involves various sub-capabilities such as planning, action execution, error
+          recovery, visual object association, and so much more.
+        </p>
+        <p>
+          A simple underlying substrate that brings all these aspects together for an environment
+          and benchmarking task is a maze with mechanisms. Moreover, this setup helps us identify
+          and separate different failure modes in agents, such as not working out how to operate a
+          mechanism, messing up the order of operation of mechanisms, or losing its way and not
+          recovering - each of which requires a very different fix. Four properties that mazes as an
+          underlying representation possess, which are highly valuable to us as we build towards
+          this vision:
+        </p>
+      </div>
+      <div class="lp-props">
+        <div class="lp-prop">
+          <span class="lp-prop__icon"><i class="fas fa-lightbulb"></i></span>
+          <h3>Knowledge-free</h3>
+          <p>No prior knowledge required - no API familiarity, no jargon, and no domain-specific rules.
+             Failures here cannot be blamed on unfamiliarity of interface.</p>
+        </div>
+        <div class="lp-prop">
+          <span class="lp-prop__icon"><i class="fas fa-dice"></i></span>
+          <h3>Generative</h3>
+          <p>No fixed answer key to contaminate, and difficulty scales with the models instead of saturating.</p>
+        </div>
+        <div class="lp-prop">
+          <span class="lp-prop__icon"><i class="fas fa-layer-group"></i></span>
+          <h3>Projectable</h3>
+          <p>The same maze can be re-rendered in language or 3D or many other domains, quantifying cross-domain
+             generalization. For the full version of the benchmark, we will be expanding to multiple other
+             domains.</p>
+        </div>
+        <div class="lp-prop">
+          <span class="lp-prop__icon"><i class="fas fa-ruler-combined"></i></span>
+          <h3>Verifiable</h3>
+          <p>BFS gives the exact optimal path from any state - an objective difficulty scale, partial credit,
+             and the ability to call one move strictly wrong.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FINDINGS ==================== -->
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <h2 class="lp-h2" style="margin-bottom: 2rem;">Findings and Analysis</h2>
+
+      <div class="r1-tabs" id="r1-tabs"></div>
+      <div class="r1-tab-panel" id="r1-tab-panel">
+        <!-- a div, not a p: the Exploration failure tab fills this with
+             paragraphs, which a p cannot legally contain -->
+        <div class="r1-tab__claim"></div>
+        <div class="r1-tab__figure"></div>
+        <p class="r1-tab__caption"></p>
+      </div>
+
+      <p style="text-align: center; margin-top: 1.75rem;">
+        <a class="lp-btn" href="https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/" target="_blank" rel="noopener noreferrer">
+          Read the technical report &rarr;
+        </a>
+      </p>
+
+      <!-- Figures live here until a tab claims them. Keeping every chart in
+           one hidden store means the tab script never has to know how any
+           individual figure is built. -->
+      <div id="r1-tab-figures" aria-hidden="true">
+        <div data-figure="r1-switch-funnel">
+          <div id="r1-switch-funnel"></div>
+        </div>
+        <div data-figure="r1-inversion-chart">
+          <div class="r1-chart-stage" style="height: 300px;"><canvas id="r1-inversion-chart"></canvas></div>
+        </div>
+        <div data-figure="r1-quarter-chart">
+          <div class="r1-metric-buttons" id="r1-quarter-metrics" style="justify-content: center; margin-bottom: 1rem;"></div>
+          <div class="r1-chart-stage" style="height: 320px;"><canvas id="r1-quarter-chart"></canvas></div>
+          <!-- the chart script writes a per-view hint here, so this doubles
+               as the caption for the Failure styles tab -->
+          <p id="r1-quarter-note" class="r1-tab__caption"></p>
+        </div>
+        <div data-figure="r1-thinking-chart">
+          <div class="r1-chart-stage" style="height: 300px;"><canvas id="r1-thinking-chart"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <div class="lp-final">
+        <h2>How does your agent do on cross-domain, multimodal, long-horizon tasks?</h2>
+        <p>
+          If you build models or agents, or work on benchmarking and evaluation, we would love to
+          hear from you - whether that means getting your model on our MultiNet v2.0 benchmark,
+          contributing to the environments we are building, or working with us on what comes after!
+        </p>
+        <div class="lp-cta-row" style="justify-content: center;">
+          <!-- Same Notion form as the CTA banner and the nav's "Evaluate Your Model"
+               entry (SIGNUP in mn-shell.js) - update all three together. -->
+          <a class="lp-btn" href="https://sparkly-broccoli-3c7.notion.site/3bf4b1d3c487800596bbe4a150962cc0"
+             target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-paper-plane"></i> Evaluate your model
+          </a>
+          <a class="lp-btn" href="mailto:pranav@fig.inc?subject=Collaborating%20on%20MultiNet%20v2.0">
+            <i class="fas fa-envelope"></i> Work with us
+          </a>
+          <a class="lp-btn" href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-discord"></i> Join the Discord
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CITATION ==================== -->
+  <!-- Last section before the footer, which is where anyone looking for a
+       BibTeX block goes first. The nav's Citation entry points at #citation. -->
+  <section class="lp-section lp-section--tight" id="citation">
+    <div class="lp-wrap">
+      <h2 class="lp-h2">Citation</h2>
+      <p class="lp-sub">Please cite this work as:</p>
+
+      <div class="lp-cite lp-cite--text">
+        <button type="button" class="lp-cite__copy" data-copy-target="lp-cite-plain">
+          <i class="far fa-copy" aria-hidden="true"></i> <span>Copy</span>
+        </button>
+        <pre id="lp-cite-plain"><code>Guruprasad, P., Rivera, S., Lu, H., Jain, A., Ren, H. and Sikka, H. (2026) Agentic behavior in 2D mazes: previewing a multi-domain benchmark. Available at: https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark</code></pre>
+      </div>
+
+      <p class="lp-cite__or">Or use the BibTeX citation</p>
+
+      <div class="lp-cite">
+        <button type="button" class="lp-cite__copy" data-copy-target="lp-bibtex">
+          <i class="far fa-copy" aria-hidden="true"></i> <span>Copy</span>
+        </button>
+        <pre id="lp-bibtex"><code>@online{multinet_v2_gridworld_technical_report_2026,
+  title   = {Agentic behavior in 2D mazes: previewing a multi-domain benchmark},
+  author  = {Pranav Guruprasad and Sean Rivera and Helen Lu and Arushi Jain and
+             Hangliang Ren and Harshvardhan Sikka},
+  year    = {2026},
+  url     = {www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark},
+  note    = {MultiNet v2.0, GridWorld domain}
 }</code></pre>
+      </div>
     </div>
   </section>
 
@@ -2262,385 +1146,86 @@
       <div class="columns is-centered">
         <div class="column is-8">
           <div class="content" style="color: #fff;">
-            <div class="buttons is-centered mb-4">
-              <a href="https://github.com/ManifoldRG/MultiNet" class="button is-small is-dark" target="_blank">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <span>Code</span>
-              </a>
-            </div>
-  
-            <p>For questions or issues, please <a href="https://github.com/ManifoldRG/MultiNet/issues">open a GitHub issue</a> or contact <a href="mailto:pranav@metarch.ai">pranav [at] metarch [dot] ai</a></p>
-  
-            <p>
-              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-              You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-              Commons Attribution-ShareAlike 4.0 International License</a>.
+            <p class="has-text-centered">
+              <a href="https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/" target="_blank" rel="noopener noreferrer" style="color: #90caf9;">Technical Report</a>
+              &nbsp;&middot;&nbsp;
+              <a href="static/pages/archive.html" style="color: #90caf9;">MultiNet v1.0</a>
+              &nbsp;&middot;&nbsp;
+              <a href="https://github.com/ManifoldRG/MultiNet-v2.0" style="color: #90caf9;">Code</a>
             </p>
-            
+            <p class="has-text-centered">
+              For questions or issues, please
+              <a href="https://github.com/ManifoldRG/MultiNet-v2.0/issues" style="color: #90caf9;">open a GitHub issue</a>
+              or contact <a href="mailto:pranav@fig.inc" style="color: #90caf9;">pranav [at] fig [dot] inc</a>
+            </p>
           </div>
         </div>
       </div>
     </div>
   </footer>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="static/js/play.js?v=p1b8"></script>
+<script src="static/js/mn-shell.js?v=r9i"></script>
+<script src="static/js/v2_r1_results_table.js?v=r9i"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r9i"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r9i"></script>
+<script src="static/js/v2_r1_reel.js?v=r9i"></script>
+<script src="static/js/lp_headline_stats.js?v=r9i"></script>
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+<script>
+  // How far a .lp-fig--pop figure may grow on hover. Scaling past the
+  // viewport would add a horizontal scrollbar, so the ceiling is whatever
+  // fits, and 1.34 above that - beyond it the figure starts crowding the
+  // window edges. offsetWidth rather than a rect, because a rect reports the
+  // already-scaled width if this reruns mid-hover.
+  (function () {
+    function sizePop() {
+      document.querySelectorAll(".lp-fig--pop").forEach(function (fig) {
+        var img = fig.querySelector("img");
+        if (!img || !img.offsetWidth) return;
+        var room = (document.documentElement.clientWidth - 24) / img.offsetWidth;
+        fig.style.setProperty("--pop", Math.max(1, Math.min(1.34, room)).toFixed(3));
+      });
+    }
+    sizePop();
+    addEventListener("resize", sizePop);
+    addEventListener("load", sizePop);
+  })();
 
-    <!-- End of Statcounter Code -->
+  // Copy the BibTeX. Small enough to live here rather than earn a file.
+  // navigator.clipboard needs a secure context - it is undefined on plain
+  // http from anything but localhost - so fall back rather than throw.
+  document.querySelectorAll("[data-copy-target]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var src = document.getElementById(btn.dataset.copyTarget);
+      if (!src) return;
+      var text = src.innerText;
+      var label = btn.querySelector("span");
 
-  </div>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const navToggleBtn = document.getElementById('navToggleBtn');
-        const mobileNavToggle = document.getElementById('mobileNavToggle');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-        const sideNav = document.getElementById('side-nav');
-        const mainContent = document.getElementById('main-page-content');
-        const allNavLinks = document.querySelectorAll('.side-navigation .nav-item:not(.has-dropdown) > a, .side-navigation .sub-item:not(.has-dropdown)'); // Links that can be active
-        
-        // Check if mobile
-        function isMobile() {
-            return window.innerWidth <= 768;
-        }
-
-        // Global function for mobile device detection (used in inline handlers)
-        window.isMobileDevice = function() {
-            return window.innerWidth <= 768;
-        }
-
-        // Dropdown toggle function
-        function toggleDropdown(parentNavItem, dropdownMenu, toggle) {
-            const isOpen = parentNavItem.classList.toggle('open');
-            toggle.setAttribute('aria-expanded', isOpen.toString());
-            dropdownMenu.style.maxHeight = isOpen ? dropdownMenu.scrollHeight + "px" : null;
-            
-            const arrowIcon = toggle.querySelector('.dropdown-arrow .fas');
-            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
-                arrowIcon.classList.toggle('rotated', isOpen);
-            }
-
-            // Close sibling dropdowns (accordion behavior)
-            const parentMenu = parentNavItem.parentElement;
-            if (parentMenu && isOpen) {
-                const siblingDropdowns = Array.from(parentMenu.children).filter(child => 
-                    child.classList.contains('has-dropdown') && child !== parentNavItem
-                );
-                siblingDropdowns.forEach(sib => {
-                    sib.classList.remove('open');
-                    sib.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
-                    const sibMenu = sib.querySelector(':scope > .dropdown-menu-items');
-                    if (sibMenu) sibMenu.style.maxHeight = null;
-                    const sibArrowIcon = sib.querySelector('.dropdown-arrow .fas');
-                    if (sibArrowIcon && sibArrowIcon.classList.contains('fa-chevron-right')) {
-                        sibArrowIcon.classList.remove('rotated');
-                    }
-                });
-            }
-        }
-
-        function expandSidebar() {
-            if (!sideNav || !mainContent) return;
-            if (sideNav.classList.contains('collapsed')) {
-                sideNav.classList.remove('collapsed');
-                if (isMobile()) {
-                    mobileOverlay.classList.add('active');
-                    document.body.classList.add('mobile-nav-open');
-                }
-                // Ensure all dropdowns are closed when expanding from fully collapsed hover state
-                document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
-                    const menu = openDropdown.querySelector('.dropdown-menu-items');
-                    if (menu) menu.style.maxHeight = null; // Collapse menu
-                    openDropdown.classList.remove('open');
-                    openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
-                    const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
-                    if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
-                        arrowIcon.classList.remove('rotated');
-                    }
-                });
-            }
-        }
-
-        function collapseSidebar() {
-            if (!sideNav || !mainContent) return;
-            if (!sideNav.classList.contains('collapsed')) {
-                sideNav.classList.add('collapsed');
-                if (isMobile()) {
-                    mobileOverlay.classList.remove('active');
-                    document.body.classList.remove('mobile-nav-open');
-                }
-                
-                // Collapse all open dropdowns
-                document.querySelectorAll('.side-navigation .nav-item.has-dropdown.open').forEach(openDropdown => {
-                    openDropdown.classList.remove('open');
-                    openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
-                    const menu = openDropdown.querySelector('.dropdown-menu-items');
-                    if (menu) menu.style.maxHeight = null;
-                    const arrowIcon = openDropdown.querySelector('.dropdown-arrow .fas');
-                     if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) { // Level 2 arrow
-                        arrowIcon.classList.remove('rotated');
-                    }
-                });
-            }
-        }
-
-        function masterToggleSidebar() {
-            if (!sideNav) return;
-            if (sideNav.classList.contains('collapsed')) {
-                expandSidebar();
-            } else {
-                collapseSidebar();
-            }
-        }
-
-        if (navToggleBtn) {
-            const icon = navToggleBtn.querySelector('i');
-            if (icon) icon.className = 'fas fa-bars';
-            navToggleBtn.addEventListener('click', masterToggleSidebar);
-            navToggleBtn.addEventListener('mouseenter', () => {
-                if (sideNav.classList.contains('collapsed') && !isMobile()) expandSidebar();
-            });
-        }
-
-        // Mobile navigation toggle
-        if (mobileNavToggle) {
-            mobileNavToggle.addEventListener('click', masterToggleSidebar);
-        }
-
-        // Mobile overlay click to close
-        if (mobileOverlay) {
-            mobileOverlay.addEventListener('click', collapseSidebar);
-        }
-
-        document.addEventListener('click', function(event) {
-            if (!sideNav || !navToggleBtn || !mainContent) return;
-            const isClickInsideNav = sideNav.contains(event.target);
-            const isClickOnToggle = navToggleBtn.contains(event.target) || (mobileNavToggle && mobileNavToggle.contains(event.target));
-            if (!sideNav.classList.contains('collapsed') && !isClickInsideNav && !isClickOnToggle) {
-                collapseSidebar();
-            }
-        });
-
-        // New Dropdown Handling for multiple levels
-        const dropdownToggles = document.querySelectorAll('.side-navigation .nav-item.has-dropdown > .dropdown-toggle');
-        dropdownToggles.forEach(toggle => {
-            toggle.addEventListener('click', function (event) {
-                event.preventDefault();
-                event.stopPropagation(); // Prevent click from bubbling to document listener
-
-                const parentNavItem = this.parentElement; // The .nav-item.has-dropdown
-                const dropdownMenu = parentNavItem.querySelector(':scope > .dropdown-menu-items');
-                
-                if (!dropdownMenu) return;
-
-                // On mobile, always ensure sidebar is expanded first
-                if (isMobile() && sideNav.classList.contains('collapsed')) {
-                    expandSidebar();
-                    // Wait for sidebar to expand before toggling dropdown
-                    setTimeout(() => {
-                        toggleDropdown(parentNavItem, dropdownMenu, this);
-                    }, 150);
-                    return;
-                }
-
-                // For desktop collapsed or mobile expanded, toggle dropdown immediately
-                if (!isMobile() && sideNav.classList.contains('collapsed')) {
-                    expandSidebar(); 
-                    setTimeout(() => {
-                        toggleDropdown(parentNavItem, dropdownMenu, this);
-                    }, 50);
-                    return;
-                }
-
-                // Normal toggle
-                toggleDropdown(parentNavItem, dropdownMenu, this);
-            });
-        });
-        
-        // Handle hover for flyouts when collapsed
-        document.querySelectorAll('.side-navigation.collapsed .nav-item.has-dropdown').forEach(dropdownItem => {
-            dropdownItem.addEventListener('mouseenter', function() {
-                if (sideNav.classList.contains('collapsed')) {
-                    const menu = this.querySelector(':scope > .dropdown-menu-items');
-                    if (menu) {
-                        // Position flyout correctly (JS might be needed if CSS is not enough for multi-level)
-                        // For now, CSS handles :hover to display.
-                    }
-                }
-            });
-            dropdownItem.addEventListener('mouseleave', function() {
-                if (sideNav.classList.contains('collapsed')) {
-                    // CSS will hide on mouseleave from the :hover target
-                }
-            });
-        });
-
-
-        // Active link handling
-        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-        const currentFullPath = window.location.pathname;
-
-        allNavLinks.forEach(item => {
-            // Make sure item is an <a> tag, could be .nav-item directly if it's not a dropdown
-            const linkElement = item.matches('a') ? item : item.querySelector('a');
-            if (!linkElement) return;
-
-            const itemLink = linkElement.getAttribute('href');
-            if (itemLink) {
-                let isMatch = false;
-                // Handle absolute URLs (external)
-                if (itemLink.startsWith('http')) {
-                    if (itemLink === window.location.href) {
-                        // isMatch = true; // Usually don't mark external as active
-                    }
-                } 
-                // Handle root index.html
-                else if (itemLink === 'index.html' || itemLink === './index.html' || itemLink === '/') {
-                    if (currentFullPath === '/' || currentFullPath.endsWith('/index.html') || currentPath === 'index.html' && currentFullPath.split('/').filter(Boolean).length <=1 ) {
-                        isMatch = true;
-                    }
-                }
-                // Handle other relative links
-                else if (itemLink.endsWith(currentPath) && currentPath !== 'index.html') {
-                     isMatch = true;
-                }
-
-
-                if (isMatch) {
-                    // Remove active from all other items first
-                    document.querySelectorAll('.side-navigation .nav-item.active, .side-navigation .sub-item.active').forEach(activeEl => activeEl.classList.remove('active'));
-                    
-                    // Add active to current item
-                    const parentNavItem = linkElement.closest('.nav-item, .sub-item');
-                    if(parentNavItem) parentNavItem.classList.add('active');
-
-                    // Open parent dropdowns if active item is inside
-                    let parentDropdown = linkElement.closest('.nav-item.has-dropdown > .dropdown-menu-items');
-                    while(parentDropdown) {
-                        const mainDropdownItem = parentDropdown.parentElement; // The .nav-item.has-dropdown
-                        if (mainDropdownItem && !mainDropdownItem.classList.contains('open')) {
-                            mainDropdownItem.classList.add('open');
-                             mainDropdownItem.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');
-                            parentDropdown.style.maxHeight = parentDropdown.scrollHeight + "px";
-                            const arrowIcon = mainDropdownItem.querySelector('.dropdown-arrow .fas');
-                            if (arrowIcon && arrowIcon.classList.contains('fa-chevron-right')) {
-                                arrowIcon.classList.add('rotated');
-                            }
-                        }
-                        parentDropdown = mainDropdownItem.parentElement.closest('.nav-item.has-dropdown > .dropdown-menu-items');
-                    }
-                }
-            }
-        });
-        
-        // If no specific link matched but we are on index.html, make Home active.
-        if ( (currentFullPath === '/' || currentFullPath.endsWith('/index.html')) && !document.querySelector('.side-navigation .nav-item.active') ) {
-            const homeLink = document.querySelector('.side-navigation a.nav-item[href="index.html"]');
-            if(homeLink) homeLink.classList.add('active');
-        }
-
-        // Initialize Videos Carousel
-        if (document.getElementById('videos-carousel')) {
-          bulmaCarousel.attach('#videos-carousel', {
-            slidesToScroll: 1,
-            slidesToShow: 2,
-            loop: true,
-            autoplay: false,
-            autoplaySpeed: 5000, // 5 seconds
-            pauseOnHover: true,
-            breakpoints: [{
-                changePoint: 480, // Mobile
-                slidesToShow: 1,
-                slidesToScroll: 1
-              },
-              {
-                changePoint: 768, // Tablet
-                slidesToShow: 2,
-                slidesToScroll: 1
-              },
-              {
-                changePoint: 1024, // Desktop
-                slidesToShow: 3,
-                slidesToScroll: 1
-              }
-            ]
-          });
-        }
-
-        // CTA Banner close functionality
-        const ctaCloseBtn = document.getElementById('cta-close-btn');
-        const ctaBanner = document.getElementById('cta-banner');
-        
-        console.log('CTA Close Button:', ctaCloseBtn);
-        console.log('CTA Banner:', ctaBanner);
-        
-        if (ctaCloseBtn && ctaBanner) {
-          ctaCloseBtn.addEventListener('click', function(e) {
-            console.log('Close button clicked!');
-            e.preventDefault();
-            e.stopPropagation();
-            ctaBanner.style.display = 'none';
-          });
-          
-          // Add hover effect for close button
-          ctaCloseBtn.addEventListener('mouseenter', function() {
-            this.style.opacity = '1';
-          });
-          
-          ctaCloseBtn.addEventListener('mouseleave', function() {
-            this.style.opacity = '0.8';
-          });
-        } else {
-          console.log('CTA elements not found');
-        }
-
-        // Handle window resize for mobile/desktop switching
-        window.addEventListener('resize', function() {
-            if (isMobile()) {
-                // Ensure sidebar is collapsed on mobile
-                if (!sideNav.classList.contains('collapsed')) {
-                    collapseSidebar();
-                }
-            } else {
-                // Remove mobile overlay if switching to desktop
-                if (mobileOverlay) {
-                    mobileOverlay.classList.remove('active');
-                }
-            }
-        });
-
-        // Initial mobile check
-        if (isMobile()) {
-            collapseSidebar();
-        }
-    });
-  </script>
-  <script src="static/js/v1_leaderboard_table.js"></script>
-  <script>
-    // Handle collapsible legend functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const collapsibleTrigger = document.querySelector('.collapsible-trigger');
-      const collapsibleContent = document.querySelector('.collapsible-content');
-      const collapsibleIcon = document.querySelector('.collapsible-icon');
-      
-      if (collapsibleTrigger && collapsibleContent && collapsibleIcon) {
-        collapsibleTrigger.addEventListener('click', function() {
-          if (collapsibleContent.style.maxHeight === '0px' || !collapsibleContent.style.maxHeight) {
-            // Expand
-            collapsibleContent.style.maxHeight = collapsibleContent.scrollHeight + 'px';
-            collapsibleIcon.style.transform = 'rotate(180deg)';
-          } else {
-            // Collapse
-            collapsibleContent.style.maxHeight = '0px';
-            collapsibleIcon.style.transform = 'rotate(0deg)';
-          }
-        });
+      function done() {
+        btn.classList.add("is-done");
+        label.textContent = "Copied";
+        setTimeout(function () {
+          btn.classList.remove("is-done");
+          label.textContent = "Copy";
+        }, 1600);
       }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done, function () {});
+        return;
+      }
+      // Fallback: select the block so ctrl/cmd-C still works.
+      var sel = window.getSelection();
+      var range = document.createRange();
+      range.selectNodeContents(src);
+      sel.removeAllRanges();
+      sel.addRange(range);
+      try { if (document.execCommand("copy")) done(); } catch (e) {}
     });
-  </script>
+  });
+</script>
 </body>
 </html>
-
