@@ -44,7 +44,7 @@
   <meta name="twitter:image" content="https://multinet.ai/static/images/multinet_logo_square_copy.jpg">
   <meta name="keywords" content="Agentic Benchmark, Long-Horizon Action, Causal Reasoning, Interactive 2D Mazes, Living Benchmark, Agentic Behavior, MultiNet">
 
-  <title>Goal Progress Decays with Task Horizon for Frontier VLMs in Interactive 2D Environments</title>
+  <title>MultiNet 2.0 Preview: Goal Progress Decays with Task Horizon for Frontier VLMs in Interactive 2D Environments</title>
 
   <link rel="icon" type="image/x-icon" href="static/images/multinet_logo_square.png">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
@@ -52,8 +52,8 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/mn-shared.css?v=r9k">
-  <link rel="stylesheet" href="static/css/r1-components.css?v=r9k">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r9l">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r9l">
   <link rel="stylesheet" href="static/css/play.css?v=p1b9">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
@@ -641,8 +641,11 @@
       left: calc(100% / 14); right: calc(100% / 14);
       background: linear-gradient(90deg, #e6eaf0, #c8d6e6);
     }
+    /* gap is tight because the stack is four items (mark, name, date,
+       description); the name carries a top margin so the mark keeps its
+       original 0.5rem of breathing room. */
     .lp-rail__link {
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.28rem;
       padding: 0 0.4rem; text-align: center; text-decoration: none;
       color: inherit;
     }
@@ -656,7 +659,11 @@
     }
     .lp-rail__when {
       font-size: 0.78rem; font-weight: 700; color: #12151c;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.01em; margin-top: 0.22rem;
+    }
+    .lp-rail__date {
+      font-size: 0.7rem; font-weight: 600; color: #5b6472;
+      letter-spacing: 0.01em;
     }
     .lp-rail__what { font-size: 0.72rem; line-height: 1.35; color: #8a94a6; }
     .lp-rail__item.is-paper .lp-rail__mark { border-color: #d8c9e8; }
@@ -677,7 +684,7 @@
        scroll sideways. width:max-content keeps ::before spanning the whole
        list rather than only the visible slice. */
     @media screen and (max-width: 860px) {
-      .lp-rail { grid-auto-columns: 132px; width: max-content; }
+      .lp-rail { grid-auto-columns: 144px; width: max-content; }
     }
 
     /* ---------- responsive ---------- */
@@ -718,7 +725,7 @@
       <div class="lp-hero__grid">
         <div>
           <p class="lp-eyebrow">MultiNet 2.0 Preview: Interactive 2D Mazes</p>
-          <h1>Agentic Behavior in 2D Mazes: Previewing a Multi-Domain Benchmark</h1>
+          <h1>Frontier Reasoning Agents fail on Interactive 2D Mazes</h1>
           <!-- The eyebrow names the release; the headline says what it is about;
                the result goes below, mazes first so there is no doubt what the
                models were measured on. -->
@@ -734,7 +741,7 @@
             <a class="lp-btn" href="#play-the-maze">
               <i class="fas fa-gamepad"></i> Play a maze
             </a>
-            <a class="lp-btn" href="https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/" target="_blank" rel="noopener noreferrer">
+            <a class="lp-btn" href="https://www.fig.inc/multinet-v2-preview/" target="_blank" rel="noopener noreferrer">
               Read the technical report
             </a>
           </div>
@@ -779,20 +786,22 @@
        release. Each node links straight to that milestone. -->
   <section class="lp-news-rail">
     <div class="lp-wrap">
-      <p class="lp-sub" style="margin-bottom: 1.5rem;">MultiNet milestones over the past 2 years:</p>
+      <p class="lp-sub" style="margin-bottom: 1.5rem;">MultiNet Milestones</p>
       <div class="lp-rail-scroll">
         <ol class="lp-rail">
             <li class="lp-rail__item">
               <a class="lp-rail__link" href="static/pages/Multinet.html">
                 <span class="lp-rail__mark" aria-hidden="true">🚀</span>
-                <span class="lp-rail__when">Introduction</span>
-                <span class="lp-rail__what">MultiNet announced</span>
+                <span class="lp-rail__when">MultiNet Announced</span>
+                <span class="lp-rail__date">September 2024</span>
+                <span class="lp-rail__what">Project introduction</span>
               </a>
             </li>
             <li class="lp-rail__item">
               <a class="lp-rail__link" href="static/pages/Multinetv01.html">
                 <span class="lp-rail__mark" aria-hidden="true">🤖</span>
                 <span class="lp-rail__when">v0.1</span>
+                <span class="lp-rail__date">December 2024</span>
                 <span class="lp-rail__what">Real-world robotics</span>
               </a>
             </li>
@@ -800,6 +809,7 @@
               <a class="lp-rail__link" href="static/pages/Multinetv02.html">
                 <span class="lp-rail__mark" aria-hidden="true">🎮</span>
                 <span class="lp-rail__when">v0.2</span>
+                <span class="lp-rail__date">May 2025</span>
                 <span class="lp-rail__what">Procedural game worlds</span>
               </a>
             </li>
@@ -807,6 +817,7 @@
               <a class="lp-rail__link" href="static/pdfs/An Open-Source Software Toolkit &amp; Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener noreferrer">
                 <span class="lp-rail__mark" aria-hidden="true">🏅</span>
                 <span class="lp-rail__when">ICML 2025</span>
+                <span class="lp-rail__date">July 2025</span>
                 <span class="lp-rail__what">CodeML workshop</span>
               </a>
             </li>
@@ -814,6 +825,7 @@
               <a class="lp-rail__link" href="static/pages/Multinetv1.html">
                 <span class="lp-rail__mark" aria-hidden="true">📊</span>
                 <span class="lp-rail__when">v1.0</span>
+                <span class="lp-rail__date">December 2025</span>
                 <span class="lp-rail__what">Comprehensive suite</span>
               </a>
             </li>
@@ -821,13 +833,15 @@
               <a class="lp-rail__link" href="https://arxiv.org/abs/2512.11315" target="_blank" rel="noopener noreferrer">
                 <span class="lp-rail__mark" aria-hidden="true">🎓</span>
                 <span class="lp-rail__when">CVPR 2026</span>
+                <span class="lp-rail__date">June 2026</span>
                 <span class="lp-rail__what">MMFM workshop</span>
               </a>
             </li>
             <li class="lp-rail__item is-current">
-              <a class="lp-rail__link" href="https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/" target="_blank" rel="noopener noreferrer">
+              <a class="lp-rail__link" href="https://www.fig.inc/multinet-v2-preview/" target="_blank" rel="noopener noreferrer">
                 <span class="lp-rail__mark" aria-hidden="true">🧩</span>
                 <span class="lp-rail__when">2.0 Preview</span>
+                <span class="lp-rail__date">August 2026</span>
                 <span class="lp-rail__what">Agentic maze tasks</span>
               </a>
             </li>
@@ -987,7 +1001,7 @@
            carries its own title and description, so it takes no figcaption -
            one would only repeat what is already inside it. -->
       <figure class="lp-fig lp-fig--lead lp-fig--pop">
-        <img src="static/images/maze_figure.png?v=r9k"
+        <img src="static/images/maze_figure.png?v=r9l"
              alt="Four variations of one 8x8 maze showing mechanisms added in stages: bare topology, then a key and door, then a switch and gate, then distractors, with the BFS-optimal route drawn as a dotted line. Below, the dependency chain: red key, red door, switch, gate, blue key, blue door, goal."
              width="3200" height="1551" loading="lazy" decoding="async">
       </figure>
@@ -1060,7 +1074,7 @@
       </div>
 
       <p style="text-align: center; margin-top: 1.75rem;">
-        <a class="lp-btn" href="https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/" target="_blank" rel="noopener noreferrer">
+        <a class="lp-btn" href="https://www.fig.inc/multinet-v2-preview/" target="_blank" rel="noopener noreferrer">
           Read the technical report &rarr;
         </a>
       </p>
@@ -1096,7 +1110,7 @@
         <h2>Interested in evaluating your agent on long-horizon tasks, or collaborating on research?</h2>
         <p>
           If you build models or agents, or work on benchmarking and evaluation, we would love to
-          hear from you - whether that means getting your model on MultiNet 2.0 Preview,
+          hear from you - whether that means getting your model on the MultiNet 2.0 benchmark,
           contributing to the environments we are building, or working with us on what comes after!
         </p>
         <div class="lp-cta-row" style="justify-content: center;">
@@ -1106,8 +1120,8 @@
              target="_blank" rel="noopener noreferrer">
             <i class="fas fa-paper-plane"></i> Let's work together
           </a>
-          <a class="lp-btn" href="mailto:pranav@fig.inc?subject=Collaborating%20on%20MultiNet%20v2.0">
-            <i class="fas fa-envelope"></i> Work with us
+          <a class="lp-btn" href="mailto:pranav@fig.inc?subject=MultiNet%202.0%20Preview">
+            <i class="fas fa-envelope"></i> Contact Us
           </a>
           <a class="lp-btn" href="https://discord.gg/Rk4gAq5aYr" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-discord"></i> Join the Discord
@@ -1129,7 +1143,7 @@
         <button type="button" class="lp-cite__copy" data-copy-target="lp-cite-plain">
           <i class="far fa-copy" aria-hidden="true"></i> <span>Copy</span>
         </button>
-        <pre id="lp-cite-plain"><code>Guruprasad, P., Rivera, S., Lu, H., Jain, A., Ren, H. and Sikka, H. (2026) Agentic behavior in 2D mazes: previewing a multi-domain benchmark. Available at: https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark</code></pre>
+        <pre id="lp-cite-plain"><code>Guruprasad, P., Rivera, S., Lu, H., Jain, A., Ren, H. and Sikka, H. (2026) MultiNet 2.0 Preview: Goal Progress Decays with Task Horizon for Frontier VLMs in Interactive 2D Environments. Available at: https://www.fig.inc/multinet-v2-preview</code></pre>
       </div>
 
       <p class="lp-cite__or">Or use the BibTeX citation</p>
@@ -1139,12 +1153,12 @@
           <i class="far fa-copy" aria-hidden="true"></i> <span>Copy</span>
         </button>
         <pre id="lp-bibtex"><code>@online{multinet_v2_preview_technical_report_2026,
-  title   = {Goal Progress Decays with Task Horizon for Frontier VLMs in
-             Interactive 2D Environments},
+  title   = {MultiNet 2.0 Preview: Goal Progress Decays with Task Horizon
+             for Frontier VLMs in Interactive 2D Environments},
   author  = {Pranav Guruprasad and Sean Rivera and Helen Lu and Arushi Jain and
              Hangliang Ren and Harshvardhan Sikka},
   year    = {2026},
-  url     = {www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark},
+  url     = {www.fig.inc/multinet-v2-preview},
   note    = {MultiNet 2.0 Preview: Interactive 2D Mazes}
 }</code></pre>
       </div>
@@ -1157,7 +1171,7 @@
         <div class="column is-8">
           <div class="content" style="color: #fff;">
             <p class="has-text-centered">
-              <a href="https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/" target="_blank" rel="noopener noreferrer" style="color: #90caf9;">Technical Report</a>
+              <a href="https://www.fig.inc/multinet-v2-preview/" target="_blank" rel="noopener noreferrer" style="color: #90caf9;">Technical Report</a>
               &nbsp;&middot;&nbsp;
               <a href="static/pages/archive.html" style="color: #90caf9;">MultiNet v1.0</a>
               &nbsp;&middot;&nbsp;
@@ -1177,12 +1191,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="static/js/play.js?v=p1c2"></script>
-<script src="static/js/mn-shell.js?v=r9k"></script>
-<script src="static/js/v2_r1_results_table.js?v=r9k"></script>
-<script src="static/js/v2_r1_finding_charts.js?v=r9k"></script>
-<script src="static/js/v2_r1_finding_tabs.js?v=r9k"></script>
-<script src="static/js/v2_r1_reel.js?v=r9k"></script>
-<script src="static/js/lp_headline_stats.js?v=r9k"></script>
+<script src="static/js/mn-shell.js?v=r9l"></script>
+<script src="static/js/v2_r1_results_table.js?v=r9l"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r9l"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r9l"></script>
+<script src="static/js/v2_r1_reel.js?v=r9l"></script>
+<script src="static/js/lp_headline_stats.js?v=r9l"></script>
 
 <script>
   // How far a .lp-fig--pop figure may grow on hover. Scaling past the

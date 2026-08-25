@@ -71,7 +71,7 @@
   // Declared here rather than beside the banner because the nav tree below is
   // built at load time and would otherwise read it as undefined.
   var SIGNUP = "https://sparkly-broccoli-3c7.notion.site/3bf4b1d3c487800596bbe4a150962cc0";
-  var REPORT = "https://www.fig.inc/agentic-behavior-in-2d-mazes-previewing-a-multi-domain-benchmark/";
+  var REPORT = "https://www.fig.inc/multinet-v2-preview/";
 
   // ---- The whole site, in one tree ----------------------------------------
   // This is the drawer. Everything the site has is reachable from here.
