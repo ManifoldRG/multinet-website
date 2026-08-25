@@ -80,7 +80,7 @@
     {
       label: "Benchmark Releases", icon: "fas fa-microscope",
       children: [
-        { id: "v2r1", label: "v2.0 - Gridworld", icon: "fas fa-project-diagram", href: home() },
+        { id: "v2r1", label: "2.0 Preview", icon: "fas fa-project-diagram", href: home() },
         { id: "v1", label: "v1.0 - Generalist", icon: "fas fa-rocket", href: url("static/pages/Multinetv1.html") },
         { id: "v02", label: "v0.2 - Gameplay", icon: "fas fa-gamepad", href: url("static/pages/Multinetv02.html") },
         { id: "v01", label: "v0.1 - Robotics", icon: "fas fa-robot", href: url("static/pages/Multinetv01.html") }
@@ -117,9 +117,10 @@
     // One line, one ask. The research index and the mailto used to sit on a
     // second row, but both were routes to the same place as the form - three
     // ways to do one thing is how a banner ends up ignored.
-    html: 'How does your agent do on cross-domain, multimodal, long-horizon tasks? ' +
+    html: 'Interested in evaluating your agent on long horizon tasks, or ' +
+          'collaborating on research? ' +
           '<a class="cta-banner__signup" href="' + SIGNUP + '" ' +
-          'target="_blank" rel="noopener noreferrer">Work with us to find out!</a>'
+          'target="_blank" rel="noopener noreferrer">Let\'s work together</a>'
   };
 
   function el(html) {
