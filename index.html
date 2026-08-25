@@ -641,8 +641,11 @@
       left: calc(100% / 14); right: calc(100% / 14);
       background: linear-gradient(90deg, #e6eaf0, #c8d6e6);
     }
+    /* gap is tight because the stack is four items (mark, name, date,
+       description); the name carries a top margin so the mark keeps its
+       original 0.5rem of breathing room. */
     .lp-rail__link {
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.28rem;
       padding: 0 0.4rem; text-align: center; text-decoration: none;
       color: inherit;
     }
@@ -656,7 +659,11 @@
     }
     .lp-rail__when {
       font-size: 0.78rem; font-weight: 700; color: #12151c;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.01em; margin-top: 0.22rem;
+    }
+    .lp-rail__date {
+      font-size: 0.7rem; font-weight: 600; color: #5b6472;
+      letter-spacing: 0.01em;
     }
     .lp-rail__what { font-size: 0.72rem; line-height: 1.35; color: #8a94a6; }
     .lp-rail__item.is-paper .lp-rail__mark { border-color: #d8c9e8; }
@@ -677,7 +684,7 @@
        scroll sideways. width:max-content keeps ::before spanning the whole
        list rather than only the visible slice. */
     @media screen and (max-width: 860px) {
-      .lp-rail { grid-auto-columns: 132px; width: max-content; }
+      .lp-rail { grid-auto-columns: 144px; width: max-content; }
     }
 
     /* ---------- responsive ---------- */
@@ -786,49 +793,56 @@
               <a class="lp-rail__link" href="static/pages/Multinet.html">
                 <span class="lp-rail__mark" aria-hidden="true">🚀</span>
                 <span class="lp-rail__when">MultiNet Announced</span>
-                <span class="lp-rail__what">September 2024</span>
+                <span class="lp-rail__date">September 2024</span>
+                <span class="lp-rail__what">Project introduction</span>
               </a>
             </li>
             <li class="lp-rail__item">
               <a class="lp-rail__link" href="static/pages/Multinetv01.html">
                 <span class="lp-rail__mark" aria-hidden="true">🤖</span>
                 <span class="lp-rail__when">v0.1</span>
-                <span class="lp-rail__what">December 2024</span>
+                <span class="lp-rail__date">December 2024</span>
+                <span class="lp-rail__what">Real-world robotics</span>
               </a>
             </li>
             <li class="lp-rail__item">
               <a class="lp-rail__link" href="static/pages/Multinetv02.html">
                 <span class="lp-rail__mark" aria-hidden="true">🎮</span>
                 <span class="lp-rail__when">v0.2</span>
-                <span class="lp-rail__what">May 2025</span>
+                <span class="lp-rail__date">May 2025</span>
+                <span class="lp-rail__what">Procedural game worlds</span>
               </a>
             </li>
             <li class="lp-rail__item is-paper">
               <a class="lp-rail__link" href="static/pdfs/An Open-Source Software Toolkit &amp; Benchmark Suite for the Evaluation and Adaptation of Multimodal Action Models.pdf" target="_blank" rel="noopener noreferrer">
                 <span class="lp-rail__mark" aria-hidden="true">🏅</span>
                 <span class="lp-rail__when">ICML 2025</span>
-                <span class="lp-rail__what">July 2025</span>
+                <span class="lp-rail__date">July 2025</span>
+                <span class="lp-rail__what">CodeML workshop</span>
               </a>
             </li>
             <li class="lp-rail__item">
               <a class="lp-rail__link" href="static/pages/Multinetv1.html">
                 <span class="lp-rail__mark" aria-hidden="true">📊</span>
                 <span class="lp-rail__when">v1.0</span>
-                <span class="lp-rail__what">December 2025</span>
+                <span class="lp-rail__date">December 2025</span>
+                <span class="lp-rail__what">Comprehensive suite</span>
               </a>
             </li>
             <li class="lp-rail__item is-paper">
               <a class="lp-rail__link" href="https://arxiv.org/abs/2512.11315" target="_blank" rel="noopener noreferrer">
                 <span class="lp-rail__mark" aria-hidden="true">🎓</span>
                 <span class="lp-rail__when">CVPR 2026</span>
-                <span class="lp-rail__what">June 2026</span>
+                <span class="lp-rail__date">June 2026</span>
+                <span class="lp-rail__what">MMFM workshop</span>
               </a>
             </li>
             <li class="lp-rail__item is-current">
               <a class="lp-rail__link" href="https://www.fig.inc/multinet-v2-preview/" target="_blank" rel="noopener noreferrer">
                 <span class="lp-rail__mark" aria-hidden="true">🧩</span>
                 <span class="lp-rail__when">2.0 Preview</span>
-                <span class="lp-rail__what">August 2026</span>
+                <span class="lp-rail__date">August 2026</span>
+                <span class="lp-rail__what">Agentic maze tasks</span>
               </a>
             </li>
         </ol>
