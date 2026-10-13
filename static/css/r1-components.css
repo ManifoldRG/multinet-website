@@ -59,9 +59,11 @@
     /* ---------- Results: one card per model ---------- */
     .r1-results {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.1rem;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.9rem;
     }
+    /* five cards: one row when there is room, 3 + 2 on mid widths, stacked on phones */
+    @media screen and (max-width: 1215px) { .r1-results { grid-template-columns: repeat(3, 1fr); gap: 1.1rem; } }
     @media screen and (max-width: 860px) { .r1-results { grid-template-columns: 1fr; }
 }
 
@@ -146,7 +148,7 @@
       font-size: 0.78rem; color: #64748b; text-align: center;
     }
 
-    /* Keep the same metric on the same line across all three cards, even when
+    /* Keep the same metric on the same line across the cards, even when
        one description runs to an extra line. Two levels of subgrid: the card
        shares the grid's rows, and the metric list shares four of them. */
     @supports (grid-template-rows: subgrid) {

@@ -52,8 +52,8 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/mn-shared.css?v=r9n">
-  <link rel="stylesheet" href="static/css/r1-components.css?v=r9n">
+  <link rel="stylesheet" href="static/css/mn-shared.css?v=r10">
+  <link rel="stylesheet" href="static/css/r1-components.css?v=r10">
   <link rel="stylesheet" href="static/css/play.css?v=p1b9">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
@@ -717,9 +717,9 @@
                the result goes below, mazes first so there is no doubt what the
                models were measured on. -->
           <p class="lp-hero__lead">
-            We put 3 highly capable models in 50 simple 2-dimensional mazes each. Claude Opus 4.8,
-            Kimi K2.6, and Qwen 3.6-27B together solved just 6 out of 150 maze runs, and 45 out of
-            the 50 mazes were not solved by any model.
+            We put 5 highly capable models in 50 simple 2-dimensional mazes each. GPT-6 Astra,
+            Claude Opus 5.5, Claude Opus 4.8, Kimi K2.6, and Qwen 3.6-27B together solved just 24 out
+            of 250 maze runs, and 38 out of the 50 mazes were not solved by any model.
           </p>
           <div class="lp-cta-row">
             <a class="lp-btn" href="#results">
@@ -728,7 +728,7 @@
             <a class="lp-btn" href="#play-the-maze">
               <i class="fas fa-gamepad"></i> Play a maze
             </a>
-            <a class="lp-btn" href="https://www.fig.inc/blog/multinet-v2-preview/" target="_blank" rel="noopener noreferrer">
+            <a class="lp-btn" href="https://www.fig.inc/blog/multinet-v2-preview-astra-opus/" target="_blank" rel="noopener noreferrer">
               Read the technical report
             </a>
           </div>
@@ -824,12 +824,20 @@
                 <span class="lp-rail__what">MMFM workshop</span>
               </a>
             </li>
-            <li class="lp-rail__item is-current">
+            <li class="lp-rail__item">
               <a class="lp-rail__link" href="https://www.fig.inc/blog/multinet-v2-preview/" target="_blank" rel="noopener noreferrer">
                 <span class="lp-rail__mark" aria-hidden="true">🧩</span>
                 <span class="lp-rail__when">2.0 Preview</span>
                 <span class="lp-rail__date">August 2026</span>
                 <span class="lp-rail__what">Agentic maze tasks</span>
+              </a>
+            </li>
+            <li class="lp-rail__item is-current">
+              <a class="lp-rail__link" href="https://www.fig.inc/blog/multinet-v2-preview-astra-opus/" target="_blank" rel="noopener noreferrer">
+                <span class="lp-rail__mark" aria-hidden="true">🔬</span>
+                <span class="lp-rail__when">2.0 Preview Addendum</span>
+                <span class="lp-rail__date">October 2026</span>
+                <span class="lp-rail__what">GPT-6 Astra and Claude Opus 5.5</span>
               </a>
             </li>
         </ol>
@@ -847,20 +855,20 @@
       <h2 class="lp-h2" style="margin-bottom: 1.75rem;">Frontier Model Performance</h2>
 
       <!-- One dot per episode, lit if it was solved. A percentage bar asks you
-           to work the ratio out; a grid of 150 with 6 lit is the ratio. The
+           to work the ratio out; a grid of 250 with 24 lit is the ratio. The
            numbers and labels are here in full, so the strip is correct before
            lp_headline_stats.js touches it. -->
       <div class="lp-stats">
-        <div class="lp-stat" data-value="6" data-total="150" style="--c: #005A9C">
-          <span class="hd"><span class="n"><span class="v">6</span><span class="d"> / 150</span></span><span class="l">Episodes solved</span></span>
+        <div class="lp-stat" data-value="24" data-total="250" style="--c: #005A9C">
+          <span class="hd"><span class="n"><span class="v">24</span><span class="d"> / 250</span></span><span class="l">Episodes solved</span></span>
           <span class="u" aria-hidden="true"></span>
         </div>
-        <div class="lp-stat" data-value="5" data-total="50" style="--c: #0B7285">
-          <span class="hd"><span class="n"><span class="v">5</span><span class="d"> / 50</span></span><span class="l">Mazes solved</span></span>
+        <div class="lp-stat" data-value="12" data-total="50" style="--c: #0B7285">
+          <span class="hd"><span class="n"><span class="v">12</span><span class="d"> / 50</span></span><span class="l">Mazes solved</span></span>
           <span class="u" aria-hidden="true"></span>
         </div>
-        <div class="lp-stat" data-value="0" data-total="105" data-zero style="--c: #D35400">
-          <span class="hd"><span class="n"><span class="v">0</span><span class="d"> / 105</span></span><span class="l">Switch-gate episodes solved</span></span>
+        <div class="lp-stat" data-value="0" data-total="175" data-zero style="--c: #D35400">
+          <span class="hd"><span class="n"><span class="v">0</span><span class="d"> / 175</span></span><span class="l">Switch-gate episodes solved</span></span>
           <span class="u" aria-hidden="true"></span>
         </div>
       </div>
@@ -882,7 +890,9 @@
       <p class="lp-sub">
         Each column is a maze and each row a model, with the mazes ranked left to right by how
         many actions the shortest solution takes. Colour is how far toward the goal the model got,
-        and the stars mark the six solves - all of them among the shortest mazes.
+        and the stars mark the 24 solves. Claude Opus 4.8, Kimi K2.6 and Qwen 3.6-27B solve only
+        mazes of 45 actions or fewer, while GPT-6 Astra and Claude Opus 5.5 also solve 14x14 mazes of
+        77 to 89 actions.
       </p>
       <div id="r1-episode-grid"></div>
     </div>
@@ -988,7 +998,7 @@
            carries its own title and description, so it takes no figcaption -
            one would only repeat what is already inside it. -->
       <figure class="lp-fig lp-fig--lead lp-fig--pop">
-        <img src="static/images/maze_figure.png?v=r9n"
+        <img src="static/images/maze_figure.png?v=r10"
              alt="Four variations of one 8x8 maze showing mechanisms added in stages: bare topology, then a key and door, then a switch and gate, then distractors, with the BFS-optimal route drawn as a dotted line. Below, the dependency chain: red key, red door, switch, gate, blue key, blue door, goal."
              width="3200" height="1551" loading="lazy" decoding="async">
       </figure>
@@ -1061,7 +1071,7 @@
       </div>
 
       <p style="text-align: center; margin-top: 1.75rem;">
-        <a class="lp-btn" href="https://www.fig.inc/blog/multinet-v2-preview/" target="_blank" rel="noopener noreferrer">
+        <a class="lp-btn" href="https://www.fig.inc/blog/multinet-v2-preview-astra-opus/" target="_blank" rel="noopener noreferrer">
           Read the technical report &rarr;
         </a>
       </p>
@@ -1073,8 +1083,8 @@
         <div data-figure="r1-switch-funnel">
           <div id="r1-switch-funnel"></div>
         </div>
-        <div data-figure="r1-inversion-chart">
-          <div class="r1-chart-stage" style="height: 300px;"><canvas id="r1-inversion-chart"></canvas></div>
+        <div data-figure="r1-horizon-chart">
+          <div class="r1-chart-stage" style="height: 300px;"><canvas id="r1-horizon-chart"></canvas></div>
         </div>
         <div data-figure="r1-quarter-chart">
           <div class="r1-metric-buttons" id="r1-quarter-metrics" style="justify-content: center; margin-bottom: 1rem;"></div>
@@ -1101,9 +1111,9 @@
           contributing to the environments we are building, or working with us on what comes after!
         </p>
         <div class="lp-cta-row" style="justify-content: center;">
-          <!-- Same Notion form as the CTA banner and the nav's "Evaluate Your Model"
+          <!-- Same Tally form as the CTA banner and the nav's "Evaluate Your Model"
                entry (SIGNUP in mn-shell.js) - update all three together. -->
-          <a class="lp-btn" href="https://sparkly-broccoli-3c7.notion.site/3bf4b1d3c487800596bbe4a150962cc0"
+          <a class="lp-btn" href="https://tally.so/r/7RGXaZ?utm_source=multinet-website&amp;utm_medium=website&amp;utm_campaign=multinet-v2-r1-astra-opus"
              target="_blank" rel="noopener noreferrer">
             <i class="fas fa-paper-plane"></i> Let's work together
           </a>
@@ -1158,7 +1168,7 @@
         <div class="column is-8">
           <div class="content" style="color: #fff;">
             <p class="has-text-centered">
-              <a href="https://www.fig.inc/blog/multinet-v2-preview/" target="_blank" rel="noopener noreferrer" style="color: #90caf9;">Technical Report</a>
+              <a href="https://www.fig.inc/blog/multinet-v2-preview-astra-opus/" target="_blank" rel="noopener noreferrer" style="color: #90caf9;">Technical Report</a>
               &nbsp;&middot;&nbsp;
               <a href="static/pages/archive.html" style="color: #90caf9;">MultiNet v1.0</a>
               &nbsp;&middot;&nbsp;
@@ -1178,12 +1188,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="static/js/play.js?v=p1c2"></script>
-<script src="static/js/mn-shell.js?v=r9n"></script>
-<script src="static/js/v2_r1_results_table.js?v=r9n"></script>
-<script src="static/js/v2_r1_finding_charts.js?v=r9n"></script>
-<script src="static/js/v2_r1_finding_tabs.js?v=r9n"></script>
-<script src="static/js/v2_r1_reel.js?v=r9n"></script>
-<script src="static/js/lp_headline_stats.js?v=r9n"></script>
+<script src="static/js/mn-shell.js?v=r10"></script>
+<script src="static/js/v2_r1_results_table.js?v=r11"></script>
+<script src="static/js/v2_r1_finding_charts.js?v=r10"></script>
+<script src="static/js/v2_r1_finding_tabs.js?v=r11"></script>
+<script src="static/js/v2_r1_reel.js?v=r12"></script>
+<script src="static/js/lp_headline_stats.js?v=r10"></script>
 
 <script>
   // How far a .lp-fig--pop figure may grow on hover. Scaling past the

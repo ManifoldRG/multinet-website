@@ -67,11 +67,11 @@
 
   var GH_V1 = "https://github.com/ManifoldRG/MultiNet";
   var GENESIS = GH_V1 + "/tree/main/src/modules";
-  // Notion form; responses land in the Figipedia database of the same name.
+  // Tally form, tagged so website sign-ups are told apart from the blog's.
   // Declared here rather than beside the banner because the nav tree below is
   // built at load time and would otherwise read it as undefined.
-  var SIGNUP = "https://sparkly-broccoli-3c7.notion.site/3bf4b1d3c487800596bbe4a150962cc0";
-  var REPORT = "https://www.fig.inc/blog/multinet-v2-preview/";
+  var SIGNUP = "https://tally.so/r/7RGXaZ?utm_source=multinet-website&utm_medium=website&utm_campaign=multinet-v2-r1-astra-opus";
+  var REPORT = "https://www.fig.inc/blog/multinet-v2-preview-astra-opus/";
 
   // ---- The whole site, in one tree ----------------------------------------
   // This is the drawer. Everything the site has is reachable from here.
