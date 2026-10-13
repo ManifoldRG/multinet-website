@@ -3,14 +3,14 @@
 
    Each visual is attached to the claim it evidences:
 
-   1. #r1-episode-grid   - all 150 episodes, one cell each.
+   1. #r1-episode-grid   - all 250 episodes, one cell each.
    2. #r1-switch-funnel  - the discovery wall. Agents reach the
       switch and walk over it. Rendered as HTML rather than a
       chart because it is a drop-off, not a distribution.
-   3. #r1-inversion-chart - what each maze property explains,
-      across the whole set and on the short mazes alone.
+   3. #r1-horizon-chart  - how much of each model's progress the
+      shortest-path length explains, one bar per model.
    4. #r1-quarter-chart  - how the composition of an agent's
-      actions shifts across an episode. Carries the three
+      actions shifts across an episode. Carries the five
       failure styles.
    5. #r1-thinking-chart - thinking spent per turn, log scale.
 
@@ -25,11 +25,13 @@
   var COLOUR = {
     "Claude Opus 4.8": "#D97757",
     "Kimi k2.6": "#111111",
-    "Qwen3.6-27B": "#6950EF"
+    "Qwen3.6-27B": "#6950EF",
+    "GPT-6 Astra": "#10A37F",
+    "Claude Opus 5.5": "#9C4A2F"
   };
 
   // ---- 0. every episode, as a grid ---------------------------------------
-  // 50 mazes x 3 models, every maze ranked by BFS-min actions across the whole
+  // 50 mazes x 5 models, every maze ranked by BFS-min actions across the whole
   // set - the same ordering as the report's progress_grid_actions figure.
   //
   // It used to group by family and sort within each group, which put a 23-move
@@ -232,40 +234,47 @@
     draw();
   }
 
-  // ---- 4. what each maze property explains, before and after the
-  //         path-length term stops swamping it ------------------------------
-  function renderInversion(data, canvas) {
-    if (!data.inversion || typeof Chart === "undefined") return;
-    var inv = data.inversion;
-    var labels = inv.features.map(function (f) { return f.name; });
+  // ---- 4. how much the shortest-path length explains, per model ----------
+  // One OLS fit per model over its 50 episodes. For Opus 4.8, Kimi and Qwen the
+  // path length explains 11-21% of the variation in progress; for Astra and
+  // Opus 5.5 it explains almost none, because they also solve long mazes.
+  function renderHorizon(data, canvas) {
+    if (!data.horizon || typeof Chart === "undefined") return;
+    var h = data.horizon;
 
     new Chart(canvas.getContext("2d"), {
       type: "bar",
       data: {
-        labels: labels,
-        datasets: [
-          { label: inv.series[0].label, data: inv.features.map(function (f) { return f.all; }),
-            backgroundColor: "#cbd5e1", borderRadius: 3 },
-          { label: inv.series[1].label, data: inv.features.map(function (f) { return f.short; }),
-            backgroundColor: "#005A9C", borderRadius: 3 }
-        ]
+        labels: h.series.map(function (s) { return s.model; }),
+        datasets: [{
+          label: "R\u00b2 of progress on shortest-path length",
+          data: h.series.map(function (s) { return Math.round(s.r2 * 1000) / 10; }),
+          backgroundColor: h.series.map(function (s) { return COLOUR[s.model] || "#666"; }),
+          borderRadius: 3
+        }]
       },
       options: {
         indexAxis: "y",
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { labels: { usePointStyle: true, pointStyle: "rect", boxWidth: 10 } },
+          legend: { display: false },
           tooltip: {
             callbacks: {
               label: function (ctx) {
-                return ctx.dataset.label + ": R² " + ctx.parsed.x.toFixed(2);
+                var s = h.series[ctx.dataIndex];
+                var long = (h.longSolves && h.longSolves[s.model]) || [];
+                return [
+                  "R\u00b2 " + ctx.parsed.x.toFixed(1) + "% (p " + (s.p < 0.001 ? "< 0.001" : "= " + s.p.toFixed(2)) + ")",
+                  long.length ? "Solved 14\u00d714 mazes of " + long.join(", ") + " actions" : "No 14\u00d714 maze solved"
+                ];
               }
             }
           }
         },
         scales: {
-          x: { beginAtZero: true, title: { display: true, text: "R² - share of progress the property explains" },
+          x: { beginAtZero: true, title: { display: true, text: "% of the variation in progress explained by shortest-path length" },
+               ticks: { callback: function (v) { return v + "%"; } },
                grid: { color: "rgba(0,0,0,0.05)" } },
           y: { grid: { display: false } }
         }
@@ -285,8 +294,10 @@
         datasets: t.series.map(function (s) {
           var c = COLOUR[s.model] || "#666";
           return {
-            label: s.model, data: s.median,
+            label: s.model + (s.exact ? "" : " (est.)"), data: s.median,
             borderColor: c, backgroundColor: c,
+            // dashed = estimated from output length; solid = provider-reported reasoning tokens
+            borderDash: s.exact ? [] : [6, 4],
             pointRadius: 0, pointHoverRadius: 4,
             borderWidth: 2.2, tension: 0.25
           };
@@ -318,7 +329,7 @@
 
   function init() {
     var gridEl = document.getElementById("r1-episode-grid");
-    var invEl = document.getElementById("r1-inversion-chart");
+    var invEl = document.getElementById("r1-horizon-chart");
     var thinkEl = document.getElementById("r1-thinking-chart");
     var funnelEl = document.getElementById("r1-switch-funnel");
     var quarterEl = document.getElementById("r1-quarter-chart");
@@ -327,7 +338,7 @@
     var onHome = /\/(index\.html)?$/.test(window.location.pathname);
     // Versioned like the scripts are: the numbers change more often than the
     // code that draws them, and a cached copy of the old ones is invisible.
-    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r2m";
+    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r3b";
 
     fetch(path)
       .then(function (r) { return r.json(); })
@@ -339,10 +350,10 @@
             document.getElementById("r1-quarter-metrics"),
             document.getElementById("r1-quarter-note"));
         }
-        if (invEl) renderInversion(data, invEl);
+        if (invEl) renderHorizon(data, invEl);
         if (thinkEl) renderThinking(data, thinkEl);
       })
-      .catch(function (err) { console.error("R1 finding charts:", err); });
+      .catch(function (err) { console.error("v2.0 finding charts:", err); });
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

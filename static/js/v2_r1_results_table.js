@@ -1,10 +1,10 @@
 /* ============================================================
    MultiNet v2.0 R1 - results table
 
-   Deliberately NOT a leaderboard. R1 produced 6 solves across 150
-   episodes, which is far too few to rank three models, and
-   the ordering flips depending on which metric you read: Claude
-   leads on success and comes last on progress. The table therefore
+   Deliberately NOT a leaderboard. The five models produced 24 solves
+   across 250 episodes, too few to rank them on, and the ordering
+   flips depending on which metric you read: Claude Opus 4.8 solves more
+   mazes than Kimi and Qwen but makes the least progress. The table therefore
    shows every reported metric side by side, in a fixed order, with
    no ranks, medals or "wins" column.
 
@@ -19,7 +19,9 @@
   var BRAND = {
     "Claude Opus 4.8": { colour: "#D97757", logo: "claude.svg" },
     "Kimi k2.6":       { colour: "#000000", logo: "kimi.svg" },
-    "Qwen3.6-27B":     { colour: "#6950EF", logo: "qwen.svg" }
+    "Qwen3.6-27B":     { colour: "#6950EF", logo: "qwen.svg" },
+    "GPT-6 Astra":     { colour: "#10A37F", logo: "openai.svg" },
+    "Claude Opus 5.5": { colour: "#9C4A2F", logo: "claude.svg" }
   };
 
   // Every bar is a share of a denominator, and every denominator is named in
@@ -81,12 +83,13 @@
       key: "tokens",
       title: "Tokens per new tile reached",
       body: "Output tokens spent for each previously unseen tile the agent reached - what one " +
-            "unit of exploration cost. Kimi and Qwen spend 20 to 26 times what Claude does, and " +
-            "solve fewer mazes.",
+            "unit of exploration cost. Kimi and Qwen spend 20 to 26 times what Claude Opus 4.8 does, " +
+            "and solve fewer mazes. GPT-6 Astra (2,172) and Claude Opus 5.5 (4,504) spend the least " +
+            "of the five and solve the most.",
       formula: 'Cost = <span class="frac"><span class="top">output tokens generated</span>' +
                '<span class="bot">new tiles reached</span></span>',
       denom: "162k (Kimi)",
-      scale: "The only metric here with no real ceiling, so it fills against the highest of the three."
+      scale: "The only metric here with no real ceiling, so it fills against the highest of the five."
     },
     {
       key: "noeffect",
@@ -154,21 +157,26 @@
     var STEP_BUDGET = 173.5;
 
     // A token ratio has no such ceiling, so this one is explicitly relative to
-    // the heaviest of the three and says so in the panel.
+    // the heaviest of the five and says so in the panel.
     var maxTokens = Math.max.apply(null, models.map(function (m) {
       return m.tokensPerNewTile;
     }));
 
     var cards = models.map(function (m) {
       var b = BRAND[m.name] || { colour: "#64748b", logo: null };
-      var tokens = (m.tokensLowerBound ? "≥" : "") + Math.round(m.tokensPerNewTile / 1000) + "k";
+      // one decimal under 10k, so 2,172 and 4,504 do not both round to a misleading whole number
+      var k = m.tokensPerNewTile / 1000;
+      var tokens = (m.tokensLowerBound ? "≥" : "") + (k < 10 ? k.toFixed(1) : Math.round(k)) + "k";
       var ended = [
         m.stallKills + " stalled",
         m.capKills ? m.capKills + " hit the step cap" : null
       ].filter(Boolean).join(" · ");
 
       var mark = b.logo
-        ? '<span class="r1-rc__logo" style="--logo:url(\'' + assetBase + "images/logos/" + b.logo + '\')"></span>'
+        // absolute: a url() inside a custom property resolves against the stylesheet that
+        // reads it (static/css/), so a page-relative path pointed at nothing
+        ? '<span class="r1-rc__logo" style="--logo:url(\'' +
+            new URL(assetBase + "images/logos/" + b.logo, document.baseURI).href + '\')"></span>'
         : "";
 
       return "" +
@@ -206,7 +214,7 @@
     var onHome = /\/(index\.html)?$/.test(window.location.pathname);
     // Versioned like the scripts are: the numbers change more often than the
     // code that draws them, and a cached copy of the old ones is invisible.
-    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r2m";
+    var path = (onHome ? "static/data/" : "../data/") + "v2_r1_results.json?v=r3b";
     var assetBase = onHome ? "static/" : "../";
 
     fetch(path)
@@ -217,7 +225,7 @@
       .then(function (data) { render(data, container, assetBase); })
       .catch(function (err) {
         container.innerHTML =
-          '<div class="notification is-danger">Could not load R1 results: ' + err.message + "</div>";
+          '<div class="notification is-danger">Could not load the results: ' + err.message + "</div>";
       });
   }
 

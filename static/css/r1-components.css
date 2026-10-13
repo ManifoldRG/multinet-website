@@ -59,9 +59,11 @@
     /* ---------- Results: one card per model ---------- */
     .r1-results {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.1rem;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.9rem;
     }
+    /* five cards: one row when there is room, 3 + 2 on mid widths, stacked on phones */
+    @media screen and (max-width: 1215px) { .r1-results { grid-template-columns: repeat(3, 1fr); gap: 1.1rem; } }
     @media screen and (max-width: 860px) { .r1-results { grid-template-columns: 1fr; }
 }
 
@@ -146,7 +148,7 @@
       font-size: 0.78rem; color: #64748b; text-align: center;
     }
 
-    /* Keep the same metric on the same line across all three cards, even when
+    /* Keep the same metric on the same line across the cards, even when
        one description runs to an extra line. Two levels of subgrid: the card
        shares the grid's rows, and the metric list shares four of them. */
     @supports (grid-template-rows: subgrid) {
@@ -399,6 +401,8 @@
       display: flex; justify-content: center; gap: 0.6rem;
       flex-wrap: wrap; margin-bottom: 0.85rem;
     }
+    /* forces the pills after it onto a new row (see ROW_BREAK_AFTER in v2_r1_reel.js) */
+    .r1-reel-break { flex-basis: 100%; height: 0; }
     /* Same physical key as the rest of the site, in each model's own colour:
        a face on a solid edge, pressing flush when selected. Everything else -
        the pill shape, the brand mark, the sizing - is unchanged. */
