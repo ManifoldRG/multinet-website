@@ -26,35 +26,37 @@
       // mechanisms are before its figure means anything.
       claimHtml:
         "<p>The key-door mechanism is familiar to frontier models as they have surely seen it " +
-        "during training. However, a switch in this environment is represented as a colored circle " +
+        "during training. However, a switch in this environment is represented as a circle " +
         "on a cell in the maze, while the gate is represented as a blocked cell. The model has to " +
         "learn from experience which switch opens which gate, and that operating it means standing " +
-        "on that exact cell and toggling. Across the 105 switch-gate episodes a switch was toggled " +
-        "twice, both times by the same model, and no maze with a switch was solved by any model - " +
-        "while key-door mazes account for four of the six solves.</p>",
+        "on that exact cell and toggling. Across the 175 switch-gate episodes of the five models a " +
+        "switch was toggled twice, both times by Qwen 3.6-27B, and no maze with a switch was solved " +
+        "by any model - while key-door mazes account for 17 of the 24 solves.</p>",
       mount: "r1-switch-funnel",
-      caption: "Models walked onto a live switch in 38 of the 105 switch-gate episodes, but toggled " +
+      caption: "Models walked onto a live switch in 67 of the 175 switch-gate episodes, but toggled " +
                "one successfully only in 2 of them."
     },
     {
       id: "difficulty",
       label: "Difficulty axes",
-      claim: "Optimal path length to solve the maze is a dominant factor in deciding how much " +
-             "progress a model makes in a given maze. However, when restricted to the 69 episodes " +
-             "where the optimal path length is 45 moves or fewer, the influence of gates and " +
-             "switches rises as the influence of the path length falls.",
-      mount: "r1-inversion-chart",
-      caption: "How much of the variation in progress each maze property explains on its own, with " +
-               "the model held constant."
+      claim: "For Claude Opus 4.8, Kimi K2.6 and Qwen 3.6-27B, the optimal path length is a " +
+             "dominant factor in how much progress they make in a maze, explaining 11% to 21% of the " +
+             "variation. For GPT-6 Astra and Claude Opus 5.5 it explains 2% and 0.3%: Astra solves " +
+             "three 14x14 mazes of 77 to 85 actions and Opus 5.5 four of 77 to 89, while both still " +
+             "solve none of the 35 mazes with a switch.",
+      mount: "r1-horizon-chart",
+      caption: "Share of the variation in each model's progress explained by the shortest-path length " +
+               "of the maze alone, from one fit per model over its 50 episodes."
     },
     {
       id: "styles",
       label: "Failure styles",
       claim: "The stall watchdog, which ends an episode after 30 consecutive steps with no change " +
-             "in position, inventory or mechanism state, accounts for 139 of the 144 failed " +
+             "in position, inventory or mechanism state, accounts for 221 of the 226 failed " +
              "episodes. But each model behaves differently in the environment and fails in its own " +
-             "way. Claude walks into walls, Kimi retreads ground it has covered, Qwen turns on the " +
-             "spot.",
+             "way. Claude Opus 4.8 walks into walls, Qwen turns on the spot, Kimi and GPT-6 Astra " +
+             "retread ground they have covered, and Claude Opus 5.5 presses PICKUP at keys from the " +
+             "adjacent square, which does nothing in this environment.",
       mount: "r1-quarter-chart",
       // this figure writes its own caption, per selected view
       caption: ""
@@ -62,13 +64,16 @@
     {
       id: "compute",
       label: "Test time compute",
-      claim: "Kimi and Qwen spend roughly 20 and 26 times more output tokens per newly discovered tile " +
-             "than Claude, last around 1.6x as many steps, and solve fewer mazes. Claude's thinking " +
-             "roughly halves over the course of an episode, Kimi's roughly doubles, and Qwen's stays " +
-             "flat at around 16,000 tokens a turn.",
+      claim: "Kimi and Qwen spend roughly 26 and 20 times more output tokens per newly discovered tile " +
+             "than Claude Opus 4.8, last around 1.6x as many steps, and solve fewer mazes. GPT-6 Astra " +
+             "and Claude Opus 5.5 spend the least of the five, 2,172 and 4,504 tokens per new tile, and " +
+             "solve the most. Claude Opus 4.8's thinking roughly halves over the course of an episode, " +
+             "Kimi's, Astra's and Opus 5.5's roughly double, and Qwen's stays flat at around 16,000 " +
+             "tokens a turn.",
       mount: "r1-thinking-chart",
-      caption: "Estimated thinking spent on each turn, by turn number. The scale is logarithmic " +
-               "because Claude runs close to two orders of magnitude under the other two."
+      caption: "Median thinking tokens spent on each turn, by turn number, on a log scale. GPT-6 Astra " +
+               "and Claude Opus 5.5 are exact provider counts; Claude Opus 4.8, Kimi K2.6 and Qwen " +
+               "3.6-27B are estimates (dashed)."
     }
   ];
 
